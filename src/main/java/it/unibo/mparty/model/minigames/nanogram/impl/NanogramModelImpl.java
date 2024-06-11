@@ -1,5 +1,5 @@
-package model.minigames.nanogram.api;
+package model.minigames.nanogram.impl;
 
-public class NanogramModel implements NanogramModel{
+public class NanogramModelImpl implements NanogramModel{
     
 }
