@@ -1,4 +1,4 @@
-package model.minigames.nanogram.api;
+package it.unibo.mparty.model.minigames.nanogram.api;
 
 public interface NanogramController{
 
