@@ -7,12 +7,11 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class NanogramViewImpl implements NanogramView {
-    
+
     @FXML
-    private HBox buttonHBox;
+    private HBox buttonBox;
 
     @FXML
     private GridPane columnHints;
@@ -27,7 +26,7 @@ public class NanogramViewImpl implements NanogramView {
     private GridPane gameGrid;
 
     @FXML
-    private HBox livesHBox;
+    private HBox livesBox;
 
     @FXML
     private Label livesLabel;
@@ -44,6 +43,4 @@ public class NanogramViewImpl implements NanogramView {
     @FXML
     private GridPane rowHints;
 
-    @FXML
-    private VBox vBox;
 }

@@ -10,14 +10,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.model.minigames.nanogram.impl.NanogramViewImpl">
    <bottom>
-      <HBox fx:id="buttonHBox" prefHeight="100.0" prefWidth="200.0" spacing="50.0" BorderPane.alignment="CENTER">
+      <HBox fx:id="buttonBox" prefHeight="100.0" prefWidth="200.0" spacing="50.0" BorderPane.alignment="CENTER">
          <children>
             <RadioButton fx:id="crossButton" mnemonicParsing="false" text="X">
                <HBox.margin>
-                  <Insets left="225.0" top="25.0" />
+                  <Insets left="245.0" top="25.0" />
                </HBox.margin>
             </RadioButton>
             <RadioButton fx:id="filledButton" mnemonicParsing="true" text="█">
@@ -44,46 +43,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
+         <padding>
+            <Insets right="100.0" />
+         </padding>
       </GridPane>
    </center>
-   <top>
-      <HBox fx:id="livesHBox" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="livesLabel" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="270.0" text="Lives: ">
-               <HBox.margin>
-                  <Insets left="20.0" top="25.0" />
-               </HBox.margin>
-            </Label>
-            <Label fx:id="numberLivesLabel" maxWidth="1.7976931348623157E308" text="3">
-               <HBox.margin>
-                  <Insets right="60.0" top="25.0" />
-               </HBox.margin>
-            </Label>
-            <VBox fx:id="vBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-               <children>
-                  <Label fx:id="messageLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" />
-                  <GridPane fx:id="columnHints" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="105.0" prefWidth="697.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                  </GridPane>
-               </children>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </VBox>
-         </children>
-      </HBox>
-   </top>
    <left>
       <GridPane fx:id="rowHints" alignment="CENTER" prefHeight="194.0" prefWidth="126.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -100,4 +64,41 @@
         </rowConstraints>
       </GridPane>
    </left>
+   <top>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="livesBox">
+               <children>
+                  <Label fx:id="livesLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Lives: " textAlignment="CENTER">
+                     <HBox.margin>
+                        <Insets left="280.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="numberLivesLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" text="3" />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <Label fx:id="messageLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="CENTER" />
+            <GridPane fx:id="columnHints" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <VBox.margin>
+                  <Insets left="128.0" right="100.0" />
+               </VBox.margin>
+            </GridPane>
+         </children>
+      </VBox>
+   </top>
 </BorderPane>
