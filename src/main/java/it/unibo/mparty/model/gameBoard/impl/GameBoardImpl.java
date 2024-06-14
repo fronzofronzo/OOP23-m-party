@@ -16,16 +16,22 @@ import it.unibo.mparty.model.gameBoard.api.SlotFactory;
 public class GameBoardImpl implements GameBoard {
 
     private static final int N_SLOTS = 50;
-    private static final int N_SLOTS_EMPTY = 12;
-    private static final int N_SLOT_MINIGAME_SINGLEPLAYER = 5;
-    private static final int N_SLOTS_MINIGAME_MULTIPLAYER = 5;
-    private static final int N_SLOTS_BONUS = 10;
-    private static final int N_SLOTS_MALUS = 10;
-    private static final int N_SLOTS_STAR = 4;
-    private static final int N_SLOTS_SHOP = 4;
+    private static final int SLOTS_EMPTY = 12;
+    private static final int SLOTS_MINIGAME_SINGLEPLAYER = 5;
+    private static final int SLOTS_MINIGAME_MULTIPLAYER = 5;
+    private static final int SLOTS_BONUS = 10;
+    private static final int SLOTS_MALUS = 10;
+    private static final int SLOTS_STAR = 4;
+    private static final int SLOTS_SHOP = 4;
     private Map<Integer,SlotType> myBoard = new HashMap<>();
     private final SlotFactory factory = new SlotFactoyImpl();
-    private final Set<SlotType> slotTypes = new HashSet<>(Set.of(SlotType.BONUS,SlotType.MALUS,SlotType.SINGLEPLAYER,SlotType.MULTIPLAYER,SlotType.STAR,SlotType.SHOP,SlotType.EMPTY));
+    private final Set<Pair<SlotType,Integer>> rules = new HashSet<>(Set.of( new Pair<>(SlotType.EMPTY, SLOTS_EMPTY),
+                                                                            new Pair<>(SlotType.SINGLEPLAYER, SLOTS_MINIGAME_SINGLEPLAYER),
+                                                                            new Pair<>(SlotType.MULTIPLAYER, SLOTS_MINIGAME_MULTIPLAYER),
+                                                                            new Pair<>(SlotType.BONUS, SLOTS_BONUS),
+                                                                            new Pair<>(SlotType.MALUS, SLOTS_MALUS),
+                                                                            new Pair<>(SlotType.STAR, SLOTS_STAR),
+                                                                            new Pair<>(SlotType.SHOP, SLOTS_SHOP)));
 
     @Override
     public void createGameBoard() {
@@ -51,18 +57,25 @@ public class GameBoardImpl implements GameBoard {
                 count++;
             }
         }
-        if (tmpSlotType == SlotType.EMPTY){
-            return count <= N_SLOTS_EMPTY;
-        };
+        for (Pair<SlotType,Integer> rule : rules) {
+            if (rule.get1() == tmpSlotType){
+                return count <= rule.get2();
+            }
+        }
         return false;
     }
 
     private SlotType getRandomSlotType() {
         Random random = new Random();
-        Optional<SlotType> output = this.slotTypes.stream()
-                                                    .skip(random.nextInt(this.slotTypes.size()))
-                                                    .findFirst();
-        return output.get();
+        return this.rules.stream().skip(random.nextInt(this.rules.size())).findFirst().get().get1();
+    }
+
+    @Override
+    public Slot geSlot(int position) {
+        if (myBoard.get(position) == SlotType.EMPTY) {
+            return this.factory.empty();
+        }
+        return null;
     }
     
 
