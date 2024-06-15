@@ -38,11 +38,11 @@ public class SlotImpl implements Slot {
         return isNeighbor(slot.getPosition());
     }
 
-    private boolean isNeighbor(Position coordinate) {
-        return Math.abs(this.position.getX()-coordinate.getX())==1 
-            && Math.abs(this.position.getY()-coordinate.getY())==0
-            || Math.abs(this.position.getX()-coordinate.getX())==0 
-            && Math.abs(this.position.getY()-coordinate.getY())==1;
+    private boolean isNeighbor(Position position) {
+        return Math.abs(this.position.getX()-position.getX())==1 
+            && Math.abs(this.position.getY()-position.getY())==0
+            || Math.abs(this.position.getX()-position.getX())==0 
+            && Math.abs(this.position.getY()-position.getY())==1;
     }
 
     @Override
