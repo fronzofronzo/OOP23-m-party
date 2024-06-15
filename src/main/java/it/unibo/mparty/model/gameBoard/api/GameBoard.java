@@ -5,4 +5,6 @@ public interface GameBoard {
     //come input potrebbe avere un numero di caselle o una difficoltà selezionata
     void createGameBoard();
 
+    Slot geSlot(int position);
+
 }
