@@ -1,27 +1,40 @@
 package it.unibo.mparty.model.minigames.perilouspath.api;
 
-import it.unibo.mparty.model.minigames.perilouspath.impl.Pair;
+import java.util.List;
 
+import it.unibo.mparty.model.minigames.perilouspath.impl.Pair;
+/*
+ * An abstract class for implementing the position  of a button inside a grid.
+ * A generic button has a generic position (x,y) inside a cartesian system.
+ */
 public abstract class AbstractPosition {
 
     private Pair<Integer,Integer> position;
     private int size;
     private static int ADJ = 1;
 
+    /**
+     * 
+     * @param x 
+     * @param y
+     * @param size the size of the gri
+     */
     public AbstractPosition(int x,int y,int size){
         this.position = new Pair<>(x,y);
         this.size = size;
     }
 
-    /*
-     * getter for the x of a position
+    /**
+     * 
+     * @return the x position of a button
      */
     public int getX(){
         return position.getX();
     }
 
-    /*
-     * getter for the y of a position
+    /**
+     * 
+     * @return the y position of a button
      */
     public int getY(){
         return position.getY();
@@ -35,4 +48,11 @@ public abstract class AbstractPosition {
     public boolean adjacent(AbstractPosition p){
         return Math.abs(this.getX() - p.getX()) <= ADJ || Math.abs(this.getY() - p.getY()) <= ADJ;
     }
+
+    /**
+     * the politics regarding wheter the position of a button inside a grid is safe or not, it dipends on the implementation 
+     * @param list list of positions of buttons to compare to this to know if it is safe
+     * @return true if the position is safe, false otherwise
+     */
+    public abstract boolean isSafe(List<AbstractPosition> list);
 }
