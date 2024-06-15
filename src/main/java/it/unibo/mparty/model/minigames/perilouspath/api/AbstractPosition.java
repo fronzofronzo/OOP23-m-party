@@ -50,6 +50,13 @@ public abstract class AbstractPosition {
     }
 
     /**
+     * @return the size of the grid
+     */
+    public int getSize(){
+        return this.size;
+    }
+
+    /**
      * the politics regarding wheter the position of a button inside a grid is safe or not, it dipends on the implementation 
      * @param list list of positions of buttons to compare to this to know if it is safe
      * @return true if the position is safe, false otherwise
