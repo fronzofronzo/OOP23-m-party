@@ -2,9 +2,7 @@ package it.unibo.mparty.model.gameBoard.api;
 
 public interface GameBoard {
 
-    //come input potrebbe avere un numero di caselle o una difficoltà selezionata
-    void createGameBoard();
+    void createGameBoard(int map_selected);
 
-    Slot geSlot(int position);
-
+    
 }

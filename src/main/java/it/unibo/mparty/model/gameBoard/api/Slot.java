@@ -8,14 +8,16 @@ import it.unibo.mparty.model.gameBoard.util.Direction;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 
 public interface Slot {
-
+    
     public Coordinate getCoordinate();
-
-    public void addConnection();
-
+    
+    public SlotType getSlotType();
+    
     public Optional<Slot> getConnection(Direction dir);
-
+    
     public Map<Direction, Slot> getConnections();
+    
+    public void addConnection(Direction dir, Slot slot);
 
-    public SlotType getSlotType();    
+    public void removeConnection(Direction dir);
 }

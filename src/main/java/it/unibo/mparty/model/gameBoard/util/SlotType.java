@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.gameBoard.impl;
+package it.unibo.mparty.model.gameBoard.util;
 
 public enum SlotType {
     EMPTY, SINGLEPLAYER, MULTIPLAYER, BONUS, MALUS, STAR, SHOP;

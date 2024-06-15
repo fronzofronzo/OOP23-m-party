@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.gameBoard.impl;
+package it.unibo.mparty.model.gameBoard.util;
 
 import java.util.Objects;
 
