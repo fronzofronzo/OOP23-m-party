@@ -6,24 +6,24 @@ import java.util.Collections;
 import java.util.Optional;
 
 import it.unibo.mparty.model.gameBoard.api.Slot;
-import it.unibo.mparty.model.gameBoard.util.Coordinate;
+import it.unibo.mparty.model.gameBoard.util.Position;
 import it.unibo.mparty.model.gameBoard.util.Direction;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 
 public class SlotImpl implements Slot {
 
-    private final Coordinate position;
+    private final Position position;
     private final SlotType slotType;
     private Map<Direction,Slot> connections;
 
-    public SlotImpl(Coordinate position, SlotType slotType){
+    public SlotImpl(Position position, SlotType slotType){
         this.position = position;
         this.slotType = slotType;
         this.connections = new HashMap<>();
     }
 
     @Override
-    public Coordinate getCoordinate() {
+    public Position getPosition() {
         return this.position;
     }
 
@@ -35,10 +35,10 @@ public class SlotImpl implements Slot {
     }
 
     protected boolean isValidConnection(Slot slot) {
-        return isNeighbor(slot.getCoordinate());
+        return isNeighbor(slot.getPosition());
     }
 
-    private boolean isNeighbor(Coordinate coordinate) {
+    private boolean isNeighbor(Position coordinate) {
         return Math.abs(this.position.getX()-coordinate.getX())==1 
             && Math.abs(this.position.getY()-coordinate.getY())==0
             || Math.abs(this.position.getX()-coordinate.getX())==0 
