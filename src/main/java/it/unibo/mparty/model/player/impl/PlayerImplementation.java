@@ -60,7 +60,7 @@ public class PlayerImplementation implements Player{
 
     @Override
     public void addStar() {
-
+        this.numStars++;
     }
 
     @Override
