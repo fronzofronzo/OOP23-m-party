@@ -26,7 +26,7 @@ public class PlayerImplementation implements Player{
 
     @Override
     public Character getCharacter() {
-        return null;
+        return this.character;
     }
 
     @Override
