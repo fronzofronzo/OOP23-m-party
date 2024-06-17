@@ -65,6 +65,6 @@ public class PlayerImplementation implements Player{
 
     @Override
     public int getNumStars() {
-        return 0;
+        return this.numStars;
     }
 }
