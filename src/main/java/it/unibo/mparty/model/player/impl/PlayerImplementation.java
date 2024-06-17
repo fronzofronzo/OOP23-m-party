@@ -41,7 +41,7 @@ public class PlayerImplementation implements Player{
 
     @Override
     public void addCoins(int num) {
-
+        this.numCoins += num;
     }
 
     @Override
