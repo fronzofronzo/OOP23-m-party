@@ -25,4 +25,10 @@ public interface PlayerBuilder {
      * @return current builder
      */
     PlayerBuilder position(Position position);
+
+    /**
+     * Create the player instance with the specified parameters
+     * @return player instance
+     */
+    Player buildPlayer();
 }
