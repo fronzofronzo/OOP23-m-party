@@ -22,5 +22,17 @@ public class TestPlayerImplementation {
         assertEquals(position, testPlayer.getPosition());
     }
 
+    @Test
+    public void testStarAmount(){
+        final String username = "username";
+        final Character character = Character.CHAR_LUIGI;
+        final Position position = new Position(0,0);
+        final Player testPlayer = new PlayerImplementation(username,position,character);
+        assertEquals(0, testPlayer.getNumStars());
+        testPlayer.addStar();
+        assertEquals(1, testPlayer.getNumStars());
+        testPlayer.
+    }
+
 
 }
