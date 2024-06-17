@@ -1,18 +1,24 @@
 package it.unibo.mparty.model.gameBoard.api;
 
-import it.unibo.mparty.model.gameBoard.util.Position;
+import java.util.Map;
+
 import it.unibo.mparty.model.gameBoard.util.Direction;
+import it.unibo.mparty.model.gameBoard.util.Position;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 
 public interface Board {
 
     void generateBoard();
 
-    void addSlot(Position position, SlotType slotType);
+    Slot getSlot(Position position);
 
-    void addConnection(Position from, Position to, Direction dir);
+    Position getStarPosition();
 
-    Slot getSlot(Position positoin);
+    SlotType getSlotType(Position position);
 
     Position getInitialPosition();
+
+    Map<Direction, Position> getNextPositions(Position position);
+
+    void changeStarPosition();
 }

@@ -22,19 +22,17 @@ public abstract class AbstractBoardImpl implements Board{
         this.initialPosition = initialPosition;
     }
 
-    @Override
-    public void addSlot(Position position, SlotType slotType) {
+    protected void addSlot(Position position, SlotType slotType) {
         if (isValidPosition(position)){
             this.myBoard.put(position, new SlotImpl(position, slotType));
         }
     }
 
-    private boolean isValidPosition(Position position) {
+    protected boolean isValidPosition(Position position) {
         return position.getX() < this.width && position.getY() < this.height;
     }
 
-    @Override
-    public void addConnection(Position from, Position to, Direction dir) {
+    protected void addConnection(Position from, Position to, Direction dir) {
         if (this.myBoard.containsKey(from) && this.myBoard.containsKey(to)) {
             this.myBoard.get(from).addConnection(dir, to);
         };
@@ -48,5 +46,25 @@ public abstract class AbstractBoardImpl implements Board{
     @Override
     public Position getInitialPosition() {
         return this.initialPosition;
-    }    
+    }
+    
+    @Override
+    public Position getStarPosition() {
+        return null;
+    }
+
+    @Override
+    public SlotType getSlotType(Position position) {
+        return null;
+    }
+
+    @Override
+    public void changeStarPosition() {
+        ;
+    }
+
+    @Override
+    public Map<Direction, Position> getNextPositions(Position position) {
+        return null;
+    }
 }
