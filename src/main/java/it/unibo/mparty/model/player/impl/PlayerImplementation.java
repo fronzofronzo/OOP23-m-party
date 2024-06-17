@@ -5,6 +5,12 @@ import it.unibo.mparty.model.player.api.Player;
 
 public class PlayerImplementation implements Player{
 
+    private final String username;
+    private final Position position;
+    private final Character character;
+    private int numCoins;
+    private int numStars;
+
     @Override
     public String getUsername() {
         return null;
