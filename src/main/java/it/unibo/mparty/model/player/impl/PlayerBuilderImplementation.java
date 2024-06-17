@@ -18,7 +18,8 @@ public class PlayerBuilderImplementation implements PlayerBuilder {
 
     @Override
     public PlayerBuilder character(Character character) {
-        return null;
+        this.character = character;
+        return this;
     }
 
     @Override
