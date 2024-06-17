@@ -48,5 +48,21 @@ public interface Player {
      */
     void removeCoins(int num);
 
+    /**
+     * Get the amount of money of the player
+     * @return the number of money
+     */
+    int getNumCoins();
+
+    /**
+     * Add one star to the player.
+     */
+    void addStar();
+
+    /**
+     * Get the number of stars of the player
+     * @return the number of stars
+     */
+    int getNumStars();
 
 }
