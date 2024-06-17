@@ -21,4 +21,6 @@ public class TestPlayerImplementation {
         assertEquals(character, testPlayer.getCharacter());
         assertEquals(position, testPlayer.getPosition());
     }
+
+
 }
