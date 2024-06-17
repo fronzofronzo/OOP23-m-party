@@ -11,6 +11,14 @@ public class PlayerImplementation implements Player{
     private int numCoins;
     private int numStars;
 
+    public PlayerImplementation(String username, Position position, Character character){
+        this.username = username;
+        this.position = position;
+        this.character = character;
+        this.numCoins = 0;
+        this.numStars = 0;
+    }
+
     @Override
     public String getUsername() {
         return null;
