@@ -1,0 +1,4 @@
+package it.unibo.mparty.model.player.impl;
+
+public enum Character {
+}
