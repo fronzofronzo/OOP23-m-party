@@ -1,5 +1,5 @@
 package it.unibo.mparty.model.gameBoard.util;
 
-public enum MapType {
-    A, B, C;
+public enum BoardType {
+    EASY, MEDIUM, HARD;
 }

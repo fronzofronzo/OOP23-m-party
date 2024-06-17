@@ -9,14 +9,14 @@ import it.unibo.mparty.model.gameBoard.util.Direction;
 import it.unibo.mparty.model.gameBoard.util.Position;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 
-public class BoardImpl implements Board{
+public abstract class AbstractBoardImpl implements Board{
 
     private final int width;
     private final int height;
     private final Position initialPosition;
     private Map<Position,Slot> myBoard = new HashMap<>();
 
-    public BoardImpl(int lenght, int height, Position initialPosition){
+    public AbstractBoardImpl(int lenght, int height, Position initialPosition){
         this.width = lenght;
         this.height = height;
         this.initialPosition = initialPosition;
@@ -48,6 +48,5 @@ public class BoardImpl implements Board{
     @Override
     public Position getInitialPosition() {
         return this.initialPosition;
-    }
-    
+    }    
 }

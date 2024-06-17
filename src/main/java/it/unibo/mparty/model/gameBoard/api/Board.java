@@ -6,6 +6,8 @@ import it.unibo.mparty.model.gameBoard.util.SlotType;
 
 public interface Board {
 
+    void generateBoard();
+
     void addSlot(Position position, SlotType slotType);
 
     void addConnection(Position from, Position to, Direction dir);
