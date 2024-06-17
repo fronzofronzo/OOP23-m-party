@@ -21,7 +21,7 @@ public class PlayerImplementation implements Player{
 
     @Override
     public String getUsername() {
-        return null;
+        return this.username;
     }
 
     @Override
