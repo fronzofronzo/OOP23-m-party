@@ -8,4 +8,10 @@ public interface PlayerBag {
      * @return the selected item
      */
     Item getItem(int i);
+
+    /**
+     * Add an item to the player bag
+     * @param item to add
+     */
+    void addItem(Item item);
 }
