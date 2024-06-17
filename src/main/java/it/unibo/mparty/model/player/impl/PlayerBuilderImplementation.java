@@ -12,7 +12,8 @@ public class PlayerBuilderImplementation implements PlayerBuilder {
 
     @Override
     public PlayerBuilder username(String username) {
-        return null;
+        this.username = username;
+        return this;
     }
 
     @Override
