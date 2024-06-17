@@ -46,7 +46,11 @@ public class PlayerImplementation implements Player{
 
     @Override
     public void removeCoins(int num) {
-
+        if(num >= this.getNumCoins()){
+            this.numCoins = 0;
+        } else {
+            this.numCoins -= num;
+        }
     }
 
     @Override
