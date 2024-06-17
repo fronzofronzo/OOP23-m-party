@@ -1,5 +1,7 @@
 package it.unibo.mparty.model.player.api;
 
+import it.unibo.mparty.model.player.impl.Character;
+
 /**
  *  This interface models a Player
  */
@@ -20,17 +22,17 @@ public interface Player {
     String getUsername();
 
     /**
-     * Sets the username of the player
+     * Sets the character chosen by the player
      *
-     * @param username is the username chosen
+     * @param character is the chosen character
      */
-    void setCharacter(String username);
+    void setCharacter(Character character);
 
     /**
-     * Get the username of a certain player
+     * Get the character of a certain player
      *
-     * @return the username of the player
+     * @return the character of the player
      */
-    String getUsername();
+    String getCharacter();
 
 }
