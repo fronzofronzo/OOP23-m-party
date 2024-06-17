@@ -65,6 +65,9 @@ public interface Player {
      */
     int getNumStars();
 
-
+    /**
+     * Remove one star from the player
+     */
+    void removeStar();
 
 }
