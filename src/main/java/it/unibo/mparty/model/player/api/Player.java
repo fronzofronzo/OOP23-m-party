@@ -35,4 +35,9 @@ public interface Player {
      */
     String getCharacter();
 
+    /**
+     *
+     */
+    void setInitialPosition(Position );
+
 }
