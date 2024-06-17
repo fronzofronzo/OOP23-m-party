@@ -6,7 +6,7 @@ import it.unibo.mparty.model.player.api.Player;
 public class PlayerImplementation implements Player{
 
     private final String username;
-    private final Position position;
+    private Position position;
     private final Character character;
     private int numCoins;
     private int numStars;
@@ -36,7 +36,7 @@ public class PlayerImplementation implements Player{
 
     @Override
     public void setPosition(Position position) {
-
+        this.position = position;
     }
 
     @Override
