@@ -31,7 +31,7 @@ public class PlayerImplementation implements Player{
 
     @Override
     public Position getPosition() {
-        return null;
+        return this.position;
     }
 
     @Override
