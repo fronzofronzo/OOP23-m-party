@@ -14,4 +14,12 @@ public interface PlayerBag {
      * @param item to add
      */
     void addItem(Item item);
+
+    /**
+     * Remove selected item from the player bag
+     * @param i index of item to remove
+     * @throws IllegalAccessException in case of trying to remove an item from
+     * a position where it is not present
+     */
+    void removeItem(int i);
 }
