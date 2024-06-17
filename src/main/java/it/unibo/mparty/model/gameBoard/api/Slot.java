@@ -1,7 +1,6 @@
 package it.unibo.mparty.model.gameBoard.api;
 
 import java.util.Map;
-import java.util.Optional;
 
 import it.unibo.mparty.model.gameBoard.util.Position;
 import it.unibo.mparty.model.gameBoard.util.Direction;

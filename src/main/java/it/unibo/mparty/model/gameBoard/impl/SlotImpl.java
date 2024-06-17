@@ -3,7 +3,6 @@ package it.unibo.mparty.model.gameBoard.impl;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Collections;
-import java.util.Optional;
 
 import it.unibo.mparty.model.gameBoard.api.Slot;
 import it.unibo.mparty.model.gameBoard.util.Position;
