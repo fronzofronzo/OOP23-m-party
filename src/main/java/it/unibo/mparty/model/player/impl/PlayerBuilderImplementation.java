@@ -30,6 +30,9 @@ public class PlayerBuilderImplementation implements PlayerBuilder {
 
     @Override
     public Player buildPlayer() {
-        return null;
+        if (this.username == null || this.position == null || this.character == null){
+            throw new IllegalStateException("Missing fields: cannot create a new Player");
+        }
+        return new PlayerImplementation(this.username, this.position, this.character);
     }
 }
