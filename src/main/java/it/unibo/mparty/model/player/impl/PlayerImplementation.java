@@ -55,7 +55,7 @@ public class PlayerImplementation implements Player{
 
     @Override
     public int getNumCoins() {
-        return 0;
+        return this.numCoins;
     }
 
     @Override
