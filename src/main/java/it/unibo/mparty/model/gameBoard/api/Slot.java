@@ -9,15 +9,17 @@ import it.unibo.mparty.model.gameBoard.util.SlotType;
 
 public interface Slot {
     
-    public Position getPosition();
+    Position getPosition();
     
-    public SlotType getSlotType();
-    
-    public Optional<Slot> getConnection(Direction dir);
-    
-    public Map<Direction, Slot> getConnections();
-    
-    public void addConnection(Direction dir, Slot slot);
+    SlotType getSlotType();
 
-    public void removeConnection(Direction dir);
+    boolean hasConnections();
+    
+    Position getConnection(Direction dir);
+    
+    Map<Direction, Position> getConnections();
+    
+    void addConnection(Direction dir, Position position);
+
+    void removeConnection(Direction dir);
 }

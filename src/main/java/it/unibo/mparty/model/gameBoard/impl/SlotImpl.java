@@ -14,7 +14,7 @@ public class SlotImpl implements Slot {
 
     private final Position position;
     private final SlotType slotType;
-    private Map<Direction,Slot> connections;
+    private Map<Direction,Position> connections;
 
     public SlotImpl(Position position, SlotType slotType){
         this.position = position;
@@ -28,14 +28,14 @@ public class SlotImpl implements Slot {
     }
 
     @Override
-    public void addConnection(Direction dir, Slot slot) {
-        if (isValidConnection(slot)) {
-            this.connections.put(dir, slot);
+    public void addConnection(Direction dir, Position position) {
+        if (isValidConnection(dir, position)) {
+            this.connections.put(dir, position);
         }
     }
 
-    protected boolean isValidConnection(Slot slot) {
-        return isNeighbor(slot.getPosition());
+    protected boolean isValidConnection(Direction dir, Position position) {
+        return !this.connections.containsKey(dir) && isNeighbor(position);
     }
 
     private boolean isNeighbor(Position position) {
@@ -46,12 +46,12 @@ public class SlotImpl implements Slot {
     }
 
     @Override
-    public Optional<Slot> getConnection(Direction dir) {
-        return Optional.ofNullable(this.connections.get(dir));
+    public Position getConnection(Direction dir) {
+        return this.connections.get(dir);
     }
 
     @Override
-    public Map<Direction, Slot> getConnections() {
+    public Map<Direction, Position> getConnections() {
         return Collections.unmodifiableMap(this.connections);
     }
 
@@ -64,4 +64,13 @@ public class SlotImpl implements Slot {
     public void removeConnection(Direction dir) {
         this.connections.remove(dir);
     }
+
+    public String toString(){
+        return "[Pos: " + this.position + "; SlotType: " + this.slotType + "; Connections:(" + this.connections + ")]";
+    }
+
+    @Override
+    public boolean hasConnections() {
+        return !this.connections.isEmpty();
+    };
 }
