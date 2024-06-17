@@ -24,7 +24,8 @@ public class PlayerBuilderImplementation implements PlayerBuilder {
 
     @Override
     public PlayerBuilder position(Position position) {
-        return null;
+        this.position = position;
+        return this;
     }
 
     @Override
