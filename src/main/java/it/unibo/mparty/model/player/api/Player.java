@@ -36,4 +36,17 @@ public interface Player {
      */
     void setPosition(Position position);
 
+    /**
+     * Add a certain amount of coins to the player
+     * @param num of coins to be added
+     */
+    void addCoins(int num);
+
+    /**
+     * Remove a certain amount of coins to the player.
+     * @param num of coins to be removed
+     */
+    void removeCoins(int num);
+
+
 }
