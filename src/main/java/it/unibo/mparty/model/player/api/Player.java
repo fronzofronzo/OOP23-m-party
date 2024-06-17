@@ -9,13 +9,6 @@ import it.unibo.mparty.model.player.impl.Character;
 public interface Player {
 
     /**
-     * Sets the username of the player
-     *
-     * @param username is the username chosen
-     */
-    void setUsername(String username);
-
-    /**
      * Get the username of a certain player
      *
      * @return the username of the player
@@ -23,24 +16,17 @@ public interface Player {
     String getUsername();
 
     /**
-     * Sets the character chosen by the player
-     *
-     * @param character is the chosen character
-     */
-    void setCharacter(Character character);
-
-    /**
      * Get the character of a certain player
      *
      * @return the character of the player
      */
-    String getCharacter();
+    Character getCharacter();
 
     /**
-     * Set the initial position of the player on the board
+     * Get the current position of the player
      *
-     * @param position is the initial position
+     * @return the position
      */
-    void setInitialPosition(Position position);
+    Position getPosition();
 
 }
