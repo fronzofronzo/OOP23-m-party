@@ -29,4 +29,11 @@ public interface Player {
      */
     Position getPosition();
 
+    /**
+     * Move the player to a certain position
+     *
+     * @param position where move the player
+     */
+    void setPosition(Position position);
+
 }
