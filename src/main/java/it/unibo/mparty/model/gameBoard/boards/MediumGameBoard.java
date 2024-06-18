@@ -2,6 +2,7 @@ package it.unibo.mparty.model.gameBoard.boards;
 
 import it.unibo.mparty.model.gameBoard.impl.AbstractBoardImpl;
 import it.unibo.mparty.model.gameBoard.util.Position;
+import it.unibo.mparty.model.gameBoard.util.SlotType;
 
 public class MediumGameBoard extends AbstractBoardImpl{
 
@@ -14,6 +15,12 @@ public class MediumGameBoard extends AbstractBoardImpl{
     public void generateBoard() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'generateBoard'");
+    }
+
+    @Override
+    protected SlotType getNewSlotType() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getNewSlotType'");
     }
     
 }
