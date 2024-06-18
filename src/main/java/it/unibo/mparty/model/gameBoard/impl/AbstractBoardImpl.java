@@ -111,6 +111,17 @@ public abstract class AbstractBoardImpl implements Board{
         positions.stream().forEach(p -> this.addSlot(p, this.getNewSlotType()));
     }
 
+    protected void createPath(Position from, int steps, Direction currentDir){
+        this.addSlot(from, getNewSlotType());
+        Position to = this.getNeighbor(from, currentDir);
+        for (int i = 0; i < steps; i++) {
+            this.addSlot(to, getNewSlotType());
+            this.addConnection(from, to, currentDir);
+            from=to;
+            to=this.getNeighbor(to, currentDir);
+        }
+    }
+
     protected abstract SlotType getNewSlotType();
 
     @Override

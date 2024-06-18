@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
+//import org.apache.commons.math3.distribution.EnumeratedDistribution 
 public class RandomListGenerator {
-    public static <E> List<E> generateRandomList(Set<Pair<E,Integer>> inputSet) {
+    public static <E> List<E> generateRandomList(Set<Pair<E,Double>> inputSet) {
         List<E> outputList = new ArrayList<>();
-        for (Pair<E,Integer> p : inputSet) {
-            var element = p.getX();
-            int quantity = p.getY();
-            for (int i = 0; i < quantity; i++) {
+        for (Pair<E,Double> p : inputSet) {
+            E element = p.getX();
+            Double perc = p.getY();
+            for (int i = 0; i < perc * 100; i++) {
                 outputList.add(element);
             }            
         }

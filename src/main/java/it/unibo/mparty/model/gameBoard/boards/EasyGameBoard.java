@@ -8,17 +8,16 @@ import it.unibo.mparty.model.gameBoard.util.RandomListGenerator;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 import java.util.Set;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class EasyGameBoard extends AbstractBoardImpl{
 
-    private Set<Pair<SlotType,Integer>> rules = Set.of(new Pair<>(SlotType.PATH, 80),
-                                                                   new Pair<>(SlotType.SINGLEPLAYER, 20),
-                                                                   new Pair<>(SlotType.MALUS, 10),
-                                                                   new Pair<>(SlotType.MULTIPLAYER, 20),
-                                                                   new Pair<>(SlotType.SHOP, 10),
-                                                                   new Pair<>(SlotType.BONUS, 20));
+    private Set<Pair<SlotType,Double>> rules = Set.of(new Pair<>(SlotType.PATH, 0.5),
+                                                      new Pair<>(SlotType.SINGLEPLAYER, 0.1),
+                                                      new Pair<>(SlotType.MALUS, 0.05),
+                                                      new Pair<>(SlotType.MULTIPLAYER, 0.1),
+                                                      new Pair<>(SlotType.SHOP, 0.1),
+                                                      new Pair<>(SlotType.BONUS, 0.15));
 
     private List<SlotType> avaiableSlotsType = RandomListGenerator.generateRandomList(this.rules);
 
@@ -51,19 +50,7 @@ public class EasyGameBoard extends AbstractBoardImpl{
         createPath(new Position(34, 26), 9, Direction.LEFT);     
         createPath(new Position(25, 26), 7, Direction.UP);              
         createPath(new Position(25, 19), 2, Direction.LEFT);
-        this.changeStarPosition();    
         }
-
-    private void createPath(Position from, int steps, Direction currentDir){
-        this.addSlot(from, getNewSlotType());
-        Position to = this.getNeighbor(from, currentDir);
-        for (int i = 0; i < steps; i++) {
-            this.addSlot(to, getNewSlotType());
-            this.addConnection(from, to, currentDir);
-            from=to;
-            to=this.getNeighbor(to, currentDir);
-        }
-    }
 
     @Override
     protected SlotType getNewSlotType() {
