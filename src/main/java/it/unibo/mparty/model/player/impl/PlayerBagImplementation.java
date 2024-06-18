@@ -4,6 +4,11 @@ import it.unibo.mparty.model.player.api.PlayerBag;
 
 public class PlayerBagImplementation implements PlayerBag {
 
+    private Item [] items;
+
+    public PlayerBagImplementation(int numberOfItems) {
+        this.item = new Item[numberOfItems];
+    }
 
     @Override
     public Item getItem(int i) {
