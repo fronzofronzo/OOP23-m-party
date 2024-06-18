@@ -15,5 +15,4 @@ public class EasyGameBoard extends AbstractBoardImpl{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'generateBoard'");
     }
-    
 }
