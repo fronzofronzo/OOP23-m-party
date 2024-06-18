@@ -14,7 +14,7 @@ public interface Board {
 
     SlotType getSlotType(Position position);
     
-    Position getInitialPosition();
+    Position getStrartingPosition();
     
     Map<Direction, Position> getNextPositions(Position position);
     

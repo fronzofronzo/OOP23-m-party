@@ -16,6 +16,6 @@ class TestGameBoard{
         SimpleBoardFactory factory = new SimpleBoardFactory();
         Board myBoard = factory.createBoard(BoardType.EASY);
         myBoard.printBoard();
-        assertEquals(new Position(5, 25), myBoard.getInitialPosition());
+        assertEquals(new Position(5, 25), myBoard.getStrartingPosition());
     }
 }

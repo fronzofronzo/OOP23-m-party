@@ -20,15 +20,9 @@ public interface Slot {
     
     boolean hasNext();
     
-    //Position getNextConnection(Direction dir);
-    
     Map<Direction, Position> getNextConnections();
     
     boolean hasPrev();
     
-    //Position getPrevConnection(Direction dir);
-    
     Map<Direction, Position> getPrevConnections();
-
-    //void removeConnection(Direction dir);
 }

@@ -37,11 +37,10 @@ public abstract class AbstractBoardImpl implements Board{
     }
     
     @Override
-    public Position getInitialPosition() {
+    public Position getStrartingPosition() {
         return this.initialPosition;
     }
 
-    //Lancia eccezione se position non ha next o position non è nella board
     @Override
     public Map<Direction, Position> getNextPositions(Position position) {
         return Collections.unmodifiableMap(this.myBoard.get(position).getNextConnections());

@@ -29,9 +29,9 @@ public class EasyGameBoard extends AbstractBoardImpl{
     @Override
     public void generateBoard() {
         this.addSlot(this.stars.stream().skip(new Random().nextInt(this.stars.size())).findFirst().get(), SlotType.ACTIVE_STAR);
-        this.addSlot(getInitialPosition(), SlotType.PATH);
+        this.addSlot(getStrartingPosition(), SlotType.PATH);
         this.stars.stream().forEach(p -> this.addSlot(p, SlotType.NOT_ACTIVE_STAR));
-        createPath(this.getInitialPosition(), 19, Direction.UP);
+        createPath(this.getStrartingPosition(), 19, Direction.UP);
         createPath(new Position(5, 6), 11, Direction.RIGHT);
         createPath(new Position(16, 6), 22, Direction.DOWN);        
         createPath(new Position(16, 28), 6, Direction.LEFT);       
