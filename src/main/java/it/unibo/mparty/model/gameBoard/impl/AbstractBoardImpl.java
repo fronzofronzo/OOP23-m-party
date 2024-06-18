@@ -3,6 +3,9 @@ package it.unibo.mparty.model.gameBoard.impl;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import it.unibo.mparty.model.gameBoard.api.Board;
 import it.unibo.mparty.model.gameBoard.api.Slot;
@@ -56,7 +59,18 @@ public abstract class AbstractBoardImpl implements Board{
 
     @Override
     public void changeStarPosition() {
-        ;
+        Set<Position> possibleNextStarPosition = this.myBoard.entrySet()
+                                                .stream()
+                                                .filter(entry -> entry.getValue().getSlotType().equals(SlotType.NOT_ACTIVE_STAR))
+                                                .map(entry -> entry.getKey())
+                                                .collect(Collectors.toSet());
+        Position newStarPosition = possibleNextStarPosition.stream()
+                                    .skip(new Random().nextInt(possibleNextStarPosition.size()))
+                                    .findFirst()
+                                    .get();
+        Position oldStarPosition = this.getStarPosition();
+        this.myBoard.get(newStarPosition).changeSlotType(SlotType.ACTIVE_STAR);
+        this.myBoard.get(oldStarPosition).changeSlotType(SlotType.NOT_ACTIVE_STAR);
     }
 
     protected void addSlot(Position position, SlotType slotType) {
