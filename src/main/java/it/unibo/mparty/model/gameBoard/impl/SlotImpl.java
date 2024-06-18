@@ -13,12 +13,14 @@ public class SlotImpl implements Slot {
 
     private final Position position;
     private final SlotType slotType;
-    private Map<Direction,Position> connections;
+    private Map<Direction,Position> nextConnections;
+    private Map<Direction,Position> prevConnections;
 
     public SlotImpl(Position position, SlotType slotType){
         this.position = position;
         this.slotType = slotType;
-        this.connections = new HashMap<>();
+        this.nextConnections = new HashMap<>();
+        this.prevConnections = new HashMap<>();
     }
 
     @Override
@@ -27,49 +29,53 @@ public class SlotImpl implements Slot {
     }
 
     @Override
-    public void addConnection(Direction dir, Position position) {
-        if (isValidConnection(dir, position)) {
-            this.connections.put(dir, position);
-        }
-    }
-
-    protected boolean isValidConnection(Direction dir, Position position) {
-        return !this.connections.containsKey(dir) && isNeighbor(position);
-    }
-
-    private boolean isNeighbor(Position position) {
-        return Math.abs(this.position.getX()-position.getX())==1 
-            && Math.abs(this.position.getY()-position.getY())==0
-            || Math.abs(this.position.getX()-position.getX())==0 
-            && Math.abs(this.position.getY()-position.getY())==1;
-    }
-
-    @Override
-    public Position getConnection(Direction dir) {
-        return this.connections.get(dir);
-    }
-
-    @Override
-    public Map<Direction, Position> getConnections() {
-        return Collections.unmodifiableMap(this.connections);
-    }
-
-    @Override
     public SlotType getSlotType() {
         return this.slotType;
     }
 
     @Override
-    public void removeConnection(Direction dir) {
-        this.connections.remove(dir);
-    }
-
-    public String toString(){
-        return "[Pos: " + this.position + "; SlotType: " + this.slotType + "; Connections:(" + this.connections + ")]";
+    public void addNext(Direction dir, Position position) {
+        if (isValidConnection(dir, position)) {
+            this.nextConnections.put(dir, position);
+        }
     }
 
     @Override
-    public boolean hasConnections() {
-        return !this.connections.isEmpty();
-    };
+    public void addPrev(Direction dir, Position position) {
+        if (isValidConnection(dir, position)) {
+            this.prevConnections.put(dir, position);
+        }
+    }
+
+    protected boolean isValidConnection(Direction dir, Position position) {
+        return isNeighbor(position);
+    }
+
+    private boolean isNeighbor(Position position) {
+        return Math.abs(this.position.getX()-position.getX()+this.position.getY()-position.getY())==1;
+    }
+
+    @Override
+    public boolean hasNext(){
+        return !this.nextConnections.isEmpty();        
+    }
+
+    @Override
+    public Map<Direction, Position> getNextConnections() {
+        return Collections.unmodifiableMap(this.nextConnections);
+    }
+
+    @Override
+    public boolean hasPrev(){
+        return !this.prevConnections.isEmpty();        
+    }
+
+    @Override
+    public Map<Direction, Position> getPrevConnections() {
+        return Collections.unmodifiableMap(this.prevConnections);
+    }    
+
+    public String toString(){
+        return "[Pos: " + this.position + "; SlotType: " + this.slotType + "; Connections:(" + this.nextConnections + ")]";
+    }
 }

@@ -11,14 +11,22 @@ public interface Slot {
     Position getPosition();
     
     SlotType getSlotType();
+    
+    void addNext(Direction dir, Position position);
+    
+    void addPrev(Direction dir, Position position);
+    
+    boolean hasNext();
+    
+    //Position getNextConnection(Direction dir);
+    
+    Map<Direction, Position> getNextConnections();
+    
+    boolean hasPrev();
+    
+    //Position getPrevConnection(Direction dir);
+    
+    Map<Direction, Position> getPrevConnections();
 
-    boolean hasConnections();
-    
-    Position getConnection(Direction dir);
-    
-    Map<Direction, Position> getConnections();
-    
-    void addConnection(Direction dir, Position position);
-
-    void removeConnection(Direction dir);
+    //void removeConnection(Direction dir);
 }
