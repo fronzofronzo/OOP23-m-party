@@ -73,10 +73,12 @@ public abstract class AbstractBoardImpl implements Board{
         this.myBoard.get(oldStarPosition).changeSlotType(SlotType.NOT_ACTIVE_STAR);
     }
 
-    protected void addSlot(Position position, SlotType slotType) {
-        if (isValidPosition(position)){
+    protected boolean addSlot(Position position, SlotType slotType) {
+        if (!this.myBoard.containsKey(position) && isValidPosition(position)){
             this.myBoard.put(position, new SlotImpl(position, slotType));
+            return true;
         }
+        return false;
     }
 
     protected boolean isValidPosition(Position position) {
@@ -93,5 +95,44 @@ public abstract class AbstractBoardImpl implements Board{
             this.myBoard.get(from).addNext(dir, to);
             this.myBoard.get(to).addPrev(dir, from);
         };
+    }
+
+    protected void addConnections(Set<Position> positions, Direction dir){
+        for (Position p : positions) {
+            Position nextP = new Position(p.getX() + (dir.equals(Direction.RIGHT) ? 1 : 0) + (dir.equals(Direction.LEFT) ? -1 : 0), p.getY() + (dir.equals(Direction.UP) ? -1 : 0) + (dir.equals(Direction.DOWN) ? 1 : 0));
+            if (positions.contains(nextP)) {
+                this.addConnection(p, nextP, dir);
+            }
+        }
+    }
+
+    protected void addSlots(Set<Set<Position>> positions){
+        positions.stream().forEach(s -> s.stream().forEach(p -> this.addSlot(p, this.getNewSlotType())));
+    }
+
+    protected abstract SlotType getNewSlotType();
+
+    public void printBoard(){
+        for(int j = 0; j < this.height; j++){
+            String line = "";
+            for(int i = 0; i < this.width; i++){
+                SlotType slotType = this.myBoard.get(new Position(i, j)).getSlotType();
+                String c = "";
+                switch (slotType) {
+                    case VOID: c = "."; break;
+                    case ACTIVE_STAR: c = "*"; break;
+                    case PATH: c = "O"; break;
+                    case SINGLEPLAYER: c = "1"; break;
+                    case MULTIPLAYER: c = "2"; break;
+                    case BONUS: c = "B"; break;
+                    case MALUS: c = "M"; break;
+                    case NOT_ACTIVE_STAR: c = "s"; break;
+                    case SHOP: c = "I"; break;
+                    default: c = "."; break;
+                } 
+                line = line + c;
+            }
+            System.out.println(line);
+        }
     }
 }
