@@ -71,7 +71,9 @@ public class PlayerImplementation implements Player{
 
     @Override
     public void removeStar() {
-
+        if(this.numStars > 0 ){
+            this.numStars--;
+        }
     }
 
     @Override
