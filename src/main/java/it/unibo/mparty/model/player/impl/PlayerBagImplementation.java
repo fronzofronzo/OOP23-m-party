@@ -2,12 +2,14 @@ package it.unibo.mparty.model.player.impl;
 
 import it.unibo.mparty.model.player.api.PlayerBag;
 
+import java.util.Optional;
+
 public class PlayerBagImplementation implements PlayerBag {
 
-    private Item [] items;
+    private Optional<Item>[] items;
 
     public PlayerBagImplementation(int numberOfItems) {
-        this.item = new Item[numberOfItems];
+        this.item = new Optional<Item>[numberOfItems];
     }
 
     @Override
