@@ -6,9 +6,12 @@ import it.unibo.mparty.model.player.api.PlayerBag;
 
 public class PlayerImplementation implements Player{
 
+    private static final int NUM_ITEMS = 3;
+
     private final String username;
     private Position position;
     private final Character character;
+    private final PlayerBag playerBag;
     private int numCoins;
     private int numStars;
 
@@ -16,6 +19,7 @@ public class PlayerImplementation implements Player{
         this.username = username;
         this.position = position;
         this.character = character;
+        this.playerBag = new PlayerBagImplementation(NUM_ITEMS);
         this.numCoins = 0;
         this.numStars = 0;
     }
