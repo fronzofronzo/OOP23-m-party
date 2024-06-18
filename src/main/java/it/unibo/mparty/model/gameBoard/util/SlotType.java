@@ -1,7 +1,8 @@
 package it.unibo.mparty.model.gameBoard.util;
 
 public enum SlotType {
-    EMPTY,
+    VOID,
+    PATH,
     SINGLEPLAYER,
     MULTIPLAYER,
     BONUS,

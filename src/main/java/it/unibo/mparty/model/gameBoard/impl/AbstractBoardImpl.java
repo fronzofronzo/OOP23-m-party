@@ -28,12 +28,12 @@ public abstract class AbstractBoardImpl implements Board{
 
     @Override
     public Slot getSlot(Position position) {
-        return this.myBoard.containsKey(position) ? this.myBoard.get(position) : new SlotImpl(position, SlotType.EMPTY);
+        return this.myBoard.containsKey(position) ? this.myBoard.get(position) : new SlotImpl(position, SlotType.VOID);
     }
     
     @Override
     public SlotType getSlotType(Position position) {
-        return this.myBoard.containsKey(position) ? this.myBoard.get(position).getSlotType() : SlotType.EMPTY;
+        return this.myBoard.containsKey(position) ? this.myBoard.get(position).getSlotType() : SlotType.VOID;
     }
     
     @Override
