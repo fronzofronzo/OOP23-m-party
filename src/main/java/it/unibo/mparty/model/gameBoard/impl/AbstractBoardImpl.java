@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.gameBoard.impl;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,40 +23,35 @@ public abstract class AbstractBoardImpl implements Board{
         this.initialPosition = initialPosition;
     }
 
-    protected void addSlot(Position position, SlotType slotType) {
-        if (isValidPosition(position)){
-            this.myBoard.put(position, new SlotImpl(position, slotType));
-        }
-    }
-
-    protected boolean isValidPosition(Position position) {
-        return position.getX() < this.width && position.getY() < this.height;
-    }
-
-    protected void addConnection(Position from, Position to, Direction dir) {
-        if (this.myBoard.containsKey(from) && this.myBoard.containsKey(to)) {
-            this.myBoard.get(from).addConnection(dir, to);
-        };
-    }
-
     @Override
     public Slot getSlot(Position position) {
         return this.myBoard.containsKey(position) ? this.myBoard.get(position) : new SlotImpl(position, SlotType.EMPTY);
     }
-
+    
+    @Override
+    public SlotType getSlotType(Position position) {
+        return this.myBoard.containsKey(position) ? this.myBoard.get(position).getSlotType() : SlotType.EMPTY;
+    }
+    
     @Override
     public Position getInitialPosition() {
         return this.initialPosition;
     }
-    
+
+    //Lancia eccezione se position non ha next o position non è nella board
     @Override
-    public Position getStarPosition() {
-        return null;
+    public Map<Direction, Position> getNextPositions(Position position) {
+        return Collections.unmodifiableMap(this.myBoard.get(position).getNextConnections());
     }
 
     @Override
-    public SlotType getSlotType(Position position) {
-        return null;
+    public Position getStarPosition() {
+        return  this.myBoard.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().getSlotType().equals(SlotType.ACTIVE_STAR))
+                .findFirst()
+                .get()
+                .getKey();
     }
 
     @Override
@@ -63,8 +59,25 @@ public abstract class AbstractBoardImpl implements Board{
         ;
     }
 
-    @Override
-    public Map<Direction, Position> getNextPositions(Position position) {
-        return null;
+    protected void addSlot(Position position, SlotType slotType) {
+        if (isValidPosition(position)){
+            this.myBoard.put(position, new SlotImpl(position, slotType));
+        }
+    }
+
+    protected boolean isValidPosition(Position position) {
+        return isInTheBoard(position);
+    }
+
+    private boolean isInTheBoard(Position position){
+        return  position.getX() >= 0 && position.getX() < this.width &&
+                position.getY() >= 0 && position.getY() < this.height;
+    }
+
+    protected void addConnection(Position from, Position to, Direction dir) {
+        if (this.myBoard.containsKey(from) && this.myBoard.containsKey(to)) {
+            this.myBoard.get(from).addNext(dir, to);
+            this.myBoard.get(to).addPrev(dir, from);
+        };
     }
 }

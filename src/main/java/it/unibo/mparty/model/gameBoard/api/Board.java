@@ -12,13 +12,13 @@ public interface Board {
 
     Slot getSlot(Position position);
 
-    Position getStarPosition();
-
     SlotType getSlotType(Position position);
-
+    
     Position getInitialPosition();
-
+    
     Map<Direction, Position> getNextPositions(Position position);
+    
+    Position getStarPosition();
 
     void changeStarPosition();
 }
