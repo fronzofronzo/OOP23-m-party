@@ -14,7 +14,11 @@ public class PlayerBagImplementation implements PlayerBag {
 
     @Override
     public Item getItem(int i) {
-        return null;
+        if(items[i].isPresent()){
+            return items[i].get();
+        } else {
+            return null;
+        }
     }
 
     @Override
