@@ -34,7 +34,11 @@ public class PlayerBagImplementation implements PlayerBag {
     }
 
     @Override
-    public void removeItem(int i) {
-
+    public void removeItem(int i) throws IllegalAccessException {
+        if(items[i].isEmpty()){
+            throw new IllegalAccessException("No element is present");
+        } else {
+            items[i] = Optional.empty();
+        }
     }
 }

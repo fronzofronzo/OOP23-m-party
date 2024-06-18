@@ -21,5 +21,5 @@ public interface PlayerBag {
      * @throws IllegalAccessException in case of trying to remove an item from
      * a position where it is not present
      */
-    void removeItem(int i);
+    void removeItem(int i) throws IllegalAccessException;
 }
