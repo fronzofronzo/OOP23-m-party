@@ -70,6 +70,10 @@ public interface Player {
      */
     void removeStar();
 
-
+    /**
+     * Access to player bag
+     * @return the player bag
+     */
+    PlayerBag getPlayerBag();
 
 }
