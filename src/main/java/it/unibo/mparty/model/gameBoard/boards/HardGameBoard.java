@@ -5,8 +5,8 @@ import it.unibo.mparty.model.gameBoard.util.Position;
 
 public class HardGameBoard extends AbstractBoardImpl{
 
-    public HardGameBoard(int lenght, int height, Position initialPosition) {
-        super(lenght, height, initialPosition);
+    public HardGameBoard(int width, int height, Position initialPosition) {
+        super(width, height, initialPosition);
         //TODO Auto-generated constructor stub
     }
 

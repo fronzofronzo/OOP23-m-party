@@ -20,8 +20,8 @@ public abstract class AbstractBoardImpl implements Board{
     private final Position initialPosition;
     private Map<Position,Slot> myBoard = new HashMap<>();
 
-    public AbstractBoardImpl(int lenght, int height, Position initialPosition){
-        this.width = lenght;
+    public AbstractBoardImpl(int width, int height, Position initialPosition){
+        this.width = width;
         this.height = height;
         this.initialPosition = initialPosition;
     }
