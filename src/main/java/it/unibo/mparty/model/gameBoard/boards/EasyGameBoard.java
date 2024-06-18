@@ -6,15 +6,18 @@ import it.unibo.mparty.model.gameBoard.util.Position;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 import java.util.Set;
 import java.util.Random;
+import org.apache.commons.math3.distribution.EnumeratedDistribution;
+import org.apache.commons.math3.util.Pair;
 
 public class EasyGameBoard extends AbstractBoardImpl{
-
+    /* 
     private Set<SlotType> avaiableSlotsType = Set.of(SlotType.PATH,
                                                      SlotType.SINGLEPLAYER,
                                                      SlotType.MULTIPLAYER,
                                                      SlotType.BONUS,
                                                      SlotType.MALUS,
                                                      SlotType.SHOP);
+                                                     */
 
     private Set<Position> stars = Set.of(new Position(5, 6), 
                                          new Position(25, 21),
@@ -61,9 +64,11 @@ public class EasyGameBoard extends AbstractBoardImpl{
 
     @Override
     protected SlotType getNewSlotType() {
+        /* 
         return this.avaiableSlotsType.stream()
         .skip(new Random().nextInt(this.avaiableSlotsType.size()))
         .findFirst()
-        .get();
+        .get(); */
+        retrun null;
     }
 }
