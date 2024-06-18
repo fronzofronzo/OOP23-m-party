@@ -9,9 +9,9 @@ public class PlayerBagImplementation implements PlayerBag {
     private Optional<Item>[] items;
 
     public PlayerBagImplementation(int numberOfItems) {
-        this.item = new Optional[numberOfItems];
+        this.item = new Optional<Item>[numberOfItems];
         for(int i = 0; i < numberOfItems; i++ ){
-            items[i] = (Item)Optional.empty();
+            items[i] = Optional.empty();
         }
     }
 
