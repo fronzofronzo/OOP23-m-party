@@ -9,7 +9,10 @@ public class PlayerBagImplementation implements PlayerBag {
     private Optional<Item>[] items;
 
     public PlayerBagImplementation(int numberOfItems) {
-        this.item = new Optional<Item>[numberOfItems];
+        this.item = new Optional[numberOfItems];
+        for(int i = 0; i < numberOfItems; i++ ){
+            items[i] = (Item)Optional.empty();
+        }
     }
 
     @Override
@@ -23,7 +26,11 @@ public class PlayerBagImplementation implements PlayerBag {
 
     @Override
     public void addItem(Item item) {
-
+        int i = 0;
+        while(items[i].isPresent()){
+            i++;
+        }
+        items[i] = Optional.of(item);
     }
 
     @Override
