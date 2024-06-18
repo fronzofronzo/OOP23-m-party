@@ -82,6 +82,6 @@ public class PlayerImplementation implements Player{
 
     @Override
     public PlayerBag getPlayerBag() {
-        return null;
+        return this.playerBag;
     }
 }
