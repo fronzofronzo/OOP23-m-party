@@ -7,6 +7,10 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import it.unibo.mparty.model.gameBoard.api.Board;
 import it.unibo.mparty.model.gameBoard.api.Slot;
 import it.unibo.mparty.model.gameBoard.util.Direction;
@@ -119,6 +123,25 @@ public abstract class AbstractBoardImpl implements Board{
             this.addConnection(from, to, currentDir);
             from=to;
             to=this.getNeighbor(to, currentDir);
+        }
+    }
+
+    protected void createPathFromFile(String filePath){
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(" ");
+                if (parts.length == 4){
+                    int x = Integer.parseInt(parts[0]);
+                    int y = Integer.parseInt(parts[1]);
+                    int steps = Integer.parseInt(parts[2]);
+                    String d = parts[3];
+                    Direction dir = d.equals("U") ? Direction.UP : d.equals("D") ? Direction.DOWN : d.equals("L") ? Direction.LEFT : Direction.RIGHT;
+                    this.createPath(new Position(x, y), steps, dir);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
