@@ -73,12 +73,10 @@ public abstract class AbstractBoardImpl implements Board{
         this.myBoard.get(oldStarPosition).changeSlotType(SlotType.NOT_ACTIVE_STAR);
     }
 
-    protected boolean addSlot(Position position, SlotType slotType) {
+    protected void addSlot(Position position, SlotType slotType) {
         if (!this.myBoard.containsKey(position) && isValidPosition(position)){
             this.myBoard.put(position, new SlotImpl(position, slotType));
-            return true;
         }
-        return false;
     }
 
     protected boolean isValidPosition(Position position) {
@@ -99,15 +97,19 @@ public abstract class AbstractBoardImpl implements Board{
 
     protected void addConnections(Set<Position> positions, Direction dir){
         for (Position p : positions) {
-            Position nextP = new Position(p.getX() + (dir.equals(Direction.RIGHT) ? 1 : 0) + (dir.equals(Direction.LEFT) ? -1 : 0), p.getY() + (dir.equals(Direction.UP) ? -1 : 0) + (dir.equals(Direction.DOWN) ? 1 : 0));
+            Position nextP = getNeighbor(p, dir);
             if (positions.contains(nextP)) {
                 this.addConnection(p, nextP, dir);
             }
         }
     }
 
-    protected void addSlots(Set<Set<Position>> positions){
-        positions.stream().forEach(s -> s.stream().forEach(p -> this.addSlot(p, this.getNewSlotType())));
+    protected Position getNeighbor(Position p, Direction dir) {
+        return new Position(p.getX() + (dir.equals(Direction.RIGHT) ? 1 : 0) + (dir.equals(Direction.LEFT) ? -1 : 0), p.getY() + (dir.equals(Direction.UP) ? -1 : 0) + (dir.equals(Direction.DOWN) ? 1 : 0));
+    }
+
+    protected void addSlots(Set<Position> positions){
+        positions.stream().forEach(p -> this.addSlot(p, this.getNewSlotType()));
     }
 
     protected abstract SlotType getNewSlotType();

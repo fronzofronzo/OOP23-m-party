@@ -1,30 +1,22 @@
 package it.unibo.mparty.model.gameBoard.boards;
 
 import it.unibo.mparty.model.gameBoard.impl.AbstractBoardImpl;
+import it.unibo.mparty.model.gameBoard.util.Direction;
 import it.unibo.mparty.model.gameBoard.util.Position;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.Random;
-import java.util.Map;
 
 public class EasyGameBoard extends AbstractBoardImpl{
 
-    private static final int N_PATH = 87;
-    private static final int N_SINGLEPLAYER = 10;
-    private static final int N_MULTIPLAYER = 10;
-    private static final int N_BONUS = 20;
-    private static final int N_MALUS = 10;
-    private static final int N_SHOPS = 10;
+    private Set<SlotType> avaiableSlotsType = Set.of(SlotType.PATH,
+                                                     SlotType.SINGLEPLAYER,
+                                                     SlotType.MULTIPLAYER,
+                                                     SlotType.BONUS,
+                                                     SlotType.MALUS,
+                                                     SlotType.SHOP);
 
-    private Map<SlotType, Integer> rules = Map.of(SlotType.PATH, N_PATH,
-                                                  SlotType.SINGLEPLAYER, N_SINGLEPLAYER, 
-                                                  SlotType.MULTIPLAYER, N_MULTIPLAYER,
-                                                  SlotType.BONUS, N_BONUS, 
-                                                  SlotType.MALUS, N_MALUS,
-                                                  SlotType.SHOP, N_SHOPS);
-
-    private Set<Position> stars = Set.of(new Position(6, 6), 
+    private Set<Position> stars = Set.of(new Position(5, 6), 
                                          new Position(25, 21),
                                          new Position(34, 6));
     
@@ -36,24 +28,42 @@ public class EasyGameBoard extends AbstractBoardImpl{
 
     @Override
     public void generateBoard() {
+        this.addSlot(this.stars.stream().skip(new Random().nextInt(this.stars.size())).findFirst().get(), SlotType.ACTIVE_STAR);
         this.addSlot(getInitialPosition(), SlotType.PATH);
         this.stars.stream().forEach(p -> this.addSlot(p, SlotType.NOT_ACTIVE_STAR));
-        
+        createPath(this.getInitialPosition(), 19, Direction.UP);
+        createPath(new Position(5, 6), 11, Direction.RIGHT);
+        createPath(new Position(16, 6), 22, Direction.DOWN);        
+        createPath(new Position(16, 28), 6, Direction.LEFT);       
+        createPath(new Position(11, 28), 4, Direction.UP);       
+        createPath(new Position(11, 24), 5, Direction.LEFT);       
+        createPath(new Position(16, 10), 7, Direction.RIGHT);      
+        createPath(new Position(16, 18), 7, Direction.RIGHT);      
+        createPath(new Position(23, 19), 17, Direction.UP);      
+        createPath(new Position(23, 2), 11, Direction.RIGHT);    
+        createPath(new Position(34, 2), 24, Direction.DOWN);       
+        createPath(new Position(34, 26), 9, Direction.LEFT);     
+        createPath(new Position(25, 26), 7, Direction.UP);              
+        createPath(new Position(25, 19), 2, Direction.LEFT);
+        this.changeStarPosition();    
+        }
+
+    private void createPath(Position from, int steps, Direction currentDir){
+        this.addSlot(from, getNewSlotType());
+        Position to = this.getNeighbor(from, currentDir);
+        for (int i = 0; i < steps; i++) {
+            this.addSlot(to, getNewSlotType());
+            this.addConnection(from, to, currentDir);
+            from=to;
+            to=this.getNeighbor(to, currentDir);
+        }
     }
 
     @Override
     protected SlotType getNewSlotType() {
-        Set<SlotType> possibleSlotTypes = this.rules.entrySet()
-                                                    .stream()
-                                                    .filter(entry -> entry.getValue() > 0)
-                                                    .map(entry -> entry.getKey())
-                                                    .collect(Collectors.toSet());
-        SlotType newSlotType = possibleSlotTypes.stream()
-                                                .skip(new Random().nextInt(possibleSlotTypes.size()))
-                                                .findFirst()
-                                                .get();
-        this.rules.put(newSlotType, this.rules.get(newSlotType)-1);
-        return newSlotType;
-        
+        return this.avaiableSlotsType.stream()
+        .skip(new Random().nextInt(this.avaiableSlotsType.size()))
+        .findFirst()
+        .get();
     }
 }
