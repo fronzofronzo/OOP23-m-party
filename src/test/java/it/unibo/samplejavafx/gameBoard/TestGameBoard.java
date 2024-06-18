@@ -13,10 +13,9 @@ class TestGameBoard{
 
     @Test 
     public void printBoard(){
-        //SimpleBoardFactory factory = new SimpleBoardFactory();
-        //Board myBoard = factory.createBoard(BoardType.EASY);
-        //myBoard.printBoard();
-        //assertEquals(new Position(5, 25), myBoard.getInitialPosition());
-        assertEquals(true, true);
+        SimpleBoardFactory factory = new SimpleBoardFactory();
+        Board myBoard = factory.createBoard(BoardType.EASY);
+        myBoard.printBoard();
+        assertEquals(new Position(5, 25), myBoard.getInitialPosition());
     }
 }

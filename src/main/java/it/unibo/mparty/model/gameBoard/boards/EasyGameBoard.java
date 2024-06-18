@@ -8,6 +8,7 @@ public class EasyGameBoard extends AbstractBoardImpl{
 
     public EasyGameBoard(int width, int height, Position initialPosition) {
         super(width, height, initialPosition);
+        this.generateBoard();
     }
 
     @Override

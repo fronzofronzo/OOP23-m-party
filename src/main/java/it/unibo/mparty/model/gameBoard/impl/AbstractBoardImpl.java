@@ -117,7 +117,7 @@ public abstract class AbstractBoardImpl implements Board{
         for(int j = 0; j < this.height; j++){
             String line = "";
             for(int i = 0; i < this.width; i++){
-                SlotType slotType = this.myBoard.get(new Position(i, j)).getSlotType();
+                SlotType slotType = this.getSlotType(new Position(i, j));
                 String c = "";
                 switch (slotType) {
                     case VOID: c = "."; break;
@@ -133,7 +133,7 @@ public abstract class AbstractBoardImpl implements Board{
                 } 
                 line = line + c;
             }
-            System.out.println(line);
+            System.out.println(j<10 ? " " + j + line : "" + j + line);
         }
     }
 }
