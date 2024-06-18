@@ -12,7 +12,7 @@ import it.unibo.mparty.model.gameBoard.util.SlotType;
 public class SlotImpl implements Slot {
 
     private final Position position;
-    private final SlotType slotType;
+    private SlotType slotType;
     private Map<Direction,Position> nextConnections;
     private Map<Direction,Position> prevConnections;
 
@@ -31,6 +31,11 @@ public class SlotImpl implements Slot {
     @Override
     public SlotType getSlotType() {
         return this.slotType;
+    }
+
+    @Override
+    public void changeSlotType(SlotType newSlotType) {
+        this.slotType = newSlotType;
     }
 
     @Override

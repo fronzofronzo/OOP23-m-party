@@ -11,10 +11,12 @@ public interface Slot {
     Position getPosition();
     
     SlotType getSlotType();
+
+    void changeSlotType(SlotType newSlotType);
     
-    void addNext(Direction dir, Position position);
+    void addNext(Direction dir, Position next);
     
-    void addPrev(Direction dir, Position position);
+    void addPrev(Direction dir, Position prev);
     
     boolean hasNext();
     
