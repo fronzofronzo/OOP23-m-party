@@ -2,22 +2,25 @@ package it.unibo.mparty.model.gameBoard.boards;
 
 import it.unibo.mparty.model.gameBoard.impl.AbstractBoardImpl;
 import it.unibo.mparty.model.gameBoard.util.Direction;
+import it.unibo.mparty.model.gameBoard.util.Pair;
 import it.unibo.mparty.model.gameBoard.util.Position;
+import it.unibo.mparty.model.gameBoard.util.RandomListGenerator;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
-import org.apache.commons.math3.distribution.EnumeratedDistribution;
-import org.apache.commons.math3.util.Pair;
 
 public class EasyGameBoard extends AbstractBoardImpl{
-    /* 
-    private Set<SlotType> avaiableSlotsType = Set.of(SlotType.PATH,
-                                                     SlotType.SINGLEPLAYER,
-                                                     SlotType.MULTIPLAYER,
-                                                     SlotType.BONUS,
-                                                     SlotType.MALUS,
-                                                     SlotType.SHOP);
-                                                     */
+
+    private Set<Pair<SlotType,Integer>> rules = Set.of(new Pair<>(SlotType.PATH, 80),
+                                                                   new Pair<>(SlotType.SINGLEPLAYER, 20),
+                                                                   new Pair<>(SlotType.MALUS, 10),
+                                                                   new Pair<>(SlotType.MULTIPLAYER, 20),
+                                                                   new Pair<>(SlotType.SHOP, 10),
+                                                                   new Pair<>(SlotType.BONUS, 20));
+
+    private List<SlotType> avaiableSlotsType = RandomListGenerator.generateRandomList(this.rules);
 
     private Set<Position> stars = Set.of(new Position(5, 6), 
                                          new Position(25, 21),
@@ -37,7 +40,7 @@ public class EasyGameBoard extends AbstractBoardImpl{
         createPath(this.getStrartingPosition(), 19, Direction.UP);
         createPath(new Position(5, 6), 11, Direction.RIGHT);
         createPath(new Position(16, 6), 22, Direction.DOWN);        
-        createPath(new Position(16, 28), 6, Direction.LEFT);       
+        createPath(new Position(16, 28), 5, Direction.LEFT);       
         createPath(new Position(11, 28), 4, Direction.UP);       
         createPath(new Position(11, 24), 5, Direction.LEFT);       
         createPath(new Position(16, 10), 7, Direction.RIGHT);      
@@ -64,11 +67,11 @@ public class EasyGameBoard extends AbstractBoardImpl{
 
     @Override
     protected SlotType getNewSlotType() {
-        /* 
-        return this.avaiableSlotsType.stream()
-        .skip(new Random().nextInt(this.avaiableSlotsType.size()))
-        .findFirst()
-        .get(); */
-        retrun null;
+        if (this.avaiableSlotsType.isEmpty()) {
+            this.avaiableSlotsType = RandomListGenerator.generateRandomList(this.rules);
+        }
+        SlotType output = this.avaiableSlotsType.getFirst();
+        this.avaiableSlotsType.removeFirst();
+        return output;
     }
 }
