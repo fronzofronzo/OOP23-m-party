@@ -21,4 +21,6 @@ public interface Board {
     Position getStarPosition();
 
     void changeStarPosition();
+
+    void printBoard();
 }

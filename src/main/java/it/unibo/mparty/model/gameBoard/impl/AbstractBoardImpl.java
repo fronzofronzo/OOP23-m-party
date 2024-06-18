@@ -112,6 +112,7 @@ public abstract class AbstractBoardImpl implements Board{
 
     protected abstract SlotType getNewSlotType();
 
+    @Override
     public void printBoard(){
         for(int j = 0; j < this.height; j++){
             String line = "";

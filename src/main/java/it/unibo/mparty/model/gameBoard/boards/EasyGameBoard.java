@@ -12,13 +12,12 @@ public class EasyGameBoard extends AbstractBoardImpl{
 
     @Override
     public void generateBoard() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'generateBoard'");
+        this.addSlot(getInitialPosition(), SlotType.PATH);
     }
 
     @Override
     protected SlotType getNewSlotType() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getNewSlotType'");
+        return SlotType.VOID;
+        
     }
 }
