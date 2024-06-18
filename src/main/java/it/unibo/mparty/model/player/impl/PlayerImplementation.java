@@ -2,6 +2,7 @@ package it.unibo.mparty.model.player.impl;
 
 import it.unibo.mparty.model.player.Position;
 import it.unibo.mparty.model.player.api.Player;
+import it.unibo.mparty.model.player.api.PlayerBag;
 
 public class PlayerImplementation implements Player{
 
@@ -66,5 +67,15 @@ public class PlayerImplementation implements Player{
     @Override
     public int getNumStars() {
         return this.numStars;
+    }
+
+    @Override
+    public void removeStar() {
+
+    }
+
+    @Override
+    public PlayerBag getPlayerBag() {
+        return null;
     }
 }
