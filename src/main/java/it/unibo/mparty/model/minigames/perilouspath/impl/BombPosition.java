@@ -12,8 +12,10 @@ public class BombPosition extends AbstractPosition{
 
     @Override
     public boolean isSafe(List<AbstractPosition> list) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isSafe'");
+        if(list.size() == 0){
+            return true;
+        }
+        return list.stream().allMatch(b -> !this.adjacent(b));
     }
 
     
