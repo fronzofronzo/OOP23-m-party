@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 //import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Map;
+import java.util.Collections;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -26,10 +27,12 @@ class TestGameBoard{
     private static final int INITIAL_Y_EASY_BOARD = 25;
 
     
+    @SuppressWarnings("unchecked")
     private final Map<Position,Map<Direction, Position>> dataSetToTestgetNextPositions = 
     Map.of(
         new Position(5, 6), Map.of(Direction.RIGHT, new Position(6, 6)),
-        new Position(16, 10), Map.of(Direction.RIGHT, new Position(17, 10),Direction.DOWN, new Position(16, 11))
+        new Position(16, 10), Map.of(Direction.RIGHT, new Position(17, 10),Direction.DOWN, new Position(16, 11)),
+        new Position(0,0), Collections.EMPTY_MAP
         );
     
     private static Board myBoard;
