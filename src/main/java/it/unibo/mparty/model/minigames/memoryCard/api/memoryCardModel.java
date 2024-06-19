@@ -15,4 +15,9 @@ public interface memoryCardModel {
      * @param card it's the second card selected
      */
     void secondClick(Position card);
+
+    /**
+     * Add mistake to player's mistakes counter
+     */
+    void addMistake();
 }
