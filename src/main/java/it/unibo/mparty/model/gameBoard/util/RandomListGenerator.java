@@ -9,8 +9,8 @@ public class RandomListGenerator {
     public static <E> List<E> generateRandomList(Set<Pair<E,Double>> inputSet) {
         List<E> outputList = new ArrayList<>();
         for (Pair<E,Double> p : inputSet) {
-            E element = p.getX();
-            Double perc = p.getY();
+            E element = p.getFirst();
+            Double perc = p.getSecond();
             for (int i = 0; i < perc * 100; i++) {
                 outputList.add(element);
             }            

@@ -15,11 +15,11 @@ public class Pair<X,Y> {
 		this.y = y;
 	}
 
-	public X getX() {
+	public X getFirst() {
 		return x;
 	}
 
-	public Y getY() {
+	public Y getSecond() {
 		return y;
 	}
 
