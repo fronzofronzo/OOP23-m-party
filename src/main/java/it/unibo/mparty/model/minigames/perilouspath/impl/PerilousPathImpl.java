@@ -3,6 +3,7 @@ package it.unibo.mparty.model.minigames.perilouspath.impl;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
@@ -12,11 +13,13 @@ public class PerilousPathImpl implements PerilousPath{
     private Optional<List<BombPosition>> bombs = Optional.empty();
     private Optional<List<BallPosition>> balls = Optional.empty();
     private Optional<List<PathPosition>> path = Optional.empty();
+    private Random random;
 
     public PerilousPathImpl(){
         this.bombs = Optional.of(new LinkedList<>());
         this.balls = Optional.of(new LinkedList<>());
         this.path = Optional.of(new LinkedList<>());
+        this.random = new Random();
     }
 
     @Override
