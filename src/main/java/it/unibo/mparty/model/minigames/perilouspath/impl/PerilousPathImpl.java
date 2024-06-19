@@ -34,14 +34,16 @@ public class PerilousPathImpl implements PerilousPath{
             BombPosition b;
             do {
                 b = new BombPosition(random.nextInt(this.size - 1), random.nextInt(this.size - 1), this.size);
-            } while (b.isSafe(this.getBombs()));
+            } while (!b.isSafe(this.getBombs()));
+            this.bombs.get().add(b);
         }
     }
 
     @Override
     public void setBalls() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setBalls'");
+        this.balls.get().add(new BallPosition(this.random.nextInt(this.size - 1),0,this.size));
+        this.balls.get().add(new BallPosition(this.random.nextInt(this.size - 1),this.size - 1,this.size));
+
     }
 
     @Override
