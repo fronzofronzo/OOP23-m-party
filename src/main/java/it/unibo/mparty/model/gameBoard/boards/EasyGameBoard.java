@@ -29,18 +29,20 @@ public class EasyGameBoard extends AbstractBoardImpl{
     private static final double PROB_BONUS = 0.15;
 
     private static final String FilePath = "C:\\Users\\81W1019HIX\\OneDrive\\Desktop\\MARIO PARTY\\OOP23-m-party\\src\\main\\java\\it\\unibo\\mparty\\model\\gameBoard\\file\\EasyBoardGame.txt";
-    
-    private Set<Pair<SlotType,Double>> rules = Set.of(new Pair<>(SlotType.PATH, PROB_PATH),
-                                                      new Pair<>(SlotType.SINGLEPLAYER, PROB_SINGLEPLAYER),
-                                                      new Pair<>(SlotType.MALUS, PROB_MALUS),
-                                                      new Pair<>(SlotType.MULTIPLAYER, PROB_MULTIPLAYER),
-                                                      new Pair<>(SlotType.SHOP, PROB_SHOP),
-                                                      new Pair<>(SlotType.BONUS, PROB_BONUS));
+
+    private Set<Pair<SlotType,Double>> rules = 
+        Set.of(new Pair<>(SlotType.PATH, PROB_PATH),
+               new Pair<>(SlotType.SINGLEPLAYER, PROB_SINGLEPLAYER),
+               new Pair<>(SlotType.MALUS, PROB_MALUS),
+               new Pair<>(SlotType.MULTIPLAYER, PROB_MULTIPLAYER),
+               new Pair<>(SlotType.SHOP, PROB_SHOP),
+               new Pair<>(SlotType.BONUS, PROB_BONUS));
+
+    private static final Set<Position> starsPositions = Set.of(new Position(5, 6), 
+                                                               new Position(25, 21),
+                                                               new Position(34, 6));
+           
     private List<SlotType> avaiableSlotsType = RandomListGenerator.generateRandomList(this.rules);
-    private final Set<Position> starsPositions = Set.of(new Position(5, 6), 
-                                         new Position(25, 21),
-                                         new Position(34, 6));
-    
 
     public EasyGameBoard() {
         super();
@@ -49,24 +51,9 @@ public class EasyGameBoard extends AbstractBoardImpl{
 
     @Override
     public void generateBoard() {
-        this.addSlot(this.starsPositions.stream().skip(new Random().nextInt(this.starsPositions.size())).findFirst().get(), SlotType.ACTIVE_STAR);
-        this.starsPositions.stream().forEach(p -> this.addSlot(p, SlotType.NOT_ACTIVE_STAR));
+        this.addSlot(starsPositions.stream().skip(new Random().nextInt(starsPositions.size())).findFirst().get(), SlotType.ACTIVE_STAR);
+        starsPositions.stream().forEach(p -> this.addSlot(p, SlotType.NOT_ACTIVE_STAR));
         this.addSlot(getStrartingPosition(), SlotType.PATH);
-        /*createPath(this.getStrartingPosition(), 19, Direction.UP);
-        createPath(new Position(5, 6), 11, Direction.RIGHT);
-        createPath(new Position(16, 6), 22, Direction.DOWN);        
-        createPath(new Position(16, 28), 5, Direction.LEFT);       
-        createPath(new Position(11, 28), 4, Direction.UP);       
-        createPath(new Position(11, 24), 5, Direction.LEFT);       
-        createPath(new Position(16, 10), 7, Direction.RIGHT);      
-        createPath(new Position(16, 18), 7, Direction.RIGHT);      
-        createPath(new Position(23, 19), 17, Direction.UP);      
-        createPath(new Position(23, 2), 11, Direction.RIGHT);    
-        createPath(new Position(34, 2), 24, Direction.DOWN);       
-        createPath(new Position(34, 26), 9, Direction.LEFT);     
-        createPath(new Position(25, 26), 7, Direction.UP);              
-        createPath(new Position(25, 19), 2, Direction.LEFT);
-        */
         this.createPathFromFile(FilePath);
         }
 
@@ -87,7 +74,7 @@ public class EasyGameBoard extends AbstractBoardImpl{
 
     @Override
     protected Set<Position> setStarsPosition() {
-        return Collections.unmodifiableSet(this.starsPositions);
+        return Collections.unmodifiableSet(starsPositions);
     }
 
     @Override
