@@ -20,4 +20,11 @@ public interface memoryCardModel {
      * Add mistake to player's mistakes counter
      */
     void addMistake();
+
+    /**
+     * Check if the game is over
+     * @return true if the player has guessed all the couples
+     * false if there are others couples to find
+     */
+    boolean isDone();
 }
