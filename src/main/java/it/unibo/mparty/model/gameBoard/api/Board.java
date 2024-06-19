@@ -11,8 +11,6 @@ public interface Board {
 
     void generateBoard();
 
-    Slot getSlot(Position position);
-
     SlotType getSlotType(Position position);
     
     Position getStrartingPosition();

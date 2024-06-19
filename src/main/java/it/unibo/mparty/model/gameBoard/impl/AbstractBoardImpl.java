@@ -23,6 +23,7 @@ public abstract class AbstractBoardImpl implements Board{
     private final int height;
     private final Position initialPosition;
     private Map<Position,Slot> myBoard = new HashMap<>();
+    private Position starPositin;
 
     public AbstractBoardImpl(int width, int height, Position initialPosition){
         this.width = width;
@@ -30,8 +31,7 @@ public abstract class AbstractBoardImpl implements Board{
         this.initialPosition = initialPosition;
     }
 
-    @Override
-    public Slot getSlot(Position position) {
+    protected Slot getSlot(Position position) {
         return this.myBoard.containsKey(position) ? this.myBoard.get(position) : new SlotImpl(position, SlotType.VOID);
     }
     
