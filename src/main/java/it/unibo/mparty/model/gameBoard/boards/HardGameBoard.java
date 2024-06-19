@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.gameBoard.boards;
 
+import java.util.List;
 import java.util.Set;
 
 import it.unibo.mparty.model.gameBoard.impl.AbstractBoardImpl;
@@ -54,6 +55,12 @@ public class HardGameBoard extends AbstractBoardImpl{
     protected Position setInitialPosition() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setInitialPosition'");
+    }
+
+    @Override
+    protected List<SlotType> setAviableSlotType() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setAviableSlotType'");
     }
     
 }

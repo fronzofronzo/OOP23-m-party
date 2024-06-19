@@ -30,7 +30,7 @@ public class EasyGameBoard extends AbstractBoardImpl{
 
     private static final String FilePath = "C:\\Users\\81W1019HIX\\OneDrive\\Desktop\\MARIO PARTY\\OOP23-m-party\\src\\main\\java\\it\\unibo\\mparty\\model\\gameBoard\\file\\EasyBoardGame.txt";
 
-    private Set<Pair<SlotType,Double>> rules = 
+    private static final Set<Pair<SlotType,Double>> rules = 
         Set.of(new Pair<>(SlotType.PATH, PROB_PATH),
                new Pair<>(SlotType.SINGLEPLAYER, PROB_SINGLEPLAYER),
                new Pair<>(SlotType.MALUS, PROB_MALUS),
@@ -42,11 +42,8 @@ public class EasyGameBoard extends AbstractBoardImpl{
                                                                new Position(25, 21),
                                                                new Position(34, 6));
            
-    private List<SlotType> avaiableSlotsType = RandomListGenerator.generateRandomList(this.rules);
-
     public EasyGameBoard() {
         super();
-        this.generateBoard();
     }
 
     @Override
@@ -56,16 +53,6 @@ public class EasyGameBoard extends AbstractBoardImpl{
         this.addSlot(getStrartingPosition(), SlotType.PATH);
         this.createPathFromFile(FilePath);
         }
-
-    @Override
-    protected SlotType getNewSlotType() {
-        if (this.avaiableSlotsType.isEmpty()) {
-            this.avaiableSlotsType = RandomListGenerator.generateRandomList(this.rules);
-        }
-        SlotType output = this.avaiableSlotsType.getFirst();
-        this.avaiableSlotsType.removeFirst();
-        return output;
-    }
 
     @Override
     public BoardType getBoardType() {
@@ -90,5 +77,10 @@ public class EasyGameBoard extends AbstractBoardImpl{
     @Override
     protected Position setInitialPosition() {
         return new Position(INITIAL_X_EASY_BOARD, INITIAL_Y_EASY_BOARD);
+    }
+
+    @Override
+    protected List<SlotType> setAviableSlotType() {
+        return RandomListGenerator.generateRandomList(rules);
     }
 }

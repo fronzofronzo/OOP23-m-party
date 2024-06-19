@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import java.io.BufferedReader;
@@ -12,9 +13,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import it.unibo.mparty.model.gameBoard.api.Board;
-import it.unibo.mparty.model.gameBoard.api.Slot;
 import it.unibo.mparty.model.gameBoard.util.Direction;
+import it.unibo.mparty.model.gameBoard.util.Pair;
 import it.unibo.mparty.model.gameBoard.util.Position;
+import it.unibo.mparty.model.gameBoard.api.Slot;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 
 public abstract class AbstractBoardImpl implements Board{
@@ -22,31 +24,25 @@ public abstract class AbstractBoardImpl implements Board{
     private final int width;
     private final int height;
     private final Position initialPosition;
-    private Map<Position,Slot> myBoard = new HashMap<>();
-    private final Set<Position> stars;
+    private final Set<Position> starsPosition;
+    private Map<Position,Slot> board = new HashMap<>();
+    protected List<SlotType> avaiableSlotsType;
+
 
     public AbstractBoardImpl(){
         this.width = setWidth();
         this.height = setHeight();
         this.initialPosition = setInitialPosition();
-        this.stars = setStarsPosition();
-    }
-
-    protected abstract Set<Position> setStarsPosition();
-
-    protected abstract  int setWidth();
-
-    protected abstract  int setHeight();
-
-    protected abstract Position setInitialPosition();
-
-    protected Slot getSlot(Position position) {
-        return this.myBoard.containsKey(position) ? this.myBoard.get(position) : new SlotImpl(position, SlotType.VOID);
+        this.starsPosition = setStarsPosition();
+        this.avaiableSlotsType = setAviableSlotType();
+        this.generateBoard();
     }
     
+    protected abstract List<SlotType> setAviableSlotType();
+
     @Override
     public SlotType getSlotType(Position position) {
-        return this.myBoard.containsKey(position) ? this.myBoard.get(position).getSlotType() : SlotType.VOID;
+        return this.board.containsKey(position) ? this.board.get(position).getSlotType() : SlotType.VOID;
     }
     
     @Override
@@ -56,38 +52,42 @@ public abstract class AbstractBoardImpl implements Board{
 
     @Override
     public Map<Direction, Position> getNextPositions(Position position) {
-        return Collections.unmodifiableMap(this.myBoard.get(position).getNextConnections());
+        return Collections.unmodifiableMap(this.getSlot(position).getNextConnections());
     }
 
     @Override
     public Position getStarPosition() {
+        return this.starsPosition.stream().filter(p -> this.getSlotType(p).equals(SlotType.ACTIVE_STAR)).findFirst().get();
+        /* 
         return  this.myBoard.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().getSlotType().equals(SlotType.ACTIVE_STAR))
                 .findFirst()
                 .get()
                 .getKey();
+                */
     }
 
     @Override
     public void changeStarPosition() {
-        Set<Position> possibleNextStarPosition = this.myBoard.entrySet()
-                                                .stream()
-                                                .filter(entry -> entry.getValue().getSlotType().equals(SlotType.NOT_ACTIVE_STAR))
-                                                .map(entry -> entry.getKey())
-                                                .collect(Collectors.toSet());
+        Set<Position> possibleNextStarPosition = this.starsPosition.stream().filter(p -> this.getSlotType(p).equals(SlotType.NOT_ACTIVE_STAR)).collect(Collectors.toSet());
         Position newStarPosition = possibleNextStarPosition.stream()
                                     .skip(new Random().nextInt(possibleNextStarPosition.size()))
                                     .findFirst()
                                     .get();
         Position oldStarPosition = this.getStarPosition();
-        this.myBoard.get(newStarPosition).changeSlotType(SlotType.ACTIVE_STAR);
-        this.myBoard.get(oldStarPosition).changeSlotType(SlotType.NOT_ACTIVE_STAR);
+        this.board.get(newStarPosition).changeSlotType(SlotType.ACTIVE_STAR);
+        this.board.get(oldStarPosition).changeSlotType(SlotType.NOT_ACTIVE_STAR);
+    }
+
+    @Override
+    public Pair<Integer, Integer> getDimension() {
+        return new Pair<Integer,Integer>(this.width, this.height);
     }
 
     protected void addSlot(Position position, SlotType slotType) {
-        if (!this.myBoard.containsKey(position) && isValidPosition(position)){
-            this.myBoard.put(position, new SlotImpl(position, slotType));
+        if (!this.board.containsKey(position) && isValidPosition(position)){
+            this.board.put(position, new SlotImpl(position, slotType));
         }
     }
 
@@ -101,9 +101,9 @@ public abstract class AbstractBoardImpl implements Board{
     }
 
     protected void addConnection(Position from, Position to, Direction dir) {
-        if (this.myBoard.containsKey(from) && this.myBoard.containsKey(to)) {
-            this.myBoard.get(from).addNext(dir, to);
-            this.myBoard.get(to).addPrev(dir, from);
+        if (this.board.containsKey(from) && this.board.containsKey(to)) {
+            this.board.get(from).addNext(dir, to);
+            this.board.get(to).addPrev(dir, from);
         };
     }
 
@@ -154,7 +154,14 @@ public abstract class AbstractBoardImpl implements Board{
         }
     }
 
-    protected abstract SlotType getNewSlotType();
+    protected SlotType getNewSlotType(){
+        if (this.avaiableSlotsType.isEmpty()) {
+            this.avaiableSlotsType = setAviableSlotType();
+        }
+        SlotType output = this.avaiableSlotsType.getFirst();
+        this.avaiableSlotsType.removeFirst();
+        return output;
+    }
 
     @Override
     public void printBoard(){
@@ -181,8 +188,22 @@ public abstract class AbstractBoardImpl implements Board{
         }
     }
 
+    protected Slot getSlot(Position position) {
+        return this.board.containsKey(position) ? this.board.get(position) : new SlotImpl(position, SlotType.VOID);
+    }
+
     @Override
     public Map<Position,Slot> getBoard() {
-        return Collections.unmodifiableMap(this.myBoard);
+        return Collections.unmodifiableMap(this.board);
     }
+
+    protected abstract void generateBoard();
+
+    protected abstract Set<Position> setStarsPosition();
+
+    protected abstract  int setWidth();
+
+    protected abstract  int setHeight();
+
+    protected abstract Position setInitialPosition();
 }
