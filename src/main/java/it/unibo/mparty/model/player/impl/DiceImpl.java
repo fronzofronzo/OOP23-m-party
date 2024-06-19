@@ -36,6 +36,10 @@ public class DiceImpl implements Dice {
 
     @Override
     public int generateNumber() {
-        return random.nextInt(minNumber,maxNumber+1);
+        int number = 0;
+        for(int i = 0; i < numberOfAttempts; i++){
+            number +=  random.nextInt(minNumber,maxNumber+1);
+        }
+        return number;
     }
 }
