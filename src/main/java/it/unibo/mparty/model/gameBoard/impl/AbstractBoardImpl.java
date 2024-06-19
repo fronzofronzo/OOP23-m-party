@@ -48,9 +48,10 @@ public abstract class AbstractBoardImpl implements Board{
         return this.initialPosition;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Map<Direction, Position> getNextPositions(Position position) {
-        return Collections.unmodifiableMap(this.getSlot(position).getNextConnections());
+        return this.getSlot(position).hasNext() ? Collections.unmodifiableMap(this.getSlot(position).getNextConnections()) : Collections.EMPTY_MAP;
     }
 
     @Override
