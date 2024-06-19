@@ -10,7 +10,12 @@ import it.unibo.mparty.model.gameBoard.util.SlotType;
 
 public class HardGameBoard extends AbstractBoardImpl{
 
-    public HardGameBoard(int width, int height, Position initialPosition) {
+    private static final int WIDTH = 40;
+    private static final int HEIGHT = 30;
+    private static final int INITIAL_X_HARD_BOARD = 5;
+    private static final int INITIAL_Y_HARD_BOARD = 25;
+
+    public HardGameBoard() {
         super();
         //TODO Auto-generated constructor stub
     }
