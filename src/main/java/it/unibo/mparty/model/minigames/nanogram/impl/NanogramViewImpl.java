@@ -43,4 +43,16 @@ public class NanogramViewImpl implements NanogramView {
     @FXML
     private GridPane rowHints;
 
+    @Override
+    public Pair<Integer, Integer> userClicked() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'userClicked'");
+    }
+
+    @Override
+    public void displayStatusMessage(String message, String messageType) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'displayStatusMessage'");
+    }
+
 }
