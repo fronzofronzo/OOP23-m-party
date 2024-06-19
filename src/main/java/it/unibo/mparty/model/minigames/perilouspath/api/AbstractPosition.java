@@ -9,9 +9,9 @@ import it.unibo.mparty.model.minigames.perilouspath.impl.Pair;
  */
 public abstract class AbstractPosition {
 
-    private Pair<Integer,Integer> position;
-    private int size;
-    private static int ADJ = 1;
+    final private Pair<Integer,Integer> position;
+    final private int size;
+    final private static int ADJ = 1;
 
     /**
      * 
