@@ -2,18 +2,24 @@ package it.unibo.mparty.model.minigames.nanogram.api;
 
 import java.util.*;
 
+import it.unibo.mparty.model.minigames.nanogram.util.CellState;
+
 public interface NanogramModel {
     void initializeGameGrid(int size);
 
-    String getCellState(int row, int column);
+    CellState getCellState(int row, int column);
 
-    void setCellState(int row, int column, String state);
+    void updateCellState(int row, int column, CellState state);
 
-    List<String> getRowHints();
+    List<List<Integer>> getRowHints();
 
-    List<String> getColumnHints();
+    List<List<Integer>> getColumnHints();
 
-    boolean isMoveValid(int row, int column, String move);
+    boolean isMoveValid(int row, int column, CellState state);
 
     boolean isGameComplete();
+
+    int getLives();
+
+    boolean isGameOver();
 }
