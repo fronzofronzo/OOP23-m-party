@@ -21,4 +21,10 @@ public interface Dice {
      */
     void setMinNumber(int num);
 
+    /**
+     * Generate the number of the dice when you roll it
+     * @return the number generated when you roll the dice
+     */
+    int generateNumber();
+
 }
