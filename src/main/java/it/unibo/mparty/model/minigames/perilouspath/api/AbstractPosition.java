@@ -57,6 +57,19 @@ public abstract class AbstractPosition {
     }
 
     /**
+     * 
+     * @param p the position we want to check wheter is adjacent and in orizzontal to this
+     * @return true if they are adjacent and in orizzontal, false otherwise
+     */
+    public boolean inOrizzontal(AbstractPosition p){
+        return this.getX() == p.getX() && adjacent(p);
+    }
+
+    public boolean inVertical(AbstractPosition p){
+        return this.getY() == p.getY() && adjacent(p);
+    }
+
+    /**
      * the politics regarding wheter the position of a button inside a grid is safe or not, it dipends on the implementation 
      * @param list list of positions of buttons to compare to this to know if it is safe
      * @return true if the position is safe, false otherwise
