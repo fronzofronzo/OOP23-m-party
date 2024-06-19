@@ -25,26 +25,29 @@ class TestGameBoard{
     private static final int INITIAL_X_EASY_BOARD = 5;
     private static final int INITIAL_Y_EASY_BOARD = 25;
 
+    
     private final Map<Position,Map<Direction, Position>> dataSetToTestgetNextPositions = 
-    Map.of(new Position(5, 6), Map.of(Direction.RIGHT, new Position(6, 6)),
-           new Position(16, 10), Map.of(Direction.RIGHT, new Position(17, 10),Direction.DOWN, new Position(16, 11)));
-
-    private Board myBoard;
+    Map.of(
+        new Position(5, 6), Map.of(Direction.RIGHT, new Position(6, 6)),
+        new Position(16, 10), Map.of(Direction.RIGHT, new Position(17, 10),Direction.DOWN, new Position(16, 11))
+        );
+    
+    private static Board myBoard;
 
     @BeforeAll
-    public void initialise(){
+    public static void initialise(){
         SimpleBoardFactory factory = new SimpleBoardFactory();
-        this.myBoard = factory.createBoard(BoardType.EASY);
+        myBoard = factory.createBoard(BoardType.EASY);
     }
 
     @Test 
     public void testNumberStarsSlots(){
-        int count_active_star = (int)this.myBoard.getBoard()
+        int count_active_star = (int)myBoard.getBoard()
                                                  .entrySet()
                                                  .stream()
                                                  .filter(entry -> entry.getValue().getSlotType().equals(SlotType.ACTIVE_STAR))
                                                  .count();
-        int count_not_active_star = (int)this.myBoard.getBoard()
+        int count_not_active_star = (int)myBoard.getBoard()
                                                      .entrySet()
                                                      .stream()
                                                      .filter(entry -> entry.getValue().getSlotType().equals(SlotType.NOT_ACTIVE_STAR))
@@ -55,28 +58,27 @@ class TestGameBoard{
 
     @Test
     public void testChangeStarPosition() {
-        Position oldStarPosition = this.myBoard.getStarPosition();
+        Position oldStarPosition = myBoard.getStarPosition();
         assertNotNull(oldStarPosition);
-        this.myBoard.changeStarPosition();
-        assertNotEquals(oldStarPosition, this.myBoard.getStarPosition());
+        myBoard.changeStarPosition();
+        assertNotEquals(oldStarPosition, myBoard.getStarPosition());
     }
 
     @Test 
     public void testStartingPosition(){
         Position expected = null;
         expected = new Position(INITIAL_X_EASY_BOARD, INITIAL_Y_EASY_BOARD);
-        assertEquals(expected, this.myBoard.getStrartingPosition());
-        assertTrue(this.myBoard.getSlot(expected).hasNext());
-        assertFalse(this.myBoard.getSlot(expected).hasPrev());
-        Map<Direction, Position>  getNextPositions = this.myBoard.getSlot(expected).getNextConnections();
+        assertEquals(expected, myBoard.getStrartingPosition());
+        assertTrue(myBoard.getSlot(expected).hasNext());
+        assertFalse(myBoard.getSlot(expected).hasPrev());
+        Map<Direction, Position>  getNextPositions = myBoard.getSlot(expected).getNextConnections();
         assertEquals(1, getNextPositions.size());
-        getNextPositions.entrySet().stream().forEach(entry -> assertNotEquals(this.myBoard.getStrartingPosition(), entry.getValue()));
+        getNextPositions.entrySet().stream().forEach(entry -> assertNotEquals(myBoard.getStrartingPosition(), entry.getValue()));
     }
 
     @Test
     public void testGetNextPositions() {
-        this.dataSetToTestgetNextPositions.entrySet()
-                                          .stream()
-                                          .forEach(entry -> assertEquals(entry.getValue(), this.myBoard.getNextPositions(null)));
+        this.dataSetToTestgetNextPositions.entrySet().stream().forEach(entry -> assertEquals(entry.getValue(), myBoard.getNextPositions(entry.getKey())));
+        //System.out.println(myBoard.getNextPositions(new Position(5, 6)));
     }
 }
