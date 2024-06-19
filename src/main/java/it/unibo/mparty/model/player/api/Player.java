@@ -76,4 +76,9 @@ public interface Player {
      */
     PlayerBag getPlayerBag();
 
+    /**
+     * Access to the player's dice
+     * @return the player's dice
+     */
+    Dice getDice();
 }
