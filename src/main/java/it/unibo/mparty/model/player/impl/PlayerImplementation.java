@@ -1,6 +1,7 @@
 package it.unibo.mparty.model.player.impl;
 
 import it.unibo.mparty.model.player.Position;
+import it.unibo.mparty.model.player.api.Dice;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBag;
 
@@ -12,6 +13,7 @@ public class PlayerImplementation implements Player{
     private Position position;
     private final Character character;
     private final PlayerBag playerBag;
+    private final Dice dice;
     private int numCoins;
     private int numStars;
 
@@ -20,6 +22,7 @@ public class PlayerImplementation implements Player{
         this.position = position;
         this.character = character;
         this.playerBag = new PlayerBagImplementation(NUM_ITEMS);
+        this.dice = new DiceImpl();
         this.numCoins = 0;
         this.numStars = 0;
     }
@@ -83,5 +86,10 @@ public class PlayerImplementation implements Player{
     @Override
     public PlayerBag getPlayerBag() {
         return this.playerBag;
+    }
+
+    @Override
+    public Dice getDice() {
+        return this.dice;
     }
 }
