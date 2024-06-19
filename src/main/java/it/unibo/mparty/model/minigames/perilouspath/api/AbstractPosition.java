@@ -65,6 +65,11 @@ public abstract class AbstractPosition {
         return this.getX() == p.getX() && adjacent(p);
     }
 
+    /**
+     * 
+     * @param p the position we want to check wheter is adjacent and in vertical to this
+     * @return true if they are adjacent and in vertical, false otherwise
+     */
     public boolean inVertical(AbstractPosition p){
         return this.getY() == p.getY() && adjacent(p);
     }
