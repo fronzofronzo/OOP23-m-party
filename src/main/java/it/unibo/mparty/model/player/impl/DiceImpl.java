@@ -4,13 +4,13 @@ import it.unibo.mparty.model.player.api.Dice;
 
 public class DiceImpl implements Dice {
 
-    final int numberOfAttempts = 1;
-    final int maxNumber = 6;
-    final int minNumber = 1;
+    private int numberOfAttempts = 1;
+    private int maxNumber = 6;
+    private int minNumber = 1;
 
     @Override
     public void setNumberOfAttempts(int num) {
-
+        this.numberOfAttempts = num;
     }
 
     @Override
