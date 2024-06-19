@@ -15,7 +15,7 @@ public class DiceImpl implements Dice {
 
     @Override
     public void setMaxNumber(int num) {
-
+        this.maxNumber = num;
     }
 
     @Override
