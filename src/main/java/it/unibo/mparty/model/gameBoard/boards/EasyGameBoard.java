@@ -4,16 +4,16 @@ import it.unibo.mparty.model.gameBoard.impl.AbstractBoardImpl;
 import it.unibo.mparty.model.gameBoard.util.BoardType;
 import it.unibo.mparty.model.gameBoard.util.Pair;
 import it.unibo.mparty.model.gameBoard.util.Position;
+import it.unibo.mparty.model.gameBoard.util.RandomFromSet;
 import it.unibo.mparty.model.gameBoard.util.RandomListGenerator;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 import java.util.Set;
 import java.util.List;
-import java.util.Random;
 import java.util.Collections;
 
 public class EasyGameBoard extends AbstractBoardImpl{
 
-    private final static BoardType myBoardType = BoardType.EASY; 
+    private final static BoardType boardType = BoardType.EASY; 
 
     private static final int WIDTH = 40;
     private static final int HEIGHT = 30;
@@ -28,9 +28,9 @@ public class EasyGameBoard extends AbstractBoardImpl{
     private static final double PROB_SHOP = 0.1;
     private static final double PROB_BONUS = 0.15;
 
-    private static final String FilePath = "C:\\Users\\81W1019HIX\\OneDrive\\Desktop\\MARIO PARTY\\OOP23-m-party\\src\\main\\java\\it\\unibo\\mparty\\model\\gameBoard\\file\\EasyBoardGame.txt";
+    private static final String FILE_PATH = "C:\\Users\\81W1019HIX\\OneDrive\\Desktop\\MARIO PARTY\\OOP23-m-party\\src\\main\\java\\it\\unibo\\mparty\\model\\gameBoard\\file\\EasyBoardGame.txt";
 
-    private static final Set<Pair<SlotType,Double>> rules = 
+    private static final Set<Pair<SlotType,Double>> RULES = 
         Set.of(new Pair<>(SlotType.PATH, PROB_PATH),
                new Pair<>(SlotType.SINGLEPLAYER, PROB_SINGLEPLAYER),
                new Pair<>(SlotType.MALUS, PROB_MALUS),
@@ -38,9 +38,9 @@ public class EasyGameBoard extends AbstractBoardImpl{
                new Pair<>(SlotType.SHOP, PROB_SHOP),
                new Pair<>(SlotType.BONUS, PROB_BONUS));
 
-    private static final Set<Position> starsPositions = Set.of(new Position(5, 6), 
-                                                               new Position(25, 21),
-                                                               new Position(34, 6));
+    private static final Set<Position> STARS_POSITIONS = Set.of(new Position(5, 6), 
+                                                                new Position(25, 21),
+                                                                new Position(34, 6));
            
     public EasyGameBoard() {
         super();
@@ -48,20 +48,20 @@ public class EasyGameBoard extends AbstractBoardImpl{
 
     @Override
     public void generateBoard() {
-        this.addSlot(starsPositions.stream().skip(new Random().nextInt(starsPositions.size())).findFirst().get(), SlotType.ACTIVE_STAR);
-        starsPositions.stream().forEach(p -> this.addSlot(p, SlotType.NOT_ACTIVE_STAR));
-        this.addSlot(getStrartingPosition(), SlotType.PATH);
-        this.createPathFromFile(FilePath);
+        this.addSlot(RandomFromSet.get(STARS_POSITIONS), SlotType.ACTIVE_STAR);
+        STARS_POSITIONS.stream().forEach(p -> this.addSlot(p, SlotType.NOT_ACTIVE_STAR));
+        this.addSlot(this.getStrartingPosition(), SlotType.PATH);
+        this.createPathFromFile(FILE_PATH);
         }
 
     @Override
     public BoardType getBoardType() {
-        return myBoardType;
+        return boardType;
     }
 
     @Override
     protected Set<Position> setStarsPosition() {
-        return Collections.unmodifiableSet(starsPositions);
+        return Collections.unmodifiableSet(STARS_POSITIONS);
     }
 
     @Override
@@ -81,6 +81,6 @@ public class EasyGameBoard extends AbstractBoardImpl{
 
     @Override
     protected List<SlotType> setAviableSlotType() {
-        return RandomListGenerator.generateRandomList(rules);
+        return RandomListGenerator.generate(RULES);
     }
 }

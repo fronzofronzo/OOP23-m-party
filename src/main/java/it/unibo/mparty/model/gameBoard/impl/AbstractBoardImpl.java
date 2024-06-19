@@ -3,7 +3,6 @@ package it.unibo.mparty.model.gameBoard.impl;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +15,7 @@ import it.unibo.mparty.model.gameBoard.api.Board;
 import it.unibo.mparty.model.gameBoard.util.Direction;
 import it.unibo.mparty.model.gameBoard.util.Pair;
 import it.unibo.mparty.model.gameBoard.util.Position;
+import it.unibo.mparty.model.gameBoard.util.RandomFromSet;
 import it.unibo.mparty.model.gameBoard.api.Slot;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 
@@ -24,21 +24,19 @@ public abstract class AbstractBoardImpl implements Board{
     private final int width;
     private final int height;
     private final Position initialPosition;
-    private final Set<Position> starsPosition;
+    private final Set<Position> starsPositions;
     private Map<Position,Slot> board = new HashMap<>();
-    protected List<SlotType> avaiableSlotsType;
+    protected List<SlotType> avaiableSlotTypes;
 
 
     public AbstractBoardImpl(){
         this.width = setWidth();
         this.height = setHeight();
         this.initialPosition = setInitialPosition();
-        this.starsPosition = setStarsPosition();
-        this.avaiableSlotsType = setAviableSlotType();
+        this.starsPositions = setStarsPosition();
+        this.avaiableSlotTypes = setAviableSlotType();
         this.generateBoard();
     }
-    
-    protected abstract List<SlotType> setAviableSlotType();
 
     @Override
     public SlotType getSlotType(Position position) {
@@ -57,24 +55,18 @@ public abstract class AbstractBoardImpl implements Board{
 
     @Override
     public Position getStarPosition() {
-        return this.starsPosition.stream().filter(p -> this.getSlotType(p).equals(SlotType.ACTIVE_STAR)).findFirst().get();
-        /* 
-        return  this.myBoard.entrySet()
-                .stream()
-                .filter(entry -> entry.getValue().getSlotType().equals(SlotType.ACTIVE_STAR))
-                .findFirst()
-                .get()
-                .getKey();
-                */
+        return this.starsPositions.stream()
+                                  .filter(p -> this.getSlotType(p).equals(SlotType.ACTIVE_STAR))
+                                  .findFirst()
+                                  .get();
     }
 
     @Override
     public void changeStarPosition() {
-        Set<Position> possibleNextStarPosition = this.starsPosition.stream().filter(p -> this.getSlotType(p).equals(SlotType.NOT_ACTIVE_STAR)).collect(Collectors.toSet());
-        Position newStarPosition = possibleNextStarPosition.stream()
-                                    .skip(new Random().nextInt(possibleNextStarPosition.size()))
-                                    .findFirst()
-                                    .get();
+        Set<Position> possibleNextStarPosition = this.starsPositions.stream()
+                                                                    .filter(p -> this.getSlotType(p).equals(SlotType.NOT_ACTIVE_STAR))
+                                                                    .collect(Collectors.toSet());
+        Position newStarPosition = RandomFromSet.get(possibleNextStarPosition);
         Position oldStarPosition = this.getStarPosition();
         this.board.get(newStarPosition).changeSlotType(SlotType.ACTIVE_STAR);
         this.board.get(oldStarPosition).changeSlotType(SlotType.NOT_ACTIVE_STAR);
@@ -85,19 +77,44 @@ public abstract class AbstractBoardImpl implements Board{
         return new Pair<Integer,Integer>(this.width, this.height);
     }
 
+    @Override
+    public void printBoard(){
+        for(int j = 0; j < this.height; j++){
+            String line = "";
+            for(int i = 0; i < this.width; i++){
+                SlotType slotType = this.getSlotType(new Position(i, j));
+                String c = "";
+                switch (slotType) {
+                    case VOID: c = "."; break;
+                    case ACTIVE_STAR: c = "*"; break;
+                    case PATH: c = "O"; break;
+                    case SINGLEPLAYER: c = "1"; break;
+                    case MULTIPLAYER: c = "2"; break;
+                    case BONUS: c = "B"; break;
+                    case MALUS: c = "M"; break;
+                    case NOT_ACTIVE_STAR: c = "s"; break;
+                    case SHOP: c = "I"; break;
+                    default: c = "."; break;
+                } 
+                line = line + c;
+            }
+            System.out.println(j<10 ? " " + j + line : "" + j + line);
+        }
+    }
+
+    @Override
+    public Map<Position,Slot> getBoard() {
+        return Collections.unmodifiableMap(this.board);
+    }
+
     protected void addSlot(Position position, SlotType slotType) {
         if (!this.board.containsKey(position) && isValidPosition(position)){
             this.board.put(position, new SlotImpl(position, slotType));
         }
     }
 
-    protected boolean isValidPosition(Position position) {
-        return isInTheBoard(position);
-    }
-
-    private boolean isInTheBoard(Position position){
-        return  position.getX() >= 0 && position.getX() < this.width &&
-                position.getY() >= 0 && position.getY() < this.height;
+    protected void addSlots(Set<Position> positions){
+        positions.stream().forEach(p -> this.addSlot(p, this.getNewSlotType()));
     }
 
     protected void addConnection(Position from, Position to, Direction dir) {
@@ -116,12 +133,13 @@ public abstract class AbstractBoardImpl implements Board{
         }
     }
 
-    protected Position getNeighbor(Position p, Direction dir) {
-        return new Position(p.getX() + (dir.equals(Direction.RIGHT) ? 1 : 0) + (dir.equals(Direction.LEFT) ? -1 : 0), p.getY() + (dir.equals(Direction.UP) ? -1 : 0) + (dir.equals(Direction.DOWN) ? 1 : 0));
+    protected boolean isValidPosition(Position position) {
+        return isInTheBoard(position);
     }
 
-    protected void addSlots(Set<Position> positions){
-        positions.stream().forEach(p -> this.addSlot(p, this.getNewSlotType()));
+    private boolean isInTheBoard(Position position){
+        return  position.getX() >= 0 && position.getX() < this.width &&
+                position.getY() >= 0 && position.getY() < this.height;
     }
 
     protected void createPath(Position from, int steps, Direction currentDir){
@@ -154,56 +172,32 @@ public abstract class AbstractBoardImpl implements Board{
         }
     }
 
-    protected SlotType getNewSlotType(){
-        if (this.avaiableSlotsType.isEmpty()) {
-            this.avaiableSlotsType = setAviableSlotType();
-        }
-        SlotType output = this.avaiableSlotsType.getFirst();
-        this.avaiableSlotsType.removeFirst();
-        return output;
-    }
-
-    @Override
-    public void printBoard(){
-        for(int j = 0; j < this.height; j++){
-            String line = "";
-            for(int i = 0; i < this.width; i++){
-                SlotType slotType = this.getSlotType(new Position(i, j));
-                String c = "";
-                switch (slotType) {
-                    case VOID: c = "."; break;
-                    case ACTIVE_STAR: c = "*"; break;
-                    case PATH: c = "O"; break;
-                    case SINGLEPLAYER: c = "1"; break;
-                    case MULTIPLAYER: c = "2"; break;
-                    case BONUS: c = "B"; break;
-                    case MALUS: c = "M"; break;
-                    case NOT_ACTIVE_STAR: c = "s"; break;
-                    case SHOP: c = "I"; break;
-                    default: c = "."; break;
-                } 
-                line = line + c;
-            }
-            System.out.println(j<10 ? " " + j + line : "" + j + line);
-        }
-    }
-
     protected Slot getSlot(Position position) {
         return this.board.containsKey(position) ? this.board.get(position) : new SlotImpl(position, SlotType.VOID);
     }
 
-    @Override
-    public Map<Position,Slot> getBoard() {
-        return Collections.unmodifiableMap(this.board);
+    protected Position getNeighbor(Position p, Direction dir) {
+        return new Position(p.getX() + (dir.equals(Direction.RIGHT) ? 1 : 0) + (dir.equals(Direction.LEFT) ? -1 : 0), p.getY() + (dir.equals(Direction.UP) ? -1 : 0) + (dir.equals(Direction.DOWN) ? 1 : 0));
+    }
+
+    protected SlotType getNewSlotType(){
+        if (this.avaiableSlotTypes.isEmpty()) {
+            this.avaiableSlotTypes = setAviableSlotType();
+        }
+        SlotType output = this.avaiableSlotTypes.getFirst();
+        this.avaiableSlotTypes.removeFirst();
+        return output;
     }
 
     protected abstract void generateBoard();
 
     protected abstract Set<Position> setStarsPosition();
 
-    protected abstract  int setWidth();
+    protected abstract int setWidth();
 
-    protected abstract  int setHeight();
+    protected abstract int setHeight();
 
     protected abstract Position setInitialPosition();
+    
+    protected abstract List<SlotType> setAviableSlotType();
 }

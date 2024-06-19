@@ -6,7 +6,7 @@ import java.util.Collections;
 
 //import org.apache.commons.math3.distribution.EnumeratedDistribution 
 public class RandomListGenerator {
-    public static <E> List<E> generateRandomList(Set<Pair<E,Double>> inputSet) {
+    public static <E> List<E> generate(Set<Pair<E,Double>> inputSet) {
         List<E> outputList = new ArrayList<>();
         for (Pair<E,Double> p : inputSet) {
             E element = p.getFirst();
