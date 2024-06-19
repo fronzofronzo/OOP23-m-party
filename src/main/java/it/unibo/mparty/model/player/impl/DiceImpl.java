@@ -20,7 +20,7 @@ public class DiceImpl implements Dice {
 
     @Override
     public void setMinNumber(int num) {
-
+        this.minNumber = num;
     }
 
     @Override
