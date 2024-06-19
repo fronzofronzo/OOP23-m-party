@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.minigames.perilouspath.impl;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -29,8 +30,12 @@ public class PerilousPathImpl implements PerilousPath{
 
     @Override
     public void setBombs() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setBombs'");
+        for(var i = 0; i < NUM_BOMBS; i++){
+            BombPosition b;
+            do {
+                b = new BombPosition(random.nextInt(this.size - 1), random.nextInt(this.size - 1), this.size);
+            } while (b.isSafe(this.getBombs()));
+        }
     }
 
     @Override
@@ -41,14 +46,12 @@ public class PerilousPathImpl implements PerilousPath{
 
     @Override
     public List<AbstractPosition> getBombs() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBombs'");
+        return Collections.unmodifiableList(this.bombs.get());
     }
 
     @Override
     public List<AbstractPosition> getBalls() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBalls'");
+        return Collections.unmodifiableList(this.balls.get());
     }
 
     
