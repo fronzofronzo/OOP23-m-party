@@ -14,12 +14,14 @@ public class PerilousPathImpl implements PerilousPath{
     private Optional<List<BallPosition>> balls = Optional.empty();
     private Optional<List<PathPosition>> path = Optional.empty();
     private Random random;
+    private int size;
 
-    public PerilousPathImpl(){
+    public PerilousPathImpl(int size){
         this.bombs = Optional.of(new LinkedList<>());
         this.balls = Optional.of(new LinkedList<>());
         this.path = Optional.of(new LinkedList<>());
         this.random = new Random();
+        this.size = size;
     }
 
     @Override
