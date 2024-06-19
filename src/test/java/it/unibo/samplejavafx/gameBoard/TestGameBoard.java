@@ -72,16 +72,10 @@ class TestGameBoard{
         Position expected = null;
         expected = new Position(INITIAL_X_EASY_BOARD, INITIAL_Y_EASY_BOARD);
         assertEquals(expected, myBoard.getStrartingPosition());
-        //assertTrue(myBoard.getSlot(expected).hasNext());
-        //assertFalse(myBoard.getSlot(expected).hasPrev());
-        //Map<Direction, Position>  getNextPositions = myBoard.getSlot(expected).getNextConnections();
-        //assertEquals(1, getNextPositions.size());
-        //getNextPositions.entrySet().stream().forEach(entry -> assertNotEquals(myBoard.getStrartingPosition(), entry.getValue()));
     }
 
     @Test
     public void testGetNextPositions() {
         this.dataSetToTestgetNextPositions.entrySet().stream().forEach(entry -> assertEquals(entry.getValue(), myBoard.getNextPositions(entry.getKey())));
-        //System.out.println(myBoard.getNextPositions(new Position(5, 6)));
     }
 }
