@@ -9,11 +9,11 @@ public class BombPosition extends AbstractPosition{
 
     final private static int MAX_NEAR_BOMBS = 2;
     final private static int EMPTY = 0;
-
+    
     public BombPosition(int x, int y, int size) {
         super(x, y, size);
     }
-
+    
     @Override
     public boolean isSafe(List<AbstractPosition> list) {
         if(list.size() == EMPTY){
