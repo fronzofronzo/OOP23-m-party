@@ -27,4 +27,11 @@ public interface memoryCardModel {
      * false if there are others couples to find
      */
     boolean isDone();
+
+    /**
+     * Get the amount of money that the player should receive at the
+     * end of the game
+     * @return amount of money earned by the player
+     */
+    int getResults();
 }
