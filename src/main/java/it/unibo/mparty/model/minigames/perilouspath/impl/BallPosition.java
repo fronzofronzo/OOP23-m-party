@@ -14,7 +14,7 @@ public class BallPosition extends AbstractPosition{
 
     @Override
     public boolean isSafe(List<AbstractPosition> list) {
-        return this.getY() == 0 || this.getY() == this.getSize();
+        return this.getY() == 0 || this.getY() == this.getSize() - 1;
     }
 
     
