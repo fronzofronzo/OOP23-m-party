@@ -1,4 +1,4 @@
-package it.unibo.samplejavafx.model.perilouspath;
+package it.unibo.samplejavafx.model.minigames.perilouspath;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.*;
