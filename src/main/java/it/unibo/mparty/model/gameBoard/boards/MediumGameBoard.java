@@ -1,5 +1,7 @@
 package it.unibo.mparty.model.gameBoard.boards;
 
+import java.util.Set;
+
 import it.unibo.mparty.model.gameBoard.impl.AbstractBoardImpl;
 import it.unibo.mparty.model.gameBoard.util.BoardType;
 import it.unibo.mparty.model.gameBoard.util.Position;
@@ -8,7 +10,7 @@ import it.unibo.mparty.model.gameBoard.util.SlotType;
 public class MediumGameBoard extends AbstractBoardImpl{
 
     public MediumGameBoard(int width, int height, Position initialPosition) {
-        super(width, height, initialPosition);
+        super();
         //TODO Auto-generated constructor stub
     }
 
@@ -28,6 +30,30 @@ public class MediumGameBoard extends AbstractBoardImpl{
     public BoardType getBoardType() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getBoardType'");
+    }
+
+    @Override
+    protected Set<Position> setStarsPosition() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setStarsPosition'");
+    }
+
+    @Override
+    protected int setWidth() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setWidth'");
+    }
+
+    @Override
+    protected int setHeight() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setHeight'");
+    }
+
+    @Override
+    protected Position setInitialPosition() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setInitialPosition'");
     }
     
 }

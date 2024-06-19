@@ -23,13 +23,22 @@ public abstract class AbstractBoardImpl implements Board{
     private final int height;
     private final Position initialPosition;
     private Map<Position,Slot> myBoard = new HashMap<>();
-    private Position starPositin;
+    private final Set<Position> stars;
 
-    public AbstractBoardImpl(int width, int height, Position initialPosition){
-        this.width = width;
-        this.height = height;
-        this.initialPosition = initialPosition;
+    public AbstractBoardImpl(){
+        this.width = setWidth();
+        this.height = setHeight();
+        this.initialPosition = setInitialPosition();
+        this.stars = setStarsPosition();
     }
+
+    protected abstract Set<Position> setStarsPosition();
+
+    protected abstract  int setWidth();
+
+    protected abstract  int setHeight();
+
+    protected abstract Position setInitialPosition();
 
     protected Slot getSlot(Position position) {
         return this.myBoard.containsKey(position) ? this.myBoard.get(position) : new SlotImpl(position, SlotType.VOID);
