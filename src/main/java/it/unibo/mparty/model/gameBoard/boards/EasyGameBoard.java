@@ -37,6 +37,7 @@ public class EasyGameBoard extends AbstractBoardImpl{
         this.addSlot(getStrartingPosition(), SlotType.PATH);
         this.stars.stream().forEach(p -> this.addSlot(p, SlotType.NOT_ACTIVE_STAR));
         createPath(this.getStrartingPosition(), 19, Direction.UP);
+        /* 
         createPath(new Position(5, 6), 11, Direction.RIGHT);
         createPath(new Position(16, 6), 22, Direction.DOWN);        
         createPath(new Position(16, 28), 5, Direction.LEFT);       
@@ -50,6 +51,8 @@ public class EasyGameBoard extends AbstractBoardImpl{
         createPath(new Position(34, 26), 9, Direction.LEFT);     
         createPath(new Position(25, 26), 7, Direction.UP);              
         createPath(new Position(25, 19), 2, Direction.LEFT);
+        */
+        this.createPathFromFile("C:\\Users\\81W1019HIX\\OneDrive\\Desktop\\MARIO PARTY\\OOP23-m-party\\src\\main\\java\\it\\unibo\\mparty\\model\\gameBoard\\file\\EasyBoardGame.txt");
         }
 
     @Override
