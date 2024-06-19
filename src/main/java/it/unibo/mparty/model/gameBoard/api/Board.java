@@ -2,6 +2,7 @@ package it.unibo.mparty.model.gameBoard.api;
 
 import java.util.Map;
 
+import it.unibo.mparty.model.gameBoard.util.BoardType;
 import it.unibo.mparty.model.gameBoard.util.Direction;
 import it.unibo.mparty.model.gameBoard.util.Position;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
@@ -23,4 +24,8 @@ public interface Board {
     void changeStarPosition();
 
     void printBoard();
+
+    Map<Position,Slot> getBoard();
+
+    BoardType getBoardType();
 }

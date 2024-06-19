@@ -171,4 +171,9 @@ public abstract class AbstractBoardImpl implements Board{
             System.out.println(j<10 ? " " + j + line : "" + j + line);
         }
     }
+
+    @Override
+    public Map<Position,Slot> getBoard() {
+        return Collections.unmodifiableMap(this.myBoard);
+    }
 }

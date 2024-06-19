@@ -1,6 +1,7 @@
 package it.unibo.mparty.model.gameBoard.boards;
 
 import it.unibo.mparty.model.gameBoard.impl.AbstractBoardImpl;
+import it.unibo.mparty.model.gameBoard.util.BoardType;
 import it.unibo.mparty.model.gameBoard.util.Pair;
 import it.unibo.mparty.model.gameBoard.util.Position;
 import it.unibo.mparty.model.gameBoard.util.RandomListGenerator;
@@ -18,6 +19,7 @@ public class EasyGameBoard extends AbstractBoardImpl{
     private static final double PROB_SHOP = 0.1;
     private static final double PROB_BONUS = 0.15;
     private static final String FilePath = "C:\\Users\\81W1019HIX\\OneDrive\\Desktop\\MARIO PARTY\\OOP23-m-party\\src\\main\\java\\it\\unibo\\mparty\\model\\gameBoard\\file\\EasyBoardGame.txt";
+    private final static BoardType myBoardType = BoardType.EASY; 
     private Set<Pair<SlotType,Double>> rules = Set.of(new Pair<>(SlotType.PATH, PROB_PATH),
                                                       new Pair<>(SlotType.SINGLEPLAYER, PROB_SINGLEPLAYER),
                                                       new Pair<>(SlotType.MALUS, PROB_MALUS),
@@ -66,5 +68,10 @@ public class EasyGameBoard extends AbstractBoardImpl{
         SlotType output = this.avaiableSlotsType.getFirst();
         this.avaiableSlotsType.removeFirst();
         return output;
+    }
+
+    @Override
+    public BoardType getBoardType() {
+        return myBoardType;
     }
 }
