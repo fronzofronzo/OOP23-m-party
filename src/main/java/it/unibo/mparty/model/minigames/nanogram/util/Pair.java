@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.nanogram.impl;
+package it.unibo.mparty.model.minigames.nanogram.util;
 
 public class Pair<X,Y> {
     private final X x;
