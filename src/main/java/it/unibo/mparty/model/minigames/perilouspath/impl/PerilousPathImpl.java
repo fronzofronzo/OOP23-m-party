@@ -11,9 +11,9 @@ import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
 
 public class PerilousPathImpl implements PerilousPath{
 
-    private Optional<List<BombPosition>> bombs = Optional.empty();
-    private Optional<List<BallPosition>> balls = Optional.empty();
-    private Optional<List<PathPosition>> path = Optional.empty();
+    private Optional<List<AbstractPosition>> bombs = Optional.empty();
+    private Optional<List<AbstractPosition>> balls = Optional.empty();
+    private Optional<List<AbstractPosition>> path = Optional.empty();
     private Random random;
     private int size;
     private static final int NUM_BOMBS = 7;
@@ -43,7 +43,6 @@ public class PerilousPathImpl implements PerilousPath{
     public void setBalls() {
         this.balls.get().add(new BallPosition(this.random.nextInt(this.size - 1),0,this.size));
         this.balls.get().add(new BallPosition(this.random.nextInt(this.size - 1),this.size - 1,this.size));
-
     }
 
     @Override
@@ -54,6 +53,31 @@ public class PerilousPathImpl implements PerilousPath{
     @Override
     public List<AbstractPosition> getBalls() {
         return Collections.unmodifiableList(this.balls.get());
+    }
+
+    @Override
+    public Type hit(AbstractPosition p) {
+        if(this.bombs.get().contains(p)){
+            return Type.BOMB;
+        }
+        if(this.balls.get().contains(p)){
+            return Type.BALL;
+        }
+        if(p.isSafe(this.path.get())){
+            this.path.get().add(p);
+            return Type.PATH;
+        }
+        return Type.WRONG;
+    }
+
+    @Override
+    public boolean isOver() {
+        var p1 = this.path.get().get(0);
+        var p2 = this.path.get().get(this.size - 1);
+        if(p1.adjacent(this.balls.get().get(0)) && p2.adjacent(this.balls.get().get(1))){
+            return true;
+        }
+        return false;
     }
 
     

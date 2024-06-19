@@ -3,8 +3,8 @@ package it.unibo.mparty.model.minigames.perilouspath.api;
 import java.util.List;
 
 public interface PerilousPath {
-    public enum type{
-        BOMB,BALL,PATH
+    public enum Type{
+        BOMB,BALL,PATH,WRONG
     }
 
     
@@ -15,5 +15,9 @@ public interface PerilousPath {
     public List<AbstractPosition> getBombs();
 
     public List<AbstractPosition> getBalls();
+
+    public Type hit(AbstractPosition p);
+
+    public boolean isOver();
     
 }
