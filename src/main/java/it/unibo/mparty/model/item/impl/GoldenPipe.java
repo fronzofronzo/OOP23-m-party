@@ -5,7 +5,7 @@ import it.unibo.mparty.model.player.api.Player;
 public class GoldenPipe extends AbstractItem{
 
     public GoldenPipe() {
-        super(ItemName.TUBO_DORATO, 10);
+        super(ItemName.TUBO_DORATO, 15);
     }
 
     @Override
@@ -16,7 +16,7 @@ public class GoldenPipe extends AbstractItem{
 
     @Override
     public String getDescrition() {
-        return "Vieni teletrasportato nella casella subito prima la stella";
+        return "Vieni teletrasportato nella casella della stella";
     }
 
 }
