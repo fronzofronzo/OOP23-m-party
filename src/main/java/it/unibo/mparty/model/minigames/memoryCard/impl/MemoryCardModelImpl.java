@@ -3,14 +3,23 @@ package it.unibo.mparty.model.minigames.memoryCard.impl;
 import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
 import it.unibo.mparty.model.player.Position;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class MemoryCardModelImpl implements MemoryCardModel {
 
     private final Map<Position, CardType> cards;
     private final Set<CardType> guessed;
     private int mistakesNumber;
+
+    public MemoryCardModelImpl(){
+        this.cards = new HashMap<>();
+        this.guessed = new HashSet<>();
+        this.mistakesNumber = 0;
+        final Random random = new Random();
+        for(var type : CardType.values()){
+
+        }
+    }
 
     @Override
     public void firstClick(Position card) {
@@ -36,4 +45,6 @@ public class MemoryCardModelImpl implements MemoryCardModel {
     public int getResults() {
         return 0;
     }
+
+
 }
