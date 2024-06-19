@@ -5,6 +5,7 @@ import it.unibo.mparty.model.player.Position;
 
 public class MemoryCardModelImpl implements MemoryCardModel {
 
+
     @Override
     public void firstClick(Position card) {
 
