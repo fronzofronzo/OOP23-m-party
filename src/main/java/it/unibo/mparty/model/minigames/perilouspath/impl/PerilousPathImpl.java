@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
@@ -30,13 +31,7 @@ public class PerilousPathImpl implements PerilousPath{
 
     @Override
     public void setBombs() {
-        for(var i = 0; i < NUM_BOMBS; i++){
-            BombPosition b;
-            do {
-                b = new BombPosition(random.nextInt(this.size - 1), random.nextInt(this.size - 1), this.size);
-            } while (!b.isSafe(this.getBombs()));
-            this.bombs.get().add(b);
-        }
+        IntStream.iterate(0, i -> i + 1).limit(NUM_BOMBS).forEach(b -> this.bombs.get().add(setNewPosition()));
     }
 
     @Override
@@ -80,5 +75,21 @@ public class PerilousPathImpl implements PerilousPath{
         return false;
     }
 
-    
+    @Override
+    public List<AbstractPosition> getPath() {
+        return Collections.unmodifiableList(this.path.get());
+    }
+
+    /**
+     * a private method for getting always a new BombPosition in a pseudo-random manner
+     * @return a new BombPosition which is safe
+     */
+    private AbstractPosition setNewPosition(){
+        BombPosition b;
+        do{
+            b = new BombPosition(random.nextInt(this.size - 1), random.nextInt(this.size - 1), this.size);
+        }while (!b.isSafe(this.getBombs()));
+        return b;
+
+    }
 }
