@@ -17,7 +17,7 @@ public abstract class AbstractPosition {
      * 
      * @param x 
      * @param y
-     * @param size the size of the gri
+     * @param size the size of the grid
      */
     public AbstractPosition(int x,int y,int size){
         this.position = new Pair<>(x,y);
