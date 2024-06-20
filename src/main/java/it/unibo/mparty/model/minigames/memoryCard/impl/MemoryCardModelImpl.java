@@ -47,7 +47,7 @@ public class MemoryCardModelImpl implements MemoryCardModel {
 
     @Override
     public void addMistake() {
-
+        this.mistakesNumber++;
     }
 
     @Override
