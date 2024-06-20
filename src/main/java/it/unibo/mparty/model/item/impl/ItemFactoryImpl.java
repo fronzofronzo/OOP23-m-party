@@ -3,6 +3,9 @@ package it.unibo.mparty.model.item.impl;
 import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.api.ItemFactory;
 
+/**
+ * Implementation of the factory method ItemFactory
+ */
 public class ItemFactoryImpl implements ItemFactory{
 
     @Override

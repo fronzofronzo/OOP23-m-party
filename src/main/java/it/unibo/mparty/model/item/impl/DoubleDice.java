@@ -2,6 +2,9 @@ package it.unibo.mparty.model.item.impl;
 
 import it.unibo.mparty.model.player.api.Player;
 
+/**
+ * class that implements the Double Dice item
+ */
 public class DoubleDice extends AbstractItem{
 
     public DoubleDice() {

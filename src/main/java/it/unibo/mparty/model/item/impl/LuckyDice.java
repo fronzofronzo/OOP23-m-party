@@ -2,6 +2,9 @@ package it.unibo.mparty.model.item.impl;
 
 import it.unibo.mparty.model.player.api.Player;
 
+/**
+ * class that implements the Lucky Dice item
+ */
 public class LuckyDice extends AbstractItem{
 
     public LuckyDice() {

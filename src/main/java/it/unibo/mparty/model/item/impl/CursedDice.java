@@ -2,6 +2,9 @@ package it.unibo.mparty.model.item.impl;
 
 import it.unibo.mparty.model.player.api.Player;
 
+/**
+ * class that implements the CursedDice item
+ */
 public class CursedDice extends AbstractItem{
 
     public CursedDice (){

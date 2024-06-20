@@ -2,6 +2,9 @@ package it.unibo.mparty.model.item.impl;
 
 import it.unibo.mparty.model.player.api.Player;
 
+/**
+ * class that implements the Golden Pipe item
+ */
 public class GoldenPipe extends AbstractItem{
 
     public GoldenPipe() {

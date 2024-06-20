@@ -2,6 +2,9 @@ package it.unibo.mparty.model.item.impl;
 
 import it.unibo.mparty.model.player.api.Player;
 
+/**
+ * class that implements the Boobell item
+ */
 public class BooBell extends AbstractItem{
 
     public BooBell() {
