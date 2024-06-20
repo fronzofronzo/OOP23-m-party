@@ -62,4 +62,9 @@ public class MemoryCardModelImpl implements MemoryCardModel {
         return (int)(guessed.size() * SCORE_MULTIPLIER);
     }
 
+    @Override
+    public Map<Integer, CardType> getCards() {
+        return Map.copyOf(cards);
+    }
+
 }
