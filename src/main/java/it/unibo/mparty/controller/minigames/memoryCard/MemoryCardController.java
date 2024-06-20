@@ -12,4 +12,6 @@ public interface MemoryCardController {
      * is trying to guess
      */
     void selectSecond();
+
+
 }
