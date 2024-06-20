@@ -67,4 +67,9 @@ public class MemoryCardModelImpl implements MemoryCardModel {
         return Map.copyOf(cards);
     }
 
+    @Override
+    public Set<CardType> guessedCardsType() {
+        return Set.copyOf(guessed);
+    }
+
 }
