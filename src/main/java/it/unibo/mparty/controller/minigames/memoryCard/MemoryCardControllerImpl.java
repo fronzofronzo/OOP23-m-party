@@ -17,6 +17,15 @@ public class MemoryCardControllerImpl implements MemoryCardController{
 
     @Override
     public void selectCard(int index) {
+        this.model.flip(index);
+        if(this.model.isDone()){
+
+        } else {
+            this.updateGameView();
+        }
+    }
+
+    private void updateGameView(){
 
     }
 }
