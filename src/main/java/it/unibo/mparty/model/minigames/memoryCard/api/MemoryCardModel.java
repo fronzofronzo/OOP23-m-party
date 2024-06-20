@@ -8,17 +8,10 @@ import java.util.Map;
 public interface MemoryCardModel {
 
     /**
-     * Select the first card of the pair
+     * Flip the card
      * @param card it's the first card selected
      */
-    void firstClick(int card);
-
-    /**
-     Select the second card of the pair
-     * @param card it's the second card selected
-     * @return  true if the pair is correct, false if it's not
-     */
-    boolean secondClick(int card);
+    void flip(int card);
 
     /**
      * Add mistake to player's mistakes counter

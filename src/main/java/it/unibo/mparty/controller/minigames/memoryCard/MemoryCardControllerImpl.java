@@ -15,8 +15,9 @@ public class MemoryCardControllerImpl implements MemoryCardController{
     }
 
     @Override
-    public void selectFirst() {
-
+    public void selectFirst(int index) {
+        this.model.firstClick(index);
+        this.view.blockButton(index);
     }
 
     @Override
