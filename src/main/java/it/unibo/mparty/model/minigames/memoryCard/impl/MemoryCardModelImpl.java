@@ -2,13 +2,14 @@ package it.unibo.mparty.model.minigames.memoryCard.impl;
 
 import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
 import it.unibo.mparty.model.player.Position;
-
+import javafx.util.Pair;
 import java.util.*;
 
 public class MemoryCardModelImpl implements MemoryCardModel {
 
     private final Map<Integer, CardType> cards;
     private final Set<CardType> guessed;
+    private int selected;
     private int mistakesNumber;
 
     public MemoryCardModelImpl(){
@@ -33,12 +34,15 @@ public class MemoryCardModelImpl implements MemoryCardModel {
 
     @Override
     public void firstClick(int card) {
-
+        this.selected = card;
     }
 
     @Override
     public void secondClick(int card) {
-
+        if(cards.get(selected) == cards.get(card)){
+            guessed.add(cards.get(selected));
+        }
+        selected = -1;
     }
 
     @Override
