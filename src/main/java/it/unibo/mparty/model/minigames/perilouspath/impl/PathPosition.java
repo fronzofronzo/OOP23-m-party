@@ -18,8 +18,14 @@ public class PathPosition extends AbstractPosition{
      * in this case a position can be safe only if it is near at least to another position
      */
     @Override
-    public boolean isSafe(List<AbstractPosition> list) {
-        return list.size() == 0 ? true : list.stream().anyMatch(p -> this.inOrizzontal(p) || this.inOrizzontal(p));
+    public boolean isSafe(List<AbstractPosition> list1,List<AbstractPosition> list2) {
+        if(list1.size() == 0){
+            if(this.adjacent(list2.get(0))){
+                return true;
+            }
+            return false;
+        }
+        return list1.stream().anyMatch(p -> this.inOrizzontal(p) || this.inOrizzontal(p));
     }
 
     

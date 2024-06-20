@@ -22,7 +22,7 @@ public class BallPosition extends AbstractPosition{
      * in this case the position is safe only if it is on the first or the last column
      */
     @Override
-    public boolean isSafe(List<AbstractPosition> list) {
+    public boolean isSafe(List<AbstractPosition> list1, List<AbstractPosition> list2) {
         return this.getY() == 0 || this.getY() == this.getSize() - MINUS;
     }
 

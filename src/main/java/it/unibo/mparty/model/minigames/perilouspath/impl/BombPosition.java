@@ -22,11 +22,11 @@ public class BombPosition extends AbstractPosition{
      * in this case a position is safe only if it can be at most close to another position
      */
     @Override
-    public boolean isSafe(List<AbstractPosition> list) {
-        if(list.size() == EMPTY){
+    public boolean isSafe(List<AbstractPosition> list1,List<AbstractPosition> list2) {
+        if(list1.size() == EMPTY){
             return true;
         }
-        return list.stream().filter(b -> this.adjacent(this)).collect(Collectors.toList()).size() <= MAX_NEAR_BOMBS;
+        return list1.stream().filter(b -> this.adjacent(b)).collect(Collectors.toList()).size() <= MAX_NEAR_BOMBS;
     }
 
     
