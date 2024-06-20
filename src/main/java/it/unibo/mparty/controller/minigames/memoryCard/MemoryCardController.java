@@ -1,5 +1,9 @@
 package it.unibo.mparty.controller.minigames.memoryCard;
 
+/**
+ * Interface that models the controller of the minigame Memory card
+ * to
+ */
 public interface MemoryCardController {
 
     /**

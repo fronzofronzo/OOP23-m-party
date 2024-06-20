@@ -6,11 +6,12 @@ public interface MemoryCardView {
      * Disable the button with the relative index
      * @param index of the button to disable
      */
-    void blockButton(int index);
+    void disableButton(int index);
 
     /**
-     *
-     * @param index
+     * Set text string to a certain button
+     * @param index of the button
+     * @param text to set
      */
     void setTextButton(int index, String text);
 }
