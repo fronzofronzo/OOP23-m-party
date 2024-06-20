@@ -51,13 +51,13 @@ public class PerilousPathImpl implements PerilousPath{
 
     @Override
     public Type hit(AbstractPosition p) {
-        if(this.bombs.get().contains(p)){
-            return Type.BOMB;
-        }
-        if(this.balls.get().contains(p)){
-            return Type.BALL;
-        }
         if(p.isSafe(this.path.get(),this.getBalls())){
+            if(this.bombs.get().contains(p)){
+                return Type.BOMB;
+            }
+            if(this.balls.get().contains(p)){
+                return Type.BALL;
+            }
             this.path.get().add(p);
             return Type.PATH;
         }
