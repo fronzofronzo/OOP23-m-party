@@ -40,11 +40,13 @@ public class MemoryCardModelImpl implements MemoryCardModel {
     }
 
     @Override
-    public void secondClick(int card) {
-        if(cards.get(selected) == cards.get(card)){
+    public boolean secondClick(int card) {
+        var condition = cards.get(selected) == cards.get(card);
+        if(condition){
             guessed.add(cards.get(selected));
         }
         selected = -1;
+        return condition;
     }
 
     @Override

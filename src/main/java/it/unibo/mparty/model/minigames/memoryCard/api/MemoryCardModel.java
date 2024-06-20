@@ -16,8 +16,9 @@ public interface MemoryCardModel {
     /**
      Select the second card of the pair
      * @param card it's the second card selected
+     * @return  true if the pair is correct, false if it's not
      */
-    void secondClick(int card);
+    boolean secondClick(int card);
 
     /**
      * Add mistake to player's mistakes counter
