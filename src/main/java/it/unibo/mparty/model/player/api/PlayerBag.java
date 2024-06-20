@@ -23,4 +23,11 @@ public interface PlayerBag {
      * a position where it is not present
      */
     void removeItem(int i) throws IllegalAccessException;
+
+    /**
+     * Check if the player's bag is full
+     * @return true if it's full, false otherwise
+     */
+    boolean isFull();
+
 }

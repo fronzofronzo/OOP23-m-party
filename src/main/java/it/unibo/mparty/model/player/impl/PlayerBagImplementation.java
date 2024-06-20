@@ -3,6 +3,7 @@ package it.unibo.mparty.model.player.impl;
 import it.unibo.mparty.model.player.api.PlayerBag;
 import it.unibo.mparty.model.item.api.Item;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 public class PlayerBagImplementation implements PlayerBag {
@@ -41,5 +42,10 @@ public class PlayerBagImplementation implements PlayerBag {
         } else {
             items[i] = Optional.empty();
         }
+    }
+
+    @Override
+    public boolean isFull() {
+        return Arrays.stream(items).filter(o -> o.isPresent()).count() == items.length;
     }
 }
