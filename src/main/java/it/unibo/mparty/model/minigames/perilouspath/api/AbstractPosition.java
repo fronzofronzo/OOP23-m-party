@@ -76,8 +76,15 @@ public abstract class AbstractPosition {
 
     /**
      * the politics regarding wheter the position of a button inside a grid is safe or not, it dipends on the implementation 
+     * @param list1 the first list of positions of buttons to compare to this to know if it is safe
+     * @param list2 the second list of positions of buttons to compare to this to know if it is safe
+     * @return true if the position is safe, false otherwise
+     */
+    public abstract boolean isSafe(List<AbstractPosition> list1,List<AbstractPosition> list2);
+}
+
+/**
+     * the politics regarding wheter the position of a button inside a grid is safe or not, it dipends on the implementation 
      * @param list list of positions of buttons to compare to this to know if it is safe
      * @return true if the position is safe, false otherwise
      */
-    public abstract boolean isSafe(List<AbstractPosition> list);
-}
