@@ -7,4 +7,10 @@ public interface MemoryCardView {
      * @param index of the button to disable
      */
     void blockButton(int index);
+
+    /**
+     *
+     * @param index
+     */
+    void setTextButton(int index);
 }
