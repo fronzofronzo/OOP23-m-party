@@ -1,8 +1,11 @@
 package it.unibo.mparty.controller.minigames.memoryCard;
 
 import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
+import it.unibo.mparty.model.minigames.memoryCard.impl.CardType;
 import it.unibo.mparty.model.minigames.memoryCard.impl.MemoryCardModelImpl;
 import it.unibo.mparty.view.minigames.memoryCard.MemoryCardView;
+
+import java.util.Map;
 
 public class MemoryCardControllerImpl implements MemoryCardController{
 

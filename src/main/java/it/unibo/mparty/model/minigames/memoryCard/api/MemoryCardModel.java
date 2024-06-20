@@ -32,5 +32,9 @@ public interface MemoryCardModel {
      */
     int getResults();
 
+    /**
+     * Get all the cards of the memory
+     * @return map that contains for each card its relative type
+     */
     Map<Integer, CardType> getCards();
 }
