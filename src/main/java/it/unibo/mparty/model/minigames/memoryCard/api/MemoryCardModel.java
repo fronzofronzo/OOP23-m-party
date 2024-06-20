@@ -4,9 +4,11 @@ import it.unibo.mparty.model.minigames.memoryCard.impl.CardType;
 import it.unibo.mparty.model.player.Position;
 
 import java.util.Map;
+import java.util.Set;
 
 public interface MemoryCardModel {
 
+    static final int NOT_SELECTED = -1;
     /**
      * Flip the card selected
      * @param card selected to flip
@@ -37,4 +39,10 @@ public interface MemoryCardModel {
      * @return map that contains for each card its relative type
      */
     Map<Integer, CardType> getCards();
+
+    /**
+     * Check all the card type that have been already guessed
+     * @return set of card type
+     */
+    Set<CardType> guessedCardsType();
 }
