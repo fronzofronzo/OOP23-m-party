@@ -1,4 +1,5 @@
 package it.unibo.mparty.model.player.api;
+import it.unibo.mparty.model.item.api.Item;
 
 public interface PlayerBag {
 
