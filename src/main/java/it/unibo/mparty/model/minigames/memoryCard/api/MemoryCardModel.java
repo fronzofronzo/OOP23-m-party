@@ -1,6 +1,9 @@
 package it.unibo.mparty.model.minigames.memoryCard.api;
 
+import it.unibo.mparty.model.minigames.memoryCard.impl.CardType;
 import it.unibo.mparty.model.player.Position;
+
+import java.util.Map;
 
 public interface MemoryCardModel {
 
@@ -34,4 +37,6 @@ public interface MemoryCardModel {
      * @return amount of money earned by the player
      */
     int getResults();
+
+    Map<Integer, CardType> getCards();
 }
