@@ -35,6 +35,11 @@ public interface PerilousPath {
     public List<AbstractPosition> getBalls();
 
     /**
+     * @return the list of positions on the grid that compose the path from one ball to another
+     */
+    public List<AbstractPosition> getPath();
+
+    /**
      * 
      * @param p the position of the button that was hit by the player in the grid
      * @return the type of that button
