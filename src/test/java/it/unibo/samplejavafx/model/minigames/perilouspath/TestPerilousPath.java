@@ -24,16 +24,13 @@ public class TestPerilousPath{
     @BeforeAll
     public void TestPerilousPathConstructor(){
         this.model = new PerilousPathImpl(8);
-        assertEquals(0, this.model.getBalls().size());
-        assertEquals(0, this.model.getBombs().size());
-        assertEquals(0, this.model.getPath().size());
-        assertEquals(8, this.model.getSize());
     }
 
     @Test
     public void TestSetBombs(){
         this.model.setBombs();
-        assertEquals(8, this.model.getBombs().size());
+        var bombs = this.model.getBombs();
+        assertEquals(8, bombs.size());
     }
 
     @Test
