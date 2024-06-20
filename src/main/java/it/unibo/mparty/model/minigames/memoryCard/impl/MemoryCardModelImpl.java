@@ -8,10 +8,11 @@ public class MemoryCardModelImpl implements MemoryCardModel {
 
     private static final int MAX_MISTAKES = 3;
     private static final double SCORE_MULTIPLIER = 1.5;
+    private static final int NOT_SELECTED = -1;
 
     private final Map<Integer, CardType> cards;
     private final Set<CardType> guessed;
-    private int selected;
+    private int selected = NOT_SELECTED ;
     private int mistakesNumber;
 
     public MemoryCardModelImpl(){
@@ -35,18 +36,15 @@ public class MemoryCardModelImpl implements MemoryCardModel {
     }
 
     @Override
-    public void firstClick(int card) {
-        this.selected = card;
-    }
-
-    @Override
-    public boolean secondClick(int card) {
-        var condition = cards.get(selected) == cards.get(card);
-        if(condition){
-            guessed.add(cards.get(selected));
+    public void flip(int card) {
+        if(selected == NOT_SELECTED){
+            selected = card;
+        } else {
+            if(cards.get(selected) == cards.get(card)){
+                guessed.add(cards.get(card));
+            }
+            selected = NOT_SELECTED;
         }
-        selected = -1;
-        return condition;
     }
 
     @Override

@@ -8,8 +8,8 @@ import java.util.Map;
 public interface MemoryCardModel {
 
     /**
-     * Flip the card
-     * @param card it's the first card selected
+     * Flip the card selected
+     * @param card selected to flip
      */
     void flip(int card);
 
