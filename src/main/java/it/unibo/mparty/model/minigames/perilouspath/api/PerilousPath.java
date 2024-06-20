@@ -50,5 +50,10 @@ public interface PerilousPath {
      * @return true wheter the game is over or not
      */
     public boolean isOver();
+
+    /**
+     * @return the side of the grid which is a square
+     */
+    public int getSize();
     
 }
