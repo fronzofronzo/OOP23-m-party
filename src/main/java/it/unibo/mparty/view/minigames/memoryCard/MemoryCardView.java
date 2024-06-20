@@ -14,4 +14,9 @@ public interface MemoryCardView {
      * @param text to set
      */
     void setTextButton(int index, String text);
+
+    /**
+     * shows the results of the game
+     */
+    void showResult();
 }
