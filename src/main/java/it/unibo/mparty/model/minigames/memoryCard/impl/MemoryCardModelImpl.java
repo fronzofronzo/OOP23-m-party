@@ -8,6 +8,7 @@ import java.util.*;
 public class MemoryCardModelImpl implements MemoryCardModel {
 
     private static final int MAX_MISTAKES = 3;
+    private static final double SCORE_MULTIPLIER = 1.5;
 
     private final Map<Integer, CardType> cards;
     private final Set<CardType> guessed;
@@ -59,7 +60,7 @@ public class MemoryCardModelImpl implements MemoryCardModel {
 
     @Override
     public int getResults() {
-        return 0;
+        return (int)(guessed.size() * SCORE_MULTIPLIER);
     }
 
 }
