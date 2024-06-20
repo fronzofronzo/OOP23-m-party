@@ -32,12 +32,12 @@ public class MemoryCardModelImpl implements MemoryCardModel {
     }
 
     @Override
-    public void firstClick(Position card) {
+    public void firstClick(int card) {
 
     }
 
     @Override
-    public void secondClick(Position card) {
+    public void secondClick(int card) {
 
     }
 
@@ -55,6 +55,5 @@ public class MemoryCardModelImpl implements MemoryCardModel {
     public int getResults() {
         return 0;
     }
-
 
 }
