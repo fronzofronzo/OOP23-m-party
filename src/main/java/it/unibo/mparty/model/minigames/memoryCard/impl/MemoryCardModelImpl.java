@@ -7,6 +7,8 @@ import java.util.*;
 
 public class MemoryCardModelImpl implements MemoryCardModel {
 
+    private static final int MAX_MISTAKES = 3;
+
     private final Map<Integer, CardType> cards;
     private final Set<CardType> guessed;
     private int selected;
@@ -52,7 +54,7 @@ public class MemoryCardModelImpl implements MemoryCardModel {
 
     @Override
     public boolean isDone() {
-        return false;
+        return mistakesNumber == MAX_MISTAKES || guessed.size() == CardType.values().length;
     }
 
     @Override
