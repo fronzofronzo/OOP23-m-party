@@ -17,7 +17,7 @@ public abstract class AbstractPosition {
      * 
      * @param x 
      * @param y
-     * @param size the size of the grid
+     * @param size the size of the side of the grid
      */
     public AbstractPosition(int x,int y,int size){
         this.position = new Pair<>(x,y);
@@ -83,8 +83,3 @@ public abstract class AbstractPosition {
     public abstract boolean isSafe(List<AbstractPosition> list1,List<AbstractPosition> list2);
 }
 
-/**
-     * the politics regarding wheter the position of a button inside a grid is safe or not, it dipends on the implementation 
-     * @param list list of positions of buttons to compare to this to know if it is safe
-     * @return true if the position is safe, false otherwise
-     */
