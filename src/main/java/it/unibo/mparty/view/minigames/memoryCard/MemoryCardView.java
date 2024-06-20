@@ -12,5 +12,5 @@ public interface MemoryCardView {
      *
      * @param index
      */
-    void setTextButton(int index);
+    void setTextButton(int index, String text);
 }
