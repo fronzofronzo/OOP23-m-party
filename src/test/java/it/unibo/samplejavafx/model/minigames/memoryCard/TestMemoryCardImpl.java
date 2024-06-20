@@ -25,7 +25,6 @@ public class TestMemoryCardImpl {
         var type = model.getCards().get(i);
         int j = model.getCards().entrySet().stream().filter(e -> e.getValue() == type && e.getKey() != i).map(e -> e.getKey()).reduce(0, (a,b) -> a+b);
         model.firstClick(i);
-        model.secondClick(j);
-        asse
+        assertTrue(model.secondClick(j));
     }
 }
