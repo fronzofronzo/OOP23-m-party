@@ -18,7 +18,6 @@ public class PerilousPathImpl implements PerilousPath{
     private Random random;
     private int size;
     private static final int NUM_BOMBS = 7;
-    private static final int NUM_BALLS = 2;
 
 
     public PerilousPathImpl(int size){
