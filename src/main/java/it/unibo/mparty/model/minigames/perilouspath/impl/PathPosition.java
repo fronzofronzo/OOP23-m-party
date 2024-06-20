@@ -25,7 +25,7 @@ public class PathPosition extends AbstractPosition{
             }
             return false;
         }
-        return list1.stream().anyMatch(p -> this.inOrizzontal(p) || this.inOrizzontal(p));
+        return list1.stream().anyMatch(p -> this.inOrizzontal(p) || this.inVertical(p));
     }
 
     
