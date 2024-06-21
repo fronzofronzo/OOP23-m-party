@@ -1,6 +1,6 @@
-package it.unibo.mparty.model.minigames.nanogram.api;
+package it.unibo.mparty.view.minigames.nanogram.api;
 
-import it.unibo.mparty.model.minigames.nanogram.impl.Pair;
+import it.unibo.mparty.model.minigames.nanogram.util.Pair;
 
 public interface NanogramView {
     Pair<Integer, Integer> userClicked();

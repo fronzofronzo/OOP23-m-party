@@ -35,6 +35,7 @@ public class NanogramModelImpl implements NanogramModel {
     public void updateCellState(int row, int column, CellState state) {
         if (isMoveValid(row, column, state)) {
             grid[row][column] = state;
+            System.out.println(grid[row][column].toString());
             autoMarkRemainingCells(row, column);
         } else {
             lives--;
