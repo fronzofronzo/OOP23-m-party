@@ -55,7 +55,7 @@ public class PerilousPathImpl implements PerilousPath{
             if(this.bombs.get().contains(p)){
                 return Type.BOMB;
             }
-            if(this.balls.get().contains(p)){
+            if(this.balls.get().contains(p) && !p.equals(this.getBalls().get(0))){
                 return Type.BALL;
             }
             this.path.get().add(p);
