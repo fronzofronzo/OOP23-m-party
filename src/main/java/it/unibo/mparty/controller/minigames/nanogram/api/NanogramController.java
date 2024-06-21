@@ -1,6 +1,6 @@
-package it.unibo.mparty.model.minigames.nanogram.api;
+package it.unibo.mparty.controller.minigames.nanogram.api;
 
-import it.unibo.mparty.model.minigames.nanogram.impl.Pair;
+import it.unibo.mparty.model.minigames.nanogram.util.Pair;
 
 public interface NanogramController {
     void startGame();
