@@ -23,16 +23,16 @@ class TestGameBoard{
 
     private static final int ACTIVE_STAR_SLOTS_EXPECTED = 1;
     private static final int NOT_ACTIVE_STAR_SLOTS_EXPECTED = 2;
-    private static final int INITIAL_X_EASY_BOARD = 5;
-    private static final int INITIAL_Y_EASY_BOARD = 25;
+    private static final int INITIAL_X_EASY_BOARD = 7;
+    private static final int INITIAL_Y_EASY_BOARD = 18;
 
     
     @SuppressWarnings("unchecked")
     private final Map<Position,Map<Direction, Position>> dataSetToTestgetNextPositions = 
     Map.of(
-        new Position(5, 6), Map.of(Direction.RIGHT, new Position(6, 6)),
-        new Position(16, 10), Map.of(Direction.RIGHT, new Position(17, 10),Direction.DOWN, new Position(16, 11)),
-        new Position(0,0), Collections.EMPTY_MAP
+        new Position(19, 10), Map.of(Direction.UP, new Position(19, 9)),
+        new Position(19, 13), Map.of(Direction.UP, new Position(19, 12),Direction.LEFT, new Position(18, 13)),
+        new Position(15,3), Collections.EMPTY_MAP
         );
     
     private static Board myBoard;
@@ -41,6 +41,7 @@ class TestGameBoard{
     public static void initialise(){
         SimpleBoardFactory factory = new SimpleBoardFactory();
         myBoard = factory.createBoard(BoardType.EASY);
+        myBoard.printBoard();
     }
 
     @Test 

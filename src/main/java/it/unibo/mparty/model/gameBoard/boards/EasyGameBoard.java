@@ -15,11 +15,11 @@ public class EasyGameBoard extends AbstractBoardImpl{
 
     private final static BoardType boardType = BoardType.EASY; 
 
-    private static final int WIDTH = 40;
-    private static final int HEIGHT = 30;
+    private static final int WIDTH = 30;
+    private static final int HEIGHT = 20;
 
-    private static final int INITIAL_X_EASY_BOARD = 5;
-    private static final int INITIAL_Y_EASY_BOARD = 25;
+    private static final int INITIAL_X_EASY_BOARD = 7;
+    private static final int INITIAL_Y_EASY_BOARD = 18;
 
     private static final double PROB_PATH = 0.5;
     private static final double PROB_SINGLEPLAYER = 0.1;
@@ -38,9 +38,9 @@ public class EasyGameBoard extends AbstractBoardImpl{
                new Pair<>(SlotType.SHOP, PROB_SHOP),
                new Pair<>(SlotType.BONUS, PROB_BONUS));
 
-    private static final Set<Position> STARS_POSITIONS = Set.of(new Position(5, 6), 
-                                                                new Position(25, 21),
-                                                                new Position(34, 6));
+    private static final Set<Position> STARS_POSITIONS = Set.of(new Position(5, 7), 
+                                                                new Position(22, 1),
+                                                                new Position(25, 18));
            
     public EasyGameBoard() {
         super();
