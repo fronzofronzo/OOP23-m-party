@@ -2,6 +2,8 @@ package it.unibo.samplejavafx.model.minigames.perilouspath;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.Random;
+
 import org.junit.jupiter.api.BeforeAll;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,6 +28,7 @@ public class TestPerilousPath{
     private static int LAST_COLUMN = 8;
 
     private PerilousPath model = new PerilousPathImpl(SIDE);
+    private Random random = new Random();
 
     @Test
     public void TestPerilousPathConstructor(){
@@ -56,4 +59,7 @@ public class TestPerilousPath{
         assertEquals(Type.WRONG, this.model.hit(bomb));
     }
 
+    /*private AbstractPosition getSafePosition(){
+        
+    }*/
 }
