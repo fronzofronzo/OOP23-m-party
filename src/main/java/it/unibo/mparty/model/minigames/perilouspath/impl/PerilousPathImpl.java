@@ -17,7 +17,7 @@ public class PerilousPathImpl implements PerilousPath{
     private Optional<List<AbstractPosition>> path = Optional.empty();
     private Random random;
     private int size;
-    private static final int NUM_BOMBS = 7;
+    private static final int NUM_BOMBS = 8;
 
 
     public PerilousPathImpl(int size){
