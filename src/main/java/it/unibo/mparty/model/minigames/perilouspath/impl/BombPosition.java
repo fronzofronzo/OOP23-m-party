@@ -26,7 +26,7 @@ public class BombPosition extends AbstractPosition{
         if(list1.size() == EMPTY){
             return true;
         }
-        return list1.stream().filter(b -> this.adjacent(b)).collect(Collectors.toList()).size() < MAX_NEAR_BOMBS;
+        return list1.stream().filter(b -> this.adjacent(b)).collect(Collectors.toList()).size() <= MAX_NEAR_BOMBS;
     }
 
     
