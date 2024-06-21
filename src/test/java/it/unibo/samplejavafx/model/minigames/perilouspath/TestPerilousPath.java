@@ -19,32 +19,41 @@ import it.unibo.mparty.model.minigames.perilouspath.impl.PerilousPathImpl;
 
 public class TestPerilousPath{
 
-    private PerilousPath model;
+    private static int SIDE = 8;
+    private static int NUM_BALLS = 2;
+    private static int NUM_BOMBS = 8;
+    private static int FIRST_COLUMN = 0;
+    private static int LAST_COLUMN = 8;
 
-    @BeforeAll
+    private PerilousPath model = new PerilousPathImpl(SIDE);
+
+    @Test
     public void TestPerilousPathConstructor(){
-        this.model = new PerilousPathImpl(8);
+        assertEquals(FIRST_COLUMN, this.model.getBalls().size());
+        assertEquals(FIRST_COLUMN, this.model.getPath().size());
+        assertEquals(FIRST_COLUMN, this.model.getBombs().size());
+
     }
 
     @Test
     public void TestSetBombs(){
         this.model.setBombs();
         var bombs = this.model.getBombs();
-        assertEquals(8, bombs.size());
+        assertEquals(NUM_BOMBS, bombs.size());
     }
 
     @Test
     public void TestSetBalls(){
         this.model.setBalls();
-        assertEquals(2,this.model.getBalls().size());
-        assertEquals(0, this.model.getBalls().get(0).getY());
-        assertEquals(7, this.model.getBalls().get(1).getY());
+        assertEquals(NUM_BALLS,this.model.getBalls().size());
+        assertEquals(FIRST_COLUMN, this.model.getBalls().get(0).getY());
+        assertEquals(LAST_COLUMN, this.model.getBalls().get(1).getY());
     }
 
     @Test
     public void TestHit(){
-        var bomb = this.model.getBombs().get(0);
-        assertEquals(Type.BOMB, this.model.hit(bomb));
+        var bomb = this.model.getBombs().get(FIRST_COLUMN);
+        assertEquals(Type.WRONG, this.model.hit(bomb));
     }
 
 }
