@@ -22,7 +22,7 @@ public class MemoryCardControllerImpl implements MemoryCardController{
     public void selectCard(int index) {
         this.model.flip(index);
         if(this.model.isDone()){
-
+            this.view.showResult();
         } else {
             this.updateGameView();
         }
