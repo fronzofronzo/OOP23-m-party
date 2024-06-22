@@ -14,7 +14,7 @@ public interface GameModel {
      * Get the name of the minigame that is active
      * @return the name of the minigame
      */
-    String activeMinigame();
+    String getActiveMinigame();
 
     /**
      * Check if during the actual player turn, there is a minigame active
