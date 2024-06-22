@@ -27,4 +27,11 @@ public interface GameModel {
      * next player
      */
     void nextPlayer();
+
+    /**
+     * Get the username of the player that has won
+     * @return the username of winner
+     */
+    String getWinner();
+
 }
