@@ -34,4 +34,10 @@ public interface GameModel {
      */
     String getWinner();
 
+    /**
+     * Checks if the game's over
+     * @return true if the game is over, false otherwise
+     */
+    boolean isOver();
+
 }
