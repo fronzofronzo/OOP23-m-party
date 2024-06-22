@@ -3,6 +3,7 @@ package it.unibo.mparty.model;
 import it.unibo.mparty.model.player.api.Player;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameModelImpl implements GameModel{
 
@@ -35,7 +36,13 @@ public class GameModelImpl implements GameModel{
 
     @Override
     public String getWinner() {
-        return "";
+        final int maxStars = players.stream().map(Player::getNumStars).sorted().limit(1).reduce(0 , Integer::sum);
+        List<Player> winners = players.stream().filter(p -> p.getNumStars() == maxStars).toList();
+        if (winners.size() != 1){
+            final int maxMoney = winners.stream().map(Player::getNumCoins).sorted().limit(1).reduce(0 , Integer::sum);
+            winners = winners.stream().filter(p -> p.getNumCoins() == maxMoney).toList();
+        }
+        return winners.get(0).getUsername();
     }
 
     @Override
