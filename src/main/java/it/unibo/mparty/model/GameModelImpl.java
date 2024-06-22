@@ -15,9 +15,10 @@ public class GameModelImpl implements GameModel{
     private int turn = 0;
     private int actualPlayerIndex = 0;
 
-    /**
-     * {@inheritDoc}
-     */
+    public GameModelImpl(List<Player> players){
+       this.players = players;
+    }
+
     @Override
     public void movePlayer() {
 
