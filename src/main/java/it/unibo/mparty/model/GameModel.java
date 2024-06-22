@@ -21,4 +21,10 @@ public interface GameModel {
      * @return true if there is a minigame active, false otherwise
      */
     boolean isActiveMinigame();
+
+    /**
+     * End the turn of the actual player and starts the turn of the
+     * next player
+     */
+    void nextPlayer();
 }
