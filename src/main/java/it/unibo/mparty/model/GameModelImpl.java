@@ -1,5 +1,7 @@
 package it.unibo.mparty.model;
 
+import it.unibo.mparty.model.minigameHandler.MinigameHandler;
+import it.unibo.mparty.model.minigameHandler.MinigameHandlerImplementation;
 import it.unibo.mparty.model.player.api.Player;
 
 import java.util.List;
@@ -17,9 +19,11 @@ public class GameModelImpl implements GameModel{
     private final Shop shop;
     private int turn = 0;
     private int actualPlayerIndex = 0;
+    private final MinigameHandler minigameHandler;
 
     public GameModelImpl(List<Player> players){
        this.players = players;
+       this.minigameHandler = new MinigameHandlerImplementation();
     }
 
     @Override
