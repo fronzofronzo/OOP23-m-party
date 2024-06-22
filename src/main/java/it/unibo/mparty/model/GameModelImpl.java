@@ -5,6 +5,9 @@ import it.unibo.mparty.model.player.api.Player;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Models the core structure of the game
+ */
 public class GameModelImpl implements GameModel{
 
     private static final int TURNS_NUMBER = 10;
