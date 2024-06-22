@@ -10,6 +10,8 @@ public class GameModelImpl implements GameModel{
     private final List<Player> players;
     private final GameBoard board;
     private final Shop shop;
+    private int turn = 0;
+    private int actualPlayerIndex = 0;
 
     /**
      * {@inheritDoc}
