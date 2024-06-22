@@ -15,4 +15,10 @@ public interface GameModel {
      * @return the name of the minigame
      */
     String activeMinigame();
+
+    /**
+     * Check if during the actual player turn, there is a minigame active
+     * @return true if there is a minigame active, false otherwise
+     */
+    boolean isActiveMinigame();
 }
