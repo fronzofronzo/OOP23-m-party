@@ -35,7 +35,7 @@ public class GameModelImpl implements GameModel{
 
     @Override
     public void nextPlayer() {
-
+        this.actualPlayerIndex = (this.actualPlayerIndex + 1) % players.size();
     }
 
     @Override
