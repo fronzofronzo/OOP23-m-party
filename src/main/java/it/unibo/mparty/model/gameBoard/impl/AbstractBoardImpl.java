@@ -12,10 +12,12 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import it.unibo.mparty.model.gameBoard.api.Board;
+import it.unibo.mparty.model.gameBoard.util.BoardType;
 import it.unibo.mparty.model.gameBoard.util.Direction;
 import it.unibo.mparty.model.gameBoard.util.Pair;
 import it.unibo.mparty.model.gameBoard.util.Position;
 import it.unibo.mparty.model.gameBoard.util.RandomFromSet;
+import it.unibo.mparty.model.gameBoard.util.RandomListGenerator;
 import it.unibo.mparty.model.gameBoard.api.Slot;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 
@@ -27,16 +29,29 @@ public abstract class AbstractBoardImpl implements Board{
     private final Set<Position> starsPositions;
     private Map<Position,Slot> board = new HashMap<>();
     protected List<SlotType> avaiableSlotTypes;
+    private final Set<Pair<SlotType,Double>> rules;
+    private final BoardType boardType; 
 
+    private final String filePath;
 
-    public AbstractBoardImpl(){
-        this.width = setWidth();
-        this.height = setHeight();
-        this.initialPosition = setInitialPosition();
-        this.starsPositions = setStarsPosition();
+    public AbstractBoardImpl(int width, int height, Position initialPosition, Set<Position> starPositions, String filePath, Set<Pair<SlotType,Double>> rules, BoardType boardType){
+        this.width = width;
+        this.height = height;
+        this.initialPosition = initialPosition;
+        this.starsPositions = starPositions;
+        this.rules = rules;
         this.avaiableSlotTypes = setAviableSlotType();
+        this.boardType = boardType;
+        this.filePath = filePath;
         this.generateBoard();
     }
+    
+    private void generateBoard() {
+        this.addSlot(RandomFromSet.get(this.starsPositions), SlotType.ACTIVE_STAR);
+        this.starsPositions.stream().forEach(p -> this.addSlot(p, SlotType.NOT_ACTIVE_STAR));
+        this.addSlot(this.getStrartingPosition(), SlotType.PATH);
+        this.createPathFromFile(this.filePath);
+        }
 
     @Override
     public SlotType getSlotType(Position position) {
@@ -108,24 +123,27 @@ public abstract class AbstractBoardImpl implements Board{
         return Collections.unmodifiableMap(this.board);
     }
 
-    protected void addSlot(Position position, SlotType slotType) {
+    private void addSlot(Position position, SlotType slotType) {
         if (!this.board.containsKey(position) && isValidPosition(position)){
             this.board.put(position, new SlotImpl(position, slotType));
         }
     }
 
-    protected void addSlots(Set<Position> positions){
+    /* 
+    private void addSlots(Set<Position> positions){
         positions.stream().forEach(p -> this.addSlot(p, this.getNewSlotType()));
     }
+    */
 
-    protected void addConnection(Position from, Position to, Direction dir) {
+    private void addConnection(Position from, Position to, Direction dir) {
         if (this.board.containsKey(from) && this.board.containsKey(to)) {
             this.board.get(from).addNext(dir, to);
             this.board.get(to).addPrev(dir, from);
         };
     }
 
-    protected void addConnections(Set<Position> positions, Direction dir){
+    /* 
+    private void addConnections(Set<Position> positions, Direction dir){
         for (Position p : positions) {
             Position nextP = getNeighbor(p, dir);
             if (positions.contains(nextP)) {
@@ -133,6 +151,7 @@ public abstract class AbstractBoardImpl implements Board{
             }
         }
     }
+    */
 
     protected boolean isValidPosition(Position position) {
         return isInTheBoard(position);
@@ -143,7 +162,7 @@ public abstract class AbstractBoardImpl implements Board{
                 position.getY() >= 0 && position.getY() < this.height;
     }
 
-    protected void createPath(Position from, int steps, Direction currentDir){
+    private void createPath(Position from, int steps, Direction currentDir){
         this.addSlot(from, getNewSlotType());
         Position to = this.getNeighbor(from, currentDir);
         for (int i = 0; i < steps; i++) {
@@ -154,7 +173,7 @@ public abstract class AbstractBoardImpl implements Board{
         }
     }
 
-    protected void createPathFromFile(String filePath){
+    private void createPathFromFile(String filePath){
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -189,16 +208,12 @@ public abstract class AbstractBoardImpl implements Board{
         this.avaiableSlotTypes.removeFirst();
         return output;
     }
-
-    protected abstract void generateBoard();
-
-    protected abstract Set<Position> setStarsPosition();
-
-    protected abstract int setWidth();
-
-    protected abstract int setHeight();
-
-    protected abstract Position setInitialPosition();
     
-    protected abstract List<SlotType> setAviableSlotType();
+    protected List<SlotType> setAviableSlotType() {
+        return RandomListGenerator.generate(this.rules);
+    }
+    
+    public BoardType getBoardType() {
+        return this.boardType;
+    }
 }

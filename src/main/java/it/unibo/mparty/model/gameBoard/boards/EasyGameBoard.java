@@ -4,16 +4,12 @@ import it.unibo.mparty.model.gameBoard.impl.AbstractBoardImpl;
 import it.unibo.mparty.model.gameBoard.util.BoardType;
 import it.unibo.mparty.model.gameBoard.util.Pair;
 import it.unibo.mparty.model.gameBoard.util.Position;
-import it.unibo.mparty.model.gameBoard.util.RandomFromSet;
-import it.unibo.mparty.model.gameBoard.util.RandomListGenerator;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 import java.util.Set;
-import java.util.List;
-import java.util.Collections;
 
 public class EasyGameBoard extends AbstractBoardImpl{
 
-    private final static BoardType boardType = BoardType.EASY; 
+    private final static BoardType BOARD_TYPE = BoardType.EASY; 
 
     private static final int WIDTH = 30;
     private static final int HEIGHT = 20;
@@ -43,44 +39,6 @@ public class EasyGameBoard extends AbstractBoardImpl{
                                                                 new Position(25, 18));
            
     public EasyGameBoard() {
-        super();
-    }
-
-    @Override
-    public void generateBoard() {
-        this.addSlot(RandomFromSet.get(STARS_POSITIONS), SlotType.ACTIVE_STAR);
-        STARS_POSITIONS.stream().forEach(p -> this.addSlot(p, SlotType.NOT_ACTIVE_STAR));
-        this.addSlot(this.getStrartingPosition(), SlotType.PATH);
-        this.createPathFromFile(FILE_PATH);
-        }
-
-    @Override
-    public BoardType getBoardType() {
-        return boardType;
-    }
-
-    @Override
-    protected Set<Position> setStarsPosition() {
-        return Collections.unmodifiableSet(STARS_POSITIONS);
-    }
-
-    @Override
-    protected int setWidth() {
-        return WIDTH;
-    }
-
-    @Override
-    protected int setHeight() {
-        return HEIGHT;
-    }
-
-    @Override
-    protected Position setInitialPosition() {
-        return new Position(INITIAL_X_EASY_BOARD, INITIAL_Y_EASY_BOARD);
-    }
-
-    @Override
-    protected List<SlotType> setAviableSlotType() {
-        return RandomListGenerator.generate(RULES);
+        super(WIDTH, HEIGHT, new Position(INITIAL_X_EASY_BOARD, INITIAL_Y_EASY_BOARD), STARS_POSITIONS, FILE_PATH, RULES, BOARD_TYPE);
     }
 }
