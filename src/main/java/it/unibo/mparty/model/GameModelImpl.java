@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 public class GameModelImpl implements GameModel{
 
+    private static final int TURNS_NUMBER = 10;
+
     private final List<Player> players;
     private final GameBoard board;
     private final Shop shop;
@@ -49,6 +51,6 @@ public class GameModelImpl implements GameModel{
 
     @Override
     public boolean isOver() {
-        return false;
+        return turn == TURNS_NUMBER;
     }
 }
