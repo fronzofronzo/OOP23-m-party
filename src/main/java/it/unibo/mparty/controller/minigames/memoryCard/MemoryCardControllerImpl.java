@@ -21,7 +21,8 @@ public class MemoryCardControllerImpl implements MemoryCardController{
     @Override
     public void selectCard(int index) {
         if(this.model.flip(index)){
-
+            this.view.disableButton(index);
+            this.view.setTextButton(index, this.model.getCards().get(index).getName());
         } else {
             if (this.model.isDone()) {
                 this.view.showResult();
@@ -38,7 +39,7 @@ public class MemoryCardControllerImpl implements MemoryCardController{
 
     @Override
     public String getCardName(int i) {
-        return this.model.getCards().get(i).name();
+        return this.model.getCards().get(i).getName();
     }
 
     private void updateGameView(){
