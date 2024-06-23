@@ -23,6 +23,6 @@ public interface MemoryCardController {
      * @param i the index of the card
      * @return the type associated to the selected card
      */
-    String getCardName(int i);
+    String getCardType(int i);
 
 }

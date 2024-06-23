@@ -44,7 +44,7 @@ public class MemoryCardViewImpl implements MemoryCardView{
         final Button bt = (Button)event.getSource();
         final int n = this.controller.getCardsNumber();
         for(int i = 0; i < n; i ++){
-            final Button newButton = new Button(this.controller.getCardName(i));
+            final Button newButton = new Button(this.controller.getCardType(i));
             newButton.setOnAction(this::tryCard);
             this.cardsPane.getChildren().add(newButton);
         }
