@@ -19,4 +19,5 @@ public interface MemoryCardView {
      * shows the results of the game
      */
     void showResult();
+
 }
