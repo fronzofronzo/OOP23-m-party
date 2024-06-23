@@ -59,7 +59,6 @@ public class MemoryCardViewImpl implements MemoryCardView{
 
     private void tryCard(ActionEvent e){
         this.controller.selectCard(this.cardsPane.getChildren().indexOf((Button)e.getSource()));
-
     }
 
 }

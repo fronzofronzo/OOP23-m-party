@@ -36,14 +36,16 @@ public class MemoryCardModelImpl implements MemoryCardModel {
     }
 
     @Override
-    public void flip(int card) {
+    public boolean flip(int card) {
         if(selected == NOT_SELECTED){
             selected = card;
+            return true;
         } else {
             if(cards.get(selected) == cards.get(card)){
                 guessed.add(cards.get(card));
             }
             selected = NOT_SELECTED;
+            return false;
         }
     }
 

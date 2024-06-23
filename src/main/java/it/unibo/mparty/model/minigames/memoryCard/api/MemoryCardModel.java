@@ -9,11 +9,14 @@ import java.util.Set;
 public interface MemoryCardModel {
 
     static final int NOT_SELECTED = -1;
+
     /**
-     * Flip the card selected
-     * @param card selected to flip
+     * flip the card selected
+     * @param card to flip
+     * @return true if the card is the first selected of the couple, false
+     * if it's the second
      */
-    void flip(int card);
+    boolean flip(int card);
 
     /**
      * Add mistake to player's mistakes counter
