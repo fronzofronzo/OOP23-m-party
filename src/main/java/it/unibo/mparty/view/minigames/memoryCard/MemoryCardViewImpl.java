@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 
+import javax.swing.*;
+
 public class MemoryCardViewImpl implements MemoryCardView{
 
     private final MemoryCardController controller = new MemoryCardControllerImpl(this);
@@ -28,7 +30,8 @@ public class MemoryCardViewImpl implements MemoryCardView{
 
     @Override
     public void setTextButton(int index, String text) {
-
+        final Button bt = (Button)this.cardsPane.getChildren().get(index);
+        bt.setText(text);
     }
 
     @Override
@@ -42,6 +45,7 @@ public class MemoryCardViewImpl implements MemoryCardView{
         final int n = this.controller.getCardsNumber();
         for(int i = 0; i < n; i ++){
             final Button newButton = new Button(this.controller.getCardName(i));
+            newButton.setOnAction(this::tryCard);
             this.cardsPane.getChildren().add(newButton);
         }
         bt.setText("Pronto !");
@@ -51,6 +55,11 @@ public class MemoryCardViewImpl implements MemoryCardView{
 
     private void hideCards(){
         this.cardsPane.getChildren().stream().map(e -> (Button)e).forEach(b -> b.setText(""));
+    }
+
+    private void tryCard(ActionEvent e){
+        this.controller.selectCard(this.cardsPane.getChildren().indexOf((Button)e.getSource()));
+
     }
 
 }
