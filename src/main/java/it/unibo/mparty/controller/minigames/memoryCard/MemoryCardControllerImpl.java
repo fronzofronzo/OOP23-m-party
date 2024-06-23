@@ -28,6 +28,16 @@ public class MemoryCardControllerImpl implements MemoryCardController{
         }
     }
 
+    @Override
+    public int getCardsNumber() {
+        return this.model.getCards().size();
+    }
+
+    @Override
+    public String getCardName(int i) {
+        return this.model.getCards().get(i).name();
+    }
+
     private void updateGameView(){
         final var guessed  = this.model.guessedCardsType();
         for(var e : this.model.getCards().entrySet()){

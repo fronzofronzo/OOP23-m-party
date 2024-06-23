@@ -2,6 +2,7 @@ package it.unibo.mparty.view.minigames.memoryCard;
 
 import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardController;
 import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardControllerImpl;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -35,6 +36,21 @@ public class MemoryCardViewImpl implements MemoryCardView{
 
     }
 
+    @FXML
+    private void startGame(ActionEvent event){
+        final Button bt = (Button)event.getSource();
+        final int n = this.controller.getCardsNumber();
+        for(int i = 0; i < n; i ++){
+            final Button newButton = new Button(this.controller.getCardName(i));
+            this.cardsPane.getChildren().add(newButton);
+        }
+        bt.setText("Pronto !");
+        bt.setOnAction(e -> this.hideCards() );
+        this.textLabel.setText("Quando si è pronti, spingere il pulsante 'Pronto' ");
+    }
 
+    private void hideCards(){
+        this.cardsPane.getChildren().stream().map(e -> (Button)e).forEach(b -> b.setText(""));
+    }
 
 }
