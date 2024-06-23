@@ -19,7 +19,7 @@ public interface MemoryCardController {
     int getCardsNumber();
 
     /**
-     * Gets the name of type of a selected card
+     * Gets the name of type of selected card
      * @param i the index of the card
      * @return the type associated to the selected card
      */

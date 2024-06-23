@@ -46,6 +46,8 @@ public class MemoryCardControllerImpl implements MemoryCardController{
             if(guessed.contains(type)){
                 this.view.setTextButton(i,type.getName());
                 this.view.disableButton(i);
+            } else {
+                this.view.setTextButton(i, "");
             }
         }
     }
