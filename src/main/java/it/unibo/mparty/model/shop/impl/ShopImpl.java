@@ -23,14 +23,21 @@ public class ShopImpl implements Shop {
     }
 
     @Override
-    public void buyItem(Player player, ItemName item) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buyItem'");
+    public void buyItem(Player player, ItemName itName) {
+        Item tryItem = getItem(itName);
+        if (canAfford(player, tryItem)) {
+            player.removeCoins(tryItem.getCost());
+            player.getPlayerBag().addItem(tryItem);
+        }
     }
 
     @Override
-    public Item getItem(ItemName item) {
-        return itemList.stream().filter(it -> it.getName().equals(item)).toList().get(0);
+    public Item getItem(ItemName itName) {
+        return itemList.stream().filter(it -> it.getName().equals(itName)).toList().get(0);
+    }
+
+    private boolean canAfford (Player player, Item item) {
+        return player.getNumCoins()>= item.getCost();
     }
 
 }
