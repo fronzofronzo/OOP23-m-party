@@ -3,7 +3,7 @@ package it.unibo.mparty.view;
 /**
  * Models the view of the application
  */
-public interface View {
+public interface GameView {
 
     /**
      * Sets the next scene to show
