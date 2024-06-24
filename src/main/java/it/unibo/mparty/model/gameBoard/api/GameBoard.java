@@ -8,7 +8,7 @@ import it.unibo.mparty.model.gameBoard.util.Pair;
 import it.unibo.mparty.model.gameBoard.util.Position;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 
-public interface Board {
+public interface GameBoard {
 
     SlotType getSlotType(Position position);
     

@@ -12,7 +12,7 @@ import java.util.Collections;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import it.unibo.mparty.model.gameBoard.api.Board;
+import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
 import it.unibo.mparty.model.gameBoard.util.BoardType;
 import it.unibo.mparty.model.gameBoard.util.Direction;
@@ -56,7 +56,7 @@ class TestGameBoard{
             new Position(26,1), Collections.EMPTY_MAP
             );
     
-    private static Set<Board> boards = new HashSet<>();
+    private static Set<GameBoard> boards = new HashSet<>();
     private static Set<BoardType> boardTypes = Set.of(BoardType.EASY, BoardType.MEDIUM, BoardType.HARD);
 
     @BeforeAll
@@ -65,7 +65,7 @@ class TestGameBoard{
         for (BoardType bt : boardTypes) {
             boards.add(factory.createBoard(bt));
         }
-        for (Board b : boards) {
+        for (GameBoard b : boards) {
             System.out.println(b.getBoardType());
             b.printBoard();            
         }
@@ -73,7 +73,7 @@ class TestGameBoard{
 
     @Test 
     public void testNumberStarsSlots(){
-        for (Board b : boards) {
+        for (GameBoard b : boards) {
             int count_active_star = (int)b.getBoard()
                                           .entrySet()
                                           .stream()
@@ -91,7 +91,7 @@ class TestGameBoard{
 
     @Test
     public void testChangeStarPosition() {
-        for (Board b : boards) {
+        for (GameBoard b : boards) {
             Position oldStarPosition = b.getStarPosition();
             assertNotNull(oldStarPosition);
             b.changeStarPosition();
@@ -101,7 +101,7 @@ class TestGameBoard{
 
     @Test 
     public void testStartingPosition(){
-        for (Board b : boards) {
+        for (GameBoard b : boards) {
             BoardType bt = b.getBoardType();
             Position expected = null;
             switch (bt) {
@@ -116,7 +116,7 @@ class TestGameBoard{
 
     @Test
     public void testGetNextPositions() {
-        for (Board b : boards) {
+        for (GameBoard b : boards) {
             BoardType bt = b.getBoardType();
             switch (bt) {
                 case EASY: this.dataSetToTestgetNextPositionsEasyBoard.entrySet().stream().forEach(entry -> assertEquals(entry.getValue(), b.getNextPositions(entry.getKey()))); break;

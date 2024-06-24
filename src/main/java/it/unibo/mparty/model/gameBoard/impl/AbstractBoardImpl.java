@@ -11,7 +11,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import it.unibo.mparty.model.gameBoard.api.Board;
+import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.model.gameBoard.util.BoardType;
 import it.unibo.mparty.model.gameBoard.util.Direction;
 import it.unibo.mparty.model.gameBoard.util.Pair;
@@ -21,7 +21,7 @@ import it.unibo.mparty.model.gameBoard.util.RandomListGenerator;
 import it.unibo.mparty.model.gameBoard.api.Slot;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 
-public abstract class AbstractBoardImpl implements Board{
+public abstract class AbstractBoardImpl implements GameBoard{
 
     private final int width;
     private final int height;
