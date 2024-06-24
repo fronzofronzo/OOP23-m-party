@@ -1,5 +1,8 @@
 package it.unibo.mparty.model;
 
+import it.unibo.mparty.model.gameBoard.api.GameBoard;
+import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
+import it.unibo.mparty.model.gameBoard.util.BoardType;
 import it.unibo.mparty.model.minigameHandler.MinigameHandler;
 import it.unibo.mparty.model.minigameHandler.MinigameHandlerImplementation;
 import it.unibo.mparty.model.player.api.Player;
@@ -24,6 +27,8 @@ public class GameModelImpl implements GameModel{
     public GameModelImpl(List<Player> players){
        this.players = players;
        this.minigameHandler = new MinigameHandlerImplementation();
+       final SimpleBoardFactory boardFactory = new SimpleBoardFactory();
+       this.board = boardFactory.createBoard(BoardType.MEDIUM);
     }
 
     @Override
