@@ -5,11 +5,9 @@ import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
 import it.unibo.mparty.model.gameBoard.util.BoardType;
 import it.unibo.mparty.model.minigameHandler.MinigameHandler;
 import it.unibo.mparty.model.minigameHandler.MinigameHandlerImplementation;
-import it.unibo.mparty.model.player.Position;
 import it.unibo.mparty.model.player.api.Player;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Models the core structure of the game

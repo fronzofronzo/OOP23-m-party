@@ -1,6 +1,5 @@
 package it.unibo.mparty.model.player.impl;
 
-import it.unibo.mparty.model.player.Position;
 import it.unibo.mparty.model.player.api.Dice;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBag;
