@@ -5,6 +5,7 @@ import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
 import it.unibo.mparty.model.gameBoard.util.BoardType;
 import it.unibo.mparty.model.minigameHandler.MinigameHandler;
 import it.unibo.mparty.model.minigameHandler.MinigameHandlerImplementation;
+import it.unibo.mparty.model.player.Position;
 import it.unibo.mparty.model.player.api.Player;
 
 import java.util.List;
@@ -33,6 +34,8 @@ public class GameModelImpl implements GameModel{
 
     @Override
     public void movePlayer() {
+        final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
+        final Position nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition).get(0).getY();
 
     }
 
