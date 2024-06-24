@@ -24,7 +24,7 @@ public class ShopImpl implements Shop {
 
     @Override
     public void buyItem(Player player, Item item) {
-        if (canAfford(player, item)) {
+        if (canAfford(player, item) && !player.getPlayerBag().isFull()) {
             player.removeCoins(item.getCost());
             player.getPlayerBag().addItem(item);
         }
