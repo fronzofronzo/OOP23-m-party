@@ -17,7 +17,7 @@ public class GameModelImpl implements GameModel{
     private final List<Player> players;
     private final GameBoard board;
     private final Shop shop;
-    private int turn = 0;
+    private int turn = 1 ;
     private int actualPlayerIndex = 0;
     private final MinigameHandler minigameHandler;
 
@@ -44,6 +44,9 @@ public class GameModelImpl implements GameModel{
     @Override
     public void nextPlayer() {
         this.actualPlayerIndex = (this.actualPlayerIndex + 1) % players.size();
+        if(this.actualPlayerIndex == 0){
+            this.turn++;
+        }
     }
 
     @Override
