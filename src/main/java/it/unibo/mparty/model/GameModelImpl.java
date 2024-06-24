@@ -6,6 +6,7 @@ import it.unibo.mparty.model.gameBoard.util.BoardType;
 import it.unibo.mparty.model.minigameHandler.MinigameHandler;
 import it.unibo.mparty.model.minigameHandler.MinigameHandlerImplementation;
 import it.unibo.mparty.model.player.api.Player;
+import it.unibo.mparty.utilities.Position;
 
 import java.util.List;
 

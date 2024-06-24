@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.impl.Character;
 import it.unibo.mparty.model.player.impl.PlayerImplementation;
+import it.unibo.mparty.utilities.Position;
 import org.junit.jupiter.api.Test;
 
 public class TestPlayerImplementation {
