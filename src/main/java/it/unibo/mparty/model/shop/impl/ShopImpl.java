@@ -23,17 +23,11 @@ public class ShopImpl implements Shop {
     }
 
     @Override
-    public void buyItem(Player player, ItemName itName) {
-        Item tryItem = getItem(itName);
-        if (canAfford(player, tryItem)) {
-            player.removeCoins(tryItem.getCost());
-            player.getPlayerBag().addItem(tryItem);
+    public void buyItem(Player player, Item item) {
+        if (canAfford(player, item)) {
+            player.removeCoins(item.getCost());
+            player.getPlayerBag().addItem(item);
         }
-    }
-
-    @Override
-    public Item getItem(ItemName itName) {
-        return itemList.stream().filter(it -> it.getName().equals(itName)).toList().get(0);
     }
 
     private boolean canAfford (Player player, Item item) {
