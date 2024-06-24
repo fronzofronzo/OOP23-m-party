@@ -11,7 +11,6 @@ import it.unibo.mparty.model.gameBoard.util.SlotType;
 /**
  * This interface models a Game Board
  */
-
 public interface GameBoard {
 
     /**
@@ -52,10 +51,14 @@ public interface GameBoard {
     Pair<Integer, Integer> getDimension();
 
     /**
-     * 
-     * @return
+     * Get the actual game board's map
+     * @return the map of the actual board tha has as key a position and it has as value a {@link Slot}
      */
     Map<Position,Slot> getBoard();
 
+    /**
+     * Get the board's {@link BoardType}
+     * @return the {@link BoardType}
+     */
     BoardType getBoardType();
 }
