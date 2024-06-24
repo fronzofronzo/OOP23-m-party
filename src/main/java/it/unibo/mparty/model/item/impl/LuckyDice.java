@@ -13,13 +13,12 @@ public class LuckyDice extends AbstractItem{
 
     @Override
     public void activate(Player player) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'activate'");
+        player.getDice().setMinNumber(4);
     }
 
     @Override
     public String getDescrition() {
-        return "Si ottiene qualsiasi risultato desiderato da 1 a 10.";
+        return "Il dado ha solo numeri da 4 a 6";
     }
 
 }

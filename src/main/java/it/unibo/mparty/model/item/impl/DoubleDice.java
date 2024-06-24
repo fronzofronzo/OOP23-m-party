@@ -13,8 +13,7 @@ public class DoubleDice extends AbstractItem{
 
     @Override
     public void activate(Player player) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'activate'");
+        player.getDice().setNumberOfAttempts(2);
     }
 
     @Override
