@@ -3,7 +3,7 @@ package it.unibo.mparty.model.gameBoard.boards;
 import it.unibo.mparty.model.gameBoard.impl.AbstractBoardImpl;
 import it.unibo.mparty.model.gameBoard.util.BoardType;
 import it.unibo.mparty.model.gameBoard.util.Pair;
-import it.unibo.mparty.model.gameBoard.util.Position;
+import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 import java.util.Set;
 

@@ -15,7 +15,7 @@ import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.model.gameBoard.util.BoardType;
 import it.unibo.mparty.model.gameBoard.util.Direction;
 import it.unibo.mparty.model.gameBoard.util.Pair;
-import it.unibo.mparty.model.gameBoard.util.Position;
+import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.model.gameBoard.util.RandomFromSet;
 import it.unibo.mparty.model.gameBoard.util.RandomListGenerator;
 import it.unibo.mparty.model.gameBoard.api.Slot;
