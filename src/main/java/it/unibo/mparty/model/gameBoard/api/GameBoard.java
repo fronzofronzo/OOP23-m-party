@@ -51,8 +51,10 @@ public interface GameBoard {
      */
     Pair<Integer, Integer> getDimension();
 
-    void printBoard();
-
+    /**
+     * 
+     * @return
+     */
     Map<Position,Slot> getBoard();
 
     BoardType getBoardType();

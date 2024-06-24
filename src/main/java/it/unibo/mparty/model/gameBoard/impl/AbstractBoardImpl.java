@@ -93,6 +93,7 @@ public abstract class AbstractBoardImpl implements GameBoard{
         return new Pair<Integer,Integer>(this.width, this.height);
     }
 
+    /*
     @Override
     public void printBoard(){
         for(int j = 0; j < this.height; j++){
@@ -117,6 +118,7 @@ public abstract class AbstractBoardImpl implements GameBoard{
             System.out.println(j<10 ? " " + j + line : "" + j + line);
         }
     }
+    */
 
     @Override
     public Map<Position,Slot> getBoard() {

@@ -66,8 +66,7 @@ class TestGameBoard{
             boards.add(factory.createBoard(bt));
         }
         for (GameBoard b : boards) {
-            System.out.println(b.getBoardType());
-            b.printBoard();            
+            System.out.println(b.getBoardType());  
         }
     }
 
