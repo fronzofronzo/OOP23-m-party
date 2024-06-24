@@ -39,6 +39,11 @@ public class GameModelImpl implements GameModel{
     }
 
     @Override
+    public int rollDice() {
+        return this.players.get(actualPlayerIndex).getDice().generateNumber();
+    }
+
+    @Override
     public String getActiveMinigame() {
         return "";
     }

@@ -11,6 +11,12 @@ public interface GameModel {
     void movePlayer();
 
     /**
+     * Roll dices of the actual player
+     * @return the result of the roll
+     */
+    int rollDice();
+
+    /**
      * Get the name of the minigame that is active
      * @return the name of the minigame
      */
