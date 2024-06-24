@@ -66,9 +66,8 @@ public class PerilousPathImpl implements PerilousPath{
 
     @Override
     public boolean isOver() {
-        var p1 = this.path.get().get(0);
-        var p2 = this.path.get().get(this.getSize() - 1);
-        if(p1.adjacent(this.balls.get().get(0)) && p2.adjacent(this.balls.get().get(1))){
+        var p = this.path.get().get(this.getSize() - 1);
+        if(p.inOrizzontal(getBalls().get(1)) || p.inVertical(getBalls().get(1))){
             return true;
         }
         return false;
