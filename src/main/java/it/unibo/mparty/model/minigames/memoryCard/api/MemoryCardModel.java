@@ -6,6 +6,11 @@ import it.unibo.mparty.utilities.Position;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * This interface models the Model of the pattern "MVC" of the mini-game
+ * Memory-card. It has methods to change the model status and to get game
+ * information needed by the controller
+ */
 public interface MemoryCardModel {
 
     static final int NOT_SELECTED = -1;
