@@ -6,7 +6,11 @@ import it.unibo.mparty.model.minigames.nanogram.api.NanogramModel;
 public class LiveImpl implements Live {
     private static final int INITIAL_LIVES = 3;
     private int lives;
-    private final NanogramModelImpl model = new NanogramModelImpl();
+
+    @Override
+    public int getLive() {
+        return lives;
+    }
 
     @Override
     public void reset() {
@@ -15,9 +19,7 @@ public class LiveImpl implements Live {
 
     @Override
     public void decrease() {
-        if (!model.isMoveValid()) {
-            lives--;
-        }
+        lives--;
     }
 
     @Override
