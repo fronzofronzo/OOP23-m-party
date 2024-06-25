@@ -25,7 +25,7 @@ public class MemoryCardViewImpl implements MemoryCardView{
 
     @Override
     public void disableButton(int index) {
-
+        ((Button)this.cardsPane.getChildren().get(index)).setDisable(true);
     }
 
     @Override
