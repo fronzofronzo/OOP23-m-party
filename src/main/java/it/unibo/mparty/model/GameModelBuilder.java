@@ -18,4 +18,10 @@ public interface GameModelBuilder {
      * @param difficulty of the game: it's related to the Board type
      */
     void difficulty(String difficulty);
+
+    /**
+     * Get the instance of the GameModel with the selected settings
+     * @return a {@link GameModel} instance
+     */
+    GameModel build();
 }
