@@ -16,5 +16,5 @@ public interface SceneView {
      * @param view of the application
      * @param controller of the application
      */
-    void initialise(GameView view, GameController controller);
+    void init(GameView view, GameController controller);
 }
