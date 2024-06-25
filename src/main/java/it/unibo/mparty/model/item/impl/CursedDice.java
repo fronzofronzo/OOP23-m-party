@@ -12,8 +12,7 @@ public class CursedDice extends AbstractItem{
     }
     @Override
     public void activate(Player player) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'activate'");
+        player.getDice().setMaxNumber(3);
     }
 
     @Override

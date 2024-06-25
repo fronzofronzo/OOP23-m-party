@@ -1,9 +1,9 @@
 package it.unibo.mparty.model.player.impl;
 
-import it.unibo.mparty.model.player.Position;
 import it.unibo.mparty.model.player.api.Dice;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBag;
+import it.unibo.mparty.utilities.Position;
 
 public class PlayerImplementation implements Player{
 
@@ -17,10 +17,9 @@ public class PlayerImplementation implements Player{
     private int numCoins;
     private int numStars;
 
-    public PlayerImplementation(String username, Position position, Character character){
+    public PlayerImplementation(String username, String character){
         this.username = username;
-        this.position = position;
-        this.character = character;
+        this.character = Character.valueOf(character);
         this.playerBag = new PlayerBagImplementation(NUM_ITEMS);
         this.dice = new DiceImpl();
         this.numCoins = 0;

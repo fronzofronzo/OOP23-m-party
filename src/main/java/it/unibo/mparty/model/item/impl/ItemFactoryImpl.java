@@ -9,7 +9,7 @@ import it.unibo.mparty.model.item.api.ItemFactory;
 public class ItemFactoryImpl implements ItemFactory{
 
     @Override
-    public Item createItem(ItemName name) {
+    public Item createItem(ItemName name) throws IllegalArgumentException {
         switch (name){
             case DADO_FORTUNATO:
                 return new LuckyDice();

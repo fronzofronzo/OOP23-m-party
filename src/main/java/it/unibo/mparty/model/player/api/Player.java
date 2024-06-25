@@ -1,7 +1,7 @@
 package it.unibo.mparty.model.player.api;
 
-import it.unibo.mparty.model.player.Position;
 import it.unibo.mparty.model.player.impl.Character;
+import it.unibo.mparty.utilities.Position;
 
 /**
  *  This interface models a Player

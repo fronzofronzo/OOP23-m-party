@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.player;
+package it.unibo.mparty.utilities;
 
 public record Position(int x, int y) {
 
