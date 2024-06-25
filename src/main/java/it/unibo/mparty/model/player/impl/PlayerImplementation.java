@@ -19,7 +19,7 @@ public class PlayerImplementation implements Player{
 
     public PlayerImplementation(String username, String character){
         this.username = username;
-        this.character = character;
+        this.character = Character.valueOf(character);
         this.playerBag = new PlayerBagImplementation(NUM_ITEMS);
         this.dice = new DiceImpl();
         this.numCoins = 0;
