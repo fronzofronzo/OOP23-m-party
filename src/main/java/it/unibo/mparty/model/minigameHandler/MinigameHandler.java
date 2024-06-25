@@ -1,5 +1,9 @@
 package it.unibo.mparty.model.minigameHandler;
 
+/**
+ * This interface represents the concept of mini-game handler:
+ * it's role is to handle the chose and the start of a mini-game
+ */
 public interface MinigameHandler {
 
     /**
