@@ -38,7 +38,7 @@ public class MemoryCardControllerImpl implements MemoryCardController{
     }
 
     @Override
-    public String getCardName(int i) {
+    public String getCardType(int i) {
         return this.model.getCards().get(i).getName();
     }
 
