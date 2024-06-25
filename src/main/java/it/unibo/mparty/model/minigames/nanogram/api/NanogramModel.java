@@ -3,9 +3,10 @@ package it.unibo.mparty.model.minigames.nanogram.api;
 import java.util.*;
 
 import it.unibo.mparty.model.minigames.nanogram.util.CellState;
+import it.unibo.mparty.model.minigames.nanogram.util.Difficulty;
 
-public interface NanogramModel {
-    void initializeGameGrid(int size);
+public interface NanogramModel{
+    void initializeGameGrid(Difficulty difficulty);
 
     CellState getCellState(int row, int column);
 
@@ -15,11 +16,9 @@ public interface NanogramModel {
 
     List<List<Integer>> getColumnHints();
 
-    boolean isMoveValid(int row, int column, CellState state);
+    boolean isMoveValid();
 
     boolean isGameComplete();
-
-    int getLives();
 
     boolean isGameOver();
 }
