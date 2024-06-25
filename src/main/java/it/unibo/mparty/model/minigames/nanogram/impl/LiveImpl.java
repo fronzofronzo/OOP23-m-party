@@ -1,7 +1,6 @@
 package it.unibo.mparty.model.minigames.nanogram.impl;
 
 import it.unibo.mparty.model.minigames.nanogram.api.Live;
-import it.unibo.mparty.model.minigames.nanogram.api.NanogramModel;
 
 public class LiveImpl implements Live {
     private static final int INITIAL_LIVES = 3;
