@@ -1,8 +1,9 @@
 package it.unibo.mparty.view.minigames.memoryCard;
 
+import it.unibo.mparty.view.SceneView;
 import javafx.scene.control.Button;
 
-public interface MemoryCardView {
+public interface MemoryCardView extends SceneView {
 
     /**
      * Disable the button with the relative index

@@ -1,7 +1,7 @@
 package it.unibo.mparty.model.minigames.memoryCard.api;
 
 import it.unibo.mparty.model.minigames.memoryCard.impl.CardType;
-import it.unibo.mparty.model.player.Position;
+import it.unibo.mparty.utilities.Position;
 
 import java.util.Map;
 import java.util.Set;
@@ -18,10 +18,6 @@ public interface MemoryCardModel {
      */
     boolean flip(int card);
 
-    /**
-     * Add mistake to player's mistakes counter
-     */
-    void addMistake();
 
     /**
      * Check if the game is over

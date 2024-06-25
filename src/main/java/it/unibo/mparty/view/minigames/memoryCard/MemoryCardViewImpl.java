@@ -2,6 +2,7 @@ package it.unibo.mparty.view.minigames.memoryCard;
 
 import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardController;
 import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardControllerImpl;
+import it.unibo.mparty.view.AbstractSceneView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +11,7 @@ import javafx.scene.layout.FlowPane;
 
 import javax.swing.*;
 
-public class MemoryCardViewImpl implements MemoryCardView{
+public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardView{
 
     private final MemoryCardController controller = new MemoryCardControllerImpl(this);
 

@@ -13,12 +13,11 @@ public class MemoryCardModelImpl implements MemoryCardModel {
     private final Map<Integer, CardType> cards;
     private final Set<CardType> guessed;
     private int selected = NOT_SELECTED ;
-    private int mistakesNumber;
+    private int mistakesNumber = 0;
 
     public MemoryCardModelImpl(){
         this.cards = new HashMap<>();
         this.guessed = new HashSet<>();
-        this.mistakesNumber = 0;
         final int size = CardType.values().length;
         final Random random = new Random();
         for(var type : CardType.values()){
@@ -47,11 +46,6 @@ public class MemoryCardModelImpl implements MemoryCardModel {
             selected = NOT_SELECTED;
             return false;
         }
-    }
-
-    @Override
-    public void addMistake() {
-        this.mistakesNumber++;
     }
 
     @Override
