@@ -28,13 +28,18 @@ public abstract class AbstractBoardImpl implements GameBoard{
     private final Position initialPosition;
     private final Set<Position> starsPositions;
     private Map<Position,Slot> board = new HashMap<>();
-    protected List<SlotType> avaiableSlotTypes;
+    private List<SlotType> avaiableSlotTypes;
     private final Set<Pair<SlotType,Double>> rules;
     private final BoardType boardType; 
-
     private final String filePath;
 
-    public AbstractBoardImpl(int width, int height, Position initialPosition, Set<Position> starPositions, String filePath, Set<Pair<SlotType,Double>> rules, BoardType boardType){
+    public AbstractBoardImpl(int width,
+                             int height,
+                             Position initialPosition,
+                             Set<Position> starPositions,
+                             String filePath,
+                             Set<Pair<SlotType,Double>> rules,
+                             BoardType boardType){
         this.width = width;
         this.height = height;
         this.initialPosition = initialPosition;
