@@ -40,7 +40,7 @@ public interface MemoryCardModel {
 
     /**
      * Get all the cards of the memory
-     * @return map that contains for each card its relative type
+     * @return map that contains for each card its relative {@link CardType}
      */
     Map<Integer, CardType> getCards();
 
