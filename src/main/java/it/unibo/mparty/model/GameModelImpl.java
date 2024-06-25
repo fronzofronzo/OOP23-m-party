@@ -24,9 +24,16 @@ public class GameModelImpl implements GameModel{
     private int actualPlayerIndex = 0;
     private final MinigameHandler minigameHandler;
 
-    public GameModelImpl(List<Player> players){
+    /**
+     * Constructor of the Game Model: creates a new istance of game with players
+     * insert and the selected difficulty for the board
+     * @param players of the game
+     * @param difficulty of the game. It's related to the {@link BoardType}
+     */
+    public GameModelImpl(List<Player> players, String difficulty){
        this.players = players;
        this.minigameHandler = new MinigameHandlerImplementation();
+       // deve essere modificato con la scelta della difficoltà della mappa
        final SimpleBoardFactory boardFactory = new SimpleBoardFactory();
        this.board = boardFactory.createBoard(BoardType.MEDIUM);
     }
@@ -50,7 +57,7 @@ public class GameModelImpl implements GameModel{
 
     @Override
     public boolean isActiveMinigame() {
-        return false;
+        return this.minigameHandler.getMinigame() != null;
     }
 
     @Override
