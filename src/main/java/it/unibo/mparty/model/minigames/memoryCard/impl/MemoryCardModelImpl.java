@@ -42,6 +42,8 @@ public class MemoryCardModelImpl implements MemoryCardModel {
         } else {
             if(cards.get(selected) == cards.get(card)){
                 guessed.add(cards.get(card));
+            } else {
+                this.mistakesNumber++;
             }
             selected = NOT_SELECTED;
             return false;
