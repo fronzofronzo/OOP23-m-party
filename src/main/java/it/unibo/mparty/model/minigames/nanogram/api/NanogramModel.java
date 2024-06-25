@@ -1,5 +1,4 @@
 package it.unibo.mparty.model.minigames.nanogram.api;
-
 import java.util.*;
 
 import it.unibo.mparty.model.minigames.nanogram.util.CellState;
