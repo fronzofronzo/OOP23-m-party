@@ -33,13 +33,11 @@ public class MemoryCardControllerImpl implements MemoryCardController{
     }
 
     @Override
-    public int getCardsNumber() {
-        return this.model.getCards().size();
-    }
-
-    @Override
-    public String getCardType(int i) {
-        return this.model.getCards().get(i).getName();
+    public void setUpGame() {
+        final int n = this.model.getCards().size();
+        for(int i = 0; i < n; i++ ){
+            this.view.addButton(this.model.getCards().get(i).getName());
+        }
     }
 
     private void updateGameView(){

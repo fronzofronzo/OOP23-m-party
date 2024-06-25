@@ -39,15 +39,15 @@ public class MemoryCardViewImpl implements MemoryCardView{
 
     }
 
+    @Override
+    public void addButton(String text) {
+        this.cardsPane.getChildren().add(new Button(text));
+    }
+
     @FXML
     private void startGame(ActionEvent event){
         final Button bt = (Button)event.getSource();
-        final int n = this.controller.getCardsNumber();
-        for(int i = 0; i < n; i ++){
-            final Button newButton = new Button(this.controller.getCardType(i));
-            newButton.setOnAction(this::tryCard);
-            this.cardsPane.getChildren().add(newButton);
-        }
+        this.controller.setUpGame();
         bt.setText("Pronto !");
         bt.setOnAction(e -> this.hideCards() );
         this.textLabel.setText("Quando si è pronti, spingere il pulsante 'Pronto' ");

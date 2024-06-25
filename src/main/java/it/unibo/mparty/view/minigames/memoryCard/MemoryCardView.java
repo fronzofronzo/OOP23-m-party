@@ -1,5 +1,7 @@
 package it.unibo.mparty.view.minigames.memoryCard;
 
+import javafx.scene.control.Button;
+
 public interface MemoryCardView {
 
     /**
@@ -19,5 +21,11 @@ public interface MemoryCardView {
      * shows the results of the game
      */
     void showResult();
+
+    /**
+     * Add a {@link Button} to the central pane
+     * @param text to set on the button
+     */
+    void addButton(String text);
 
 }

@@ -13,16 +13,8 @@ public interface MemoryCardController {
     void selectCard(int index);
 
     /**
-     * Get how many cards there are in game
-     * @return number of total cards in the game
+     * Set up the game view and model at the game start
      */
-    int getCardsNumber();
-
-    /**
-     * Gets the name of type of selected card
-     * @param i the index of the card
-     * @return the type associated to the selected card
-     */
-    String getCardType(int i);
+    void setUpGame();
 
 }
