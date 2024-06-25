@@ -11,7 +11,8 @@ public interface PlayerBag {
     Item getItem(int i);
 
     /**
-     * Add an item to the player bag
+     * Add an item to the player bag. The item is added in the first free
+     * space of player bag
      * @param item to add
      */
     void addItem(Item item);
