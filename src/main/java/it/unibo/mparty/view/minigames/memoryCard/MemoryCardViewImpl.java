@@ -35,8 +35,13 @@ public class MemoryCardViewImpl implements MemoryCardView{
     }
 
     @Override
-    public void showResult() {
-
+    public void showResult(int n) {
+        this.textLabel.setText("Il giocatore ha guadagnato " + String.valueOf(n) + " monete");
+        // this.getController.endMinigame(n)
+        this.controlButton.setText("Lascia il minigioco ");
+        this.controlButton.setOnAction(e -> {
+            // this.getView.setScene(mainScene.xml)
+        });
     }
 
     @Override

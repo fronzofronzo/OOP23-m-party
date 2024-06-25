@@ -18,9 +18,10 @@ public interface MemoryCardView {
     void setTextButton(int index, String text);
 
     /**
-     * shows the results of the game
+     * show the results of the game
+     * @param n coins earned by the player
      */
-    void showResult();
+    void showResult(int n);
 
     /**
      * Add a {@link Button} to the central pane
