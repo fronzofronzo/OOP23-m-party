@@ -46,7 +46,7 @@ public interface MemoryCardModel {
 
     /**
      * Check all the card type that have been already guessed
-     * @return set of card type
+     * @return set of {@link CardType}
      */
     Set<CardType> guessedCardsType();
 }
