@@ -10,7 +10,7 @@ import java.util.List;
 public class GameModelBuilderImpl implements GameModelBuilder{
 
     private final List<Player> players = new ArrayList<>();
-    private GameBoard board;
+    private String difficulty;
 
     @Override
     public void addPlayer(String nickname, String character) {
@@ -20,11 +20,11 @@ public class GameModelBuilderImpl implements GameModelBuilder{
 
     @Override
     public void difficulty(String difficulty) {
-
+        this.difficulty = difficulty;
     }
 
     @Override
     public GameModel build() {
-        return null;
+        return new GameModelImpl(players, this.difficulty);
     }
 }
