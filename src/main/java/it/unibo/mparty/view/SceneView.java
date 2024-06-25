@@ -7,7 +7,7 @@ public interface SceneView {
 
     /**
      * gets the main view of reference
-     * @return the gameView
+     * @return {@link GameView} of reference
      */
     GameView getMainView();
 }
