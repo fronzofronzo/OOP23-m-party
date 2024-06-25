@@ -55,6 +55,7 @@ public class MemoryCardViewImpl implements MemoryCardView{
 
     private void hideCards(){
         this.cardsPane.getChildren().stream().map(e -> (Button)e).forEach(b -> b.setText(""));
+        this.textLabel.setText("  ");
     }
 
     private void tryCard(ActionEvent e){
