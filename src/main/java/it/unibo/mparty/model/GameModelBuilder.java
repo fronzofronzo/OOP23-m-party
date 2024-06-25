@@ -6,5 +6,16 @@ package it.unibo.mparty.model;
  */
 public interface GameModelBuilder {
 
+    /**
+     * add a player to the game
+     * @param nickname of the player
+     * @param character chosen by the Player
+     */
+    void addPlayer(String nickname, String character);
 
+    /**
+     * Chose the difficulty of the game
+     * @param difficulty of the game: it's related to the Board type
+     */
+    void difficulty(String difficulty);
 }
