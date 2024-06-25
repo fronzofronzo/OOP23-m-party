@@ -45,7 +45,7 @@ public class GameModelImpl implements GameModel{
 
     @Override
     public boolean isActiveMinigame() {
-        return false;
+        return this.minigameHandler.getMinigame() != null;
     }
 
     @Override
