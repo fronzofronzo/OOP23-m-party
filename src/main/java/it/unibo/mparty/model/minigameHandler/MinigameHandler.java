@@ -7,7 +7,7 @@ public interface MinigameHandler {
     /**
      * Start a new minigame
      */
-    void startMinigame() throws FileNotFoundException;
+    void startMinigame() throws Exception;
 
     /**
      * Get the name of the minigame actually played

@@ -13,18 +13,18 @@ public class MinigameHandlerImplementation implements MinigameHandler{
     private String actualMinigame = null;
 
     @Override
-    public void startMinigame(){
-
+    public void startMinigame() throws Exception {
+        this.actualMinigame = generateRandomMinigame();
     }
 
     @Override
     public String getMinigame() {
-        return "";
+        return this.actualMinigame;
     }
 
     @Override
     public void stopMinigame() {
-
+        this.actualMinigame = null;
     }
 
     private String generateRandomMinigame() throws Exception {
