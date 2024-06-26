@@ -10,7 +10,7 @@ public class PlayerImplementation implements Player{
     private static final int NUM_ITEMS = 3;
 
     private final String username;
-    private Position position;
+    private Position position = new Position(0,0);
     private final Character character;
     private final PlayerBag playerBag;
     private final Dice dice;
