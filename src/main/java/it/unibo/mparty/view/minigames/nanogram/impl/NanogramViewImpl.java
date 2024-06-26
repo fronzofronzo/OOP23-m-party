@@ -90,4 +90,13 @@ public class NanogramViewImpl implements NanogramView, SceneView {
         throw new UnsupportedOperationException("Unimplemented method 'displayStatusMessage'");
     }
 
+    @Override
+    public GameView getMainView() {
+        return null;
+    }
+
+    @Override
+    public void init(GameView view, GameController controller) {
+
+    }
 }

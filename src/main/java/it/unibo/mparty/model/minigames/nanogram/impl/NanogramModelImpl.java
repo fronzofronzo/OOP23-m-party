@@ -52,7 +52,6 @@ public class NanogramModelImpl implements NanogramModel {
 
     private boolean isMoveValid(int row, int column, CellState state) {
         CellState currentCellState = grid.get(new Position(row, column));
-        // Check if the cell is currently empty or marked, and if the new state is filled
         return (currentCellState == CellState.EMPTY || currentCellState == CellState.MARKED) && state == CellState.FILLED;
     }
 
