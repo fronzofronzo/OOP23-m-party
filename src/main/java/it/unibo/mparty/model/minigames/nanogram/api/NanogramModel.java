@@ -49,13 +49,6 @@ public interface NanogramModel {
     List<List<Integer>> getColumnHints();
 
     /**
-     * Checks if the last move made by the player is valid.
-     *
-     * @return true if the move is valid, false otherwise.
-     */
-    boolean isMoveValid();
-
-    /**
      * Checks if the game is complete.
      *
      * @return true if the player has successfully completed the game, false otherwise.
