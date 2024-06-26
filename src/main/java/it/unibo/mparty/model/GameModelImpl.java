@@ -19,7 +19,7 @@ public class GameModelImpl implements GameModel{
 
     private final List<Player> players;
     private final GameBoard board;
-    private final Shop shop;
+    //private final Shop shop;
     private int turn = 1 ;
     private int actualPlayerIndex = 0;
     private final MinigameHandler minigameHandler;
@@ -41,7 +41,7 @@ public class GameModelImpl implements GameModel{
     @Override
     public void movePlayer() {
         final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
-        final Position nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition).get(0).getY();
+        //final Position nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition).get(0).getY();
 
     }
 
