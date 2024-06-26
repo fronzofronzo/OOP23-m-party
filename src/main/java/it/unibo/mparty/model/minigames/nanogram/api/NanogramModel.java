@@ -26,6 +26,20 @@ public interface NanogramModel {
     CellState getCellState(int row, int column);
 
     /**
+     * Gets the current board of the game.
+     *
+     * @return the current {@link Board} of the game.
+     */
+    Board getBoard();
+
+    /**
+     * Gets the number of lives remaining in the game.
+     *
+     * @return the number of remaining lives.
+     */
+    int getLives();
+
+    /**
      * Updates the state of a specific cell in the grid.
      *
      * @param row the row index of the cell.

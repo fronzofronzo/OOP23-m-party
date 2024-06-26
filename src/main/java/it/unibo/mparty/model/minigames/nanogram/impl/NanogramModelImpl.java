@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Implementation of the {@link NanogramModel} interface representing the model for a Nanogram game.
+ */
 public class NanogramModelImpl implements NanogramModel {
 
     private Map<Position, CellState> grid;
@@ -20,54 +23,64 @@ public class NanogramModelImpl implements NanogramModel {
 
     private final BoardFactory boardFactory = new BoardFactoryImpl();
     private final Live lives = new LiveImpl();
+    private Board board;
 
     @Override
     public void initializeGame(Difficulty difficulty) {
-        Board board;
         if (difficulty == Difficulty.SIMPLE) {
-            board = boardFactory.createSimpleBoard(5, 30);
+            this.board = this.boardFactory.createSimpleBoard(5, 30);
         } else {
-            board = boardFactory.createHardBoard(10, 40, 20);
+            this.board = this.boardFactory.createHardBoard(10, 40, 20);
         }
-        this.grid = board.getGrid();
-        this.rowHints = board.calculateHints(true);
-        this.columnHints = board.calculateHints(false);
-        lives.reset();
+        this.grid = this.board.getGrid();
+        this.rowHints = this.board.calculateHints(true);
+        this.columnHints = this.board.calculateHints(false);
+        this.lives.reset();
     }
 
     @Override
     public CellState getCellState(int row, int column) {
-        return grid.get(new Position(row, column));
+        return this.grid.get(new Position(row, column));
+    }
+
+    @Override
+    public Board getBoard() {
+        return this.board;
+    }
+
+    @Override
+    public int getLives() {
+        return this.lives.getLive();
     }
 
     @Override
     public void updateCellState(int row, int column, CellState state) {
         if (isMoveValid(row, column, state)) {
-            grid.put(new Position(row, column), state);
+            this.grid.put(new Position(row, column), state);
         } else {
-            lives.decrease();
-            grid.compute(new Position(row, column), (k, correctState) -> correctState);
+            this.lives.decrease();
+            this.grid.compute(new Position(row, column), (k, correctState) -> correctState);
         }
     }
 
     private boolean isMoveValid(int row, int column, CellState state) {
-        CellState currentCellState = grid.get(new Position(row, column));
+        CellState currentCellState = this.grid.get(new Position(row, column));
         return (currentCellState == CellState.EMPTY || currentCellState == CellState.MARKED) && state == CellState.FILLED;
     }
 
     @Override
     public List<List<Integer>> getRowHints() {
-        return rowHints;
+        return this.rowHints;
     }
 
     @Override
     public List<List<Integer>> getColumnHints() {
-        return columnHints;
+        return this.columnHints;
     }
 
     @Override
     public boolean isGameComplete() {
-        for (Map.Entry<Position, CellState> entry : grid.entrySet()) {
+        for (Map.Entry<Position, CellState> entry : this.grid.entrySet()) {
             if (entry.getValue() == CellState.EMPTY || entry.getValue() == CellState.MARKED) {
                 return false;
             }
@@ -77,6 +90,6 @@ public class NanogramModelImpl implements NanogramModel {
 
     @Override
     public boolean isGameOver() {
-        return lives.isDeath();
+        return this.lives.isDeath();
     }
 }
