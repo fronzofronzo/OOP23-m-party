@@ -3,7 +3,7 @@ package it.unibo.mparty.model.minigames.nanogram.impl;
 import it.unibo.mparty.model.minigames.nanogram.api.Board;
 import it.unibo.mparty.model.minigames.nanogram.api.BoardFactory;
 import it.unibo.mparty.model.minigames.nanogram.util.CellState;
-import it.unibo.mparty.model.minigames.nanogram.util.Pair;
+import it.unibo.mparty.utilities.Pair;
 
 import java.util.*;
 import java.util.stream.Collectors;

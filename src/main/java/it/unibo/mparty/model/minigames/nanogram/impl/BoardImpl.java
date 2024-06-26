@@ -2,10 +2,8 @@ package it.unibo.mparty.model.minigames.nanogram.impl;
 
 import it.unibo.mparty.model.minigames.nanogram.api.Board;
 import it.unibo.mparty.model.minigames.nanogram.util.CellState;
-import it.unibo.mparty.model.minigames.nanogram.util.Pair;
-import javafx.scene.control.Cell;
+import it.unibo.mparty.utilities.Pair;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
