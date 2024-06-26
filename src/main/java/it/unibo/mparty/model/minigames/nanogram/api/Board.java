@@ -20,6 +20,13 @@ public interface Board {
     Map<Position, CellState> getGrid();
 
     /**
+     * Gets the size of the grid.
+     *
+     * @return the size of the grid.
+     */
+    int getGridSize();
+
+    /**
      * Gets the grid as it is currently shown to the player, with cell states.
      *
      * @return a map representing the current visible grid, where the keys are positions of type {@link Position}

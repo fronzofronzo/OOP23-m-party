@@ -25,6 +25,11 @@ public class BoardImpl implements Board {
     }
 
     @Override
+    public int getGridSize() {
+        return this.size;
+    }
+
+    @Override
     public Map<Position, CellState> getShowGrid() {
         return showGrid;
     }
