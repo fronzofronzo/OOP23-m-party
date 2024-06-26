@@ -14,7 +14,7 @@ public interface MemorySweep {
      * method for getting the random list that the players should try to recreate
      * @return the list of random buttons to be recreated by players
      */
-    public Set<Position> randomList();
+    public Set<Position> getRandomList();
     
     /**
      * method for knowing wheter a player is done with his try
