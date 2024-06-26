@@ -64,9 +64,12 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     }
 
     private void hideCards(){
-        this.cardsPane.getChildren().stream().map(e -> (Button)e).forEach(b -> b.setText(""));
+        this.cardsPane.getChildren().stream().map(e -> (Button)e).forEach(b -> {
+            b.setText("");
+            b.setDisable(false);
+        });
         this.textLabel.setText("  ");
-        this.cardsPan
+
     }
 
     private void tryCard(ActionEvent e){
