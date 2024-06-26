@@ -1,6 +1,7 @@
 package it.unibo.mparty.model.player.api;
 
 import it.unibo.mparty.model.player.impl.Character;
+import it.unibo.mparty.utilities.Position;
 
 public interface PlayerBuilder {
 
@@ -16,7 +17,7 @@ public interface PlayerBuilder {
      * @param character chosen for the player
      * @return current builder
      */
-    PlayerBuilder character(Character character);
+    PlayerBuilder character(String character);
 
     /**
      * Sets the initial position of player
