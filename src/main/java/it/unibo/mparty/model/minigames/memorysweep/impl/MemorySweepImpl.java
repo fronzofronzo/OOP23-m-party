@@ -18,6 +18,7 @@ public class MemorySweepImpl implements MemorySweep{
     private Set<Position> player2;
     private Random random;
     private int side;
+    private boolean turn = true;
 
     public MemorySweepImpl(int side){
         this.random = new Random();
@@ -27,6 +28,9 @@ public class MemorySweepImpl implements MemorySweep{
         this.side = side;
     }
 
+    /*
+     * MIGLIORA CON STREAM FUNZIONALI
+     */
     @Override
     public Set<Position> getRandomList() {
         this.counter++;
@@ -39,8 +43,18 @@ public class MemorySweepImpl implements MemorySweep{
 
     @Override
     public HitType hit(Position p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hit'");
+        if(turn){
+            if(this.player1.size() < this.randomList.size()){
+                this.player1.add(p);
+                return HitType.FIRST;
+            }
+            this.turn = false;
+        }
+        if(this.player2.size() < this.randomList.size()){
+            this.player2.add(p);
+        }
+        this.turn = true;
+        return HitType.SECOND;
     }
 
     @Override
