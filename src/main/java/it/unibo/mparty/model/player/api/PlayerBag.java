@@ -4,14 +4,15 @@ import it.unibo.mparty.model.item.api.Item;
 public interface PlayerBag {
 
     /**
-     * Get a certain item from player items collection
-     * @param i index of the selected item
-     * @return the selected item
+     * Get a certain {@link Item} from player items collection
+     * @param i index of the selected {@link Item}
+     * @return the selected {@link Item}
      */
     Item getItem(int i);
 
     /**
-     * Add an item to the player bag
+     * Add an item to the player bag. The item is added in the first free
+     * space of player bag
      * @param item to add
      */
     void addItem(Item item);

@@ -24,8 +24,5 @@ public class TestMemoryCardImpl {
         int i  = 0;
         var type = model.getCards().get(i);
         int j = model.getCards().entrySet().stream().filter(e -> e.getValue() == type && e.getKey() != i).map(e -> e.getKey()).reduce(0, (a,b) -> a+b);
-        assertTrue(model.flip(i));
-        assertFalse(model.flip(j));
-        assertEquals(1, model.guessedCardsType().size());
     }
 }

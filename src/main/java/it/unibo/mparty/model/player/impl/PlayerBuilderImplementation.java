@@ -2,11 +2,12 @@ package it.unibo.mparty.model.player.impl;
 
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBuilder;
+import it.unibo.mparty.utilities.Position;
 
 public class PlayerBuilderImplementation implements PlayerBuilder {
 
     private String username;
-    private Character character;
+    private String character;
     private Position position;
 
     @Override
@@ -16,7 +17,7 @@ public class PlayerBuilderImplementation implements PlayerBuilder {
     }
 
     @Override
-    public PlayerBuilder character(Character character) {
+    public PlayerBuilder character(String character) {
         this.character = character;
         return this;
     }
@@ -32,6 +33,6 @@ public class PlayerBuilderImplementation implements PlayerBuilder {
         if (this.username == null || this.position == null || this.character == null){
             throw new IllegalStateException("Missing fields: cannot create a new Player");
         }
-        return new PlayerImplementation(this.username, this.position, this.character);
+        return new PlayerImplementation(this.username, this.character);
     }
 }
