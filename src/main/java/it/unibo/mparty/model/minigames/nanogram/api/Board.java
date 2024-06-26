@@ -1,7 +1,7 @@
 package it.unibo.mparty.model.minigames.nanogram.api;
 
 import it.unibo.mparty.model.minigames.nanogram.util.CellState;
-import it.unibo.mparty.utilities.Pair;
+import it.unibo.mparty.utilities.Position;
 
 import java.util.List;
 import java.util.Map;
@@ -14,23 +14,24 @@ public interface Board {
     /**
      * Gets the complete grid of the game with all cell states.
      *
-     * @return a map representing the grid, where the keys are pairs of (row, column) indices
-     *         and the values are the states of the cells.
+     * @return a map representing the grid, where the keys are positions of type {@link Position}
+     *         and the values are the states of the cells of type {@link CellState}.
      */
-    Map<Pair<Integer, Integer>, CellState> getGrid();
+    Map<Position, CellState> getGrid();
 
     /**
      * Gets the grid as it is currently shown to the player, with cell states.
      *
-     * @return a map representing the current visible grid, where the keys are pairs of (row, column) indices
-     *         and the values are the states of the cells.
+     * @return a map representing the current visible grid, where the keys are positions of type {@link Position}
+     *         and the values are the states of the cells of type {@link CellState}.
      */
-    Map<Pair<Integer, Integer>, CellState> getShowGrid();
+    Map<Position, CellState> getShowGrid();
 
     /**
-     * Gets the hints for the rows and columns of the grid.
+     * Gets the hints for the rows or columns of the grid.
      *
-     * @return a list of integers representing the hints.
+     * @return a list of lists of integers representing the hints for either rows or columns.
+     *         Each inner list contains the hints for a single row or column based on game logic.
      */
     List<Integer> getHints();
 
@@ -42,4 +43,13 @@ public interface Board {
      * @return the current state of the cell at the specified position.
      */
     CellState getCellState(int x, int y);
+
+    /**
+     * Calculates the hints for either rows or columns of the grid.
+     *
+     * @param isRow {@code true} to calculate hints for rows, {@code false} for columns.
+     * @return a list of lists of integers representing the hints for either rows or columns.
+     *         Each inner list contains the hints for a single row or column based on game logic.
+     */
+    List<List<Integer>> calculateHints(boolean isRow);
 }
