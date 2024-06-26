@@ -23,13 +23,12 @@ public class NanogramModelImpl implements NanogramModel {
     private Live lives = new LiveImpl();
 
     @Override
-    public void initializeGameGrid(Difficulty difficulty) {
+    public void initializeGame(Difficulty difficulty) {
         if (difficulty == Difficulty.SIMPLE){
             boardFactory.createSimpleBoard(5, 30);
         } else {
             boardFactory.createHardBoard(10,40, 20);
         }
-
         setRowHints();
         setColumnHints();
         lives.reset();
