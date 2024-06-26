@@ -47,7 +47,11 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
 
     @Override
     public void addButton(String text) {
-        this.cardsPane.getChildren().add(new Button(text));
+        final Button bt = new Button(text);
+        bt.setOnAction(this::tryCard);
+        bt.setPrefSize(100,100);
+        bt.setDisable(true);
+        this.cardsPane.getChildren().add(bt);
     }
 
     @FXML
@@ -56,12 +60,13 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
         this.controller.setUpGame();
         bt.setText("Pronto !");
         bt.setOnAction(e -> this.hideCards() );
-        this.textLabel.setText("Quando si è pronti, spingere il pulsante 'Pronto' ");
+        this.textLabel.setText("Quando si e' pronti, spingere il pulsante 'Pronto' ");
     }
 
     private void hideCards(){
         this.cardsPane.getChildren().stream().map(e -> (Button)e).forEach(b -> b.setText(""));
         this.textLabel.setText("  ");
+        this.cardsPan
     }
 
     private void tryCard(ActionEvent e){

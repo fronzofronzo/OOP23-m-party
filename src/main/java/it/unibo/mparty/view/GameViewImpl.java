@@ -30,7 +30,7 @@ public class GameViewImpl extends Application implements GameView{
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
-        this.setScene("memoryCard.fxml");
+        this.setScene("/layouts/minigames/memoryCard.fxml");
     }
 
     private String getLayoutPath(String layout){

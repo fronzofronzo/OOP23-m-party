@@ -18,7 +18,7 @@ public class MemoryCardModelImpl implements MemoryCardModel {
     public MemoryCardModelImpl(){
         this.cards = new HashMap<>();
         this.guessed = new HashSet<>();
-        final int size = CardType.values().length;
+        final int size = CardType.values().length * 2;
         final Random random = new Random();
         for(var type : CardType.values()){
             var i = random.nextInt(size);
