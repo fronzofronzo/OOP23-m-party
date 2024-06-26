@@ -8,7 +8,11 @@ public enum StatusMessage {
     /**
      * Error message indicating an incorrect cell.
      */
-    ERROR("Cella errata");
+    ERROR("Cella errata"),
+
+    WIN("You won!"),
+
+    LOSE("Game Over...");
 
     private String message;
 
