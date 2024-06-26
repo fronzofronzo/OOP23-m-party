@@ -10,7 +10,7 @@ import it.unibo.mparty.model.minigames.nanogram.api.Live;
 import it.unibo.mparty.model.minigames.nanogram.api.NanogramModel;
 import it.unibo.mparty.model.minigames.nanogram.util.CellState;
 import it.unibo.mparty.model.minigames.nanogram.util.Difficulty;
-import it.unibo.mparty.model.minigames.nanogram.util.Pair;
+import it.unibo.mparty.utilities.Pair;
 
 public class NanogramModelImpl implements NanogramModel {
 

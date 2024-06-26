@@ -1,6 +1,6 @@
 package it.unibo.mparty.view.minigames.nanogram.impl;
 
-import it.unibo.mparty.model.minigames.nanogram.util.Pair;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.minigames.nanogram.api.NanogramView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
