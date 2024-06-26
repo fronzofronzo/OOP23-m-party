@@ -1,6 +1,9 @@
 package it.unibo.mparty.view.minigames.nanogram.impl;
 
+import it.unibo.mparty.controller.GameController;
 import it.unibo.mparty.utilities.Pair;
+import it.unibo.mparty.view.GameView;
+import it.unibo.mparty.view.SceneView;
 import it.unibo.mparty.view.minigames.nanogram.api.NanogramView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
-public class NanogramViewImpl implements NanogramView {
+public class NanogramViewImpl implements NanogramView, SceneView {
 
     @FXML
     private HBox buttonBox;
