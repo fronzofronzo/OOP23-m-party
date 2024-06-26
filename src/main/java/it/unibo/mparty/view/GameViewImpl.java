@@ -18,7 +18,7 @@ public class GameViewImpl extends Application implements GameView{
 
     @Override
     public void setScene(String path) throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(getLayoutPath(path))) ;
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(path)) ;
         final Parent root = loader.load();
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
         final SceneView sceneView = loader.<SceneView>getController();
@@ -30,7 +30,7 @@ public class GameViewImpl extends Application implements GameView{
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
-        this.setScene("start.fxml");
+        this.setScene("memoryCard.fxml");
     }
 
     private String getLayoutPath(String layout){
