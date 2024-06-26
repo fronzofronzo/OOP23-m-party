@@ -1,18 +1,24 @@
 package it.unibo.mparty.view.minigames.nanogram.impl;
 
 import it.unibo.mparty.controller.GameController;
+import it.unibo.mparty.model.minigames.nanogram.api.Board;
+import it.unibo.mparty.model.minigames.nanogram.util.CellState;
+import it.unibo.mparty.model.minigames.nanogram.util.StatusMessage;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
 import it.unibo.mparty.view.SceneView;
 import it.unibo.mparty.view.minigames.nanogram.api.NanogramView;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
+/**
+ * Implementation of the {@link NanogramView} interface representing the view for a Nanogram game.
+ * This class handles the UI components and interactions for the Nanogram game.
+ */
 public class NanogramViewImpl implements NanogramView, SceneView {
 
     @FXML
@@ -48,48 +54,6 @@ public class NanogramViewImpl implements NanogramView, SceneView {
     @FXML
     private GridPane rowHints;
 
-    private int lastClickedRow = -1;
-    private int lastClickedColumn = -1;
-
-    private void initializedGameGrid() {
-        for (int i = 0; i < gameGrid.getRowCount(); i++) {
-            for (int j = 0; j < gameGrid.getColumnCount(); j++) {
-                Button cell = new Button();
-                cell.setStyle("-fx-border-color: black; -fx-background-color: white;");
-                int finalRow = i;
-                int finalCol = j;
-                cell.setOnAction(event -> handleCellClick(cell, finalRow, finalCol));
-                gameGrid.add(cell, i, j);
-            }
-        }
-    }
-
-    private void handleCellClick(Button cell, int row, int column) {
-        if ("white".equals(cell.getStyle().split(" ")[1])) {
-            cell.setStyle("-fx-border-color: black; -fx-background-color: black;");
-        } else {
-            cell.setStyle("-fx-border-color: black; -fx-background-color: white;");
-        }
-
-        lastClickedRow = row;
-        lastClickedColumn = column;
-    }
-
-    @Override
-    public Pair<Integer, Integer> userClicked() {
-        if (lastClickedColumn == -1 || lastClickedRow == -1) {
-            return null;
-        }
-
-        return new Pair<Integer, Integer>(lastClickedRow, lastClickedColumn);
-    }
-
-    @Override
-    public void displayStatusMessage(String message, String messageType) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'displayStatusMessage'");
-    }
-
     @Override
     public GameView getMainView() {
         return null;
@@ -97,6 +61,31 @@ public class NanogramViewImpl implements NanogramView, SceneView {
 
     @Override
     public void init(GameView view, GameController controller) {
+
+    }
+
+    @Override
+    public Pair<Integer, Integer> userClicked() {
+        return null;
+    }
+
+    @Override
+    public void updateCell(int row, int col, CellState cellState) {
+
+    }
+
+    @Override
+    public void updateLives(int actualLives) {
+
+    }
+
+    @Override
+    public void displayStatusMessage(StatusMessage message) {
+
+    }
+
+    @Override
+    public void displayBoard(Board board) {
 
     }
 }
