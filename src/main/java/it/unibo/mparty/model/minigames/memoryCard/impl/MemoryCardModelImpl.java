@@ -1,7 +1,7 @@
 package it.unibo.mparty.model.minigames.memoryCard.impl;
 
 import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
-import it.unibo.mparty.model.player.Position;
+import it.unibo.mparty.utilities.Position;
 import java.util.*;
 
 public class MemoryCardModelImpl implements MemoryCardModel {
