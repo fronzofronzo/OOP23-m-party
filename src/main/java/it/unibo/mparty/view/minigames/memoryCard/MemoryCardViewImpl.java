@@ -25,8 +25,8 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     private Label textLabel;
 
     @Override
-    public void disableButton(int index) {
-        ((Button)this.cardsPane.getChildren().get(index)).setDisable(true);
+    public void setButtonStatus(int index, boolean status) {
+        ((Button)this.cardsPane.getChildren().get(index)).setDisable(!status);
     }
 
     @Override

@@ -21,7 +21,7 @@ public class MemoryCardControllerImpl implements MemoryCardController{
     @Override
     public void selectCard(int index) {
         if(this.model.flip(index)){
-            this.view.disableButton(index);
+            this.view.setButtonStatus(index,false);
             this.view.setTextButton(index, this.model.getCards().get(index).getName());
         } else {
             if (this.model.isDone()) {
@@ -47,9 +47,10 @@ public class MemoryCardControllerImpl implements MemoryCardController{
             var i = e.getKey();
             if(guessed.contains(type)){
                 this.view.setTextButton(i,type.getName());
-                this.view.disableButton(i);
+                this.view.setButtonStatus(i,false);
             } else {
                 this.view.setTextButton(i, "");
+                this.view.setButtonStatus(i,true);
             }
         }
     }

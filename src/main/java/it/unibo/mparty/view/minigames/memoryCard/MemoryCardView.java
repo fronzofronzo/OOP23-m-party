@@ -6,10 +6,12 @@ import javafx.scene.control.Button;
 public interface MemoryCardView extends SceneView {
 
     /**
-     * Disable the button with the relative index
-     * @param index of the button to disable
+     * set if the button can be used or not
+     * @param index of the button to set
+     * @param status true if button is to set enabled, false
+     *                  if button is to set not enabled
      */
-    void disableButton(int index);
+    void setButtonStatus(int index, boolean status);
 
     /**
      * Set text string to a certain button
