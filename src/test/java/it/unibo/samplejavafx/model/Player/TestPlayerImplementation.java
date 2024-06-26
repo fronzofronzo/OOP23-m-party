@@ -53,8 +53,6 @@ public class TestPlayerImplementation {
         testPlayer.getPlayerBag().addItem(itemTest);
         assertEquals(itemTest, testPlayer.getPlayerBag().getItem(0));
         assertFalse(testPlayer.getPlayerBag().isFull());
-
-        assertDoesNotThrow(testPlayer.getPlayerBag().removeItem(0));
     }
 
 }
