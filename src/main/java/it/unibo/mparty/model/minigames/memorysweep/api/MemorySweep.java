@@ -28,4 +28,9 @@ public interface MemorySweep {
      * @return true if it is the turn of one player, false if it is the turn of the other player
      */
     public boolean getTurn();
+    /**
+     * method to check wheter either player1 or player2 has lost
+     * @return true if either player1 or player2 flase otherwise
+     */
+    public boolean isOver();
 }
