@@ -1,5 +1,7 @@
 package it.unibo.mparty.view;
 
+import it.unibo.mparty.controller.GameController;
+
 /**
  * Interface that models a general scene of the application
  */

@@ -1,11 +1,12 @@
 package it.unibo.mparty.view;
 
+import it.unibo.mparty.controller.GameControllerImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import it.unibo.mparty.controller.GameController;
 import java.io.IOException;
 
 public class GameViewImpl extends Application implements GameView{
