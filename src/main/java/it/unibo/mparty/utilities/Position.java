@@ -10,7 +10,7 @@ public record Position(int x, int y) {
         return this.y;
     }
 
-    public Position getStandardPosition(){
+    public static Position getStandardPosition(){
         return new Position(0,0);
     }
 }

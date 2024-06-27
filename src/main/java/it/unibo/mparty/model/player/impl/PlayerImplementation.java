@@ -12,14 +12,14 @@ public class PlayerImplementation implements Player{
     private static final int NUM_ITEMS = 3;
 
     private final String username;
-    private Position position = new Position(0,0);
+    private Position position = Position.getStandardPosition();
     private final Character character;
     private final PlayerBag playerBag;
     private final Dice dice;
     private int numCoins;
     private int numStars;
 
-    public PlayerImplementation(String username, String character, Position position){
+    public PlayerImplementation(String username, String character){
         this.username = username;
         this.character = Arrays.stream(Character.values()).filter(c -> c.getName().equals(character)).findAny().get();
         this.playerBag = new PlayerBagImplementation(NUM_ITEMS);
