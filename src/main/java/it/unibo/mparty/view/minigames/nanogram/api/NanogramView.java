@@ -4,11 +4,12 @@ import it.unibo.mparty.model.minigames.nanogram.api.Board;
 import it.unibo.mparty.model.minigames.nanogram.util.CellState;
 import it.unibo.mparty.model.minigames.nanogram.util.StatusMessage;
 import it.unibo.mparty.utilities.Pair;
+import it.unibo.mparty.view.minigames.MinigameView;
 
 /**
  * Interface representing the view for a Nanogram game.
  */
-public interface NanogramView {
+public interface NanogramView extends MinigameView {
 
     /**
      * Gets the user's click input as a pair of coordinates.
@@ -22,7 +23,7 @@ public interface NanogramView {
      *
      * @param row the row index of the cell.
      * @param col the column index of the cell.
-     * @param cellState the new state to set for the cell.
+     * @param cellState the new state to set for the cell, as a {@link CellState}.
      */
     void updateCell(int row, int col, CellState cellState);
 
