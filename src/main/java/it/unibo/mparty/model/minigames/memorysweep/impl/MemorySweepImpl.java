@@ -3,8 +3,6 @@ package it.unibo.mparty.model.minigames.memorysweep.impl;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
@@ -20,6 +18,7 @@ public class MemorySweepImpl implements MemorySweep{
     private int side;
     private boolean turn = true;
     private Set<Position> winner;
+    private static int START = 3;
 
     public MemorySweepImpl(int side){
         this.random = new Random();
@@ -27,7 +26,7 @@ public class MemorySweepImpl implements MemorySweep{
         this.player1 = new HashSet<>();
         this.player2 = new HashSet<>();
         this.side = side;
-        this.counter = 3;
+        this.counter = START;
     }
 
     @Override
@@ -42,9 +41,7 @@ public class MemorySweepImpl implements MemorySweep{
         return this.randomList;
     }
 
-    /*
-     * DA SISTEMARE
-     */
+    
     @Override
     public HitType hit(Position p) {
         if(this.getTurn()){
@@ -79,12 +76,6 @@ public class MemorySweepImpl implements MemorySweep{
         return this.turn;
     }
 
-    
-
-    private void setCounter(){
-        this.counter++;
-    }
-
     @Override
     public Set<Position> getWinner() {
         return this.winner;
@@ -96,6 +87,24 @@ public class MemorySweepImpl implements MemorySweep{
             p = new Position(random.nextInt(this.side),random.nextInt(this.side));
         }while(this.getRandomList().contains(p));
         return p;
+    }
+
+    private void setCounter(){
+        this.counter++;
+    }
+
+    private HitType playerTurn(Set<Position> player,Position p){
+        if(this.randomList.contains(p)){
+            player.add(p);
+            if(player.size() == this.randomList.size()){
+                this.turn = !this.turn;
+                player.clear();
+                return HitType.TURN_END;//player 1 ha passato il turno tocca al player 2
+            }
+            return HitType.RIGHT_CHOICE;
+        }
+        this.winner = player.equals(this.player1) ? player2 : player1;
+        return HitType.LOSS;//player 1 ha perso,ha vinto player 2
     }
 
     
