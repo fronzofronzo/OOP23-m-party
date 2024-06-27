@@ -6,16 +6,25 @@ import it.unibo.mparty.utilities.*;
 
 public interface MemorySweep {
 
+    /**
+     * enum describing the types of event that can appen when a button is clicked:
+     *  - RIGHT_CHOICE: the player guessed the right button of the sequence that needs to be recreated but the guess isn't over
+     *  - TURN_END: the player guessed right all the buttons of the sequence which needed to be recreated, his turn has end now it'the other player turn
+     *  - LOSS: the player guessed the wrong button, so he has lost
+     */
     enum HitType{
         RIGHT_CHOICE,TURN_END,LOSS
     }
 
     /**
-     * method for getting the random list that the players should try to recreate
+     * method for setting the random list that the players should try to recreate
      * @return the list of random buttons to be recreated by players
      */
     public Set<Position> getRandomList();
 
+    /**
+     * method for getting the random list that the players should try to recreate
+     */
     public void setRandomList();
     
     /**
