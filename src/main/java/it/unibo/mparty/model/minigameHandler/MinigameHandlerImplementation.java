@@ -14,7 +14,7 @@ import java.util.Random;
 public class MinigameHandlerImplementation implements MinigameHandler{
 
     private String actualMinigame = null;
-    private final List<Player> players;
+    private List<Player> players;
 
     public MinigameHandlerImplementation(){
         this.players = Collections.emptyList();
@@ -23,6 +23,7 @@ public class MinigameHandlerImplementation implements MinigameHandler{
     @Override
     public void startMinigame(List<Player> players) throws Exception {
         this.actualMinigame = generateRandomMinigame();
+        this.players = players;
     }
 
     @Override
@@ -33,6 +34,7 @@ public class MinigameHandlerImplementation implements MinigameHandler{
     @Override
     public void stopMinigame() {
         this.actualMinigame = null;
+        this.players = Collections.emptyList();
     }
 
     private String generateRandomMinigame() throws Exception {
