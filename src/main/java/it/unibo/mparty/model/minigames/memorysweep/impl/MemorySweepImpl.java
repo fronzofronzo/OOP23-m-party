@@ -73,7 +73,7 @@ public class MemorySweepImpl implements MemorySweep{
         if(this.randomList.contains(p)){
             player.add(p);
             if(player.size() == this.randomList.size()){
-                this.turn = !this.turn;
+                this.changeTurn();
                 player.clear();
                 return HitType.TURN_END;//player 1 ha passato il turno tocca al player 2
             }
@@ -81,6 +81,10 @@ public class MemorySweepImpl implements MemorySweep{
         }
         this.winner = player.equals(this.player1) ? player2 : player1;
         return HitType.LOSS;//player 1 ha perso,ha vinto player 2
+    }
+
+    private void changeTurn(){
+        this.turn = !this.turn;
     }
 
     
