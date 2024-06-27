@@ -18,7 +18,7 @@ public class MemoryCardControllerImpl implements MemoryCardController{
     @Override
     public void selectCard(int index) {
         if(this.model.flip(index)){
-            this.view.setButtonStatus(index,false);
+            this.view.setCardStatus(index,false);
             this.view.setCardType(index, this.model.getCards().get(index).getName());
         } else {
             if (this.model.isDone()) {
@@ -44,10 +44,10 @@ public class MemoryCardControllerImpl implements MemoryCardController{
             var i = e.getKey();
             if(guessed.contains(type)){
                 this.view.setCardType(i,type.getName());
-                this.view.setButtonStatus(i,false);
+                this.view.setCardStatus(i,false);
             } else {
                 this.view.setCardType(i, "");
-                this.view.setButtonStatus(i,true);
+                this.view.setCardStatus(i,true);
             }
         }
     }
