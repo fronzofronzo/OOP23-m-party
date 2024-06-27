@@ -33,6 +33,6 @@ public class GameViewImpl extends Application implements GameView{
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
         this.stage.show();
-        this.setScene("minigames/Nanogram.fxml");
+        this.setScene("minigames/nanogram.fxml");
     }
 }
