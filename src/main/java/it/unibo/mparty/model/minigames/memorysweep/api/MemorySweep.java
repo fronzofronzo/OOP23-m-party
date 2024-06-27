@@ -15,6 +15,8 @@ public interface MemorySweep {
      * @return the list of random buttons to be recreated by players
      */
     public Set<Position> getRandomList();
+
+    public void setRandomList();
     
     /**
      * method for knowing wheter a player is done with his try
@@ -29,8 +31,8 @@ public interface MemorySweep {
      */
     public boolean getTurn();
     /**
-     * method to check wheter either player1 or player2 has lost
-     * @return true if either player1 or player2 flase otherwise
+     * method for getting the winner of the game
+     * @return the winner of the game
      */
-    public boolean isOver(Set<Position> player);
+    public Set<Position> getWinner();
 }
