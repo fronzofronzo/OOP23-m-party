@@ -6,6 +6,8 @@ import it.unibo.mparty.model.gameBoard.util.BoardType;
 import it.unibo.mparty.model.minigameHandler.MinigameHandler;
 import it.unibo.mparty.model.minigameHandler.MinigameHandlerImplementation;
 import it.unibo.mparty.model.player.api.Player;
+import it.unibo.mparty.model.shop.api.Shop;
+import it.unibo.mparty.model.shop.impl.ShopImpl;
 import it.unibo.mparty.utilities.Position;
 
 import java.util.List;
@@ -19,7 +21,7 @@ public class GameModelImpl implements GameModel{
 
     private final List<Player> players;
     private final GameBoard board;
-    //private final Shop shop;
+    private final Shop shop = new ShopImpl();
     private int turn = 1 ;
     private int actualPlayerIndex = 0;
     private final MinigameHandler minigameHandler;
