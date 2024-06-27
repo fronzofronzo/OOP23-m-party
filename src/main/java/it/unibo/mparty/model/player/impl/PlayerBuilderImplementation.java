@@ -8,7 +8,6 @@ public class PlayerBuilderImplementation implements PlayerBuilder {
 
     private String username;
     private String character;
-    private Position position;
 
     @Override
     public PlayerBuilder username(String username) {
@@ -25,7 +24,7 @@ public class PlayerBuilderImplementation implements PlayerBuilder {
 
     @Override
     public Player buildPlayer() {
-        if (this.username == null || this.position == null || this.character == null){
+        if (this.username == null  || this.character == null){
             throw new IllegalStateException("Missing fields: cannot create a new Player");
         }
         return new PlayerImplementation(this.username, this.character);
