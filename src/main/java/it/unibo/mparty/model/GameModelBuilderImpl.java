@@ -2,6 +2,8 @@ package it.unibo.mparty.model;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.model.player.api.Player;
+import it.unibo.mparty.model.player.api.PlayerBuilder;
+import it.unibo.mparty.model.player.impl.PlayerBuilderImplementation;
 import it.unibo.mparty.model.player.impl.PlayerImplementation;
 
 import java.util.ArrayList;
@@ -13,14 +15,19 @@ public class GameModelBuilderImpl implements GameModelBuilder{
     private String difficulty;
 
     @Override
-    public void addPlayer(String nickname, String character) {
-        final Player pl = new PlayerImplementation(nickname,character);
+    public GameModelBuilder addPlayer(String nickname, String character) {
+        final PlayerBuilder builder = new PlayerBuilderImplementation();
+        final Player pl = builder.username(nickname)
+                                    .character(character)
+                                    .buildPlayer();
         players.add(pl);
+        return this;
     }
 
     @Override
-    public void difficulty(String difficulty) {
+    public GameModelBuilder difficulty(String difficulty) {
         this.difficulty = difficulty;
+        return this;
     }
 
     @Override
