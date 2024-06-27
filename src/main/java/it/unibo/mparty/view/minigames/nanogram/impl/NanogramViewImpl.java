@@ -16,6 +16,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 
 /**
  * Implementation of the {@link NanogramView} interface representing the view for a Nanogram game.
@@ -105,22 +107,34 @@ public class NanogramViewImpl implements NanogramView {
     public void updateCell(int row, int col, CellState cellState) {
         Pane cell = (Pane) getNodeByRowColumnIndex(row, col, gameGrid);
         if (cell != null) {
+            cell.getChildren().clear();  // Clear previous drawings
             switch (cellState) {
                 case FILLED:
-                    cell.getStyleClass().removeAll("crossed");
-                    cell.getStyleClass().add("filled");
+                    cell.setStyle("-fx-background-color: black;");
                     break;
                 case EMPTY:
-                    cell.getStyleClass().removeAll("filled", "crossed");
+                    cell.setStyle("-fx-background-color: white;");
                     break;
                 case CROSSED:
-                    cell.getStyleClass().removeAll("filled");
-                    cell.getStyleClass().add("crossed");
+                    drawCross(cell);
                     break;
                 default:
                     throw new IllegalArgumentException("Unknown CellState: " + cellState);
             }
+            cell.getStyleClass().add(cellState.toString().toLowerCase());
         }
+    }
+
+    private void drawCross(Pane cell) {
+        double width = cell.getWidth();
+        double height = cell.getHeight();
+        Line line1 = new Line(0, 0, width, height);
+        Line line2 = new Line(0, height, width, 0);
+        line1.setStroke(Color.BLACK);
+        line2.setStroke(Color.BLACK);
+        line1.setStrokeWidth(2);  // Optional: Make the line thicker
+        line2.setStrokeWidth(2);  // Optional: Make the line thicker
+        cell.getChildren().addAll(line1, line2);
     }
 
     private Pane getNodeByRowColumnIndex(int row, int column, GridPane gridPane) {
