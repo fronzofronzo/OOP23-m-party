@@ -1,6 +1,7 @@
 package it.unibo.mparty.controller.minigames.nanogram.impl;
 
 import it.unibo.mparty.controller.minigames.nanogram.api.NanogramController;
+import it.unibo.mparty.model.minigames.nanogram.api.Board;
 import it.unibo.mparty.model.minigames.nanogram.impl.NanogramModelImpl;
 import it.unibo.mparty.model.minigames.nanogram.util.CellState;
 import it.unibo.mparty.model.minigames.nanogram.util.Difficulty;
@@ -31,7 +32,9 @@ public class NanogramControllerImpl implements NanogramController {
     @Override
     public void startGame() {
         this.model.initializeGame(Difficulty.SIMPLE);
-        this.updateView();
+        this.view.setRowHints(model.getRowHints());
+        this.view.setColumnHints(model.getColumnHints());
+        //this.updateView();
     }
 
     @Override
