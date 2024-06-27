@@ -49,4 +49,10 @@ public interface MemoryCardModel {
      * @return set of {@link CardType}
      */
     Set<CardType> guessedCardsType();
+
+    /**
+     * gets number of mistakes made by the player
+     * @return number of mistakes
+     */
+    int getMistakes();
 }

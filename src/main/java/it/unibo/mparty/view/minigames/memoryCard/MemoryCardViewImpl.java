@@ -36,6 +36,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     @Override
     public void showResult(int n) {
         this.textLabel.setText("Il giocatore ha guadagnato " + String.valueOf(n) + " monete");
+        this.controlButton.setDisable(false);
         // this.getController.endMinigame(n)
         this.controlButton.setText("Lascia il minigioco ");
         this.controlButton.setOnAction(e -> {
@@ -49,7 +50,13 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
         bt.setOnAction(this::tryCard);
         bt.setPrefSize(100,100);
         bt.setDisable(true);
+        bt.setStyle("-fx-opacity: 1.0; ");
         this.cardsPane.getChildren().add(bt);
+    }
+
+    @Override
+    public void setMistakesNumber(int n) {
+        this.textLabel.setText("Errori: " + String.valueOf(n));
     }
 
     @FXML
@@ -57,17 +64,17 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
         final Button bt = (Button)event.getSource();
         this.controller.setUpGame();
         bt.setText("Pronto !");
-        bt.setOnAction(e -> this.hideCards() );
+        bt.setOnAction(this::hideCards);
         this.textLabel.setText("Quando si e' pronti, spingere il pulsante 'Pronto' ");
     }
 
-    private void hideCards(){
+    private void hideCards(ActionEvent event){
         this.cardsPane.getChildren().stream().map(e -> (Button)e).forEach(b -> {
             b.setText("");
             b.setDisable(false);
         });
-        this.textLabel.setText("  ");
-
+        ((Button)event.getSource()).setDisable(true);
+        this.textLabel.setText("Errori: 0");
     }
 
     private void tryCard(ActionEvent e){

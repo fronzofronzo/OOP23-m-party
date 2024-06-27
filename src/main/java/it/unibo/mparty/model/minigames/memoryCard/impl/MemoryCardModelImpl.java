@@ -70,4 +70,9 @@ public class MemoryCardModelImpl implements MemoryCardModel {
         return Set.copyOf(guessed);
     }
 
+    @Override
+    public int getMistakes() {
+        return this.mistakesNumber;
+    }
+
 }

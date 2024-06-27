@@ -32,4 +32,10 @@ public interface MemoryCardView extends SceneView {
      */
     void addCard(String text);
 
+    /**
+     * set the mistake number made by the player
+     * @param n number of mistakes
+     */
+    void setMistakesNumber(int n);
+
 }
