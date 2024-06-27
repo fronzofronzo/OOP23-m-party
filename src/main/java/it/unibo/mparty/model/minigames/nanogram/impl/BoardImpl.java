@@ -66,11 +66,13 @@ public class BoardImpl implements Board {
 
             if (count > 0) {
                 hints.add(count);
+            } else if (hints.isEmpty()) {
+                hints.add(0);
             }
 
             hintsList.add(hints);
         }
-
+        System.out.println("hitns:" + hintsList);
         return hintsList;
     }
 }
