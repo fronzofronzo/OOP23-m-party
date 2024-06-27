@@ -39,9 +39,16 @@ public interface MemorySweep {
      * @return true if it is the turn of one player, false if it is the turn of the other player
      */
     public boolean getTurn();
+
     /**
      * method for getting the winner of the game
      * @return the winner of the game
      */
     public Set<Position> getWinner();
+
+    /**
+     * method for getting the size of the list that needs to be recreated
+     * @return the size of the list
+     */
+    public int getCounter();
 }

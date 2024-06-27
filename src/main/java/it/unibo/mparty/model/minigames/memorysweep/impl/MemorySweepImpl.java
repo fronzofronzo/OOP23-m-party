@@ -100,5 +100,10 @@ public class MemorySweepImpl implements MemorySweep{
         this.turn = !this.turn;
     }
 
+    @Override
+    public int getCounter() {
+        return this.counter;
+    }
+
     
 }
