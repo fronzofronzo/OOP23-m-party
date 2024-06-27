@@ -18,5 +18,10 @@ public abstract class AbstractSceneView implements SceneView{
         this.mainController = controller;
     }
 
+    @Override
+    public GameController getMainController(){
+        return this.mainController;
+    }
+
 
 }
