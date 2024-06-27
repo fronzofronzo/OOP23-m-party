@@ -19,6 +19,7 @@ public class MemorySweepImpl implements MemorySweep{
     private Random random;
     private int side;
     private boolean turn = true;
+    private Set<Position> winner;
 
     public MemorySweepImpl(int side){
         this.random = new Random();
@@ -29,16 +30,15 @@ public class MemorySweepImpl implements MemorySweep{
         this.counter = 3;
     }
 
-    /*
-     * MIGLIORA CON STREAM FUNZIONALI
-     */
     @Override
-    public Set<Position> getRandomList() {
+    public void setRandomList() {
         this.setCounter();
         this.randomList.clear();
-        for(var i = 0; i < this.counter; i++){
-            this.randomList.add(new Position(random.nextInt(this.side),random.nextInt(this.side)));
-        }
+        Stream.iterate(0, i -> i + 1).limit(this.counter).map(i -> this.randomList.add(getNewPosition()));
+    }
+
+    @Override
+    public Set<Position> getRandomList() {
         return this.randomList;
     }
 
@@ -57,6 +57,7 @@ public class MemorySweepImpl implements MemorySweep{
                 }
                 return HitType.RIGHT_CHOICE;
             }
+            this.winner = player2;
             return HitType.LOSS;//player 1 ha perso,ha vinto player 2
         }
         
@@ -69,6 +70,7 @@ public class MemorySweepImpl implements MemorySweep{
             }
             return HitType.RIGHT_CHOICE;
         }
+        this.winner = player1;
         return HitType.LOSS;//player 2 ha perso,ha vinto player 1
     }
 
@@ -77,14 +79,23 @@ public class MemorySweepImpl implements MemorySweep{
         return this.turn;
     }
 
-    @Override
-    public boolean isOver(Set<Position> player) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isOver'");
-    }
+    
 
     private void setCounter(){
         this.counter++;
+    }
+
+    @Override
+    public Set<Position> getWinner() {
+        return this.winner;
+    }
+
+    private Position getNewPosition(){
+        Position p;
+        do {
+            p = new Position(random.nextInt(this.side),random.nextInt(this.side));
+        }while(this.getRandomList().contains(p));
+        return p;
     }
 
     
