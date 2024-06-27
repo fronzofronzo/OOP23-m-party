@@ -18,7 +18,7 @@ public enum CellState {
     /**
      * The cell is marked, possibly as a tentative or temporary indication.
      */
-    MARKED,
+    CROSSED,
 
     /**
      * The cell is marked as an error, indicating a mistake in the player's guess.

@@ -20,9 +20,9 @@ public class BoardFactoryImpl implements BoardFactory {
         int filledCellsCount = (int) Math.round(totalCells * (fillPercentage / 100.0));
 
         positions.subList(0, filledCellsCount).forEach(pos -> grid.put(pos, CellState.FILLED));
-        positions.subList(filledCellsCount, totalCells).forEach(pos -> grid.put(pos, CellState.MARKED));
+        positions.subList(filledCellsCount, totalCells).forEach(pos -> grid.put(pos, CellState.CROSSED));
 
-        grid.forEach((pos, state) -> showGrid.put(pos, CellState.MARKED));
+        grid.forEach((pos, state) -> showGrid.put(pos, CellState.CROSSED));
 
         return new BoardImpl(grid, showGrid, size);
     }
