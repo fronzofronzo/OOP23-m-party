@@ -7,6 +7,11 @@ import it.unibo.mparty.utilities.Position;
 
 import java.util.Arrays;
 
+/**
+ * Class {@code PlayerImplementation} models the player. Each player has username,
+ * character, position a player bag with all the items and a dice. Also, the player
+ * has a certain amount of coins and stars.
+ */
 public class PlayerImplementation implements Player{
 
     private static final int NUM_ITEMS = 3;
@@ -19,9 +24,17 @@ public class PlayerImplementation implements Player{
     private int numCoins;
     private int numStars;
 
+    /**
+     * Creates a new {@code Player} with username and {@link Character} set
+     * @param username of player
+     * @param character of player
+     */
     public PlayerImplementation(String username, String character){
         this.username = username;
-        this.character = Arrays.stream(Character.values()).filter(c -> c.getName().equals(character)).findAny().get();
+        this.character = Arrays.stream(Character.values())
+                .filter(c -> c.getName().equals(character))
+                .findAny()
+                .get();
         this.playerBag = new PlayerBagImplementation(NUM_ITEMS);
         this.dice = new DiceImpl();
         this.numCoins = 0;
