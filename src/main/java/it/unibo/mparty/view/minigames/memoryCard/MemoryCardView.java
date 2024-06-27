@@ -6,12 +6,12 @@ import javafx.scene.control.Button;
 public interface MemoryCardView extends SceneView {
 
     /**
-     * set if the button can be used or not
-     * @param index of the button to set
-     * @param status true if button is to set enabled, false
-     *                  if button is to set not enabled
+     * set if the selected card can be clicked or not
+     * @param index of the card to select
+     * @param status true if it's clickable, false
+     *              otherwise
      */
-    void setButtonStatus(int index, boolean status);
+    void setCardStatus(int index, boolean status);
 
     /**
      * Set the type of card
