@@ -65,7 +65,7 @@ public class NanogramModelImpl implements NanogramModel {
 
     private boolean isMoveValid(int row, int column, CellState state) {
         CellState currentCellState = this.grid.get(new Position(row, column));
-        return (currentCellState == CellState.EMPTY || currentCellState == CellState.MARKED) && state == CellState.FILLED;
+        return (currentCellState == CellState.EMPTY || currentCellState == CellState.CROSSED) && state == CellState.FILLED;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class NanogramModelImpl implements NanogramModel {
     @Override
     public boolean isGameComplete() {
         for (Map.Entry<Position, CellState> entry : this.grid.entrySet()) {
-            if (entry.getValue() == CellState.EMPTY || entry.getValue() == CellState.MARKED) {
+            if (entry.getValue() == CellState.EMPTY || entry.getValue() == CellState.CROSSED) {
                 return false;
             }
         }
