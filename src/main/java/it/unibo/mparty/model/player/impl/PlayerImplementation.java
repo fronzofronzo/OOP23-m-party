@@ -19,7 +19,7 @@ public class PlayerImplementation implements Player{
     private int numCoins;
     private int numStars;
 
-    public PlayerImplementation(String username, String character){
+    public PlayerImplementation(String username, String character, Position position){
         this.username = username;
         this.character = Arrays.stream(Character.values()).filter(c -> c.getName().equals(character)).findAny().get();
         this.playerBag = new PlayerBagImplementation(NUM_ITEMS);

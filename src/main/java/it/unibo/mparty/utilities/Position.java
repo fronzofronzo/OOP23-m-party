@@ -9,4 +9,8 @@ public record Position(int x, int y) {
     public int getY(){
         return this.y;
     }
+
+    public Position getStandardPosition(){
+        return new Position(0,0);
+    }
 }
