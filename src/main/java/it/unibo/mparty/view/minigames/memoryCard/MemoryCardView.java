@@ -14,11 +14,11 @@ public interface MemoryCardView extends SceneView {
     void setButtonStatus(int index, boolean status);
 
     /**
-     * Set text string to a certain button
-     * @param index of the button
-     * @param text to set
+     * Set the type of card
+     * @param index of card
+     * @param type to set
      */
-    void setTextButton(int index, String text);
+    void setCardType(int index, String type);
 
     /**
      * show the results of the game
@@ -27,9 +27,9 @@ public interface MemoryCardView extends SceneView {
     void showResult(int n);
 
     /**
-     * Add a {@link Button} to the central pane
-     * @param text to set on the button
+     * Add a card to the game table
+     * @param text to write on the card
      */
-    void addButton(String text);
+    void addCard(String text);
 
 }

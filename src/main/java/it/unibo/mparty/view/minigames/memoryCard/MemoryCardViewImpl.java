@@ -28,9 +28,9 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     }
 
     @Override
-    public void setTextButton(int index, String text) {
+    public void setCardType(int index, String type) {
         final Button bt = (Button)this.cardsPane.getChildren().get(index);
-        bt.setText(text);
+        bt.setText(type);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     }
 
     @Override
-    public void addButton(String text) {
+    public void addCard(String text) {
         final Button bt = new Button(text);
         bt.setOnAction(this::tryCard);
         bt.setPrefSize(100,100);
