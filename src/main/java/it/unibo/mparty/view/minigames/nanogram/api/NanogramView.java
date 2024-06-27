@@ -6,6 +6,8 @@ import it.unibo.mparty.model.minigames.nanogram.util.StatusMessage;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.minigames.MinigameView;
 
+import java.util.List;
+
 /**
  * Interface representing the view for a Nanogram game.
  */
