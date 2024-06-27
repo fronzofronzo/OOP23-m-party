@@ -7,7 +7,7 @@ import it.unibo.mparty.utilities.*;
 public interface MemorySweep {
 
     enum HitType{
-        FIRST,SECOND
+        RIGHT_CHOICE,TURN_END,LOSS
     }
 
     /**
@@ -32,5 +32,5 @@ public interface MemorySweep {
      * method to check wheter either player1 or player2 has lost
      * @return true if either player1 or player2 flase otherwise
      */
-    public boolean isOver();
+    public boolean isOver(Set<Position> player);
 }
