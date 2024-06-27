@@ -56,7 +56,10 @@ public class MemorySweepImpl implements MemorySweep{
     public Set<Position> getWinner() {
         return this.winner;
     }
-
+    /**
+     * method for getting a new position which is not already included in the randomList variable
+     * @return the new position 
+     */
     private Position getNewPosition(){
         Position p;
         do {
@@ -64,11 +67,18 @@ public class MemorySweepImpl implements MemorySweep{
         }while(this.getRandomList().contains(p));
         return p;
     }
-
+    /**
+     * method for increasing the list of buttons that will be recreated
+     */
     private void setCounter(){
         this.counter++;
     }
-
+    /**
+     * the actual method that manages the players turns
+     * @param player the set of the player
+     * @param p the position clicked by that player
+     * @return wheter his guess was right(in this case returns wheter the guess is over or not) or wrong
+     */
     private HitType playerTurn(Set<Position> player,Position p){
         if(this.randomList.contains(p)){
             player.add(p);
@@ -83,6 +93,9 @@ public class MemorySweepImpl implements MemorySweep{
         return HitType.LOSS;//player 1 ha perso,ha vinto player 2
     }
 
+    /**
+     * changes the turn
+     */
     private void changeTurn(){
         this.turn = !this.turn;
     }
