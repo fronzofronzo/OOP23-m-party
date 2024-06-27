@@ -1,19 +1,27 @@
 package it.unibo.mparty.model.minigameHandler;
 
+import it.unibo.mparty.model.player.api.Player;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public class MinigameHandlerImplementation implements MinigameHandler{
 
     private String actualMinigame = null;
+    private final List<Player> players;
+
+    public MinigameHandlerImplementation(){
+        this.players = Collections.emptyList();
+    }
 
     @Override
-    public void startMinigame() throws Exception {
+    public void startMinigame(List<Player> players) throws Exception {
         this.actualMinigame = generateRandomMinigame();
     }
 
