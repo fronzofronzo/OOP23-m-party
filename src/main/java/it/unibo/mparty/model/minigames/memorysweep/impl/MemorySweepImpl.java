@@ -44,31 +44,7 @@ public class MemorySweepImpl implements MemorySweep{
     
     @Override
     public HitType hit(Position p) {
-        if(this.getTurn()){
-            if(this.randomList.contains(p)){
-                this.player1.add(p);
-                if(this.player1.size() == this.randomList.size()){
-                    this.turn = false;
-                    this.player1.clear();
-                    return HitType.TURN_END;//player 1 ha passato il turno tocca al player 2
-                }
-                return HitType.RIGHT_CHOICE;
-            }
-            this.winner = player2;
-            return HitType.LOSS;//player 1 ha perso,ha vinto player 2
-        }
-        
-        if(this.randomList.contains(p)){
-            this.player2.add(p);
-            if(this.player2.size() == this.randomList.size()){
-                this.turn = true;
-                this.player2.clear();
-                return HitType.TURN_END;//player 2 ha passato il turno tocca al player 1
-            }
-            return HitType.RIGHT_CHOICE;
-        }
-        this.winner = player1;
-        return HitType.LOSS;//player 2 ha perso,ha vinto player 1
+        return this.getTurn() ? this.playerTurn(player1, p) : this.playerTurn(player2, p);
     }
 
     @Override
