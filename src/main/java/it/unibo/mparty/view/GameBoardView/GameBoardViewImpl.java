@@ -9,4 +9,9 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
 
     @FXML
     private GridPane board;
+
+    @Override
+    public void drawBoard() {
+
+    }
 }
