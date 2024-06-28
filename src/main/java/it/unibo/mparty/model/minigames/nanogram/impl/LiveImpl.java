@@ -29,7 +29,7 @@ public class LiveImpl implements Live {
     }
 
     @Override
-    public void update(int live) {
+    public void update(final int live) {
         this.lives = live;
     }
 
