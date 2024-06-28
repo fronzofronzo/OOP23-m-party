@@ -17,7 +17,7 @@ public class LuckyDice extends AbstractItem{
     }
 
     @Override
-    public String getDescrition() {
+    public String getDescription() {
         return "Il dado ha solo numeri da 4 a 6";
     }
 

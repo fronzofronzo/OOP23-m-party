@@ -17,7 +17,7 @@ public class GoldenPipe extends AbstractItem{
     }
 
     @Override
-    public String getDescrition() {
+    public String getDescription() {
         return "Vieni teletrasportato nella casella prima della stella";
     }
 
