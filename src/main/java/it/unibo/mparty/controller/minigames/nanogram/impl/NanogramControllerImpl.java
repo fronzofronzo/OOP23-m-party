@@ -1,12 +1,10 @@
 package it.unibo.mparty.controller.minigames.nanogram.impl;
 
 import it.unibo.mparty.controller.minigames.nanogram.api.NanogramController;
-import it.unibo.mparty.model.minigames.nanogram.api.Board;
 import it.unibo.mparty.model.minigames.nanogram.impl.NanogramModelImpl;
 import it.unibo.mparty.model.minigames.nanogram.util.CellState;
 import it.unibo.mparty.model.minigames.nanogram.util.Difficulty;
-import it.unibo.mparty.model.minigames.nanogram.util.StatusMessage;
-import it.unibo.mparty.utilities.Position;
+import it.unibo.mparty.view.minigames.nanogram.util.StatusMessage;
 import it.unibo.mparty.view.minigames.nanogram.impl.NanogramViewImpl;
 
 /**
@@ -32,36 +30,32 @@ public class NanogramControllerImpl implements NanogramController {
     @Override
     public void startGame() {
         this.model.initializeGame(Difficulty.SIMPLE);
-        this.view.setRowHints(model.getRowHints());
-        this.view.setColumnHints(model.getColumnHints());
-        //this.updateView();
+        this.view.setSolutionBoard(this.model.getBoard());
+        this.view.setRowHints(this.model.getRowHints());
+        this.view.setColumnHints(this.model.getColumnHints());
     }
 
     @Override
-    public void getClick(Position click) {
-        CellState currentState = model.getCellState(click.getX(), click.getY());
-        CellState newState = currentState == CellState.EMPTY ? CellState.FILLED : CellState.EMPTY;
-        model.updateCellState(click.getX(), click.getY(), newState);
-        updateView();
+    public void updateModel(int row, int col, CellState state) {
+        this.model.updateCellState(row, col, state);
+        updateView(row, col, state);
     }
 
     @Override
-    public void updateModel() {
+    public void updateView(int row, int col, CellState state) {
+        this.view.updateCell(row, col, this.model.getCellState(row, col));
 
-    }
-
-    @Override
-    public void updateView() {
-        for (int row = 0; row < model.getBoard().getGridSize(); row++) {
-            for (int col = 0; col < model.getBoard().getGridSize(); col++) {
-                view.updateCell(row, col, model.getCellState(row, col));
-            }
+        this.view.updateLives(this.model.getLives());
+        this.view.clearMessageLabel();
+        if (!this.model.isMoveValid(row, col, state)) {
+            this.view.displayStatusMessage(StatusMessage.ERROR);
         }
-        view.updateLives(model.getLives());
-        if (!model.isGameOver()) {
-            view.displayStatusMessage(StatusMessage.WIN);
-        } else if (model.getLives() <= 0) {
-            view.displayStatusMessage(StatusMessage.LOSE);
+        if (this.model.isGameOver()) {
+            this.view.disableAllCells();
+            this.view.displayStatusMessage(StatusMessage.LOSE);
+        } else if (this.model.isGameComplete()) {
+            this.view.fillRemainingCellsWithCrosses();
+            this.view.displayStatusMessage(StatusMessage.WIN);
         }
     }
 }

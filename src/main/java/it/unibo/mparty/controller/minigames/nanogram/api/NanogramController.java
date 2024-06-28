@@ -1,6 +1,6 @@
 package it.unibo.mparty.controller.minigames.nanogram.api;
 
-import it.unibo.mparty.utilities.Position;
+import it.unibo.mparty.model.minigames.nanogram.util.CellState;
 
 /**
  * Interface representing the controller for a Nanogram game.
@@ -15,22 +15,22 @@ public interface NanogramController {
     void startGame();
 
     /**
-     * Handles a click input from the user.
-     * This method processes the user's click and updates the model accordingly.
+     * Updates the model with the specified cell state at the given position.
+     * This method is called when a cell in the view is clicked and needs to be updated in the model.
      *
-     * @param click the position of the click in the grid.
+     * @param row   the row index of the cell to update
+     * @param col   the column index of the cell to update
+     * @param state the new state of the cell (e.g., FILLED, CROSSED)
      */
-    void getClick(Position click);
+    void updateModel(int row, int col, CellState state);
 
     /**
-     * Updates the model based on the current game state.
-     * This method updates the model with any changes resulting from user actions or game logic.
+     * Updates the view with the specified cell state at the given position.
+     * This method is called to reflect the current state of the model in the view.
+     *
+     * @param row   the row index of the cell to update
+     * @param col   the column index of the cell to update
+     * @param state the new state of the cell (e.g., FILLED, CROSSED)
      */
-    void updateModel();
-
-    /**
-     * Updates the view to reflect the current state of the model.
-     * This method ensures that the view displays the latest information from the model.
-     */
-    void updateView();
+    void updateView(int row, int col, CellState state);
 }
