@@ -6,22 +6,12 @@ package it.unibo.mparty.model.minigames.nanogram.util;
 public enum CellState {
 
     /**
-     * The cell is filled.
+     * Represents a filled cell in the Nanogram game.
      */
     FILLED,
 
     /**
-     * The cell is empty.
-     */
-    EMPTY,
-
-    /**
-     * The cell is marked, possibly as a tentative or temporary indication.
+     * Represents a crossed cell in the Nanogram game, used as a tentative or temporary mark.
      */
     CROSSED,
-
-    /**
-     * The cell is marked as an error, indicating a mistake in the player's guess.
-     */
-    ERROR
 }
