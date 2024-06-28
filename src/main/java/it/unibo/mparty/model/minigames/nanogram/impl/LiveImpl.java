@@ -8,21 +8,21 @@ public class LiveImpl implements Live {
 
     @Override
     public int getLive() {
-        return lives;
+        return this.lives;
     }
 
     @Override
     public void reset() {
-        lives = INITIAL_LIVES;
+        this.lives = INITIAL_LIVES;
     }
 
     @Override
-    public void decrease() {
-        lives--;
+    public void update(int live) {
+        this.lives = live;
     }
 
     @Override
     public boolean isDeath() {
-        return lives <= 0;
+        return this.lives <= 0;
     }
 }
