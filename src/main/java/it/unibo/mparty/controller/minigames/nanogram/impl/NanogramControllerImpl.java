@@ -10,6 +10,11 @@ import it.unibo.mparty.view.minigames.nanogram.impl.NanogramViewImpl;
 /**
  * Implementation of the {@link NanogramController} interface.
  * This controller handles the interactions between the Nanogram model and view.
+ *
+ * <p>This class is designed for extension (subclassing). Subclasses may override
+ * the methods {@link #startGame()}, {@link #updateModel(int, int, CellState)}, and
+ * {@link #updateView(int, int, CellState)} to provide additional behavior or
+ * customized functionality.</p>
  */
 public class NanogramControllerImpl implements NanogramController {
 
