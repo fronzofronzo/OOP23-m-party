@@ -10,9 +10,15 @@ public enum StatusMessage {
      */
     ERROR("Cella errata"),
 
-    WIN("You won!"),
+    /**
+     * Message indicating the player has won the game.
+     */
+    WIN("Hai vinto!"),
 
-    LOSE("Game Over...");
+    /**
+     * Message indicating the game is over.
+     */
+    LOSE("Fine del gioco...");
 
     private final String message;
 
@@ -21,10 +27,15 @@ public enum StatusMessage {
      *
      * @param message the message associated with the status.
      */
-    StatusMessage(String message) {
+    StatusMessage(final String message) {
         this.message = message;
     }
 
+    /**
+     * Returns the string representation of the status message.
+     *
+     * @return the string representation of the status message.
+     */
     @Override
     public String toString() {
         return "*" + this.message;
