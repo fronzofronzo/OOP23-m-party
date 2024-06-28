@@ -1,12 +1,11 @@
 .cell {
-    -fx-border-color: black;
-    -fx-border-width: 1;
-}
-
-.filled {
     -fx-background-color: black;
 }
 
-.crossed {
-    /* You can add any additional styling for crossed cells if needed */
+.cell.filled {
+    -fx-background-color: black;
+}
+
+.cell.crossed {
+    -fx-background-color: black;
 }
