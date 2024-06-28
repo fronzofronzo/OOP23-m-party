@@ -20,27 +20,12 @@ public interface Board {
     Map<Position, CellState> getGrid();
 
     /**
-     * Gets the size of the grid.
-     *
-     * @return the size of the grid.
-     */
-    int getGridSize();
-
-    /**
      * Gets the grid as it is currently shown to the player, with cell states.
      *
      * @return a map representing the current visible grid, where the keys are positions of type {@link Position}
      *         and the values are the states of the cells of type {@link CellState}.
      */
     Map<Position, CellState> getShowGrid();
-
-    /**
-     * Gets the hints for the rows or columns of the grid.
-     *
-     * @return a list of lists of integers representing the hints for either rows or columns.
-     *         Each inner list contains the hints for a single row or column based on game logic.
-     */
-    List<Integer> getHints();
 
     /**
      * Gets the state of a specific cell in the grid.
