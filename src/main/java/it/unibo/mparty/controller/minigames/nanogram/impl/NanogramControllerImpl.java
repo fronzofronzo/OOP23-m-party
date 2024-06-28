@@ -32,6 +32,9 @@ public class NanogramControllerImpl implements NanogramController {
         this.model = new NanogramModelImpl();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void startGame() {
         this.model.initializeGame(Difficulty.SIMPLE);
@@ -40,12 +43,18 @@ public class NanogramControllerImpl implements NanogramController {
         this.view.setColumnHints(this.model.getColumnHints());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateModel(final int row, final int col, final CellState state) {
         this.model.updateCellState(row, col, state);
         updateView(row, col, state);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateView(final int row, final int col, final CellState state) {
         this.view.updateCell(row, col, this.model.getCellState(row, col));

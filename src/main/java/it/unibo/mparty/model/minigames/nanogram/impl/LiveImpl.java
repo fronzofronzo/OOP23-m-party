@@ -18,21 +18,33 @@ public class LiveImpl implements Live {
         this.lives = INITIAL_LIVES;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getLive() {
         return this.lives;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void reset() {
         this.lives = INITIAL_LIVES;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(final int live) {
         this.lives = live;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isDeath() {
         return this.lives <= 0;

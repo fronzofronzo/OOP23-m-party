@@ -9,37 +9,41 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * Implementation of the {@link BoardFactory} interface for creating Nanogram boards.
+ * This class provides methods to generate simple and hard boards based on specified parameters.
+ */
 public class BoardFactoryImpl implements BoardFactory {
 
     private final Random random = new Random();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Board createSimpleBoard(int size, int fillPercentage) {
-        Map<Position, CellState> grid = new HashMap<>();
-        Map<Position, CellState> showGrid = new HashMap<>();
+    public Board createSimpleBoard(final int size, final int fillPercentage) {
+        final Map<Position, CellState> grid = new HashMap<>();
 
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 Position position = new Position(row, col);
                 CellState state = random.nextInt(100) < fillPercentage ? CellState.FILLED : CellState.CROSSED;
                 grid.put(position, state);
-                showGrid.put(position, CellState.CROSSED);
             }
         }
-
-        System.out.println("Grid: " + grid);
-        System.out.println("Show grid: " + showGrid);
-        return new BoardImpl(grid, showGrid, size);
+        return new BoardImpl(grid, size);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Board createHardBoard(int size, int fillPercentage, int showPercentage) {
-        Board simpleBoard = createSimpleBoard(size, fillPercentage);
-        Map<Position, CellState> grid = new HashMap<>(simpleBoard.getGrid());
-        Map<Position, CellState> showGrid = new HashMap<>(simpleBoard.getShowGrid());
+    public Board createHardBoard(final int size, final int fillPercentage, final int showPercentage) {
+        final Board simpleBoard = createSimpleBoard(size, fillPercentage);
+        final Map<Position, CellState> grid = new HashMap<>(simpleBoard.getGrid());
+        final Map<Position, CellState> showGrid = new HashMap<>(simpleBoard.getShowGrid());
 
-        int totalCells = size * size;
-        int filledCellsCount = countFilledCells(grid);
+        final int totalCells = size * size;
         int showCellsCount = (int) Math.round(totalCells * (showPercentage / 100.0));
 
         for (Map.Entry<Position, CellState> entry : grid.entrySet()) {
@@ -50,9 +54,5 @@ public class BoardFactoryImpl implements BoardFactory {
         }
 
         return new BoardImpl(grid, showGrid, size);
-    }
-
-    private int countFilledCells(Map<Position, CellState> grid) {
-        return (int) grid.values().stream().filter(state -> state == CellState.FILLED).count();
     }
 }

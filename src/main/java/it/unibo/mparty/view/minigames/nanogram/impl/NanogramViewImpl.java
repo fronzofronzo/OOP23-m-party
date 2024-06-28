@@ -12,8 +12,10 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
@@ -48,16 +50,15 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
 
     private final NanogramController controller = new NanogramControllerImpl(this);
 
-    private Board solutionBoard;
-
     private CellState selectedState = CellState.FILLED;
 
     private boolean error = false;
 
+    private Board solutionBoard;
+
     @FXML
     private void initialize() {
         this.controller.startGame();
-
         this.updateLives(3);
 
         ToggleGroup toggleGroup = new ToggleGroup();
@@ -73,11 +74,12 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     }
 
     private void initGrid() {
-        for (int row = 0; row < this.gameGrid.getRowCount(); row++) {
-            for (int col = 0; col < this.gameGrid.getColumnCount(); col++) {
+        //int size = this.solutionBoard.getSize();
+        for (int row = 0; row < gameGrid.getRowCount(); row++) {
+            for (int col = 0; col < gameGrid.getColumnCount(); col++) {
                 final int finalRow = row;
                 final int finalCol = col;
-                Pane cell = new Pane();
+                final Pane cell = new Pane();
                 cell.getStyleClass().add("cell");
                 cell.setOnMouseClicked(event -> handleCellClick(finalRow, finalCol));
                 this.gameGrid.add(cell, finalCol, finalRow);
@@ -85,16 +87,16 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         }
     }
 
-    private void setHints(GridPane grid, List<List<Integer>> hintsList, boolean isRowHints) {
+    private void setHints(final GridPane grid, final List<List<Integer>> hintsList, final boolean isRowHints) {
         grid.getChildren().clear();
-        int numLines = hintsList.size();
+        final int numLines = hintsList.size();
 
         for (int line = 0; line < numLines; line++) {
-            List<Integer> hints = hintsList.get(line);
-            int numHints = hints.size();
+            final List<Integer> hints = hintsList.get(line);
+            final int numHints = hints.size();
 
             for (int i = 0; i < numHints; i++) {
-                Label hintLabel = new Label(String.valueOf(hints.get(i)));
+                final Label hintLabel = new Label(String.valueOf(hints.get(i)));
                 hintLabel.getStyleClass().add("hint-label");
                 hintLabel.setStyle("-fx-font-size: 24pt;");
                 hintLabel.setAlignment(Pos.CENTER);
@@ -109,21 +111,27 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setRowHints(List<List<Integer>> rowHints) {
-        setHints(this.rowHints, rowHints, true);
+    public void setRowHints(final List<List<Integer>> rowHints) {
+        this.setHints(this.rowHints, rowHints, true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setColumnHints(List<List<Integer>> columnHints) {
-        setHints(this.columnHints, columnHints, false);
+    public void setColumnHints(final List<List<Integer>> columnHints) {
+        this.setHints(this.columnHints, columnHints, false);
     }
 
-    private void handleCellClick(int row, int col) {
-        Pane cell = getNodeByRowColumnIndex(row, col, this.gameGrid);
+    private void handleCellClick(final int row, final int col) {
+        final Pane cell = getNodeByRowColumnIndex(row, col, this.gameGrid);
         this.error = false;
         if (cell != null && !cell.getStyleClass().contains("filled") && !cell.getStyleClass().contains("crossed")) {
-            CellState correctState = this.solutionBoard.getCellState(row, col);
+            final CellState correctState = this.solutionBoard.getCellState(row, col);
             if (!this.selectedState.equals(correctState)) {
                 this.error = true;
             }
@@ -131,14 +139,20 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setSolutionBoard(Board board) {
+    public void setSolutionBoard(final Board board) {
         this.solutionBoard = board;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void updateCell(int row, int col, CellState cellState) {
-        Pane cell = (Pane) getNodeByRowColumnIndex(row, col, this.gameGrid);
+    public void updateCell(final int row, final int col, final CellState cellState) {
+        final Pane cell = getNodeByRowColumnIndex(row, col, this.gameGrid);
         if (cell != null) {
             cell.getChildren().clear();
 
@@ -147,7 +161,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
                     cell.setStyle(this.error ? "-fx-background-color: red;" : "-fx-background-color: black;");
                     break;
                 case CROSSED:
-                    drawCross(cell, this.error ? Color.RED : Color.BLACK);
+                    this.drawCross(cell, this.error ? Color.RED : Color.BLACK);
                     break;
                 default:
                     throw new IllegalArgumentException("Unknown CellState: " + cellState);
@@ -156,7 +170,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         }
     }
 
-    private void drawCross(Pane cell, Color color) {
+    private void drawCross(final Pane cell, final Color color) {
         double width = cell.getWidth();
         double height = cell.getHeight();
         Line line1 = new Line(0, 0, width, height);
@@ -168,7 +182,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         cell.getChildren().addAll(line1, line2);
     }
 
-    private Pane getNodeByRowColumnIndex(int row, int column, GridPane gridPane) {
+    private Pane getNodeByRowColumnIndex(final int row, final int column, final GridPane gridPane) {
         for (javafx.scene.Node node : gridPane.getChildren()) {
             if (GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) == row &&
                     GridPane.getColumnIndex(node) != null && GridPane.getColumnIndex(node) == column) {
@@ -178,36 +192,49 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void updateLives(int actualLives) {
-        String LIVES = "Lives: ";
+    public void updateLives(final int actualLives) {
+        final String LIVES = "Vite: ";
         this.livesLabel.setText(LIVES + actualLives);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void clearMessageLabel() {
         this.messageLabel.setText(" ");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void displayStatusMessage(StatusMessage message) {
+    public void displayStatusMessage(final StatusMessage message) {
         this.messageLabel.setText(message.toString());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void disableAllCells() {
-        for (javafx.scene.Node node : this.gameGrid.getChildren()) {
-            if (node instanceof Pane) {
-                node.setDisable(true);
-            }
-        }
+        this.gameGrid.getChildren().stream()
+                .filter(node -> node instanceof Pane)
+                .forEach(node -> node.setDisable(true));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void fillRemainingCellsWithCrosses() {
         for (int row = 0; row < this.gameGrid.getRowCount(); row++) {
             for (int col = 0; col < this.gameGrid.getColumnCount(); col++) {
-                Pane cell = getNodeByRowColumnIndex(row, col, this.gameGrid);
+                final Pane cell = getNodeByRowColumnIndex(row, col, this.gameGrid);
                 if (cell != null && !cell.getStyleClass().contains("filled") && !cell.getStyleClass().contains("crossed")) {
                     updateCell(row, col, CellState.CROSSED);
                 }

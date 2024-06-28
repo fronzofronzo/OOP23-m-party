@@ -16,7 +16,7 @@ public interface NanogramModel {
      *
      * @param difficulty the difficulty level to set up the game.
      */
-    void initializeGame(Difficulty difficulty);
+    void initializeGame(final Difficulty difficulty);
 
     /**
      * Gets the state of a specific cell in the grid.
@@ -25,7 +25,7 @@ public interface NanogramModel {
      * @param column the column index of the cell.
      * @return the current state of the cell at the specified position.
      */
-    CellState getCellState(int row, int column);
+    CellState getCellState(final int row, final int column);
 
     /**
      * Gets the current board of the game.
@@ -48,14 +48,14 @@ public interface NanogramModel {
      * @param column the column index of the cell.
      * @param state the new state to set for the cell.
      */
-    void updateCellState(int row, int column, CellState state);
+    void updateCellState(final int row, final int column, final CellState state);
 
     /**
      * Updates the number of lives remaining in the game.
      *
      * @param lives the new number of lives.
      */
-    void updateLives(int lives);
+    void updateLives(final int lives);
 
     /**
      * Gets the list of hints for each row of the grid.
@@ -79,7 +79,7 @@ public interface NanogramModel {
      * @param actualState the state to be validated.
      * @return true if the move is valid, false otherwise.
      */
-    boolean isMoveValid(int row, int column, CellState actualState);
+    boolean isMoveValid(final int row, final int column, final CellState actualState);
 
     /**
      * Checks if the game is complete.
