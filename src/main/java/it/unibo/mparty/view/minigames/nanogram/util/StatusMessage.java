@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.nanogram.util;
+package it.unibo.mparty.view.minigames.nanogram.util;
 
 /**
  * Enum representing various status messages for a Nanogram game.
@@ -14,14 +14,14 @@ public enum StatusMessage {
 
     LOSE("Game Over...");
 
-    private String message;
+    private final String message;
 
     /**
      * Constructs a status message with the specified message.
      *
      * @param message the message associated with the status.
      */
-    private StatusMessage(String message) {
+    StatusMessage(String message) {
         this.message = message;
     }
 
