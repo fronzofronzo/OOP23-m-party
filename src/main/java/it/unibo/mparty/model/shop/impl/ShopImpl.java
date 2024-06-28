@@ -23,11 +23,13 @@ public class ShopImpl implements Shop {
     }
 
     @Override
-    public void buyItem(Player player, Item item) {
+    public boolean buyItem(Player player, Item item) {
         if (canAfford(player, item) && !player.getPlayerBag().isFull()) {
             player.removeCoins(item.getCost());
             player.getPlayerBag().addItem(item);
+            return true;
         }
+        return false;
     }
 
     private boolean canAfford (Player player, Item item) {

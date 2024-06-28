@@ -8,9 +8,10 @@ import it.unibo.mparty.model.player.api.Player;
  */
 public interface Shop {
     /**
-     * buy an item from the shop
+     * Make the player buy the item if he can
      * @param player the player who is buying the item
-     * @param item the name of the item 
+     * @param item the item to buy
+     * @return true if the player can buy the item or false otherwise
      */
-    void buyItem(Player player, Item item);
+    boolean buyItem(Player player, Item item);
 }
