@@ -22,7 +22,7 @@ public class NanogramControllerImpl implements NanogramController {
      *
      * @param view the view for the Nanogram game.
      */
-    public NanogramControllerImpl(NanogramViewImpl view) {
+    public NanogramControllerImpl(final NanogramViewImpl view) {
         this.view = view;
         this.model = new NanogramModelImpl();
     }
@@ -36,13 +36,13 @@ public class NanogramControllerImpl implements NanogramController {
     }
 
     @Override
-    public void updateModel(int row, int col, CellState state) {
+    public void updateModel(final int row, final int col, final CellState state) {
         this.model.updateCellState(row, col, state);
         updateView(row, col, state);
     }
 
     @Override
-    public void updateView(int row, int col, CellState state) {
+    public void updateView(final int row, final int col, final CellState state) {
         this.view.updateCell(row, col, this.model.getCellState(row, col));
 
         this.view.updateLives(this.model.getLives());
