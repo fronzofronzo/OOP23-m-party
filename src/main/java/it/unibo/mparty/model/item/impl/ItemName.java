@@ -4,9 +4,19 @@ package it.unibo.mparty.model.item.impl;
  * enum of Item
  */
 public enum ItemName {
-    DADO_MALEDETTO,
-    DADO_FORTUNATO,
-    TUBO_DORATO,
-    CAMPANA_BOO,
-    DOPPIO_DADO
+    DADO_MALEDETTO("Dado Maledetto"),
+    DADO_FORTUNATO("Dado Fortunato"),
+    TUBO_DORATO("Tubo Dorato"),
+    CAMPANA_BOO("Campana Boo"),
+    DOPPIO_DADO("Doppio Dado");
+
+    private final String name;
+
+    private ItemName (String name) {
+        this.name=name;
+    }
+
+    private String getName() {
+        return this.name;
+    }
 }
