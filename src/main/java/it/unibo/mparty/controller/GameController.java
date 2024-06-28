@@ -1,5 +1,7 @@
 package it.unibo.mparty.controller;
 
+import it.unibo.mparty.model.GameModel;
+
 public interface GameController {
 
     void rollDice();
@@ -8,7 +10,7 @@ public interface GameController {
 
     boolean buyItem();
 
-    void startGame();
+    void startGame(GameModel model);
 
     void endGame();
 }

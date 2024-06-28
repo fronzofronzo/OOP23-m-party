@@ -1,6 +1,9 @@
 package it.unibo.mparty.controller;
 
+import java.io.IOException;
+
 import it.unibo.mparty.model.GameModel;
+import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.GameView;
 
 public class GameControllerImpl implements GameController{
@@ -13,13 +16,13 @@ public class GameControllerImpl implements GameController{
     }
 
     @Override
-    public void rollDice() {
-
+    public int rollDice() {
+        return this.model.rollDice();        
     }
 
     @Override
-    public void movePlayer() {
-
+    public Position movePlayer() {
+        return this.model.movePlayer();
     }
 
     @Override
@@ -28,8 +31,14 @@ public class GameControllerImpl implements GameController{
     }
 
     @Override
-    public void startGame() {
-
+    public void startGame(GameModel model) {
+        this.model = model;
+        try {
+            this.view.setScene("GameBoard.fxml");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Override
