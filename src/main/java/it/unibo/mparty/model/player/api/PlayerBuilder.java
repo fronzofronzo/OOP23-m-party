@@ -1,8 +1,19 @@
 package it.unibo.mparty.model.player.api;
 
-import it.unibo.mparty.model.player.Position;
 import it.unibo.mparty.model.player.impl.Character;
+import it.unibo.mparty.utilities.Position;
 
+/**
+ * The {@code PlayerBuilder} interface defines the methods to create a new
+ * player. It applies the creation pattern Builder
+ * Example usage:
+ *<pre>{@code
+ *     PlayerBuilder builder = new PlayerBuilder();
+ *     Player player = PlayerBuilder.username("player")
+ *                                  .character("Mario")
+ *                                  .build()
+ }</pre>
+ */
 public interface PlayerBuilder {
 
     /**
@@ -17,14 +28,7 @@ public interface PlayerBuilder {
      * @param character chosen for the player
      * @return current builder
      */
-    PlayerBuilder character(Character character);
-
-    /**
-     * Sets the initial position of player
-     * @param position of player at the start of the game
-     * @return current builder
-     */
-    PlayerBuilder position(Position position);
+    PlayerBuilder character(String character);
 
     /**
      * Create the player instance with the specified parameters
