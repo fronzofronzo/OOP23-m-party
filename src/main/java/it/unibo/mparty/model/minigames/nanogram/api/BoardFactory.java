@@ -12,7 +12,7 @@ public interface BoardFactory {
      * @param fillPercentage the percentage of cells that should be filled.
      * @return a new Board instance configured as a simple board.
      */
-    Board createSimpleBoard(final int size, final int fillPercentage);
+    Board createSimpleBoard(int size, int fillPercentage);
 
     /**
      * Creates a hard board with the specified size, fill percentage, and show percentage.
@@ -22,5 +22,5 @@ public interface BoardFactory {
      * @param showPercentage the percentage of the filled cells that should be shown to the player.
      * @return a new Board instance configured as a hard board.
      */
-    Board createHardBoard(final int size, final int fillPercentage, final int showPercentage);
+    Board createHardBoard(int size, int fillPercentage, int showPercentage);
 }

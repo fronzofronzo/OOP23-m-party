@@ -22,7 +22,7 @@ public interface Live {
      *
      * @param live the value to update the lives by.
      */
-    void update(final int live);
+    void update(int live);
 
     /**
      * Checks if there are no more lives left.

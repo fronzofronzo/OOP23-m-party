@@ -12,10 +12,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
@@ -184,8 +182,8 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
 
     private Pane getNodeByRowColumnIndex(final int row, final int column, final GridPane gridPane) {
         for (javafx.scene.Node node : gridPane.getChildren()) {
-            if (GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) == row &&
-                    GridPane.getColumnIndex(node) != null && GridPane.getColumnIndex(node) == column) {
+            if (GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) == row
+                    && GridPane.getColumnIndex(node) != null && GridPane.getColumnIndex(node) == column) {
                 return (Pane) node;
             }
         }

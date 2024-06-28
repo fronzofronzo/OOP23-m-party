@@ -36,7 +36,7 @@ public interface Board {
      * @param y the column index of the cell.
      * @return the current state of the cell at the specified position.
      */
-    CellState getCellState(final int x, final int y);
+    CellState getCellState(int x, int y);
 
     /**
      * Calculates the hints for either rows or columns of the grid.
@@ -45,5 +45,5 @@ public interface Board {
      * @return a list of lists of integers representing the hints for either rows or columns.
      *         Each inner list contains the hints for a single row or column based on game logic.
      */
-    List<List<Integer>> calculateHints(final boolean isRow);
+    List<List<Integer>> calculateHints(boolean isRow);
 }
