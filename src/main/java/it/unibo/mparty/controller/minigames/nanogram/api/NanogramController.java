@@ -22,15 +22,5 @@ public interface NanogramController {
      * @param col   the column index of the cell to update
      * @param state the new state of the cell (e.g., FILLED, CROSSED)
      */
-    void updateModel(int row, int col, CellState state);
-
-    /**
-     * Updates the view with the specified cell state at the given position.
-     * This method is called to reflect the current state of the model in the view.
-     *
-     * @param row   the row index of the cell to update
-     * @param col   the column index of the cell to update
-     * @param state the new state of the cell (e.g., FILLED, CROSSED)
-     */
-    void updateView(int row, int col, CellState state);
+    void updateModel(int row, int col, boolean state);
 }
