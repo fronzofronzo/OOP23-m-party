@@ -22,7 +22,7 @@ public class DominoImpl implements Domino {
     }
 
     @Override
-    public boolean canMatch(Domino other) {
+    public boolean canMatch(final Domino other) {
         return this.sideA == other.getSideA() || this.sideA == other.getSideB() ||
                 this.sideB == other.getSideA() || this.sideB == other.getSideB();
     }
