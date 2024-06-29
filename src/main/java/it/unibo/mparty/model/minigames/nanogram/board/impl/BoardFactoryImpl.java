@@ -31,7 +31,8 @@ public class BoardFactoryImpl implements BoardFactory {
                 grid.put(position, state);
             }
         }
-        return new BoardImpl(grid, size);
+        */
+        return new BoardImpl(size);
     }
 
     /**

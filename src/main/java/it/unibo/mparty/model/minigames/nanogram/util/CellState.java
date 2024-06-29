@@ -14,4 +14,6 @@ public enum CellState {
      * Represents a crossed cell in the Nanogram game, used as a tentative or temporary mark.
      */
     CROSSED,
+
+
 }

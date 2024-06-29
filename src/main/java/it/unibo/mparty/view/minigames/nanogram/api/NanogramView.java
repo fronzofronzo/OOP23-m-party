@@ -28,22 +28,6 @@ public interface NanogramView extends MinigameView {
     void setColumnHints(List<List<Integer>> columnHints);
 
     /**
-     * Sets the solution board for the Nanogram game.
-     *
-     * @param board the solution board represented by a {@link Board} object.
-     */
-    void setSolutionBoard(Board board);
-
-    /**
-     * Updates the state of a specific cell in the Nanogram grid.
-     *
-     * @param row       the row index of the cell.
-     * @param col       the column index of the cell.
-     * @param cellState the new state to set for the cell, represented by a {@link CellState}.
-     */
-    void updateCell(int row, int col, CellState cellState);
-
-    /**
      * Updates the display of the remaining lives in the game.
      *
      * @param actualLives the number of remaining lives to display.

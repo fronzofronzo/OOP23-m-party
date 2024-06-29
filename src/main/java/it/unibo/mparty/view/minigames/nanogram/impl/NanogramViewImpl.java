@@ -57,7 +57,6 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     @FXML
     private void initialize() {
         this.controller.startGame();
-        this.updateLives(3);
 
         ToggleGroup toggleGroup = new ToggleGroup();
         this.filledButton.setToggleGroup(toggleGroup);
@@ -230,13 +229,13 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
      */
     @Override
     public void fillRemainingCellsWithCrosses() {
-        for (int row = 0; row < this.gameGrid.getRowCount(); row++) {
-            for (int col = 0; col < this.gameGrid.getColumnCount(); col++) {
-                final Pane cell = getNodeByRowColumnIndex(row, col, this.gameGrid);
-                if (cell != null && !cell.getStyleClass().contains("filled") && !cell.getStyleClass().contains("crossed")) {
-                    updateCell(row, col, CellState.CROSSED);
-                }
-            }
-        }
+        IntStream.range(0, this.gameGrid.getRowCount())
+                .forEach(row -> IntStream.range(0, this.gameGrid.getColumnCount())
+                        .forEach(col -> {
+                            final Pane cell = getNodeByRowColumnIndex(row, col, this.gameGrid);
+                            if (cell != null) {
+                                setCorrectCell(row, col, false);
+                            }
+                        }));
     }
 }

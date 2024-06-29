@@ -32,13 +32,13 @@ public class NanogramModelImpl implements NanogramModel {
     @Override
     public void initializeGame(final Difficulty difficulty) {
         if (difficulty == Difficulty.SIMPLE) {
-            this.board = this.boardFactory.createSimpleBoard(5, 60);
+            this.board = this.boardFactory.createSimpleBoard(SIMPLE_SIZE, FILL);
         } else {
             this.board = this.boardFactory.createHardBoard(10, 40, 20);
         }
-        this.rowHints = this.board.calculateHints(true);
-        this.columnHints = this.board.calculateHints(false);
-        this.lives.reset();
+        System.out.println("board: "+board);
+        //this.rowHints = this.board.calculateHints(true); todo
+        //this.columnHints = this.board.calculateHints(false);
     }
 
     /**
@@ -82,16 +82,8 @@ public class NanogramModelImpl implements NanogramModel {
      * {@inheritDoc}
      */
     @Override
-    public void updateLives(final int lives) {
-        this.lives.update(lives);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isMoveValid(final int row, final int column, final CellState state) {
-        return state.equals(this.board.getGrid().get(new Position(row, column)));
+    public boolean isMoveValid(final int row, final int column, final boolean state) {
+        return state == this.board.getCellState(new Position(row, column));
     }
 
     /**

@@ -42,22 +42,6 @@ public interface NanogramModel {
     int getLives();
 
     /**
-     * Updates the state of a specific cell in the grid.
-     *
-     * @param row   the row index of the cell.
-     * @param column the column index of the cell.
-     * @param state the new state to set for the cell.
-     */
-    void updateCellState(int row, int column, CellState state);
-
-    /**
-     * Updates the number of lives remaining in the game.
-     *
-     * @param lives the new number of lives.
-     */
-    void updateLives(int lives);
-
-    /**
      * Gets the list of hints for each row of the grid.
      *
      * @return a list of lists of integers representing the row hints.
@@ -79,7 +63,7 @@ public interface NanogramModel {
      * @param actualState the state to be validated.
      * @return true if the move is valid, false otherwise.
      */
-    boolean isMoveValid(int row, int column, CellState actualState);
+    boolean isMoveValid(int row, int column, boolean actualState);
 
     /**
      * Checks if the game is complete.
