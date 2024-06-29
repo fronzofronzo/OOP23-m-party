@@ -10,11 +10,6 @@ import java.util.stream.IntStream;
 public class DominoFactoryImpl implements DominoFactory {
 
     @Override
-    public Domino createDomino(final int sideA, final int sideB) {
-        return new DominoImpl(sideA, sideB);
-    }
-
-    @Override
     public Set<Domino> createFullSet() {
         return IntStream.rangeClosed(0, 6).boxed()
                 .flatMap(i -> IntStream.rangeClosed(i, 6).mapToObj(j -> new DominoImpl(i, j)))
