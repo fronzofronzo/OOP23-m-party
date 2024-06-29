@@ -1,5 +1,7 @@
 package it.unibo.mparty.model;
 
+import it.unibo.mparty.utilities.Position;
+
 /**
  * Interface that models the model of the main game
  */
@@ -7,8 +9,10 @@ public interface GameModel {
 
     /**
      * Moves the current player to a new position
+     *
+     * @return
      */
-    void movePlayer();
+    Position movePlayer();
 
     /**
      * Roll dices of the actual player
