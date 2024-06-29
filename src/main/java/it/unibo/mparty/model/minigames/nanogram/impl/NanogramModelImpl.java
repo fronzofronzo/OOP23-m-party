@@ -1,10 +1,10 @@
 package it.unibo.mparty.model.minigames.nanogram.impl;
 
-import it.unibo.mparty.model.minigames.nanogram.api.Board;
-import it.unibo.mparty.model.minigames.nanogram.api.BoardFactory;
+import it.unibo.mparty.model.minigames.nanogram.board.api.Board;
+import it.unibo.mparty.model.minigames.nanogram.board.api.BoardFactory;
 import it.unibo.mparty.model.minigames.nanogram.api.Live;
 import it.unibo.mparty.model.minigames.nanogram.api.NanogramModel;
-import it.unibo.mparty.model.minigames.nanogram.util.CellState;
+import it.unibo.mparty.model.minigames.nanogram.board.impl.BoardFactoryImpl;
 import it.unibo.mparty.model.minigames.nanogram.util.Difficulty;
 import it.unibo.mparty.utilities.Position;
 
@@ -18,13 +18,26 @@ import java.util.Map;
  */
 public class NanogramModelImpl implements NanogramModel {
 
-    private final Map<Position, CellState> grid = new HashMap<>();
-    private final BoardFactory boardFactory = new BoardFactoryImpl();
-    private final Live lives = new LiveImpl();
+    private static final int SIMPLE_SIZE = 5;
+    private static final int FILL = 60;
+    private static final int HARD_SIZE = 10;
+    private static final int SHOW_PERCENTAGE = 30;
+    private static final int LIVES = 3;
 
-    private List<List<Integer>> rowHints = new ArrayList<>();
-    private List<List<Integer>> columnHints = new ArrayList<>();
+
+    private final Map<Position, Boolean> selectedBoard; //todo: pensare a come poter utilizzare Board (setPosition, state)
+    private final BoardFactory boardFactory;
+    private final Live lives;
+
+    private final List<List<Integer>> rowHints = new ArrayList<>();
+    private final List<List<Integer>> columnHints = new ArrayList<>();
     private Board board;
+
+    public NanogramModelImpl() {
+        selectedBoard = new HashMap<>();
+        boardFactory = new BoardFactoryImpl();
+        lives = new LiveImpl(LIVES);
+    }
 
     /**
      * {@inheritDoc}
@@ -34,7 +47,7 @@ public class NanogramModelImpl implements NanogramModel {
         if (difficulty == Difficulty.SIMPLE) {
             this.board = this.boardFactory.createSimpleBoard(SIMPLE_SIZE, FILL);
         } else {
-            this.board = this.boardFactory.createHardBoard(10, 40, 20);
+            this.board = this.boardFactory.createHardBoard(HARD_SIZE, FILL, SHOW_PERCENTAGE);
         }
         System.out.println("board: "+board);
         //this.rowHints = this.board.calculateHints(true); todo
@@ -45,16 +58,8 @@ public class NanogramModelImpl implements NanogramModel {
      * {@inheritDoc}
      */
     @Override
-    public CellState getCellState(final int row, final int column) {
-        return this.board.getGrid().get(new Position(row, column));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Board getBoard() {
-        return this.board;
+    public int getBoardSize() {
+        return this.board.getSize();
     }
 
     /**
@@ -69,12 +74,12 @@ public class NanogramModelImpl implements NanogramModel {
      * {@inheritDoc}
      */
     @Override
-    public void updateCellState(final int row, final int column, final CellState state) {
+    public void fillSelectedBoard(final int row, final int column, final boolean state) {
         if (isMoveValid(row, column, state)) {
-            this.grid.put(new Position(row, column), state);
+            this.selectedBoard.put(new Position(row, column), state);
         } else {
-            updateLives(lives.getLive() - 1);
-            this.grid.compute(new Position(row, column), (k, correctState) -> correctState);
+            lives.decrease();
+            this.selectedBoard.put(new Position(row, column), !state);
         }
     }
 
@@ -107,9 +112,10 @@ public class NanogramModelImpl implements NanogramModel {
      */
     @Override
     public boolean isGameComplete() {
-        return board.getGrid().entrySet().stream()
-                .filter(e -> e.getValue().equals(CellState.FILLED))
-                .allMatch(e -> CellState.FILLED.equals(this.grid.get(e.getKey())));
+        return false; //todo
+//        return board.getGrid().entrySet().stream()
+//                .filter(e -> e.getValue().equals(CellState.FILLED))
+//                .allMatch(e -> CellState.FILLED.equals(this.selectedBoard.get(e.getKey())));
     }
 
     /**

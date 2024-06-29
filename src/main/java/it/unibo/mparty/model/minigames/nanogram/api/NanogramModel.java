@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.minigames.nanogram.api;
 
+import it.unibo.mparty.model.minigames.nanogram.board.api.Board;
 import it.unibo.mparty.model.minigames.nanogram.util.CellState;
 import it.unibo.mparty.model.minigames.nanogram.util.Difficulty;
 
@@ -18,21 +19,8 @@ public interface NanogramModel {
      */
     void initializeGame(Difficulty difficulty);
 
-    /**
-     * Gets the state of a specific cell in the grid.
-     *
-     * @param row    the row index of the cell.
-     * @param column the column index of the cell.
-     * @return the current state of the cell at the specified position.
-     */
-    CellState getCellState(int row, int column);
 
-    /**
-     * Gets the current board of the game.
-     *
-     * @return the current {@link Board} of the game.
-     */
-    Board getBoard();
+    int getBoardSize();
 
     /**
      * Gets the number of lives remaining in the game.
@@ -54,6 +42,8 @@ public interface NanogramModel {
      * @return a list of lists of integers representing the column hints.
      */
     List<List<Integer>> getColumnHints();
+
+    void fillSelectedBoard(int row, int column, boolean state);
 
     /**
      * Checks if a move with the given state at the specified position is valid.
