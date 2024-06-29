@@ -33,7 +33,8 @@ class SimpleBoardImplTest {
 
     @Test
     public void testGetHint() {
-        this.simpleBoard = new SimpleBoardImpl(5, PROBABILITY);;
-        this.simpleBoard.getHints(true);
+        this.simpleBoard = new SimpleBoardImpl(10, PROBABILITY);;
+        System.out.println(simpleBoard);
+        ((SimpleBoardImpl) this.simpleBoard).getRowHint(0);
     }
 }

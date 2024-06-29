@@ -1,6 +1,7 @@
 package it.unibo.mparty.model.minigames.nanogram.board.impl;
 
 import it.unibo.mparty.model.minigames.nanogram.board.api.SimpleBoard;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 
 import java.util.*;
@@ -35,6 +36,37 @@ public class SimpleBoardImpl implements SimpleBoard {
         return this.grid.get(new Position(x, y));
     }
 
+
+    public List<Integer> getRowHint(final int row) {
+        System.out.println(this.grid.entrySet().stream().filter(e -> e.getKey().getX() == row).toList());
+        var res = this.grid.entrySet().stream().filter(e -> e.getKey().getX() == row)
+                .collect(LinkedList<Pair<Boolean, Integer>>::new, (list, entry) -> {
+                    if (list.isEmpty() || list.getLast().getX() != entry.getValue()) {
+                        list.add(new Pair<>(entry.getValue(), 1));
+                    } else {
+                        Pair<Boolean, Integer> last = list.pop();
+                        list.add(new Pair<>(entry.getValue(), last.getY() + 1));
+                    }
+                }, (l1, l2) -> {
+
+                });
+
+
+        var res2 = this.grid.entrySet().stream().filter(e -> e.getKey().getX() == row)
+                        .map(Map.Entry::getValue).collect(LinkedList<Integer>::new, (l, b) -> {
+                            if (l.isEmpty() || !b) {
+                                l.add(0);
+                            } else {
+                                int last = l.pop();
+                                l.add(last + 1);
+                            }
+                }, (l1, l2) -> {});
+
+        System.out.println(res2);
+        return null;
+    }
+
+
     @Override
     public List<List<Integer>> getHints(final boolean isRow) {
         /*
@@ -62,27 +94,37 @@ public class SimpleBoardImpl implements SimpleBoard {
                 .collect(Collectors.groupingBy(e -> isRow ? e.getKey().x() : e.getKey().y())); //okk
 
 
-        Map<Integer, Long> result = grid.entrySet().stream()
-                .collect(Collectors.groupingBy(
-                        e -> isRow ? e.getKey().x() : e.getKey().y(),
-                        Collectors.filtering(
-                                Map.Entry::getValue,
-                                Collectors.counting()
-                        )
-                ));
+        grid.entrySet().stream().collect(LinkedList<List<Integer>>::new, (list, entry) -> {
+            //if (list.isEmpty() || !list.getLast().get(0).equals(entry.getKey().getX()))
+            //{
+            //    list.add(new ArrayList<>());
+            //}
+            //list.getLast().add(value);
+        }, (l1, l2) -> {
 
-        List<List<Integer>> resultList = grid.entrySet().stream()
-                .collect(Collectors.groupingByConcurrent(
-                        e -> isRow ? e.getKey().getX() : e.getKey().getY(),
-                        Collectors.summingInt(e -> e.getValue() ? 1 : 0)
-                ))
-                .values().stream()
-                .map(Collections::singletonList)
-                .collect(Collectors.toList());
+        });
 
-        System.out.println(map);
-        System.out.println(result);
-        System.out.println(resultList);
+//        Map<Integer, Long> result = grid.entrySet().stream()
+//                .collect(Collectors.groupingBy(
+//                        e -> isRow ? e.getKey().x() : e.getKey().y(),
+//                        Collectors.filtering(
+//                                Map.Entry::getValue,
+//                                Collectors.counting()
+//                        )
+//                ));
+//
+//        List<List<Integer>> resultList = grid.entrySet().stream()
+//                .collect(Collectors.groupingByConcurrent(
+//                        e -> isRow ? e.getKey().getX() : e.getKey().getY(),
+//                        Collectors.summingInt(e -> e.getValue() ? 1 : 0)
+//                ))
+//                .values().stream()
+//                .map(Collections::singletonList)
+//                .collect(Collectors.toList());
+//
+//        System.out.println(map);
+//        System.out.println(result);
+//        System.out.println(resultList);
 
         return null;
     }
