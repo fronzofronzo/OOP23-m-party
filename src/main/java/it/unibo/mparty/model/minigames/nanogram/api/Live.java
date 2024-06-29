@@ -13,11 +13,6 @@ public interface Live {
     int getLive();
 
     /**
-     * Resets the number of lives to the initial value.
-     */
-    void reset();
-
-    /**
      * Updates the number of lives based on the given value.
      *
      * @param live the value to update the lives by.
@@ -30,4 +25,6 @@ public interface Live {
      * @return true if there are no lives left, false otherwise.
      */
     boolean isDeath();
+
+    void decrease();
 }

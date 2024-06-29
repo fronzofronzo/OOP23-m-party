@@ -12,7 +12,7 @@ public class LiveImpl implements Live {
     private int lives;
 
     /**
-     * Constructs a LiveImpl instance with the initial number of lives set to {@value #INITIAL_LIVES}.
+     * Constructs a LiveImpl instance with the initial number of lives set to .
      */
     public LiveImpl(int initialLive) {
         this.initialLive = initialLive;
@@ -41,5 +41,10 @@ public class LiveImpl implements Live {
     @Override
     public boolean isDeath() {
         return this.lives <= 0;
+    }
+
+    @Override
+    public void decrease() {
+        this.lives--;
     }
 }
