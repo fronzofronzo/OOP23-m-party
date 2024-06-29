@@ -8,4 +8,6 @@ public interface Tile {
     boolean canMatchLeft(int sideA);
 
     boolean canMatchRight(int sideB);
+
+    boolean isDoubleSide();
 }

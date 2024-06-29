@@ -29,13 +29,18 @@ public class TileImpl implements Tile {
     }
 
     @Override
-    public boolean canMatchRight(final int sideB){
+    public boolean canMatchRight(final int sideB) {
         return this.sideA == sideB || this.sideB == sideB;
     }
 
     @Override
+    public boolean isDoubleSide() {
+        return this.sideA == this.sideB;
+    }
+
+    @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         }
         if (!(o instanceof TileImpl domino)) {
