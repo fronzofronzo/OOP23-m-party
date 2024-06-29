@@ -1,14 +1,14 @@
 package it.unibo.mparty.model.minigames.domino.impl;
 
-import it.unibo.mparty.model.minigames.domino.api.Domino;
+import it.unibo.mparty.model.minigames.domino.api.Tile;
 
 import java.util.Objects;
 
-public class DominoImpl implements Domino {
+public class TileImpl implements Tile {
     private final int sideA;
     private final int sideB;
 
-    public DominoImpl(final int sideA, final int sideB) {
+    public TileImpl(final int sideA, final int sideB) {
         this.sideA = sideA;
         this.sideB = sideB;
     }
@@ -24,9 +24,13 @@ public class DominoImpl implements Domino {
     }
 
     @Override
-    public boolean canMatch(final Domino other) {
-        return this.sideA == other.getSideA() || this.sideA == other.getSideB() ||
-                this.sideB == other.getSideA() || this.sideB == other.getSideB();
+    public boolean canMatchLeft(final int sideA) {
+        return this.sideA == sideA || this.sideB == sideA;
+    }
+
+    @Override
+    public boolean canMatchRight(final int sideB){
+        return this.sideA == sideB || this.sideB == sideB;
     }
 
     @Override
@@ -34,7 +38,7 @@ public class DominoImpl implements Domino {
         if (this == o){
             return true;
         }
-        if (!(o instanceof DominoImpl domino)) {
+        if (!(o instanceof TileImpl domino)) {
             return false;
         }
         return sideA == domino.sideA && sideB == domino.sideB;

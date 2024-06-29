@@ -1,7 +1,6 @@
 package it.unibo.mparty.model.minigames.domino.impl;
 
-import it.unibo.mparty.model.minigames.domino.api.Domino;
-import it.unibo.mparty.model.minigames.domino.api.DominoFactory;
+import it.unibo.mparty.model.minigames.domino.api.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,28 +12,28 @@ import static org.junit.jupiter.api.Assertions.*;
 class DominoFactoryImplTest {
 
     private final int DOMINO_SET_SIZE = 28;
-    private DominoFactoryImpl dominoFactory;
+    private TileFactoryImpl dominoFactory;
 
 
     @BeforeEach
     void setUp() {
-        dominoFactory = new DominoFactoryImpl();
+        dominoFactory = new TileFactoryImpl();
     }
 
     @Test
     void testCreateFullSet() {
-        Set<Domino> fullSet = dominoFactory.createFullSet();
-        Set<Domino> expectedSet = generateFullSet();
+        Set<Tile> fullSet = dominoFactory.createFullSet();
+        Set<Tile> expectedSet = generateFullSet();
 
         assertEquals(DOMINO_SET_SIZE, dominoFactory.createFullSet().size());
         assertTrue(fullSet.containsAll(expectedSet));
     }
 
-    private Set<Domino> generateFullSet() {
-        Set<Domino> fullSet = new HashSet<>();
+    private Set<Tile> generateFullSet() {
+        Set<Tile> fullSet = new HashSet<>();
         for (int i = 0; i <= 6; i++) {
             for (int j = i; j <= 6; j++) {
-                fullSet.add(new DominoImpl(i, j));
+                fullSet.add(new TileImpl(i, j));
             }
         }
         return fullSet;
