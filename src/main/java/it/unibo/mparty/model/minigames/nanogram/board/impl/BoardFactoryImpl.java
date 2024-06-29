@@ -1,7 +1,7 @@
-package it.unibo.mparty.model.minigames.nanogram.impl;
+package it.unibo.mparty.model.minigames.nanogram.board.impl;
 
-import it.unibo.mparty.model.minigames.nanogram.api.Board;
-import it.unibo.mparty.model.minigames.nanogram.api.BoardFactory;
+import it.unibo.mparty.model.minigames.nanogram.board.api.Board;
+import it.unibo.mparty.model.minigames.nanogram.board.api.BoardFactory;
 import it.unibo.mparty.model.minigames.nanogram.util.CellState;
 import it.unibo.mparty.utilities.Position;
 
@@ -22,12 +22,13 @@ public class BoardFactoryImpl implements BoardFactory {
      */
     @Override
     public Board createSimpleBoard(final int size, final int fillPercentage) {
-        final Map<Position, CellState> grid = new HashMap<>();
+        final Map<Position, Boolean> grid = new HashMap<>();
 
+        /*
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < size; col++) {
                 Position position = new Position(row, col);
-                CellState state = random.nextInt(100) < fillPercentage ? CellState.FILLED : CellState.CROSSED;
+                Boolean state = random.nextInt(100) < fillPercentage ? CellState.FILLED : CellState.CROSSED;
                 grid.put(position, state);
             }
         }
@@ -40,20 +41,20 @@ public class BoardFactoryImpl implements BoardFactory {
      */
     @Override
     public Board createHardBoard(final int size, final int fillPercentage, final int showPercentage) {
-        final Board simpleBoard = createSimpleBoard(size, fillPercentage);
-        final Map<Position, CellState> grid = new HashMap<>(simpleBoard.getGrid());
-        final Map<Position, CellState> showGrid = new HashMap<>(simpleBoard.getShowGrid());
+        //final Board simpleBoard = createSimpleBoard(size, fillPercentage);
+        //final Map<Position, Boolean> grid = new HashMap<>(simpleBoard.getGrid());
+        //final Map<Position, Boolean> showGrid = new HashMap<>(simpleBoard.getShowGrid());
 
-        final int totalCells = size * size;
-        int showCellsCount = (int) Math.round(totalCells * (showPercentage / 100.0));
+//        final int totalCells = size * size;
+//        int showCellsCount = (int) Math.round(totalCells * (showPercentage / 100.0));
+//
+//        for (Map.Entry<Position, Boolean> entry : grid.entrySet()) {
+//            if (entry.getValue() == true && showCellsCount > 0) {
+//                showGrid.put(entry.getKey(), true);
+//                showCellsCount--;
+//            }
+//        }
 
-        for (Map.Entry<Position, CellState> entry : grid.entrySet()) {
-            if (entry.getValue() == CellState.FILLED && showCellsCount > 0) {
-                showGrid.put(entry.getKey(), CellState.FILLED);
-                showCellsCount--;
-            }
-        }
-
-        return new BoardImpl(grid, showGrid, size);
+        return new BoardImpl(size);
     }
 }

@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.nanogram.api;
+package it.unibo.mparty.model.minigames.nanogram.board.api;
 
 /**
  * Interface for a factory that creates boards for a Nanogram game.
