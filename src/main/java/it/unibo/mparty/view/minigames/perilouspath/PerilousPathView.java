@@ -6,5 +6,11 @@ import it.unibo.mparty.view.SceneView;
 public interface PerilousPathView  extends SceneView{
 
     public void setObserver(PerilousPathController controller);
+
+    public void setUpView();
+
+    public void hideBombs();
+
+    public void hitTile();
     
 }
