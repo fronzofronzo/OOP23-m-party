@@ -5,6 +5,7 @@ import it.unibo.mparty.model.player.api.Player;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class DominoModelImpl implements DominoModel {
 
@@ -23,7 +24,6 @@ public class DominoModelImpl implements DominoModel {
     public void initDomino(final Player p1, final Player p2) {
         this.dominoSet = this.dominoFactory.createFullSet();
 
-        //todo: distribuzione, ogni player ne ha 7, una volta distribuita le tessere possedute dal player viene tolto dal set
         playerTiles.addTilesToPlayer(p1, this.dominoSet.stream().limit(7).collect(Collectors.toSet()));
         dominoSet.removeAll(this.playerTiles.getPlayerTiles(p1));
         playerTiles.addTilesToPlayer(p2, this.dominoSet.stream().limit(7).collect(Collectors.toSet()));
@@ -31,9 +31,26 @@ public class DominoModelImpl implements DominoModel {
     }
 
     @Override
-    public void setTurn() {
-        //todo: inizia quello con il doppio piu alto, se no a random
+    public Player setTurn(final Player p1, final Player p2) {
+        if (this.boardTile.getBoardTiles().isEmpty()) {
+            return (getDoubleTiles(p1) > getDoubleTiles(p2)) ? p1 : p2;
+        }
+        Random random = new Random();
+        return random.nextBoolean()? p1 : p2;
+    }
 
+    private int getDoubleTiles(Player player) {
+        int max = playerTiles.getPlayerTiles(player).stream()
+                .filter(Tile::isDoubleSide)
+                .flatMapToInt(tile -> IntStream.of(tile.getSideA(), tile.getSideB()))
+                .max()
+                .orElse(Integer.MIN_VALUE);
+        System.out.println(max);
+        return playerTiles.getPlayerTiles(player).stream()
+                .filter(Tile::isDoubleSide)
+                .flatMapToInt(tile -> IntStream.of(tile.getSideA(), tile.getSideB()))
+                .max()
+                .orElse(Integer.MIN_VALUE);
     }
 
     @Override

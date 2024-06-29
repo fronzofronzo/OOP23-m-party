@@ -8,7 +8,7 @@ public interface DominoModel {
 
     void initDomino(Player p1, Player p2);
 
-    void setTurn();
+    Player setTurn(Player p1, Player p2);
 
     boolean checkMove(Player player, Tile domino);
 
