@@ -97,7 +97,7 @@ public class PerilousPathImpl implements PerilousPath{
 
     /**
      * a private method for getting always a new BallPosition in a pseudo-random manner
-     * @param y the already setted y position in a generic(x,y) position, meaning that onlye the x position will be random
+     * @param y the already set y position in a generic(x,y) position, meaning that only the x position will be random
      * @return a new BallPosition which is safe
      */
     private AbstractPosition setNewBallPosition(int y){
