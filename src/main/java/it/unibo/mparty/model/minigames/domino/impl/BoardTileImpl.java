@@ -6,12 +6,17 @@ import it.unibo.mparty.model.minigames.domino.api.Tile;
 import java.util.LinkedList;
 
 public class BoardTileImpl implements BoardTile {
-    private LinkedList<Tile> boardTiles;
+    private final LinkedList<Tile> boardTiles;
     private int leftExtrem;
     private int rightExtrem;
 
     public BoardTileImpl() {
         this.boardTiles = new LinkedList<>();
+    }
+
+    @Override
+    public LinkedList<Tile> getBoardTiles() {
+        return boardTiles;
     }
 
     @Override
