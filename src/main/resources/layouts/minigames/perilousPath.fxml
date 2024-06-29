@@ -14,7 +14,6 @@
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -24,12 +23,56 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="86.0" />
       <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="87.0" GridPane.columnIndex="1" />
       <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="89.0" GridPane.columnIndex="2" />
       <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="91.0" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="93.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" prefHeight="69.0" prefWidth="101.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="111.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" prefHeight="69.0" prefWidth="94.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" prefHeight="68.0" prefWidth="101.0" GridPane.columnIndex="3" />
+      <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="110.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="115.0" GridPane.rowIndex="2" />
+      <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="100.0" GridPane.columnIndex="4" />
+      <Button mnemonicParsing="false" prefHeight="77.0" prefWidth="176.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="97.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+      <Button mnemonicParsing="false" prefHeight="77.0" prefWidth="102.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+      <Button mnemonicParsing="false" prefHeight="89.0" prefWidth="116.0" GridPane.columnIndex="5" />
+      <Button mnemonicParsing="false" prefHeight="89.0" prefWidth="160.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" prefHeight="67.0" prefWidth="90.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" prefHeight="67.0" prefWidth="110.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+      <Button mnemonicParsing="false" prefHeight="94.0" prefWidth="131.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+      <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="98.0" GridPane.columnIndex="6" />
+      <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="101.0" GridPane.rowIndex="3" />
+      <Button mnemonicParsing="false" prefHeight="79.0" prefWidth="128.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Button mnemonicParsing="false" prefHeight="81.0" prefWidth="123.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="102.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+      <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="129.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+      <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="114.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+      <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="122.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+      <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="151.0" GridPane.rowIndex="4" />
+      <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="91.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Button mnemonicParsing="false" prefHeight="61.0" prefWidth="93.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="122.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+      <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="110.0" GridPane.rowIndex="5" />
+      <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="86.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+      <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="116.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+      <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="135.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+      <Button mnemonicParsing="false" prefHeight="67.0" prefWidth="116.0" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+      <Button mnemonicParsing="false" prefHeight="61.0" prefWidth="98.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="103.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+      <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="104.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+      <Button mnemonicParsing="false" prefHeight="84.0" prefWidth="131.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+      <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="110.0" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+      <Button mnemonicParsing="false" prefHeight="61.0" prefWidth="115.0" GridPane.rowIndex="6" />
+      <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="144.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Button mnemonicParsing="false" prefHeight="67.0" prefWidth="88.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+      <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="98.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+      <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="85.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+      <Button mnemonicParsing="false" prefHeight="71.0" prefWidth="140.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+      <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="94.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
    </children>
 </GridPane>
