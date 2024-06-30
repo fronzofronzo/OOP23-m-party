@@ -8,13 +8,13 @@ public interface DominoModel {
 
     void initDomino(Player p1, Player p2);
 
-    Player setTurn(Player p1, Player p2);
+    boolean isPlayer1Turn(Player p1, Player p2);
 
     boolean checkMove(Player player, Tile domino);
 
-    Player getWinner();
+    Player getWinner(Player p1, Player p2);
 
     Set<Tile> getDominoSet();
 
-    PlayerTiles getPlayerDomino();
+    PlayerTiles getPlayerTiles();
 }
