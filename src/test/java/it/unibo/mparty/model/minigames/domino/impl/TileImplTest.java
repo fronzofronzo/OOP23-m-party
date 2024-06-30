@@ -25,38 +25,17 @@ class TileImplTest {
     }
 
     @Test
-    void testCanMatchLeft() {
+    void testMatch() {
         this.tile = new TileImpl(SIDE_3, SIDE_5);
-        assertTrue(this.tile.canMatchLeft(SIDE_3));
-        assertFalse(this.tile.canMatchLeft(SIDE_4));
+        Tile tile1 = new TileImpl(SIDE_1, SIDE_2);
+        Tile tile2 = new TileImpl(SIDE_3, SIDE_3);
+        Tile tile3 = new TileImpl(SIDE_6, SIDE_4);
 
-        this.tile = new TileImpl(SIDE_3, SIDE_3);
-        assertTrue(this.tile.canMatchLeft(SIDE_3));
-
-        this.tile = new TileImpl(SIDE_6, SIDE_1);
-        assertTrue(this.tile.canMatchLeft(SIDE_6));
-        assertFalse(this.tile.canMatchLeft(SIDE_2));
-
-        this.tile = new TileImpl(SIDE_0, SIDE_0);
-        assertTrue(this.tile.canMatchLeft(SIDE_0));
+        assertFalse(this.tile.match(tile1));
+        assertTrue(this.tile.match(tile2));
+        assertFalse(this.tile.match(tile3));
     }
 
-    @Test
-    void testCanMatchRight() {
-        this.tile = new TileImpl(SIDE_3, SIDE_5);
-        assertTrue(this.tile.canMatchRight(SIDE_5));
-        assertFalse(this.tile.canMatchRight(SIDE_4));
-
-        this.tile = new TileImpl(SIDE_3, SIDE_3);
-        assertTrue(this.tile.canMatchRight(SIDE_3));
-
-        this.tile = new TileImpl(SIDE_2, SIDE_4);
-        assertTrue(this.tile.canMatchRight(SIDE_4));
-        assertFalse(this.tile.canMatchRight(SIDE_1));
-
-        this.tile = new TileImpl(SIDE_0, SIDE_0);
-        assertTrue(this.tile.canMatchRight(SIDE_0));
-    }
 
     @Test
     void testIsDoubleSide() {
