@@ -32,6 +32,6 @@ public class GameViewImpl extends Application implements GameView{
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
         this.stage.show();
-        this.setScene("Shop.fxml");
+        this.setScene("memoryCard.fxml");
     }
 }
