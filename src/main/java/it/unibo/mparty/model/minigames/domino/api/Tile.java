@@ -1,13 +1,11 @@
 package it.unibo.mparty.model.minigames.domino.api;
 
 public interface Tile {
-    int getSideA();
+    Side getSideA();
 
-    int getSideB();
+    Side getSideB();
 
-    boolean canMatchLeft(int sideA);
-
-    boolean canMatchRight(int sideB);
+    boolean match(Tile tile);
 
     boolean isDoubleSide();
 }

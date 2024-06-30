@@ -35,7 +35,7 @@ public class TileImpl implements Tile {
 
     @Override
     public boolean isDoubleSide() {
-        return this.sideA == this.sideB;
+        return this.sideA.getValue() == this.sideB.getValue();
     }
 
     @Override
@@ -43,15 +43,15 @@ public class TileImpl implements Tile {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof TileImpl domino)) {
+        if (!(o instanceof TileImpl tile)) {
             return false;
         }
-        return sideA == domino.sideA && sideB == domino.sideB;
+        return sideA.getValue() == tile.sideA.getValue() && sideB.getValue() == tile.sideB.getValue();
     }
 
     @Override
     public String toString() {
-        return "DominoImpl{" +
+        return "TileImpl{" +
                 "sideA=" + sideA +
                 ", sideB=" + sideB +
                 "}\n";

@@ -18,6 +18,13 @@ class TileImplTest {
     private Tile tile;
 
     @Test
+    void testTile() {
+        this.tile = new TileImpl(SIDE_0, SIDE_1);
+        assertEquals(this.tile.getSideA().getValue(), SIDE_0);
+        assertEquals(this.tile.getSideB().getValue(), SIDE_1);
+    }
+
+    @Test
     void testCanMatchLeft() {
         this.tile = new TileImpl(SIDE_3, SIDE_5);
         assertTrue(this.tile.canMatchLeft(SIDE_3));
