@@ -30,18 +30,16 @@ public class TestPlayerImplementation {
     public void init(){
         final String username = "username";
         final String character = "Luigi";
-        final Position position = new Position(0,0);
         testPlayer = new PlayerImplementation(username,character);
     }
 
+    /**
+     * Check that the Player implementation is created with the correct values
+     */
     @Test
-    public void testPlayerConstructor(){
-        final String username = "username";
-        final String character = "Luigi";
-        final Position position = new Position(0,0);
-        assertEquals(username, testPlayer.getUsername());
-        assertEquals(character, testPlayer.getCharacter().getName());
-        assertEquals(position, testPlayer.getPosition());
+    public void testPlayerInitialization(){
+        assertEquals(0, testPlayer.getNumStars());
+        assertEquals(0, testPlayer.getNumCoins());
     }
 
     @Test
