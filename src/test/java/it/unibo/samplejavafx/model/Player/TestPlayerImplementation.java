@@ -16,10 +16,16 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for a {@link PlayerImplementation} class
+ */
 public class TestPlayerImplementation {
 
     private Player testPlayer;
 
+    /**
+     * Configuration step: this is performed before each test
+     */
     @BeforeEach
     public void init(){
         final String username = "username";
