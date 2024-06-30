@@ -54,12 +54,35 @@ public class TestPlayerImplementation {
         assertEquals(0, testPlayer.getNumStars());
     }
 
+    /**
+     * Check that the operation of coins adding and removal work properly
+     */
+    @Test
+    public void testCoinsAmount(){
+        final int num_coins = 5;
+        assertEquals(0, testPlayer.getNumCoins());
+        testPlayer.addCoins(num_coins);
+        assertEquals(num_coins, testPlayer.getNumCoins());
+        testPlayer.removeCoins(num_coins);
+        assertEquals(0, testPlayer.getNumCoins());
+    }
+
+    /**
+     * Check that Player Bag implementation works properly ( adding and removal
+     * of item )
+     */
     @Test
     public void testPlayerBag() {
         final Item itemTest = new ItemFactoryImpl().createItem(ItemName.TUBO_DORATO);
         testPlayer.getPlayerBag().addItem(itemTest);
         assertEquals(itemTest, testPlayer.getPlayerBag().getItem(0));
         assertFalse(testPlayer.getPlayerBag().isFull());
+        try {
+            testPlayer.getPlayerBag().removeItem(0);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+        assertThrows(IllegalAccessException.class, () -> {testPlayer.getPlayerBag().removeItem(0);} );
     }
 
 }
