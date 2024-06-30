@@ -42,6 +42,9 @@ public class TestPlayerImplementation {
         assertEquals(0, testPlayer.getNumCoins());
     }
 
+    /**
+     * Check that the operation of star adding and removal work properly
+     */
     @Test
     public void testStarAmount(){
         assertEquals(0, testPlayer.getNumStars());
