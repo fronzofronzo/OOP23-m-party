@@ -3,12 +3,15 @@ package it.unibo.mparty.model;
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
 import it.unibo.mparty.model.gameBoard.util.BoardType;
+import it.unibo.mparty.model.gameBoard.util.SlotType;
 import it.unibo.mparty.model.minigameHandler.MinigameHandler;
 import it.unibo.mparty.model.minigameHandler.MinigameHandlerImplementation;
+import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Position;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Models the core structure of the game
@@ -16,6 +19,8 @@ import java.util.List;
 public class GameModelImpl implements GameModel{
 
     private static final int TURNS_NUMBER = 10;
+    private static final int MIN_NUMBER = 4;
+    private static final int MAX_NUMBER = 10;
 
     private final List<Player> players;
     private final GameBoard board;
@@ -82,5 +87,38 @@ public class GameModelImpl implements GameModel{
     @Override
     public boolean isOver() {
         return turn == TURNS_NUMBER;
+    }
+
+    @Override
+    public void activateSlot() {
+        final Player actualPlayer = this.players.get(actualPlayerIndex);
+        final SlotType slot = this.board.getSlotType(actualPlayer.getPosition());
+        final Random random = new Random();
+        switch (slot) {
+            case SINGLEPLAYER -> {
+                try {
+                    this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.SINGLE_PLAYER);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            case MULTIPLAYER -> {
+                try {
+                    this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.MULTI_PLAYER);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            case BONUS -> {
+                actualPlayer.addCoins(random.nextInt(MIN_NUMBER,MAX_NUMBER));
+            }
+            case MALUS -> {
+                actualPlayer.removeCoins(random.nextInt(MIN_NUMBER,MAX_NUMBER));
+            }
+            case ACTIVE_STAR -> {
+            }
+            default -> {break;}
+        };
+
     }
 }
