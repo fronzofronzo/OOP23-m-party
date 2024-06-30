@@ -51,7 +51,7 @@ public class DominoModelImpl implements DominoModel {
     private int getDoubleTiles(final Player player) {
         return this.playerTiles.getPlayerTiles(player).stream()
                 .filter(Tile::isDoubleSide)
-                .flatMapToInt(tile -> IntStream.of(tile.getSideA(), tile.getSideB()))
+                .flatMapToInt(tile -> IntStream.of(tile.getSideA().getValue(), tile.getSideB().getValue()))
                 .max()
                 .orElse(Integer.MIN_VALUE);
     }
