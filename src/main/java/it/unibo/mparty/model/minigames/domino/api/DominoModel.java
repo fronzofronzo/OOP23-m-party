@@ -16,7 +16,7 @@ public interface DominoModel {
 
     Set<Tile> getDominoSet();
 
-    PlayerTiles getPlayerTiles();
+    PlayerTiles getPlayersTiles();
 
     BoardTile getBoardTile();
 }

@@ -79,7 +79,7 @@ public class DominoModelImpl implements DominoModel {
     }
 
     @Override
-    public PlayerTiles getPlayerTiles() {
+    public PlayerTiles getPlayersTiles() {
         return this.playerTiles;
     }
 
