@@ -31,11 +31,12 @@ public class DominoModelImpl implements DominoModel {
     public void initDomino(final Player p1, final Player p2) {
         this.dominoSet = this.dominoFactory.createDoubleSixSet();
 
-        this.playerTiles.addTilesToPlayer(p1, this.dominoSet.stream().
-                limit(DISTRIBUTION_TILES).collect(Collectors.toSet()));
+        this.playerTiles.addTilesToPlayer(p1,
+                this.dominoSet.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet()));
         this.dominoSet.removeAll(this.playerTiles.getPlayerTiles(p1));
-        this.playerTiles.addTilesToPlayer(p2, this.dominoSet.stream().
-                limit(DISTRIBUTION_TILES).collect(Collectors.toSet()));
+
+        this.playerTiles.addTilesToPlayer(p2,
+                this.dominoSet.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet()));
         this.dominoSet.removeAll(this.playerTiles.getPlayerTiles(p2));
     }
 
@@ -62,8 +63,12 @@ public class DominoModelImpl implements DominoModel {
             this.playerTiles.removeTilesFromPlayer(player, tile);
             this.actualTurn = !this.actualTurn;
             return true;
+        } //todo: check
+        if (!dominoSet.isEmpty()) {
+            Tile newTile = dominoSet.iterator().next();
+            dominoSet.remove(newTile);
+            this.playerTiles.addTileToPlayer(player, newTile);
         }
-        this.playerTiles.addTilesToPlayer(player, this.dominoSet);
         return false;
     }
 
