@@ -22,10 +22,10 @@ class DominoFactoryImplTest {
 
     @Test
     void testCreateFullSet() {
-        Set<Tile> fullSet = dominoFactory.createFullSet();
+        Set<Tile> fullSet = dominoFactory.createDoubleSixSet();
         Set<Tile> expectedSet = generateFullSet();
 
-        assertEquals(DOMINO_SET_SIZE, dominoFactory.createFullSet().size());
+        assertEquals(DOMINO_SET_SIZE, dominoFactory.createDoubleSixSet().size());
         assertTrue(fullSet.containsAll(expectedSet));
     }
 

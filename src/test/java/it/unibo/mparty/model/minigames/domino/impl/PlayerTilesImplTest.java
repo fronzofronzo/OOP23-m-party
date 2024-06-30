@@ -36,7 +36,7 @@ class PlayerTilesImplTest {
 
     @Test
     void testAddTilesToPlayer() {
-        var fullSet = this.tileFactory.createFullSet();
+        var fullSet = this.tileFactory.createDoubleSixSet();
         var toDistributeP1 = fullSet.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet());
 
         this.playerTiles.addTilesToPlayer(this.p1, toDistributeP1);

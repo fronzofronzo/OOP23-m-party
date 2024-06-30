@@ -29,7 +29,7 @@ public class DominoModelImpl implements DominoModel {
 
     @Override
     public void initDomino(final Player p1, final Player p2) {
-        this.dominoSet = this.dominoFactory.createFullSet();
+        this.dominoSet = this.dominoFactory.createDoubleSixSet();
 
         this.playerTiles.addTilesToPlayer(p1, this.dominoSet.stream().
                 limit(DISTRIBUTION_TILES).collect(Collectors.toSet()));
