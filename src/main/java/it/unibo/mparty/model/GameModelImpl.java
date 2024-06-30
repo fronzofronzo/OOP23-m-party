@@ -21,8 +21,8 @@ import java.util.Random;
 public class GameModelImpl implements GameModel{
 
     private static final int TURNS_NUMBER = 10;
-    private static final int MIN_NUMBER = 4;
-    private static final int MAX_NUMBER = 10;
+    private static final int MIN_COINS = 4;
+    private static final int MAX_COINS = 10;
 
     private final List<Player> players;
     private final GameBoard board;
@@ -113,10 +113,10 @@ public class GameModelImpl implements GameModel{
                 }
             }
             case BONUS -> {
-                actualPlayer.addCoins(random.nextInt(MIN_NUMBER,MAX_NUMBER));
+                actualPlayer.addCoins(random.nextInt(MIN_COINS, MAX_COINS));
             }
             case MALUS -> {
-                actualPlayer.removeCoins(random.nextInt(MIN_NUMBER,MAX_NUMBER));
+                actualPlayer.removeCoins(random.nextInt(MIN_COINS, MAX_COINS));
             }
             case ACTIVE_STAR -> {
             }
