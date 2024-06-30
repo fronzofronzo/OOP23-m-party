@@ -47,6 +47,6 @@ public class GameControllerImpl implements GameController{
 
     @Override
     public void endGame() {
-
+        // this.view.showWinner(this.model.getWinner)
     }
 }
