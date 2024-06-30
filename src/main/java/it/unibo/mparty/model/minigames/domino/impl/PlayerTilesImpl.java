@@ -34,6 +34,11 @@ public class PlayerTilesImpl implements PlayerTiles {
     }
 
     @Override
+    public void addTileToPlayer(final Player player, final Tile tile) {
+        playersTiles.get(player).add(tile);
+    }
+
+    @Override
     public void removeTilesFromPlayer(final Player player, final Tile tile) {
         Set<Tile> tiles = this.playersTiles.get(player);
         if (tiles != null) {
