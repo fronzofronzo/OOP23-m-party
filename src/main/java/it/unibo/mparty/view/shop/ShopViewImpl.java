@@ -1,11 +1,7 @@
 package it.unibo.mparty.view.shop;
 
 
-import java.util.List;
-import java.util.Map;
 
-import it.unibo.mparty.controller.shop.api.ShopController;
-import it.unibo.mparty.controller.shop.impl.ShopControllerImpl;
 import it.unibo.mparty.view.AbstractSceneView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +13,6 @@ import javafx.scene.control.Label;
 
 public class ShopViewImpl extends AbstractSceneView implements ShopView{
 
-    private final ShopController controller = new ShopControllerImpl(this);
 
     @FXML
     private AnchorPane descriptionPane;
@@ -29,7 +24,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
     private SplitPane principalPane;
 
     public ShopViewImpl() {
-        controller.setUpShop(Map.of("Dado",20), List.of("Lanci il dado"));
+        this.getMainController().setUpShop(this);
     }
 
     public void addButton (String item, int cost)
