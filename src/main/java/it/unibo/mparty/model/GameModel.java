@@ -46,4 +46,9 @@ public interface GameModel {
      */
     boolean isOver();
 
+    /**
+     * Activate the effect of slot where is the player that's playing its turn
+     */
+    void activateSlot();
+
 }
