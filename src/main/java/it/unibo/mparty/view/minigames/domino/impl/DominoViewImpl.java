@@ -9,6 +9,7 @@ import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.minigames.domino.api.DominoView;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
