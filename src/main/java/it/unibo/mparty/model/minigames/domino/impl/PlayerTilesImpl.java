@@ -10,27 +10,33 @@ import java.util.Map;
 import java.util.Set;
 
 public class PlayerTilesImpl implements PlayerTiles {
-    private Map<Player,Set<Tile>> playerDomino = new HashMap<>();
+
+    private final Map<Player,Set<Tile>> playerTiles = new HashMap<>();
 
     @Override
     public void addTilesToPlayer(final Player player, final Set<Tile> tiles) {
-        this.playerDomino.computeIfAbsent(player, k -> new HashSet<>()).addAll(tiles);
+        if (!playerTiles.containsKey(player) || this.playerTiles.get(player).isEmpty()){
+            this.playerTiles.computeIfAbsent(player, k -> new HashSet<>()).addAll(tiles);
+        } else {
+            Tile tile = tiles.stream().findFirst().orElse(null);
+            if (tile != null) {
+                this.playerTiles.computeIfAbsent(player, k -> new HashSet<>()).add(tile);
+                tiles.remove(tile);
+            }
+        }
     }
 
     @Override
-    public boolean removeTilesFromPlayer(final Player player, final Tile tile){
-        Set<Tile> tiles = this.playerDomino.get(player);
-        if(tiles == null) return false;
-        return tiles.remove(tile);
+    public void removeTilesFromPlayer(final Player player, final Tile tile){
+        Set<Tile> tiles = this.playerTiles.get(player);
+        if(tiles == null) {
+            return;
+        }
+        tiles.remove(tile);
     }
 
     @Override
     public Set<Tile> getPlayerTiles(final Player player){
-        return this.playerDomino.getOrDefault(player, new HashSet<>());
+        return this.playerTiles.getOrDefault(player, new HashSet<>());
     }
-
-//    @Override
-//    public boolean canPlayerMakeMove(Player player){
-//        return true;
-//    }
 }
