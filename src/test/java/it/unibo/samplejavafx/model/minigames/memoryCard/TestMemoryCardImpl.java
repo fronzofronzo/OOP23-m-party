@@ -10,10 +10,16 @@ import org.junit.jupiter.api.Test;
 
 import java.util.stream.Collectors;
 
+/**
+ * Test class for the {@link MemoryCardModelImpl} class
+ */
 public class TestMemoryCardImpl {
 
     private static MemoryCardModel model;
 
+    /**
+     * Initialization method executed Before all others methods
+     */
     @BeforeAll
     public static void initialise(){
         model = new MemoryCardModelImpl();
