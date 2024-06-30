@@ -25,10 +25,16 @@ public class TestMemoryCardImpl {
         model = new MemoryCardModelImpl();
     }
 
+    /**
+     * Check if flipping correct behavior of model flipping two cards of same type
+     */
     @Test
     public void testClicks(){
-        int i  = 0;
+        final int i  = 0;
         var type = model.getCards().get(i);
-        int j = model.getCards().entrySet().stream().filter(e -> e.getValue() == type && e.getKey() != i).map(e -> e.getKey()).reduce(0, (a,b) -> a+b);
+        final int j = model.getCards().entrySet().stream().filter(e -> e.getValue() == type && e.getKey() != i).map(e -> e.getKey()).reduce(0, (a,b) -> a+b);
+        model.flip(i);
+        model.flip(j);
+        assertEquals(1,model.guessedCardsType().size());
     }
 }
