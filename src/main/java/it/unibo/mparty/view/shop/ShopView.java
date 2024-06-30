@@ -1,5 +1,7 @@
 package it.unibo.mparty.view.shop;
 
+import java.util.Map;
+
 import it.unibo.mparty.view.SceneView;
 
 /**
@@ -7,5 +9,6 @@ import it.unibo.mparty.view.SceneView;
  */
 public interface ShopView extends SceneView{
     
-    public void setUpShop();
+    public void setUpShop(Map<String,Integer> itemMap, String descriptionItem);
+
 }
