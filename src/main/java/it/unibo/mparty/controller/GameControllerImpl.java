@@ -16,13 +16,12 @@ public class GameControllerImpl implements GameController{
     }
 
     @Override
-    public int rollDice() {
-        return this.model.rollDice();        
+    public void rollDice(){
     }
 
     @Override
-    public Position movePlayer() {
-        return this.model.movePlayer();
+    public void movePlayer() {
+
     }
 
     @Override

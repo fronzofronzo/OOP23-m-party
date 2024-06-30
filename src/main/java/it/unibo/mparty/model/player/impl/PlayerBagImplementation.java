@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class PlayerBagImplementation implements PlayerBag {
 
-    private final Optional<Item>[] items;
+    private final Optional[] items;
 
     public PlayerBagImplementation(int numberOfItems) {
         this.items = new Optional[numberOfItems];
@@ -20,7 +20,7 @@ public class PlayerBagImplementation implements PlayerBag {
     @Override
     public Item getItem(int i) {
         if(items[i].isPresent()){
-            return items[i].get();
+            return (Item)items[i].get();
         } else {
             return null;
         }
@@ -46,6 +46,6 @@ public class PlayerBagImplementation implements PlayerBag {
 
     @Override
     public boolean isFull() {
-        return Arrays.stream(items).filter(o -> o.isPresent()).count() == items.length;
+        return Arrays.stream(items).filter(Optional::isPresent).count() == items.length;
     }
 }
