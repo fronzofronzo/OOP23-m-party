@@ -7,8 +7,6 @@ import java.util.LinkedList;
 
 public class BoardTileImpl implements BoardTile {
     private final LinkedList<Tile> boardTiles;
-    private int leftExtrem;
-    private int rightExtrem;
 
     public BoardTileImpl() {
         this.boardTiles = new LinkedList<>();
@@ -20,20 +18,16 @@ public class BoardTileImpl implements BoardTile {
     }
 
     @Override
-    public boolean canPlaceTile(Tile tile){
+    public boolean canPlaceTile(final Tile tile){
         if (this.boardTiles.isEmpty()){
             this.boardTiles.add(tile);
-            this.leftExtrem = this.boardTiles.getFirst().getSideA();
-            this.rightExtrem = this.boardTiles.getFirst().getSideB();
             return true;
         }
 
-        if (tile.canMatchLeft(leftExtrem)){
-            leftExtrem = tile.getSideA();
+        if (this.boardTiles.getFirst().match(tile)) {
             this.boardTiles.addFirst(tile);
             return true;
-        } else if (tile.canMatchRight(rightExtrem)){
-            rightExtrem = tile.getSideB();
+        } else if (this.boardTiles.getLast().match(tile)) {
             this.boardTiles.addLast(tile);
             return true;
         }
