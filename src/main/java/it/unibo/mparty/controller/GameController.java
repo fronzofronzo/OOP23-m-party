@@ -1,14 +1,15 @@
 package it.unibo.mparty.controller;
 
 import it.unibo.mparty.model.GameModel;
+import it.unibo.mparty.model.item.impl.ItemName;
 
 public interface GameController {
 
-    void rollDice();
+    int rollDice();
 
     void movePlayer();
 
-    boolean buyItem();
+    boolean buyItem(ItemName item);
 
     void startGame(GameModel model);
 
