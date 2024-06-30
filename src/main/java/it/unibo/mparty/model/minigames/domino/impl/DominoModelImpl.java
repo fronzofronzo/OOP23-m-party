@@ -43,14 +43,13 @@ public class DominoModelImpl implements DominoModel {
     public boolean isPlayer1Turn(final Player p1, final Player p2) {
         Random random = new Random();
         if (this.boardTile.getBoardTiles().isEmpty()) {
-            this.actualTurn = getDoubleTiles(p1) > getDoubleTiles(p2) ||
-                    (getDoubleTiles(p1) == getDoubleTiles(p2) && (random.nextBoolean()));
+            this.actualTurn = getDoubleTiles(p1) > getDoubleTiles(p2) || random.nextBoolean();
         }
         return this.actualTurn;
     }
 
     private int getDoubleTiles(final Player player) {
-        return playerTiles.getPlayerTiles(player).stream()
+        return this.playerTiles.getPlayerTiles(player).stream()
                 .filter(Tile::isDoubleSide)
                 .flatMapToInt(tile -> IntStream.of(tile.getSideA(), tile.getSideB()))
                 .max()
@@ -82,5 +81,10 @@ public class DominoModelImpl implements DominoModel {
     @Override
     public PlayerTiles getPlayerTiles() {
         return this.playerTiles;
+    }
+
+    @Override
+    public BoardTile getBoardTile() {
+        return  this.boardTile;
     }
 }
