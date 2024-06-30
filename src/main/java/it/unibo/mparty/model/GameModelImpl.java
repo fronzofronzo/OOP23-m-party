@@ -57,7 +57,7 @@ public class GameModelImpl implements GameModel{
 
     @Override
     public String getActiveMinigame() {
-        return "";
+        return this.minigameHandler.getMinigame();
     }
 
     @Override
