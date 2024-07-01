@@ -4,6 +4,7 @@ import it.unibo.mparty.model.minigames.domino.api.Side;
 import it.unibo.mparty.model.minigames.domino.api.Tile;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public class TileImpl implements Tile {
 
@@ -34,14 +35,12 @@ public class TileImpl implements Tile {
         if (matchedSideA.isPresent()) {
             sideA.setMatched();
             matchedSideA.get().setMatched();
-            //tile.getSideA().setMatched();
             return true;
         }
         Optional<Side> matchedSideB = this.canMatchSide(sideB, tile);
         if (matchedSideB.isPresent()) {
             sideB.setMatched();
             matchedSideB.get().setMatched();
-            //tile.getSideA().setMatched();
             return true;
         }
         return false;
