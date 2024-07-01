@@ -5,9 +5,11 @@ import it.unibo.mparty.model.player.api.Player;
 import java.util.Set;
 
 public interface PlayerTiles {
-    void addTilesToPlayer(Player player, Set<Tile> tiles);
+    void initializePlayerTiles(Player player, Set<Tile> tiles);
 
     void addTileToPlayer(Player player, Tile tile);
+
+    boolean canPlayerPlace(Player player, BoardTile boardTile);
 
     void removeTilesFromPlayer(Player player, Tile tile);
 

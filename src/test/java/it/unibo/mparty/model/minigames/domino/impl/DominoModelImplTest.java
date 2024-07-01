@@ -81,7 +81,7 @@ class DominoModelImplTest {
     }
 
     @Test
-    void testAddTile() {
+    void testCanDrawTile() {
         this.model.initDomino(this.player1, this.player2);
 
         // Get initial set of player1
@@ -97,7 +97,7 @@ class DominoModelImplTest {
         this.model.checkMove(this.player1, invalidTile);
 
         // Draw a tile from tileSet to player1
-        this.model.addTile(this.player1);
+        this.model.canDrawTile(this.player1);
 
         // Get update set of player1
         Set<Tile> updatedTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);

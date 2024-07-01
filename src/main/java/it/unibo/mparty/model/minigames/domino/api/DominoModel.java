@@ -12,7 +12,7 @@ public interface DominoModel {
 
     boolean checkMove(Player player, Tile domino);
 
-    void addTile(Player player);
+    boolean canDrawTile(Player player);
 
     Player getWinner(Player p1, Player p2);
 

@@ -38,7 +38,7 @@ public class SideImpl implements Side {
     public String toString() {
         return "SideImpl{" +
                 "value=" + value +
-                ", isMarched=" + isMatched +
+                ", isMatched=" + isMatched +
                 "}\n";
     }
 

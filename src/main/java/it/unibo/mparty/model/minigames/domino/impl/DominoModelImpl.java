@@ -32,11 +32,11 @@ public class DominoModelImpl implements DominoModel {
     public void initDomino(final Player p1, final Player p2) {
         this.dominoSet = this.dominoFactory.createDoubleSixSet();
 
-        this.playerTiles.addTilesToPlayer(p1,
+        this.playerTiles.initializePlayerTiles(p1,
                 this.dominoSet.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet()));
         this.dominoSet.removeAll(this.playerTiles.getPlayerTiles(p1));
 
-        this.playerTiles.addTilesToPlayer(p2,
+        this.playerTiles.initializePlayerTiles(p2,
                 this.dominoSet.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet()));
         this.dominoSet.removeAll(this.playerTiles.getPlayerTiles(p2));
     }
@@ -70,12 +70,16 @@ public class DominoModelImpl implements DominoModel {
     }
 
     @Override
-    public void addTile(final Player player){
-        if (!this.checkMove(player, this.selectedTile)) {
-            Tile newTile = dominoSet.iterator().next();
-            dominoSet.remove(newTile);
-            this.playerTiles.addTileToPlayer(player, newTile);
+    public boolean canDrawTile(final Player player){
+        if (!this.playerTiles.canPlayerPlace(player, this.boardTile)) {
+            if (!this.dominoSet.isEmpty()) {
+                Tile newTile = this.dominoSet.iterator().next();
+                this.dominoSet.remove(newTile);
+                this.playerTiles.addTileToPlayer(player, newTile);
+                return true;
+            }
         }
+        return false;
     }
 
     @Override
