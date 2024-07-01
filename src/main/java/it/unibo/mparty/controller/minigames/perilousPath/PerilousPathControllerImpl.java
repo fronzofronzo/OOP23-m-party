@@ -40,5 +40,4 @@ public class PerilousPathControllerImpl implements  PerilousPathController{
         this.view.hitTile(type);
     }
 
-
 }
