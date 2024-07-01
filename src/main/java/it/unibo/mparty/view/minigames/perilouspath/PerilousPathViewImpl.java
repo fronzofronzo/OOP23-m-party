@@ -20,7 +20,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     @FXML
     private GridPane gridPane;
     private Button button;
-    private int size;
+    private final int size;
 
     public PerilousPathViewImpl(int size) {
         this.size = size;
