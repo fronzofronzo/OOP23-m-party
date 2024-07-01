@@ -1,5 +1,6 @@
 package it.unibo.mparty.view.minigames.nanogram.api;
 
+import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.minigames.nanogram.util.StatusMessage;
 import it.unibo.mparty.view.minigames.MinigameView;
 
@@ -11,7 +12,8 @@ import java.util.List;
  */
 public interface NanogramView extends MinigameView {
 
-    void init(int boardSize);
+    void initGrid(int boardSize);
+
     /**
      * Sets the hints for each row in the Nanogram grid.
      *
@@ -25,10 +27,6 @@ public interface NanogramView extends MinigameView {
      * @param columnHints a list of lists of integers representing the hints for each column.
      */
     void setColumnHints(List<List<Integer>> columnHints);
-
-    void setCorrectCell(int row, int col, boolean state);
-
-    void setErrorCell(int row, int col, boolean state);
 
     /**
      * Updates the display of the remaining lives in the game.
@@ -55,4 +53,8 @@ public interface NanogramView extends MinigameView {
      * This method is called when the game is completed successfully.
      */
     void fillRemainingCellsWithCrosses();
+
+    void fillCell(boolean isCorrect);
+
+    void crossCell(boolean isCorrect);
 }
