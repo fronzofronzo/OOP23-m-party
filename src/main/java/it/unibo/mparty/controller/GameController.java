@@ -4,7 +4,7 @@ import it.unibo.mparty.model.GameModel;
 
 public interface GameController {
 
-    void rollDice();
+    int rollDice();
 
     void movePlayer();
 

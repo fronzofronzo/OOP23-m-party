@@ -15,7 +15,7 @@ public class GameViewImpl extends Application implements GameView{
     private final static String PATH = "/layouts/";
 
     private Stage stage;
-    private final GameController controller = new GameControllerImpl();
+    private final GameController controller = new GameControllerImpl(this);
 
     @Override
     public void setScene(String path) throws IOException {
@@ -34,4 +34,6 @@ public class GameViewImpl extends Application implements GameView{
         this.stage.show();
         this.setScene("GameBoard.fxml");
     }
+
+    
 }

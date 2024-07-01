@@ -5,6 +5,7 @@ import java.io.IOException;
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.GameView;
+import javafx.scene.layout.Pane;
 
 public class GameControllerImpl implements GameController{
 
@@ -21,8 +22,8 @@ public class GameControllerImpl implements GameController{
     }
 
     @Override
-    public Position movePlayer() {
-        return this.model.movePlayer();
+    public void movePlayer() {
+         this.model.movePlayer();
     }
 
     @Override
@@ -35,9 +36,18 @@ public class GameControllerImpl implements GameController{
         this.model = model;
         try {
             this.view.setScene("GameBoard.fxml");
+            this.drawBoard();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        }
+    }
+
+    private void drawBoard() {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                this.view.
+            }
         }
     }
 
