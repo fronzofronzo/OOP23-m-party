@@ -17,7 +17,7 @@ public class TestMemorySweep {
 
     private static MemorySweep model;
 
-    @BeforeAll
+    @Test
     public void initial(){
         model = new MemorySweepImpl(4);
         assertTrue(model.getTurn());
