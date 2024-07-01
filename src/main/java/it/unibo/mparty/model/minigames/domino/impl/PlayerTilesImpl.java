@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.minigames.domino.impl;
 
+import it.unibo.mparty.model.minigames.domino.api.BoardTile;
 import it.unibo.mparty.model.minigames.domino.api.Tile;
 import it.unibo.mparty.model.minigames.domino.api.PlayerTiles;
 import it.unibo.mparty.model.player.api.Player;
@@ -15,27 +16,24 @@ public class PlayerTilesImpl implements PlayerTiles {
 
 
     @Override
-    public void addTilesToPlayer(final Player player, final Set<Tile> tiles) {
+    public void initializePlayerTiles(final Player player, final Set<Tile> tiles) {
         playersTiles.put(player, tiles);
-
-//        if (!playersTiles.containsKey(player) || this.playersTiles.get(player).isEmpty()) {
-//            this.playersTiles.computeIfAbsent(player, k -> new HashSet<>()).addAll(tiles);
-//        } else {
-//            Tile tile = tiles.stream().findFirst().orElse(null);
-//            if (tile != null) {
-//                Set<Tile> set = this.playersTiles.get(player);
-//                set.put(tile);
-//                playersTiles.replace(player, set);
-//
-//                this.playersTiles.computeIfAbsent(player, k -> new HashSet<>()).add(tile);
-//                tiles.remove(tile);
-//            }
-//        }
     }
 
     @Override
     public void addTileToPlayer(final Player player, final Tile tile) {
         playersTiles.get(player).add(tile);
+    }
+
+    @Override
+    public boolean canPlayerPlace(Player player, BoardTile boardTile){
+        for (final Tile tile : playersTiles.get(player)) {
+           if (!boardTile.canPlaceTile(tile)){
+               return false;
+           }
+        }
+        return true;
+        //return false;
     }
 
     @Override
