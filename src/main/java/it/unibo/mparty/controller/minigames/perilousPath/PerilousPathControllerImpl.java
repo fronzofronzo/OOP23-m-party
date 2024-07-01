@@ -16,19 +16,29 @@ public class PerilousPathControllerImpl implements  PerilousPathController{
     private PerilousPath model;
     private PerilousPathView view;
     private final static int SIZE = 8;
-    private final Map<Button, AbstractPosition> map = new HashMap<>();
+    private final static int SECONDS = 6000;
 
-    @Override
-    public void setUp() {
+    public PerilousPathControllerImpl(){
         this.model = new PerilousPathImpl(SIZE);
-        this.view = new PerilousPathViewImpl();
+        this.view = new PerilousPathViewImpl(SIZE);
         this.model.setBombs();
         this.model.setBalls();
+
     }
 
     @Override
-    public PerilousPath.Type hit(Button button) {
-        var pos = this.map.get(button);
-        return this.model.hit(pos);
+    public void setUp() throws InterruptedException {
+        this.view.setObserver(this);
+        this.view.setUpView(this.model.getBalls(),this.model.getBombs());
+        Thread.sleep(SECONDS);
+        this.view.hideBombs(this.model.getBombs());
     }
+
+    @Override
+    public void hit(AbstractPosition p) {
+        var type = this.model.hit(p);
+        this.view.hitTile(type);
+    }
+
+
 }
