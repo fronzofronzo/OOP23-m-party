@@ -20,7 +20,7 @@ public class GameViewImpl extends Application implements GameView{
 
     @Override
     public void setScene(String path) throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + path)) ;
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + path));
         final Parent root = loader.load(getClass().getResourceAsStream(PATH + path));
         final Scene scene = new Scene(root, this.stage.getWidth(), this.stage.getHeight());
         final SceneView sceneView = loader.<SceneView>getController();
@@ -34,7 +34,7 @@ public class GameViewImpl extends Application implements GameView{
         this.stage = primaryStage;
         this.setStageSize();
         this.stage.show();
-        this.setScene("GameBoard.fxml");
+        this.setScene("minigames/memoryCard.fxml");
     }
 
     private void setStageSize(){
