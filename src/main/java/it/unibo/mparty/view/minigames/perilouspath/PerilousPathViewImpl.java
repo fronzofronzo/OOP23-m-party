@@ -81,7 +81,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         var x = GridPane.getRowIndex((Node) button);
         var y = GridPane.getColumnIndex((Node) button);
         var pos = new PathPosition(x,y,7);
-        //this.observer.hit(pos);
+        this.observer.hit(pos);
     }
 
 
