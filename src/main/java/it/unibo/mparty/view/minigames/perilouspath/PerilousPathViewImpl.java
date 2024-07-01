@@ -20,6 +20,11 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     @FXML
     private GridPane gridPane;
     private Button button;
+    private int size;
+
+    public PerilousPathViewImpl(int size) {
+        this.size = size;
+    }
 
     private PerilousPathController observer;
     @Override
@@ -32,7 +37,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         for(var child: this.gridPane.getChildren()){
             var x = GridPane.getRowIndex(child);
             var y = GridPane.getColumnIndex(child);
-            var pos = new PathPosition(x,y,7);
+            var pos = new PathPosition(x,y,this.size);
             if(balls.contains(pos)){
                 if (child instanceof Button) {
                     ((Button) child).setText("O");
@@ -51,7 +56,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         for(var child: this.gridPane.getChildren()){
             var x = GridPane.getRowIndex(child);
             var y = GridPane.getColumnIndex(child);
-            var pos = new PathPosition(x,y,7);
+            var pos = new PathPosition(x,y,this.size);
             if(bombs.contains(pos)){
                 if (child instanceof Button) {
                     ((Button) child).setText(" ");
