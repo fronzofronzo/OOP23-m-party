@@ -3,6 +3,7 @@ package it.unibo.mparty.model.gameBoard.impl;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 import java.util.List;
@@ -127,6 +128,15 @@ public abstract class AbstractBoardImpl implements GameBoard{
     @Override
     public Map<Position,Slot> getBoard() {
         return Collections.unmodifiableMap(this.board);
+    }
+
+    @Override
+    public Map<Position,SlotType> getSlotTypeBoard() {
+        Map<Position,SlotType> output = new HashMap<>();
+        for (Entry<Position, Slot> entry : this.board.entrySet()) {
+            output.put(entry.getKey(), entry.getValue().getSlotType());
+        }
+        return Collections.unmodifiableMap(output);
     }
 
     /**

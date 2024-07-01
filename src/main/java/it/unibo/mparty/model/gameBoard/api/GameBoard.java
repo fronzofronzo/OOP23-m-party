@@ -57,6 +57,12 @@ public interface GameBoard {
     Map<Position,Slot> getBoard();
 
     /**
+     * Get the actual game board's map but with only SlotTypes
+     * @return the map of the actual board tha has as key a position and it has as value a {@link Slot}
+     */
+    Map<Position,SlotType> getSlotTypeBoard();
+
+    /**
      * Get the board's {@link BoardType}
      * @return the {@link BoardType}
      */
