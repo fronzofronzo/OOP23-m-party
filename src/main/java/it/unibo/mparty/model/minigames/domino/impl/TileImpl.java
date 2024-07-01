@@ -15,17 +15,33 @@ public class TileImpl implements Tile {
         this.sideB = new SideImpl(sideB);
     }
 
-    private boolean canMatchSide(final Side side, final Tile tile){
-        return !side.isMatched() && (side.getValue() == tile.getSideA().getValue() || side.getValue() == tile.getSideB().getValue());
+    private Optional<Side> canMatchSide(final Side side, final Tile tile){
+        if (side.isMatched()) {
+            return Optional.empty();
+        } else
+        if (side.getValue() == tile.getSideA().getValue()) {
+            return Optional.of(tile.getSideA());
+        } else if (side.getValue() == tile.getSideB().getValue()) {
+            return Optional.of(tile.getSideB());
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
     public boolean match(final Tile tile){
-        if (canMatchSide(sideA, tile)) {
+        Optional<Side> matchedSideA = this.canMatchSide(sideA, tile);
+        if (matchedSideA.isPresent()) {
             sideA.setMatched();
+            matchedSideA.get().setMatched();
+            //tile.getSideA().setMatched();
             return true;
-        } else if (canMatchSide(sideB, tile)) {
+        }
+        Optional<Side> matchedSideB = this.canMatchSide(sideB, tile);
+        if (matchedSideB.isPresent()) {
             sideB.setMatched();
+            matchedSideB.get().setMatched();
+            //tile.getSideA().setMatched();
             return true;
         }
         return false;
