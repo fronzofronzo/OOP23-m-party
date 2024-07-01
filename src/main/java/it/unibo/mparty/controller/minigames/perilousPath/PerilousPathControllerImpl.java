@@ -13,8 +13,8 @@ import java.util.Map;
 
 public class PerilousPathControllerImpl implements  PerilousPathController{
 
-    private PerilousPath model;
-    private PerilousPathView view;
+    private final PerilousPath model;
+    private final PerilousPathView view;
     private final static int SIZE = 8;
     private final static int SECONDS = 6000;
 
