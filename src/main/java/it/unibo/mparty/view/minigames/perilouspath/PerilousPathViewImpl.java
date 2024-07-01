@@ -18,7 +18,7 @@ import java.util.List;
 public class PerilousPathViewImpl extends AbstractSceneView implements PerilousPathView{
 
     @FXML
-    private GridPane gridPane;
+    private GridPane myGridPane;
     private Button button;
     private final int size;
 
@@ -34,7 +34,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
 
     @Override
     public void setUpView(List<AbstractPosition> balls, List<AbstractPosition> bombs) {
-        for(var child: this.gridPane.getChildren()){
+        for(var child: this.myGridPane.getChildren()){
             var pos = this.buttonPosition(child);
             if(balls.contains(pos)){
                 if (child instanceof Button) {
@@ -51,7 +51,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
 
     @Override
     public void hideBombs(List<AbstractPosition> bombs) {
-        for(var child: this.gridPane.getChildren()){
+        for(var child: this.myGridPane.getChildren()){
             var pos = this.buttonPosition(child);
             if(bombs.contains(pos)){
                 if (child instanceof Button) {
