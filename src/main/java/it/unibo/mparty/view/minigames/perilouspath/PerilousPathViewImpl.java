@@ -9,6 +9,7 @@ import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.GameView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
@@ -18,6 +19,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
 
     @FXML
     private GridPane gridPane;
+    private Button button;
 
     private PerilousPathController observer;
     @Override
@@ -60,8 +62,24 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
 
     @Override
     public void hitTile(PerilousPath.Type type) {
-
+        switch(type){
+            case PATH -> this.button.setText("*");
+            case BOMB -> System.out.println("perso");
+            case BALL -> System.out.println("vinto");
+            case WRONG -> System.out.println("sbagliato");
+        }
     }
+
+    @Override
+    public void buttonClicked(ActionEvent e) {
+        this.button = (Button) e.getSource();
+        var x = GridPane.getRowIndex((Node) button);
+        var y = GridPane.getColumnIndex((Node) button);
+        var pos = new PathPosition(x,y,7);
+        //this.observer.hit(pos);
+    }
+
+
 
 
     @Override
@@ -78,7 +96,5 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     public GameView getMainView() {
         return super.getMainView();
     }
-
-
 
 }
