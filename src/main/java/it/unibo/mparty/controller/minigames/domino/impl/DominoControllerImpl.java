@@ -3,6 +3,7 @@ package it.unibo.mparty.controller.minigames.domino.impl;
 import it.unibo.mparty.controller.minigames.domino.api.DominoController;
 import it.unibo.mparty.model.minigames.domino.api.DominoModel;
 import it.unibo.mparty.model.minigames.domino.impl.DominoModelImpl;
+import it.unibo.mparty.model.minigames.domino.impl.TileImpl;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.view.minigames.domino.api.DominoView;
 
@@ -11,6 +12,7 @@ public class DominoControllerImpl implements DominoController {
     private final DominoView view;
     private final Player player1;
     private final Player player2;
+    private boolean isPlayer1Turn;
 
     public DominoControllerImpl(final DominoView view, final Player player1, final Player player2) {
         this.model = new DominoModelImpl();
@@ -23,15 +25,58 @@ public class DominoControllerImpl implements DominoController {
     public void setUp() {
         this.model.initDomino(this.player1, this.player2);
 
-        this.view.setPlayerTiles(true, this.model.getPlayersTiles().getPlayerTiles(this.player1));
-        this.view.setPlayerTiles(false, this.model.getPlayersTiles().getPlayerTiles(this.player2));
-
         this.view.setPlayerName(true, this.player1.getUsername());
         this.view.setPlayerName(false, this.player2.getUsername());
 
-        boolean isPlayer1Turn = this.model.isPlayer1Turn(this.player1, this.player2);
+        this.updatePlayersTiles();
+        this.updateTurn();
+    }
+
+    @Override
+    public void playTile(final int sideA, final int sideB) {
+        if (this.isPlayer1Turn) {
+            if (!this.model.checkMove(this.player1, new TileImpl(sideA, sideB))) {
+                this.view.setErrorMessage();
+            }
+        } else {
+            if (!this.model.checkMove(this.player2, new TileImpl(sideA, sideB))) {
+                this.view.setErrorMessage();
+            }
+        }
+        this.updateTurn();
+        this.updatePlayersTiles();
+        this.updateBoard();
+    }
+
+    @Override
+    public void drawTile() {
+        if (this.isPlayer1Turn) {
+            this.model.addTile(this.player1);
+        } else {
+            this.model.addTile(this.player2);
+        }
+
+        this.updateTurn();
+        this.updatePlayersTiles();
+        this.updateBoard();
+    }
+
+    @Override
+    public void updatePlayersTiles() {
+        this.view.setPlayerTiles(true, this.model.getPlayersTiles().getPlayerTiles(this.player1));
+        this.view.setPlayerTiles(false, this.model.getPlayersTiles().getPlayerTiles(this.player2));
+    }
+
+    @Override
+    public void updateTurn() {
+        this.isPlayer1Turn = this.model.isPlayer1Turn(this.player1, this.player2);
 
         this.view.setTurn(isPlayer1Turn, isPlayer1Turn ?
                 this.player1.getUsername() : this.player2.getUsername());
+    }
+
+    @Override
+    public void updateBoard() {
+        this.view.setBoard(this.model.getBoardTile().getBoardTiles());
     }
 }
