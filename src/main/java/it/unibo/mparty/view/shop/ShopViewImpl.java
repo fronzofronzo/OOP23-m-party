@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 
 public class ShopViewImpl extends AbstractSceneView implements ShopView{
 
+    private int i=1;
+    private int j=1;
 
     @FXML
     private AnchorPane descriptionPane;
@@ -30,16 +32,21 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
         but.setText("Acquista "+ item + ": " + cost);
         but.setOnAction(this::selectItem);
         buttonPane.getChildren().add(but);
+        AnchorPane.setTopAnchor(but, i*50.0);
+        i++;
+        
     }
 
     public void addDescription(String description)
     {
         final Label lb = new Label(description);
         descriptionPane.getChildren().add(lb);
+        AnchorPane.setTopAnchor(lb,j*50.0);
+        j++;
     }
 
     private void selectItem(ActionEvent e) {
-
+        this.getMainController().selectItem();
     }
     
 }

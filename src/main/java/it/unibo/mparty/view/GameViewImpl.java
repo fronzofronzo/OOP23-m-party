@@ -1,6 +1,7 @@
 package it.unibo.mparty.view;
 
 import it.unibo.mparty.controller.GameControllerImpl;
+import it.unibo.mparty.view.shop.ShopView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +17,7 @@ public class GameViewImpl extends Application implements GameView{
 
     private Stage stage;
     private final GameController controller = new GameControllerImpl();
+    private SceneView view;
 
     @Override
     public void setScene(String path) throws IOException {
@@ -23,6 +25,7 @@ public class GameViewImpl extends Application implements GameView{
         final Parent root = loader.load(getClass().getResourceAsStream(PATH+path));
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
         final SceneView sceneView = loader.<SceneView>getController();
+        view = sceneView;
         sceneView.init(this,this.controller);
         this.stage.setScene(scene);
         this.stage.show();
@@ -33,5 +36,6 @@ public class GameViewImpl extends Application implements GameView{
         this.stage = primaryStage;
         this.stage.show();
         this.setScene("Shop.fxml");
+        this.controller.setUpShop((ShopView)view);
     }
 }
