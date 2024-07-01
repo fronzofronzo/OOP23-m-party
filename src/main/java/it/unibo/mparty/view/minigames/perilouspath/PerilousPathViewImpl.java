@@ -35,9 +35,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     @Override
     public void setUpView(List<AbstractPosition> balls, List<AbstractPosition> bombs) {
         for(var child: this.gridPane.getChildren()){
-            var x = GridPane.getRowIndex(child);
-            var y = GridPane.getColumnIndex(child);
-            var pos = new PathPosition(x,y,this.size);
+            var pos = this.buttonPosition(child);
             if(balls.contains(pos)){
                 if (child instanceof Button) {
                     ((Button) child).setText("O");
@@ -54,9 +52,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     @Override
     public void hideBombs(List<AbstractPosition> bombs) {
         for(var child: this.gridPane.getChildren()){
-            var x = GridPane.getRowIndex(child);
-            var y = GridPane.getColumnIndex(child);
-            var pos = new PathPosition(x,y,this.size);
+            var pos = this.buttonPosition(child);
             if(bombs.contains(pos)){
                 if (child instanceof Button) {
                     ((Button) child).setText(" ");
@@ -78,9 +74,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     @Override
     public void buttonClicked(ActionEvent e) {
         this.button = (Button) e.getSource();
-        var x = GridPane.getRowIndex((Node) button);
-        var y = GridPane.getColumnIndex((Node) button);
-        var pos = new PathPosition(x,y,7);
+        var pos = this.buttonPosition(this.button);
         this.observer.hit(pos);
     }
 
@@ -100,6 +94,10 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     @Override
     public GameView getMainView() {
         return super.getMainView();
+    }
+
+    private AbstractPosition buttonPosition(Node child){
+        return new PathPosition(GridPane.getRowIndex(child),GridPane.getColumnIndex(child),this.size);
     }
 
 }
