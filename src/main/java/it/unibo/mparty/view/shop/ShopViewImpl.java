@@ -23,9 +23,6 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
     @FXML
     private SplitPane principalPane;
 
-    public ShopViewImpl() {
-        this.getMainController().setUpShop(this);
-    }
 
     public void addButton (String item, int cost)
     {
