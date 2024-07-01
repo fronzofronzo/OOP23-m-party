@@ -24,5 +24,7 @@ public class DominoControllerImpl implements DominoController {
         this.model.initDomino(player1, player2);
         this.view.setPlayerTiles(true, this.model.getPlayersTiles().getPlayerTiles(player1));
         this.view.setPlayerTiles(false, this.model.getPlayersTiles().getPlayerTiles(player2));
+        this.view.setPlayerName(true, this.player1.getUsername());
+        this.view.setPlayerName(false, this.player2.getUsername());
     }
 }

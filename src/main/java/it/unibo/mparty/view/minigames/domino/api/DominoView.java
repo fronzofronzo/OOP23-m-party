@@ -7,4 +7,6 @@ import java.util.Set;
 
 public interface DominoView extends SceneView {
     void setPlayerTiles(boolean isPlayer1, Set<Tile> playerTiles);
+
+    void setPlayerName(boolean isPlayer1, String playerName);
 }
