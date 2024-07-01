@@ -1,6 +1,8 @@
 package it.unibo.mparty.view;
 
 import it.unibo.mparty.controller.GameControllerImpl;
+import it.unibo.mparty.model.GameModelImpl;
+import it.unibo.mparty.view.GameBoardView.GameBoardView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +15,7 @@ public class GameViewImpl extends Application implements GameView{
 
     private final static double DEFAULT_DIMENSION_VALUE = -1;
     private final static String PATH = "/layouts/";
+    private GameBoardView boardView;
 
     private Stage stage;
     private final GameController controller = new GameControllerImpl(this);
@@ -24,6 +27,7 @@ public class GameViewImpl extends Application implements GameView{
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
         final SceneView sceneView = loader.<SceneView>getController();
         sceneView.init(this,this.controller);
+        this.controller.startGame(new GameModelImpl(null, ""));
         this.stage.setScene(scene);
         this.stage.show();
     }
