@@ -1,18 +1,10 @@
 package it.unibo.mparty.controller.minigames.nanogram.api;
 
-import it.unibo.mparty.model.minigames.nanogram.util.CellState;
-
 /**
  * Interface representing the controller for a Nanogram game.
  * This controller handles the interactions between the model and the view.
  */
 public interface NanogramController {
-
-    /**
-     * Starts the Nanogram game.
-     * This method initializes the game, setting up the model and view as needed.
-     */
-    void startGame();
 
     /**
      * Updates the model with the specified cell state at the given position.
@@ -23,4 +15,8 @@ public interface NanogramController {
      * @param state the new state of the cell (e.g., FILLED, CROSSED)
      */
     void updateModel(int row, int col, boolean state);
+
+    void checkCell(int row, int column);
+
+    void setFillState(boolean state);
 }

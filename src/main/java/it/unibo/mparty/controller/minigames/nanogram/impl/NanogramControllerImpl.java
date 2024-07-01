@@ -2,9 +2,7 @@ package it.unibo.mparty.controller.minigames.nanogram.impl;
 
 import it.unibo.mparty.controller.minigames.nanogram.api.NanogramController;
 import it.unibo.mparty.model.minigames.nanogram.impl.NanogramModelImpl;
-import it.unibo.mparty.model.minigames.nanogram.util.CellState;
 import it.unibo.mparty.model.minigames.nanogram.util.Difficulty;
-import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.minigames.nanogram.util.StatusMessage;
 import it.unibo.mparty.view.minigames.nanogram.impl.NanogramViewImpl;
 
@@ -17,27 +15,24 @@ public class NanogramControllerImpl implements NanogramController {
     private final NanogramViewImpl view;
     private final NanogramModelImpl model;
 
+
+    private boolean fillState = true;
+
     /**
-     * Constructs a new {@code NanogramControllerImpl} with the specified view.
+     * Constructs a new {@link NanogramControllerImpl} with the specified view.
      * Initializes the model for the Nanogram game.
      *
      * @param view the view for the Nanogram game.
      */
-    public NanogramControllerImpl(final NanogramViewImpl view) {
+    public NanogramControllerImpl(final NanogramViewImpl view, final Difficulty difficulty) {
         this.view = view;
-        this.model = new NanogramModelImpl();
+        this.model = new NanogramModelImpl(difficulty);
+        this.initializeGame();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void startGame() {
-        this.model.initializeGame(Difficulty.SIMPLE);
-        this.model.getLives();
-
-        this.view.init(this.model.getBoardSize());
-
+    private void initializeGame() {
+        this.view.updateLives(this.model.getLives());
+        this.view.initGrid(this.model.getBoardSize());
         this.view.setRowHints(this.model.getRowHints());
         this.view.setColumnHints(this.model.getColumnHints());
     }
@@ -47,14 +42,36 @@ public class NanogramControllerImpl implements NanogramController {
      */
     @Override
     public void updateModel(final int row, final int col, final boolean state) {
-        final boolean isCorrect = this.model.isMoveValid(row, col, state);
-        if (isCorrect) {
-            this.view.setCorrectCell(row, col, state);
-        } else {
-            this.view.setErrorCell(row,col,state);
-        }
+//        final boolean isCorrect = this.model.isMoveValid(row, col, state);
+//        if (isCorrect) {
+//            this.view.setCorrectCell(row, col, state);
+//        } else {
+//            this.view.setErrorCell(row,col,state);
+//        }
+//
+//        this.model.fillSelectedBoard(row, col, state);
+//        this.view.updateLives(this.model.getLives());
+//
+//        if (this.model.isGameOver()) {
+//            this.view.disableAllCells();
+//            this.view.displayStatusMessage(StatusMessage.LOSE);
+//        } else if (this.model.isGameComplete()) {
+//            this.view.fillRemainingCellsWithCrosses();
+//            this.view.displayStatusMessage(StatusMessage.WIN);
+//        }
+    }
 
-        this.model.fillSelectedBoard(row, col, state);
+    @Override
+    public void checkCell(int row, int col) {
+        final boolean isCorrect = this.model.checkAndSelectCell(row, col, this.fillState);
+//        if (isCorrect) {
+
+
+        if (this.fillState) {
+            this.view.fillCell(isCorrect);
+        } else {
+            this.view.crossCell(isCorrect);
+        }
         this.view.updateLives(this.model.getLives());
 
         if (this.model.isGameOver()) {
@@ -64,5 +81,18 @@ public class NanogramControllerImpl implements NanogramController {
             this.view.fillRemainingCellsWithCrosses();
             this.view.displayStatusMessage(StatusMessage.WIN);
         }
+//        }
+//        } else {
+//            if (this.fillState) {
+//                this.view.crossCell(row, col, isCorrect);
+//            } else {
+//                this.view.fillCell(row, col, isCorrect);
+//            }
+//        }
+    }
+
+    @Override
+    public void setFillState(boolean state) {
+        this.fillState = state;
     }
 }
