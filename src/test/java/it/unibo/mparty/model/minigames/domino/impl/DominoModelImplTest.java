@@ -19,38 +19,38 @@ class DominoModelImplTest {
     private static final int SIDE2 = 2;
     private static final int SIDE3 = 3;
     private DominoModel model;
-    private Player p1;
-    private Player p2;
+    private Player player1;
+    private Player player2;
 
     @BeforeEach
     void setUp() {
         this.model = new DominoModelImpl();
 
-        this.p1 = new PlayerImplementation("player1", "Mario");
-        this.p2 = new PlayerImplementation("player2", "Luigi");
+        this.player1 = new PlayerImplementation("player1", "Mario");
+        this.player2 = new PlayerImplementation("player2", "Luigi");
     }
 
     @Test
     void testDistributionTiles() {
-        this.model.initDomino(this.p1, this.p2);
+        this.model.initDomino(this.player1, this.player2);
 
         // Verify players' domino sets are not empty after initialization
-        assertFalse(this.model.getPlayersTiles().getPlayerTiles(this.p1).isEmpty());
-        assertFalse(this.model.getPlayersTiles().getPlayerTiles(this.p2).isEmpty());
+        assertFalse(this.model.getPlayersTiles().getPlayerTiles(this.player1).isEmpty());
+        assertFalse(this.model.getPlayersTiles().getPlayerTiles(this.player2).isEmpty());
 
         // Verify both players have the correct number of tiles
-        assertEquals(DISTRIBUTION_TILES, this.model.getPlayersTiles().getPlayerTiles(this.p1).size());
-        assertEquals(DISTRIBUTION_TILES, this.model.getPlayersTiles().getPlayerTiles(this.p2).size());
+        assertEquals(DISTRIBUTION_TILES, this.model.getPlayersTiles().getPlayerTiles(this.player1).size());
+        assertEquals(DISTRIBUTION_TILES, this.model.getPlayersTiles().getPlayerTiles(this.player2).size());
 
         // Verify the model's domino set has correct size after distribution
         assertEquals(DOMINO_SET_SIZE - (DISTRIBUTION_TILES * 2), this.model.getDominoSet().size());
 
         // Verify tiles assigned to players are removed from the main set
-        assertFalse(this.model.getDominoSet().containsAll(this.model.getPlayersTiles().getPlayerTiles(this.p1)));
-        assertFalse(this.model.getDominoSet().containsAll(this.model.getPlayersTiles().getPlayerTiles(this.p2)));
+        assertFalse(this.model.getDominoSet().containsAll(this.model.getPlayersTiles().getPlayerTiles(this.player1)));
+        assertFalse(this.model.getDominoSet().containsAll(this.model.getPlayersTiles().getPlayerTiles(this.player2)));
 
         // Verify players' domino sets are distinct from each other
-        assertFalse(this.model.getPlayersTiles().getPlayerTiles(this.p1).containsAll(this.model.getPlayersTiles().getPlayerTiles(this.p2)));
+        assertFalse(this.model.getPlayersTiles().getPlayerTiles(this.player1).containsAll(this.model.getPlayersTiles().getPlayerTiles(this.player2)));
     }
 
     @Test
@@ -58,50 +58,80 @@ class DominoModelImplTest {
         testDistributionTiles();
 
         // Assuming the turn is set correctly, it should be either p1 or p2's turn
-        assertTrue(this.model.isPlayer1Turn(this.p1, this.p2)
-                || !this.model.isPlayer1Turn(this.p1, this.p2));
+        assertTrue(this.model.isPlayer1Turn(this.player1, this.player2)
+                || !this.model.isPlayer1Turn(this.player1, this.player2));
     }
 
     @Test
     void testMove() {
         this.testDistributionTiles();
-        Set<Tile> p1Tiles = this.model.getPlayersTiles().getPlayerTiles(this.p1);
+        Set<Tile> p1Tiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
 
         Tile tileToMove = p1Tiles.iterator().next();
-        boolean moveResult = this.model.checkMove(this.p1, tileToMove);
+        boolean moveResult = this.model.checkMove(this.player1, tileToMove);
 
         // Verify the move result
         assertTrue(moveResult);
 
         // Verify the tile was removed from player1's set
-        assertFalse(this.model.getPlayersTiles().getPlayerTiles(this.p1).contains(tileToMove));
+        assertFalse(this.model.getPlayersTiles().getPlayerTiles(this.player1).contains(tileToMove));
 
         // Verify the tile was added to the board
         assertTrue(this.model.getBoardTile().getBoardTiles().contains(tileToMove));
     }
 
     @Test
+    void testAddTile() {
+        this.model.initDomino(this.player1, this.player2);
+
+        // Get initial set of player1
+        Set<Tile> initialTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
+        int initialSize = initialTiles.size();
+
+        // Simulate a valid move
+        Tile validTile = new TileImpl(SIDE1, SIDE1);
+        this.model.checkMove(this.player1, validTile);
+
+        // Simulate an invalid move
+        Tile invalidTile = new TileImpl(SIDE2, SIDE2);
+        this.model.checkMove(this.player1, invalidTile);
+
+        // Draw a tile from tileSet to player1
+        this.model.addTile(this.player1);
+
+        // Get update set of player1
+        Set<Tile> updatedTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
+        int updatedSize = updatedTiles.size();
+
+        // Verify the size is update 1 more
+        assertEquals(initialSize + 1, updatedSize);
+    }
+
+
+    @Test
     void testWinner() {
         this.testDistributionTiles();
 
         // Simulate player1 winning by emptying their tile set
-        this.model.getPlayersTiles().getPlayerTiles(this.p1).clear();
+        this.model.getPlayersTiles().getPlayerTiles(this.player1).clear();
 
         // Verify player1 is declared the winner
-        assertEquals(this.p1, this.model.getWinner(this.p1, this.p2));
+        assertEquals(this.player1, this.model.getWinner(this.player1, this.player2));
 
         // Simulate player2 winning by emptying their tile set
-        this.model.getPlayersTiles().getPlayerTiles(this.p1).add(new TileImpl(SIDE1, SIDE1));
-        this.model.getPlayersTiles().getPlayerTiles(this.p2).clear();
+        this.model.getPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE1));
+        this.model.getPlayersTiles().getPlayerTiles(this.player2).clear();
 
         // Verify player2 is declared the winner
-        assertEquals(this.p2, this.model.getWinner(this.p1, this.p2));
+        assertEquals(this.player2, this.model.getWinner(this.player1, this.player2));
 
         // No winner case
-        this.model.getPlayersTiles().getPlayerTiles(this.p1).add(new TileImpl(SIDE1, SIDE3));
-        this.model.getPlayersTiles().getPlayerTiles(this.p2).add(new TileImpl(SIDE2, SIDE2));
+        this.model.getPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE3));
+        this.model.getPlayersTiles().getPlayerTiles(this.player2).add(new TileImpl(SIDE2, SIDE2));
 
         // Verify no winner
-        assertNull(this.model.getWinner(this.p1, this.p2));
+        assertNull(this.model.getWinner(this.player1, this.player2));
     }
+
+
 }
