@@ -44,6 +44,7 @@ public class DominoControllerImpl implements DominoController {
                 this.view.setMessage(DominoMessage.MOVE_NOT_VALID);
             }
         }
+        this.drawTile();
         this.updateTurn();
         this.updatePlayersTiles();
         this.updateBoard();
@@ -51,13 +52,16 @@ public class DominoControllerImpl implements DominoController {
 
     @Override
     public void drawTile() {
-        if (this.isPlayer1Turn) {
-            this.model.addTile(this.player1);
+        if (isPlayer1Turn && this.model.canDrawTile(player1)) {
+            this.view.setMessage(DominoMessage.DRAW_TILE);
+            this.view.playerCanDraw();
+        } else if (!isPlayer1Turn && this.model.canDrawTile(player2)) {
+            this.view.setMessage(DominoMessage.DRAW_TILE);
+            this.view.playerCanDraw();
         } else {
-            this.model.addTile(this.player2);
+            this.view.playerCantDraw();
         }
 
-        this.updateTurn();
         this.updatePlayersTiles();
         this.updateBoard();
     }
