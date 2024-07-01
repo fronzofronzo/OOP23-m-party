@@ -3,6 +3,7 @@ package it.unibo.mparty.model;
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
 import it.unibo.mparty.model.gameBoard.util.BoardType;
+import it.unibo.mparty.model.gameBoard.util.Pair;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 import it.unibo.mparty.model.minigameHandler.MinigameHandler;
 import it.unibo.mparty.model.minigameHandler.MinigameHandlerImplementation;
@@ -13,6 +14,7 @@ import it.unibo.mparty.model.shop.impl.ShopImpl;
 import it.unibo.mparty.utilities.Position;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -123,5 +125,15 @@ public class GameModelImpl implements GameModel{
             default -> {break;}
         };
 
+    }
+
+    @Override
+    public Map<Position, SlotType> getBoardConfiguration() {
+        return this.board.getSlotTypeBoard();
+    }
+
+    @Override
+    public Pair<Integer, Integer> getBoardDimensions() {
+        return this.board.getDimension();
     }
 }
