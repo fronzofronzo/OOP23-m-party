@@ -2,6 +2,7 @@ package it.unibo.mparty.view.minigames.domino.api;
 
 import it.unibo.mparty.model.minigames.domino.api.Tile;
 import it.unibo.mparty.view.SceneView;
+import it.unibo.mparty.view.minigames.domino.DominoMessage;
 
 import java.util.LinkedList;
 import java.util.Set;
@@ -15,5 +16,5 @@ public interface DominoView extends SceneView {
 
     void setBoard(LinkedList<Tile> board);
 
-    void setErrorMessage();
+    void setMessage(DominoMessage message);
 }

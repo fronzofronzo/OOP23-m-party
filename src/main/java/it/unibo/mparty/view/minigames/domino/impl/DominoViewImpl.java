@@ -30,6 +30,9 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     private Label messageLabel;
 
     @FXML
+    private Button drawButton;
+
+    @FXML
     private Label player1Label;
 
     @FXML
@@ -47,12 +50,16 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     private DominoController controller;
     private Integer selectedSideA;
     private Integer selectedSideB;
+    private int col = 0;
+    private final int row = 0;
 
     @FXML
     private void initialize() {
         //todo: da cancellare
         this.initPlayers(new PlayerImplementation("Player1", "Luigi"),
                 new PlayerImplementation("Player2", "Mario"));
+
+        this.drawButton.setDisable(true);
     }
 
     //todo: da mettere nell'interfaccia e deve essere chiamato da fuori (gioco principale)
@@ -63,6 +70,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
 
     @FXML
     private void drawButtonClicked() {
+        //todo: set drawButton enable
         this.controller.drawTile();
     }
 
@@ -113,13 +121,18 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
 
     @Override
     public void setBoard(LinkedList<Tile> boardTiles) {
-        Tile tile = boardTiles.getFirst();
-        this.tilesGrid.getChildren().add(this.generateTile(tile.getSideA().getValue(), tile.getSideB().getValue()));
+        System.out.println("boardTiles: " + boardTiles);
+        this.tilesGrid.getChildren().clear();
+        for (Tile tile : boardTiles) {
+            VBox tileBox = this.generateTile(tile.getSideA().getValue(), tile.getSideB().getValue());
+            this.tilesGrid.add(tileBox, this.col, this.row);
+            this.col++;
+        }
     }
 
     @Override
-    public void setErrorMessage() {
-        this.messageLabel.setText(DominoMessage.MOVE_NOT_VALID.toString());
+    public void setMessage(DominoMessage message) {
+        this.messageLabel.setText(message.toString());
     }
 
     private void clearTileValues(final HBox playerTiles) {
@@ -147,6 +160,8 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         box.setOnMouseClicked(event -> {
             this.selectedSideA = Integer.parseInt(sideA.getText());
             this.selectedSideB = Integer.parseInt(sideB.getText());
+            System.out.println("sideA: "+this.selectedSideA);
+            System.out.println("sideB: "+this.selectedSideB);
         });
         return box;
     }
