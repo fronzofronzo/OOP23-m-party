@@ -21,7 +21,7 @@ public class BoardFactoryImpl implements BoardFactory {
      * {@inheritDoc}
      */
     @Override
-    public Board createSimpleBoard(final int size, final int fillPercentage) {
+    public Board createSimpleBoard(final int size, final double fillPercentage) {
         final Map<Position, Boolean> grid = new HashMap<>();
 
         /*
@@ -33,14 +33,14 @@ public class BoardFactoryImpl implements BoardFactory {
             }
         }
         */
-        return new BoardImpl(size);
+        return new SimpleBoardImpl(size, fillPercentage);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Board createHardBoard(final int size, final int fillPercentage, final int showPercentage) {
+    public Board createHardBoard(final int size, final double fillPercentage, final double showPercentage) {
         //final Board simpleBoard = createSimpleBoard(size, fillPercentage);
         //final Map<Position, Boolean> grid = new HashMap<>(simpleBoard.getGrid());
         //final Map<Position, Boolean> showGrid = new HashMap<>(simpleBoard.getShowGrid());

@@ -4,6 +4,7 @@ import it.unibo.mparty.model.minigames.nanogram.board.api.Board;
 import it.unibo.mparty.utilities.Position;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,12 +17,12 @@ public class BoardImpl implements Board { //SimpleBoard
     // HardBoard --extend--> Board   //interfaces
     // HardBoardImpl --implement--> HardBoard  //classes
 
-    private final Map<Position, Boolean> hitCells;
+    protected final Map<Position, Boolean> board;
     private final int size;
 
     public BoardImpl(int size) {
         this.size = size;
-        hitCells = new HashMap<>();
+        board = new HashMap<>();
     }
 
     @Override
@@ -31,12 +32,17 @@ public class BoardImpl implements Board { //SimpleBoard
 
     @Override
     public void setCellState(Position position, boolean state) {
-        hitCells.put(position, state);
+        board.put(position, state);
     }
 
     @Override
     public boolean getCellState(Position position) {
-        return hitCells.get(position);
+        return board.get(position);
+    }
+
+    @Override
+    public List<Position> getFilledCells() {
+        return board.entrySet().stream().filter(Map.Entry::getValue).map(Map.Entry::getKey).toList();
     }
 
 

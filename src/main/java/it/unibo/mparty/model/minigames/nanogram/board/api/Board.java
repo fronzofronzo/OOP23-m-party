@@ -2,6 +2,8 @@ package it.unibo.mparty.model.minigames.nanogram.board.api;
 
 import it.unibo.mparty.utilities.Position;
 
+import java.util.List;
+
 /**
  * Interface representing the board of a Nanogram game.
  */
@@ -10,6 +12,8 @@ public interface Board {
     int getSize();
     void setCellState(Position position, boolean state);
     boolean getCellState(Position position);
+
+    List<Position> getFilledCells();
 
 //    /**
 //     * Gets the state of a specific cell in the grid.
