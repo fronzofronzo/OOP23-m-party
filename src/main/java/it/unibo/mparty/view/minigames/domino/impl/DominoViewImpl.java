@@ -59,7 +59,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         this.initPlayers(new PlayerImplementation("Player1", "Luigi"),
                 new PlayerImplementation("Player2", "Mario"));
 
-        this.drawButton.setDisable(true);
+        this.playerCantDraw();
     }
 
     //todo: da mettere nell'interfaccia e deve essere chiamato da fuori (gioco principale)
@@ -117,6 +117,16 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         } else {
             clearTileValues(this.player1Tiles);
         }
+    }
+
+    @Override
+    public void playerCanDraw(){
+        this.drawButton.setDisable(false);
+    }
+
+    @Override
+    public void playerCantDraw() {
+        this.drawButton.setDisable(true);
     }
 
     @Override

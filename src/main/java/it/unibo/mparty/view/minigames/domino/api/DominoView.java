@@ -14,6 +14,10 @@ public interface DominoView extends SceneView {
 
     void setTurn(boolean isPlayer1Turn, String playerName);
 
+    void playerCanDraw();
+
+    void playerCantDraw();
+
     void setBoard(LinkedList<Tile> board);
 
     void setMessage(DominoMessage message);
