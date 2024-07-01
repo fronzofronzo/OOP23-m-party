@@ -12,4 +12,6 @@ public interface DominoController {
     void updateTurn();
 
     void updateBoard();
+
+    void haveWinner();
 }

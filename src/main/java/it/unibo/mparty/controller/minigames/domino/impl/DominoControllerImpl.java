@@ -45,9 +45,10 @@ public class DominoControllerImpl implements DominoController {
             }
         }
         this.drawTile();
-        this.updateTurn();
         this.updatePlayersTiles();
+        this.updateTurn();
         this.updateBoard();
+        this.haveWinner();
     }
 
     @Override
@@ -63,6 +64,7 @@ public class DominoControllerImpl implements DominoController {
         }
 
         this.updatePlayersTiles();
+        this.updateTurn();
         this.updateBoard();
     }
 
@@ -83,5 +85,13 @@ public class DominoControllerImpl implements DominoController {
     @Override
     public void updateBoard() {
         this.view.setBoard(this.model.getBoardTile().getBoardTiles());
+    }
+
+    @Override
+    public void haveWinner() {
+        Player winner = this.model.getWinner(this.player1, this.player2);
+        if (winner != null) {
+            this.view.setWinner(winner.getUsername());
+        }
     }
 }

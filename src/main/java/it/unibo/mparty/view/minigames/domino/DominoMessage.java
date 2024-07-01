@@ -6,7 +6,9 @@ public enum DominoMessage {
 
     MOVE_NOT_VALID("Mossa non valida. Seleziona un'altra tessera."),
 
-    DRAW_TILE("Tessere non compattibili. Pesca una tessera.");
+    DRAW_TILE("Tessere non compattibili. Pesca una tessera."),
+
+    WIN(" ha vinto!");
 
     private final String message;
 
