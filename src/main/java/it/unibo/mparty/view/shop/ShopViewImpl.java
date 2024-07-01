@@ -1,7 +1,5 @@
 package it.unibo.mparty.view.shop;
 
-
-
 import it.unibo.mparty.view.AbstractSceneView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
