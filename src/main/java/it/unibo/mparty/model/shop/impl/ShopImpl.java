@@ -36,4 +36,9 @@ public class ShopImpl implements Shop {
         return player.getNumCoins()>= item.getCost();
     }
 
+    @Override
+    public List<Item> getItemList() {
+        return itemList;
+    }
+
 }
