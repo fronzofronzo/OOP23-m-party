@@ -1,5 +1,10 @@
 package it.unibo.mparty.model;
 
+import it.unibo.mparty.model.gameBoard.util.SlotType;
+import it.unibo.mparty.utilities.Position;
+
+import java.util.Map;
+
 /**
  * Interface that models the model of the main game
  */
@@ -50,5 +55,11 @@ public interface GameModel {
      * Activate the effect of slot where is the player that's playing its turn
      */
     void activateSlot();
+
+    /**
+     * Get the board configuration: for each slot, returns the relative slot type
+     * @return {@link Map} of {@link Position} and {@link SlotType}
+     */
+    Map<Position, SlotType> getBoardConfiguration();
 
 }
