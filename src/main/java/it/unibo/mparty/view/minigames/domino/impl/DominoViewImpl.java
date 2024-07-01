@@ -14,10 +14,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import java.util.LinkedList;
 import java.util.Set;
@@ -85,18 +82,12 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
 
     @Override
     public void setPlayerTiles(final boolean isPlayer1, final Set<Tile> playerTiles) {
-        if (isPlayer1) {
-            this.player1Tiles.getChildren().clear();
-            for (Tile tile : playerTiles) {
-                this.player1Tiles.getChildren().add(this.generateTile(tile.getSideA().getValue(),
-                        tile.getSideB().getValue()));
-            }
-        } else {
-            this.player2Tiles.getChildren().clear();
-            for (Tile tile : playerTiles) {
-                this.player2Tiles.getChildren().add(this.generateTile(tile.getSideA().getValue(),
-                        tile.getSideB().getValue()));
-            }
+        HBox playertiles = isPlayer1 ? this.player1Tiles : this.player2Tiles;
+        playertiles.getChildren().clear();
+        for (Tile tile : playerTiles) {
+            VBox tileBox = new VBox();
+            this.generateTile(tileBox, tile.getSideA().getValue(), tile.getSideB().getValue());
+            playertiles.getChildren().add(tileBox);
         }
     }
 
@@ -134,7 +125,12 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         System.out.println("boardTiles: " + boardTiles);
         this.tilesGrid.getChildren().clear();
         for (Tile tile : boardTiles) {
-            VBox tileBox = this.generateTile(tile.getSideA().getValue(), tile.getSideB().getValue());
+            HBox tileBox = new HBox();
+            this.generateTile(tileBox, tile.getSideA().getValue(), tile.getSideB().getValue());
+            tileBox.setAlignment(Pos.CENTER);
+            VBox.setVgrow(tileBox, Priority.ALWAYS);
+            VBox.setMargin(tileBox, new Insets(0, PREF_SIZE, 0, PREF_SIZE));
+            tileBox.setDisable(true);
             this.tilesGrid.add(tileBox, this.col, this.row);
             this.col++;
         }
@@ -154,12 +150,8 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
                 .forEach(button -> button.setText(""));
     }
 
-    private VBox generateTile(final int valueA, final int valueB) {
-        VBox box = new VBox();
+    private void generateTile(final Pane box, final int valueA, final int valueB) {
         box.setPrefSize(PREF_SIZE * 2, PREF_SIZE);
-        box.setAlignment(Pos.CENTER);
-        VBox.setVgrow(box, Priority.ALWAYS);
-        VBox.setMargin(box, new Insets(0, PREF_SIZE, 0, PREF_SIZE));
 
         Button sideA = generateSide(valueA);
         Button sideB = generateSide(valueB);
@@ -168,12 +160,12 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         box.getChildren().add(sideB);
 
         box.setOnMouseClicked(event -> {
-            this.selectedSideA = Integer.parseInt(sideA.getText());
-            this.selectedSideB = Integer.parseInt(sideB.getText());
+            VBox clicked = (VBox) event.getSource();
+            this.selectedSideA = Integer.parseInt(((Button)clicked.getChildren().get(0)).getText());
+            this.selectedSideB = Integer.parseInt(((Button)clicked.getChildren().get(1)).getText());
             System.out.println("sideA: "+this.selectedSideA);
             System.out.println("sideB: "+this.selectedSideB);
         });
-        return box;
     }
 
     private Button generateSide(final int value) {
