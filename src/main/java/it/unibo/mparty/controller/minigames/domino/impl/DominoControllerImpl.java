@@ -5,6 +5,7 @@ import it.unibo.mparty.model.minigames.domino.api.DominoModel;
 import it.unibo.mparty.model.minigames.domino.impl.DominoModelImpl;
 import it.unibo.mparty.model.minigames.domino.impl.TileImpl;
 import it.unibo.mparty.model.player.api.Player;
+import it.unibo.mparty.view.minigames.domino.DominoMessage;
 import it.unibo.mparty.view.minigames.domino.api.DominoView;
 
 public class DominoControllerImpl implements DominoController {
@@ -36,11 +37,11 @@ public class DominoControllerImpl implements DominoController {
     public void playTile(final int sideA, final int sideB) {
         if (this.isPlayer1Turn) {
             if (!this.model.checkMove(this.player1, new TileImpl(sideA, sideB))) {
-                this.view.setErrorMessage();
+                this.view.setMessage(DominoMessage.MOVE_NOT_VALID);
             }
         } else {
             if (!this.model.checkMove(this.player2, new TileImpl(sideA, sideB))) {
-                this.view.setErrorMessage();
+                this.view.setMessage(DominoMessage.MOVE_NOT_VALID);
             }
         }
         this.updateTurn();
