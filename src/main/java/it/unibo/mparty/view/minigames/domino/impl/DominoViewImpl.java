@@ -6,6 +6,7 @@ import it.unibo.mparty.model.minigames.domino.api.Tile;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.impl.PlayerImplementation;
 import it.unibo.mparty.view.AbstractSceneView;
+import it.unibo.mparty.view.minigames.domino.DominoMessage;
 import it.unibo.mparty.view.minigames.domino.api.DominoView;
 
 import javafx.fxml.FXML;
@@ -49,13 +50,12 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     @FXML
     private void initialize() {
         //todo: da cancellare
-        this.initPlayers(new PlayerImplementation("Player1", "Luigi"), new PlayerImplementation("Player2", "Mario"));
-
-        this.messageLabel.setText("");
+        this.initPlayers(new PlayerImplementation("Player1", "Luigi"),
+                new PlayerImplementation("Player2", "Mario"));
     }
 
     //todo: da mettere nell'interfaccia e deve essere chiamato da fuori (gioco principale)
-    public void initPlayers(Player player1, Player player2) {
+    public void initPlayers(final Player player1, final Player player2) {
         this.controller = new DominoControllerImpl(this, player1, player2);
         this.controller.setUp();
     }
@@ -71,7 +71,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     }
 
     @Override
-    public void setPlayerTiles(boolean isPlayer1, Set<Tile> playerTiles) {
+    public void setPlayerTiles(final boolean isPlayer1, final Set<Tile> playerTiles) {
         if (isPlayer1) {
             this.player1Tiles.getChildren().clear();
             for (Tile tile : playerTiles) {
@@ -88,20 +88,40 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     }
 
     @Override
-    public void setPlayerName(boolean isPlayer1, String playerName){
-        if (isPlayer1){
+    public void setPlayerName(final boolean isPlayer1, final String playerName) {
+        if (isPlayer1) {
             this.player1Label.setText(playerName);
         } else {
             this.player2Label.setText(playerName);
         }
     }
 
-    private VBox generateDomino(int valueA, int valueB) {
+    @Override
+    public void setTurn(final boolean isPlayer1Turn, final String playerName) {
+        this.messageLabel.setText(DominoMessage.TURN + playerName);
+        if (isPlayer1Turn) {
+            clearTileValues(this.player2Tiles);
+        } else {
+            clearTileValues(this.player1Tiles);
+        }
+    }
+
+    private void clearTileValues(final HBox playerTiles) {
+        playerTiles.getChildren().stream().filter(node -> node instanceof VBox)
+                .map(node -> (VBox) node)
+                .flatMap(vBox -> vBox.getChildren()
+                        .stream()).filter(child -> child instanceof Button)
+                .map(button -> (Button) button)
+                .forEach(button -> button.setText(""));
+    }
+
+    private VBox generateDomino(final int valueA, final int valueB) {
         VBox box = new VBox();
         box.setPrefSize(PREF_SIZE * 2, PREF_SIZE);
-        VBox.setVgrow(box, Priority.ALWAYS);
         box.setAlignment(Pos.CENTER);
+        VBox.setVgrow(box, Priority.ALWAYS);
         VBox.setMargin(box, new Insets(0, PREF_SIZE, 0, PREF_SIZE));
+
         Button sideA = generateSide(valueA);
         Button sideB = generateSide(valueB);
 
@@ -110,10 +130,9 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         return box;
     }
 
-    private Button generateSide(int value) {
+    private Button generateSide(final int value) {
         Button button = new Button(String.valueOf(value));
         button.setPrefSize(PREF_SIZE, PREF_SIZE);
-        //button.setMaxSize();
         return button;
     }
 }
