@@ -2,7 +2,9 @@ package it.unibo.mparty.view.minigames.domino;
 
 public enum DominoMessage {
 
-    TURN("E' il turno di ");
+    TURN("E' il turno di "),
+
+    MOVE_NOT_VALID("Mossa non valida. Seleziona un'altra tessera.");
 
     private final String message;
 
