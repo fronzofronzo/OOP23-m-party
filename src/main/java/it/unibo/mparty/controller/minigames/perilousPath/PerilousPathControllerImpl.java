@@ -1,15 +1,9 @@
 package it.unibo.mparty.controller.minigames.perilousPath;
-
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
-import it.unibo.mparty.model.minigames.perilouspath.impl.PathPosition;
 import it.unibo.mparty.model.minigames.perilouspath.impl.PerilousPathImpl;
 import it.unibo.mparty.view.minigames.perilouspath.PerilousPathView;
 import it.unibo.mparty.view.minigames.perilouspath.PerilousPathViewImpl;
-import javafx.scene.control.Button;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class PerilousPathControllerImpl implements  PerilousPathController{
 
