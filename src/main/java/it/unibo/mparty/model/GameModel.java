@@ -1,5 +1,6 @@
 package it.unibo.mparty.model;
 
+import it.unibo.mparty.model.gameBoard.util.Pair;
 import it.unibo.mparty.model.gameBoard.util.SlotType;
 import it.unibo.mparty.utilities.Position;
 
@@ -61,5 +62,11 @@ public interface GameModel {
      * @return {@link Map} of {@link Position} and {@link SlotType}
      */
     Map<Position, SlotType> getBoardConfiguration();
+
+    /**
+     * Get the board width and height
+     * @return {@link Pair} containing dimensions
+     */
+    Pair<Integer, Integer> getBoardDimensions();
 
 }
