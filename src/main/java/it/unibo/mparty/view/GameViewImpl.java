@@ -33,7 +33,5 @@ public class GameViewImpl extends Application implements GameView{
         this.stage = primaryStage;
         this.stage.show();
         this.setScene("GameBoard.fxml");
-    }
-
-    
+    }    
 }

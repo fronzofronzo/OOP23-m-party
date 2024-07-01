@@ -4,9 +4,7 @@ import java.io.IOException;
 
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
-import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.GameView;
-import javafx.scene.layout.Pane;
 
 public class GameControllerImpl implements GameController{
 
@@ -42,15 +40,13 @@ public class GameControllerImpl implements GameController{
             this.view.setScene("GameBoard.fxml");
             this.drawBoard();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
     private void drawBoard() {
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                this.view.
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
             }
         }
     }
