@@ -63,13 +63,17 @@ public class DominoModelImpl implements DominoModel {
             this.playerTiles.removeTilesFromPlayer(player, tile);
             this.actualTurn = !this.actualTurn;
             return true;
-        } //todo: check
+        }
+        return false;
+    }
+
+    @Override
+    public void addTile(final Player player){
         if (!dominoSet.isEmpty()) {
             Tile newTile = dominoSet.iterator().next();
             dominoSet.remove(newTile);
             this.playerTiles.addTileToPlayer(player, newTile);
         }
-        return false;
     }
 
     @Override
