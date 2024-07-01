@@ -33,7 +33,6 @@ public class PlayerTilesImpl implements PlayerTiles {
            }
         }
         return true;
-        //return false;
     }
 
     @Override

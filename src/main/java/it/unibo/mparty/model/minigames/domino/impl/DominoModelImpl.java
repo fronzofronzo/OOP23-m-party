@@ -20,7 +20,6 @@ public class DominoModelImpl implements DominoModel {
     private final PlayerTiles playerTiles;
     private Set<Tile> dominoSet;
     private boolean actualTurn = true; //true for player1, false for player2
-    private Tile selectedTile;
 
     public DominoModelImpl() {
         this.dominoFactory = new TileFactoryImpl();
@@ -60,8 +59,7 @@ public class DominoModelImpl implements DominoModel {
 
     @Override
     public boolean checkMove(final Player player, final Tile tile) {
-        this.selectedTile = tile;
-        if (this.boardTile.canPlaceTile(tile)) { //todo: check if is match only for extreme
+        if (this.boardTile.canPlaceTile(tile)) {
             this.playerTiles.removeTilesFromPlayer(player, tile);
             this.actualTurn = !this.actualTurn;
             return true;
@@ -70,14 +68,12 @@ public class DominoModelImpl implements DominoModel {
     }
 
     @Override
-    public boolean canDrawTile(final Player player){
-        if (!this.playerTiles.canPlayerPlace(player, this.boardTile)) {
-            if (!this.dominoSet.isEmpty()) {
-                Tile newTile = this.dominoSet.iterator().next();
-                this.dominoSet.remove(newTile);
-                this.playerTiles.addTileToPlayer(player, newTile);
-                return true;
-            }
+    public boolean canDrawTile(final Player player) {
+        if (!this.playerTiles.canPlayerPlace(player, this.boardTile) && !this.dominoSet.isEmpty()) {
+            Tile newTile = this.dominoSet.iterator().next();
+            this.dominoSet.remove(newTile);
+            this.playerTiles.addTileToPlayer(player, newTile);
+            return true;
         }
         return false;
     }
@@ -100,6 +96,6 @@ public class DominoModelImpl implements DominoModel {
 
     @Override
     public BoardTile getBoardTile() {
-        return  this.boardTile;
+        return this.boardTile;
     }
 }
