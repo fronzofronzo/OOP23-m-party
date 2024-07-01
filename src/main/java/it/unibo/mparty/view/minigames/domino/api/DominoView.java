@@ -21,4 +21,6 @@ public interface DominoView extends SceneView {
     void setBoard(LinkedList<Tile> board);
 
     void setMessage(DominoMessage message);
+
+    void setWinner(String winner);
 }
