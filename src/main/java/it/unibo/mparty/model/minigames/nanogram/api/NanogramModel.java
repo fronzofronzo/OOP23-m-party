@@ -1,8 +1,6 @@
 package it.unibo.mparty.model.minigames.nanogram.api;
 
-import it.unibo.mparty.model.minigames.nanogram.board.api.Board;
-import it.unibo.mparty.model.minigames.nanogram.util.CellState;
-import it.unibo.mparty.model.minigames.nanogram.util.Difficulty;
+import it.unibo.mparty.utilities.Position;
 
 import java.util.List;
 
@@ -12,15 +10,9 @@ import java.util.List;
  */
 public interface NanogramModel {
 
-    /**
-     * Initializes the game grid based on the given difficulty.
-     *
-     * @param difficulty the difficulty level to set up the game.
-     */
-    void initializeGame(Difficulty difficulty);
-
-
     int getBoardSize();
+
+    List<Position> getFilledCells();
 
     /**
      * Gets the number of lives remaining in the game.
@@ -43,17 +35,16 @@ public interface NanogramModel {
      */
     List<List<Integer>> getColumnHints();
 
-    void fillSelectedBoard(int row, int column, boolean state);
-
     /**
      * Checks if a move with the given state at the specified position is valid.
      *
      * @param row        the row index of the cell.
      * @param column     the column index of the cell.
-     * @param actualState the state to be validated.
+     * @param state the state to be validated.
      * @return true if the move is valid, false otherwise.
      */
-    boolean isMoveValid(int row, int column, boolean actualState);
+    boolean checkAndSelectCell(int row, int column, boolean state);
+
 
     /**
      * Checks if the game is complete.
