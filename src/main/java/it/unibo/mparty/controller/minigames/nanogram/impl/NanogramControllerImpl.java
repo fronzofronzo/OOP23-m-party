@@ -2,9 +2,13 @@ package it.unibo.mparty.controller.minigames.nanogram.impl;
 
 import it.unibo.mparty.controller.minigames.nanogram.api.NanogramController;
 import it.unibo.mparty.model.minigames.nanogram.impl.NanogramModelImpl;
-import it.unibo.mparty.view.minigames.nanogram.StatusMessage;
+import it.unibo.mparty.view.minigames.nanogram.NanogramMessage;
 import it.unibo.mparty.view.minigames.nanogram.impl.NanogramViewImpl;
 
+/**
+ * Implementation of the {@link NanogramController} interface for managing the Nanogram game logic.
+ * This controller interacts with the game model ({@link NanogramModelImpl}) and updates the view ({@link NanogramViewImpl}).
+ */
 public class NanogramControllerImpl implements NanogramController {
 
     private final NanogramViewImpl view;
@@ -12,10 +16,9 @@ public class NanogramControllerImpl implements NanogramController {
     private boolean fillState = true;
 
     /**
-     * Constructs a new {@code NanogramControllerImpl} with the specified view.
-     * Initializes the model for the Nanogram game.
+     * Constructs a new {@code NanogramControllerImpl} instance with the specified view.
      *
-     * @param view the view for the Nanogram game.
+     * @param view the view component to interact with.
      */
     public NanogramControllerImpl(final NanogramViewImpl view) {
         this.view = view;
@@ -30,8 +33,11 @@ public class NanogramControllerImpl implements NanogramController {
         this.view.setColumnHints(this.model.getColumnHints());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void checkCell(int x, int y) {
+    public void checkCell(final int x, final int y) {
         final boolean isCorrect = this.model.checkAndSelectCell(x, y, this.fillState);
 
         if (this.fillState) {
@@ -43,16 +49,19 @@ public class NanogramControllerImpl implements NanogramController {
 
         if (this.model.isGameOver()) {
             this.view.disableAllCells();
-            this.view.displayStatusMessage(StatusMessage.LOSE);
+            this.view.displayStatusMessage(NanogramMessage.LOSE);
         } else if (this.model.isGameComplete()) {
             this.view.disableAllCells();
             this.view.fillRemainingCellsWithCrosses();
-            this.view.displayStatusMessage(StatusMessage.WIN);
+            this.view.displayStatusMessage(NanogramMessage.WIN);
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setFillState(boolean state) {
+    public void setFillState(final boolean state) {
         this.fillState = state;
     }
 }
