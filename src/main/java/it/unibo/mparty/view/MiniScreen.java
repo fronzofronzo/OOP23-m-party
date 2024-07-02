@@ -1,6 +1,7 @@
 package it.unibo.mparty.view;
 
 import it.unibo.mparty.controller.GameController;
+import it.unibo.mparty.model.GameModelBuilder;
 import javafx.event.ActionEvent;
 
 public interface MiniScreen {
@@ -13,7 +14,7 @@ public interface MiniScreen {
 
     void handleUsernameTextField(ActionEvent e);
 
-    void setUp(GameController controller);
+    void setUp(GameModelBuilder builder);
 
 
 

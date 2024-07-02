@@ -1,6 +1,7 @@
 package it.unibo.mparty.view;
 
 import it.unibo.mparty.controller.GameController;
+import it.unibo.mparty.model.GameModelBuilder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
@@ -8,7 +9,7 @@ import javafx.scene.control.TextField;
 
 public class MiniScreenImpl implements MiniScreen {
 
-    private GameController controller;
+    private GameModelBuilder builder;
 
     @FXML
     private ChoiceBox<String> choiceBox;
@@ -43,8 +44,8 @@ public class MiniScreenImpl implements MiniScreen {
     }
 
     @Override
-    public void setUp(GameController controller) {
-        this.controller = controller;
+    public void setUp(GameModelBuilder builder) {
+        this.builder = builder;
         //load the choicebox whit characters
     }
 }
