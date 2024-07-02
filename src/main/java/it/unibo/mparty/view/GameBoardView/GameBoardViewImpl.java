@@ -78,10 +78,10 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private Button buttonEnter;
 
-    private List<Label> labelPlayersNames = List.of(nameP1, nameP2, nameP3, nameP4);     
-    private List<Label> labelPlayersCoins = List.of(coinsP1, coinsP2, coinsP3, coinsP4); 
-    private List<Label> labelPlayersStars = List.of(starsP1, starsP2, starsP3, starsP4);
-    private List<Button> buttonsItem = List.of(useItem1, useItem2, useItem3);
+    //private List<Label> labelPlayersNames = List.of(nameP1, nameP2, nameP3, nameP4);     
+    //private List<Label> labelPlayersCoins = List.of(coinsP1, coinsP2, coinsP3, coinsP4); 
+    //private List<Label> labelPlayersStars = List.of(starsP1, starsP2, starsP3, starsP4);
+    //private List<Button> buttonsItem = List.of(useItem1, useItem2, useItem3);
 
     @Override
     public void updatePlayer(String nickname, int coins, int money, List<String> items) {
@@ -98,6 +98,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @Override
     public void setUpBoard(int width, int height, Map<Position, SlotType> map, List<String> nicknames) {
         this.board = new GridPane();
+        System.out.println(map);
         this.populateGridPane(width, height, map);
     }
 
