@@ -79,6 +79,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Button buttonMove;
     @FXML
     private Button buttonEnter;
+    @FXML
+    private Pane centerPane;
 
     //private List<Label> labelPlayersNames = List.of(nameP1, nameP2, nameP3, nameP4);     
     //private List<Label> labelPlayersCoins = List.of(coinsP1, coinsP2, coinsP3, coinsP4); 
@@ -102,14 +104,17 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.board = new GridPane();
         //System.out.println(map);
         this.populateGridPane(dimension, map);
-        this.board.prefWidthProperty().bind(this.borderPane.widthProperty());
-        this.board.prefHeightProperty().bind(this.borderPane.heightProperty());
-        this.borderPane.setCenter(this.board);
+        this.board.prefWidthProperty().bind(this.centerPane.widthProperty());
+        this.board.prefHeightProperty().bind(this.centerPane.heightProperty());
+        this.centerPane.prefWidthProperty().bind(this.borderPane.widthProperty());
+        this.centerPane.prefHeightProperty().bind(this.borderPane.heightProperty());
+        this.centerPane.getChildren().add(this.board);
+        this.borderPane.setCenter(this.centerPane);
     }
 
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
-        int W = 50;
-        int H = 50;
+        /*int W = 20;
+        int H = 40;
         for (int i = 0; i < dimension.getFirst(); i++){      
                 ColumnConstraints c = new ColumnConstraints();
                 c.setMinWidth(W);
@@ -122,7 +127,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                 r.setPrefHeight(H);
                 r.setMaxHeight(H);     
                 this.board.getRowConstraints().add(r);
-        }
+        } */
         for (int i = 0; i < dimension.getFirst(); i++) {
             for (int j = 0; j < dimension.getSecond(); j++) {
                 Label tmp = new Label(Objects.isNull(map.get(new Position(i, j))) ? "." : map.get(new Position(i, j)).toString());

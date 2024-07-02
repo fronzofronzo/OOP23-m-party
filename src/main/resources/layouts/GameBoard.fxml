@@ -76,4 +76,7 @@
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
+   <center>
+      <Pane fx:id="centerPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>
