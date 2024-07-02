@@ -19,5 +19,10 @@ public interface MinigameModel {
      */
     Pair<String, Integer> getResult();
 
+    /**
+     * Method to set up the players participating in the selected minigame
+     * If the mini-game is single-player, there's only one player in List
+     * @param players of the mini-game
+     */
     void setUpPlayers(List<String> players);
 }
