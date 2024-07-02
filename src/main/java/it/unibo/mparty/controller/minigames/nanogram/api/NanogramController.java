@@ -6,29 +6,7 @@ package it.unibo.mparty.controller.minigames.nanogram.api;
  */
 public interface NanogramController {
 
-    /**
-     * Starts the Nanogram game.
-     * This method initializes the game, setting up the model and view as needed.
-     */
-    void startGame();
+    void checkCell(int x, int y);
 
-    /**
-     * Updates the model with the specified cell state at the given position.
-     * This method is called when a cell in the view is clicked and needs to be updated in the model.
-     *
-     * @param row   the row index of the cell to update
-     * @param col   the column index of the cell to update
-     * @param state the new state of the cell (e.g., FILLED, CROSSED)
-     */
-    void updateModel(int row, int col, boolean state);
-
-    /**
-     * Updates the view with the specified cell state at the given position.
-     * This method is called to reflect the current state of the model in the view.
-     *
-     * @param row   the row index of the cell to update
-     * @param col   the column index of the cell to update
-     * @param state the new state of the cell (e.g., FILLED, CROSSED)
-     */
-    void updateView(int row, int col, boolean state);
+    void setFillState(boolean state);
 }
