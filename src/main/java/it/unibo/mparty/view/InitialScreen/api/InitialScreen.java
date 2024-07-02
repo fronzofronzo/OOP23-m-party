@@ -7,16 +7,16 @@ import java.io.IOException;
 
 public interface InitialScreen {
 
-    public void setBuilder(GameModelBuilder builder);
+     void setBuilder(GameModelBuilder builder);
 
-    public void setUp();
+     void setUp();
 
-    public void handleExitButton(ActionEvent event);
+     void handleExitButton(ActionEvent event);
 
-    public void handleDifficultyButton(ActionEvent event);
+     void handleDifficultyButton(ActionEvent event);
 
-    public void handleAddPlayerButton(ActionEvent event) throws IOException;
+     void handleAddPlayerButton(ActionEvent event) throws IOException;
 
-    public void handleStartButton(ActionEvent event);
+     void handleStartButton(ActionEvent event);
 
 }
