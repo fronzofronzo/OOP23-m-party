@@ -37,12 +37,12 @@ public class MiniScreenImpl implements MiniScreen {
 
     @Override
     public void handleCharacterChoiceBox(ActionEvent e) {
-        this.character = choiceBox.getValue();
+        this.character = this.choiceBox.getValue();
     }
 
     @Override
     public void handleUsernameTextField(ActionEvent e) {
-        this.username = textField.getText();
+        this.username = this.textField.getText();
     }
 
     @Override
