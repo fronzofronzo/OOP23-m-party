@@ -3,7 +3,6 @@ package it.unibo.mparty.view.minigames.nanogram.impl;
 import it.unibo.mparty.controller.minigames.nanogram.api.NanogramController;
 import it.unibo.mparty.controller.minigames.nanogram.impl.NanogramControllerImpl;
 import it.unibo.mparty.model.minigames.nanogram.api.Board;
-import it.unibo.mparty.model.minigames.nanogram.util.CellState;
 import it.unibo.mparty.view.minigames.nanogram.util.StatusMessage;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.minigames.nanogram.api.NanogramView;
@@ -48,7 +47,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
 
     private final NanogramController controller = new NanogramControllerImpl(this);
 
-    private CellState selectedState = CellState.FILLED;
+    private boolean selectedState = true;
 
     private boolean error = false;
 
@@ -65,8 +64,8 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
 
         this.filledButton.setSelected(true);
 
-        this.filledButton.setOnAction(event -> this.selectedState = CellState.FILLED);
-        this.crossButton.setOnAction(event -> this.selectedState = CellState.CROSSED);
+        this.filledButton.setOnAction(event -> this.selectedState = true);
+        this.crossButton.setOnAction(event -> this.selectedState = false);
 
         initGrid();
     }
@@ -126,15 +125,15 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     }
 
     private void handleCellClick(final int row, final int col) {
-        final Pane cell = getNodeByRowColumnIndex(row, col, this.gameGrid);
-        this.error = false;
-        if (cell != null && !cell.getStyleClass().contains("filled") && !cell.getStyleClass().contains("crossed")) {
-            final CellState correctState = this.solutionBoard.getCellState(row, col);
-            if (!this.selectedState.equals(correctState)) {
-                this.error = true;
-            }
-            this.controller.updateModel(row, col, this.selectedState);
-        }
+//        final Pane cell = getNodeByRowColumnIndex(row, col, this.gameGrid);
+//        this.error = false;
+//        if (cell != null && !cell.getStyleClass().contains("filled") && !cell.getStyleClass().contains("crossed")) {
+//            final boolean correctState = this.solutionBoard.getboolean;
+//            if (!this.selectedState.equals(correctState)) {
+//                this.error = true;
+//            }
+//            this.controller.updateModel(row, col, this.selectedState);
+//        }
     }
 
     /**
@@ -149,23 +148,23 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
      * {@inheritDoc}
      */
     @Override
-    public void updateCell(final int row, final int col, final CellState cellState) {
-        final Pane cell = getNodeByRowColumnIndex(row, col, this.gameGrid);
-        if (cell != null) {
-            cell.getChildren().clear();
-
-            switch (cellState) {
-                case FILLED:
-                    cell.setStyle(this.error ? "-fx-background-color: red;" : "-fx-background-color: black;");
-                    break;
-                case CROSSED:
-                    this.drawCross(cell, this.error ? Color.RED : Color.BLACK);
-                    break;
-                default:
-                    throw new IllegalArgumentException("Unknown CellState: " + cellState);
-            }
-            cell.getStyleClass().add(cellState.toString().toLowerCase());
-        }
+    public void updateCell(final int row, final int col, final boolean state) {
+//        final Pane cell = getNodeByRowColumnIndex(row, col, this.gameGrid);
+//        if (cell != null) {
+//            cell.getChildren().clear();
+//
+//            switch (boolean) {
+//                case FILLED:
+//                    cell.setStyle(this.error ? "-fx-background-color: red;" : "-fx-background-color: black;");
+//                    break;
+//                case CROSSED:
+//                    this.drawCross(cell, this.error ? Color.RED : Color.BLACK);
+//                    break;
+//                default:
+//                    throw new IllegalArgumentException("Unknown boolean: " + boolean);
+//            }
+//            cell.getStyleClass().add(boolean.toString().toLowerCase());
+//        }
     }
 
     private void drawCross(final Pane cell, final Color color) {
@@ -233,8 +232,8 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         for (int row = 0; row < this.gameGrid.getRowCount(); row++) {
             for (int col = 0; col < this.gameGrid.getColumnCount(); col++) {
                 final Pane cell = getNodeByRowColumnIndex(row, col, this.gameGrid);
-                if (cell != null && !cell.getStyleClass().contains("filled") && !cell.getStyleClass().contains("crossed")) {
-                    updateCell(row, col, CellState.CROSSED);
+                if (cell != null) {
+                    updateCell(row, col, false);
                 }
             }
         }

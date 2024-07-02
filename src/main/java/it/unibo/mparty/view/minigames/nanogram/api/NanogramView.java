@@ -1,7 +1,6 @@
 package it.unibo.mparty.view.minigames.nanogram.api;
 
 import it.unibo.mparty.model.minigames.nanogram.api.Board;
-import it.unibo.mparty.model.minigames.nanogram.util.CellState;
 import it.unibo.mparty.view.minigames.nanogram.util.StatusMessage;
 import it.unibo.mparty.view.minigames.MinigameView;
 
@@ -39,9 +38,9 @@ public interface NanogramView extends MinigameView {
      *
      * @param row       the row index of the cell.
      * @param col       the column index of the cell.
-     * @param cellState the new state to set for the cell, represented by a {@link CellState}.
+     * @param cellState the new state to set for the cell, represented by a {@link boolean}.
      */
-    void updateCell(int row, int col, CellState cellState);
+    void updateCell(int row, int col, boolean cellState);
 
     /**
      * Updates the display of the remaining lives in the game.
