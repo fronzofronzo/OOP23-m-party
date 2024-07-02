@@ -20,7 +20,7 @@ public class InitialScreenImpl implements InitialScreen {
 
     private GameModelBuilder builder;
 
-    private Set<String> temp = Set.of("Easy","Medium","Difficult");
+    private final Set<String> temp = Set.of("Easy","Medium","Difficult");
     private String difficulty;
 
     @FXML
@@ -58,7 +58,6 @@ public class InitialScreenImpl implements InitialScreen {
     public void handleAddPlayerButton(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MiniScreen.fxml"));
         Parent root = loader.load();
-        //var controller = loader.getController();
         MiniScreen controller = new MiniScreenImpl();
         controller.setUp(this.builder);
         Stage stage = new Stage();
@@ -66,10 +65,12 @@ public class InitialScreenImpl implements InitialScreen {
         stage.setTitle("Add player");
         stage.setScene(new Scene(root));
         stage.showAndWait();
+        //this.builder.getPlayers() >= 2 ? this.startGame.setDisable(true) : this.startGame.setDisable(false);
     }
 
     @Override
     public void handleStartButton(ActionEvent event) {
-        //controller.build();
+        this.builder.difficulty(this.difficulty);
+        this.builder.build();
     }
 }

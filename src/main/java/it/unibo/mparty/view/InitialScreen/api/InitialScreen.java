@@ -2,6 +2,7 @@ package it.unibo.mparty.view.InitialScreen.api;
 
 import it.unibo.mparty.model.GameModelBuilder;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 
 import java.io.IOException;
 
