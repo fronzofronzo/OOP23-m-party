@@ -3,7 +3,7 @@ package it.unibo.mparty.view.minigames.nanogram;
 /**
  * Enum representing various status messages for a Nanogram game.
  */
-public enum StatusMessage {
+public enum NanogramMessage {
 
     /**
      * Error message indicating an incorrect cell.
@@ -27,7 +27,7 @@ public enum StatusMessage {
      *
      * @param message the message associated with the status.
      */
-    StatusMessage(final String message) {
+    NanogramMessage(final String message) {
         this.message = message;
     }
 
