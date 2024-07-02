@@ -108,8 +108,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
-        int W = 20;
-        int H = 20;
+        int W = 50;
+        int H = 50;
         for (int i = 0; i < dimension.getFirst(); i++){      
                 ColumnConstraints c = new ColumnConstraints();
                 c.setMinWidth(W);
@@ -125,7 +125,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         }
         for (int i = 0; i < dimension.getFirst(); i++) {
             for (int j = 0; j < dimension.getSecond(); j++) {
-                Label tmp = new Label(Objects.isNull(map.get(new Position(i, j))) ? "void" : map.get(new Position(i, j)).toString());
+                Label tmp = new Label(Objects.isNull(map.get(new Position(i, j))) ? "." : map.get(new Position(i, j)).toString());
                 this.board.add(tmp, i, j);
             }
         }

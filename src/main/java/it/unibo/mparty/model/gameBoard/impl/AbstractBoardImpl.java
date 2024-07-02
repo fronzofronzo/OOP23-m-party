@@ -270,10 +270,9 @@ public abstract class AbstractBoardImpl implements GameBoard{
         if (this.avaiableSlotTypes.isEmpty()) {
             this.avaiableSlotTypes = setAviableSlotType();
         }
-        //SlotType output = this.avaiableSlotTypes.getFirst();
-        //this.avaiableSlotTypes.removeFirst();
-        //return output;
-        return null;
+        SlotType output = this.avaiableSlotTypes.getFirst();
+        this.avaiableSlotTypes.removeFirst();
+        return output;
     }
     
     /**

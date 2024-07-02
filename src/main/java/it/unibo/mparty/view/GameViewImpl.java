@@ -33,7 +33,6 @@ public class GameViewImpl extends Application implements GameView{
         //final SceneView sceneView = loader.<SceneView>getController();
         //sceneView.init(this,this.controller);
         this.boardView = loader.<GameBoardView>getController();
-        this.stage.setFullScreen(true);
         this.stage.setScene(scene);
         this.stage.show();
     }
@@ -43,6 +42,7 @@ public class GameViewImpl extends Application implements GameView{
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
+        this.stage.setFullScreen(true);
         this.stage.show();
         this.setScene("GameBoard.fxml");
         this.controller.startGame(new GameModelImpl(null, ""));
