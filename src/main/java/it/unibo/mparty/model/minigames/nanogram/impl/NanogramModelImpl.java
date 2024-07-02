@@ -29,29 +29,20 @@ public class NanogramModelImpl implements NanogramModel {
     }
 
     @Override
-    public boolean getSolutionCellState(final int x, final int y) {
-        return this.solutionBoard.getState(new Position(x, y));
+    public boolean checkAndSelectCell(int x, int y, boolean state) {
+        if (state == this.solutionBoard.getState(new Position(x,y))) {
+            this.hittedBoard.setCellState(new Position(x, y), state);
+            return true;
+        } else {
+            lives.decrease();
+            this.hittedBoard.setCellState(new Position(x, y), !state);
+            return false;
+        }
     }
 
     @Override
     public int getLives() {
         return this.lives.getLive();
-    }
-
-    @Override
-    public void hitCell(final int x, final int y, final boolean state) {
-        this.hittedBoard.setCellState(new Position(x, y), state);
-    }
-
-    @Override
-    public boolean isMoveValid(final int x, final int y, final boolean state) {
-        Position position = new Position(x, y);
-        return hittedBoard.getCellState(position) == solutionBoard.getState(position);
-    }
-
-    @Override
-    public void updateLives(final int lives) {
-        this.lives.update(lives);
     }
 
     @Override
@@ -65,33 +56,21 @@ public class NanogramModelImpl implements NanogramModel {
     }
 
     @Override
+    public int getBoardSize() {
+        return this.solutionBoard.getSize();
+    }
+
+    @Override
     public boolean isGameComplete() {
         return IntStream.range(0, SIZE_SIMPLE_BOARD)
                 .boxed().flatMap(row -> IntStream.range(0, SIZE_SIMPLE_BOARD)
                         .mapToObj(col -> new Position(row, col)))
                 .filter(solutionBoard::getState)
-                .allMatch(hittedBoard::getCellState);
+                .allMatch(hittedBoard::getState);
     }
 
     @Override
     public boolean isGameOver() {
         return this.lives.isDeath();
-    }
-
-    @Override
-    public boolean checkAndSelectCell(int x, int y, boolean state) {
-        if (state == this.solutionBoard.getState(new Position(x,y))) {
-            this.hittedBoard.setCellState(new Position(x, y), state);
-            return true;
-        } else {
-            lives.decrease();
-            this.hittedBoard.setCellState(new Position(x, y), !state);
-            return false;
-        }
-    }
-
-    @Override
-    public int getBoardSize() {
-        return this.solutionBoard.getSize();
     }
 }
