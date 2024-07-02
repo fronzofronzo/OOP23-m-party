@@ -23,7 +23,7 @@ public class MiniScreenImpl implements MiniScreen {
 
     @Override
     public void handleOkButton(ActionEvent e) {
-        //controller.addPlayers();
+        this.builder.addPlayer(this.username, this.character);
         System.exit(0);
 
     }
@@ -46,6 +46,5 @@ public class MiniScreenImpl implements MiniScreen {
     @Override
     public void setUp(GameModelBuilder builder) {
         this.builder = builder;
-        //load the choicebox whit characters
     }
 }
