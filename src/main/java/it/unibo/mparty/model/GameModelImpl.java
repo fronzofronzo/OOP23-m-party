@@ -38,6 +38,7 @@ public class GameModelImpl implements GameModel{
        this.board = boardFactory.createBoard(BoardType.MEDIUM);
     }
 
+
     @Override
     public Position movePlayer() {
         final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();

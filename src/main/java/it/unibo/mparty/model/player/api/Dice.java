@@ -1,5 +1,9 @@
 package it.unibo.mparty.model.player.api;
 
+/**
+ * This interface models a dice. Each player has his own dice, which can be
+ * modified with items effect.
+ */
 public interface Dice {
 
     /**
