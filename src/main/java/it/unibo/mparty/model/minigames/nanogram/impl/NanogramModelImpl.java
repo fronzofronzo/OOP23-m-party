@@ -9,16 +9,23 @@ import it.unibo.mparty.utilities.Position;
 import java.util.List;
 import java.util.stream.IntStream;
 
+/**
+ * Implementation of the {@link NanogramModel} interface for managing the Nanogram game logic.
+ * This class handles the game state, including the board, hints, lives, and game status.
+ */
 public class NanogramModelImpl implements NanogramModel {
 
     private static final int SIZE_SIMPLE_BOARD = 5;
     private static final double SIMPLE_FILL_PERCENTAGE = 0.6;
-    private final Live lives;
     private final List<List<Integer>> rowHints;
     private final List<List<Integer>> columnHints;
     private final SimpleBoard solutionBoard;
     private final Board hittedBoard;
+    private final Live lives;
 
+    /**
+     * Constructs a {@code NanogramModelImpl} instance initializing the game state with default parameters.
+     */
     public NanogramModelImpl() {
         this.lives = new LiveImpl();
         this.solutionBoard = new SimpleBoardImpl(SIZE_SIMPLE_BOARD, SIMPLE_FILL_PERCENTAGE);
@@ -28,47 +35,68 @@ public class NanogramModelImpl implements NanogramModel {
         this.lives.reset();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean checkAndSelectCell(int x, int y, boolean state) {
+    public boolean checkAndSelectCell(final int x, final int y, final boolean state) {
         if (state == this.solutionBoard.getState(new Position(x,y))) {
             this.hittedBoard.setCellState(new Position(x, y), state);
             return true;
         } else {
-            lives.decrease();
+            this.lives.decrease();
             this.hittedBoard.setCellState(new Position(x, y), !state);
             return false;
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getLives() {
         return this.lives.getLive();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<List<Integer>> getRowHints() {
         return this.rowHints;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<List<Integer>> getColumnHints() {
         return this.columnHints;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getBoardSize() {
         return this.solutionBoard.getSize();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isGameComplete() {
         return IntStream.range(0, SIZE_SIMPLE_BOARD)
                 .boxed().flatMap(row -> IntStream.range(0, SIZE_SIMPLE_BOARD)
                         .mapToObj(col -> new Position(row, col)))
-                .filter(solutionBoard::getState)
-                .allMatch(hittedBoard::getState);
+                .filter(this.solutionBoard::getState)
+                .allMatch(this.hittedBoard::getState);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isGameOver() {
         return this.lives.isDeath();
