@@ -5,9 +5,11 @@ import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
 import it.unibo.mparty.utilities.Position;
 import javafx.event.ActionEvent;
 
+import java.util.Set;
+
 public interface MemorySweepView {
 
-    public void setUp();
+    public void setUp(Set<Position> randoms);
 
     public void hit(MemorySweep.HitType type);
 
