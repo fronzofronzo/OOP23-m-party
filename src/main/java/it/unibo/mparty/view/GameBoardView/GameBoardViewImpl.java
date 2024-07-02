@@ -12,8 +12,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
 public class GameBoardViewImpl extends AbstractSceneView implements GameBoardView{
@@ -100,10 +102,27 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.board = new GridPane();
         //System.out.println(map);
         this.populateGridPane(dimension, map);
+        this.board.prefWidthProperty().bind(this.borderPane.widthProperty());
+        this.board.prefHeightProperty().bind(this.borderPane.heightProperty());
         this.borderPane.setCenter(this.board);
     }
 
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
+        int W = 20;
+        int H = 20;
+        for (int i = 0; i < dimension.getFirst(); i++){      
+                ColumnConstraints c = new ColumnConstraints();
+                c.setMinWidth(W);
+                c.setPrefWidth(W);
+                c.setMaxWidth(W);
+                this.board.getColumnConstraints().add(c);
+        }for (int i = 0; i < dimension.getSecond(); i++){
+                RowConstraints r = new RowConstraints();
+                r.setMinHeight(H);
+                r.setPrefHeight(H);
+                r.setMaxHeight(H);     
+                this.board.getRowConstraints().add(r);
+        }
         for (int i = 0; i < dimension.getFirst(); i++) {
             for (int j = 0; j < dimension.getSecond(); j++) {
                 Label tmp = new Label(Objects.isNull(map.get(new Position(i, j))) ? "void" : map.get(new Position(i, j)).toString());

@@ -33,7 +33,7 @@ public class GameViewImpl extends Application implements GameView{
         //final SceneView sceneView = loader.<SceneView>getController();
         //sceneView.init(this,this.controller);
         this.boardView = loader.<GameBoardView>getController();
-
+        this.stage.setFullScreen(true);
         this.stage.setScene(scene);
         this.stage.show();
     }
