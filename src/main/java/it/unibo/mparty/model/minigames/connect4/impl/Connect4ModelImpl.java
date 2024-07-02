@@ -21,8 +21,10 @@ public class Connect4ModelImpl implements Connect4Model{
 
     @Override
     public boolean isOver() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isOver'");
+        if (isADraw() == true) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -52,19 +54,16 @@ public class Connect4ModelImpl implements Connect4Model{
         if (row ==-1) {
             return false;
         }
+        selectedMap.put(getTurnPlayer(), new Position(column, row));
         manageTurn();
         return true;
     }
 
     private int getAvailableRow (int column) {
-        try {
-            return IntStream.range(0, ROW_NUMBER)
-            .filter(i -> !(selectedMap.values().contains(new Position(i,column))))
-            .findFirst()
-            .getAsInt();
-        } catch (NoSuchElementException e) {
-            return -1;
-        }
+        return IntStream.range(0, ROW_NUMBER)
+        .filter(i -> !(selectedMap.values().contains(new Position(i,column))))
+        .findFirst()
+        .orElse(-1);
     }
 
     private void manageTurn () {
