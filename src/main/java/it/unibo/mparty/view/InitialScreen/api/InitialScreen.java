@@ -1,11 +1,9 @@
-package it.unibo.mparty.view;
+package it.unibo.mparty.view.InitialScreen.api;
 
-import it.unibo.mparty.controller.GameController;
 import it.unibo.mparty.model.GameModelBuilder;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
-import java.util.Observer;
 
 public interface InitialScreen {
 
