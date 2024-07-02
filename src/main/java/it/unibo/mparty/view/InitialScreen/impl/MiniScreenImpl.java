@@ -23,7 +23,9 @@ public class MiniScreenImpl implements MiniScreen {
 
     @Override
     public void handleOkButton(ActionEvent e) {
-        this.builder.addPlayer(this.username, this.character);
+        if(this.username != null && this.character != null) {
+            this.builder.addPlayer(this.username, this.character);
+        }
         System.exit(0);
 
     }
