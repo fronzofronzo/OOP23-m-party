@@ -2,6 +2,7 @@ package it.unibo.mparty.view.GameBoardView;
 
 import java.util.Map;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import it.unibo.mparty.utilities.Position;
@@ -76,6 +77,11 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Button buttonMove;
     @FXML
     private Button buttonEnter;
+
+    private List<Label> labelPlayersNames = List.of(nameP1, nameP2, nameP3, nameP4);     
+    private List<Label> labelPlayersCoins = List.of(coinsP1, coinsP2, coinsP3, coinsP4); 
+    private List<Label> labelPlayersStars = List.of(starsP1, starsP2, starsP3, starsP4);
+    private List<Button> buttonsItem = List.of(useItem1, useItem2, useItem3);
 
     @Override
     public void updatePlayer(String nickname, int coins, int money, List<String> items) {
