@@ -8,5 +8,5 @@ public interface SimpleBoard {
 
     boolean getState(Position position);
 
-    List<List<Integer>> getHints(boolean isRow);
+    List<List<Integer>> generateHints(boolean isRow);
 }

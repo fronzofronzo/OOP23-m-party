@@ -14,7 +14,7 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
 
     private final int size;
 
-    public SimpleBoardImpl(final int size, final int fillPercentage) {
+    public SimpleBoardImpl(final int size, final double fillPercentage) {
         super(size);
         Random random = new Random();
         this.size = size;
@@ -36,7 +36,7 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
     }
 
     @Override
-    public List<List<Integer>> getHints(boolean isRow){
+    public List<List<Integer>> generateHints(boolean isRow){
         final List<List<Integer>> hintsList = new ArrayList<>();
 
         for (int i = 0; i < this.size; i++) {
