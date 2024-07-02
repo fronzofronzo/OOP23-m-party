@@ -1,7 +1,7 @@
 package it.unibo.mparty.view.GameBoardView;
 
 import java.util.Map;
-import java.util.Set;
+import java.util.List;
 import java.util.Objects;
 
 import it.unibo.mparty.utilities.Position;
@@ -78,19 +78,19 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Button buttonEnter;
 
     @Override
-    public void updatePlayer(String nickname, int coins, int money, Set<String> items) {
+    public void updatePlayer(String nickname, int coins, int money, List<String> items) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updatePlayer'");
     }
 
     @Override
-    public void updateCommands(Set<String> items) {
+    public void updateCommands(List<String> items) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateCommands'");
     }
 
     @Override
-    public void setUpBoard(int width, int height, Map<Position, SlotType> map, Set<String> nicknames) {
+    public void setUpBoard(int width, int height, Map<Position, SlotType> map, List<String> nicknames) {
         this.board = new GridPane();
         this.populateGridPane(width, height, map);
     }
