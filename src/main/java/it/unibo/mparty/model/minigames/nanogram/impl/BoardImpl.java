@@ -12,7 +12,7 @@ public class BoardImpl implements Board {
     private final int size;
 
     public BoardImpl(final int size) {
-        board = new HashMap<>();
+        this.board = new HashMap<>();
         this.size = size;
     }
 
