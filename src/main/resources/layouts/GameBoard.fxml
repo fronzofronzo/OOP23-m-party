@@ -1,37 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="644.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.GameBoardView.GameBoardViewImpl">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="644.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.GameBoardView.GameBoardViewImpl">
    <left>
       <SplitPane fx:id="leftSplitPane" dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
          <items>
-            <VBox fx:id="sectionP1" prefHeight="200.0" prefWidth="100.0" />
-            <VBox fx:id="sectionP3" prefHeight="200.0" prefWidth="100.0" />
+            <VBox fx:id="sectionP1" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                  <Label fx:id="nameP1" text="nameP1" />
+                  <Label fx:id="coinsP1" text="coinsP1" />
+                  <Label fx:id="starsP1" text="starsP1" />
+               </children>
+               <padding>
+                  <Insets left="10.0" top="10.0" />
+               </padding></VBox>
+            <VBox fx:id="sectionP3" prefHeight="265.0" prefWidth="116.0" spacing="5.0">
+               <children>
+                  <Label fx:id="nameP3" text="nameP3" />
+                  <Label fx:id="coinsP3" text="coinsP3" />
+                  <Label fx:id="starsP3" text="starsP3" />
+               </children>
+               <padding>
+                  <Insets left="10.0" top="10.0" />
+               </padding></VBox>
          </items>
       </SplitPane>
    </left>
    <right>
       <SplitPane fx:id="rightSplitPane" dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
          <items>
-            <VBox fx:id="sectionP2" prefHeight="200.0" prefWidth="100.0" />
-            <VBox fx:id="sectoionP4" prefHeight="200.0" prefWidth="100.0" />
+            <VBox fx:id="sectionP2" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                  <Label fx:id="nameP2" text="nameP2" />
+                  <Label fx:id="coinsP2" text="coinsP2" />
+                  <Label fx:id="starsP2" text="starsP2" />
+               </children>
+               <padding>
+                  <Insets left="10.0" top="10.0" />
+               </padding></VBox>
+            <VBox fx:id="sectionP4" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                  <Label fx:id="nameP4" text="nameP4" />
+                  <Label fx:id="coinsP4" text="coinsP4" />
+                  <Label fx:id="starsP4" text="starsP4" />
+               </children>
+               <padding>
+                  <Insets left="10.0" top="10.0" />
+               </padding></VBox>
          </items>
       </SplitPane>
    </right>
    <bottom>
       <Pane fx:id="paneCommand" prefHeight="105.0" prefWidth="854.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="buttonUP" layoutX="416.0" layoutY="14.0" mnemonicParsing="false" text="↑" />
-            <Button fx:id="buttonDOWN" layoutX="416.0" layoutY="65.0" mnemonicParsing="false" text="↓" />
-            <Button fx:id="buttonLT" layoutX="389.0" layoutY="40.0" mnemonicParsing="false" text="←" />
-            <Button fx:id="buttonRGHT" layoutX="437.0" layoutY="40.0" mnemonicParsing="false" text="→" />
-            <Button fx:id="buttonACTION" layoutX="491.0" layoutY="39.0" mnemonicParsing="false" text="action" />
-            <Button layoutX="552.0" layoutY="39.0" mnemonicParsing="false" text="Button" />
+            <Button fx:id="buttonUP" layoutX="415.0" layoutY="12.0" maxHeight="30.0" maxWidth="25.0" minHeight="30.0" minWidth="25.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="25.0" text="↑" />
+            <Button fx:id="buttonDOWN" layoutX="415.0" layoutY="64.0" maxHeight="30.0" maxWidth="25.0" minHeight="30.0" minWidth="25.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="25.0" text="↓" />
+            <Button fx:id="buttonLEFT" layoutX="385.0" layoutY="40.0" maxHeight="25.0" maxWidth="30.0" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" text="←" />
+            <Button fx:id="buttonRIGHT" layoutX="440.0" layoutY="40.0" maxHeight="25.0" maxWidth="30.0" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" text="→" />
+            <Button fx:id="buttonRollDice" layoutX="598.0" layoutY="14.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="Roll Dice" />
+            <Button fx:id="buttonMove" layoutX="598.0" layoutY="40.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="Move" />
+            <Button fx:id="useItem1" layoutX="157.0" layoutY="14.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="item1" />
+            <Button fx:id="useItem2" layoutX="157.0" layoutY="40.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="item2" />
+            <Button fx:id="useItem3" layoutX="157.0" layoutY="66.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="item3" />
+            <Button fx:id="Enter" layoutX="598.0" layoutY="66.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="Enter" />
          </children>
       </Pane>
    </bottom>
