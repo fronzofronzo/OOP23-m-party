@@ -45,6 +45,7 @@ public class NanogramControllerImpl implements NanogramController {
             this.view.disableAllCells();
             this.view.displayStatusMessage(StatusMessage.LOSE);
         } else if (this.model.isGameComplete()) {
+            this.view.disableAllCells();
             this.view.fillRemainingCellsWithCrosses();
             this.view.displayStatusMessage(StatusMessage.WIN);
         }
