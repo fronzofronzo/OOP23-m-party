@@ -25,4 +25,10 @@ public interface MinigameModel {
      * @param players of the mini-game
      */
     void setUpPlayers(List<String> players);
+
+    /**
+     * Method to check if the minigame is over
+     * @return true if the minigame is over, false otherwise
+     */
+    boolean isOver();
 }
