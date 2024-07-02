@@ -52,9 +52,12 @@ public class InitialScreenImpl implements InitialScreen {
     public void handleAddPlayerButton(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MiniScreen.fxml"));
         Parent root = loader.load();
+        //var controller = loader.getController();
+        MiniScreen controller = new MiniScreenImpl();
+        controller.setUp(this.controller);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Add players");
+        stage.setTitle("Add player");
         stage.setScene(new Scene(root));
         stage.showAndWait();
     }
