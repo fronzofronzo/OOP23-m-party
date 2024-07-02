@@ -2,9 +2,9 @@ package it.unibo.mparty.view.GameBoardView;
 
 import java.util.Map;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Objects;
 
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.view.AbstractSceneView;
@@ -18,7 +18,7 @@ import javafx.scene.layout.VBox;
 
 public class GameBoardViewImpl extends AbstractSceneView implements GameBoardView{
 
-    private final static int N_VBOX = 4;
+    //private final static int N_VBOX = 4;
 
     private GridPane board;
     @FXML 
@@ -96,16 +96,16 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @Override
-    public void setUpBoard(int width, int height, Map<Position, SlotType> map, List<String> nicknames) {
+    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> map, List<String> nicknames) {
         this.board = new GridPane();
-        System.out.println(map);
-        this.populateGridPane(width, height, map);
+        //System.out.println(map);
+        this.populateGridPane(dimension, map);
         this.borderPane.setCenter(this.board);
     }
 
-    private void populateGridPane(int width, int height, Map<Position, SlotType> map) {
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+    private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
+        for (int i = 0; i < dimension.getFirst(); i++) {
+            for (int j = 0; j < dimension.getSecond(); j++) {
                 Label tmp = new Label(Objects.isNull(map.get(new Position(i, j))) ? "void" : map.get(new Position(i, j)).toString());
                 this.board.add(tmp, i, j);
             }

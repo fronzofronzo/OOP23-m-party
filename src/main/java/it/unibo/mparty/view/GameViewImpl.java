@@ -2,6 +2,9 @@ package it.unibo.mparty.view;
 
 import it.unibo.mparty.controller.GameControllerImpl;
 import it.unibo.mparty.model.GameModelImpl;
+import it.unibo.mparty.utilities.Pair;
+import it.unibo.mparty.utilities.Position;
+import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.view.GameBoardView.GameBoardView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import it.unibo.mparty.controller.GameController;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 public class GameViewImpl extends Application implements GameView{
 
@@ -28,11 +33,12 @@ public class GameViewImpl extends Application implements GameView{
         //final SceneView sceneView = loader.<SceneView>getController();
         //sceneView.init(this,this.controller);
         this.boardView = loader.<GameBoardView>getController();
-        //this.boardView.setUpBoard(0, 0, this.controller.getBoard(), null);
 
         this.stage.setScene(scene);
         this.stage.show();
     }
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -40,5 +46,12 @@ public class GameViewImpl extends Application implements GameView{
         this.stage.show();
         this.setScene("GameBoard.fxml");
         this.controller.startGame(new GameModelImpl(null, ""));
+    }
+
+
+
+    @Override
+    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> nicknames) {
+        this.boardView.setUpBoard(dimension, board, nicknames);
     }    
 }

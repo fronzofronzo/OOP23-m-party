@@ -1,5 +1,6 @@
 package it.unibo.mparty.view.GameBoardView;
 
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.view.SceneView;
@@ -12,5 +13,5 @@ public interface GameBoardView extends SceneView{
 
     void updateCommands(List<String> items);
 
-    void setUpBoard(int width, int height, Map<Position,SlotType> map, List<String> nicknames);
+    void setUpBoard(Pair<Integer,Integer> dimension, Map<Position,SlotType> map, List<String> nicknames);
 }
