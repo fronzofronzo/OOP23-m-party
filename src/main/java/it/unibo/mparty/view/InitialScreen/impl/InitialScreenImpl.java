@@ -1,8 +1,8 @@
-package it.unibo.mparty.view;
+package it.unibo.mparty.view.InitialScreen.impl;
 
-import it.unibo.mparty.controller.GameController;
-import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.GameModelBuilder;
+import it.unibo.mparty.view.InitialScreen.api.InitialScreen;
+import it.unibo.mparty.view.InitialScreen.api.MiniScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
