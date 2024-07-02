@@ -4,7 +4,7 @@ import it.unibo.mparty.controller.minigames.nanogram.api.NanogramController;
 import it.unibo.mparty.controller.minigames.nanogram.impl.NanogramControllerImpl;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.minigames.nanogram.api.NanogramView;
-import it.unibo.mparty.view.minigames.nanogram.StatusMessage;
+import it.unibo.mparty.view.minigames.nanogram.NanogramMessage;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -14,7 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 
@@ -55,7 +56,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     @FXML
     private GridPane rowHints;
 
-    private NanogramController controller;// = new NanogramControllerImpl(this);
+    private NanogramController controller;
 
     private Button hitButton;
 
@@ -64,7 +65,6 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     @FXML
     private void initialize() {
         this.controller = new NanogramControllerImpl(this);
-        //this.boardGrid = new GridPane();
         this.boardGrid.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         GridPane.setMargin(boardGrid, new Insets(MARGIN));
         pane.setCenter(this.boardGrid);
@@ -79,6 +79,9 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         this.crossButton.setOnAction(event -> this.controller.setFillState(false));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void initGrid(final int size) {
         this.boardButtons = new HashSet<>();
@@ -89,7 +92,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
             for (int col = 0; col < size; col++) {
                 final Button button = new Button();
                 button.setPrefSize(PREF_SIZE, PREF_SIZE);
-                //button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 button.setOnMouseClicked(handleCellClicked);
                 this.boardButtons.add(button);
                 this.boardGrid.add(button, col, row);
@@ -97,24 +100,30 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void fillCell(boolean isCorrect) {
         if (isCorrect) {
             this.clearMessageLabel();
             this.hitButton.setStyle( "-fx-background-color: #38475f");
         } else {
-            this.messageLabel.setText(StatusMessage.ERROR.toString());
+            this.messageLabel.setText(NanogramMessage.ERROR.toString());
             this.hitButton.setGraphic(drawCross(Color.valueOf("#ff4443")));
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void crossCell(boolean isCorrect) {
         if (isCorrect) {
             this.clearMessageLabel();
             this.hitButton.setGraphic(drawCross(Color.valueOf("#38475f")));
         } else {
-            this.messageLabel.setText(StatusMessage.ERROR.toString());
+            this.messageLabel.setText(NanogramMessage.ERROR.toString());
             this.hitButton.setStyle( "-fx-background-color: #ff4443");
         }
     }
@@ -133,6 +142,41 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     @Override
     public void setColumnHints(final List<List<Integer>> columnHints) {
         this.setHints(this.columnHints, columnHints, false);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateLives(final int actualLives) {
+        final String LIVES = "Vite: ";
+        this.livesLabel.setText(LIVES + actualLives);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void displayStatusMessage(final NanogramMessage message) {
+        this.messageLabel.setText(message.toString());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void disableAllCells() {
+        this.boardGrid.getChildren().stream()
+                .filter(node -> node instanceof Button)
+                .forEach(node -> node.setDisable(true));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void fillRemainingCellsWithCrosses() {
+        boardButtons.forEach(button -> button.setGraphic(drawCross(Color.valueOf("#38475f"))));
     }
 
     private void setHints(final GridPane grid, final List<List<Integer>> hintsList, final boolean isRowHints) {
@@ -159,46 +203,15 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void updateLives(final int actualLives) {
-        final String LIVES = "Vite: ";
-        this.livesLabel.setText(LIVES + actualLives);
-    }
-
     private void clearMessageLabel() {
         this.messageLabel.setText(" ");
-    }
-
-    @Override
-    public void displayStatusMessage(final StatusMessage message) {
-        this.messageLabel.setText(message.toString());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void disableAllCells() {
-        this.boardGrid.getChildren().stream()
-                .filter(node -> node instanceof Button)
-                .forEach(node -> node.setDisable(true));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void fillRemainingCellsWithCrosses() {
-        boardButtons.forEach(button -> button.setGraphic(drawCross(Color.valueOf("#38475f"))));
     }
 
     private final EventHandler<MouseEvent> handleCellClicked = event -> {
         this.hitButton = (Button) event.getSource();
         this.controller.checkCell(GridPane.getRowIndex(hitButton), GridPane.getColumnIndex(hitButton));
-        this.boardButtons.remove(hitButton); //todo: check
+        this.hitButton.setDisable(true);
+        this.boardButtons.remove(hitButton);
     };
 
     private SVGPath drawCross(final Color color) {
