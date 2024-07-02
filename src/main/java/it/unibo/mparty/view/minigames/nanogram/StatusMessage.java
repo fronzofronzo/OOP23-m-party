@@ -1,4 +1,4 @@
-package it.unibo.mparty.view.minigames.nanogram.util;
+package it.unibo.mparty.view.minigames.nanogram;
 
 /**
  * Enum representing various status messages for a Nanogram game.
