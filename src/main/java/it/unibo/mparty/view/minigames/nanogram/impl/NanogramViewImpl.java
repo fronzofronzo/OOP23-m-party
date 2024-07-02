@@ -2,27 +2,37 @@ package it.unibo.mparty.view.minigames.nanogram.impl;
 
 import it.unibo.mparty.controller.minigames.nanogram.api.NanogramController;
 import it.unibo.mparty.controller.minigames.nanogram.impl.NanogramControllerImpl;
-import it.unibo.mparty.model.minigames.nanogram.api.Board;
-import it.unibo.mparty.view.minigames.nanogram.util.StatusMessage;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.minigames.nanogram.api.NanogramView;
+import it.unibo.mparty.view.minigames.nanogram.StatusMessage;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
+import javafx.scene.shape.SVGPath;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Implementation of the {@link NanogramView} interface representing the view for a Nanogram game.
  * This class handles the UI components and interactions for the Nanogram game.
  */
 public class NanogramViewImpl extends AbstractSceneView implements NanogramView {
+
+    private static final int PREF_SIZE = 300;
+    private static final double MARGIN = 30;
+
+    @FXML
+    private BorderPane pane;
 
     @FXML
     private GridPane columnHints;
@@ -34,7 +44,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     private RadioButton filledButton;
 
     @FXML
-    private GridPane gameGrid;
+    private GridPane boardGrid;
 
     @FXML
     private Label livesLabel;
@@ -45,18 +55,19 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     @FXML
     private GridPane rowHints;
 
-    private final NanogramController controller = new NanogramControllerImpl(this);
+    private NanogramController controller;// = new NanogramControllerImpl(this);
 
-    private boolean selectedState = true;
+    private Button hitButton;
 
-    private boolean error = false;
-
-    private Board solutionBoard;
+    private Set<Button> boardButtons;
 
     @FXML
     private void initialize() {
-        this.controller.startGame();
-        this.updateLives(3);
+        this.controller = new NanogramControllerImpl(this);
+        //this.boardGrid = new GridPane();
+        this.boardGrid.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        GridPane.setMargin(boardGrid, new Insets(MARGIN));
+        pane.setCenter(this.boardGrid);
 
         ToggleGroup toggleGroup = new ToggleGroup();
         this.filledButton.setToggleGroup(toggleGroup);
@@ -64,24 +75,49 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
 
         this.filledButton.setSelected(true);
 
-        this.filledButton.setOnAction(event -> this.selectedState = true);
-        this.crossButton.setOnAction(event -> this.selectedState = false);
-
-        initGrid();
+        this.filledButton.setOnAction(event -> this.controller.setFillState(true));
+        this.crossButton.setOnAction(event -> this.controller.setFillState(true));
     }
 
-    private void initGrid() {
-        //int size = this.solutionBoard.getSize();
-        for (int row = 0; row < gameGrid.getRowCount(); row++) {
-            for (int col = 0; col < gameGrid.getColumnCount(); col++) {
-                final int finalRow = row;
-                final int finalCol = col;
-                final Pane cell = new Pane();
-                cell.getStyleClass().add("cell");
-                cell.setOnMouseClicked(event -> handleCellClick(finalRow, finalCol));
-                this.gameGrid.add(cell, finalCol, finalRow);
+    private final EventHandler<MouseEvent> handleCellClicked = event -> {
+        this.hitButton = (Button) event.getSource();
+        //this.controller.updateModel(GridPane.getRowIndex(hitButton), GridPane.getColumnIndex(hitButton), this.selectedState);
+        this.controller.checkCell(GridPane.getRowIndex(hitButton), GridPane.getColumnIndex(hitButton));
+        boardButtons.remove(hitButton); //todo: check
+    };
+
+    @Override
+    public void initGrid(final int size) {
+        this.boardButtons = new HashSet<>();
+        this.boardGrid.setHgap(2);
+        this.boardGrid.setVgap(2);
+
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++) {
+                final Button button = new Button();
+                button.setPrefSize(PREF_SIZE, PREF_SIZE);
+                button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                button.setOnMouseClicked(handleCellClicked);
+                this.boardButtons.add(button);
+                this.boardGrid.add(button, col, row);
             }
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setRowHints(final List<List<Integer>> rowHints) {
+        this.setHints(this.rowHints, rowHints, true);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setColumnHints(final List<List<Integer>> columnHints) {
+        this.setHints(this.columnHints, columnHints, false);
     }
 
     private void setHints(final GridPane grid, final List<List<Integer>> hintsList, final boolean isRowHints) {
@@ -106,87 +142,6 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
                 }
             }
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setRowHints(final List<List<Integer>> rowHints) {
-        this.setHints(this.rowHints, rowHints, true);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setColumnHints(final List<List<Integer>> columnHints) {
-        this.setHints(this.columnHints, columnHints, false);
-    }
-
-    private void handleCellClick(final int row, final int col) {
-//        final Pane cell = getNodeByRowColumnIndex(row, col, this.gameGrid);
-//        this.error = false;
-//        if (cell != null && !cell.getStyleClass().contains("filled") && !cell.getStyleClass().contains("crossed")) {
-//            final boolean correctState = this.solutionBoard.getboolean;
-//            if (!this.selectedState.equals(correctState)) {
-//                this.error = true;
-//            }
-//            this.controller.updateModel(row, col, this.selectedState);
-//        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setSolutionBoard(final Board board) {
-        this.solutionBoard = board;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void updateCell(final int row, final int col, final boolean state) {
-//        final Pane cell = getNodeByRowColumnIndex(row, col, this.gameGrid);
-//        if (cell != null) {
-//            cell.getChildren().clear();
-//
-//            switch (boolean) {
-//                case FILLED:
-//                    cell.setStyle(this.error ? "-fx-background-color: red;" : "-fx-background-color: black;");
-//                    break;
-//                case CROSSED:
-//                    this.drawCross(cell, this.error ? Color.RED : Color.BLACK);
-//                    break;
-//                default:
-//                    throw new IllegalArgumentException("Unknown boolean: " + boolean);
-//            }
-//            cell.getStyleClass().add(boolean.toString().toLowerCase());
-//        }
-    }
-
-    private void drawCross(final Pane cell, final Color color) {
-        double width = cell.getWidth();
-        double height = cell.getHeight();
-        Line line1 = new Line(0, 0, width, height);
-        Line line2 = new Line(0, height, width, 0);
-        line1.setStroke(color);
-        line2.setStroke(color);
-        line1.setStrokeWidth(2);
-        line2.setStrokeWidth(2);
-        cell.getChildren().addAll(line1, line2);
-    }
-
-    private Pane getNodeByRowColumnIndex(final int row, final int column, final GridPane gridPane) {
-        for (javafx.scene.Node node : gridPane.getChildren()) {
-            if (GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) == row
-                    && GridPane.getColumnIndex(node) != null && GridPane.getColumnIndex(node) == column) {
-                return (Pane) node;
-            }
-        }
-        return null;
     }
 
     /**
@@ -219,7 +174,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
      */
     @Override
     public void disableAllCells() {
-        this.gameGrid.getChildren().stream()
+        this.boardGrid.getChildren().stream()
                 .filter(node -> node instanceof Pane)
                 .forEach(node -> node.setDisable(true));
     }
@@ -229,13 +184,26 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
      */
     @Override
     public void fillRemainingCellsWithCrosses() {
-        for (int row = 0; row < this.gameGrid.getRowCount(); row++) {
-            for (int col = 0; col < this.gameGrid.getColumnCount(); col++) {
-                final Pane cell = getNodeByRowColumnIndex(row, col, this.gameGrid);
-                if (cell != null) {
-                    updateCell(row, col, false);
-                }
-            }
-        }
+        boardButtons.forEach(button -> button.setStyle("-fx-background-color: #38475f"));
+    }
+
+    @Override
+    public void fillCell(boolean isCorrect) {
+        this.hitButton.setStyle(isCorrect ? "-fx-background-color: #38475f" : "-fx-background-color: #ff4443");
+    }
+
+    @Override
+    public void crossCell(boolean isCorrect) {
+        this.hitButton.setGraphic(drawCross(Color.valueOf(isCorrect ? "#38475f" : "#ff4443")));
+    }
+
+    private SVGPath drawCross(final Color color) {
+        final String path = "M18.8,16l5.5-5.5c0.8-0.8,0.8-2,0-2.8l0,0C24,7.3,23.5,7,23,7c-0.5,0-1,0.2-1.4,0.6L16,13.2l-5.5-5.5  c-0.8-0.8-2.1-0.8-2.8,0C7.3,8,7,8.5,7,9.1s0.2,1,0.6,1.4l5.5,5.5l-5.5,5.5C7.3,21.9,7,22.4,7,23c0,0.5,0.2,1,0.6,1.4  C8,24.8,8.5,25,9,25c0.5,0,1-0.2,1.4-0.6l5.5-5.5l5.5,5.5c0.8,0.8,2.1,0.8,2.8,0c0.8-0.8,0.8-2.1,0-2.8L18.8,16z";
+        final SVGPath svgPath = new SVGPath();
+        svgPath.setScaleX(2.5);
+        svgPath.setScaleY(2.5);
+        svgPath.setContent(path);
+        svgPath.setFill(color);
+        return svgPath;
     }
 }
