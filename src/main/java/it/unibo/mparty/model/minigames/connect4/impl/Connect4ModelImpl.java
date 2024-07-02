@@ -54,7 +54,9 @@ public class Connect4ModelImpl implements Connect4Model{
         if (row ==-1) {
             return false;
         }
-        selectedMap.put(getTurnPlayer(), new Position(column, row));
+        Position toAdd = new Position(column, row);
+        selectedMap.put(getTurnPlayer(), toAdd );
+
         manageTurn();
         return true;
     }
@@ -73,6 +75,15 @@ public class Connect4ModelImpl implements Connect4Model{
         else {
             turnPlayer=player1;
         }
+    }
+
+    private boolean hasWon(int i, int j) {
+        return false;
+    }
+
+    private boolean checkDirections (int i, int j)
+    {
+        return false;
     }
 
     
