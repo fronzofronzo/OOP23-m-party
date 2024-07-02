@@ -100,6 +100,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.board = new GridPane();
         System.out.println(map);
         this.populateGridPane(width, height, map);
+        this.borderPane.setCenter(this.board);
     }
 
     private void populateGridPane(int width, int height, Map<Position, SlotType> map) {
