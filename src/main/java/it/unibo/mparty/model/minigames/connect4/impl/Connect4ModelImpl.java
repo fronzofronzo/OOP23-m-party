@@ -3,7 +3,6 @@ package it.unibo.mparty.model.minigames.connect4.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.stream.IntStream;
 
 import it.unibo.mparty.model.gameBoard.util.Pair;
