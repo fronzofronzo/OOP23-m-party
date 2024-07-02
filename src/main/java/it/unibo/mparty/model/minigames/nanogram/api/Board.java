@@ -8,5 +8,5 @@ public interface Board {
 
     void setCellState(Position position, boolean state);
 
-    boolean getCellState(Position position);
+    boolean getState(Position position);
 }

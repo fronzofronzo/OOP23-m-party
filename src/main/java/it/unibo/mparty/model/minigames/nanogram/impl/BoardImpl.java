@@ -27,7 +27,7 @@ public class BoardImpl implements Board {
     }
 
     @Override
-    public boolean getCellState(Position position) {
-        return this.board.get(position);
+    public boolean getState(Position position) {
+        return this.board.getOrDefault(position, false);
     }
 }
