@@ -16,7 +16,7 @@ public class Connect4ModelImpl implements Connect4Model{
     private String player1;
     private String player2;
     private String turnPlayer;
-    private Map<String,Position> selectedMap = new HashMap<>();
+    private Map<Position,String> selectedMap = new HashMap<>();
 
     @Override
     public boolean isOver() {
@@ -54,7 +54,7 @@ public class Connect4ModelImpl implements Connect4Model{
             return false;
         }
         Position toAdd = new Position(column, row);
-        selectedMap.put(getTurnPlayer(), toAdd );
+        selectedMap.put(toAdd, getTurnPlayer());
 
         manageTurn();
         return true;
@@ -62,7 +62,7 @@ public class Connect4ModelImpl implements Connect4Model{
 
     private int getAvailableRow (int column) {
         return IntStream.range(0, ROW_NUMBER)
-        .filter(i -> !(selectedMap.values().contains(new Position(i,column))))
+        .filter(i -> !(selectedMap.keySet().contains(new Position(i,column))))
         .findFirst()
         .orElse(-1);
     }
