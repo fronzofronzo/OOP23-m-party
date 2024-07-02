@@ -30,4 +30,6 @@ public interface Live {
      * @return true if there are no lives left, false otherwise.
      */
     boolean isDeath();
+
+    void decrease();
 }

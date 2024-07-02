@@ -8,6 +8,7 @@ import it.unibo.mparty.model.minigames.nanogram.api.Live;
  * retrieve, reset, update, and check the status of lives.
  */
 public class LiveImpl implements Live {
+
     private static final int INITIAL_LIVES = 3;
     private int lives;
 
@@ -48,5 +49,10 @@ public class LiveImpl implements Live {
     @Override
     public boolean isDeath() {
         return this.lives <= 0;
+    }
+
+    @Override
+    public void decrease() {
+        this.lives--;
     }
 }
