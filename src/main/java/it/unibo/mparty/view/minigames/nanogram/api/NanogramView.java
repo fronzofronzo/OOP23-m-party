@@ -36,11 +36,6 @@ public interface NanogramView extends MinigameView {
     void updateLives(int actualLives);
 
     /**
-     * Clears the message label in the UI, removing any displayed text.
-     */
-    void clearMessageLabel();
-
-    /**
      * Displays a status message to the user in the UI.
      *
      * @param message the status message to display, encapsulated in a {@link StatusMessage} object.

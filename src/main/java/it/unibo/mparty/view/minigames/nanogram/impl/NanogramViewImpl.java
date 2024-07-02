@@ -76,15 +76,8 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         this.filledButton.setSelected(true);
 
         this.filledButton.setOnAction(event -> this.controller.setFillState(true));
-        this.crossButton.setOnAction(event -> this.controller.setFillState(true));
+        this.crossButton.setOnAction(event -> this.controller.setFillState(false));
     }
-
-    private final EventHandler<MouseEvent> handleCellClicked = event -> {
-        this.hitButton = (Button) event.getSource();
-        //this.controller.updateModel(GridPane.getRowIndex(hitButton), GridPane.getColumnIndex(hitButton), this.selectedState);
-        this.controller.checkCell(GridPane.getRowIndex(hitButton), GridPane.getColumnIndex(hitButton));
-        boardButtons.remove(hitButton); //todo: check
-    };
 
     @Override
     public void initGrid(final int size) {
@@ -96,11 +89,33 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
             for (int col = 0; col < size; col++) {
                 final Button button = new Button();
                 button.setPrefSize(PREF_SIZE, PREF_SIZE);
-                button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                //button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 button.setOnMouseClicked(handleCellClicked);
                 this.boardButtons.add(button);
                 this.boardGrid.add(button, col, row);
             }
+        }
+    }
+
+    @Override
+    public void fillCell(boolean isCorrect) {
+        if (isCorrect) {
+            this.clearMessageLabel();
+            this.hitButton.setStyle( "-fx-background-color: #38475f");
+        } else {
+            this.messageLabel.setText(StatusMessage.ERROR.toString());
+            this.hitButton.setGraphic(drawCross(Color.valueOf("#ff4443")));
+        }
+    }
+
+    @Override
+    public void crossCell(boolean isCorrect) {
+        if (isCorrect) {
+            this.clearMessageLabel();
+            this.hitButton.setGraphic(drawCross(Color.valueOf("#38475f")));
+        } else {
+            this.messageLabel.setText(StatusMessage.ERROR.toString());
+            this.hitButton.setStyle( "-fx-background-color: #ff4443");
         }
     }
 
@@ -153,17 +168,10 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         this.livesLabel.setText(LIVES + actualLives);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void clearMessageLabel() {
+    private void clearMessageLabel() {
         this.messageLabel.setText(" ");
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void displayStatusMessage(final StatusMessage message) {
         this.messageLabel.setText(message.toString());
@@ -175,7 +183,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     @Override
     public void disableAllCells() {
         this.boardGrid.getChildren().stream()
-                .filter(node -> node instanceof Pane)
+                .filter(node -> node instanceof Button)
                 .forEach(node -> node.setDisable(true));
     }
 
@@ -184,18 +192,14 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
      */
     @Override
     public void fillRemainingCellsWithCrosses() {
-        boardButtons.forEach(button -> button.setStyle("-fx-background-color: #38475f"));
+        boardButtons.forEach(button -> button.setGraphic(drawCross(Color.valueOf("#38475f"))));
     }
 
-    @Override
-    public void fillCell(boolean isCorrect) {
-        this.hitButton.setStyle(isCorrect ? "-fx-background-color: #38475f" : "-fx-background-color: #ff4443");
-    }
-
-    @Override
-    public void crossCell(boolean isCorrect) {
-        this.hitButton.setGraphic(drawCross(Color.valueOf(isCorrect ? "#38475f" : "#ff4443")));
-    }
+    private final EventHandler<MouseEvent> handleCellClicked = event -> {
+        this.hitButton = (Button) event.getSource();
+        this.controller.checkCell(GridPane.getRowIndex(hitButton), GridPane.getColumnIndex(hitButton));
+        this.boardButtons.remove(hitButton); //todo: check
+    };
 
     private SVGPath drawCross(final Color color) {
         final String path = "M18.8,16l5.5-5.5c0.8-0.8,0.8-2,0-2.8l0,0C24,7.3,23.5,7,23,7c-0.5,0-1,0.2-1.4,0.6L16,13.2l-5.5-5.5  c-0.8-0.8-2.1-0.8-2.8,0C7.3,8,7,8.5,7,9.1s0.2,1,0.6,1.4l5.5,5.5l-5.5,5.5C7.3,21.9,7,22.4,7,23c0,0.5,0.2,1,0.6,1.4  C8,24.8,8.5,25,9,25c0.5,0,1-0.2,1.4-0.6l5.5-5.5l5.5,5.5c0.8,0.8,2.1,0.8,2.8,0c0.8-0.8,0.8-2.1,0-2.8L18.8,16z";
