@@ -3,16 +3,25 @@ package it.unibo.mparty.model.minigames.nanogram.impl;
 import it.unibo.mparty.model.minigames.nanogram.api.SimpleBoard;
 import it.unibo.mparty.utilities.Position;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
+/**
+ * Implementation of a simple board for a Nanogram game.
+ * Extends {@link BoardImpl} and implements {@link SimpleBoard}.
+ */
 public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
 
     private final int size;
 
+    /**
+     * Constructs a SimpleBoardImpl object with the specified size and fill percentage.
+     *
+     * @param size           the size of the board (size x size).
+     * @param fillPercentage the percentage of cells to be initially filled (true).
+     */
     public SimpleBoardImpl(final int size, final double fillPercentage) {
         super(size);
         this.size = size;
@@ -28,13 +37,19 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
         position.stream().limit(Math.round(size * size * fillPercentage)).forEach(p -> this.board.replace(p, true));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean getState(Position position){
+    public boolean getState(final Position position){
         return this.board.get(position);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<List<Integer>> generateHints(boolean isRow){
+    public List<List<Integer>> generateHints(final boolean isRow){
         final List<List<Integer>> hintsList = new ArrayList<>();
 
         for (int i = 0; i < this.size; i++) {
@@ -61,7 +76,6 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
 
             hintsList.add(hints);
         }
-        System.out.println("SimpleBoard: "+hintsList);
         return hintsList;
     }
 }
