@@ -7,7 +7,6 @@ import it.unibo.mparty.utilities.Position;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.IntStream;
 
 public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
@@ -16,7 +15,6 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
 
     public SimpleBoardImpl(final int size, final double fillPercentage) {
         super(size);
-        Random random = new Random();
         this.size = size;
 
         List<Position> position = new ArrayList<>(IntStream.range(0, size * size)
@@ -63,6 +61,7 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
 
             hintsList.add(hints);
         }
+        System.out.println("SimpleBoard: "+hintsList);
         return hintsList;
     }
 }
