@@ -104,12 +104,16 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.board = new GridPane();
         //System.out.println(map);
         this.populateGridPane(dimension, map);
-        this.board.prefWidthProperty().bind(this.centerPane.widthProperty());
-        this.board.prefHeightProperty().bind(this.centerPane.heightProperty());
-        this.centerPane.prefWidthProperty().bind(this.borderPane.widthProperty());
-        this.centerPane.prefHeightProperty().bind(this.borderPane.heightProperty());
-        this.centerPane.getChildren().add(this.board);
-        this.borderPane.setCenter(this.centerPane);
+        this.board.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        this.board.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        this.borderPane.setCenter(this.board);
+        this.borderPane.widthProperty().addListener((obs, oldVal, newVal) -> {
+            this.board.setPrefWidth(newVal.doubleValue());
+        });
+
+        this.borderPane.heightProperty().addListener((obs, oldVal, newVal) -> {
+            this.board.setPrefHeight(newVal.doubleValue());
+        });
     }
 
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
