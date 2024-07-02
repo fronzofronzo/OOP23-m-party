@@ -27,9 +27,9 @@ public class GameViewImpl extends Application implements GameView{
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
         //final SceneView sceneView = loader.<SceneView>getController();
         //sceneView.init(this,this.controller);
-        this.boardView = loader.getController();
+        this.boardView = loader.<GameBoardView>getController();
         //this.boardView.setUpBoard(0, 0, this.controller.getBoard(), null);
-        this.controller.startGame(new GameModelImpl(null, ""));
+
         this.stage.setScene(scene);
         this.stage.show();
     }
@@ -39,5 +39,6 @@ public class GameViewImpl extends Application implements GameView{
         this.stage = primaryStage;
         this.stage.show();
         this.setScene("GameBoard.fxml");
+        this.controller.startGame(new GameModelImpl(null, ""));
     }    
 }
