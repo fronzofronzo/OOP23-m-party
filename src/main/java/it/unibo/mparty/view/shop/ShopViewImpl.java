@@ -1,5 +1,8 @@
 package it.unibo.mparty.view.shop;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import it.unibo.mparty.view.AbstractSceneView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +16,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
 
     private int i=1;
     private int j=1;
+    private List<String> stringList = new ArrayList<>();
 
     @FXML
     private AnchorPane descriptionPane;
@@ -32,7 +36,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
         buttonPane.getChildren().add(but);
         AnchorPane.setTopAnchor(but, i*50.0);
         i++;
-        
+        stringList.add(item);
     }
 
     public void addDescription(String description)
@@ -44,7 +48,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
     }
 
     private void selectItem(ActionEvent e) {
-        this.getMainController().selectItem();
+        this.getMainController().selectItem(stringList.get(this.buttonPane.getChildren().indexOf((Button)(e.getSource()))));
     }
     
 }
