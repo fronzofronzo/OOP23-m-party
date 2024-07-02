@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import it.unibo.mparty.model.gameBoard.util.Pair;
 import it.unibo.mparty.model.minigames.connect4.api.Connect4Model;
+import it.unibo.mparty.utilities.Connect4Directions;
 import it.unibo.mparty.utilities.Position;
 
 public class Connect4ModelImpl implements Connect4Model{
@@ -16,26 +18,35 @@ public class Connect4ModelImpl implements Connect4Model{
     private String player1;
     private String player2;
     private String turnPlayer;
+    private Position lastSelected = new Position(-1, -1);
+    private int coinsWon;
     private Map<Position,String> selectedMap = new HashMap<>();
 
     @Override
     public boolean isOver() {
         if (isADraw() == true) {
+            turnPlayer=player2;
+            coinsWon = 5;
             return true;
         }
+        if (hasWon(lastSelected.getX(), lastSelected.getY())) {
+            coinsWon = 15;
+            return true;
+        }
+        manageTurn();
         return false;
     }
 
     @Override
     public Pair<String, Integer> getResult() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getResult'");
+        return new Pair<String,Integer>(getTurnPlayer(),coinsWon);
     }
 
     @Override
     public void setUpPlayers(List<String> players) {
         player1 = players.get(0);
         player2 = players.get(1);
+        turnPlayer = player1;
     }
 
     private boolean isADraw() {
@@ -53,10 +64,8 @@ public class Connect4ModelImpl implements Connect4Model{
         if (row ==-1) {
             return false;
         }
-        Position toAdd = new Position(column, row);
-        selectedMap.put(toAdd, getTurnPlayer());
-
-        manageTurn();
+        lastSelected = new Position(column, row);
+        selectedMap.put(lastSelected, getTurnPlayer());
         return true;
     }
 
@@ -77,14 +86,23 @@ public class Connect4ModelImpl implements Connect4Model{
     }
 
     private boolean hasWon(int i, int j) {
-        return false;
+        return Stream.of(Connect4Directions.values())
+        .anyMatch(dir -> checkDirections(i, j, dir));
     }
 
-    private boolean checkDirections (int i, int j)
+    private boolean checkDirections (int i, int j, Connect4Directions direction)
     {
-        return false;
+        return IntStream.rangeClosed(-3, 3)
+        .map(off -> countMatches(i, j, direction, off))
+        .sum() >= 4;
     }
 
-    
+    private int countMatches (int i,int j, Connect4Directions direction, int offset) {
+        Position check = new Position(i + offset * direction.getPosition().getX(), j + offset * direction.getPosition().getY());
+        if (selectedMap.containsKey(check) && selectedMap.get(check).equals(getTurnPlayer())) {
+            return 1;
+        }
+        return 0;
+    }
 
 }
