@@ -46,6 +46,6 @@ public class PlayerBagImplementation implements PlayerBag {
 
     @Override
     public boolean isFull() {
-        return Arrays.stream(items).filter(o -> o.isPresent()).count() == items.length;
+        return Arrays.stream(items).filter(Optional::isPresent).count() == items.length;
     }
 }
