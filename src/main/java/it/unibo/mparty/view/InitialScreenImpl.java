@@ -1,6 +1,8 @@
 package it.unibo.mparty.view;
 
 import it.unibo.mparty.controller.GameController;
+import it.unibo.mparty.model.GameModel;
+import it.unibo.mparty.model.GameModelBuilder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,10 +14,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Set;
 
 public class InitialScreenImpl implements InitialScreen {
 
-    private GameController controller;
+    private GameModelBuilder builder;
+
+    private Set<String> temp = Set.of("Easy","Medium","Difficult");
+    private String difficulty;
 
     @FXML
     private Button addPlayers;
@@ -28,14 +34,14 @@ public class InitialScreenImpl implements InitialScreen {
 
 
     @Override
-    public void setObserver(GameController observer) {
-        this.controller = observer;
+    public void setBuilder(GameModelBuilder builder) {
+        this.builder = builder;
     }
 
     @Override
     public void setUp() {
         this.startGame.setDisable(false);
-        //add to the choice box the characters with a controller method
+        this.playerChoiceBox.getItems().addAll(temp);
     }
 
     @Override
@@ -45,7 +51,7 @@ public class InitialScreenImpl implements InitialScreen {
 
     @Override
     public void handleDifficultyButton(ActionEvent event) {
-        //set the string to mychoicebox.getValue() to get current choice so when the game start you pass that difficulty
+        this.difficulty = this.playerChoiceBox.getValue();
     }
 
     @Override
@@ -54,7 +60,7 @@ public class InitialScreenImpl implements InitialScreen {
         Parent root = loader.load();
         //var controller = loader.getController();
         MiniScreen controller = new MiniScreenImpl();
-        controller.setUp(this.controller);
+        controller.setUp(this.builder);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Add player");
@@ -64,6 +70,6 @@ public class InitialScreenImpl implements InitialScreen {
 
     @Override
     public void handleStartButton(ActionEvent event) {
-
+        //controller.build();
     }
 }
