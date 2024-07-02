@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class BoardImpl implements Board {
 
-    protected final Map<Position, Boolean> board;
+    private final Map<Position, Boolean> board;
     private final int size;
 
     /**
@@ -47,5 +47,14 @@ public class BoardImpl implements Board {
     @Override
     public boolean getState(final Position position) {
         return this.board.getOrDefault(position, false);
+    }
+
+    /**
+     * Retrieves the board map.
+     *
+     * @return the board map.
+     */
+    protected Map<Position, Boolean> getBoard() {
+        return this.board;
     }
 }

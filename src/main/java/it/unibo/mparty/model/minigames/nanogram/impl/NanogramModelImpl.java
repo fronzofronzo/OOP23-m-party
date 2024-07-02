@@ -40,7 +40,7 @@ public class NanogramModelImpl implements NanogramModel {
      */
     @Override
     public boolean checkAndSelectCell(final int x, final int y, final boolean state) {
-        if (state == this.solutionBoard.getState(new Position(x,y))) {
+        if (state == this.solutionBoard.getState(new Position(x, y))) {
             this.hittedBoard.setCellState(new Position(x, y), state);
             return true;
         } else {

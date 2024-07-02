@@ -30,26 +30,26 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
                 .mapToObj(i -> new Position(i / size, i % size))
                 .toList());
 
-        position.forEach(p -> this.board.put(p, false));
+        position.forEach(p -> getBoard().put(p, false));
 
         Collections.shuffle(position);
 
-        position.stream().limit(Math.round(size * size * fillPercentage)).forEach(p -> this.board.replace(p, true));
+        position.stream().limit(Math.round(size * size * fillPercentage)).forEach(p -> getBoard().replace(p, true));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean getState(final Position position){
-        return this.board.get(position);
+    public boolean getState(final Position position) {
+        return getBoard().get(position);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<List<Integer>> generateHints(final boolean isRow){
+    public List<List<Integer>> generateHints(final boolean isRow) {
         final List<List<Integer>> hintsList = new ArrayList<>();
 
         for (int i = 0; i < this.size; i++) {
@@ -58,7 +58,7 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
 
             for (int j = 0; j < this.size; j++) {
                 final Position pos = isRow ? new Position(i, j) : new Position(j, i);
-                final Boolean currentState = this.board.get(pos);
+                final boolean currentState = getBoard().get(pos);
 
                 if (currentState) {
                     count++;
