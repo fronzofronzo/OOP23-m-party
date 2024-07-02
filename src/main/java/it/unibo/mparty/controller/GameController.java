@@ -2,6 +2,7 @@ package it.unibo.mparty.controller;
 
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.utilities.Position;
+import it.unibo.mparty.model.item.impl.ItemName;
 
 public interface GameController {
 
@@ -9,7 +10,7 @@ public interface GameController {
 
     Position movePlayer();
 
-    boolean buyItem();
+    boolean buyItem(ItemName item);
 
     void startGame(GameModel model);
 

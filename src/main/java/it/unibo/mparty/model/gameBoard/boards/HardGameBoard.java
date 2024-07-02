@@ -1,10 +1,11 @@
 package it.unibo.mparty.model.gameBoard.boards;
 
 import it.unibo.mparty.model.gameBoard.impl.AbstractBoardImpl;
-import it.unibo.mparty.model.gameBoard.util.BoardType;
-import it.unibo.mparty.model.gameBoard.util.Pair;
+import it.unibo.mparty.utilities.BoardType;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
-import it.unibo.mparty.model.gameBoard.util.SlotType;
+import it.unibo.mparty.utilities.SlotType;
+
 import java.util.Set;
 
 public class HardGameBoard extends AbstractBoardImpl{

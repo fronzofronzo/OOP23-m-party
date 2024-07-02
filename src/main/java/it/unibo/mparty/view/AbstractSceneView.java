@@ -22,6 +22,4 @@ public abstract class AbstractSceneView implements SceneView{
     public GameController getMainController(){
         return this.mainController;
     }
-
-
 }

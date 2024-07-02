@@ -2,9 +2,9 @@ package it.unibo.mparty.model.gameBoard.api;
 
 import java.util.Map;
 
+import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Position;
-import it.unibo.mparty.model.gameBoard.util.Direction;
-import it.unibo.mparty.model.gameBoard.util.SlotType;
+import it.unibo.mparty.utilities.SlotType;
 
 /**
  * This interface models a Slot, that it is like a graph'node
