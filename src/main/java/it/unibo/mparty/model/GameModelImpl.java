@@ -39,10 +39,11 @@ public class GameModelImpl implements GameModel{
     }
 
     @Override
-    public void movePlayer() {
+    public Position movePlayer() {
         final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
         //final Position nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition).get(0).getY();
 
+        return actualPlayerPosition;
     }
 
     @Override
