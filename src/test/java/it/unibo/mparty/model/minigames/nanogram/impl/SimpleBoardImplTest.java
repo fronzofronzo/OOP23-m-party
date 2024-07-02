@@ -25,7 +25,7 @@ class SimpleBoardImplTest {
     }
 
     @Test
-    void testSimpleBoard(){
+    void testSimpleBoard() {
         Random random = new Random();
         random.doubles(NUM_TEST).forEach(p -> {
             this.simpleBoard = new SimpleBoardImpl(SIZE, p);
@@ -41,7 +41,7 @@ class SimpleBoardImplTest {
     }
 
     @Test
-    void TestGenerateHints() {
+    void testGenerateHints() {
         List<List<Integer>> rowHints = simpleBoard.generateHints(true);
         List<List<Integer>> columnHints = simpleBoard.generateHints(false);
 

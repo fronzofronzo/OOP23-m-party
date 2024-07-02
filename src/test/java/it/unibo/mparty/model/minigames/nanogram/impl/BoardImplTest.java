@@ -25,9 +25,9 @@ class BoardImplTest {
     @Test
     void setCellState() {
         Position position1 = new Position(ZERO, ZERO);
-        Position position2 = new Position(ZERO,FIRST);
-        Position position3 = new Position(FIRST,SECOND);
-        Position position4 = new Position(SECOND,THIRD);
+        Position position2 = new Position(ZERO, FIRST);
+        Position position3 = new Position(FIRST, SECOND);
+        Position position4 = new Position(SECOND, THIRD);
         Position position5 = new Position(THIRD, ZERO);
 
         this.board.setCellState(position1, true);

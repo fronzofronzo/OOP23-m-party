@@ -150,8 +150,8 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
      */
     @Override
     public void updateLives(final int actualLives) {
-        final String LIVES = "Vite: ";
-        this.livesLabel.setText(LIVES + actualLives);
+        final String live = "Vite: ";
+        this.livesLabel.setText(live + actualLives);
     }
 
     /**
