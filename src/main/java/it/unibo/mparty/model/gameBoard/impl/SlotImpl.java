@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Collections;
 
 import it.unibo.mparty.model.gameBoard.api.Slot;
+import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Position;
-import it.unibo.mparty.model.gameBoard.util.Direction;
-import it.unibo.mparty.model.gameBoard.util.SlotType;
+import it.unibo.mparty.utilities.SlotType;
 
 public class SlotImpl implements Slot {
 

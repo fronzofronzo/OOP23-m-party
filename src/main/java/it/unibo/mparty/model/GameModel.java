@@ -1,8 +1,8 @@
 package it.unibo.mparty.model;
 
-import it.unibo.mparty.model.gameBoard.util.Pair;
-import it.unibo.mparty.model.gameBoard.util.SlotType;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
+import it.unibo.mparty.utilities.SlotType;
 
 import java.util.Map;
 

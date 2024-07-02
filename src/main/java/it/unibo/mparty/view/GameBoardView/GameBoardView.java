@@ -1,7 +1,7 @@
 package it.unibo.mparty.view.GameBoardView;
 
-import it.unibo.mparty.model.gameBoard.util.SlotType;
 import it.unibo.mparty.utilities.Position;
+import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.view.SceneView;
 import java.util.Set;
 import java.util.Map;

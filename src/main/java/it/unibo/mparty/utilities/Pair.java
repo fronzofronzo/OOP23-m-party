@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.gameBoard.util;
+package it.unibo.mparty.utilities;
 
 /*
  * A standard generic Pair<X,Y>, with getters, hashCode, equals, and toString well implemented. 

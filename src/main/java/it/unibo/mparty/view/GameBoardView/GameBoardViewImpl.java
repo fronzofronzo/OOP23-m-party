@@ -4,8 +4,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Objects;
 
-import it.unibo.mparty.model.gameBoard.util.SlotType;
 import it.unibo.mparty.utilities.Position;
+import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.view.AbstractSceneView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -70,6 +70,12 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Button buttonDOWN;
     @FXML
     private Button buttonRIGHT;
+    @FXML
+    private Button buttonRollDice;
+    @FXML
+    private Button buttonMove;
+    @FXML
+    private Button buttonEnter;
 
     @Override
     public void updatePlayer(String nickname, int coins, int money, Set<String> items) {

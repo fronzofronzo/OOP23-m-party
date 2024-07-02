@@ -14,14 +14,14 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
-import it.unibo.mparty.model.gameBoard.util.BoardType;
-import it.unibo.mparty.model.gameBoard.util.Direction;
-import it.unibo.mparty.model.gameBoard.util.Pair;
+import it.unibo.mparty.utilities.BoardType;
+import it.unibo.mparty.utilities.Direction;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
+import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.model.gameBoard.util.RandomFromSet;
 import it.unibo.mparty.model.gameBoard.util.RandomListGenerator;
 import it.unibo.mparty.model.gameBoard.api.Slot;
-import it.unibo.mparty.model.gameBoard.util.SlotType;
 
 /**
  * This is an Abstract class that implements GameBoard that could be considerated as a
