@@ -21,4 +21,8 @@ public interface NanogramModel {
     boolean isGameComplete();
 
     boolean isGameOver();
+
+    boolean checkAndSelectCell(int x, int y, boolean state);
+
+    int getBoardSize();
 }

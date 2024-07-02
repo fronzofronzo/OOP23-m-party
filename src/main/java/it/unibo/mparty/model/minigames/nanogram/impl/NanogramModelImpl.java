@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 public class NanogramModelImpl implements NanogramModel {
 
     private static final int SIZE_SIMPLE_BOARD = 5;
-    private static final int SIMPLE_FILL_PERCENTAGE = 60;
+    private static final double SIMPLE_FILL_PERCENTAGE = 0.6;
     private final Live lives;
     private final List<List<Integer>> rowHints;
     private final List<List<Integer>> columnHints;
@@ -76,5 +76,22 @@ public class NanogramModelImpl implements NanogramModel {
     @Override
     public boolean isGameOver() {
         return this.lives.isDeath();
+    }
+
+    @Override
+    public boolean checkAndSelectCell(int x, int y, boolean state) {
+        if (state == this.solutionBoard.getState(new Position(x,y))) {
+            this.hittedBoard.setCellState(new Position(x, y), state);
+            return true;
+        } else {
+            lives.decrease();
+            this.hittedBoard.setCellState(new Position(x, y), !state);
+            return false;
+        }
+    }
+
+    @Override
+    public int getBoardSize() {
+        return this.solutionBoard.getSize();
     }
 }
