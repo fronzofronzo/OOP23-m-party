@@ -49,9 +49,8 @@ public class GameModelImpl implements GameModel{
        this.players = players;
        this.minigameHandler = new MinigameHandlerImplementation();
        this.shop = new ShopImpl();
-       // deve essere modificato con la scelta della difficoltà della mappa
        final SimpleBoardFactory boardFactory = new SimpleBoardFactory();
-       this.board = boardFactory.createBoard(BoardType.MEDIUM);
+       this.board = boardFactory.createBoard(BoardType.valueOf(difficulty));
     }
 
     /**
