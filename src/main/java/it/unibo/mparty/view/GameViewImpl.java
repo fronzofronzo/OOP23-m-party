@@ -1,10 +1,13 @@
 package it.unibo.mparty.view;
 
 import it.unibo.mparty.controller.GameControllerImpl;
+import it.unibo.mparty.model.GameModelImpl;
+import it.unibo.mparty.view.GameBoardView.GameBoardView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import it.unibo.mparty.controller.GameController;
 import java.io.IOException;
@@ -13,7 +16,7 @@ public class GameViewImpl extends Application implements GameView{
 
     private final static double DEFAULT_DIMENSION_VALUE = -1;
     private final static String PATH = "/layouts/";
-
+    private GameBoardView boardView;
 
     private Stage stage;
     private final GameController controller = new GameControllerImpl(this);
@@ -35,4 +38,5 @@ public class GameViewImpl extends Application implements GameView{
         this.stage.show();
         this.setScene("minigames/nanogram.fxml");
     }
+
 }

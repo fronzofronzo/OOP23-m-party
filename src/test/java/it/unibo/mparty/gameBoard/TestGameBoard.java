@@ -1,4 +1,4 @@
-package it.unibo.samplejavafx.gameBoard;
+package it.unibo.mparty.gameBoard;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -14,10 +14,10 @@ import org.junit.jupiter.api.Test;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
-import it.unibo.mparty.model.gameBoard.util.BoardType;
-import it.unibo.mparty.model.gameBoard.util.Direction;
+import it.unibo.mparty.utilities.BoardType;
+import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Position;
-import it.unibo.mparty.model.gameBoard.util.SlotType;
+import it.unibo.mparty.utilities.SlotType;
 
 import java.util.Set;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package it.unibo.samplejavafx.model.minigames.perilouspath;
+package it.unibo.mparty.model.minigames.perilouspath;
 
 
 

@@ -1,6 +1,6 @@
 package it.unibo.mparty.model.minigames;
 
-import it.unibo.mparty.model.gameBoard.util.Pair;
+import it.unibo.mparty.utilities.Pair;
 
 import java.util.List;
 
