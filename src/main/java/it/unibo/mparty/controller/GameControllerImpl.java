@@ -71,8 +71,6 @@ public class GameControllerImpl implements GameController{
             case MOVE_PLAYER -> {
 
             }
-            case USE_ITEM -> {
-            }
         };
 
     }
