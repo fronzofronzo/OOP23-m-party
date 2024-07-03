@@ -27,7 +27,5 @@ public interface GameView {
     /**
      * Switch to te board scene
      */
-    void switchToBoard();
 
-    void setUpBoard() throws IOException;
 }

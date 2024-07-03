@@ -27,11 +27,11 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private static final Map<SlotType,Color> SLOT_COLOR = Map.of(SlotType.ACTIVE_STAR, Color.GOLD, 
                                                                  SlotType.BONUS, Color.GREEN, 
                                                                  SlotType.MALUS, Color.RED, 
-                                                                 SlotType.MULTIPLAYER, Color.LIGHTGREEN, 
-                                                                 SlotType.NOT_ACTIVE_STAR, Color.LIGHTGREEN, 
-                                                                 SlotType.PATH, Color.LIGHTGREEN, 
-                                                                 SlotType.SHOP, Color.BROWN, 
-                                                                 SlotType.SINGLEPLAYER, Color.LIGHTGREEN, 
+                                                                 SlotType.MULTIPLAYER, Color.GRAY, 
+                                                                 SlotType.NOT_ACTIVE_STAR, Color.WHITE, 
+                                                                 SlotType.PATH, Color.WHITE, 
+                                                                 SlotType.SHOP, Color.CYAN, 
+                                                                 SlotType.SINGLEPLAYER, Color.GRAY, 
                                                                  SlotType.VOID, Color.BLACK);
     @FXML
     private GridPane board;

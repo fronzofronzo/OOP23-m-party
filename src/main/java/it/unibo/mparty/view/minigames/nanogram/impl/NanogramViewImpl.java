@@ -232,6 +232,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
 
     @Override
     public void showResult(Pair<String, Integer> result) {
-
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'showResult'");
     }
 }
