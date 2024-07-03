@@ -24,7 +24,7 @@ public class MemoryCardControllerImpl implements MemoryCardController{
             this.view.setCardType(index, this.model.getCards().get(index).getName());
         } else {
             if (this.model.isDone()) {
-                this.view.showResult(this.model.getResult().getY());
+                this.view.showResult(this.model.getResult());
             } else {
                 this.updateGameView();
             }

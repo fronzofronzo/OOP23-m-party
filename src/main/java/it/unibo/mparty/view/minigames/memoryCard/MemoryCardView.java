@@ -22,12 +22,6 @@ public interface MemoryCardView extends MinigameView {
     void setCardType(int index, String type);
 
     /**
-     * show the results of the game
-     * @param n coins earned by the player
-     */
-    void showResult(int n);
-
-    /**
      * Add a card to the game table
      * @param text to write on the card
      */

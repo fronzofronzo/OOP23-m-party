@@ -2,6 +2,7 @@ package it.unibo.mparty.view.minigames.memoryCard;
 
 import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardController;
 import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardControllerImpl;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,11 +33,6 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     public void setCardType(int index, String type) {
         final Button bt = (Button)this.cardsPane.getChildren().get(index);
         bt.setText(type);
-    }
-
-    @Override
-    public void showResult(int n) {
-
     }
 
     @Override
@@ -83,7 +79,9 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     }
 
     @Override
-    public void showResult() {
-
+    public void showResult(Pair<String, Integer> result) {
+        this.textLabel.setText(  result.getX() + " ha guadagnato " +  String.valueOf(result.getY()) + " monete." );
+        this.controlButton.setOnAction(e -> {/*this.getMainView.showBoard*/});
     }
+
 }
