@@ -8,6 +8,7 @@ import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.List;
 
 
@@ -34,5 +35,5 @@ public interface GameView {
 
     void updatePlayerStats(String player, int coins, int stars, List<String> items);
 
-    void updateCommands(List<String> items, List<Direction> directions);
+    void updateCommands(List<String> items, Set<Direction> directions);
 }

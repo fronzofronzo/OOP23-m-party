@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Set;
 
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
@@ -185,7 +186,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @Override
-    public void updateCommands(List<String> items, List<Direction> directions) {
+    public void updateCommands(List<String> items, Set<Direction> directions) {
         for (int i = 0; i <= this.buttonsItem.size(); i++) {
             if (i <= items.size()) {
                 this.buttonsItem.get(i).setText(items.get(i));

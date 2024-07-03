@@ -16,6 +16,7 @@ import it.unibo.mparty.controller.GameController;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class GameViewImpl extends Application implements GameView{
 
@@ -77,7 +78,7 @@ public class GameViewImpl extends Application implements GameView{
 
 
     @Override
-    public void updateCommands(List<String> items, List<Direction> directions) {
+    public void updateCommands(List<String> items, Set<Direction> directions) {
         this.updateCommands(items, directions);
     }    
 }

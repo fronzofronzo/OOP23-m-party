@@ -7,6 +7,7 @@ import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.view.SceneView;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public interface GameBoardView extends SceneView{
 
@@ -16,7 +17,7 @@ public interface GameBoardView extends SceneView{
 
     void updatePlayerStats(String player, int coins, int stars, List<String> items);
 
-    void updateCommands(List<String> items, List<Direction> directions);
+    void updateCommands(List<String> items, Set<Direction> directions);
 
     void setUpBoard(Pair<Integer,Integer> dimension, Map<Position,SlotType> board, List<String> players);
 }

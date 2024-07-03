@@ -24,16 +24,16 @@ public class GameControllerImpl implements GameController{
     @Override
     public void rollDice() {
         if(this.status.equals(GameStatus.ROLL_DICE)){
-            //this.view.showRollResult(this.model.rollDice());
+            this.view.showResultDice(this.model.rollDice());
             this.switchStatus();
         }
     }
 
     @Override
     public void movePlayer() {
-        this.model.movePlayer();
-        // this.view.clean()
-        // this.view.drawBoard()
+        if (!this.model.movePlayer()) {
+            this.view.updateCommands(null, this.model.getDirections());   
+        }
     }
 
     @Override
@@ -77,7 +77,7 @@ public class GameControllerImpl implements GameController{
 
     @Override
     public void movePlayerWithDirection(Direction dir) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'movePlayerWithDirection'");
+        this.model.movePlayerWithDirection(dir);
+        this.movePlayer();
     }
 }
