@@ -2,6 +2,7 @@ package it.unibo.mparty.view.minigames.perilouspath;
 
 import it.unibo.mparty.controller.GameController;
 import it.unibo.mparty.controller.minigames.perilousPath.PerilousPathController;
+import it.unibo.mparty.controller.minigames.perilousPath.PerilousPathControllerImpl;
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
 import it.unibo.mparty.model.minigames.perilouspath.impl.PathPosition;
@@ -26,11 +27,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         this.size = size;
     }
 
-    private PerilousPathController observer;
-    @Override
-    public void setObserver(PerilousPathController controller) {
-        this.observer = controller;
-    }
+    private final PerilousPathController observer = new PerilousPathControllerImpl(this);
 
     @Override
     public void setUpView(List<AbstractPosition> balls, List<AbstractPosition> bombs) {

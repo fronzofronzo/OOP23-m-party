@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface PerilousPathView  extends SceneView{
 
-    public void setObserver(PerilousPathController controller);
 
     public void setUpView(List<AbstractPosition> balls,List<AbstractPosition> bombs);
 
