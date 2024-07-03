@@ -1,7 +1,7 @@
 package it.unibo.mparty.model.minigames.domino.api;
 
-import java.util.Set;
+import java.util.List;
 
 public interface TileFactory {
-    Set<Tile> createDoubleSixSet();
+    List<Tile> createDoubleSixSet();
 }
