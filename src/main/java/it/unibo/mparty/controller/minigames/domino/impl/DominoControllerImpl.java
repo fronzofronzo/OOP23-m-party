@@ -24,7 +24,7 @@ public class DominoControllerImpl implements DominoController {
 
     @Override
     public void setUp() {
-        this.model.initDomino(this.player1, this.player2);
+        this.model.setPlayerTiles(this.player1, this.player2);
 
         this.view.setPlayerName(true, this.player1.getUsername());
         this.view.setPlayerName(false, this.player2.getUsername());

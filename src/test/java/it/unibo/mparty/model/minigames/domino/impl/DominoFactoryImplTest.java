@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,7 +23,7 @@ class DominoFactoryImplTest {
 
     @Test
     void testCreateFullSet() {
-        Set<Tile> fullSet = dominoFactory.createDoubleSixSet();
+        List<Tile> fullSet = dominoFactory.createDoubleSixSet();
         Set<Tile> expectedSet = generateFullSet();
 
         assertEquals(DOMINO_SET_SIZE, dominoFactory.createDoubleSixSet().size());

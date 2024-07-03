@@ -32,7 +32,7 @@ class DominoModelImplTest {
 
     @Test
     void testDistributionTiles() {
-        this.model.initDomino(this.player1, this.player2);
+        this.model.setPlayerTiles(this.player1, this.player2);
 
         // Verify players' domino sets are not empty after initialization
         assertFalse(this.model.getPlayersTiles().getPlayerTiles(this.player1).isEmpty());
@@ -82,7 +82,7 @@ class DominoModelImplTest {
 
     @Test
     void testCanDrawTile() {
-        this.model.initDomino(this.player1, this.player2);
+        this.model.setPlayerTiles(this.player1, this.player2);
 
         // Get initial set of player1
         Set<Tile> initialTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);

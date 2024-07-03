@@ -3,41 +3,40 @@ package it.unibo.mparty.model.minigames.domino.impl;
 import it.unibo.mparty.model.minigames.domino.api.BoardTile;
 import it.unibo.mparty.model.minigames.domino.api.DominoModel;
 import it.unibo.mparty.model.minigames.domino.api.PlayerTiles;
-import it.unibo.mparty.model.minigames.domino.api.TileFactory;
 import it.unibo.mparty.model.minigames.domino.api.Tile;
 import it.unibo.mparty.model.player.api.Player;
 
+import java.util.List;
 import java.util.Random;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class DominoModelImpl implements DominoModel {
 
     private static final int DISTRIBUTION_TILES = 7;
-    private final TileFactory dominoFactory;
     private final BoardTile boardTile;
     private final PlayerTiles playerTiles;
-    private Set<Tile> dominoSet;
-    private boolean actualTurn = true; //true for player1, false for player2
+    private final List<Tile> dominoSet;
+    private boolean actualTurn; //true for player1, false for player2
 
     public DominoModelImpl() {
-        this.dominoFactory = new TileFactoryImpl();
         this.boardTile = new BoardTileImpl();
         this.playerTiles = new PlayerTilesImpl();
+        this.dominoSet = new TileFactoryImpl().createDoubleSixSet();
+
+        this.actualTurn = true;
     }
 
     @Override
-    public void initDomino(final Player p1, final Player p2) {
-        this.dominoSet = this.dominoFactory.createDoubleSixSet();
+    public void setPlayerTiles(final Player player1, final Player player2) {
+        this.distribution(player1);
+        this.distribution(player2);
+    }
 
-        this.playerTiles.initializePlayerTiles(p1,
+    private void distribution(final Player player) {
+        this.playerTiles.initializePlayerTiles(player,
                 this.dominoSet.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet()));
-        this.dominoSet.removeAll(this.playerTiles.getPlayerTiles(p1));
-
-        this.playerTiles.initializePlayerTiles(p2,
-                this.dominoSet.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet()));
-        this.dominoSet.removeAll(this.playerTiles.getPlayerTiles(p2));
+        this.dominoSet.removeAll(this.playerTiles.getPlayerTiles(player));
     }
 
     @Override
@@ -85,7 +84,7 @@ public class DominoModelImpl implements DominoModel {
     }
 
     @Override
-    public Set<Tile> getDominoSet() {
+    public List<Tile> getDominoSet() {
         return this.dominoSet;
     }
 
