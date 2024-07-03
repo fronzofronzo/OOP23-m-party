@@ -1,6 +1,7 @@
 package it.unibo.mparty.view.InitialScreen.impl;
 
 import it.unibo.mparty.model.GameModelBuilder;
+import it.unibo.mparty.model.player.impl.Character;
 import it.unibo.mparty.view.InitialScreen.api.MiniScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,9 +10,15 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
 public class MiniScreenImpl implements MiniScreen {
 
     private GameModelBuilder builder;
+    private final List<String> characterList = new ArrayList<>();
 
     @FXML
     private ChoiceBox<String> choiceBox;
@@ -59,6 +66,13 @@ public class MiniScreenImpl implements MiniScreen {
     public void setUp(GameModelBuilder builder) {
 
         this.builder = builder;
-        //missing the loading of the choice box choices
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        for(Character character : Character.values()){
+            this.characterList.add(character.getName());
+        }
+        this.choiceBox.getItems().addAll(this.characterList);
     }
 }
