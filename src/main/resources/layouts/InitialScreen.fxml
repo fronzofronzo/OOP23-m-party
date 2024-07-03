@@ -3,12 +3,19 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.InitialScreen.impl.InitialScreenImpl">
    <children>
-      <Label contentDisplay="CENTER" prefHeight="116.0" prefWidth="299.0" style="-fx-font-weight: bold; -fx-font-size: 30px;" text="          M-PARTY" />
+      <ImageView fitHeight="173.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/MarioPartyInitialScreen.jpeg" />
+         </image>
+      </ImageView>
+      <Label contentDisplay="CENTER" prefHeight="152.0" prefWidth="277.0" style="-fx-font-weight: bold; -fx-font-size: 30px;" text="          M-PARTY" />
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="154.0">
          <children>
             <Button fx:id="addPlayers" mnemonicParsing="false" onAction="#handleAddPlayerButton" prefHeight="42.0" prefWidth="242.0" text="AGGIUNGI GIOCATORE" />
