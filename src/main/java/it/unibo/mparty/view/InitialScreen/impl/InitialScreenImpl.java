@@ -54,7 +54,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
 
     @Override
     public void handleAddPlayerButton(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MiniScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/MiniScreen.fxml"));
         Parent root = loader.load();
         MiniScreen controller = new MiniScreenImpl();
         controller.setUp(this.builder);
