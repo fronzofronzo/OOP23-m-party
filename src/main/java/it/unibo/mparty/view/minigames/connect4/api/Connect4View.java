@@ -1,6 +1,13 @@
 package it.unibo.mparty.view.minigames.connect4.api;
 
+import it.unibo.mparty.view.minigames.MinigameView;
 
-public interface Connect4View {
+;
+
+public interface Connect4View extends MinigameView{
+
+    public void addCircle(int row);
+
+    public void updateDisplayLabel();
 
 }

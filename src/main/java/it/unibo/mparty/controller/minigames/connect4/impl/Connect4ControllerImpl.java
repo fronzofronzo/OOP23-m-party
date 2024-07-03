@@ -4,19 +4,39 @@ import java.util.List;
 
 import it.unibo.mparty.controller.minigames.MinigameController;
 import it.unibo.mparty.controller.minigames.connect4.api.Connect4Controller;
+import it.unibo.mparty.model.minigames.connect4.api.Connect4Model;
+import it.unibo.mparty.model.minigames.connect4.impl.Connect4ModelImpl;
+import it.unibo.mparty.view.minigames.connect4.api.Connect4View;
 
 public class Connect4ControllerImpl implements MinigameController, Connect4Controller {
 
+    private Connect4View view;
+    private final Connect4Model model;
+
+    public Connect4ControllerImpl (Connect4View view) {
+        this.view=view;
+        this.model= new Connect4ModelImpl();
+    }
+
     @Override
     public void endGame() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'endGame'");
+        this.view.getMainController().saveMinigameResult(this.model.getResult());
     }
 
     @Override
     public void initGame(List<String> players) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'initGame'");
+        this.model.setUpPlayers(players);
+    }
+
+    @Override
+    public void selectColumn(int column) {
+        if (this.model.addDisc(column)) {
+            //addCircle
+            if (this.model.isOver()) {
+                this.endGame();
+                //displayresult
+            }
+        }
     }
 
 }

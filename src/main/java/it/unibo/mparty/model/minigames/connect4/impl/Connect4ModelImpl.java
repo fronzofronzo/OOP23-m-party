@@ -69,7 +69,8 @@ public class Connect4ModelImpl implements Connect4Model{
         return true;
     }
 
-    private int getAvailableRow (int column) {
+    @Override
+    public int getAvailableRow (int column) {
         return IntStream.range(0, ROW_NUMBER)
         .filter(i -> !(selectedMap.keySet().contains(new Position(i,column))))
         .findFirst()
