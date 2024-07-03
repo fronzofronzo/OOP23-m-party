@@ -2,6 +2,7 @@ package it.unibo.mparty.view.minigames.nanogram.impl;
 
 import it.unibo.mparty.controller.minigames.nanogram.api.NanogramController;
 import it.unibo.mparty.controller.minigames.nanogram.impl.NanogramControllerImpl;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.minigames.nanogram.api.NanogramView;
 import it.unibo.mparty.view.minigames.nanogram.NanogramMessage;
@@ -227,5 +228,10 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         svgPath.setContent(path);
         svgPath.setFill(color);
         return svgPath;
+    }
+
+    @Override
+    public void showResult(Pair<String, Integer> result) {
+
     }
 }

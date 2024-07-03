@@ -28,21 +28,11 @@ public class GameViewImpl extends Application implements GameView{
 
     @Override
     public void setScene(String path) throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH+path)) ;
-        final Parent root = loader.load(getClass().getResourceAsStream(PATH+path));
-        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        //final SceneView sceneView = loader.<SceneView>getController();
-        //sceneView.init(this,this.controller);
-        this.boardView = loader.<GameBoardView>getController();
-        this.stage.setScene(scene);
-<<<<<<< HEAD
         final Pair<Scene, SceneView> scene = this.loadScene(path);
         scene.getY().init(this,this.controller);
         this.stage.setScene(scene.getX());
-=======
         this.stage.setMinWidth(1000);
         this.stage.setMinHeight(700);
->>>>>>> feature/gameBorad
         this.stage.show();
     }
 
@@ -59,10 +49,18 @@ public class GameViewImpl extends Application implements GameView{
         this.board = new Pair<>(scene.getX(),(GameBoardView) scene.getY());
     }
 
+    private Pair<Scene, SceneView> loadScene(String path) throws IOException {
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH+path)) ;
+        final Parent root = loader.load(getClass().getResourceAsStream(PATH+path));
+        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
+        final SceneView sceneView = loader.<SceneView>getController();
+        return new Pair<>(scene,sceneView);
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
-        this.setScene("GameBoard.fxml");
+        this.setUpBoard();
         this.controller.startGame(new GameModelImpl(null, ""));
         this.stage.setMaximized(true);
         this.stage.show();
@@ -72,6 +70,6 @@ public class GameViewImpl extends Application implements GameView{
 
     @Override
     public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> nicknames) {
-        this.boardView.setUpBoard(dimension, board, nicknames);
+        this.board.getY().setUpBoard(dimension, board, nicknames);
     }    
 }
