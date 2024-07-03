@@ -73,10 +73,6 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
         this.controller.selectCard(this.cardsPane.getChildren().indexOf((Button)e.getSource()));
     }
 
-    @Override
-    public void setUpView() {
-
-    }
 
     @Override
     public void showResult(Pair<String, Integer> result) {
