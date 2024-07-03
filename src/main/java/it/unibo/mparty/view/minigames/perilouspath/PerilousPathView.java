@@ -11,12 +11,16 @@ import java.util.List;
 public interface PerilousPathView  extends SceneView{
 
 
-    public void setUpView(List<AbstractPosition> balls,List<AbstractPosition> bombs);
+    void setUpView(List<AbstractPosition> balls,List<AbstractPosition> bombs);
 
-    public void hideBombs(List<AbstractPosition> bombs);
+    void hideBombs(List<AbstractPosition> bombs);
 
-    public void hitTile(PerilousPath.Type type);
+    void hitTile(PerilousPath.Type type);
 
-    public void buttonClicked(ActionEvent e);
+    void buttonClicked(ActionEvent e);
+
+    void handleStartButton(ActionEvent e);
+
+
     
 }
