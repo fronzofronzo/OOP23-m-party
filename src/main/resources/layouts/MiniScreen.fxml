@@ -10,8 +10,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="202.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.InitialScreen.impl.MiniScreenImpl">
    <children>
-      <Button layoutX="69.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleOkButton" text="OK" />
-      <Button layoutX="224.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleBackButton" text="ANNULLA" />
+      <Button fx:id="okButton" layoutX="69.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleOkButton" text="OK" />
+      <Button fx:id="backButton" layoutX="224.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleBackButton" text="ANNULLA" />
       <ChoiceBox fx:id="choiceBox" layoutX="82.0" layoutY="88.0" onDragDetected="#handleCharacterChoiceBox" prefWidth="150.0" />
       <TextField fx:id="textField" layoutX="82.0" layoutY="62.0" onAction="#handleUsernameTextField" />
       <Label layoutX="82.0" layoutY="20.0" prefHeight="18.0" prefWidth="150.0" text="AGGIUNGI PERSONAGGIO">
