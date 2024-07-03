@@ -49,6 +49,10 @@ public class GameModelImpl implements GameModel{
        this.board = boardFactory.createBoard(BoardType.MEDIUM);
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public Position movePlayer() {
         final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
@@ -57,11 +61,17 @@ public class GameModelImpl implements GameModel{
         return actualPlayerPosition;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int rollDice() {
         return this.players.get(actualPlayerIndex).getDice().generateNumber();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<String> getActiveMinigame() {
         if(this.minigameHandler.isInGame()){
@@ -71,6 +81,9 @@ public class GameModelImpl implements GameModel{
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void nextPlayer() {
         this.actualPlayerIndex = (this.actualPlayerIndex + 1) % players.size();
@@ -79,6 +92,9 @@ public class GameModelImpl implements GameModel{
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getWinner() {
         final int maxStars = players.stream().map(Player::getNumStars).sorted().limit(1).reduce(0 , Integer::sum);
@@ -90,11 +106,17 @@ public class GameModelImpl implements GameModel{
         return winners.get(0).getUsername();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isOver() {
         return turn == TURNS_NUMBER;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void activateSlot() {
         final Player actualPlayer = this.players.get(actualPlayerIndex);
@@ -128,16 +150,25 @@ public class GameModelImpl implements GameModel{
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Map<Position, SlotType> getBoardConfiguration() {
         return this.board.getSlotTypeBoard();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Pair<Integer, Integer> getBoardDimensions() {
         return this.board.getDimension();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void endMinigame(Pair<String, Integer> result) {
         final Player winner = this.players.stream().filter(p -> p.getUsername().equals(result.getX())).findAny().get();
