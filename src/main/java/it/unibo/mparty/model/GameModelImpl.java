@@ -9,6 +9,7 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.shop.api.Shop;
 import it.unibo.mparty.model.shop.impl.ShopImpl;
 import it.unibo.mparty.utilities.BoardType;
+import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
@@ -54,11 +55,14 @@ public class GameModelImpl implements GameModel{
      * {@inheritDoc}
      */
     @Override
-    public Position movePlayer() {
+    public boolean movePlayer() {
         final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
-        //final Position nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition).get(0).getY();
+        final Map<Direction, Position> nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition);
+        if (nextPlayerPosition.size() == 1) {
+            this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.entrySet().stream().findFirst().get().getValue());
+        }
 
-        return actualPlayerPosition;
+        return true;
     }
 
     /**

@@ -2,6 +2,7 @@ package it.unibo.mparty.view;
 
 import it.unibo.mparty.controller.GameControllerImpl;
 import it.unibo.mparty.model.GameModelImpl;
+import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
@@ -54,5 +55,29 @@ public class GameViewImpl extends Application implements GameView{
     @Override
     public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> nicknames) {
         this.boardView.setUpBoard(dimension, board, nicknames);
+    }
+
+
+    @Override
+    public void showResultDice(int result) {
+        this.boardView.showResultDice(result);
+    }
+
+
+    @Override
+    public void updatePlayerPos(String player, Position position) {
+        this.updatePlayerPos(player, position);
+    }
+
+
+    @Override
+    public void updatePlayerStats(String player, int coins, int stars, List<String> items) {
+        this.updatePlayerStats(player, coins, stars, items);
+    }
+
+
+    @Override
+    public void updateCommands(List<String> items, List<Direction> directions) {
+        this.updateCommands(items, directions);
     }    
 }

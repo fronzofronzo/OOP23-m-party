@@ -22,6 +22,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 public class GameBoardViewImpl extends AbstractSceneView implements GameBoardView{
 
@@ -104,6 +105,13 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private SplitPane leftSplitPane;
     @FXML
     private SplitPane rightSplitPane;
+    @FXML
+    private Label resultDice;
+
+    private Circle player1 = new Circle(10, Color.ORANGE);
+    private Circle player2 = new Circle(10, Color.PURPLE);
+    private Circle player3 = new Circle(10, Color.BLUE);
+    private Circle player4 = new Circle(10, Color.PINK);
 
     private List<Label> labelPlayersNames = new ArrayList<>();     
     private List<Label> labelPlayersCoins = new ArrayList<>(); 
@@ -111,11 +119,12 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private List<Label> labelPlayersItems = new ArrayList<>();
     private List<Button> buttonsItem = new ArrayList<>();
     private List<Button> buttonsDirection = new ArrayList<>();
+    private List<Circle> players = new ArrayList<>();
 
     @Override
-    public void updatePlayer(String nickname, int coins, int stars, List<String> items) {
+    public void updatePlayerStats(String palyer, int coins, int stars, List<String> items) {
         for (int i = 0; i <= this.labelPlayersNames.size(); i++) {
-            if (this.labelPlayersNames.get(i).getText().equals(nickname)) {
+            if (this.labelPlayersNames.get(i).getText().equals(palyer)) {
                 this.labelPlayersCoins.get(i).setText(String.valueOf(coins));
                 this.labelPlayersStars.get(i).setText(String.valueOf(stars));
                 this.labelPlayersItems.get(i).setText(items.toString());
@@ -142,6 +151,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.labelPlayersItems.addAll(List.of(this.itemP1, this.itemP2, this.itemP3, this.itemP4));
         this.buttonsItem.addAll(List.of(this.useItem1, this.useItem2, this.useItem3));
         this.buttonsDirection.addAll(List.of(this.buttonUP, this.buttonDOWN, this.buttonLEFT, this.buttonRIGHT));
+        this.players.addAll(List.of(this.player1, this.player2, this.player3, this.player4));
     }
 
     private void setSize() {
@@ -195,5 +205,30 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                 default: break;
             }
         }
-    } 
+    }
+    
+    @SuppressWarnings("unused")
+    private void rollDice(){
+        this.getMainController().rollDice();
+    }
+
+    @Override
+    public void showResultDice(int result) {
+        this.resultDice.setText(String.valueOf(result));
+    }
+
+    @SuppressWarnings("unused")
+    private void movePlayer(){
+        this.getMainController().movePlayer();
+    }
+
+    @Override
+    public void updatePlayerPos(String player, Position position) {
+        for (int i = 0; i <= this.labelPlayersNames.size(); i++) {
+            if (this.labelPlayersNames.get(i).getText().equals(player)) {
+                this.board.getChildren().remove(this.players.get(i));
+                this.board.getChildren().add(this.players.get(i));
+            }
+        }
+    }    
 }
