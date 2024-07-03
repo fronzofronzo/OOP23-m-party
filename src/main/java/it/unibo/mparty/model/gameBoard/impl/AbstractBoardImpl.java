@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -270,10 +269,9 @@ public abstract class AbstractBoardImpl implements GameBoard{
         if (this.avaiableSlotTypes.isEmpty()) {
             this.avaiableSlotTypes = setAviableSlotType();
         }
-        //SlotType output = this.avaiableSlotTypes.getFirst();
-        //this.avaiableSlotTypes.removeFirst();
-        //return output;
-        return null;
+        SlotType output = this.avaiableSlotTypes.get(0);
+        this.avaiableSlotTypes.remove(0);
+        return output;
     }
     
     /**

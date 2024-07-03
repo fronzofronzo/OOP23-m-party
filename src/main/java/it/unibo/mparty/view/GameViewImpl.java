@@ -34,11 +34,15 @@ public class GameViewImpl extends Application implements GameView{
         //final SceneView sceneView = loader.<SceneView>getController();
         //sceneView.init(this,this.controller);
         this.boardView = loader.<GameBoardView>getController();
-
         this.stage.setScene(scene);
+<<<<<<< HEAD
         final Pair<Scene, SceneView> scene = this.loadScene(path);
         scene.getY().init(this,this.controller);
         this.stage.setScene(scene.getX());
+=======
+        this.stage.setMinWidth(1000);
+        this.stage.setMinHeight(700);
+>>>>>>> feature/gameBorad
         this.stage.show();
     }
 
@@ -58,9 +62,10 @@ public class GameViewImpl extends Application implements GameView{
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
-        this.stage.show();
         this.setScene("GameBoard.fxml");
         this.controller.startGame(new GameModelImpl(null, ""));
+        this.stage.setMaximized(true);
+        this.stage.show();
     }
 
 
