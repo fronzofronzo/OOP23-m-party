@@ -1,7 +1,6 @@
 package it.unibo.mparty.view.InitialScreen.impl;
 
 import it.unibo.mparty.controller.GameController;
-import it.unibo.mparty.controller.initialScreen.InitialScreenController;
 import it.unibo.mparty.model.GameModelBuilder;
 import it.unibo.mparty.model.GameModelBuilderImpl;
 import it.unibo.mparty.view.AbstractSceneView;
@@ -18,13 +17,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 public class InitialScreenImpl extends AbstractSceneView implements InitialScreen {
 
     private GameModelBuilder builder;
     private GameController controller;
-    private final InitialScreenController screenController = new InitialScreenController(this);
     private final Set<String> temp = Set.of("Easy","Medium","Difficult");
     private String difficulty;
 
@@ -38,17 +38,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     private ChoiceBox<String> playerChoiceBox;
 
 
-    @Override
-    public void setBuilder(GameModelBuilder builder) {
-        this.builder = builder;
-    }
 
-    @Override
-    public void setUp() {
-        this.startGame.setDisable(true);
-        this.playerChoiceBox.getItems().addAll(temp);
-        this.builder = new GameModelBuilderImpl();
-    }
 
     @Override
     public void handleExitButton(ActionEvent event) {
@@ -57,6 +47,8 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
 
     @Override
     public void handleDifficultyButton(ActionEvent event) {
+
+        this.playerChoiceBox.getItems().addAll(temp);
         this.difficulty = this.playerChoiceBox.getValue();
     }
 
@@ -79,5 +71,12 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     public void handleStartButton(ActionEvent event) {
         this.builder.difficulty(this.difficulty);
         this.builder.build();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.startGame.setDisable(true);
+        this.playerChoiceBox.getItems().addAll(temp);
+        this.builder = new GameModelBuilderImpl();
     }
 }
