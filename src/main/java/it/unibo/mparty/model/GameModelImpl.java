@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Models the core structure of the game
@@ -178,5 +180,11 @@ public class GameModelImpl implements GameModel{
         final Player winner = this.players.stream().filter(p -> p.getUsername().equals(result.getX())).findAny().get();
         winner.addCoins(result.getY());
         this.minigameHandler.stopMinigame();
+    }
+
+    @Override
+    public Set<Direction> getDirections() {
+        Map<Direction,Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
+        return pos.entrySet().stream().map(entry -> entry.getKey()).collect(Collectors.toSet());
     }
 }

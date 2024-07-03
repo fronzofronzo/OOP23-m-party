@@ -1,13 +1,14 @@
 package it.unibo.mparty.model;
 
 import it.unibo.mparty.utilities.Position;
-
+import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Interface that models the model of the main game
@@ -20,6 +21,8 @@ public interface GameModel {
      * @return
      */
     boolean movePlayer();
+
+    Set<Direction> getDirections();
 
     /**
      * Roll dices of the actual player
