@@ -10,7 +10,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import it.unibo.mparty.controller.GameController;
 import java.io.IOException;
@@ -21,7 +20,7 @@ public class GameViewImpl extends Application implements GameView{
 
     private final static double DEFAULT_DIMENSION_VALUE = -1;
     private final static String PATH = "/layouts/";
-    private Pair<Scene,GameBoardView> board;
+    private GameBoardView boardView;
 
     private Stage stage;
     private final GameController controller = new GameControllerImpl(this);
@@ -35,26 +34,11 @@ public class GameViewImpl extends Application implements GameView{
         //sceneView.init(this,this.controller);
         this.boardView = loader.<GameBoardView>getController();
         this.stage.setScene(scene);
-        final Pair<Scene, SceneView> scene = this.loadScene(path);
-        scene.getY().init(this,this.controller);
-        this.stage.setScene(scene.getX());
         this.stage.setMinWidth(1000);
         this.stage.setMinHeight(700);
         this.stage.show();
     }
 
-
-
-    @Override
-    public void switchToBoard() {
-        this.stage.setScene(board.getX());
-    }
-
-    @Override
-    public void setUpBoard() throws IOException {
-        final Pair<Scene,SceneView> scene =  this.loadScene("GameBoard.fxml");
-        this.board = new Pair<>(scene.getX(),(GameBoardView) scene.getY());
-    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
