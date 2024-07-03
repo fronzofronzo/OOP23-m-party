@@ -1,40 +1,35 @@
 package it.unibo.mparty.utilities;
 
-/*
- * A standard generic Pair<X,Y>, with getters, hashCode, equals, and toString well implemented. 
- */
-
 public class Pair<X,Y> {
-	
-	private final X x;
+    private final X x;
 	private final Y y;
 	
-	public Pair(X x, Y y) {
+	public Pair(final X x, final Y y) {
 		super();
 		this.x = x;
 		this.y = y;
 	}
 
-	public X getFirst() {
-		return x;
+	public X getX() {
+		return this.x;
 	}
 
-	public Y getSecond() {
-		return y;
+	public Y getY() {
+		return this.y;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((x == null) ? 0 : x.hashCode());
-		result = prime * result + ((y == null) ? 0 : y.hashCode());
+		result = prime * result + ((this.x == null) ? 0 : this.x.hashCode());
+		result = prime * result + ((this.y == null) ? 0 : this.y.hashCode());
 		return result;
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -42,24 +37,18 @@ public class Pair<X,Y> {
 		if (getClass() != obj.getClass())
 			return false;
 		Pair other = (Pair) obj;
-		if (x == null) {
+		if (this.x == null) {
 			if (other.x != null)
 				return false;
-		} else if (!x.equals(other.x))
+		} else if (!this.x.equals(other.x))
 			return false;
-		if (y == null) {
-			if (other.y != null)
-				return false;
-		} else if (!y.equals(other.y))
-			return false;
-		return true;
-	}
+		if (this.y == null) {
+            return other.y == null;
+		} else return this.y.equals(other.y);
+    }
 
 	@Override
 	public String toString() {
-		return "Pair [x=" + x + ", y=" + y + "]";
+		return "Pair [x=" + this.x + ", y=" + this.y + "]";
 	}
-	
-	
-
 }

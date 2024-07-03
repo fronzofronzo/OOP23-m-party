@@ -1,10 +1,12 @@
 package it.unibo.mparty.controller.minigames.memoryCard;
 
+import it.unibo.mparty.controller.minigames.MinigameController;
+
 /**
  * Interface that models the controller of the minigame Memory card
  * to
  */
-public interface MemoryCardController {
+public interface MemoryCardController extends MinigameController {
 
     /**
      * Select a certain card

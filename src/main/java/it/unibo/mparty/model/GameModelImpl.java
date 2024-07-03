@@ -49,10 +49,11 @@ public class GameModelImpl implements GameModel{
     }
 
     @Override
-    public void movePlayer() {
+    public Position movePlayer() {
         final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
         //final Position nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition).get(0).getY();
 
+        return actualPlayerPosition;
     }
 
     @Override
@@ -135,5 +136,12 @@ public class GameModelImpl implements GameModel{
     @Override
     public Pair<Integer, Integer> getBoardDimensions() {
         return this.board.getDimension();
+    }
+
+    @Override
+    public void endMinigame(Pair<String, Integer> result) {
+        final Player winner = this.players.stream().filter(p -> p.getUsername().equals(result.getX())).findAny().get();
+        winner.addCoins(result.getY());
+        this.minigameHandler.stopMinigame();
     }
 }
