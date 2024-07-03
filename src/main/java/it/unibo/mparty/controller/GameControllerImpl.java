@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
 
 public class GameControllerImpl implements GameController{
@@ -42,6 +43,11 @@ public class GameControllerImpl implements GameController{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void saveMinigameResult(Pair<String, Integer> result) {
+        this.model.
     }
 
     private void drawBoard() {
