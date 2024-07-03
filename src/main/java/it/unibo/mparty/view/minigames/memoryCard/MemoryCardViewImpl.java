@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Font;
 
 public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardView{
 
@@ -51,6 +52,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
         bt.setPrefSize(100,100);
         bt.setDisable(true);
         bt.setStyle("-fx-opacity: 1.0; ");
+        bt.setFont(new Font("Segoe UI Light", 15));
         this.cardsPane.getChildren().add(bt);
     }
 
