@@ -104,8 +104,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
 
     @Override
     public void updatePlayer(String nickname, int coins, int money, List<String> items) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updatePlayer'");
+
     }
 
     @Override
@@ -113,7 +112,12 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.populateGridPane(dimension, map);
         this.setSize();
         this.createData();
+        for(int i=0; i< nicknames.size(); i++){
+            this.labelPlayersNames.get(i).setText(nicknames.get(i));
+            this.labelPlayersStars.get(i).setText(String.valueOf(0));
+            this.labelPlayersCoins.get(i).setText(String.valueOf(0));
         }
+    }
         
     private void createData() {
         this.labelPlayersNames.addAll(List.of(this.nameP1, this.nameP2, this.nameP3, this.nameP4));
