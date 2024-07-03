@@ -13,9 +13,8 @@ public interface GameController {
 
     /**
      * Handle the request of the user to roll dice
-     * @return the result of rolling dice
      */
-    int rollDice();
+    void rollDice();
 
     /**
      * Handle the action of moving the player in the {@code GameBoard }

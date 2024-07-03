@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
+import it.unibo.mparty.utilities.GameStatus;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
 
@@ -13,14 +14,18 @@ public class GameControllerImpl implements GameController{
 
     private final GameView view;
     private GameModel model;
+    private GameStatus status = GameStatus.ROLL_DICE;
 
     public GameControllerImpl(final GameView view){
         this.view = view;
     }
 
     @Override
-    public int rollDice() {
-        return this.model.rollDice();        
+    public void rollDice() {
+        if(this.status.equals(GameStatus.ROLL_DICE)){
+            //this.view.showRollResult(this.model.rollDice());
+            this.switchStatus();
+        }
     }
 
     @Override
@@ -62,5 +67,19 @@ public class GameControllerImpl implements GameController{
     @Override
     public void endGame() {
         // this.view.showWinner(this.model.getWinner)
+    }
+
+    private void switchStatus(){
+        switch (this.status) {
+            case ROLL_DICE -> {
+                this.status = GameStatus.MOVE_PLAYER;
+            }
+            case MOVE_PLAYER -> {
+
+            }
+            case USE_ITEM -> {
+            }
+        };
+
     }
 }
