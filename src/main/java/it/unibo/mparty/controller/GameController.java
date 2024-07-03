@@ -2,6 +2,7 @@ package it.unibo.mparty.controller;
 
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
+import it.unibo.mparty.utilities.Pair;
 
 /**
  * This interface models the Controller ( pattern MVC ) of the main game. After the game
@@ -34,6 +35,12 @@ public interface GameController {
      * @param model to set, created during the initial game phase
      */
     void startGame(GameModel model);
+
+    /**
+     * Get the result of a minigame and update the model with it
+     * @param result of the game
+     */
+    void saveMinigameResult(Pair<String, Integer> result);
 
     void endGame();
 }
