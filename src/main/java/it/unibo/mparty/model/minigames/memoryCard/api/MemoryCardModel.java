@@ -24,15 +24,6 @@ public interface MemoryCardModel extends MinigameModel {
      */
     boolean flip(int card);
 
-
-    /**
-     * Check if the game is over
-     * @return true if the player has guessed all the couples
-     * false if there are others couples to find
-     */
-    boolean isDone();
-
-
     /**
      * Get all the cards of the memory
      * @return map that contains for each card its relative {@link CardType}

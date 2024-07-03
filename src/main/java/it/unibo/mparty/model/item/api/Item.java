@@ -20,7 +20,7 @@ public interface Item {
      * 
      * @return the description of the effect of the item
      */
-    String getDescrition ();
+    String getDescription ();
 
     /**
      * Get the cost of the item
