@@ -4,6 +4,8 @@ import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
 import it.unibo.mparty.model.minigames.memoryCard.impl.MemoryCardModelImpl;
 import it.unibo.mparty.view.minigames.memoryCard.MemoryCardView;
 
+import java.util.List;
+
 public class MemoryCardControllerImpl implements MemoryCardController{
 
     private final MemoryCardModel model;
@@ -21,8 +23,8 @@ public class MemoryCardControllerImpl implements MemoryCardController{
             this.view.setCardStatus(index,false);
             this.view.setCardType(index, this.model.getCards().get(index).getName());
         } else {
-            if (this.model.isDone()) {
-                this.view.showResult(this.model.getResults());
+            if (this.model.isOver()) {
+                this.view.showResult(this.model.getResult());
             } else {
                 this.updateGameView();
             }
@@ -51,5 +53,16 @@ public class MemoryCardControllerImpl implements MemoryCardController{
                 this.view.setCardStatus(i,true);
             }
         }
+    }
+
+    @Override
+    public void endGame() {
+        this.view.getMainController().saveMinigameResult(this.model.getResult());
+        //this.view.showResult()
+    }
+
+    @Override
+    public void initGame(List<String> players) {
+        this.model.setUpPlayers(players);
     }
 }

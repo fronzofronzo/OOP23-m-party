@@ -3,7 +3,8 @@ package it.unibo.mparty.controller;
 import java.io.IOException;
 
 import it.unibo.mparty.model.GameModel;
-import it.unibo.mparty.utilities.Position;
+import it.unibo.mparty.model.item.impl.ItemName;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
 
 public class GameControllerImpl implements GameController{
@@ -21,13 +22,16 @@ public class GameControllerImpl implements GameController{
     }
 
     @Override
-    public Position movePlayer() {
-        return this.model.movePlayer();
+    public void movePlayer() {
+        this.model.movePlayer();
+        // this.view.clean()
+        // this.view.drawBoard()
     }
 
     @Override
-    public boolean buyItem() {
-        return false;
+    public boolean buyItem(ItemName item) {
+       // return this.model.buyItem()
+        return true;
     }
 
     @Override
@@ -35,14 +39,26 @@ public class GameControllerImpl implements GameController{
         this.model = model;
         try {
             this.view.setScene("GameBoard.fxml");
+            this.drawBoard();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
     @Override
-    public void endGame() {
+    public void saveMinigameResult(Pair<String, Integer> result) {
+        this.model.endMinigame(result);
+    }
 
+    private void drawBoard() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+            }
+        }
+    }
+
+    @Override
+    public void endGame() {
+        // this.view.showWinner(this.model.getWinner)
     }
 }

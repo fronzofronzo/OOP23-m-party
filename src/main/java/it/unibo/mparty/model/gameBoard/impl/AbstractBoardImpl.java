@@ -3,6 +3,7 @@ package it.unibo.mparty.model.gameBoard.impl;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 import java.util.List;
@@ -13,14 +14,14 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
-import it.unibo.mparty.model.gameBoard.util.BoardType;
-import it.unibo.mparty.model.gameBoard.util.Direction;
-import it.unibo.mparty.model.gameBoard.util.Pair;
+import it.unibo.mparty.utilities.BoardType;
+import it.unibo.mparty.utilities.Direction;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
+import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.model.gameBoard.util.RandomFromSet;
 import it.unibo.mparty.model.gameBoard.util.RandomListGenerator;
 import it.unibo.mparty.model.gameBoard.api.Slot;
-import it.unibo.mparty.model.gameBoard.util.SlotType;
 
 /**
  * This is an Abstract class that implements GameBoard that could be considerated as a
@@ -127,6 +128,15 @@ public abstract class AbstractBoardImpl implements GameBoard{
     @Override
     public Map<Position,Slot> getBoard() {
         return Collections.unmodifiableMap(this.board);
+    }
+
+    @Override
+    public Map<Position,SlotType> getSlotTypeBoard() {
+        Map<Position,SlotType> output = new HashMap<>();
+        for (Entry<Position, Slot> entry : this.board.entrySet()) {
+            output.put(entry.getKey(), entry.getValue().getSlotType());
+        }
+        return Collections.unmodifiableMap(output);
     }
 
     /**

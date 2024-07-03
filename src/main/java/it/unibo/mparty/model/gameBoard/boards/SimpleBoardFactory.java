@@ -1,7 +1,7 @@
 package it.unibo.mparty.model.gameBoard.boards;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
-import it.unibo.mparty.model.gameBoard.util.BoardType;
+import it.unibo.mparty.utilities.BoardType;
 
 /**
  * This class is a factory that creates a board based on a selection
