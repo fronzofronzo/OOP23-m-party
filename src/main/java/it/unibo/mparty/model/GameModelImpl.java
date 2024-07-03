@@ -35,6 +35,7 @@ public class GameModelImpl implements GameModel{
     private final Shop shop;
     private int turn = 1 ;
     private int actualPlayerIndex = 0;
+    private int steps = 0;
     private final MinigameHandler minigameHandler;
 
     /**
