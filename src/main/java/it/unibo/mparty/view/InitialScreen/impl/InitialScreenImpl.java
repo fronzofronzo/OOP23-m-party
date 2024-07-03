@@ -41,7 +41,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
 
     @Override
     public void setUp() {
-        this.startGame.setDisable(false);
+        this.startGame.setDisable(true);
         this.playerChoiceBox.getItems().addAll(temp);
     }
 
@@ -66,7 +66,8 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
         stage.setTitle("Add player");
         stage.setScene(new Scene(root));
         stage.showAndWait();
-        //this.builder.getPlayers() >= 2 ? this.startGame.setDisable(true) : this.startGame.setDisable(false);
+        this.startGame.setDisable(!this.builder.enoughPlayers());
+        this.addPlayers.setDisable(!this.builder.isFull());
     }
 
     @Override
