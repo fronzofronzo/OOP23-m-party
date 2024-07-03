@@ -128,27 +128,27 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         //});
 
         //this.borderPane.heightProperty().addListener((obs, oldVal, newVal) -> {
-        //    this.board.setPrefHeight(newVal.doubleValue());
-        //});
-    }
-
+            //    this.board.setPrefHeight(newVal.doubleValue());
+            //});
+        }
+        
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
-        /*int W = 20;
-        int H = 40;
+        this.board = new GridPane();
+        int W = 700 / dimension.getFirst();
+        int H = 400 / dimension.getSecond();
         for (int i = 0; i < dimension.getFirst(); i++){      
                 ColumnConstraints c = new ColumnConstraints();
                 c.setMinWidth(W);
                 c.setPrefWidth(W);
-                c.setMaxWidth(W);
+                c.setMaxWidth(W+20);
                 this.board.getColumnConstraints().add(c);
         }for (int i = 0; i < dimension.getSecond(); i++){
                 RowConstraints r = new RowConstraints();
                 r.setMinHeight(H);
                 r.setPrefHeight(H);
-                r.setMaxHeight(H);     
+                r.setMaxHeight(H+20);     
                 this.board.getRowConstraints().add(r);
-        } */
-        this.board = new GridPane();
+        } 
         for (int i = 0; i < dimension.getFirst(); i++) {
             for (int j = 0; j < dimension.getSecond(); j++) {
                 Label tmp = new Label(Objects.isNull(map.get(new Position(i, j))) ? "." : map.get(new Position(i, j)).toString());
