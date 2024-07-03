@@ -36,6 +36,7 @@ public class GameModelImpl implements GameModel{
     private int turn = 1 ;
     private int actualPlayerIndex = 0;
     private int steps = 0;
+    private int dice = 0;
     private final MinigameHandler minigameHandler;
 
     /**
@@ -59,12 +60,17 @@ public class GameModelImpl implements GameModel{
      */
     @Override
     public boolean movePlayer() {
-        final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
-        final Map<Direction, Position> nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition);
-        if (nextPlayerPosition.size() == 1) {
-            this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.entrySet().stream().findFirst().get().getValue());
+        while (this.steps < this.dice) {
+            final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
+            final Map<Direction, Position> nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition);
+            if (nextPlayerPosition.size() == 1) {
+                this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.entrySet().stream().findFirst().get().getValue());
+            } else {
+                return false;
+            }
+            this.steps++;
         }
-
+        this.steps = 0;
         return true;
     }
 
@@ -73,7 +79,8 @@ public class GameModelImpl implements GameModel{
      */
     @Override
     public int rollDice() {
-        return this.players.get(actualPlayerIndex).getDice().generateNumber();
+        this.dice = this.players.get(actualPlayerIndex).getDice().generateNumber();
+        return this.dice;
     }
 
     /**
