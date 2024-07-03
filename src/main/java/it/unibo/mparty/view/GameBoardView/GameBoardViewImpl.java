@@ -2,6 +2,7 @@ package it.unibo.mparty.view.GameBoardView;
 
 import java.util.Map;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import it.unibo.mparty.utilities.Pair;
@@ -95,10 +96,10 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private SplitPane rightSplitPane;
 
-    //private List<Label> labelPlayersNames = List.of(nameP1, nameP2, nameP3, nameP4);     
-    //private List<Label> labelPlayersCoins = List.of(coinsP1, coinsP2, coinsP3, coinsP4); 
-    //private List<Label> labelPlayersStars = List.of(starsP1, starsP2, starsP3, starsP4);
-    //private List<Button> buttonsItem = List.of(useItem1, useItem2, useItem3);
+    //private List<Label> labelPlayersNames;     
+    private List<Label> labelPlayersCoins = new ArrayList<>(); 
+    //private List<Label> labelPlayersStars;
+    //private List<Button> buttonsItem;
 
     @Override
     public void updatePlayer(String nickname, int coins, int money, List<String> items) {
@@ -116,14 +117,21 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> map, List<String> nicknames) {
         this.populateGridPane(dimension, map);
         this.setSize();
+        this.createData();
         }
         
+    private void createData() {
+        this.labelPlayersCoins.addAll(List.of(this.coinsP1, this.coinsP2, this.coinsP3, this.coinsP4));
+    }
+
     private void setSize() {
         this.borderPane.setMinSize(1000, 600);
         this.leftSplitPane.setMinSize(150, 400);
         this.rightSplitPane.setMinSize(150, 400);
         this.board.setMinSize(700, 400);
-        this.paneCommand.setMinSize(1000, 200);
+        this.paneCommand.setMinSize(1000, 100);
+        this.paneCommand.prefHeight(100);
+        this.paneCommand.maxHeight(100);
     }
 
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
