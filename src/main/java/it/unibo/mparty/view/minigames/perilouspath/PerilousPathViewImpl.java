@@ -14,18 +14,20 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class PerilousPathViewImpl extends AbstractSceneView implements PerilousPathView{
 
     @FXML
     private GridPane myGridPane;
-    private Button button;
-    private final int size;
 
-    public PerilousPathViewImpl(int size) {
-        this.size = size;
-    }
+    @FXML
+    private Button startButton;
+
+    private Button button;
+    private final static int SIZE = 8;
 
     private final PerilousPathController observer = new PerilousPathControllerImpl(this);
 
@@ -75,7 +77,11 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         this.observer.hit(pos);
     }
 
-
+    @Override
+    public void handleStartButton(ActionEvent e) throws InterruptedException {
+        this.observer.setUp();
+        this.startButton.setDisable(true);
+    }
 
 
     @Override
@@ -94,7 +100,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     }
 
     private AbstractPosition buttonPosition(Node child){
-        return new PathPosition(GridPane.getRowIndex(child),GridPane.getColumnIndex(child),this.size);
+        return new PathPosition(GridPane.getRowIndex(child),GridPane.getColumnIndex(child),SIZE);
     }
 
 }
