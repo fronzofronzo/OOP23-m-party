@@ -7,7 +7,7 @@ import javafx.event.ActionEvent;
 
 public interface Connect4View extends MinigameView{
 
-    public void addCircle(int row, boolean color);
+    public void addCircle(int col, int row, boolean color);
 
     public void updateDisplayLabel(String msg);
 

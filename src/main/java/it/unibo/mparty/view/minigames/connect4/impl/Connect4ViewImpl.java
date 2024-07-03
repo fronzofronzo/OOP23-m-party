@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 public class Connect4ViewImpl extends AbstractSceneView implements Connect4View {
 
@@ -20,6 +22,9 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
 
     @FXML
     private Button exitButton;
+
+    @FXML
+    private GridPane gameGrid;
 
     @FXML
     private GridPane buttonGrid;
@@ -41,8 +46,10 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     }
 
     @Override
-    public void addCircle(int row, boolean color) {
-        
+    public void addCircle(int col, int row, boolean color) {
+        Circle circle = new Circle();
+        circle.setFill(color ? Color.RED : Color.YELLOW);
+        gameGrid.add(circle, col, row);
     }
 
     @Override

@@ -34,7 +34,7 @@ public class Connect4ControllerImpl implements MinigameController, Connect4Contr
     public void selectColumn(int column) {
         int row = this.model.getAvailableRow(column);
         if (this.model.addDisc(column)) {
-            this.view.addCircle(row, this.model.getTurnPlayer().equals(this.model.getPlayer1()));
+            this.view.addCircle(column, row, this.model.getTurnPlayer().equals(this.model.getPlayer1()));
             if (this.model.isOver()) {
                 this.endGame();
                 this.view.showResult(this.model.getResult());
