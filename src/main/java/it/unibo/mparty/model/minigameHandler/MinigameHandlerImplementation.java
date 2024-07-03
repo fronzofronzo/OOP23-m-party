@@ -35,6 +35,11 @@ public class MinigameHandlerImplementation implements MinigameHandler{
     }
 
     @Override
+    public boolean isInGame() {
+        return actualMinigame.isEmpty();
+    }
+
+    @Override
     public void stopMinigame() {
         this.actualMinigame = null;
         this.players = Collections.emptyList();
