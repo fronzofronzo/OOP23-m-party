@@ -195,4 +195,11 @@ public class GameModelImpl implements GameModel{
         Map<Direction,Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
         return pos.entrySet().stream().map(entry -> entry.getKey()).collect(Collectors.toSet());
     }
+
+    @Override
+    public void movePlayerWithDirection(Direction dir) {
+        Map<Direction,Position> p = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
+        this.players.get(actualPlayerIndex).setPosition(p.get(dir));
+        this.steps++;
+    }
 }

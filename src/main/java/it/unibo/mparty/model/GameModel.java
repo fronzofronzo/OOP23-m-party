@@ -23,6 +23,8 @@ public interface GameModel {
     boolean movePlayer();
 
     Set<Direction> getDirections();
+    
+    void movePlayerWithDirection(Direction dir);
 
     /**
      * Roll dices of the actual player
