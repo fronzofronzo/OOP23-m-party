@@ -47,6 +47,8 @@ public class MiniScreenImpl implements MiniScreen {
 
     @Override
     public void setUp(GameModelBuilder builder) {
+
         this.builder = builder;
+        //missing the loading of the choice box choices
     }
 }
