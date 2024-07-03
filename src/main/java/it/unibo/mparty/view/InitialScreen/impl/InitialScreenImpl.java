@@ -1,6 +1,7 @@
 package it.unibo.mparty.view.InitialScreen.impl;
 
 import it.unibo.mparty.model.GameModelBuilder;
+import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.InitialScreen.api.InitialScreen;
 import it.unibo.mparty.view.InitialScreen.api.MiniScreen;
 import javafx.event.ActionEvent;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Set;
 
-public class InitialScreenImpl implements InitialScreen {
+public class InitialScreenImpl extends AbstractSceneView implements InitialScreen {
 
     private GameModelBuilder builder;
 
