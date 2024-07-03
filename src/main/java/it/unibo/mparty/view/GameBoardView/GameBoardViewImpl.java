@@ -208,5 +208,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.resultDice.setText(String.valueOf(result));
     }
 
+    private void movePlayer(){
+        this.getMainController().movePlayer();
+    }
     
 }
