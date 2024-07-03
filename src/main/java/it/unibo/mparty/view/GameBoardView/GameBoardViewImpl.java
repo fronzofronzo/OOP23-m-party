@@ -9,21 +9,29 @@ import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.view.AbstractSceneView;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class GameBoardViewImpl extends AbstractSceneView implements GameBoardView{
 
-    //private final static int N_VBOX = 4;
+    private static final Map<SlotType,Color> SLOT_COLOR = Map.of(SlotType.ACTIVE_STAR, Color.GOLD, 
+                                                                 SlotType.BONUS, Color.GREEN, 
+                                                                 SlotType.MALUS, Color.RED, 
+                                                                 SlotType.MULTIPLAYER, Color.LIGHTGREEN, 
+                                                                 SlotType.NOT_ACTIVE_STAR, Color.LIGHTGREEN, 
+                                                                 SlotType.PATH, Color.LIGHTGREEN, 
+                                                                 SlotType.SHOP, Color.BROWN, 
+                                                                 SlotType.SINGLEPLAYER, Color.LIGHTGREEN, 
+                                                                 SlotType.VOID, Color.BLACK);
     @FXML
     private GridPane board;
     @FXML 
@@ -107,25 +115,34 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @Override
     public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> map, List<String> nicknames) {
         this.populateGridPane(dimension, map);
-
+        this.setSize();
+        }
+        
+    private void setSize() {
         this.borderPane.setMinSize(1000, 600);
         this.leftSplitPane.setMinSize(150, 400);
         this.rightSplitPane.setMinSize(150, 400);
         this.board.setMinSize(700, 400);
         this.paneCommand.setMinSize(1000, 200);
-        }
-        
+    }
+
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
         for (int i = 0; i < dimension.getFirst(); i++) {
             for (int j = 0; j < dimension.getSecond(); j++) {
                 Pane tmp = new Pane();
-                if (Objects.isNull(map.get(new Position(i, j)))) {
-                    tmp.setStyle("-fx-background-color: black;");
-                } else {
-                    tmp.setStyle("-fx-background-color: white;");
-                }
+                BackgroundFill backgroundfill = new BackgroundFill(getColor(map.get(new Position(i, j))),CornerRadii.EMPTY, null);
+                Background background = new Background(backgroundfill);
+                tmp.setBackground(background);
                 this.board.add(tmp, i, j);
             }
+        }
+    }
+
+    private Color getColor(SlotType slotType) {
+        if (Objects.isNull(slotType)) {
+            return Color.BLACK;
+        } else {
+            return SLOT_COLOR.get(slotType);
         }
     }    
 }
