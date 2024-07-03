@@ -106,4 +106,9 @@ public class Connect4ModelImpl implements Connect4Model{
         return 0;
     }
 
+    @Override
+    public String getPlayer1() {
+        return this.player1;
+    }
+
 }

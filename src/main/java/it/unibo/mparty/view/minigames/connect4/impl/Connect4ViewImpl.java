@@ -17,23 +17,21 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
 
     @Override
     public void showResult(Pair<String, Integer> result) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showResult'");
+        this.updateDisplayLabel(result.getFirst() + " ha vinto " + result.getSecond() + "monete");
+        this.activateExitButton();
     }
 
     @Override
-    public void addCircle(int row) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addCircle'");
-    }
-
-    @Override
-    public void updateDisplayLabel() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateDisplayLabel'");
+    public void updateDisplayLabel(String msg) {
+        displayLabel.setText(msg);;
     }
 
     private void activateExitButton () {
+
+    }
+
+    @Override
+    public void addCircle(int row, boolean color) {
         
     }
 

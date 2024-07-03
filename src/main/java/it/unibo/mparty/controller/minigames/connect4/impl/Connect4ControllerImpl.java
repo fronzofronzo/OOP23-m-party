@@ -31,11 +31,12 @@ public class Connect4ControllerImpl implements MinigameController, Connect4Contr
     @Override
     public void selectColumn(int column) {
         if (this.model.addDisc(column)) {
-            //addCircle
+            this.view.addCircle(this.model.getAvailableRow(column), this.model.getTurnPlayer().equals(this.model.getPlayer1()));
             if (this.model.isOver()) {
                 this.endGame();
-                //displayresult
+                this.view.showResult(this.model.getResult());
             }
+            this.view.updateDisplayLabel("E' il turno di "+ this.model.getTurnPlayer());
         }
     }
 
