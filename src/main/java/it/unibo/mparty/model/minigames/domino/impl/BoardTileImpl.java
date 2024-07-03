@@ -18,20 +18,26 @@ public class BoardTileImpl implements BoardTile {
     }
 
     @Override
-    public boolean canPlaceTile(final Tile tile){
+    public boolean canMatchBoardTile(final Tile tile){
         if (this.boardTiles.isEmpty()){
-            this.boardTiles.add(tile);
             return true;
+        }
+        return this.boardTiles.getFirst().match(tile) || this.boardTiles.getLast().match(tile);
+    }
+
+    @Override
+    public void addTileToBoard(final Tile tile) {
+        if (this.boardTiles.isEmpty()) {
+            this.boardTiles.add(tile);
+            return;
         }
 
         if (this.boardTiles.getFirst().match(tile)) {
             this.boardTiles.addFirst(tile);
-            return true;
         } else if (this.boardTiles.getLast().match(tile)) {
             this.boardTiles.addLast(tile);
-            return true;
         }
 
-        return false;
     }
+
 }

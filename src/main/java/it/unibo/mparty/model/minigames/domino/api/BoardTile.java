@@ -5,5 +5,7 @@ import java.util.LinkedList;
 public interface BoardTile {
     LinkedList<Tile> getBoardTiles();
 
-    boolean canPlaceTile(Tile tile);
+    boolean canMatchBoardTile(Tile tile);
+
+    void addTileToBoard(Tile tile);
 }
