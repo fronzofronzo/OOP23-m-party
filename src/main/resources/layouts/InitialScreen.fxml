@@ -6,17 +6,23 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.InitialScreen.impl.InitialScreenImpl">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="570.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.InitialScreen.impl.InitialScreenImpl">
    <children>
+      <Button mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="26.0" prefWidth="32.0" text="?" VBox.vgrow="NEVER">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
       <ImageView fitHeight="173.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/MarioPartyInitialScreen.jpeg" />
          </image>
       </ImageView>
       <Label contentDisplay="CENTER" prefHeight="152.0" prefWidth="277.0" style="-fx-font-weight: bold; -fx-font-size: 30px;" text="          M-PARTY" />
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="154.0">
+      <VBox alignment="CENTER" prefHeight="192.0" prefWidth="732.0">
          <children>
             <Button fx:id="addPlayers" mnemonicParsing="false" onAction="#handleAddPlayerButton" prefHeight="42.0" prefWidth="242.0" text="AGGIUNGI GIOCATORE" />
             <ChoiceBox fx:id="playerChoiceBox" onDragDetected="#handleDifficultyButton" prefHeight="46.0" prefWidth="237.0" />
