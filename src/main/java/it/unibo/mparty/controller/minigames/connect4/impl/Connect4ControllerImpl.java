@@ -26,6 +26,7 @@ public class Connect4ControllerImpl implements MinigameController, Connect4Contr
     @Override
     public void initGame(List<String> players) {
         this.model.setUpPlayers(players);
+        this.view.updateDisplayLabel("E' il turno di " + this.model.getPlayer1());
     }
 
     @Override
