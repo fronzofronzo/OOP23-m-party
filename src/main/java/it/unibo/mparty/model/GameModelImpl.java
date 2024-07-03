@@ -78,8 +78,8 @@ public class GameModelImpl implements GameModel{
      */
     @Override
     public int rollDice() {
-        this.dice = this.players.get(actualPlayerIndex).getDice().generateNumber();
-        return this.dice;
+        this.players.get(actualPlayerIndex).getDice().rollDice();
+        return this.players.get(actualPlayerIndex).getDice().getResult();
     }
 
     /**
