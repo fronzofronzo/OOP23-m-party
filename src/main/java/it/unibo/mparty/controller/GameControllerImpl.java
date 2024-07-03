@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
+import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.GameStatus;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
@@ -74,5 +75,11 @@ public class GameControllerImpl implements GameController{
             }
         };
 
+    }
+
+    @Override
+    public void movePlayerWithDirection(Direction dir) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'movePlayerWithDirection'");
     }
 }
