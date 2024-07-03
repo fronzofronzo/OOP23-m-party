@@ -1,6 +1,9 @@
 package it.unibo.mparty.view.InitialScreen.impl;
 
+import it.unibo.mparty.controller.GameController;
+import it.unibo.mparty.controller.initialScreen.InitialScreenController;
 import it.unibo.mparty.model.GameModelBuilder;
+import it.unibo.mparty.model.GameModelBuilderImpl;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.InitialScreen.api.InitialScreen;
 import it.unibo.mparty.view.InitialScreen.api.MiniScreen;
@@ -20,7 +23,8 @@ import java.util.Set;
 public class InitialScreenImpl extends AbstractSceneView implements InitialScreen {
 
     private GameModelBuilder builder;
-
+    private GameController controller;
+    private final InitialScreenController screenController = new InitialScreenController(this);
     private final Set<String> temp = Set.of("Easy","Medium","Difficult");
     private String difficulty;
 
@@ -43,6 +47,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     public void setUp() {
         this.startGame.setDisable(true);
         this.playerChoiceBox.getItems().addAll(temp);
+        this.builder = new GameModelBuilderImpl();
     }
 
     @Override
@@ -67,7 +72,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
         stage.setScene(new Scene(root));
         stage.showAndWait();
         this.startGame.setDisable(!this.builder.enoughPlayers());
-        this.addPlayers.setDisable(!this.builder.isFull());
+        this.addPlayers.setDisable(this.builder.isFull());
     }
 
     @Override
