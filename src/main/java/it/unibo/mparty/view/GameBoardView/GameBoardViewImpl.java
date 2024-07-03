@@ -104,6 +104,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private SplitPane leftSplitPane;
     @FXML
     private SplitPane rightSplitPane;
+    @FXML
+    private Label resultDice;
 
     private List<Label> labelPlayersNames = new ArrayList<>();     
     private List<Label> labelPlayersCoins = new ArrayList<>(); 
@@ -200,4 +202,11 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private void rollDice(){
         this.getMainController().rollDice();
     }
+
+    @Override
+    public void showResultDice(int result) {
+        this.resultDice.setText(String.valueOf(result));
+    }
+
+    
 }
