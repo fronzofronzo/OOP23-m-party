@@ -54,11 +54,6 @@ public class MemoryCardModelImpl implements MemoryCardModel {
     }
 
     @Override
-    public boolean isDone() {
-        return mistakesNumber == MAX_MISTAKES || guessed.size() == CardType.values().length;
-    }
-
-    @Override
     public Map<Integer, CardType> getCards() {
         return Map.copyOf(cards);
     }
@@ -81,5 +76,10 @@ public class MemoryCardModelImpl implements MemoryCardModel {
     @Override
     public void setUpPlayers(List<String> players) {
         player = players.get(FIRST);
+    }
+
+    @Override
+    public boolean isOver() {
+        return mistakesNumber == MAX_MISTAKES || guessed.size() == CardType.values().length;
     }
 }
