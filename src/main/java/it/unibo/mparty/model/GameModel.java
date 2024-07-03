@@ -19,7 +19,7 @@ public interface GameModel {
      *
      * @return
      */
-    Position movePlayer();
+    boolean movePlayer();
 
     /**
      * Roll dices of the actual player

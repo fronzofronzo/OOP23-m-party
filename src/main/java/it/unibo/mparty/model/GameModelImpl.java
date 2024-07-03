@@ -55,14 +55,14 @@ public class GameModelImpl implements GameModel{
      * {@inheritDoc}
      */
     @Override
-    public Position movePlayer() {
+    public boolean movePlayer() {
         final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
         final Map<Direction, Position> nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition);
         if (nextPlayerPosition.size() == 1) {
             this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.entrySet().stream().findFirst().get().getValue());
         }
 
-        return actualPlayerPosition;
+        return true;
     }
 
     /**
