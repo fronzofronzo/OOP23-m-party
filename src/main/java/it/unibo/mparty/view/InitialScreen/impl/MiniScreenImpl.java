@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MiniScreenImpl implements MiniScreen {
@@ -32,14 +33,14 @@ public class MiniScreenImpl implements MiniScreen {
     @FXML
     private Button backButton;
 
-    private String username;
-
-    private String character;
+    private Optional<String> username = Optional.empty();
+    private Optional<String> character = Optional.empty();
+    private static int MAX_SIZE = 10;
 
     @Override
     public void handleOkButton(ActionEvent e) {
-        if(this.username != null && this.character != null) {
-            this.builder.addPlayer(this.username, this.character);
+        if(this.username.isPresent() && this.character.isPresent()) {
+            this.builder.addPlayer(this.username.get(), this.character.get());
         }
         Stage stage = (Stage) this.okButton.getScene().getWindow();
         stage.close();
@@ -54,12 +55,12 @@ public class MiniScreenImpl implements MiniScreen {
 
     @Override
     public void handleCharacterChoiceBox(ActionEvent e) {
-        this.character = this.choiceBox.getValue();
+        this.character = Optional.of(this.choiceBox.getValue());
     }
 
     @Override
     public void handleUsernameTextField(ActionEvent e) {
-        this.username = this.textField.getText();
+        this.username = Optional.of(this.textField.getText().length() > MAX_SIZE ? "" : this.textField.getText());
     }
 
     @Override
