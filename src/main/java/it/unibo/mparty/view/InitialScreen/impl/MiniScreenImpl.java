@@ -35,7 +35,7 @@ public class MiniScreenImpl implements MiniScreen {
 
     private Optional<String> username = Optional.empty();
     private Optional<String> character = Optional.empty();
-    private static int MAX_SIZE = 10;
+    private static final int MAX_SIZE = 10;
 
     @Override
     public void handleOkButton(ActionEvent e) {
@@ -66,8 +66,7 @@ public class MiniScreenImpl implements MiniScreen {
     }
 
     @Override
-    public void setUp(GameModelBuilder builder) {
-
+    public void setUp(GameModelBuilder builder){
         this.builder = builder;
     }
 
