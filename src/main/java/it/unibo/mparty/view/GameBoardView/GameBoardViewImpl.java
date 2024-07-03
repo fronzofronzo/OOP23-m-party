@@ -172,8 +172,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         }
     }
 
-
-
     @Override
     public void updateCommands(List<String> items, List<Direction> directions) {
         // TODO Auto-generated method stub
