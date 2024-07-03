@@ -1,9 +1,10 @@
 package it.unibo.mparty.view.minigames.memoryCard;
 
 import it.unibo.mparty.view.SceneView;
+import it.unibo.mparty.view.minigames.MinigameView;
 import javafx.scene.control.Button;
 
-public interface MemoryCardView extends SceneView {
+public interface MemoryCardView extends MinigameView {
 
     /**
      * set if the selected card can be clicked or not

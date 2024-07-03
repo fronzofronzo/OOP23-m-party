@@ -36,13 +36,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
 
     @Override
     public void showResult(int n) {
-        this.textLabel.setText("Il giocatore ha guadagnato " + String.valueOf(n) + " monete");
-        this.controlButton.setDisable(false);
-        // this.getController.endMinigame(n)
-        this.controlButton.setText("Lascia il minigioco ");
-        this.controlButton.setOnAction(e -> {
-            // this.getView.setScene(mainScene.xml)
-        });
+
     }
 
     @Override
@@ -83,4 +77,13 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
         this.controller.selectCard(this.cardsPane.getChildren().indexOf((Button)e.getSource()));
     }
 
+    @Override
+    public void setUpView() {
+
+    }
+
+    @Override
+    public void showResult() {
+
+    }
 }
