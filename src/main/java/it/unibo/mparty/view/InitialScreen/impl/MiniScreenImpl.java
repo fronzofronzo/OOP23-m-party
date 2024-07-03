@@ -60,7 +60,9 @@ public class MiniScreenImpl implements MiniScreen {
 
     @Override
     public void handleUsernameTextField(ActionEvent e) {
-        this.username = Optional.of(this.textField.getText().length() > MAX_SIZE ? "" : this.textField.getText());
+        if(this.textField.getText().length() > MAX_SIZE){
+            this.username = Optional.of(this.textField.getText());
+        }
     }
 
     @Override
