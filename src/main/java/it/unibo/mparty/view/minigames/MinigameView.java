@@ -10,11 +10,6 @@ import it.unibo.mparty.view.SceneView;
 public interface MinigameView extends SceneView {
 
     /**
-     * Method to set up the view when the game stars
-     */
-    void setUpView();
-
-    /**
      * Show the result of the minigame
      * @param result is a {@link Pair} of player who has won and how many
      *               coins he has earned
