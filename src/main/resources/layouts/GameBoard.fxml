@@ -20,6 +20,7 @@
                   <Label fx:id="nameP1" />
                   <Label fx:id="coinsP1" />
                   <Label fx:id="starsP1" />
+                  <Label fx:id="itemP1" />
                </children>
                <padding>
                   <Insets left="10.0" top="10.0" />
@@ -29,6 +30,7 @@
                   <Label fx:id="nameP3" />
                   <Label fx:id="coinsP3" />
                   <Label fx:id="starsP3" />
+                  <Label fx:id="itemP3" />
                </children>
                <padding>
                   <Insets left="10.0" top="10.0" />
@@ -44,6 +46,7 @@
                   <Label fx:id="nameP2" />
                   <Label fx:id="coinsP2" />
                   <Label fx:id="starsP2" />
+                  <Label fx:id="itemP2" />
                </children>
                <padding>
                   <Insets left="10.0" top="10.0" />
@@ -53,6 +56,7 @@
                   <Label fx:id="nameP4" />
                   <Label fx:id="coinsP4" />
                   <Label fx:id="starsP4" />
+                  <Label fx:id="itemP4" />
                </children>
                <padding>
                   <Insets left="10.0" top="10.0" />

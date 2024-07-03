@@ -10,7 +10,7 @@ import java.util.Map;
 
 public interface GameBoardView extends SceneView{
 
-    void updatePlayer(String nickname, int coins, int money, List<String> items);
+    void updatePlayer(String nickname, int coins, int stars, List<String> items);
 
     void updateCommands(List<String> items, List<Direction> directions);
 

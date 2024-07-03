@@ -46,6 +46,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label coinsP1;
     @FXML 
     private Label starsP1;
+    @FXML
+    private Label itemP1;
     @FXML 
     private VBox sectionP2;
     @FXML 
@@ -54,6 +56,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label coinsP2;
     @FXML 
     private Label starsP2;
+    @FXML
+    private Label itemP2;
     @FXML 
     private VBox sectionP3;
     @FXML 
@@ -62,6 +66,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label coinsP3;
     @FXML 
     private Label starsP3;
+    @FXML
+    private Label itemP3;
     @FXML 
     private VBox sectionP4;
     @FXML 
@@ -70,6 +76,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label coinsP4;
     @FXML 
     private Label starsP4;
+    @FXML
+    private Label itemP4;
     @FXML
     private Pane paneCommand;
     @FXML 
@@ -97,14 +105,21 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private SplitPane rightSplitPane;
 
-    private List<Label> labelPlayersNames;     
+    private List<Label> labelPlayersNames = new ArrayList<>();     
     private List<Label> labelPlayersCoins = new ArrayList<>(); 
-    private List<Label> labelPlayersStars;
-    private List<Button> buttonsItem;
+    private List<Label> labelPlayersStars = new ArrayList<>();
+    private List<Label> labelPlayersItems = new ArrayList<>();
+    private List<Button> buttonsItem = new ArrayList<>();
 
     @Override
-    public void updatePlayer(String nickname, int coins, int money, List<String> items) {
-
+    public void updatePlayer(String nickname, int coins, int stars, List<String> items) {
+        for (int i = 0; i <= this.labelPlayersNames.size(); i++) {
+            if (this.labelPlayersNames.get(i).getText().equals(nickname)) {
+                this.labelPlayersCoins.get(i).setText(String.valueOf(coins));
+                this.labelPlayersStars.get(i).setText(String.valueOf(stars));
+                this.labelPlayersItems.get(i).setText(items.toString());
+            }
+        }
     }
 
     @Override
@@ -123,6 +138,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.labelPlayersNames.addAll(List.of(this.nameP1, this.nameP2, this.nameP3, this.nameP4));
         this.labelPlayersCoins.addAll(List.of(this.coinsP1, this.coinsP2, this.coinsP3, this.coinsP4));
         this.labelPlayersStars.addAll(List.of(this.starsP1, this.starsP2, this.starsP3, this.starsP4));
+        this.labelPlayersItems.addAll(List.of(this.itemP1, this.itemP2, this.itemP3, this.itemP4));
         this.buttonsItem.addAll(List.of(this.useItem1, this.useItem2, this.useItem3));
     }
 
