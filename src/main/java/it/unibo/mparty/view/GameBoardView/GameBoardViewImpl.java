@@ -24,7 +24,7 @@ import javafx.scene.layout.VBox;
 public class GameBoardViewImpl extends AbstractSceneView implements GameBoardView{
 
     //private final static int N_VBOX = 4;
-
+    @FXML
     private GridPane board;
     @FXML 
     private BorderPane borderPane;
@@ -86,8 +86,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private SplitPane leftSplitPane;
     @FXML
     private SplitPane rightSplitPane;
-    @FXML
-    private StackPane centerPane;
 
     //private List<Label> labelPlayersNames = List.of(nameP1, nameP2, nameP3, nameP4);     
     //private List<Label> labelPlayersCoins = List.of(coinsP1, coinsP2, coinsP3, coinsP4); 
@@ -115,46 +113,17 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.rightSplitPane.setMinSize(150, 400);
         this.board.setMinSize(700, 400);
         this.paneCommand.setMinSize(1000, 200);
-        this.centerPane.getChildren().add(this.board);
-        StackPane.setAlignment(this.board, javafx.geometry.Pos.CENTER);
-        this.board.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-        //this.board.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        //this.board.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        //this.board.setPadding(new Insets(10,10,10,10));
-        this.borderPane.setCenter(this.board);
-        //this.borderPane.widthProperty().addListener((obs, oldVal, newVal) -> {
-        //    this.board.setPrefWidth(newVal.doubleValue());
-        //});
-
-        //this.borderPane.heightProperty().addListener((obs, oldVal, newVal) -> {
-            //    this.board.setPrefHeight(newVal.doubleValue());
-            //});
         }
         
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
-        this.board = new GridPane();
-        int W = 700 / dimension.getFirst();
-        int H = 400 / dimension.getSecond();
-        for (int i = 0; i < dimension.getFirst(); i++){      
-                ColumnConstraints c = new ColumnConstraints();
-                c.setMinWidth(W);
-                c.setPrefWidth(W);
-                c.setMaxWidth(W+20);
-                this.board.getColumnConstraints().add(c);
-        }for (int i = 0; i < dimension.getSecond(); i++){
-                RowConstraints r = new RowConstraints();
-                r.setMinHeight(H);
-                r.setPrefHeight(H);
-                r.setMaxHeight(H+20);     
-                this.board.getRowConstraints().add(r);
-        } 
         for (int i = 0; i < dimension.getFirst(); i++) {
             for (int j = 0; j < dimension.getSecond(); j++) {
-                Label tmp = new Label(Objects.isNull(map.get(new Position(i, j))) ? "." : map.get(new Position(i, j)).toString());
-                //Pane tmp = new Pane();
-                //tmp.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                tmp.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                Pane tmp = new Pane();
+                if (Objects.isNull(map.get(new Position(i, j)))) {
+                    tmp.setStyle("-fx-background-color: black;");
+                } else {
+                    tmp.setStyle("-fx-background-color: white;");
+                }
                 this.board.add(tmp, i, j);
             }
         }
