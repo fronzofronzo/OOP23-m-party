@@ -17,7 +17,7 @@ public class DoubleDice extends AbstractItem{
     }
 
     @Override
-    public String getDescrition() {
+    public String getDescription() {
         return "Si lancia 2 dadi per avanzare";
     }
 

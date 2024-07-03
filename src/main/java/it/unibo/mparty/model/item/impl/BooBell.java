@@ -17,7 +17,7 @@ public class BooBell extends AbstractItem{
     }
 
     @Override
-    public String getDescrition() {
+    public String getDescription() {
         return "Boo ruba delle monete ad un avversario.";
     }
 
