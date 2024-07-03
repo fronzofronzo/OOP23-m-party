@@ -135,8 +135,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
-        for (int i = 0; i < dimension.getFirst(); i++) {
-            for (int j = 0; j < dimension.getSecond(); j++) {
+        for (int i = 0; i < dimension.getX(); i++) {
+            for (int j = 0; j < dimension.getY(); j++) {
                 Pane tmp = new Pane();
                 BackgroundFill backgroundfill = new BackgroundFill(getColor(map.get(new Position(i, j))),CornerRadii.EMPTY, null);
                 Background background = new Background(backgroundfill);
