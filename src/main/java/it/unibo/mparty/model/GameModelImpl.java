@@ -64,7 +64,11 @@ public class GameModelImpl implements GameModel{
 
     @Override
     public Optional<String> getActiveMinigame() {
-        if(this.minigameHandler.)
+        if(this.minigameHandler.isInGame()){
+            return Optional.of(this.minigameHandler.getMinigame());
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
