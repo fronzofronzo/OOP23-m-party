@@ -195,5 +195,9 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                 default: break;
             }
         }
-    } 
+    }
+    
+    private void rollDice(){
+        this.getMainController().rollDice();
+    }
 }
