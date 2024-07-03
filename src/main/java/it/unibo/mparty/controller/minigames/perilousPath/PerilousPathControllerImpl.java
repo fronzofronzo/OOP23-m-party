@@ -15,9 +15,9 @@ public class PerilousPathControllerImpl implements  PerilousPathController{
     private final static int SECONDS = 6000;
     private final PauseTransition pause = new PauseTransition(new Duration(SECONDS));
 
-    public PerilousPathControllerImpl(){
+    public PerilousPathControllerImpl(PerilousPathView view){
         this.model = new PerilousPathImpl(SIZE);
-        this.view = new PerilousPathViewImpl(SIZE);
+        this.view = view;
         this.model.setBombs();
         this.model.setBalls();
 
@@ -25,7 +25,7 @@ public class PerilousPathControllerImpl implements  PerilousPathController{
 
     @Override
     public void setUp() throws InterruptedException {
-        this.view.setObserver(this);
+
         this.view.setUpView(this.model.getBalls(),this.model.getBombs());
         pause.setOnFinished(e -> this.view.hideBombs(this.model.getBombs()));
         pause.play();
