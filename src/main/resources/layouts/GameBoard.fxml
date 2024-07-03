@@ -17,18 +17,18 @@
          <items>
             <VBox fx:id="sectionP1" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                <children>
-                  <Label fx:id="nameP1" text="nameP1" />
-                  <Label fx:id="coinsP1" text="coinsP1" />
-                  <Label fx:id="starsP1" text="starsP1" />
+                  <Label fx:id="nameP1" />
+                  <Label fx:id="coinsP1" />
+                  <Label fx:id="starsP1" />
                </children>
                <padding>
                   <Insets left="10.0" top="10.0" />
                </padding></VBox>
             <VBox fx:id="sectionP3" prefHeight="265.0" prefWidth="116.0" spacing="5.0">
                <children>
-                  <Label fx:id="nameP3" text="nameP3" />
-                  <Label fx:id="coinsP3" text="coinsP3" />
-                  <Label fx:id="starsP3" text="starsP3" />
+                  <Label fx:id="nameP3" />
+                  <Label fx:id="coinsP3" />
+                  <Label fx:id="starsP3" />
                </children>
                <padding>
                   <Insets left="10.0" top="10.0" />
@@ -41,18 +41,18 @@
          <items>
             <VBox fx:id="sectionP2" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                <children>
-                  <Label fx:id="nameP2" text="nameP2" />
-                  <Label fx:id="coinsP2" text="coinsP2" />
-                  <Label fx:id="starsP2" text="starsP2" />
+                  <Label fx:id="nameP2" />
+                  <Label fx:id="coinsP2" />
+                  <Label fx:id="starsP2" />
                </children>
                <padding>
                   <Insets left="10.0" top="10.0" />
                </padding></VBox>
             <VBox fx:id="sectionP4" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                <children>
-                  <Label fx:id="nameP4" text="nameP4" />
-                  <Label fx:id="coinsP4" text="coinsP4" />
-                  <Label fx:id="starsP4" text="starsP4" />
+                  <Label fx:id="nameP4" />
+                  <Label fx:id="coinsP4" />
+                  <Label fx:id="starsP4" />
                </children>
                <padding>
                   <Insets left="10.0" top="10.0" />

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
@@ -96,21 +97,15 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private SplitPane rightSplitPane;
 
-    //private List<Label> labelPlayersNames;     
+    private List<Label> labelPlayersNames;     
     private List<Label> labelPlayersCoins = new ArrayList<>(); 
-    //private List<Label> labelPlayersStars;
-    //private List<Button> buttonsItem;
+    private List<Label> labelPlayersStars;
+    private List<Button> buttonsItem;
 
     @Override
     public void updatePlayer(String nickname, int coins, int money, List<String> items) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updatePlayer'");
-    }
-
-    @Override
-    public void updateCommands(List<String> items) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateCommands'");
     }
 
     @Override
@@ -121,7 +116,10 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         }
         
     private void createData() {
+        this.labelPlayersNames.addAll(List.of(this.nameP1, this.nameP2, this.nameP3, this.nameP4));
         this.labelPlayersCoins.addAll(List.of(this.coinsP1, this.coinsP2, this.coinsP3, this.coinsP4));
+        this.labelPlayersStars.addAll(List.of(this.starsP1, this.starsP2, this.starsP3, this.starsP4));
+        this.buttonsItem.addAll(List.of(this.useItem1, this.useItem2, this.useItem3));
     }
 
     private void setSize() {
@@ -152,5 +150,13 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         } else {
             return SLOT_COLOR.get(slotType);
         }
+    }
+
+
+
+    @Override
+    public void updateCommands(List<String> items, List<Direction> directions) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateCommands'");
     }    
 }
