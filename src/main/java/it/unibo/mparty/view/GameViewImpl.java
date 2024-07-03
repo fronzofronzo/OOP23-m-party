@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import it.unibo.mparty.controller.GameController;
 import java.io.IOException;
@@ -22,14 +23,11 @@ public class GameViewImpl extends Application implements GameView{
 
     @Override
     public void setScene(String path) throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH+path)) ;
-        final Parent root = loader.load(getClass().getResourceAsStream(PATH+path));
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + path)) ;
+        final Parent root = loader.load(getClass().getResourceAsStream(PATH + path));
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        //final SceneView sceneView = loader.<SceneView>getController();
-        //sceneView.init(this,this.controller);
-        this.boardView = loader.<GameBoardView>getController();
-        //this.boardView.setUpBoard(0, 0, this.controller.getBoard(), null);
-
+        final SceneView sceneView = loader.<SceneView>getController();
+        sceneView.init(this,this.controller);
         this.stage.setScene(scene);
         this.stage.show();
     }
@@ -38,7 +36,7 @@ public class GameViewImpl extends Application implements GameView{
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
         this.stage.show();
-        this.setScene("GameBoard.fxml");
-        this.controller.startGame(new GameModelImpl(null, ""));
-    }    
+        this.setScene("minigames/nanogram.fxml");
+    }
+
 }
