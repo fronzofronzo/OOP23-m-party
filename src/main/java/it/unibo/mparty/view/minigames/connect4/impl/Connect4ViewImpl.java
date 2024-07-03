@@ -1,5 +1,9 @@
 package it.unibo.mparty.view.minigames.connect4.impl;
 
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
 import it.unibo.mparty.controller.minigames.connect4.api.Connect4Controller;
 import it.unibo.mparty.controller.minigames.connect4.impl.Connect4ControllerImpl;
 import it.unibo.mparty.utilities.Pair;
@@ -29,6 +33,7 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     @FXML
     private GridPane buttonGrid;
 
+    
     @Override
     public void showResult(Pair<String, Integer> result) {
         this.updateDisplayLabel(result.getFirst() + " ha vinto " + result.getSecond() + "monete");
@@ -56,6 +61,11 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     public void getColumn(ActionEvent e) {
         Button but = (Button) (e.getSource());
         this.controller.selectColumn(GridPane.getColumnIndex(but));
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.controller.initGame(List.of("filo","dan"));
     }
 
 }

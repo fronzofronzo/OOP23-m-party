@@ -1,5 +1,7 @@
 package it.unibo.mparty.controller.minigames.connect4.api;
 
-public interface Connect4Controller {
+import it.unibo.mparty.controller.minigames.MinigameController;
+
+public interface Connect4Controller extends MinigameController{
     public void selectColumn (int column);
 }
