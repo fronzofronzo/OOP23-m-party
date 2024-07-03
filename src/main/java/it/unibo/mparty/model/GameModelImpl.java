@@ -15,6 +15,7 @@ import it.unibo.mparty.utilities.SlotType;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 /**
@@ -62,13 +63,8 @@ public class GameModelImpl implements GameModel{
     }
 
     @Override
-    public String getActiveMinigame() {
-        return this.minigameHandler.getMinigame();
-    }
-
-    @Override
-    public boolean isActiveMinigame() {
-        return this.minigameHandler.getMinigame() != null;
+    public Optional<String> getActiveMinigame() {
+        if(this.minigameHandler.)
     }
 
     @Override
