@@ -6,9 +6,9 @@ import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import it.unibo.mparty.model.gameBoard.util.Pair;
 import it.unibo.mparty.model.minigames.connect4.api.Connect4Model;
 import it.unibo.mparty.utilities.Connect4Directions;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 
 public class Connect4ModelImpl implements Connect4Model{
