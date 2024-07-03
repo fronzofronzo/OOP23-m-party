@@ -9,13 +9,16 @@ import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.view.AbstractSceneView;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class GameBoardViewImpl extends AbstractSceneView implements GameBoardView{
@@ -80,7 +83,11 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private Button buttonEnter;
     @FXML
-    private Pane centerPane;
+    private SplitPane leftSplitPane;
+    @FXML
+    private SplitPane rightSplitPane;
+    @FXML
+    private StackPane centerPane;
 
     //private List<Label> labelPlayersNames = List.of(nameP1, nameP2, nameP3, nameP4);     
     //private List<Label> labelPlayersCoins = List.of(coinsP1, coinsP2, coinsP3, coinsP4); 
@@ -101,19 +108,28 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
 
     @Override
     public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> map, List<String> nicknames) {
-        this.board = new GridPane();
-        //System.out.println(map);
         this.populateGridPane(dimension, map);
-        this.board.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        this.board.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        this.borderPane.setCenter(this.board);
-        this.borderPane.widthProperty().addListener((obs, oldVal, newVal) -> {
-            this.board.setPrefWidth(newVal.doubleValue());
-        });
 
-        this.borderPane.heightProperty().addListener((obs, oldVal, newVal) -> {
-            this.board.setPrefHeight(newVal.doubleValue());
-        });
+        this.borderPane.setMinSize(1000, 600);
+        this.leftSplitPane.setMinSize(150, 400);
+        this.rightSplitPane.setMinSize(150, 400);
+        this.board.setMinSize(700, 400);
+        this.paneCommand.setMinSize(1000, 200);
+        this.centerPane.getChildren().add(this.board);
+        StackPane.setAlignment(this.board, javafx.geometry.Pos.CENTER);
+        this.board.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
+        //this.board.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        //this.board.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        //this.board.setPadding(new Insets(10,10,10,10));
+        this.borderPane.setCenter(this.board);
+        //this.borderPane.widthProperty().addListener((obs, oldVal, newVal) -> {
+        //    this.board.setPrefWidth(newVal.doubleValue());
+        //});
+
+        //this.borderPane.heightProperty().addListener((obs, oldVal, newVal) -> {
+        //    this.board.setPrefHeight(newVal.doubleValue());
+        //});
     }
 
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
@@ -132,9 +148,13 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                 r.setMaxHeight(H);     
                 this.board.getRowConstraints().add(r);
         } */
+        this.board = new GridPane();
         for (int i = 0; i < dimension.getFirst(); i++) {
             for (int j = 0; j < dimension.getSecond(); j++) {
                 Label tmp = new Label(Objects.isNull(map.get(new Position(i, j))) ? "." : map.get(new Position(i, j)).toString());
+                //Pane tmp = new Pane();
+                //tmp.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                tmp.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 this.board.add(tmp, i, j);
             }
         }

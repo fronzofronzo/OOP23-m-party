@@ -34,6 +34,8 @@ public class GameViewImpl extends Application implements GameView{
         //sceneView.init(this,this.controller);
         this.boardView = loader.<GameBoardView>getController();
         this.stage.setScene(scene);
+        this.stage.setMinWidth(1000);
+        this.stage.setMinHeight(600);
         this.stage.show();
     }
 
