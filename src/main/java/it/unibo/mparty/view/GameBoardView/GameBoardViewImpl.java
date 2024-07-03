@@ -110,6 +110,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private List<Label> labelPlayersStars = new ArrayList<>();
     private List<Label> labelPlayersItems = new ArrayList<>();
     private List<Button> buttonsItem = new ArrayList<>();
+    private List<Button> buttonsDirection = new ArrayList<>();
 
     @Override
     public void updatePlayer(String nickname, int coins, int stars, List<String> items) {
@@ -140,6 +141,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.labelPlayersStars.addAll(List.of(this.starsP1, this.starsP2, this.starsP3, this.starsP4));
         this.labelPlayersItems.addAll(List.of(this.itemP1, this.itemP2, this.itemP3, this.itemP4));
         this.buttonsItem.addAll(List.of(this.useItem1, this.useItem2, this.useItem3));
+        this.buttonsDirection.addAll(List.of(this.buttonUP, this.buttonDOWN, this.buttonLEFT, this.buttonRIGHT));
     }
 
     private void setSize() {
@@ -174,7 +176,24 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
 
     @Override
     public void updateCommands(List<String> items, List<Direction> directions) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateCommands'");
-    }    
+        for (int i = 0; i <= this.buttonsItem.size(); i++) {
+            if (i <= items.size()) {
+                this.buttonsItem.get(i).setText(items.get(i));
+                this.buttonsItem.get(i).setDisable(false);
+            } else {
+                this.buttonsItem.get(i).setText("");
+                this.buttonsItem.get(i).setDisable(true);
+            }
+        }
+        this.buttonsDirection.stream().forEach(b -> b.setDisable(true));
+        for (Direction d : directions) {
+            switch (d) {
+                case Direction.UP: this.buttonUP.setDisable(true);
+                case Direction.DOWN: this.buttonDOWN.setDisable(true);
+                case Direction.LEFT: this.buttonLEFT.setDisable(true);
+                case Direction.RIGHT: this.buttonRIGHT.setDisable(true);            
+                default: break;
+            }
+        }
+    } 
 }
