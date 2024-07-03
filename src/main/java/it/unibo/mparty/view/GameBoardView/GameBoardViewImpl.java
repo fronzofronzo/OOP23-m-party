@@ -25,13 +25,13 @@ import javafx.scene.paint.Color;
 public class GameBoardViewImpl extends AbstractSceneView implements GameBoardView{
 
     private static final Map<SlotType,Color> SLOT_COLOR = Map.of(SlotType.ACTIVE_STAR, Color.GOLD, 
-                                                                 SlotType.BONUS, Color.GREEN, 
-                                                                 SlotType.MALUS, Color.RED, 
-                                                                 SlotType.MULTIPLAYER, Color.LIGHTGREEN, 
-                                                                 SlotType.NOT_ACTIVE_STAR, Color.LIGHTGREEN, 
-                                                                 SlotType.PATH, Color.LIGHTGREEN, 
-                                                                 SlotType.SHOP, Color.BROWN, 
-                                                                 SlotType.SINGLEPLAYER, Color.LIGHTGREEN, 
+                                                                 SlotType.BONUS, Color.LIGHTGREEN, 
+                                                                 SlotType.MALUS, Color.LIGHTCORAL, 
+                                                                 SlotType.MULTIPLAYER, Color.LIGHTGRAY, 
+                                                                 SlotType.NOT_ACTIVE_STAR, Color.WHEAT, 
+                                                                 SlotType.PATH, Color.WHEAT, 
+                                                                 SlotType.SHOP, Color.SKYBLUE, 
+                                                                 SlotType.SINGLEPLAYER, Color.LIGHTGRAY, 
                                                                  SlotType.VOID, Color.BLACK);
     @FXML
     private GridPane board;
@@ -148,7 +148,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
 
     private Color getColor(SlotType slotType) {
         if (Objects.isNull(slotType)) {
-            return Color.BLACK;
+            return SLOT_COLOR.get(SlotType.VOID);
         } else {
             return SLOT_COLOR.get(slotType);
         }
