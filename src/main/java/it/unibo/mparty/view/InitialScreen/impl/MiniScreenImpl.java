@@ -4,8 +4,10 @@ import it.unibo.mparty.model.GameModelBuilder;
 import it.unibo.mparty.view.InitialScreen.api.MiniScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class MiniScreenImpl implements MiniScreen {
 
@@ -17,6 +19,12 @@ public class MiniScreenImpl implements MiniScreen {
     @FXML
     private TextField textField;
 
+    @FXML
+    private Button okButton;
+
+    @FXML
+    private Button backButton;
+
     private String username;
 
     private String character;
@@ -26,13 +34,15 @@ public class MiniScreenImpl implements MiniScreen {
         if(this.username != null && this.character != null) {
             this.builder.addPlayer(this.username, this.character);
         }
-        System.exit(0);
+        Stage stage = (Stage) this.okButton.getScene().getWindow();
+        stage.close();
 
     }
 
     @Override
     public void handleBackButton(ActionEvent e) {
-        System.exit(0);
+        Stage stage = (Stage) this.backButton.getScene().getWindow();
+        stage.close();
     }
 
     @Override
