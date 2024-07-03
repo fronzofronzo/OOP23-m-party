@@ -199,6 +199,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         }
     }
     
+    @SuppressWarnings("unused")
     private void rollDice(){
         this.getMainController().rollDice();
     }
@@ -208,6 +209,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.resultDice.setText(String.valueOf(result));
     }
 
+    @SuppressWarnings("unused")
     private void movePlayer(){
         this.getMainController().movePlayer();
     }

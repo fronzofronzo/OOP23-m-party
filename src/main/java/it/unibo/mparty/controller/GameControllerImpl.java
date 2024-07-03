@@ -57,13 +57,6 @@ public class GameControllerImpl implements GameController{
         this.model.endMinigame(result);
     }
 
-    private void drawBoard() {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-            }
-        }
-    }
-
     @Override
     public void endGame() {
         // this.view.showWinner(this.model.getWinner)
