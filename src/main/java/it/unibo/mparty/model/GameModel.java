@@ -73,4 +73,11 @@ public interface GameModel {
      */
     Pair<Integer, Integer> getBoardDimensions();
 
+    /**
+     * Method to end the current minigame and update the model
+     * with the results
+     * @param result of the minigame
+     */
+    void endMinigame(Pair<String,Integer> result);
+
 }
