@@ -1,0 +1,11 @@
+.cell {
+    -fx-background-color: black;
+}
+
+.cell.filled {
+    -fx-background-color: black;
+}
+
+.cell.crossed {
+    -fx-background-color: black;
+}

@@ -24,4 +24,17 @@ public interface GameModelBuilder {
      * @return a {@link GameModel} instance
      */
     GameModel build();
+
+    /**
+     * Check if the game is initialized with enough player
+     * @return true if there are enough players, false otherwise
+     */
+    boolean enoughPlayers();
+
+    /**
+     * Check if it can be added other players
+     * @return true if the game is full ( no other players can be added),
+     * false otherwise
+     */
+    boolean isFull();
 }

@@ -1,0 +1,1 @@
+package it.unibo.mparty.view.minigames.perilouspath;

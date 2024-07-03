@@ -1,4 +1,4 @@
-package it.unibo.samplejavafx.model.minigames.memoryCard;
+package it.unibo.mparty.model.minigames.memoryCard;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.*;

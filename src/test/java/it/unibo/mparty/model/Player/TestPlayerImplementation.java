@@ -1,4 +1,4 @@
-package it.unibo.samplejavafx.model.Player;
+package it.unibo.mparty.model.Player;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.*;
