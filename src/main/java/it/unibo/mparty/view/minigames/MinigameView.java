@@ -7,4 +7,14 @@ import it.unibo.mparty.view.SceneView;
  * This interface extends the {@link SceneView} interface to include functionality specific to minigames.
  */
 public interface MinigameView extends SceneView {
+
+    /**
+     * Method to set up the view when the game stars
+     */
+    void setUpView();
+
+    /**
+     * Method to show the result of the minigame
+     */
+    void showResult();
 }
