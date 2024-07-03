@@ -13,4 +13,6 @@ public interface Connect4View extends MinigameView{
 
     public int getColumn(ActionEvent e);
 
+    public void activateExitButton(boolean pred);
+
 }

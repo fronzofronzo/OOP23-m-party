@@ -23,16 +23,17 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     @Override
     public void showResult(Pair<String, Integer> result) {
         this.updateDisplayLabel(result.getFirst() + " ha vinto " + result.getSecond() + "monete");
-        this.activateExitButton();
+        this.activateExitButton(true);
     }
 
     @Override
     public void updateDisplayLabel(String msg) {
-        displayLabel.setText(msg);;
+        displayLabel.setText(msg);
     }
 
-    private void activateExitButton () {
-
+    @Override
+    public void activateExitButton (boolean pred) {
+        exitButton.setDisable(!pred);
     }
 
     @Override
