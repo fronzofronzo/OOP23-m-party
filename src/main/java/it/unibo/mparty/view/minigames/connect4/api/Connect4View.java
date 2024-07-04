@@ -16,4 +16,5 @@ public interface Connect4View extends MinigameView, Initializable{
 
     public void activateExitButton(boolean pred);
 
+    public void closeView ();
 }

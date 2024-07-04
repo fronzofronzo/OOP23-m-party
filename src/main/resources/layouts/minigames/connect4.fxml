@@ -39,7 +39,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <GridPane fx:id="buttonGrid" prefHeight="35.0" prefWidth="598.0">
+                  <GridPane fx:id="buttonGrid" alignment="CENTER" prefHeight="35.0" prefWidth="598.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -81,7 +81,7 @@
         </items>
       </SplitPane>
       <Label fx:id="displayLabel" layoutX="74.0" layoutY="391.0" prefHeight="25.0" prefWidth="318.0" />
-      <Button fx:id="exitButton" layoutX="492.0" layoutY="391.0" mnemonicParsing="false" text="Esci" />
+      <Button fx:id="exitButton" layoutX="492.0" layoutY="391.0" mnemonicParsing="false" onAction="#closeView" text="Esci" />
    </children>
    <padding>
       <Insets top="10.0" />

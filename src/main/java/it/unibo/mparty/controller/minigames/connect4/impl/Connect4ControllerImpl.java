@@ -35,8 +35,8 @@ public class Connect4ControllerImpl implements Connect4Controller {
         if (this.model.addDisc(column)) {
             this.view.addCircle(column, row, this.model.getTurnPlayer().equals(this.model.getPlayer1()));
             if (this.model.isOver()) {
-                this.endGame();
                 this.view.showResult(this.model.getResult());
+                return;
             }
             this.view.updateDisplayLabel("E' il turno di "+ this.model.getTurnPlayer());
         }

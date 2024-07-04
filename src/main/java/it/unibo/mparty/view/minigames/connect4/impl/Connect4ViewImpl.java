@@ -38,6 +38,7 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     public void showResult(Pair<String, Integer> result) {
         this.updateDisplayLabel(result.getFirst() + " ha vinto " + result.getSecond() + "monete");
         this.activateExitButton(true);
+        buttonGrid.getChildren().listIterator().forEachRemaining(it -> it.setDisable(true));
     }
 
     @Override
@@ -52,7 +53,7 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
 
     @Override
     public void addCircle(int col, int row, boolean color) {
-        Circle circle = new Circle();
+        Circle circle = new Circle(30);
         circle.setFill(color ? Color.RED : Color.YELLOW);
         gameGrid.add(circle, col, row);
     }
@@ -66,6 +67,11 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.controller.initGame(List.of("filo","dan"));
+    }
+
+    @Override
+    public void closeView() {
+        //this.controller.endGame();
     }
 
 }
