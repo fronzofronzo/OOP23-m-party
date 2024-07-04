@@ -40,7 +40,7 @@ public class MiniScreenImpl implements MiniScreen {
     @Override
     public void handleOkButton(ActionEvent e) {
         if(this.username.isPresent() && this.character.isPresent()) {
-            this.builder.addPlayer(this.username.get(), this.character.get());
+            this.builder = this.builder.addPlayer(this.username.get(), this.character.get());
         }
         Stage stage = (Stage) this.okButton.getScene().getWindow();
         stage.close();
