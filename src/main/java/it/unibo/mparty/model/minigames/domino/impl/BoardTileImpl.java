@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.Objects;
 
 public class BoardTileImpl implements BoardTile {
+
     private final LinkedList<Tile> boardTiles;
 
     public BoardTileImpl() {
@@ -15,7 +16,7 @@ public class BoardTileImpl implements BoardTile {
 
     @Override
     public LinkedList<Tile> getBoardTiles() {
-        return boardTiles;
+        return this.boardTiles;
     }
 
     @Override
@@ -34,6 +35,7 @@ public class BoardTileImpl implements BoardTile {
         }
 
         if (this.boardTiles.getFirst().match(tile)) {
+            //tile = new TileImpl(tile.getSideB().getValue(), tile.getSideA().getValue());
             this.boardTiles.addFirst(tile);
         } else if (this.boardTiles.getLast().match(tile)) {
             this.boardTiles.addLast(tile);
@@ -43,11 +45,11 @@ public class BoardTileImpl implements BoardTile {
 
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BoardTileImpl boardTile = (BoardTileImpl) o;
-        return Objects.equals(boardTiles, boardTile.boardTiles);
+        return Objects.equals(this.boardTiles, boardTile.boardTiles);
     }
 
     @Override
