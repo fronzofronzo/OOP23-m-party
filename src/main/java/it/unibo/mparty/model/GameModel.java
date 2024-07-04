@@ -21,11 +21,9 @@ public interface GameModel {
      *
      * @return
      */
-    boolean movePlayer();
+    void movePlayer(Optional<Direction> dir);
 
     Set<Direction> getDirections();
-    
-    void movePlayerWithDirection(Direction dir);
 
     /**
      * Roll dices of the actual player

@@ -57,19 +57,26 @@ public class GameModelImpl implements GameModel{
      * {@inheritDoc}
      */
     @Override
-    public boolean movePlayer() {
-        while (this.steps < this.players.get(actualPlayerIndex).getDice().getResult()) {
-            final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
-            final Map<Direction, Position> nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition);
-            if (nextPlayerPosition.size() == 1) {
-                this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.entrySet().stream().findFirst().get().getValue());
-            } else {
-                return false;
+    public void movePlayer(Optional<Direction> dir) {
+        if (this.status.equals(GameStatus.MOVE_PLAYER)) {
+            while (this.steps < this.players.get(actualPlayerIndex).getDice().getResult()) {
+                final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
+                final Map<Direction, Position> nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition);
+                if (nextPlayerPosition.size() == 1) {
+                    this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.entrySet().stream().findFirst().get().getValue());
+                } else {
+                    if (dir.isEmpty()) {
+                        return;
+                    } else {
+                        this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.get(dir.get()));
+                        dir = Optional.empty();
+                    }
+                }
+                this.steps++;
             }
-            this.steps++;
+            this.steps = 0;
+            this.status = this.status.switchStatus();
         }
-        this.steps = 0;
-        return true;
     }
 
     /**
@@ -199,17 +206,6 @@ public class GameModelImpl implements GameModel{
         return pos.entrySet().stream().map(entry -> entry.getKey()).collect(Collectors.toSet());
     }
 
-    @Override
-    public void movePlayerWithDirection(Direction dir) {
-        Map<Direction,Position> p = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
-        this.players.get(actualPlayerIndex).setPosition(p.get(dir));
-        this.steps++;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return
-     */
     @Override
     public List<String> getPlayersNicknames() {
         List<String> output = new ArrayList<>();
