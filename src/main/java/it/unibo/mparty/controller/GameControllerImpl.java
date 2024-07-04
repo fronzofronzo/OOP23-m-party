@@ -83,7 +83,7 @@ public class GameControllerImpl implements GameController{
         this.shopview=sceneView;
         shop.getItemList().stream().forEach(it -> itemMap.put(it.getName().getNametoString(), it.getCost()));
         itemMap.forEach((str, i) -> shopview.addButton(str, i));
-        shop.getItemList().stream().forEach(it -> shopview.addDescription(it.getDescrition()));
+        shop.getItemList().stream().forEach(it -> shopview.addDescription(it.getDescription()));
     }
 
 
