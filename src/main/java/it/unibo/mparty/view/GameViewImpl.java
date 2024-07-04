@@ -69,8 +69,8 @@ public class GameViewImpl extends Application implements GameView{
 
     @Override
     public void setMinigameScene(String name) throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH_MINIGAMES + EXTENSION)); ;
-        final Parent root = loader.load(getClass().getResourceAsStream( PATH_MINIGAMES + EXTENSION));
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH_MINIGAMES + name+ EXTENSION)); ;
+        final Parent root = loader.load(getClass().getResourceAsStream( PATH_MINIGAMES + name + EXTENSION));
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
         final MinigameView minigameView = loader.<MinigameView>getController();
         minigameView.init(this,this.controller);
