@@ -34,6 +34,7 @@ public class DominoControllerImpl implements DominoController {
         this.view.setPlayerName(false, this.player2.getUsername());
 
         this.updatePlayersTiles();
+        this.updateTurn();
     }
 
     @Override
@@ -43,6 +44,7 @@ public class DominoControllerImpl implements DominoController {
         boolean isValidMove = this.model.checkAndAddToBoard(currentPlayer, selectedTile);
         if (isValidMove) {
             this.updatePlayersTiles();
+            this.isPlayer1Turn = !this.isPlayer1Turn;
             this.updateTurn();
             this.checkDraw();
             this.updateBoard(selectedTile.isDoubleSide());
@@ -68,6 +70,7 @@ public class DominoControllerImpl implements DominoController {
         this.model.drawTile(isPlayer1Turn ? player1 : player2);
         this.updatePlayersTiles();
         this.checkDraw();
+        this.updateTurn();
     }
 
     private void updatePlayersTiles() {
@@ -76,7 +79,6 @@ public class DominoControllerImpl implements DominoController {
     }
 
     private void updateTurn() {
-        this.isPlayer1Turn = !this.isPlayer1Turn;
         this.view.setTurn(this.isPlayer1Turn);
     }
 
