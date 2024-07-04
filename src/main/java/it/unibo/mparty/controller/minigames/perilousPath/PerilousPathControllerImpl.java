@@ -18,8 +18,8 @@ public class PerilousPathControllerImpl implements  PerilousPathController{
     public PerilousPathControllerImpl(PerilousPathView view){
         this.model = new PerilousPathImpl(SIZE);
         this.view = view;
-        this.model.setBombs();
         this.model.setBalls();
+        this.model.setBombs();
 
     }
 
