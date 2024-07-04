@@ -25,6 +25,7 @@ public class GameViewImpl extends Application implements GameView{
 
     private final static double DEFAULT_DIMENSION_VALUE = -1;
     private final static String PATH = "/layouts/";
+    private final static String PATH_MINIGAMES = "/layouts/minigames/";
     private final static String EXTENSION = ".fxml";
     private GameBoardView boardView;
 
@@ -63,6 +64,20 @@ public class GameViewImpl extends Application implements GameView{
     @Override
     public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> nicknames, Position startingPosition) {
         this.boardView.setUpBoard(dimension, board, nicknames, startingPosition);
+    }
+
+    @Override
+    public void setMinigameScene(String name) throws IOException {
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH_MINIGAMES + EXTENSION)); ;
+        final Parent root = loader.load(getClass().getResourceAsStream( PATH_MINIGAMES + EXTENSION));
+        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
+        final  SceneView sceneView = loader.<SceneView>getController();
+        sceneView.init(this,this.controller);
+    }
+
+    @Override
+    public void setShopScene() {
+
     }
 
 
