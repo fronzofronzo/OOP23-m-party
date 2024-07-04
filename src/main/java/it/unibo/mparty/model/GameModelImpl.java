@@ -14,6 +14,8 @@ import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -200,5 +202,12 @@ public class GameModelImpl implements GameModel{
         Map<Direction,Position> p = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
         this.players.get(actualPlayerIndex).setPosition(p.get(dir));
         this.steps++;
+    }
+
+    @Override
+    public List<String> getPlayersNicknames() {
+        List<String> output = new ArrayList<>();
+        this.players.stream().forEach(p -> output.add(p.getUsername()));
+        return Collections.unmodifiableList(output);
     }
 }

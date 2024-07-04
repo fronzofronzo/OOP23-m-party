@@ -187,8 +187,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
 
     @Override
     public void updateCommands(List<String> items, Set<Direction> directions) {
-        for (int i = 0; i <= this.buttonsItem.size(); i++) {
-            if (i <= items.size()) {
+        for (int i = 0; i < this.buttonsItem.size(); i++) {
+            if (i < items.size()) {
                 this.buttonsItem.get(i).setText(items.get(i));
                 this.buttonsItem.get(i).setDisable(false);
             } else {
