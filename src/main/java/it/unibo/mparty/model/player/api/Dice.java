@@ -47,4 +47,9 @@ public interface Dice {
      */
     int getNumOfAttempts();
 
+    /**
+     * Reset dice to default values
+     */
+    void resetDice();
+
 }

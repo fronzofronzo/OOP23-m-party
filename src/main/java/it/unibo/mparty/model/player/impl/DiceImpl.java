@@ -56,4 +56,11 @@ public class DiceImpl implements Dice {
         return this.numberOfAttempts;
     }
 
+    @Override
+    public void resetDice() {
+        numberOfAttempts = ATTEMPTS;
+        maxNumber = MAX_NUMBER;
+        minNumber = MIN_NUMBER;
+    }
+
 }
