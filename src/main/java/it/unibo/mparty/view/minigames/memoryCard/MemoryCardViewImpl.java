@@ -76,7 +76,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
 
     @Override
     public void showResult(Pair<String, Integer> result) {
-        this.textLabel.setText(  result.getX() + " ha guadagnato " +  String.valueOf(result.getY()S) + " monete." );
+        this.textLabel.setText(  result.getX() + " ha guadagnato " +  String.valueOf(result.getY()) + " monete." );
         this.controlButton.setOnAction(e -> {/*this.getMainView.showBoard*/});
     }
 

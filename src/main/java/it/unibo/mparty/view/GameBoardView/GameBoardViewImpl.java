@@ -199,10 +199,10 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.buttonsDirection.stream().forEach(b -> b.setDisable(true));
         for (Direction d : directions) {
             switch (d) {
-                case Direction.UP: this.buttonUP.setDisable(true);
-                case Direction.DOWN: this.buttonDOWN.setDisable(true);
-                case Direction.LEFT: this.buttonLEFT.setDisable(true);
-                case Direction.RIGHT: this.buttonRIGHT.setDisable(true);            
+                case UP: this.buttonUP.setDisable(true);
+                case DOWN: this.buttonDOWN.setDisable(true);
+                case LEFT: this.buttonLEFT.setDisable(true);
+                case RIGHT: this.buttonRIGHT.setDisable(true);
                 default: break;
             }
         }

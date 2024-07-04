@@ -46,7 +46,7 @@ public class GameViewImpl extends Application implements GameView{
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
         this.setScene("GameBoard.fxml");
-        this.controller.startGame(new GameModelImpl(null, ""));
+        this.controller.startGame(new GameModelImpl(null, "MEDIUM"));
         this.stage.setMaximized(true);
         this.stage.show();
     }
