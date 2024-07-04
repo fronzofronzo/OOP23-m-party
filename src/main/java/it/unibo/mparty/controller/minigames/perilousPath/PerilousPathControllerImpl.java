@@ -7,6 +7,8 @@ import it.unibo.mparty.view.minigames.perilouspath.PerilousPathViewImpl;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 
+import java.util.List;
+
 public class PerilousPathControllerImpl implements  PerilousPathController{
 
     private final PerilousPath model;
@@ -42,4 +44,13 @@ public class PerilousPathControllerImpl implements  PerilousPathController{
         this.view.hitTile(type);
     }
 
+    @Override
+    public void endGame() {
+
+    }
+
+    @Override
+    public void initGame(List<String> players) {
+        this.model.setUpPlayers(players);
+    }
 }
