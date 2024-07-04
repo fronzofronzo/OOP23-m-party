@@ -212,10 +212,7 @@ public class GameModelImpl implements GameModel{
     }
 
     @Override
-    public Position getPlayerPosition(String username) {
-        return this.players.stream()
-                .filter(p -> p.getUsername().equals(username))
-                .findFirst().get()
-                .getPosition();
+    public Position getPlayerPosition() {
+        return this.players.get(actualPlayerIndex).getPosition();
     }
 }
