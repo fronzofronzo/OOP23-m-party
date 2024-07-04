@@ -227,7 +227,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         }
     }
     
-    @SuppressWarnings("unused")
+    @FXML
     private void rollDice(){
         this.getMainController().rollDice();
     }
@@ -237,7 +237,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.resultDice.setText(String.valueOf(result));
     }
 
-    @SuppressWarnings("unused")
+    @FXML
     private void movePlayer(){
         this.getMainController().movePlayer();
     }
