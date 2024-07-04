@@ -86,9 +86,10 @@ public interface GameModel {
     List<String> getPlayersNicknames();
 
     /**
-     * Get the position of actual player
-     * @return {@link  Position} of player
+     * Get the information of the player that's playing the actual turn
+     * @return {@link Pair} containing nickname of player and it's
+     * {@link Position}
      */
-    Position getPlayerPosition();
+    Pair<String, Position> getActualPlayerInfo();
 
 }

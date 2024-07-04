@@ -212,7 +212,10 @@ public class GameModelImpl implements GameModel{
     }
 
     @Override
-    public Position getPlayerPosition() {
-        return this.players.get(actualPlayerIndex).getPosition();
+    public Pair<String, Position> getActualPlayerInfo() {
+        final Player pl = this.players.get(actualPlayerIndex);
+        return new Pair<>(pl.getUsername(),pl.getPosition());
     }
+
+
 }
