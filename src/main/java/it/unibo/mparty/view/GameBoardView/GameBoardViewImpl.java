@@ -156,10 +156,10 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.buttonsItem.addAll(List.of(this.useItem1, this.useItem2, this.useItem3));
         this.buttonsDirection.addAll(List.of(this.buttonUP, this.buttonDOWN, this.buttonLEFT, this.buttonRIGHT));
         this.players.addAll(List.of(this.player1, this.player2, this.player3, this.player4));
-        this.setUpPlayers(this.players);
+        this.setUpPlayers();
     }
 
-    private void setUpPlayers(List<Circle> players2) {
+    private void setUpPlayers() {
         double cellWidth = this.board.getWidth() / this.board.getColumnCount();
         double cellHeight = this.board.getHeight() / this.board.getRowCount();
 
@@ -244,10 +244,10 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
 
     @Override
     public void updatePlayerPos(String player, Position position) {
-        for (int i = 0; i <= this.labelPlayersNames.size(); i++) {
+        for (int i = 0; i < this.labelPlayersNames.size(); i++) {
             if (this.labelPlayersNames.get(i).getText().equals(player)) {
                 this.board.getChildren().remove(this.players.get(i));
-                this.board.getChildren().add(this.players.get(i));
+                this.board.add(this.players.get(i), position.getX(), position.getY());
             }
         }
     }    
