@@ -15,6 +15,7 @@ import it.unibo.mparty.utilities.SlotType;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 /**
@@ -140,8 +141,19 @@ public class GameModelImpl implements GameModel{
 
     @Override
     public void endMinigame(Pair<String, Integer> result) {
-        final Player winner = this.players.stream().filter(p -> p.getUsername().equals(result.getFirst())).findAny().get();
-        winner.addCoins(result.getSecond());
-        this.minigameHandler.stopMinigame();
+        Optional<Player> winnerOpt = this.players.stream()
+            .filter(p -> p.getUsername().equals(result.getFirst()))
+            .findAny();
+
+        if (winnerOpt.isPresent()) {
+            Player winner = winnerOpt.get();
+            winner.addCoins(result.getSecond());
+            this.minigameHandler.stopMinigame();
+        } else {
+            throw new IllegalArgumentException("Giocatore non trovato: " + result.getFirst());
+        }
+//        final Player winner = this.players.stream().filter(p -> p.getUsername().equals(result.getFirst())).findAny().get();
+//        winner.addCoins(result.getSecond());
+//        this.minigameHandler.stopMinigame();
     }
 }
