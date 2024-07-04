@@ -16,7 +16,6 @@ public class GameControllerImpl implements GameController{
 
     private final GameView view;
     private GameModel model;
-    private GameStatus status = GameStatus.ROLL_DICE;
 
     public GameControllerImpl(final GameView view){
         this.view = view;
@@ -24,10 +23,7 @@ public class GameControllerImpl implements GameController{
 
     @Override
     public void rollDice() {
-        if(this.status.equals(GameStatus.ROLL_DICE)){
-            this.view.showResultDice(this.model.rollDice());
-            this.switchStatus();
-        }
+        this.view.showResultDice(this.model.rollDice());
     }
 
     @Override
@@ -66,17 +62,7 @@ public class GameControllerImpl implements GameController{
         // this.view.showWinner(this.model.getWinner)
     }
 
-    private void switchStatus(){
-        switch (this.status) {
-            case ROLL_DICE -> {
-                this.status = GameStatus.MOVE_PLAYER;
-            }
-            case MOVE_PLAYER -> {
-                this.status = GameStatus.ROLL_DICE;
-            }
-        };
 
-    }
 
     @Override
     public void movePlayerWithDirection(Direction dir) {

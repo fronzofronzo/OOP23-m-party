@@ -8,11 +8,7 @@ import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.shop.api.Shop;
 import it.unibo.mparty.model.shop.impl.ShopImpl;
-import it.unibo.mparty.utilities.BoardType;
-import it.unibo.mparty.utilities.Direction;
-import it.unibo.mparty.utilities.Pair;
-import it.unibo.mparty.utilities.Position;
-import it.unibo.mparty.utilities.SlotType;
+import it.unibo.mparty.utilities.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,6 +32,7 @@ public class GameModelImpl implements GameModel{
     private final GameBoard board;
     private final Shop shop;
     private int turn = 1 ;
+    private GameStatus status = GameStatus.ROLL_DICE;
     private int actualPlayerIndex = 0;
     private int steps = 0;
     private final MinigameHandler minigameHandler;
@@ -80,8 +77,13 @@ public class GameModelImpl implements GameModel{
      */
     @Override
     public int rollDice() {
-        this.players.get(actualPlayerIndex).getDice().rollDice();
-        return this.players.get(actualPlayerIndex).getDice().getResult();
+       if(this.status == GameStatus.ROLL_DICE){
+           this.players.get(actualPlayerIndex).getDice().rollDice();
+           this.switchStatus();
+           return this.players.get(actualPlayerIndex).getDice().getResult();
+       } else {
+           return 0;
+       }
     }
 
     /**
@@ -217,5 +219,16 @@ public class GameModelImpl implements GameModel{
         return new Pair<>(pl.getUsername(),pl.getPosition());
     }
 
+    private void switchStatus(){
+        switch (this.status) {
+            case ROLL_DICE -> {
+                this.status = GameStatus.MOVE_PLAYER;
+            }
+            case MOVE_PLAYER -> {
+                this.status = GameStatus.ROLL_DICE;
+            }
+        };
+
+    }
 
 }
