@@ -1,32 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.endGame.impl.EndGameViewImpl">
-   <center>
-      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-        </columns>
-      </TableView>
-   </center>
-   <top>
-      <Label text="CLASSIFICA FINALE" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-   </top>
-   <bottom>
-      <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
-   </bottom>
+    <center>
+        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="rankColumn" prefWidth="150.0" text="Posto" />
+                <TableColumn fx:id="playerColumn" prefWidth="268.0" text="Player" />
+                <TableColumn fx:id="starColumn" prefWidth="200.0" text="Stelle" />
+                <TableColumn fx:id="coinColumn" prefWidth="200.79998779296875" text="Monete" />
+            </columns>
+            <BorderPane.margin>
+                <Insets left="100.0" right="100.0" top="50.0" />
+            </BorderPane.margin>
+        </TableView>
+    </center>
+    <top>
+        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="CLASSIFICA FINALE" BorderPane.alignment="CENTER">
+            <font>
+                <Font name="AdLib WGL4 BT" size="24.0" />
+            </font>
+            <BorderPane.margin>
+                <Insets top="20.0" />
+            </BorderPane.margin>
+        </Label>
+    </top>
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="menuButton" mnemonicParsing="false" onMouseClicked="#menuClicked" text="MENÙ">
+                    <font>
+                        <Font name="AdLib WGL4 BT" size="18.0" />
+                    </font>
+                </Button>
+            </children>
+        </HBox>
+    </bottom>
 </BorderPane>
