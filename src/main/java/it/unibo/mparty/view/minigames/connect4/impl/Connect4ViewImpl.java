@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -53,9 +54,11 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
 
     @Override
     public void addCircle(int col, int row, boolean color) {
-        Circle circle = new Circle(30);
+        Circle circle = new Circle(25);
         circle.setFill(color ? Color.RED : Color.YELLOW);
-        gameGrid.add(circle, col, row);
+        StackPane stack = new StackPane();
+        stack.getChildren().add(circle);
+        gameGrid.add(stack, col, row);
     }
 
     @Override
