@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.minigames.connect4.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,10 +22,12 @@ public class Connect4ModelImpl implements Connect4Model{
     private Position lastSelected;
     private int coinsWon=0;
     private Map<Position,String> selectedMap;
+    private List<Position> checkList;
 
     public Connect4ModelImpl() {
         selectedMap = new HashMap<>();
         lastSelected = new Position(-1, -1);
+        checkList = new ArrayList<>();
     }
 
     @Override
@@ -101,15 +104,22 @@ public class Connect4ModelImpl implements Connect4Model{
     {
         return IntStream.rangeClosed(-3, 3)
         .map(off -> countMatches(i, j, direction, off))
-        .sum() >= 4;
+        .max().getAsInt() >= 4;
     }
 
     private int countMatches (int i,int j, Connect4Directions direction, int offset) {
         Position check = new Position(i + offset * direction.getPosition().getX(), j + offset * direction.getPosition().getY());
-        if (selectedMap.containsKey(check) && selectedMap.get(check).equals(getTurnPlayer())) {
-            return 1;
+        if (selectedMap.containsKey(check) && selectedMap.get(check).equals(getTurnPlayer()) && isAvailable(check)) {
+            checkList.add(check);
         }
-        return 0;
+        else {
+            checkList.clear();
+        }
+        return checkList.size();
+    }
+
+    private boolean isAvailable (Position pos) {
+        return pos.getX() >= 0 && pos.getX() <ROW_NUMBER && pos.getY()>=0 && pos.getY()<COLUMN_NUMBER;
     }
 
     @Override
