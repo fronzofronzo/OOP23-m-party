@@ -8,11 +8,13 @@ public interface DominoModel {
 
     void setPlayerTiles(Player p1, Player p2);
 
-    boolean isPlayer1Turn(Player p1, Player p2);
+    boolean initializeTurn(Player p1, Player p2);
 
-    boolean checkMove(Player player, Tile domino);
+    boolean checkAndAddToBoard(Player player, Tile domino);
 
     boolean canDrawTile(Player player);
+
+    void drawTile(Player player);
 
     Player getWinner(Player p1, Player p2);
 
