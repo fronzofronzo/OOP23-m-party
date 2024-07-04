@@ -71,7 +71,7 @@ public class GameControllerImpl implements GameController{
                 this.status = GameStatus.MOVE_PLAYER;
             }
             case MOVE_PLAYER -> {
-
+                this.status = GameStatus.ROLL_DICE;
             }
         };
 

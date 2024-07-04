@@ -53,6 +53,7 @@ public class GameModelImpl implements GameModel{
        this.shop = new ShopImpl();
        final SimpleBoardFactory boardFactory = new SimpleBoardFactory();
        this.board = boardFactory.createBoard(BoardType.valueOf(difficulty));
+       this.players.stream().forEach(p -> p.setPosition(this.board.getStrartingPosition()));
     }
 
     /**
