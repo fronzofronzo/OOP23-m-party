@@ -78,6 +78,7 @@
             <Button fx:id="useItem3" layoutX="157.0" layoutY="66.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="item3" />
             <Button fx:id="Enter" layoutX="598.0" layoutY="66.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#action" prefWidth="100.0" text="Enter" />
             <Label fx:id="resultDice" layoutX="709.0" layoutY="19.0" />
+            <Label fx:id="labelMessage" layoutX="758.0" layoutY="44.0" />
          </children>
       </Pane>
    </bottom>

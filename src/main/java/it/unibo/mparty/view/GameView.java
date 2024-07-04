@@ -35,5 +35,5 @@ public interface GameView {
 
     void updatePlayerStats(String player, int coins, int stars, List<String> items);
 
-    void updateCommands(List<String> items, Set<Direction> directions);
+    void updateCommands(List<String> items, String message);
 }

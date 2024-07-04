@@ -65,7 +65,7 @@ public class GameModelImpl implements GameModel{
                 if (nextPlayerPosition.size() == 1) {
                     this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.entrySet().stream().findFirst().get().getValue());
                 } else {
-                    if (dir.isEmpty()) {
+                    if (dir.isEmpty() || !nextPlayerPosition.containsKey(dir.get())) {
                         return;
                     } else {
                         this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.get(dir.get()));

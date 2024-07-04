@@ -30,7 +30,7 @@ public class GameControllerImpl implements GameController{
     @Override
     public void movePlayer(Optional<Direction> dir) {
         this.model.movePlayer(dir);
-        this.view.updateCommands(null, this.model.getDirections());
+        this.view.updateCommands(Collections.emptyList(), "");
         this.view.updatePlayerPos(this.model.getActualPlayerInfo());
     }
 
@@ -55,7 +55,7 @@ public class GameControllerImpl implements GameController{
         try {
             this.view.setScene("GameBoard.fxml");
             this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.getActualPlayerInfo().getY());
-            this.view.updateCommands(Collections.emptyList(), Collections.EMPTY_SET);
+            this.view.updateCommands(Collections.emptyList(), "");
         } catch (IOException e) {
             e.printStackTrace();
         }

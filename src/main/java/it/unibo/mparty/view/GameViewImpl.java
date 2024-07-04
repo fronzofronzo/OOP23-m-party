@@ -84,7 +84,7 @@ public class GameViewImpl extends Application implements GameView{
 
 
     @Override
-    public void updateCommands(List<String> items, Set<Direction> directions) {
-        this.boardView.updateCommands(items, directions);
+    public void updateCommands(List<String> items, String message) {
+        this.boardView.updateCommands(items, message);
     }
 }

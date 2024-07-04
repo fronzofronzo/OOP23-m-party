@@ -111,6 +111,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private SplitPane rightSplitPane;
     @FXML
     private Label resultDice;
+    @FXML
+    private Label labelMessage;
 
     private Circle player1 = new Circle(10, Color.ORANGE);
     private Circle player2 = new Circle(10, Color.PURPLE);
@@ -208,7 +210,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @Override
-    public void updateCommands(List<String> items, Set<Direction> directions) {
+    public void updateCommands(List<String> items, String message) {
         for (int i = 0; i < this.buttonsItem.size(); i++) {
             if (i < items.size()) {
                 this.buttonsItem.get(i).setText(items.get(i));
@@ -218,16 +220,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                 this.buttonsItem.get(i).setDisable(true);
             }
         }
-        this.buttonsDirection.stream().forEach(b -> b.setDisable(true));
-        for (Direction d : directions) {
-            switch (d) {
-                case UP: this.buttonUP.setDisable(true);
-                case DOWN: this.buttonDOWN.setDisable(true);
-                case LEFT: this.buttonLEFT.setDisable(true);
-                case RIGHT: this.buttonRIGHT.setDisable(true);
-                default: break;
-            }
-        }
+        this.labelMessage.setText(message);
     }
     
     @FXML
@@ -244,7 +237,9 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private void movePlayer(ActionEvent e){
         final Button bt = (Button)e.getSource();
         Optional<Direction> dir = Optional.empty();
-        if (bt.equals(buttonDOWN)) {
+        if (bt.equals(buttonMove)) {
+            
+        } else if (bt.equals(buttonDOWN)) {
             dir = Optional.of(Direction.DOWN);
         } else if (bt.equals(buttonUP)) {
             dir = Optional.of(Direction.UP);
