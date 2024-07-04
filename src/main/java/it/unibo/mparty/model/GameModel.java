@@ -85,4 +85,11 @@ public interface GameModel {
 
     List<String> getPlayersNicknames();
 
+    /**
+     * Get the position of the selected player
+     * @param username of player
+     * @return {@link  Position} of player
+     */
+    Position getPlayerPosition(final String username);
+
 }

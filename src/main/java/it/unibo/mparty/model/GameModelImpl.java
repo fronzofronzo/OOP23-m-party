@@ -210,4 +210,12 @@ public class GameModelImpl implements GameModel{
         this.players.stream().forEach(p -> output.add(p.getUsername()));
         return Collections.unmodifiableList(output);
     }
+
+    @Override
+    public Position getPlayerPosition(String username) {
+        return this.players.stream()
+                .filter(p -> p.getUsername().equals(username))
+                .findFirst().get()
+                .getPosition();
+    }
 }
