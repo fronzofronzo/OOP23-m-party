@@ -27,6 +27,9 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
     @FXML
     private SplitPane principalPane;
 
+    @FXML 
+    private Label moneyLabel;
+
 
     public void addButton (String item, int cost)
     {
@@ -49,6 +52,11 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
 
     private void selectItem(ActionEvent e) {
         this.getMainController().selectItem(stringList.get(this.buttonPane.getChildren().indexOf((Button)(e.getSource()))));
+    }
+
+    @Override
+    public void updateMoney(int money) {
+        moneyLabel.setText("Monete rimaste: " + money);
     }
     
 }

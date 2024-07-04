@@ -12,6 +12,7 @@ import java.util.HashMap;
 import it.unibo.mparty.model.shop.impl.ShopImpl;
 import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.player.api.Player;
+import it.unibo.mparty.model.player.impl.PlayerImplementation;
 import it.unibo.mparty.model.shop.api.Shop;
 import it.unibo.mparty.view.shop.ShopView;
 
@@ -36,12 +37,6 @@ public class GameControllerImpl implements GameController{
         this.model.movePlayer();
         // this.view.clean()
         // this.view.drawBoard()
-    }
-
-    @Override
-    public boolean buyItem(ItemName item) {
-       // return this.model.buyItem()
-        return true;
     }
 
     @Override
@@ -72,7 +67,7 @@ public class GameControllerImpl implements GameController{
         // this.view.showWinner(this.model.getWinner)
     }
     
-    private Player player;
+    private Player player = new PlayerImplementation("ferro", "Mario");
     final private Shop shop = new ShopImpl();
     private ShopView shopview;
     private HashMap<String,Integer> itemMap = new HashMap<>();
@@ -83,7 +78,8 @@ public class GameControllerImpl implements GameController{
         this.shopview=sceneView;
         shop.getItemList().stream().forEach(it -> itemMap.put(it.getName().getNametoString(), it.getCost()));
         itemMap.forEach((str, i) -> shopview.addButton(str, i));
-        shop.getItemList().stream().forEach(it -> shopview.addDescription(it.getDescription()));
+        shop.getItemList().stream().forEach(it -> this.shopview.addDescription(it.getDescription()));
+        this.shopview.updateMoney(player.getNumCoins());
     }
 
 

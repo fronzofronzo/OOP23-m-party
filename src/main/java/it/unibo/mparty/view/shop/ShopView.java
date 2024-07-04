@@ -21,4 +21,6 @@ public interface ShopView extends SceneView{
      */
     public void addDescription(String description);
 
+    public void updateMoney(int money);
+
 }
