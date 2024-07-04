@@ -26,7 +26,7 @@ public class DominoControllerImpl implements DominoController {
     public void setUp() {
         this.model.setPlayerTiles(this.player1, this.player2);
 
-        this.isPlayer1Turn = this.model.isPlayer1Turn(this.player1, this.player2);
+        this.isPlayer1Turn = this.model.initializeTurn(this.player1, this.player2);
         this.view.setTurn(this.isPlayer1Turn);
         this.view.setPlayerName(true, this.player1.getUsername());
         this.view.setPlayerName(false, this.player2.getUsername());
