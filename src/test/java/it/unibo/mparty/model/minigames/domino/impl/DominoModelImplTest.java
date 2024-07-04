@@ -58,8 +58,8 @@ class DominoModelImplTest {
         testDistributionTiles();
 
         // Assuming the turn is set correctly, it should be either p1 or p2's turn
-        assertTrue(this.model.isPlayer1Turn(this.player1, this.player2)
-                || !this.model.isPlayer1Turn(this.player1, this.player2));
+        assertTrue(this.model.initializeTurn(this.player1, this.player2)
+                || !this.model.initializeTurn(this.player1, this.player2));
     }
 
     @Test
@@ -68,7 +68,7 @@ class DominoModelImplTest {
         Set<Tile> p1Tiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
 
         Tile tileToMove = p1Tiles.iterator().next();
-        boolean moveResult = this.model.checkMove(this.player1, tileToMove);
+        boolean moveResult = this.model.checkAndAddToBoard(this.player1, tileToMove);
 
         // Verify the move result
         assertTrue(moveResult);
@@ -90,14 +90,14 @@ class DominoModelImplTest {
 
         // Simulate a valid move
         Tile validTile = new TileImpl(SIDE1, SIDE1);
-        this.model.checkMove(this.player1, validTile);
+        this.model.checkAndAddToBoard(this.player1, validTile);
 
         // Simulate an invalid move
         Tile invalidTile = new TileImpl(SIDE2, SIDE2);
-        this.model.checkMove(this.player1, invalidTile);
+        this.model.checkAndAddToBoard(this.player1, invalidTile);
 
         // Draw a tile from tileSet to player1
-        this.model.canDrawTile(this.player1);
+        this.model.drawTile(this.player1);
 
         // Get update set of player1
         Set<Tile> updatedTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);

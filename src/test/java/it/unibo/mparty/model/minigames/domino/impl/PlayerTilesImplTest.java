@@ -10,8 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTilesImplTest {
 
@@ -56,10 +55,12 @@ class PlayerTilesImplTest {
     void testRemoveTilesFromPlayer() {
         this.testInitializePlayerTiles();
 
-        this.playerTiles.removeTilesFromPlayer(this.p1, this.tile);
-        assertFalse(playerTiles.getPlayerTiles(this.p1).contains(this.tile));
+        var pickTile = this.playerTiles.getPlayerTiles(p1).iterator().next();
+        assertTrue(this.playerTiles.getPlayerTiles(this.p1).contains(pickTile));
+        this.playerTiles.removeTilesFromPlayer(this.p1, pickTile);
+        assertFalse(this.playerTiles.getPlayerTiles(this.p1).contains(pickTile));
 
         this.playerTiles.removeTilesFromPlayer(this.p2, this.tile);
-        assertFalse(playerTiles.getPlayerTiles(this.p2).contains(this.tile));
+        assertFalse(this.playerTiles.getPlayerTiles(this.p2).contains(this.tile));
     }
 }
