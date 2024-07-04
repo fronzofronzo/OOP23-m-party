@@ -204,6 +204,10 @@ public class GameModelImpl implements GameModel{
         this.steps++;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return
+     */
     @Override
     public List<String> getPlayersNicknames() {
         List<String> output = new ArrayList<>();
@@ -211,22 +215,15 @@ public class GameModelImpl implements GameModel{
         return Collections.unmodifiableList(output);
     }
 
+    /**
+     * {@inheritDoc}
+     * @return
+     */
     @Override
     public Pair<String, Position> getActualPlayerInfo() {
         final Player pl = this.players.get(actualPlayerIndex);
         return new Pair<>(pl.getUsername(),pl.getPosition());
     }
 
-    private void switchStatus(){
-        switch (this.status) {
-            case ROLL_DICE -> {
-                this.status = GameStatus.MOVE_PLAYER;
-            }
-            case MOVE_PLAYER -> {
-                this.status = GameStatus.ROLL_DICE;
-            }
-        };
-
-    }
 
 }
