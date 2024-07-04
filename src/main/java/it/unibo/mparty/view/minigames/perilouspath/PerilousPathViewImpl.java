@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
@@ -27,6 +28,9 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
 
     @FXML
     private Button startButton;
+
+    @FXML
+    private Label gameLabel;
 
     private Button button;
     private final static int SIZE = 8;
@@ -70,10 +74,14 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     @Override
     public void hitTile(PerilousPath.Type type) {
         switch(type){
-            case PATH -> this.button.setText("*");
-            case BOMB -> System.out.println("perso");
-            case BALL -> System.out.println("vinto");
-            case WRONG -> System.out.println("sbagliato");
+            case PATH ->
+                    this.button.setText("*");
+            case BOMB ->
+                    this.gameLabel.setText("hai perso");
+            case BALL ->
+                    this.gameLabel.setText("hai vinto");
+            case WRONG ->
+                    this.gameLabel.setText("mossa non valida");
         }
     }
 
