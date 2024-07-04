@@ -1,5 +1,6 @@
 package it.unibo.mparty.controller;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import it.unibo.mparty.model.GameModel;
@@ -26,8 +27,9 @@ public interface GameController {
 
     /**
      * handle the activation of the slot where is located the actual player
+     * @throws IOException 
      */
-    void activateSlot();
+    void activateSlot() throws IOException;
 
 
     /**

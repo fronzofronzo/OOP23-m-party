@@ -2,6 +2,7 @@ package it.unibo.mparty.view.GameBoardView;
 
 import java.util.Map;
 import java.util.List;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
@@ -256,7 +257,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @FXML
-    private void activateSlot(){
+    private void activateSlot() throws IOException{
         this.getMainController().activateSlot();
     }
 
