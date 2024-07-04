@@ -38,14 +38,10 @@ public class GameControllerImpl implements GameController{
     @Override
     public void action() throws IOException {
         this.model.action();
-        //if (this.model.getActiveMinigame().isPresent()) {
-        //    this.view.setScene(this.model.getActiveMinigame().get());
-        //}
-        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
-        /* 
         if (this.model.getActiveMinigame().isPresent()) {
-              this.view.setScene("minigames/" +  this.model.getActiveMinigame().get());
-        }*/
+           this.view.setMinigameScene(this.model.getActiveMinigame().get());
+        }
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
     @Override

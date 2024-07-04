@@ -26,9 +26,18 @@ public interface GameView {
     void setScene(String path) throws IOException;
 
     void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> nicknames, Position startingPosition);
+
     /**
-     * Switch to te board scene
+     * Method to set the view scene with a minigame
+     * @param name of the minigame to set
      */
+    void setMinigameScene(String name) throws IOException;
+
+    /**
+     * Set the shop scene in the view
+     */
+    void setShopScene();
+
     void showResultDice(int result);
 
     void updatePlayerPos(Pair<String,Position> playerInfo);
