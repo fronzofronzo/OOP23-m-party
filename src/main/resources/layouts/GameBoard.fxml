@@ -76,7 +76,7 @@
             <Button fx:id="useItem1" layoutX="157.0" layoutY="14.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="item1" />
             <Button fx:id="useItem2" layoutX="157.0" layoutY="40.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="item2" />
             <Button fx:id="useItem3" layoutX="157.0" layoutY="66.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="item3" />
-            <Button fx:id="Enter" layoutX="598.0" layoutY="66.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="Enter" />
+            <Button fx:id="Enter" layoutX="598.0" layoutY="66.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#activateSlot" prefWidth="100.0" text="Enter" />
             <Label fx:id="resultDice" layoutX="709.0" layoutY="19.0" />
          </children>
       </Pane>

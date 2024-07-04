@@ -255,7 +255,10 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.getMainController().movePlayer(dir);
     }
 
-    
+    @FXML
+    private void activateSlot(){
+        this.getMainController().activateSlot();
+    }
 
     @Override
     public void updatePlayerPos(Pair<String,Position> playerInfo) {
