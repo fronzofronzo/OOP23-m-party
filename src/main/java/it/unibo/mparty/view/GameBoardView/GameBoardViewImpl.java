@@ -114,10 +114,11 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private Label labelMessage;
 
-    private Circle player1 = new Circle(10, Color.ORANGE);
-    private Circle player2 = new Circle(10, Color.PURPLE);
-    private Circle player3 = new Circle(10, Color.BLUE);
-    private Circle player4 = new Circle(10, Color.PINK);
+    private static final int RADIUS = 7;
+    private Circle player1 = new Circle(RADIUS, Color.ORANGE);
+    private Circle player2 = new Circle(RADIUS, Color.PURPLE);
+    private Circle player3 = new Circle(RADIUS, Color.BLUE);
+    private Circle player4 = new Circle(RADIUS, Color.PINK);
 
     private List<Label> labelPlayersNames = new ArrayList<>();     
     private List<Label> labelPlayersCoins = new ArrayList<>(); 
@@ -165,18 +166,17 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     private void setUpPlayers() {
-        //double cellWidth = this.board.getWidth() / this.board.getColumnCount();
-        //double cellHeight = this.board.getHeight() / this.board.getRowCount();
-
-        //double offsetX = (cellWidth / 2) - this.player1.getRadius();
-        //double offsetY = (cellHeight / 2) - this.player1.getRadius();
-        int d = 10;
-        this.player1.setTranslateY(-d); // Sposta il primo cerchio in alto
-        this.player2.setTranslateX(d); // Sposta il secondo cerchio a destra
-        this.player2.setTranslateY(d); // Sposta il secondo cerchio in alto
-        this.player3.setTranslateY(d); // Sposta il terzo cerchio in basso
-        this.player4.setTranslateX(d); // Sposta il quarto cerchio a destra
-        this.player4.setTranslateY(d); // Sposta il quarto cerchio in basso
+        double cellWidth = this.board.getWidth() / this.board.getColumnCount();
+        double cellHeight = this.board.getHeight() / this.board.getRowCount();
+        //double padding = 3.0;
+        double offsetX = cellWidth;
+        double offsetY = cellHeight - (RADIUS / 2);
+        this.player1.setTranslateY(-offsetY); // Sposta il primo cerchio in alto
+        this.player2.setTranslateX(offsetX); // Sposta il secondo cerchio a destra
+        this.player2.setTranslateY(-offsetY); // Sposta il secondo cerchio in alto
+        this.player3.setTranslateY(offsetY); // Sposta il terzo cerchio in basso
+        this.player4.setTranslateX(offsetX); // Sposta il quarto cerchio a destra
+        this.player4.setTranslateY(offsetY); // Sposta il quarto cerchio in basso
     }
 
     private void setSize() {
