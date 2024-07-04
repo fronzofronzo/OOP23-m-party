@@ -5,6 +5,8 @@ public interface DominoController {
 
     void playTile(int SideA, int SideB);
 
+    void checkDraw();
+
     void drawTile();
 
     void updatePlayersTiles();

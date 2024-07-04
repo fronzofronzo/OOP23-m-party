@@ -26,46 +26,45 @@ public class DominoControllerImpl implements DominoController {
     public void setUp() {
         this.model.setPlayerTiles(this.player1, this.player2);
 
+        this.isPlayer1Turn = this.model.isPlayer1Turn(this.player1, this.player2);
+        this.view.setTurn(this.isPlayer1Turn);
         this.view.setPlayerName(true, this.player1.getUsername());
         this.view.setPlayerName(false, this.player2.getUsername());
 
         this.updatePlayersTiles();
-        this.updateTurn();
     }
 
     @Override
     public void playTile(final int sideA, final int sideB) {
-        if (this.isPlayer1Turn) {
-            if (!this.model.checkMove(this.player1, new TileImpl(sideA, sideB))) {
-                this.view.setMessage(DominoMessage.MOVE_NOT_VALID);
-            }
+        Player currentPlayer = this.isPlayer1Turn ? this.player1 : this.player2;
+        boolean isValidMove = this.model.checkAndAddToBoard(currentPlayer, new TileImpl(sideA, sideB));
+        if (isValidMove) {
+            this.updatePlayersTiles();
+            this.checkDraw();
+            this.updateTurn();
+            this.updateBoard();
+            this.haveWinner();
         } else {
-            if (!this.model.checkMove(this.player2, new TileImpl(sideA, sideB))) {
-                this.view.setMessage(DominoMessage.MOVE_NOT_VALID);
-            }
+            this.view.setMessage(DominoMessage.MOVE_NOT_VALID);
         }
-        this.drawTile();
-        this.updatePlayersTiles();
-        this.updateTurn();
-        this.updateBoard();
-        this.haveWinner();
     }
 
     @Override
-    public void drawTile() {
-        if (isPlayer1Turn && this.model.canDrawTile(player1)) {
-            this.view.setMessage(DominoMessage.DRAW_TILE);
-            this.view.playerCanDraw();
-        } else if (!isPlayer1Turn && this.model.canDrawTile(player2)) {
+    public void checkDraw() {
+        Player currentPlayer = isPlayer1Turn ? player1 : player2;
+        if (this.model.canDrawTile(currentPlayer)) {
             this.view.setMessage(DominoMessage.DRAW_TILE);
             this.view.playerCanDraw();
         } else {
             this.view.playerCantDraw();
         }
+    }
 
+    @Override
+    public void drawTile() {
+        this.model.drawTile(isPlayer1Turn ? player1 : player2);
         this.updatePlayersTiles();
-        this.updateTurn();
-        this.updateBoard();
+        this.checkDraw();
     }
 
     @Override
@@ -76,10 +75,8 @@ public class DominoControllerImpl implements DominoController {
 
     @Override
     public void updateTurn() {
-        this.isPlayer1Turn = this.model.isPlayer1Turn(this.player1, this.player2);
-
-        this.view.setTurn(isPlayer1Turn, isPlayer1Turn ?
-                this.player1.getUsername() : this.player2.getUsername());
+        this.isPlayer1Turn = !this.isPlayer1Turn;
+        this.view.setTurn(this.isPlayer1Turn);
     }
 
     @Override
@@ -91,7 +88,7 @@ public class DominoControllerImpl implements DominoController {
     public void haveWinner() {
         Player winner = this.model.getWinner(this.player1, this.player2);
         if (winner != null) {
-            this.view.setWinner(winner.getUsername());
+            this.view.gameEnd(winner.getUsername());
         }
     }
 }
