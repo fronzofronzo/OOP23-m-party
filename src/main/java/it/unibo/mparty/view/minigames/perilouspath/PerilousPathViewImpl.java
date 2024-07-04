@@ -6,6 +6,7 @@ import it.unibo.mparty.controller.minigames.perilousPath.PerilousPathControllerI
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
 import it.unibo.mparty.model.minigames.perilouspath.impl.BallPosition;
+import it.unibo.mparty.model.minigames.perilouspath.impl.BombPosition;
 import it.unibo.mparty.model.minigames.perilouspath.impl.PathPosition;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.GameView;
@@ -37,13 +38,14 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         balls.forEach(b -> System.out.println("x: " + b.getX() + " y: " + b.getY()));
         bombs.forEach(b -> System.out.println("x: " + b.getX() + " y: " + b.getY()));
         for(var child: this.myGridPane.getChildren()){
-            var pos = this.buttonPosition(child);
-            if(balls.contains(pos)){
+            var ballPos = this.ballPosition(child);
+            var bombPos = this.bombPosition(child);
+            if(balls.stream().anyMatch(b -> b.getX() == ballPos.getX() && b.getY() == ballPos.getY())){
                 if (child instanceof Button) {
                     ((Button) child).setText("O");
                 }
             }
-            if(bombs.contains(pos)){
+            if(bombs.stream().anyMatch(b -> b.getX() == bombPos.getX() && b.getY() == bombPos.getY())){
                 if (child instanceof Button) {
                     ((Button) child).setText("X");
                 }
@@ -54,8 +56,8 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     @Override
     public void hideBombs(List<AbstractPosition> bombs) {
         for(var child: this.myGridPane.getChildren()){
-            var pos = this.buttonPosition(child);
-            if(bombs.contains(pos)){
+            var bombPos = this.bombPosition(child);
+            if(bombs.stream().anyMatch(b -> b.getX() == bombPos.getX() && b.getY() == bombPos.getY())){
                 if (child instanceof Button) {
                     ((Button) child).setText(" ");
                 }
@@ -108,5 +110,19 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         var y = GridPane.getColumnIndex(child) == null ? 0 : GridPane.getColumnIndex(child);
         return new PathPosition(x,y,SIZE);
     }
+
+    private BallPosition ballPosition(Node child){
+        var x = GridPane.getRowIndex(child) == null ? 0 : GridPane.getRowIndex(child);
+        var y = GridPane.getColumnIndex(child) == null ? 0 : GridPane.getColumnIndex(child);
+        return new BallPosition(x,y,SIZE);
+    }
+
+    private BombPosition bombPosition(Node child){
+        var x = GridPane.getRowIndex(child) == null ? 0 : GridPane.getRowIndex(child);
+        var y = GridPane.getColumnIndex(child) == null ? 0 : GridPane.getColumnIndex(child);
+        return new BombPosition(x,y,SIZE);
+    }
+
+
 
 }
