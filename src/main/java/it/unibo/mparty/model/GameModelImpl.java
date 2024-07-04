@@ -57,14 +57,19 @@ public class GameModelImpl implements GameModel{
      * {@inheritDoc}
      */
     @Override
-    public boolean movePlayer() {
+    public boolean movePlayer(Optional<Direction> dir) {
         while (this.steps < this.players.get(actualPlayerIndex).getDice().getResult()) {
             final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
             final Map<Direction, Position> nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition);
             if (nextPlayerPosition.size() == 1) {
                 this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.entrySet().stream().findFirst().get().getValue());
             } else {
-                return false;
+                if (dir.isEmpty()) {
+                    return false;
+                } else {
+                    this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.get(dir.get()));
+                    dir = Optional.empty();
+                }
             }
             this.steps++;
         }
@@ -197,13 +202,6 @@ public class GameModelImpl implements GameModel{
     public Set<Direction> getDirections() {
         Map<Direction,Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
         return pos.entrySet().stream().map(entry -> entry.getKey()).collect(Collectors.toSet());
-    }
-
-    @Override
-    public void movePlayerWithDirection(Direction dir) {
-        Map<Direction,Position> p = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
-        this.players.get(actualPlayerIndex).setPosition(p.get(dir));
-        this.steps++;
     }
 
     @Override

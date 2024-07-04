@@ -1,5 +1,7 @@
 package it.unibo.mparty.controller;
 
+import java.util.Optional;
+
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.utilities.Direction;
@@ -20,13 +22,7 @@ public interface GameController {
     /**
      * Handle the action of moving the player in the {@code GameBoard }
      */
-    void movePlayer();
-
-    /**
-     * Handle the action of moving the player in the {@code GameBoard } towards the input direction
-     * @param dir direction
-     */
-    void movePlayerWithDirection(Direction dir);
+    void movePlayer(Optional<Direction> dir);
 
     /**
      * Manage the acquisition of an item of the player's playing the

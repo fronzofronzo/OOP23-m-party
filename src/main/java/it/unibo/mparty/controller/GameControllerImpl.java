@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Optional;
 
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
@@ -27,10 +28,8 @@ public class GameControllerImpl implements GameController{
     }
 
     @Override
-    public void movePlayer() {
-        if (!this.model.movePlayer()) {
-            this.view.updateCommands(null, this.model.getDirections());   
-        }
+    public void movePlayer(Optional<Direction> dir) {
+        this.model.movePlayer(dir);
         this.view.updatePlayerPos(this.model.getActualPlayerInfo());
     }
 
@@ -60,13 +59,5 @@ public class GameControllerImpl implements GameController{
     @Override
     public void endGame() {
         // this.view.showWinner(this.model.getWinner)
-    }
-
-
-
-    @Override
-    public void movePlayerWithDirection(Direction dir) {
-        this.model.movePlayerWithDirection(dir);
-        this.movePlayer();
     }
 }

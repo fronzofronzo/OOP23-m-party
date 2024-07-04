@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import it.unibo.mparty.utilities.Direction;
@@ -11,6 +12,7 @@ import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.view.AbstractSceneView;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -238,9 +240,22 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @FXML
-    private void movePlayer(){
-        this.getMainController().movePlayer();
+    private void movePlayer(ActionEvent e){
+        final Button bt = (Button)e.getSource();
+        Optional<Direction> dir = Optional.empty();
+        if (bt.equals(buttonDOWN)) {
+            dir = Optional.of(Direction.DOWN);
+        } else if (bt.equals(buttonUP)) {
+            dir = Optional.of(Direction.UP);
+        } else if (bt.equals(buttonLEFT)) {
+            dir = Optional.of(Direction.LEFT);
+        } else if (bt.equals(buttonRIGHT)) {
+            dir = Optional.of(Direction.RIGHT);
+        }
+        this.getMainController().movePlayer(dir);
     }
+
+    
 
     @Override
     public void updatePlayerPos(Pair<String,Position> playerInfo) {
