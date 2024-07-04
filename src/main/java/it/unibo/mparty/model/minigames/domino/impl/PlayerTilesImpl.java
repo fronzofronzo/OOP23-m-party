@@ -5,25 +5,29 @@ import it.unibo.mparty.model.minigames.domino.api.Tile;
 import it.unibo.mparty.model.minigames.domino.api.PlayerTiles;
 import it.unibo.mparty.model.player.api.Player;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
 
 public class PlayerTilesImpl implements PlayerTiles {
 
     private final Map<Player, Set<Tile>> playersTiles = new HashMap<>();
 
-
     @Override
     public void initializePlayerTiles(final Player player, final Set<Tile> tiles) {
-        playersTiles.put(player, tiles);
+        this.playersTiles.put(player, tiles);
     }
 
     @Override
     public void addTileToPlayer(final Player player, final Tile tile) {
-        playersTiles.get(player).add(tile);
+        this.playersTiles.get(player).add(tile);
     }
 
     @Override
-    public boolean canPlayerPlace(Player player, BoardTile boardTile){
+    public boolean canPlayerPlace(final Player player, final BoardTile boardTile){
         for (final Tile tile : this.playersTiles.get(player)) {
             if (boardTile.canMatchBoardTile(tile)){
                 return true;
@@ -43,7 +47,7 @@ public class PlayerTilesImpl implements PlayerTiles {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PlayerTilesImpl that = (PlayerTilesImpl) o;
