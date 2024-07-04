@@ -61,8 +61,8 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
         gameGrid.add(stack, col, row);
     }
 
-    @Override
-    public void getColumn(ActionEvent e) {
+    @FXML
+    private void getColumn(ActionEvent e) {
         Button but = (Button) (e.getSource());
         var index = GridPane.getColumnIndex(but);
         if (index==null) {
@@ -76,8 +76,8 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
         this.controller.initGame(List.of("filo","dan"));
     }
 
-    @Override
-    public void closeView() {
+    @FXML
+    private void closeView() {
         //this.controller.endGame();
     }
 
