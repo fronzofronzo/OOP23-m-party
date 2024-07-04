@@ -61,7 +61,11 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     @Override
     public void getColumn(ActionEvent e) {
         Button but = (Button) (e.getSource());
-        this.controller.selectColumn(GridPane.getColumnIndex(but));
+        var index = GridPane.getColumnIndex(but);
+        if (index==null) {
+            index=0;
+        }
+        this.controller.selectColumn(index);
     }
 
     @Override
