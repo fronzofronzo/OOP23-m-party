@@ -2,9 +2,6 @@ package it.unibo.mparty.model.item.impl;
 
 import it.unibo.mparty.model.item.api.Item;
 
-/**
- * Abstract class for items
- */
 
 public abstract class AbstractItem implements Item{
     private final ItemName name;
