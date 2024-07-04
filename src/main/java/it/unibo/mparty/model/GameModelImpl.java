@@ -79,7 +79,7 @@ public class GameModelImpl implements GameModel{
     public int rollDice() {
        if(this.status == GameStatus.ROLL_DICE){
            this.players.get(actualPlayerIndex).getDice().rollDice();
-           this.switchStatus();
+           this.status = this.status.switchStatus();
        }
         return this.players.get(actualPlayerIndex).getDice().getResult();
     }
