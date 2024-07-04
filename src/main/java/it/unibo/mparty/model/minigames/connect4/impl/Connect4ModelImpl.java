@@ -97,19 +97,24 @@ public class Connect4ModelImpl implements Connect4Model{
         .anyMatch(dir -> checkDirections(i, j, dir));
     }
 
-    private boolean checkDirections (int i, int j, Connect4Directions direction)
-    {
-        return IntStream.rangeClosed(-3, 3)
-        .map(off -> countMatches(i, j, direction, off))
-        .sum() >= 4;
+    private boolean checkDirections (int i, int j, Connect4Directions direction) {
+        int count = 1;
+        count+= countMatchesInOneDirection(i, j, direction.getPosition().getX(), direction.getPosition().getY());
+        count+=countMatchesInOneDirection(i, j, -direction.getPosition().getX(), -direction.getPosition().getY());
+        return count>=4;
     }
 
-    private int countMatches (int i,int j, Connect4Directions direction, int offset) {
-        Position check = new Position(i + offset * direction.getPosition().getX(), j + offset * direction.getPosition().getY());
-        if (selectedMap.containsKey(check) && selectedMap.get(check).equals(getTurnPlayer())) {
-            return 1;
+    private int countMatchesInOneDirection (int i, int j, int dx, int dy) {
+        int c=0;
+        Position p = new Position(i, j);
+        while (isValidPosition(p) && selectedMap.get(p)==getTurnPlayer()) {
+            c++;
         }
-        return 0;
+        return c;
+    }
+
+    private boolean isValidPosition (Position pos) {
+        return pos.getX() >=0 && pos.getY()< ROW_NUMBER && pos.getY()>= 0 && pos.getY()<= COLUMN_NUMBER;
     }
 
     @Override
