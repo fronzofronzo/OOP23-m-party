@@ -41,6 +41,9 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     private Button drawButton;
 
     @FXML
+    private Button playButton;
+
+    @FXML
     private Label player1Label;
 
     @FXML
@@ -85,7 +88,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     @FXML
     private void drawButtonClicked() {
         this.messageLabel.setText("");
-        this.controller.drawTile(); //ogni volta che aggiunge una carta devo ricontrollare se ha mosse
+        this.controller.drawTile();
     }
 
     @FXML
@@ -123,14 +126,14 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     public void setTurn(final boolean isPlayer1Turn) {
         if (isPlayer1Turn) {
             this.highlightPlayerTurn(this.player1Label, this.player2Label);
-            //clearTileValues(this.player2Tiles);
+            clearTileValues(this.player2Tiles);
         } else {
             this.highlightPlayerTurn(this.player2Label, this.player1Label);
-            //clearTileValues(this.player1Tiles);
+            clearTileValues(this.player1Tiles);
         }
     }
 
-    private void highlightPlayerTurn(Label currentPlayerLabel, Label otherPlayerLabel) {
+    private void highlightPlayerTurn(final Label currentPlayerLabel, final Label otherPlayerLabel) {
         currentPlayerLabel.setBackground(new Background(new BackgroundFill
                 (Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
         otherPlayerLabel.setBackground(Background.EMPTY);
@@ -147,7 +150,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     }
 
     @Override
-    public void setBoard(LinkedList<Tile> boardTiles) {
+    public void setBoard(final LinkedList<Tile> boardTiles, final boolean isDoubleSide) {
         tilesContainer.getChildren().clear();
 
         HBox rowBox = new HBox();
@@ -167,15 +170,16 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     }
 
     @Override
-    public void setMessage(DominoMessage message) {
+    public void setMessage(final DominoMessage message) {
         this.messageLabel.setText(message.toString());
     }
 
     @Override
-    public void gameEnd(String winner) {
+    public void gameEnd(final String winner) {
         this.messageLabel.setText(winner + DominoMessage.WIN);
 
         this.drawButton.setDisable(true);
+        this.playButton.setDisable(true);
 
         disableTiles(this.player1Tiles);
         disableTiles(this.player2Tiles);
@@ -187,7 +191,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         });
     }
 
-    private void disableTiles(HBox playerTilesBox) {
+    private void disableTiles(final HBox playerTilesBox) {
         playerTilesBox.getChildren().forEach(tileNode -> {
             if (tileNode instanceof VBox) {
                 ((VBox) tileNode).getChildren().forEach(sideNode -> sideNode.setDisable(true));
@@ -195,7 +199,8 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         });
     }
 
-    private void clearTileValues(final HBox playerTiles) {
+    @Override
+    public void clearTileValues(final HBox playerTiles) {
         playerTiles.getChildren().stream()
                 .filter(node -> node instanceof VBox)
                 .map(node -> (VBox) node)
