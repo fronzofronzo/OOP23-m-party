@@ -93,6 +93,7 @@ public class Connect4ModelImpl implements Connect4Model{
         else {
             turnPlayer=player1;
         }
+        checkList.clear();
     }
 
     private boolean hasWon(int i, int j) {
