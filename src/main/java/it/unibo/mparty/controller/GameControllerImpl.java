@@ -37,9 +37,9 @@ public class GameControllerImpl implements GameController{
     @Override
     public void action() throws IOException {
         this.model.action();
-        //if (this.model.getActiveMinigame().isPresent()) {
-        //    this.view.setScene(this.model.getActiveMinigame().get());
-        //}
+        if (this.model.getActiveMinigame().isPresent()) {
+              this.view.setScene("minigames/" +  this.model.getActiveMinigame().get());
+        }
         this.model.nextPlayer();
     }
 
@@ -53,7 +53,7 @@ public class GameControllerImpl implements GameController{
     public void startGame(GameModel model) {
         this.model = model;
         try {
-            this.view.setScene("GameBoard.fxml");
+            this.view.setScene("GameBoard");
             this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.getActualPlayerInfo().getY());
             this.view.updateCommands(Collections.emptyList(), "");
         } catch (IOException e) {
