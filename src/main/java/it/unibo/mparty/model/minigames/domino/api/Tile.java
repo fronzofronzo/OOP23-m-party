@@ -5,7 +5,10 @@ public interface Tile {
 
     Side getSideB();
 
+
     boolean match(Tile tile);
+
+    boolean canMatch(Tile tile);
 
     boolean isDoubleSide();
 }
