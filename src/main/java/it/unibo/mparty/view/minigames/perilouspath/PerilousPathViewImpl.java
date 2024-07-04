@@ -39,8 +39,6 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
 
     @Override
     public void setUpView(List<AbstractPosition> balls, List<AbstractPosition> bombs) {
-        balls.forEach(b -> System.out.println("x: " + b.getX() + " y: " + b.getY()));
-        bombs.forEach(b -> System.out.println("x: " + b.getX() + " y: " + b.getY()));
         for(var child: this.myGridPane.getChildren()){
             var ballPos = this.ballPosition(child);
             var bombPos = this.bombPosition(child);
@@ -72,16 +70,34 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     }
 
     @Override
+    public void showBombs(List<AbstractPosition> bombs) {
+        for(var child: this.myGridPane.getChildren()){
+            var bombPos = this.bombPosition(child);
+            if(bombs.stream().anyMatch(b -> b.getX() == bombPos.getX() && b.getY() == bombPos.getY())){
+                if (child instanceof Button) {
+                    ((Button) child).setText("X");
+                }
+            }
+        }
+        this.myGridPane.setDisable(true);
+    }
+
+
+
+    @Override
     public void hitTile(PerilousPath.Type type) {
         switch(type){
-            case PATH ->
-                    this.button.setText("*");
+            case PATH -> {
+                this.button.setText("*");
+                this.gameLabel.setText("MOSSA VALIDA");
+            }
             case BOMB ->
-                    this.gameLabel.setText("hai perso");
+                    this.gameLabel.setText("HAI PERSO");
+
             case BALL ->
-                    this.gameLabel.setText("hai vinto");
+                    this.gameLabel.setText("HAI VINTO");
             case WRONG ->
-                    this.gameLabel.setText("mossa non valida");
+                    this.gameLabel.setText("MOSSA NON VALIDA");
         }
     }
 

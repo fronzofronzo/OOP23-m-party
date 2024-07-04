@@ -21,6 +21,8 @@ public interface PerilousPathView  extends SceneView{
 
     void handleStartButton(ActionEvent e) throws InterruptedException;
 
+    void showBombs(List<AbstractPosition> bombs);
+
 
     
 }
