@@ -154,7 +154,7 @@ public class GameModelImpl implements GameModel{
         final Player actualPlayer = this.players.get(actualPlayerIndex);
         final SlotType slot = this.board.getSlotType(actualPlayer.getPosition());
         final Random random = new Random();
-        if(this.status.equals(GameStatus.END_TURN)){
+        if(this.status.equals(GameStatus.ACTIVE_SLOT)){
             switch (slot) {
                 case SINGLEPLAYER -> {
                     try {

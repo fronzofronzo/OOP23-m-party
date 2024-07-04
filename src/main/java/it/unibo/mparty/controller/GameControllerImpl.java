@@ -42,6 +42,10 @@ public class GameControllerImpl implements GameController{
         //    this.view.setScene(this.model.getActiveMinigame().get());
         //}
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
+        /* 
+        if (this.model.getActiveMinigame().isPresent()) {
+              this.view.setScene("minigames/" +  this.model.getActiveMinigame().get());
+        }*/
     }
 
     @Override
@@ -54,7 +58,7 @@ public class GameControllerImpl implements GameController{
     public void startGame(GameModel model) {
         this.model = model;
         try {
-            this.view.setScene("GameBoard.fxml");
+            this.view.setScene("GameBoard");
             this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.getActualPlayerInfo().getY());
             this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
         } catch (IOException e) {

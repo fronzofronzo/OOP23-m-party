@@ -3,10 +3,7 @@ package it.unibo.mparty.model.minigameHandler;
 import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.player.api.Player;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -36,7 +33,7 @@ public class MinigameHandlerImplementation implements MinigameHandler{
 
     @Override
     public boolean isInGame() {
-        return actualMinigame.isEmpty();
+        return actualMinigame != null;
     }
 
     @Override
@@ -47,7 +44,7 @@ public class MinigameHandlerImplementation implements MinigameHandler{
     }
 
     private String generateRandomMinigame(MinigameType type) throws Exception {
-        final BufferedReader reader = new BufferedReader(new FileReader(type + ".txt"));
+        final BufferedReader reader = new BufferedReader(new InputStreamReader( ClassLoader.getSystemResourceAsStream(type + ".txt")));
         String name = null;
         final List<String> minigames = new ArrayList<>();
         while ((name = reader.readLine()) != null){

@@ -25,6 +25,7 @@ public class GameViewImpl extends Application implements GameView{
 
     private final static double DEFAULT_DIMENSION_VALUE = -1;
     private final static String PATH = "/layouts/";
+    private final static String EXTENSION = ".fxml";
     private GameBoardView boardView;
 
     private Stage stage;
@@ -32,8 +33,8 @@ public class GameViewImpl extends Application implements GameView{
 
     @Override
     public void setScene(String path) throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + path)) ;
-        final Parent root = loader.load(getClass().getResourceAsStream(PATH + path));
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + path + EXTENSION)); ;
+        final Parent root = loader.load(getClass().getResourceAsStream(PATH + path + EXTENSION));
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
         final  SceneView sceneView = loader.<SceneView>getController();
         sceneView.init(this,this.controller);
@@ -48,7 +49,7 @@ public class GameViewImpl extends Application implements GameView{
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
-        this.setScene("GameBoard.fxml");
+        this.setScene("GameBoard");
         PlayerBuilder pb = new PlayerBuilderImplementation();
         Player p1 = pb.username("M").character("Mario").buildPlayer();
         Player p2 = pb.username("L").character("Luigi").buildPlayer();
