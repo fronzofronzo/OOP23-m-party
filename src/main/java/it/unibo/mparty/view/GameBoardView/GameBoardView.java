@@ -13,7 +13,7 @@ public interface GameBoardView extends SceneView{
 
     void showResultDice(int result);
 
-    void updatePlayerPos(String player, Position position);
+    void updatePlayerPos(Pair<String,Position> playerInfo);
 
     void updatePlayerStats(String player, int coins, int stars, List<String> items);
 

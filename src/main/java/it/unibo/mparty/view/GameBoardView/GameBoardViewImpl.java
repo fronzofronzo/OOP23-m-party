@@ -243,11 +243,11 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @Override
-    public void updatePlayerPos(String player, Position position) {
+    public void updatePlayerPos(Pair<String,Position> playerInfo) {
         for (int i = 0; i < this.labelPlayersNames.size(); i++) {
-            if (this.labelPlayersNames.get(i).getText().equals(player)) {
+            if (this.labelPlayersNames.get(i).getText().equals(playerInfo.getX())) {
                 this.board.getChildren().remove(this.players.get(i));
-                this.board.add(this.players.get(i), position.getX(), position.getY());
+                this.board.add(this.players.get(i), playerInfo.getY().getX(), playerInfo.getY().getY());
             }
         }
     }    

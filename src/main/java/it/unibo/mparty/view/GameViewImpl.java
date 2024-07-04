@@ -72,8 +72,8 @@ public class GameViewImpl extends Application implements GameView{
 
 
     @Override
-    public void updatePlayerPos(String player, Position position) {
-        this.updatePlayerPos(player, position);
+    public void updatePlayerPos(Pair<String,Position> playerInfo) {
+        this.boardView.updatePlayerPos(playerInfo);
     }
 
 

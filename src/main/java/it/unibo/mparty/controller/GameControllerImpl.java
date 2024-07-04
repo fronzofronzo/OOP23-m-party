@@ -35,6 +35,7 @@ public class GameControllerImpl implements GameController{
         if (!this.model.movePlayer()) {
             this.view.updateCommands(null, this.model.getDirections());   
         }
+        this.view.updatePlayerPos(this.model.getActualPlayerInfo());
     }
 
     @Override
@@ -48,7 +49,7 @@ public class GameControllerImpl implements GameController{
         this.model = model;
         try {
             this.view.setScene("GameBoard.fxml");
-            this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.getPlayerPosition(this.model.getPlayersNicknames().stream().findFirst().get()));
+            this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.getActualPlayerInfo().getY());
             this.view.updateCommands(Collections.emptyList(), Collections.EMPTY_SET);
         } catch (IOException e) {
             e.printStackTrace();
