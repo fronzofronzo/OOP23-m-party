@@ -2,6 +2,7 @@ package it.unibo.mparty.controller;
 
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
+import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 
 /**
@@ -13,14 +14,19 @@ public interface GameController {
 
     /**
      * Handle the request of the user to roll dice
-     * @return the result of rolling dice
      */
-    int rollDice();
+    void rollDice();
 
     /**
      * Handle the action of moving the player in the {@code GameBoard }
      */
     void movePlayer();
+
+    /**
+     * Handle the action of moving the player in the {@code GameBoard } towards the input direction
+     * @param dir direction
+     */
+    void movePlayerWithDirection(Direction dir);
 
     /**
      * Manage the acquisition of an item of the player's playing the

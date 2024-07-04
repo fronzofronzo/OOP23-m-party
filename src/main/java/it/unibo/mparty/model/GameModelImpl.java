@@ -9,13 +9,17 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.shop.api.Shop;
 import it.unibo.mparty.model.shop.impl.ShopImpl;
 import it.unibo.mparty.utilities.BoardType;
+import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Models the core structure of the game
@@ -31,6 +35,8 @@ public class GameModelImpl implements GameModel{
     private final Shop shop;
     private int turn = 1 ;
     private int actualPlayerIndex = 0;
+    private int steps = 0;
+    private int dice = 0;
     private final MinigameHandler minigameHandler;
 
     /**
@@ -43,34 +49,54 @@ public class GameModelImpl implements GameModel{
        this.players = players;
        this.minigameHandler = new MinigameHandlerImplementation();
        this.shop = new ShopImpl();
-       // deve essere modificato con la scelta della difficoltà della mappa
        final SimpleBoardFactory boardFactory = new SimpleBoardFactory();
-       this.board = boardFactory.createBoard(BoardType.MEDIUM);
+       this.board = boardFactory.createBoard(BoardType.valueOf(difficulty));
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
-    public Position movePlayer() {
-        final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
-        //final Position nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition).get(0).getY();
-
-        return actualPlayerPosition;
+    public boolean movePlayer() {
+        while (this.steps < this.dice) {
+            final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
+            final Map<Direction, Position> nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition);
+            if (nextPlayerPosition.size() == 1) {
+                this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.entrySet().stream().findFirst().get().getValue());
+            } else {
+                return false;
+            }
+            this.steps++;
+        }
+        this.steps = 0;
+        return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int rollDice() {
-        return this.players.get(actualPlayerIndex).getDice().generateNumber();
+        this.players.get(actualPlayerIndex).getDice().rollDice();
+        return this.players.get(actualPlayerIndex).getDice().getResult();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public String getActiveMinigame() {
-        return this.minigameHandler.getMinigame();
+    public Optional<String> getActiveMinigame() {
+        if(this.minigameHandler.isInGame()){
+            return Optional.of(this.minigameHandler.getMinigame());
+        } else {
+            return Optional.empty();
+        }
     }
 
-    @Override
-    public boolean isActiveMinigame() {
-        return this.minigameHandler.getMinigame() != null;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void nextPlayer() {
         this.actualPlayerIndex = (this.actualPlayerIndex + 1) % players.size();
@@ -79,6 +105,9 @@ public class GameModelImpl implements GameModel{
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getWinner() {
         final int maxStars = players.stream().map(Player::getNumStars).sorted().limit(1).reduce(0 , Integer::sum);
@@ -90,11 +119,17 @@ public class GameModelImpl implements GameModel{
         return winners.get(0).getUsername();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isOver() {
         return turn == TURNS_NUMBER;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void activateSlot() {
         final Player actualPlayer = this.players.get(actualPlayerIndex);
@@ -128,20 +163,42 @@ public class GameModelImpl implements GameModel{
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Map<Position, SlotType> getBoardConfiguration() {
         return this.board.getSlotTypeBoard();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Pair<Integer, Integer> getBoardDimensions() {
         return this.board.getDimension();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void endMinigame(Pair<String, Integer> result) {
-        final Player winner = this.players.stream().filter(p -> p.getUsername().equals(result.getFirst())).findAny().get();
-        winner.addCoins(result.getSecond());
+        final Player winner = this.players.stream().filter(p -> p.getUsername().equals(result.getX())).findAny().get();
+        winner.addCoins(result.getY());
         this.minigameHandler.stopMinigame();
+    }
+
+    @Override
+    public Set<Direction> getDirections() {
+        Map<Direction,Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
+        return pos.entrySet().stream().map(entry -> entry.getKey()).collect(Collectors.toSet());
+    }
+
+    @Override
+    public void movePlayerWithDirection(Direction dir) {
+        Map<Direction,Position> p = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
+        this.players.get(actualPlayerIndex).setPosition(p.get(dir));
+        this.steps++;
     }
 }

@@ -1,12 +1,14 @@
 package it.unibo.mparty.model;
 
 import it.unibo.mparty.utilities.Position;
-
+import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 
 import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * Interface that models the model of the main game
@@ -18,7 +20,11 @@ public interface GameModel {
      *
      * @return
      */
-    Position movePlayer();
+    boolean movePlayer();
+
+    Set<Direction> getDirections();
+    
+    void movePlayerWithDirection(Direction dir);
 
     /**
      * Roll dices of the actual player
@@ -27,16 +33,12 @@ public interface GameModel {
     int rollDice();
 
     /**
-     * Get the name of the minigame that is active
-     * @return the name of the minigame
+     * If is active, get the name of the minigame.
+     * @return {@link Optional}: it's empty if there is no minigame running
+     * at that moment. If there's a minigame playing, the Optional contains
+     * its name
      */
-    String getActiveMinigame();
-
-    /**
-     * Check if during the actual player turn, there is a minigame active
-     * @return true if there is a minigame active, false otherwise
-     */
-    boolean isActiveMinigame();
+    Optional<String> getActiveMinigame();
 
     /**
      * End the turn of the actual player and starts the turn of the

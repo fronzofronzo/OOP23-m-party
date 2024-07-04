@@ -4,22 +4,39 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Set;
 
+import it.unibo.mparty.utilities.Direction;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.view.AbstractSceneView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 public class GameBoardViewImpl extends AbstractSceneView implements GameBoardView{
 
-    private final static int N_VBOX = 4;
-
+    private static final Map<SlotType,Color> SLOT_COLOR = Map.of(SlotType.ACTIVE_STAR, Color.GOLD,
+                                                                 SlotType.BONUS, Color.LIGHTGREEN,
+                                                                 SlotType.MALUS, Color.LIGHTCORAL,
+                                                                 SlotType.MULTIPLAYER, Color.LIGHTGRAY,
+                                                                 SlotType.NOT_ACTIVE_STAR, Color.WHEAT,
+                                                                 SlotType.PATH, Color.WHEAT,
+                                                                 SlotType.SHOP, Color.SKYBLUE,
+                                                                 SlotType.SINGLEPLAYER, Color.LIGHTGRAY,
+                                                                 SlotType.VOID, Color.BLACK);
+    @FXML
     private GridPane board;
     @FXML 
     private BorderPane borderPane;
@@ -31,6 +48,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label coinsP1;
     @FXML 
     private Label starsP1;
+    @FXML
+    private Label itemP1;
     @FXML 
     private VBox sectionP2;
     @FXML 
@@ -39,6 +58,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label coinsP2;
     @FXML 
     private Label starsP2;
+    @FXML
+    private Label itemP2;
     @FXML 
     private VBox sectionP3;
     @FXML 
@@ -47,6 +68,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label coinsP3;
     @FXML 
     private Label starsP3;
+    @FXML
+    private Label itemP3;
     @FXML 
     private VBox sectionP4;
     @FXML 
@@ -55,6 +78,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label coinsP4;
     @FXML 
     private Label starsP4;
+    @FXML
+    private Label itemP4;
     @FXML
     private Pane paneCommand;
     @FXML 
@@ -77,35 +102,133 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Button buttonMove;
     @FXML
     private Button buttonEnter;
+    @FXML
+    private SplitPane leftSplitPane;
+    @FXML
+    private SplitPane rightSplitPane;
+    @FXML
+    private Label resultDice;
 
-    private List<Label> labelPlayersNames = List.of(nameP1, nameP2, nameP3, nameP4);     
-    private List<Label> labelPlayersCoins = List.of(coinsP1, coinsP2, coinsP3, coinsP4); 
-    private List<Label> labelPlayersStars = List.of(starsP1, starsP2, starsP3, starsP4);
-    private List<Button> buttonsItem = List.of(useItem1, useItem2, useItem3);
+    private Circle player1 = new Circle(10, Color.ORANGE);
+    private Circle player2 = new Circle(10, Color.PURPLE);
+    private Circle player3 = new Circle(10, Color.BLUE);
+    private Circle player4 = new Circle(10, Color.PINK);
+
+    private List<Label> labelPlayersNames = new ArrayList<>();     
+    private List<Label> labelPlayersCoins = new ArrayList<>(); 
+    private List<Label> labelPlayersStars = new ArrayList<>();
+    private List<Label> labelPlayersItems = new ArrayList<>();
+    private List<Button> buttonsItem = new ArrayList<>();
+    private List<Button> buttonsDirection = new ArrayList<>();
+    private List<Circle> players = new ArrayList<>();
 
     @Override
-    public void updatePlayer(String nickname, int coins, int money, List<String> items) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updatePlayer'");
+    public void updatePlayerStats(String palyer, int coins, int stars, List<String> items) {
+        for (int i = 0; i <= this.labelPlayersNames.size(); i++) {
+            if (this.labelPlayersNames.get(i).getText().equals(palyer)) {
+                this.labelPlayersCoins.get(i).setText(String.valueOf(coins));
+                this.labelPlayersStars.get(i).setText(String.valueOf(stars));
+                this.labelPlayersItems.get(i).setText(items.toString());
+            }
+        }
     }
 
     @Override
-    public void updateCommands(List<String> items) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateCommands'");
+    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> map, List<String> nicknames) {
+        this.populateGridPane(dimension, map);
+        this.setSize();
+        this.createData();
+        for(int i=0; i< nicknames.size(); i++){
+            this.labelPlayersNames.get(i).setText(nicknames.get(i));
+            this.labelPlayersStars.get(i).setText(String.valueOf(0));
+            this.labelPlayersCoins.get(i).setText(String.valueOf(0));
+        }
+    }
+        
+    private void createData() {
+        this.labelPlayersNames.addAll(List.of(this.nameP1, this.nameP2, this.nameP3, this.nameP4));
+        this.labelPlayersCoins.addAll(List.of(this.coinsP1, this.coinsP2, this.coinsP3, this.coinsP4));
+        this.labelPlayersStars.addAll(List.of(this.starsP1, this.starsP2, this.starsP3, this.starsP4));
+        this.labelPlayersItems.addAll(List.of(this.itemP1, this.itemP2, this.itemP3, this.itemP4));
+        this.buttonsItem.addAll(List.of(this.useItem1, this.useItem2, this.useItem3));
+        this.buttonsDirection.addAll(List.of(this.buttonUP, this.buttonDOWN, this.buttonLEFT, this.buttonRIGHT));
+        this.players.addAll(List.of(this.player1, this.player2, this.player3, this.player4));
     }
 
-    @Override
-    public void setUpBoard(int width, int height, Map<Position, SlotType> map, List<String> nicknames) {
-        this.board = new GridPane();
-        this.populateGridPane(width, height, map);
+    private void setSize() {
+        this.borderPane.setMinSize(1000, 600);
+        this.leftSplitPane.setMinSize(150, 400);
+        this.rightSplitPane.setMinSize(150, 400);
+        this.board.setMinSize(700, 400);
+        this.paneCommand.setMinSize(1000, 100);
+        this.paneCommand.prefHeight(100);
+        this.paneCommand.maxHeight(100);
     }
 
-    private void populateGridPane(int width, int height, Map<Position, SlotType> map) {
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                Label tmp = new Label(Objects.isNull(map.get(new Position(i, j))) ? "void" : map.get(new Position(i, j)).toString());
+    private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
+        for (int i = 0; i < dimension.getX(); i++) {
+            for (int j = 0; j < dimension.getY(); j++) {
+                Pane tmp = new Pane();
+                BackgroundFill backgroundfill = new BackgroundFill(getColor(map.get(new Position(i, j))),CornerRadii.EMPTY, null);
+                Background background = new Background(backgroundfill);
+                tmp.setBackground(background);
                 this.board.add(tmp, i, j);
+            }
+        }
+    }
+
+    private Color getColor(SlotType slotType) {
+        if (Objects.isNull(slotType)) {
+            return Color.BLACK;
+        } else {
+            return SLOT_COLOR.get(slotType);
+        }
+    }
+
+    @Override
+    public void updateCommands(List<String> items, Set<Direction> directions) {
+        for (int i = 0; i <= this.buttonsItem.size(); i++) {
+            if (i <= items.size()) {
+                this.buttonsItem.get(i).setText(items.get(i));
+                this.buttonsItem.get(i).setDisable(false);
+            } else {
+                this.buttonsItem.get(i).setText("");
+                this.buttonsItem.get(i).setDisable(true);
+            }
+        }
+        this.buttonsDirection.stream().forEach(b -> b.setDisable(true));
+        for (Direction d : directions) {
+            switch (d) {
+                case Direction.UP: this.buttonUP.setDisable(true);
+                case Direction.DOWN: this.buttonDOWN.setDisable(true);
+                case Direction.LEFT: this.buttonLEFT.setDisable(true);
+                case Direction.RIGHT: this.buttonRIGHT.setDisable(true);            
+                default: break;
+            }
+        }
+    }
+    
+    @SuppressWarnings("unused")
+    private void rollDice(){
+        this.getMainController().rollDice();
+    }
+
+    @Override
+    public void showResultDice(int result) {
+        this.resultDice.setText(String.valueOf(result));
+    }
+
+    @SuppressWarnings("unused")
+    private void movePlayer(){
+        this.getMainController().movePlayer();
+    }
+
+    @Override
+    public void updatePlayerPos(String player, Position position) {
+        for (int i = 0; i <= this.labelPlayersNames.size(); i++) {
+            if (this.labelPlayersNames.get(i).getText().equals(player)) {
+                this.board.getChildren().remove(this.players.get(i));
+                this.board.getChildren().add(this.players.get(i));
             }
         }
     }    
