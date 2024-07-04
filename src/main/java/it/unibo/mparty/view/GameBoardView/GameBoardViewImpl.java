@@ -257,8 +257,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @FXML
-    private void activateSlot() throws IOException{
-        this.getMainController().activateSlot();
+    private void action() throws IOException{
+        this.getMainController().action();
     }
 
     @Override
