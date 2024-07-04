@@ -10,6 +10,7 @@ import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.view.GameBoardView.GameBoardView;
+import it.unibo.mparty.view.minigames.MinigameView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -71,8 +72,12 @@ public class GameViewImpl extends Application implements GameView{
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH_MINIGAMES + EXTENSION)); ;
         final Parent root = loader.load(getClass().getResourceAsStream( PATH_MINIGAMES + EXTENSION));
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        final  SceneView sceneView = loader.<SceneView>getController();
-        sceneView.init(this,this.controller);
+        final MinigameView minigameView = loader.<MinigameView>getController();
+        minigameView.init(this,this.controller);
+        this.stage.setScene(scene);
+        this.stage.setMinWidth(1000);
+        this.stage.setMinHeight(700);
+        this.stage.show();
     }
 
     @Override
