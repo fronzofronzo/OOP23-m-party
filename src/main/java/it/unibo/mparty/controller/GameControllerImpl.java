@@ -25,12 +25,13 @@ public class GameControllerImpl implements GameController{
     @Override
     public void rollDice() {
         this.view.showResultDice(this.model.rollDice());
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
     @Override
     public void movePlayer(Optional<Direction> dir) {
         this.model.movePlayer(dir);
-        this.view.updateCommands(Collections.emptyList(), "");
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
         this.view.updatePlayerPos(this.model.getActualPlayerInfo());
     }
 
@@ -40,7 +41,7 @@ public class GameControllerImpl implements GameController{
         //if (this.model.getActiveMinigame().isPresent()) {
         //    this.view.setScene(this.model.getActiveMinigame().get());
         //}
-        this.model.nextPlayer();
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
     @Override
@@ -55,7 +56,7 @@ public class GameControllerImpl implements GameController{
         try {
             this.view.setScene("GameBoard.fxml");
             this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.getActualPlayerInfo().getY());
-            this.view.updateCommands(Collections.emptyList(), "");
+            this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
         }

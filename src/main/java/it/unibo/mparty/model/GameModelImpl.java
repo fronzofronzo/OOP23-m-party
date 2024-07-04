@@ -209,8 +209,8 @@ public class GameModelImpl implements GameModel{
         this.minigameHandler.stopMinigame();
     }
 
-    @Override
-    public Set<Direction> getDirections() {
+    /*
+    private Set<Direction> getDirections() {
         if (this.status.equals(GameStatus.MOVE_PLAYER)) {
             Map<Direction,Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
             if (pos.size() > 1) {
@@ -218,7 +218,7 @@ public class GameModelImpl implements GameModel{
             }
         }
         return Collections.emptySet();
-    }
+    } */
 
     @Override
     public List<String> getPlayersNicknames() {
@@ -235,6 +235,19 @@ public class GameModelImpl implements GameModel{
     public Pair<String, Position> getActualPlayerInfo() {
         final Player pl = this.players.get(actualPlayerIndex);
         return new Pair<>(pl.getUsername(),pl.getPosition());
+    }
+
+    @Override
+    public String getMessage() {
+        String output = this.players.get(actualPlayerIndex).getUsername();
+        switch (this.status) {
+            case GameStatus.ROLL_DICE: output = output + " tira i dadi"; break;
+            case GameStatus.MOVE_PLAYER: output = output + " muovi la pedina"; break;
+            case GameStatus.ACTIVE_SLOT: output = output + " attiva l'effetto dello slot"; break;
+            case GameStatus.END_TURN: output = output + " passa il turno"; break;
+            default: break;
+        }
+        return output;
     }
 
 

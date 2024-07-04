@@ -23,7 +23,7 @@ public interface GameModel {
      */
     void movePlayer(Optional<Direction> dir);
 
-    Set<Direction> getDirections();
+    String getMessage();
 
     /**
      * Roll dices of the actual player
