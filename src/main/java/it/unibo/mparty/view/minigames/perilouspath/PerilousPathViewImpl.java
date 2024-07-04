@@ -5,6 +5,7 @@ import it.unibo.mparty.controller.minigames.perilousPath.PerilousPathController;
 import it.unibo.mparty.controller.minigames.perilousPath.PerilousPathControllerImpl;
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
+import it.unibo.mparty.model.minigames.perilouspath.impl.BallPosition;
 import it.unibo.mparty.model.minigames.perilouspath.impl.PathPosition;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.GameView;
@@ -33,6 +34,8 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
 
     @Override
     public void setUpView(List<AbstractPosition> balls, List<AbstractPosition> bombs) {
+        balls.forEach(b -> System.out.println("x: " + b.getX() + " y: " + b.getY()));
+        bombs.forEach(b -> System.out.println("x: " + b.getX() + " y: " + b.getY()));
         for(var child: this.myGridPane.getChildren()){
             var pos = this.buttonPosition(child);
             if(balls.contains(pos)){
@@ -99,8 +102,11 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         return super.getMainView();
     }
 
+
     private AbstractPosition buttonPosition(Node child){
-        return new PathPosition(GridPane.getRowIndex(child),GridPane.getColumnIndex(child),SIZE);
+        var x = GridPane.getRowIndex(child) == null ? 0 : GridPane.getRowIndex(child);
+        var y = GridPane.getColumnIndex(child) == null ? 0 : GridPane.getColumnIndex(child);
+        return new PathPosition(x,y,SIZE);
     }
 
 }
