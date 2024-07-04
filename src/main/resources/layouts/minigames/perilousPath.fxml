@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.perilouspath.PerilousPathViewImpl">
@@ -99,6 +100,10 @@
          </children>
       </GridPane>
       <Button fx:id="startButton" alignment="BASELINE_LEFT" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleStartButton" prefHeight="26.0" prefWidth="50.0" text="START" />
-      <Label fx:id="gameLabel" alignment="CENTER" prefHeight="18.0" prefWidth="154.0" />
+      <Label fx:id="gameLabel" alignment="CENTER" prefHeight="18.0" prefWidth="154.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
    </children>
 </VBox>
