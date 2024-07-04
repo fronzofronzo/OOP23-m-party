@@ -12,8 +12,18 @@ import it.unibo.mparty.utilities.Pair;
  * during the initialisation phase. It also handles user request to the model
  */
 public interface GameController {
+
+    /**
+     * Set up the shop view
+     * @param scenView the view of the shop
+     */
     public void setUpShop(ShopView scenView);
 
+    /**
+     * Select an item and check if the player can add it
+     * @param itemString the item theplayer wants to buy
+     * @return true if he can buy it, false otherwise
+     */
     public boolean selectItem(String itemString);
 
     /**
