@@ -3,12 +3,14 @@ package it.unibo.mparty.controller.minigames.domino.impl;
 import it.unibo.mparty.controller.minigames.domino.api.DominoController;
 import it.unibo.mparty.model.minigames.domino.api.DominoModel;
 import it.unibo.mparty.model.minigames.domino.impl.DominoModelImpl;
+import it.unibo.mparty.model.minigames.domino.api.Tile;
 import it.unibo.mparty.model.minigames.domino.impl.TileImpl;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.view.minigames.domino.DominoMessage;
 import it.unibo.mparty.view.minigames.domino.api.DominoView;
 
 public class DominoControllerImpl implements DominoController {
+
     private final DominoModel model;
     private final DominoView view;
     private final Player player1;
@@ -36,13 +38,14 @@ public class DominoControllerImpl implements DominoController {
 
     @Override
     public void playTile(final int sideA, final int sideB) {
+        Tile selectedTile = new TileImpl(sideA, sideB);
         Player currentPlayer = this.isPlayer1Turn ? this.player1 : this.player2;
-        boolean isValidMove = this.model.checkAndAddToBoard(currentPlayer, new TileImpl(sideA, sideB));
+        boolean isValidMove = this.model.checkAndAddToBoard(currentPlayer, selectedTile);
         if (isValidMove) {
             this.updatePlayersTiles();
-            this.checkDraw();
             this.updateTurn();
-            this.updateBoard();
+            this.checkDraw();
+            this.updateBoard(selectedTile.isDoubleSide());
             this.haveWinner();
         } else {
             this.view.setMessage(DominoMessage.MOVE_NOT_VALID);
@@ -67,25 +70,21 @@ public class DominoControllerImpl implements DominoController {
         this.checkDraw();
     }
 
-    @Override
-    public void updatePlayersTiles() {
+    private void updatePlayersTiles() {
         this.view.setPlayerTiles(true, this.model.getPlayersTiles().getPlayerTiles(this.player1));
         this.view.setPlayerTiles(false, this.model.getPlayersTiles().getPlayerTiles(this.player2));
     }
 
-    @Override
-    public void updateTurn() {
+    private void updateTurn() {
         this.isPlayer1Turn = !this.isPlayer1Turn;
         this.view.setTurn(this.isPlayer1Turn);
     }
 
-    @Override
-    public void updateBoard() {
-        this.view.setBoard(this.model.getBoardTile().getBoardTiles());
+    private void updateBoard(boolean isDoubleSide) {
+        this.view.setBoard(this.model.getBoardTile().getBoardTiles(), isDoubleSide);
     }
 
-    @Override
-    public void haveWinner() {
+    private void haveWinner() {
         Player winner = this.model.getWinner(this.player1, this.player2);
         if (winner != null) {
             this.view.gameEnd(winner.getUsername());

@@ -8,12 +8,4 @@ public interface DominoController {
     void checkDraw();
 
     void drawTile();
-
-    void updatePlayersTiles();
-
-    void updateTurn();
-
-    void updateBoard();
-
-    void haveWinner();
 }
