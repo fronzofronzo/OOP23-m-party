@@ -7,6 +7,9 @@ import it.unibo.mparty.model.player.api.Player;
  */
 public class GoldenPipe extends AbstractItem{
 
+    /**
+     * Construct a new istance of GoldenPipe item
+     */
     public GoldenPipe() {
         super(ItemName.TUBO_DORATO, 15);
     }

@@ -12,6 +12,9 @@ import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.impl.PlayerImplementation;
 
+/**
+ * Test class for the Items
+ */
 public class TestItemImplementation {
 
     private final ItemFactory factory = new ItemFactoryImpl();
@@ -22,6 +25,9 @@ public class TestItemImplementation {
     private Item booBell;
     private Item goldenPipe;
     
+    /**
+     * Initialize the items and the player used in all tests
+     */
     @BeforeEach
     public void init() {
         cursedDice = factory.createItem(ItemName.DADO_MALEDETTO);
@@ -32,6 +38,9 @@ public class TestItemImplementation {
         testPlayer= new PlayerImplementation("test", "Mario");
     }
 
+    /**
+     * Test the getDescription method of the items
+     */
     @Test
     public void testGetDescription() {
         assertEquals("Il dado ha solo numeri da 1 a 3. Può essere attivato su un giocatore a tua scelta",
@@ -39,18 +48,27 @@ public class TestItemImplementation {
         assertEquals("Boo ruba delle monete ad un avversario.", booBell.getDescription());
     }
 
+    /**
+     * Test the getCost method of the items
+     */
     @Test
     public void testGetCost() {
         assertEquals(15, goldenPipe.getCost());
         assertEquals(5, doubleDice.getCost());
     }
 
+    /**
+     * test the getName method of the item
+     */
     @Test
     public void testGetName() {
         assertEquals(ItemName.DADO_FORTUNATO, luckyDice.getName());
         assertEquals(ItemName.CAMPANA_BOO, booBell.getName());
     }
 
+    /**
+     * Test the activation of the items and the effect on the playesr
+     */
     @Test
     public void testActivation () {
         final Player testPlayer2 = new PlayerImplementation("test2", "Luigi");

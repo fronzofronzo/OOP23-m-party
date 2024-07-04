@@ -7,6 +7,9 @@ import it.unibo.mparty.model.player.api.Player;
  */
 public class CursedDice extends AbstractItem{
 
+    /**
+     * Construct a new istance of CursedDice item
+     */
     public CursedDice (){
         super (ItemName.DADO_MALEDETTO,5);
     }
