@@ -84,11 +84,9 @@ public class GameModelImpl implements GameModel{
     public int rollDice() {
        if(this.status == GameStatus.ROLL_DICE){
            this.players.get(actualPlayerIndex).getDice().rollDice();
-           this.switchStatus();
-           return this.players.get(actualPlayerIndex).getDice().getResult();
-       } else {
-           return 0;
+           this.status = this.status.switchStatus();
        }
+        return this.players.get(actualPlayerIndex).getDice().getResult();
     }
 
     /**
@@ -211,22 +209,15 @@ public class GameModelImpl implements GameModel{
         return Collections.unmodifiableList(output);
     }
 
+    /**
+     * {@inheritDoc}
+     * @return
+     */
     @Override
     public Pair<String, Position> getActualPlayerInfo() {
         final Player pl = this.players.get(actualPlayerIndex);
         return new Pair<>(pl.getUsername(),pl.getPosition());
     }
 
-    private void switchStatus(){
-        switch (this.status) {
-            case ROLL_DICE -> {
-                this.status = GameStatus.MOVE_PLAYER;
-            }
-            case MOVE_PLAYER -> {
-                this.status = GameStatus.ROLL_DICE;
-            }
-        };
-
-    }
 
 }
