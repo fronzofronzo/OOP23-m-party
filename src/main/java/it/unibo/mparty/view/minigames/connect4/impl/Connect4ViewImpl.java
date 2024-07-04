@@ -68,7 +68,7 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
         if (index==null) {
             index=0;
         }
-        this.controller.selectColumn(index);
+        this.controller.check(index);
     }
 
     @Override

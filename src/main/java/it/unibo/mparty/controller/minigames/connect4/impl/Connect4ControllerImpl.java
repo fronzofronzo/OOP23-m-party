@@ -30,7 +30,7 @@ public class Connect4ControllerImpl implements Connect4Controller {
     }
 
     @Override
-    public void selectColumn(int column) {
+    public void check(int column) {
         int row = this.model.getAvailableRow(column);
         if (this.model.addDisc(column)) {
             this.view.addCircle(column, row, this.model.getTurnPlayer().equals(this.model.getPlayer1()));

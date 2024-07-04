@@ -9,7 +9,7 @@ public interface Connect4View extends MinigameView, Initializable{
      * Add a circle to the gameGrid
      * @param col the column index
      * @param row the row index
-     * @param color treu if the first player is adding a circle, false otherwise
+     * @param color true if the first player is adding a circle, false otherwise
      */
     public void addCircle(int col, int row, boolean color);
 
