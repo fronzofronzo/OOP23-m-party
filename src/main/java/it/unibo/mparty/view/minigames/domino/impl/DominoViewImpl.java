@@ -69,6 +69,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     private void initialize() {
         this.tilesContainer = new VBox();
         this.tilesContainer.setSpacing(SPACING);
+        this.tilesContainer.setAlignment(Pos.CENTER);
         this.scrollPane.setContent(tilesContainer);
         this.scrollPane.setFitToWidth(true);
         this.scrollPane.setFitToHeight(true);
