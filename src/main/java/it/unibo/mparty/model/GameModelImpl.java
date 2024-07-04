@@ -211,8 +211,13 @@ public class GameModelImpl implements GameModel{
 
     @Override
     public Set<Direction> getDirections() {
-        Map<Direction,Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
-        return pos.entrySet().stream().map(entry -> entry.getKey()).collect(Collectors.toSet());
+        if (this.status.equals(GameStatus.MOVE_PLAYER)) {
+            Map<Direction,Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
+            if (pos.size() > 1) {
+                return pos.entrySet().stream().map(entry -> entry.getKey()).collect(Collectors.toSet());
+            }
+        }
+        return Collections.emptySet();
     }
 
     @Override
