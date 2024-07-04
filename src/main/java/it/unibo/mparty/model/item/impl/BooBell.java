@@ -11,7 +11,7 @@ public class BooBell extends AbstractItem{
      * Construct a new istance of BooBell item
      */
     public BooBell() {
-        super(ItemName.CAMPANA_BOO, 10);
+        super(ItemName.CAMPANA_BOO, 7);
     }
 
     @Override

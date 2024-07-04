@@ -53,8 +53,8 @@ public class TestItemImplementation {
      */
     @Test
     public void testGetCost() {
-        assertEquals(15, goldenPipe.getCost());
-        assertEquals(5, doubleDice.getCost());
+        assertEquals(10, goldenPipe.getCost());
+        assertEquals(7, doubleDice.getCost());
     }
 
     /**
