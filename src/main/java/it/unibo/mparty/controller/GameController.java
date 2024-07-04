@@ -25,6 +25,12 @@ public interface GameController {
     void movePlayer(Optional<Direction> dir);
 
     /**
+     * handle the activation of the slot where is located the actual player
+     */
+    void activateSlot();
+
+
+    /**
      * Manage the acquisition of an item of the player's playing the
      * turn
      * @param item that player wants to buy

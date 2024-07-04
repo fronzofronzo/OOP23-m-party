@@ -34,6 +34,12 @@ public class GameControllerImpl implements GameController{
     }
 
     @Override
+    public void activateSlot() {
+        this.model.activateSlot();
+
+    }
+
+    @Override
     public boolean buyItem(ItemName item) {
        // return this.model.buyItem()
         return true;
