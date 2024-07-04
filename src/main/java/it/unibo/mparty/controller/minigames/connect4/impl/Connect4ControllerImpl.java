@@ -2,13 +2,12 @@ package it.unibo.mparty.controller.minigames.connect4.impl;
 
 import java.util.List;
 
-import it.unibo.mparty.controller.minigames.MinigameController;
 import it.unibo.mparty.controller.minigames.connect4.api.Connect4Controller;
 import it.unibo.mparty.model.minigames.connect4.api.Connect4Model;
 import it.unibo.mparty.model.minigames.connect4.impl.Connect4ModelImpl;
 import it.unibo.mparty.view.minigames.connect4.api.Connect4View;
 
-public class Connect4ControllerImpl implements MinigameController, Connect4Controller {
+public class Connect4ControllerImpl implements Connect4Controller {
 
     private Connect4View view;
     private final Connect4Model model;

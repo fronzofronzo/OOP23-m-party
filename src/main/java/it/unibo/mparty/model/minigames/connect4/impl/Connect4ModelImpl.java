@@ -64,14 +64,16 @@ public class Connect4ModelImpl implements Connect4Model{
         if (row ==-1) {
             return false;
         }
-        lastSelected = new Position(column, row);
+        lastSelected = new Position(row, column);
         selectedMap.put(lastSelected, getTurnPlayer());
         return true;
     }
 
     @Override
     public int getAvailableRow (int column) {
+        //da modificare
         return IntStream.range(0, ROW_NUMBER)
+        .map(it -> ROW_NUMBER -1 -it)
         .filter(i -> !selectedMap.containsKey(new Position(i, column)))
         .findFirst()
         .orElse(-1);
