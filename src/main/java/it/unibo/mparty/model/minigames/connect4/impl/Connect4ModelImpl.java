@@ -18,9 +18,14 @@ public class Connect4ModelImpl implements Connect4Model{
     private String player1;
     private String player2;
     private String turnPlayer;
-    private Position lastSelected = new Position(-1, -1);
-    private int coinsWon;
-    private Map<Position,String> selectedMap = new HashMap<>();
+    private Position lastSelected;
+    private int coinsWon=0;
+    private Map<Position,String> selectedMap;
+
+    public Connect4ModelImpl() {
+        selectedMap = new HashMap<>();
+        lastSelected = new Position(-1, -1);
+    }
 
     @Override
     public boolean isOver() {
