@@ -25,7 +25,7 @@ public interface GameView {
      */
     void setScene(String path) throws IOException;
 
-    void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> nicknames);
+    void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> nicknames, Position startingPosition);
     /**
      * Switch to te board scene
      */
