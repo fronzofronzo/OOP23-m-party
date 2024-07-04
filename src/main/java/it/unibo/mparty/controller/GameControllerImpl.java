@@ -30,6 +30,7 @@ public class GameControllerImpl implements GameController{
     @Override
     public void movePlayer(Optional<Direction> dir) {
         this.model.movePlayer(dir);
+        this.view.updateCommands(null, this.model.getDirections());
         this.view.updatePlayerPos(this.model.getActualPlayerInfo());
     }
 
