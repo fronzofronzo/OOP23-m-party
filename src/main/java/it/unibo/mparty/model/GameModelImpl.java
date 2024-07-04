@@ -241,10 +241,10 @@ public class GameModelImpl implements GameModel{
     public String getMessage() {
         String output = this.players.get(actualPlayerIndex).getUsername();
         switch (this.status) {
-            case GameStatus.ROLL_DICE: output = output + " tira i dadi"; break;
-            case GameStatus.MOVE_PLAYER: output = output + " muovi la pedina"; break;
-            case GameStatus.ACTIVE_SLOT: output = output + " attiva l'effetto dello slot"; break;
-            case GameStatus.END_TURN: output = output + " passa il turno"; break;
+            case ROLL_DICE: output = output + " tira i dadi"; break;
+            case MOVE_PLAYER: output = output + " muovi la pedina"; break;
+            case ACTIVE_SLOT: output = output + " attiva l'effetto dello slot"; break;
+            case END_TURN: output = output + " passa il turno"; break;
             default: break;
         }
         return output;
