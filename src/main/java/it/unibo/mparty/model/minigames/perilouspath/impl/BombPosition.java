@@ -23,10 +23,14 @@ public class BombPosition extends AbstractPosition{
      */
     @Override
     public boolean isSafe(List<AbstractPosition> list1,List<AbstractPosition> list2) {
-        if(list1.size() == EMPTY){
+        if(list1.isEmpty()){
             return true;
         }
-        return list1.stream().filter(b -> this.adjacent(b)).collect(Collectors.toList()).size() <= MAX_NEAR_BOMBS;
+        return list1.stream().filter(this::adjacent).toList().size() <= MAX_NEAR_BOMBS;
+    }
+
+    private boolean notSamePosition(List<AbstractPosition> list){
+        return list.stream().anyMatch(b -> (this.getX() == b.getX() && this.getY() == b.getY()));
     }
 
     
