@@ -53,9 +53,11 @@ public class GameViewImpl extends Application implements GameView{
         this.stage = primaryStage;
         this.setScene("GameBoard");
         PlayerBuilder pb = new PlayerBuilderImplementation();
-        Player p1 = pb.username("M").character("Mario").buildPlayer();
-        Player p2 = pb.username("L").character("Luigi").buildPlayer();
-        this.controller.startGame(new GameModelImpl(List.of(p1,p2), "MEDIUM"));
+        Player p1 = pb.username("Mario").character("Mario").buildPlayer();
+        Player p2 = pb.username("Luigi").character("Luigi").buildPlayer();
+        Player p3 = pb.username("Daisy").character("Luigi").buildPlayer();
+        Player p4 = pb.username("Peach").character("Luigi").buildPlayer();
+        this.controller.startGame(new GameModelImpl(List.of(p1,p2,p3,p4), "MEDIUM"));
         this.stage.setMaximized(true);
         this.stage.show();
     }
