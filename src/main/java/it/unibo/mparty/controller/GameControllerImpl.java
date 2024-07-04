@@ -8,6 +8,7 @@ import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 import it.unibo.mparty.model.shop.impl.ShopImpl;
 import it.unibo.mparty.model.item.api.Item;
@@ -84,9 +85,14 @@ public class GameControllerImpl implements GameController{
 
 
     @Override
-    public boolean selectItem(String itemString) {
-        Item item = (Item) (shop.getItemList().stream().filter(it -> itemString.equals(it.getName().getNametoString())));
-        return shop.buyItem(player, item);
+    public boolean buyItem(String itemString) {
+        Optional<Item> item = shop.getItemList().stream().filter(it -> itemString.equals(it.getName().getNametoString()))
+        .findFirst();
+        if (item.isPresent()) {
+            return shop.buyItem(player, item.get());
+        }
+        return false;
+        
     }
 
 }

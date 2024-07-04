@@ -51,7 +51,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
     }
 
     private void selectItem(ActionEvent e) {
-        this.getMainController().selectItem(stringList.get(this.buttonPane.getChildren().indexOf((Button)(e.getSource()))));
+        this.getMainController().buyItem(stringList.get(this.buttonPane.getChildren().indexOf((Button)(e.getSource()))));
     }
 
     @Override

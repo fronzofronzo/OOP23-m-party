@@ -23,7 +23,7 @@ public interface GameController {
      * @param itemString the item theplayer wants to buy
      * @return true if he can buy it, false otherwise
      */
-    public boolean selectItem(String itemString);
+    public boolean buyItem(String itemString);
 
     /**
      * Handle the request of the user to roll dice
