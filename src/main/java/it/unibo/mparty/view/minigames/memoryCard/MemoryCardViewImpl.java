@@ -2,12 +2,14 @@ package it.unibo.mparty.view.minigames.memoryCard;
 
 import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardController;
 import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardControllerImpl;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Font;
 
 public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardView{
 
@@ -34,23 +36,13 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     }
 
     @Override
-    public void showResult(int n) {
-        this.textLabel.setText("Il giocatore ha guadagnato " + String.valueOf(n) + " monete");
-        this.controlButton.setDisable(false);
-        // this.getController.endMinigame(n)
-        this.controlButton.setText("Lascia il minigioco ");
-        this.controlButton.setOnAction(e -> {
-            // this.getView.setScene(mainScene.xml)
-        });
-    }
-
-    @Override
     public void addCard(String text) {
         final Button bt = new Button(text);
         bt.setOnAction(this::tryCard);
         bt.setPrefSize(100,100);
         bt.setDisable(true);
         bt.setStyle("-fx-opacity: 1.0; ");
+        bt.setFont(new Font("Segoe UI Light", 15));
         this.cardsPane.getChildren().add(bt);
     }
 
@@ -79,6 +71,13 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
 
     private void tryCard(ActionEvent e){
         this.controller.selectCard(this.cardsPane.getChildren().indexOf((Button)e.getSource()));
+    }
+
+
+    @Override
+    public void showResult(Pair<String, Integer> result) {
+        this.textLabel.setText(  result.getFirst() + " ha guadagnato " +  String.valueOf(result.getSecond()) + " monete." );
+        this.controlButton.setOnAction(e -> {/*this.getMainView.showBoard*/});
     }
 
 }
