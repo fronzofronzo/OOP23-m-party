@@ -16,7 +16,11 @@ public enum ItemName {
         this.name=name;
     }
 
-    private String getName() {
+    /**
+     * Get the name of the item
+     * @return the string representing the item
+     */
+    public String getName() {
         return this.name;
     }
 }
