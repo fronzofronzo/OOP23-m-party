@@ -2,6 +2,9 @@ package it.unibo.mparty.view;
 
 import it.unibo.mparty.controller.GameControllerImpl;
 import it.unibo.mparty.model.GameModelImpl;
+import it.unibo.mparty.model.player.api.Player;
+import it.unibo.mparty.model.player.api.PlayerBuilder;
+import it.unibo.mparty.model.player.impl.PlayerBuilderImplementation;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
@@ -46,7 +49,10 @@ public class GameViewImpl extends Application implements GameView{
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
         this.setScene("GameBoard.fxml");
-        this.controller.startGame(new GameModelImpl(null, "MEDIUM"));
+        PlayerBuilder pb = new PlayerBuilderImplementation();
+        Player p1 = pb.username("M").character("Mario").buildPlayer();
+        Player p2 = pb.username("L").character("Luigi").buildPlayer();
+        this.controller.startGame(new GameModelImpl(List.of(p1,p2), "MEDIUM"));
         this.stage.setMaximized(true);
         this.stage.show();
     }
@@ -79,6 +85,6 @@ public class GameViewImpl extends Application implements GameView{
 
     @Override
     public void updateCommands(List<String> items, Set<Direction> directions) {
-        this.updateCommands(items, directions);
+        this.boardView.updateCommands(items, directions);
     }
 }

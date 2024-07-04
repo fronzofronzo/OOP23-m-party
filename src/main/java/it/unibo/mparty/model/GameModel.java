@@ -6,6 +6,7 @@ import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -81,5 +82,7 @@ public interface GameModel {
      * @param result of the minigame
      */
     void endMinigame(Pair<String,Integer> result);
+
+    List<String> getPlayersNicknames();
 
 }

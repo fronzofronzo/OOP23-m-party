@@ -3,6 +3,7 @@ package it.unibo.mparty.controller;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
@@ -47,7 +48,8 @@ public class GameControllerImpl implements GameController{
         this.model = model;
         try {
             this.view.setScene("GameBoard.fxml");
-            this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), new ArrayList<>());
+            this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames());
+            this.view.updateCommands(Collections.emptyList(), Collections.EMPTY_SET);
         } catch (IOException e) {
             e.printStackTrace();
         }
