@@ -137,31 +137,33 @@ public class GameModelImpl implements GameModel{
         final Player actualPlayer = this.players.get(actualPlayerIndex);
         final SlotType slot = this.board.getSlotType(actualPlayer.getPosition());
         final Random random = new Random();
-        switch (slot) {
-            case SINGLEPLAYER -> {
-                try {
-                    this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.SINGLE_PLAYER);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
+        if(this.status.equals(GameStatus.END_TURN)){
+            switch (slot) {
+                case SINGLEPLAYER -> {
+                    try {
+                        this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.SINGLE_PLAYER);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-            }
-            case MULTIPLAYER -> {
-                try {
-                    this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.MULTI_PLAYER);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
+                case MULTIPLAYER -> {
+                    try {
+                        this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.MULTI_PLAYER);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-            }
-            case BONUS -> {
-                actualPlayer.addCoins(random.nextInt(MIN_COINS, MAX_COINS));
-            }
-            case MALUS -> {
-                actualPlayer.removeCoins(random.nextInt(MIN_COINS, MAX_COINS));
-            }
-            case ACTIVE_STAR -> {
-            }
-            default -> {break;}
-        };
+                case BONUS -> {
+                    actualPlayer.addCoins(random.nextInt(MIN_COINS, MAX_COINS));
+                }
+                case MALUS -> {
+                    actualPlayer.removeCoins(random.nextInt(MIN_COINS, MAX_COINS));
+                }
+                case ACTIVE_STAR -> {
+                }
+                default -> {break;}
+            };
+        }
 
     }
 
