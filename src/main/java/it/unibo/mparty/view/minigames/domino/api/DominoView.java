@@ -12,7 +12,7 @@ public interface DominoView extends SceneView {
 
     void setPlayerName(boolean isPlayer1, String playerName);
 
-    void setTurn(boolean isPlayer1Turn, String playerName);
+    void setTurn(boolean isPlayer1Turn);
 
     void playerCanDraw();
 
@@ -22,5 +22,5 @@ public interface DominoView extends SceneView {
 
     void setMessage(DominoMessage message);
 
-    void setWinner(String winner);
+    void gameEnd(String winner);
 }
