@@ -5,10 +5,7 @@ import it.unibo.mparty.model.minigames.domino.api.Tile;
 import it.unibo.mparty.model.minigames.domino.api.PlayerTiles;
 import it.unibo.mparty.model.player.api.Player;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class PlayerTilesImpl implements PlayerTiles {
 
@@ -27,24 +24,41 @@ public class PlayerTilesImpl implements PlayerTiles {
 
     @Override
     public boolean canPlayerPlace(Player player, BoardTile boardTile){
-        for (final Tile tile : playersTiles.get(player)) {
-           if (!boardTile.canPlaceTile(tile)){
-               return false;
-           }
+        for (final Tile tile : this.playersTiles.get(player)) {
+            if (boardTile.canMatchBoardTile(tile)){
+                return true;
+            }
         }
-        return true;
+        return false;
     }
 
     @Override
     public void removeTilesFromPlayer(final Player player, final Tile tile) {
-        Set<Tile> tiles = this.playersTiles.get(player);
-        if (tiles != null) {
-            tiles.remove(tile);
-        }
+        this.playersTiles.get(player).remove(tile);
     }
 
     @Override
     public Set<Tile> getPlayerTiles(final Player player) {
         return this.playersTiles.getOrDefault(player, new HashSet<>());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PlayerTilesImpl that = (PlayerTilesImpl) o;
+        return Objects.equals(playersTiles, that.playersTiles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(playersTiles);
+    }
+
+    @Override
+    public String toString() {
+        return "PlayerTilesImpl{" +
+                "playersTiles=" + playersTiles +
+                '}';
     }
 }
