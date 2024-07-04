@@ -52,10 +52,10 @@ public class PerilousPathImpl implements PerilousPath{
     @Override
     public Type hit(AbstractPosition p) {
         if(p.isSafe(this.path.get(),this.getBalls())){
-            if(this.bombs.get().contains(this.bombWrapper(p))){
+            if(this.bombs.get().stream().anyMatch(b -> b.getX() == p.getX() && b.getY() == p.getY())){
                 return Type.BOMB;
             }
-            if(this.balls.get().contains(this.ballWrapper(p)) && !p.equals(this.getBalls().get(0))){
+            if(this.balls.get().stream().anyMatch(b -> b.getX() == p.getX() && b.getY() == p.getY()) && !p.equals(this.getBalls().get(0))){
                 return Type.BALL;
             }
             this.path.get().add(p);
@@ -91,7 +91,7 @@ public class PerilousPathImpl implements PerilousPath{
         BombPosition b;
         do{
             b = new BombPosition(random.nextInt(this.getSize() - 1), random.nextInt(this.getSize()- 1), this.getSize());
-        }while (!b.isSafe(this.getBombs(),List.of()));
+        }while (!b.isSafe(this.getBombs(),this.getBalls()));
         return b;
     }
 
@@ -106,14 +106,6 @@ public class PerilousPathImpl implements PerilousPath{
             b = new BallPosition(this.random.nextInt(this.getSize() - 1), y, this.getSize());
         }while(!b.isSafe(List.of(), List.of()));
         return b;
-    }
-
-    private BallPosition ballWrapper(AbstractPosition p){
-        return new BallPosition(p.getX(), p.getY(), this.getSize());
-    }
-
-    private BombPosition bombWrapper(AbstractPosition p){
-        return new BombPosition(p.getX(),p.getY(),this.getSize());
     }
 
 }
