@@ -1,5 +1,7 @@
 package it.unibo.mparty.model.player.api;
 
+import it.unibo.mparty.utilities.Pair;
+
 public interface Dice {
 
     /**
@@ -31,5 +33,7 @@ public interface Dice {
      * @return dice result
      */
     int getResult();
+
+    Pair
 
 }
