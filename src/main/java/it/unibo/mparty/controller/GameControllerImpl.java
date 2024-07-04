@@ -35,7 +35,7 @@ public class GameControllerImpl implements GameController{
 
     @Override
     public void activateSlot() throws IOException {
-        this.model.activateSlot();
+        this.model.action();
         if (this.model.getActiveMinigame().isPresent()) {
             this.view.setScene(this.model.getActiveMinigame().get());
         }

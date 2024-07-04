@@ -60,7 +60,7 @@ public interface GameModel {
     /**
      * Activate the effect of slot where is the player that's playing its turn
      */
-    void activateSlot();
+    void action();
 
     /**
      * Get the board configuration: for each slot, returns the relative slot type

@@ -140,7 +140,17 @@ public class GameModelImpl implements GameModel{
      * {@inheritDoc}
      */
     @Override
-    public void activateSlot() {
+    public void action() {
+        if (this.status.equals(GameStatus.ACTIVE_SLOT)) {
+            this.activateSlot();
+            this.status = this.status.switchStatus();
+        } else if (this.status.equals(GameStatus.END_TURN)) {
+            this.nextPlayer();
+            this.status = this.status.switchStatus();
+        }
+    }
+
+    private void activateSlot() {
         final Player actualPlayer = this.players.get(actualPlayerIndex);
         final SlotType slot = this.board.getSlotType(actualPlayer.getPosition());
         final Random random = new Random();
@@ -171,7 +181,6 @@ public class GameModelImpl implements GameModel{
                 default -> {break;}
             };
         }
-
     }
 
     /**
