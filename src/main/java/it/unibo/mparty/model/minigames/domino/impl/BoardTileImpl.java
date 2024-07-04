@@ -4,6 +4,7 @@ import it.unibo.mparty.model.minigames.domino.api.BoardTile;
 import it.unibo.mparty.model.minigames.domino.api.Tile;
 
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class BoardTileImpl implements BoardTile {
     private final LinkedList<Tile> boardTiles;
@@ -40,4 +41,17 @@ public class BoardTileImpl implements BoardTile {
 
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BoardTileImpl boardTile = (BoardTileImpl) o;
+        return Objects.equals(boardTiles, boardTile.boardTiles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(boardTiles);
+    }
 }
