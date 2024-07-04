@@ -19,5 +19,5 @@ public interface GameBoardView extends SceneView{
 
     void updateCommands(List<String> items, Set<Direction> directions);
 
-    void setUpBoard(Pair<Integer,Integer> dimension, Map<Position,SlotType> board, List<String> players);
+    void setUpBoard(Pair<Integer,Integer> dimension, Map<Position,SlotType> board, List<String> players, Position startingPosition);
 }
