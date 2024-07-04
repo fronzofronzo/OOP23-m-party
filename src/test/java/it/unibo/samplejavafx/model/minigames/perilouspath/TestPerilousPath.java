@@ -4,6 +4,8 @@ package it.unibo.samplejavafx.model.minigames.perilouspath;
 
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import it.unibo.mparty.model.minigames.perilouspath.impl.BallPosition;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
@@ -14,13 +16,13 @@ import it.unibo.mparty.model.minigames.perilouspath.impl.PerilousPathImpl;
 
 public class TestPerilousPath{
 
-    private static int SIDE = 8;
-    private static int NUM_BALLS = 2;
-    private static int NUM_BOMBS = 8;
-    private static int FIRST_COLUMN = 0;
-    private static int LAST_COLUMN = 7;
+    private static final int SIDE = 8;
+    private static final int NUM_BALLS = 2;
+    private static final int NUM_BOMBS = 8;
+    private static final int FIRST_COLUMN = 0;
+    private static final int LAST_COLUMN = 7;
 
-    private PerilousPath model = new PerilousPathImpl(SIDE);
+    private final PerilousPath model = new PerilousPathImpl(SIDE);
 
     @Test
     public void TestPerilousPathConstructor(){
