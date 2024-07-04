@@ -51,6 +51,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
                 }
             }
         }
+        this.myGridPane.setDisable(true);
     }
 
     @Override
@@ -63,6 +64,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
                 }
             }
         }
+        this.myGridPane.setDisable(false);
     }
 
     @Override

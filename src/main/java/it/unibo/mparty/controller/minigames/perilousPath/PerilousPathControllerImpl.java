@@ -12,7 +12,7 @@ public class PerilousPathControllerImpl implements  PerilousPathController{
     private final PerilousPath model;
     private final PerilousPathView view;
     private final static int SIZE = 8;
-    private final static int SECONDS = 6000;
+    private final static int SECONDS = 3000;
     private final PauseTransition pause = new PauseTransition(new Duration(SECONDS));
 
     public PerilousPathControllerImpl(PerilousPathView view){
