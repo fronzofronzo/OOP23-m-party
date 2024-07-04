@@ -89,10 +89,12 @@ public class GameControllerImpl implements GameController{
         Optional<Item> item = shop.getItemList().stream().filter(it -> itemString.equals(it.getName().getNametoString()))
         .findFirst();
         if (item.isPresent()) {
-            return shop.buyItem(player, item.get());
+            if (shop.buyItem(player, item.get())) {
+                this.shopview.updateMoney(player.getNumCoins());
+                return true;
+            }
         }
         return false;
-        
     }
 
 }
