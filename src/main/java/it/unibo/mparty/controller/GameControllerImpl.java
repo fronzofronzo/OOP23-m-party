@@ -3,7 +3,6 @@ package it.unibo.mparty.controller;
 import java.io.IOException;
 
 import it.unibo.mparty.model.GameModel;
-import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
 
@@ -81,6 +80,7 @@ public class GameControllerImpl implements GameController{
         itemMap.forEach((str, i) -> shopview.addButton(str, i));
         shop.getItemList().stream().forEach(it -> this.shopview.addDescription(it.getDescription()));
         this.shopview.updateMoney(player.getNumCoins());
+        player.addCoins(50);
     }
 
 
