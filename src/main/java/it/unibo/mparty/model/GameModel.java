@@ -21,7 +21,7 @@ public interface GameModel {
      *
      * @return
      */
-    boolean movePlayer(Optional<Direction> dir);
+    void movePlayer(Optional<Direction> dir);
 
     Set<Direction> getDirections();
 
