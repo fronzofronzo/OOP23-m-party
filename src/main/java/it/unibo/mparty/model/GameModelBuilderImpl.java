@@ -23,7 +23,9 @@ public class GameModelBuilderImpl implements GameModelBuilder{
         final Player pl = builder.username(nickname)
                                     .character(character)
                                     .buildPlayer();
-        players.add(pl);
+        if(players.stream().anyMatch(p -> p.getUsername().equals(pl.getUsername()) || p.getCharacter().equals(pl.getCharacter()))){
+            throw new IllegalArgumentException("This player is already present ");
+        }
         return this;
     }
 
