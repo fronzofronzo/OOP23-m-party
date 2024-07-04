@@ -160,18 +160,18 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     private void setUpPlayers() {
-        double cellWidth = this.board.getWidth() / this.board.getColumnCount();
-        double cellHeight = this.board.getHeight() / this.board.getRowCount();
+        //double cellWidth = this.board.getWidth() / this.board.getColumnCount();
+        //double cellHeight = this.board.getHeight() / this.board.getRowCount();
 
-        double offsetX = (cellWidth / 2) - this.player1.getRadius();
-        double offsetY = (cellHeight / 2) - this.player1.getRadius();
-        int d = 5;
-        this.player1.setTranslateY(-offsetY / d); // Sposta il primo cerchio in alto
-        this.player2.setTranslateX(offsetX / d); // Sposta il secondo cerchio a destra
-        this.player2.setTranslateY(-offsetY / d); // Sposta il secondo cerchio in alto
-        this.player3.setTranslateY(offsetY / d); // Sposta il terzo cerchio in basso
-        this.player4.setTranslateX(offsetX / d); // Sposta il quarto cerchio a destra
-        this.player4.setTranslateY(offsetY / d); // Sposta il quarto cerchio in basso
+        //double offsetX = (cellWidth / 2) - this.player1.getRadius();
+        //double offsetY = (cellHeight / 2) - this.player1.getRadius();
+        int d = 10;
+        this.player1.setTranslateY(-d); // Sposta il primo cerchio in alto
+        this.player2.setTranslateX(d); // Sposta il secondo cerchio a destra
+        this.player2.setTranslateY(d); // Sposta il secondo cerchio in alto
+        this.player3.setTranslateY(d); // Sposta il terzo cerchio in basso
+        this.player4.setTranslateX(d); // Sposta il quarto cerchio a destra
+        this.player4.setTranslateY(d); // Sposta il quarto cerchio in basso
     }
 
     private void setSize() {

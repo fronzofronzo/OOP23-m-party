@@ -48,7 +48,7 @@ public class GameControllerImpl implements GameController{
         this.model = model;
         try {
             this.view.setScene("GameBoard.fxml");
-            //this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.get);
+            this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.getPlayerPosition(this.model.getPlayersNicknames().stream().findFirst().get()));
             this.view.updateCommands(Collections.emptyList(), Collections.EMPTY_SET);
         } catch (IOException e) {
             e.printStackTrace();
