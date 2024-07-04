@@ -30,7 +30,7 @@ public class Connect4ModelImpl implements Connect4Model{
             return true;
         }
         if (hasWon(lastSelected.getX(), lastSelected.getY())) {
-            coinsWon = 15;
+            coinsWon = 10;
             return true;
         }
         manageTurn();
@@ -71,7 +71,6 @@ public class Connect4ModelImpl implements Connect4Model{
 
     @Override
     public int getAvailableRow (int column) {
-        //da modificare
         return IntStream.range(0, ROW_NUMBER)
         .map(it -> ROW_NUMBER -1 -it)
         .filter(i -> !selectedMap.containsKey(new Position(i, column)))
