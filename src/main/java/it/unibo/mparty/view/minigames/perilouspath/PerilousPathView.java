@@ -19,7 +19,7 @@ public interface PerilousPathView  extends SceneView{
 
     void buttonClicked(ActionEvent e);
 
-    void handleStartButton(ActionEvent e);
+    void handleStartButton(ActionEvent e) throws InterruptedException;
 
 
     
