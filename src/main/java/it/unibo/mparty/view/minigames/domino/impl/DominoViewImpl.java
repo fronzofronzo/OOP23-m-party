@@ -200,8 +200,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         });
     }
 
-    @Override
-    public void clearTileValues(final HBox playerTiles) {
+    private void clearTileValues(final HBox playerTiles) {
         playerTiles.getChildren().stream()
                 .filter(node -> node instanceof VBox)
                 .map(node -> (VBox) node)
