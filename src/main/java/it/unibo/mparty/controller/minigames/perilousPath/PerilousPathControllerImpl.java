@@ -16,6 +16,7 @@ public class PerilousPathControllerImpl implements  PerilousPathController{
     private final PauseTransition pause = new PauseTransition(new Duration(SECONDS));
 
     public PerilousPathControllerImpl(PerilousPathView view){
+
         this.model = new PerilousPathImpl(SIZE);
         this.view = view;
         this.model.setBalls();
@@ -33,7 +34,11 @@ public class PerilousPathControllerImpl implements  PerilousPathController{
 
     @Override
     public void hit(AbstractPosition p) {
+
         var type = this.model.hit(p);
+        if(type.equals(PerilousPath.Type.BOMB) || type.equals(PerilousPath.Type.BALL)){
+            this.view.showBombs(this.model.getBombs());
+        }
         this.view.hitTile(type);
     }
 
