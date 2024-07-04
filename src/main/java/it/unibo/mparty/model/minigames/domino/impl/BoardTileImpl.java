@@ -23,7 +23,7 @@ public class BoardTileImpl implements BoardTile {
         if (this.boardTiles.isEmpty()){
             return true;
         }
-        return this.boardTiles.getFirst().match(tile) || this.boardTiles.getLast().match(tile);
+        return this.boardTiles.getFirst().canMatch(tile) || this.boardTiles.getLast().canMatch(tile);
     }
 
     @Override
