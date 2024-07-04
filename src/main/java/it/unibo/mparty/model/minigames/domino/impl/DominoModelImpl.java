@@ -42,10 +42,7 @@ public class DominoModelImpl implements DominoModel {
     @Override
     public boolean isPlayer1Turn(final Player p1, final Player p2) {
         Random random = new Random();
-        if (this.boardTile.getBoardTiles().isEmpty()) {
-            this.actualTurn = getDoubleTiles(p1) > getDoubleTiles(p2) || random.nextBoolean();
-        }
-        return this.actualTurn;
+        return getDoubleTiles(p1) > getDoubleTiles(p2) || random.nextBoolean();
     }
 
     private int getDoubleTiles(final Player player) {
@@ -60,7 +57,6 @@ public class DominoModelImpl implements DominoModel {
     public boolean checkMove(final Player player, final Tile tile) {
         if (this.boardTile.canPlaceTile(tile)) {
             this.playerTiles.removeTilesFromPlayer(player, tile);
-            this.actualTurn = !this.actualTurn;
             return true;
         }
         return false;
