@@ -19,11 +19,8 @@ public class PathPosition extends AbstractPosition{
      */
     @Override
     public boolean isSafe(List<AbstractPosition> list1,List<AbstractPosition> list2) {
-        if(list1.size() == 0){
-            if(!this.equals(list2.get(0)) && isClose(list2.get(0))){
-                return true;
-            }
-            return false;
+        if(list1.isEmpty()){
+            return !this.equals(list2.get(0)) && this.isClose(list2.get(0));
         }
         return list1.stream().anyMatch(p -> this.inOrizzontal(p) || this.inVertical(p));
     }
