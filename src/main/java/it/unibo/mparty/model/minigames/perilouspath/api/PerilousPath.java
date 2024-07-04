@@ -1,8 +1,10 @@
 package it.unibo.mparty.model.minigames.perilouspath.api;
 
+import it.unibo.mparty.model.minigames.MinigameModel;
+
 import java.util.List;
 
-public interface PerilousPath {
+public interface PerilousPath extends MinigameModel {
 
     /**
      * the types of buttons present a grid

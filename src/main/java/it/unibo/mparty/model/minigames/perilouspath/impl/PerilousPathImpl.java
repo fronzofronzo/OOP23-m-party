@@ -1,14 +1,11 @@
 package it.unibo.mparty.model.minigames.perilouspath.impl;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.IntStream;
 
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
+import it.unibo.mparty.utilities.Pair;
 
 public class PerilousPathImpl implements PerilousPath{
 
@@ -18,6 +15,8 @@ public class PerilousPathImpl implements PerilousPath{
     private Random random;
     private int size;
     private static final int NUM_BOMBS = 8;
+    private List<String> players = new LinkedList<>();
+    private int coins = 20;
 
 
     public PerilousPathImpl(int size){
@@ -65,12 +64,19 @@ public class PerilousPathImpl implements PerilousPath{
     }
 
     @Override
+    public Pair<String, Integer> getResult() {
+        return isOver() ? new Pair<>(this.players.get(0),this.coins) : new Pair<>(this.players.get(0),0);
+    }
+
+    @Override
+    public void setUpPlayers(List<String> players) {
+        this.players = players;
+    }
+
+    @Override
     public boolean isOver() {
-        var p = this.path.get().get(this.getSize() - 1);
-        if(p.inOrizzontal(getBalls().get(1)) || p.inVertical(getBalls().get(1))){
-            return true;
-        }
-        return false;
+        var p = this.path.get().get(this.path.get().size() - 1);
+        return p.inOrizzontal(getBalls().get(1)) || p.inVertical(getBalls().get(1));
     }
 
     @Override
