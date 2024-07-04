@@ -19,8 +19,7 @@ public class TileImpl implements Tile {
     private Optional<Side> canMatchSide(final Side side, final Tile tile){
         if (side.isMatched()) {
             return Optional.empty();
-        } else
-        if (side.getValue() == tile.getSideA().getValue()) {
+        } else if (side.getValue() == tile.getSideA().getValue()) {
             return Optional.of(tile.getSideA());
         } else if (side.getValue() == tile.getSideB().getValue()) {
             return Optional.of(tile.getSideB());
@@ -47,6 +46,11 @@ public class TileImpl implements Tile {
     }
 
     @Override
+    public boolean canMatch(Tile tile){
+        return this.canMatchSide(sideA, tile).isPresent() || this.canMatchSide(sideB, tile).isPresent();
+    }
+
+    @Override
     public boolean isDoubleSide() {
         return this.sideA.getValue() == this.sideB.getValue();
     }
@@ -62,14 +66,16 @@ public class TileImpl implements Tile {
     }
 
     @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof TileImpl tile)) {
-            return false;
-        }
-        return sideA.getValue() == tile.sideA.getValue() && sideB.getValue() == tile.sideB.getValue();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TileImpl tile = (TileImpl) o;
+        return Objects.equals(sideA.getValue(), tile.sideA.getValue()) && Objects.equals(sideB.getValue(), tile.sideB.getValue());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sideA.getValue(), sideB.getValue());
     }
 
     @Override
@@ -77,11 +83,6 @@ public class TileImpl implements Tile {
         return "TileImpl{" +
                 "sideA=" + sideA +
                 ", sideB=" + sideB +
-                "}\n";
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(sideA, sideB);
+                '}';
     }
 }
