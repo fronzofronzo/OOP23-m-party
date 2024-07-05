@@ -75,9 +75,9 @@ public class TestItemImplementation {
         testPlayer2.addCoins(10);
         testPlayer.getPlayerBag().addItem(doubleDice);
         testPlayer.getPlayerBag().addItem(booBell);
-        testPlayer.getPlayerBag().getItem(0).activate(testPlayer);
-        //assertEquals(2, testPlayer.getDice().);
-        testPlayer.getPlayerBag().getItem(1).activate(testPlayer2);
+        testPlayer.getPlayerBag().useItem(testPlayer.getPlayerBag().getItems().get(0));
+        assertEquals(2, testPlayer.getDice().getNumOfAttempts());
+        testPlayer.getPlayerBag().useItem(testPlayer.getPlayerBag().getItems().get(1));
         assertEquals(5,testPlayer2.getNumCoins());
     }
 

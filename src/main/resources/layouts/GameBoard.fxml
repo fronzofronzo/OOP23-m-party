@@ -5,13 +5,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafxS.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.GameBoardView.GameBoardViewImpl">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.uSnibo.mparty.view.GameBoardView.GameBoardViewImpl">
    <left>
       <SplitPane fx:id="leftSplitPane" dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
          <items>
@@ -143,4 +143,39 @@
         </rowConstraints>
       </GridPane>
    </center>
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> develop
+   <left>
+      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane fx:id="player_1" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Label layoutX="13.0" layoutY="38.0" text="NOME " />
+                  <Label layoutX="14.0" layoutY="65.0" text="MONETE" />
+                  <Label layoutX="14.0" layoutY="93.0" text="STELLE" />
+                  <Button layoutX="6.0" layoutY="234.0" mnemonicParsing="false" text="Button" />
+                  <Button layoutX="49.0" layoutY="279.0" mnemonicParsing="false" text="Button" />
+                  <Button layoutX="87.0" layoutY="234.0" mnemonicParsing="false" text="Button" />
+               </children></AnchorPane>
+          <AnchorPane fx:id="player_3" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+        </items>
+      </SplitPane>
+   </left>
+   <right>
+      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane fx:id="player_2" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+          <AnchorPane fx:id="player_4" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+        </items>
+      </SplitPane>
+   </right>
+<<<<<<< HEAD
+>>>>>>> develop
+=======
+=======
+>>>>>>> 65644270695742d91e6d6d501e3c02d60581317e
+>>>>>>> develop
 </BorderPane>

@@ -7,6 +7,7 @@ import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
+import it.unibo.mparty.view.shop.api.ShopView;
 
 /**
  * This interface models the Controller ( pattern MVC ) of the main game. After the game
@@ -14,6 +15,17 @@ import it.unibo.mparty.utilities.Pair;
  * during the initialisation phase. It also handles user request to the model
  */
 public interface GameController {
+
+    /**
+     * Set up the shop view
+     */
+    void setUpShop(ShopView shopView);
+
+    /**
+     * Select an item and check if the player can add it
+     * @param itemString the item the player wants to buy
+     */
+    void buyItem(ItemName itemName, ShopView shopView);
 
     /**
      * Handle the request of the user to roll dice
@@ -31,20 +43,17 @@ public interface GameController {
      */
     void action() throws IOException;
 
-
     /**
-     * Manage the acquisition of an item of the player's playing the
-     * turn
-     * @param item that player wants to buy
-     * @return true if the player is able to buy it, false otherwise
+     * Handle the request of the player to use an item
+     * @param item {@link ItemName} that player wants to use
      */
-    boolean buyItem(ItemName item);
+    void useItem(ItemName item);
 
     /**
      * Manage the start of a new game
      * @param model to set, created during the initial game phase
      */
-    void startGame(GameModel model);
+    void startGame(GameModel model) throws IOException;
 
     /**
      * Get the result of a minigame and update the model with it
