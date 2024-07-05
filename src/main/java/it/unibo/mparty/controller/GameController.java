@@ -3,11 +3,11 @@ package it.unibo.mparty.controller;
 import java.io.IOException;
 import java.util.Optional;
 
-import it.unibo.mparty.view.shop.ShopView;
-
 import it.unibo.mparty.model.GameModel;
+import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
+import it.unibo.mparty.view.shop.api.ShopView;
 
 /**
  * This interface models the Controller ( pattern MVC ) of the main game. After the game
@@ -24,9 +24,8 @@ public interface GameController {
     /**
      * Select an item and check if the player can add it
      * @param itemString the item the player wants to buy
-     * @return true if he can buy it, false otherwise
      */
-    public boolean buyItem(String itemString);
+    public void buyItem(ItemName itemName, ShopView shopView);
 
     /**
      * Handle the request of the user to roll dice

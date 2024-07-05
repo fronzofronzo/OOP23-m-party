@@ -1,11 +1,13 @@
-package it.unibo.mparty.view.shop;
+package it.unibo.mparty.view.shop.impl;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.view.AbstractSceneView;
+import it.unibo.mparty.view.shop.api.ShopView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.SplitPane;
@@ -18,7 +20,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
 
     private int i=1;
     private int j=1;
-    private List<String> stringList = new ArrayList<>();
+    private List<ItemName> itemNameList = new ArrayList<>();
 
     @FXML
     private AnchorPane descriptionPane;
@@ -33,15 +35,15 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
     private Label moneyLabel;
 
 
-    public void addButton (String item, int cost)
+    public void addButton (ItemName itemName, int cost)
     {
         final Button but = new Button();
-        but.setText("Acquista "+ item + ": " + cost);
+        but.setText("Acquista "+ itemName.getNameToString() + ": " + cost);
         but.setOnAction(this::selectItem);
         buttonPane.getChildren().add(but);
         AnchorPane.setTopAnchor(but, i*50.0);
         i++;
-        stringList.add(item);
+        itemNameList.add(itemName);
     }
 
     public void addDescription(String description)
@@ -53,7 +55,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
     }
 
     private void selectItem(ActionEvent e) {
-        this.getMainController().buyItem(stringList.get(this.buttonPane.getChildren().indexOf((Button)(e.getSource()))));
+        this.getMainController().buyItem(itemNameList.get(this.buttonPane.getChildren().indexOf((Button)(e.getSource()))),this);
     }
 
     @Override

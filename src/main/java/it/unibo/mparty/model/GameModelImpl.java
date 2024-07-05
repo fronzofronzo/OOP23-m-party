@@ -2,6 +2,7 @@ package it.unibo.mparty.model;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
+import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.minigameHandler.MinigameHandler;
 import it.unibo.mparty.model.minigameHandler.MinigameHandlerImplementation;
@@ -263,8 +264,8 @@ public class GameModelImpl implements GameModel{
     }
 
     @Override
-    public List<ItemName> getItems() {
-        return this.shop.getItemList().stream().map(it -> it.getName()).toList();
+    public List<Item> getItemsFromShop() {
+        return this.shop.getItemList().stream().toList();
     }
 
 

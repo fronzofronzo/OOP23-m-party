@@ -10,7 +10,7 @@ import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.view.GameBoardView.GameBoardView;
 import it.unibo.mparty.view.minigames.MinigameView;
-import it.unibo.mparty.view.shop.ShopView;
+import it.unibo.mparty.view.shop.api.ShopView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

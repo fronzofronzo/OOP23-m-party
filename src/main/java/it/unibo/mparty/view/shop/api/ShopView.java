@@ -1,6 +1,7 @@
-package it.unibo.mparty.view.shop;
+package it.unibo.mparty.view.shop.api;
 
 
+import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.view.SceneView;
 import javafx.fxml.Initializable;
 
@@ -14,7 +15,7 @@ public interface ShopView extends SceneView,Initializable{
      * @param item the item name
      * @param cost the cost of the item
      */
-    public void addButton (String item, int cost);
+    public void addButton (ItemName itemName, int cost);
 
     /**
      * Add the description of the item to the view

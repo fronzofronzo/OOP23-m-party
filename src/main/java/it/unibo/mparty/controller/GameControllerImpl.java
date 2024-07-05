@@ -9,16 +9,17 @@ import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
+import it.unibo.mparty.view.shop.api.ShopView;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import it.unibo.mparty.model.shop.impl.ShopImpl;
 import it.unibo.mparty.model.item.api.Item;
+import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.impl.PlayerImplementation;
 import it.unibo.mparty.model.shop.api.Shop;
-import it.unibo.mparty.view.shop.ShopView;
 
 
 
@@ -78,24 +79,18 @@ public class GameControllerImpl implements GameController{
 
     @Override
     public void setUpShop(ShopView shopView) {
-        /*Map<String,Integer> itemMap = new HashMap<>();
-        this.model.getItemList().stream().forEach(it -> itemMap.put(it.getName().getNametoString(), it.getCost()));
+        Map<ItemName,Integer> itemMap = new HashMap<>();
+        this.model.getItemsFromShop().stream().forEach(it -> itemMap.put(it.getName(), it.getCost()));
         itemMap.forEach((str, i) -> shopView.addButton(str, i));
-        shop.getItemList().stream().forEach(it -> shopView.addDescription(it.getDescription()));*/
-        //shopView.updateMoney(this.model.getActualPlayerInfo().getX()); player
+        this.model.getItemsFromShop().stream().forEach(it -> shopView.addDescription(it.getDescription()));
+        //shopView.updateMoney(this.model.getPlayer());
     }
 
 
     @Override
-    public boolean buyItem(String itemString) {
-        /*Optional<Item> item = shop.getItemList().stream().filter(it -> itemString.equals(it.getName().getNametoString()))
-        .findFirst();
-        if (item.isPresent()) {
-            /*if (shop.buyItem//(player, item.get())) {
-                this.shopview.updateMoney//(player.getNumCoins());
-                return true;
-            } */
+    public void buyItem(ItemName itemName, ShopView shopView) {
+        if (this.model.buyItem(itemName)) {
+            //shopView.updateMoney(this.model.getPlayer());
         }
-        return false;
     }
 }

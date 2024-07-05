@@ -1,6 +1,7 @@
 package it.unibo.mparty.model;
 
 import it.unibo.mparty.utilities.Position;
+import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
@@ -93,6 +94,6 @@ public interface GameModel {
 
     boolean buyItem (ItemName itemName);
 
-    List<ItemName> getItems ();
+    List<Item> getItemsFromShop ();
 
 }
