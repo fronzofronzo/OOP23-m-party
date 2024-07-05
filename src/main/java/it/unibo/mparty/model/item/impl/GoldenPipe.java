@@ -13,13 +13,12 @@ public class GoldenPipe extends AbstractItem{
 
     @Override
     public void activate(Player player) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'activate'");
+        player.setPosition(null);
     }
 
     @Override
-    public String getDescrition() {
-        return "Vieni teletrasportato nella casella della stella";
+    public String getDescription() {
+        return "Vieni teletrasportato nella casella prima della stella";
     }
 
 }

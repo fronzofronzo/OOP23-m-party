@@ -52,10 +52,10 @@ public class PerilousPathImpl implements PerilousPath{
     @Override
     public Type hit(AbstractPosition p) {
         if(p.isSafe(this.path.get(),this.getBalls())){
-            if(this.bombs.get().contains(p)){
+            if(this.bombs.get().stream().anyMatch(b -> b.getX() == p.getX() && b.getY() == p.getY())){
                 return Type.BOMB;
             }
-            if(this.balls.get().contains(p) && !p.equals(this.getBalls().get(0))){
+            if(this.balls.get().stream().anyMatch(b -> b.getX() == p.getX() && b.getY() == p.getY()) && !p.equals(this.getBalls().get(0))){
                 return Type.BALL;
             }
             this.path.get().add(p);
@@ -91,13 +91,13 @@ public class PerilousPathImpl implements PerilousPath{
         BombPosition b;
         do{
             b = new BombPosition(random.nextInt(this.getSize() - 1), random.nextInt(this.getSize()- 1), this.getSize());
-        }while (!b.isSafe(this.getBombs(),List.of()));
+        }while (!b.isSafe(this.getBombs(),this.getBalls()));
         return b;
     }
 
     /**
      * a private method for getting always a new BallPosition in a pseudo-random manner
-     * @param y the already setted y position in a generic(x,y) position, meaning that onlye the x position will be random
+     * @param y the already set y position in a generic(x,y) position, meaning that only the x position will be random
      * @return a new BallPosition which is safe
      */
     private AbstractPosition setNewBallPosition(int y){

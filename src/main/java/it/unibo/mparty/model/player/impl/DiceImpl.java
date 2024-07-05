@@ -1,13 +1,10 @@
 package it.unibo.mparty.model.player.impl;
 
 import it.unibo.mparty.model.player.api.Dice;
+import it.unibo.mparty.utilities.Pair;
 
 import java.util.Random;
 
-/**
- * This class models the implementation of {@link Dice}. Each dice at first
- * is initialized with standard parameters and can be modified
- */
 public class DiceImpl implements Dice {
 
     private static final int ATTEMPTS = 1;
@@ -17,48 +14,53 @@ public class DiceImpl implements Dice {
     private int numberOfAttempts = ATTEMPTS;
     private int maxNumber = MAX_NUMBER;
     private int minNumber = MIN_NUMBER;
+    private int result;
     private Random random;
 
-    /**
-     * Constructor of a new dice. It initialises the random variable
-     */
     public DiceImpl(){
         this.random = new Random();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setNumberOfAttempts(int num) {
         this.numberOfAttempts = num;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setMaxNumber(int num) {
         this.maxNumber = num;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setMinNumber(int num) {
         this.minNumber = num;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public int generateNumber() {
-        int number = 0;
-        for(int i = 0; i < numberOfAttempts; i++){
-            number += random.nextInt(minNumber,maxNumber+1);
-        }
-        return number;
+    public void rollDice() {
+        this.result = random.nextInt(minNumber, maxNumber);
     }
+
+    @Override
+    public int getResult() {
+        return this.result;
+    }
+
+    @Override
+    public Pair<Integer, Integer> getBounds() {
+        return new Pair<>(this.minNumber, this.maxNumber);
+    }
+
+    @Override
+    public int getNumOfAttempts() {
+        return this.numberOfAttempts;
+    }
+
+    @Override
+    public void resetDice() {
+        numberOfAttempts = ATTEMPTS;
+        maxNumber = MAX_NUMBER;
+        minNumber = MIN_NUMBER;
+    }
+
 }

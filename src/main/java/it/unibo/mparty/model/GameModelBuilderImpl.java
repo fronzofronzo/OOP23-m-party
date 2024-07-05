@@ -11,6 +11,9 @@ import java.util.List;
 
 public class GameModelBuilderImpl implements GameModelBuilder{
 
+    private static final int MIN_PLAYERS  = 2;
+    private static final int MAX_PLAYERS = 4;
+
     private final List<Player> players = new ArrayList<>();
     private String difficulty;
 
@@ -20,7 +23,9 @@ public class GameModelBuilderImpl implements GameModelBuilder{
         final Player pl = builder.username(nickname)
                                     .character(character)
                                     .buildPlayer();
-        players.add(pl);
+        if(players.stream().anyMatch(p -> p.getUsername().equals(pl.getUsername()) || p.getCharacter().equals(pl.getCharacter()))){
+            throw new IllegalArgumentException("This player is already present ");
+        }
         return this;
     }
 
@@ -34,4 +39,15 @@ public class GameModelBuilderImpl implements GameModelBuilder{
     public GameModel build() {
         return new GameModelImpl(players, this.difficulty);
     }
+
+    @Override
+    public boolean enoughPlayers() {
+        return players.size() >= MIN_PLAYERS;
+    }
+
+    @Override
+    public boolean isFull() {
+        return players.size() == MAX_PLAYERS;
+    }
+
 }
