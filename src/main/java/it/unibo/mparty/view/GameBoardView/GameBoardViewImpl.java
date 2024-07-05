@@ -130,7 +130,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
 
     @Override
     public void updatePlayerStats(String palyer, int coins, int stars, List<String> items) {
-        for (int i = 0; i <= this.labelPlayersNames.size(); i++) {
+        for (int i = 0; i < this.labelPlayersNames.size(); i++) {
             if (this.labelPlayersNames.get(i).getText().equals(palyer)) {
                 this.labelPlayersCoins.get(i).setText(String.valueOf(coins));
                 this.labelPlayersStars.get(i).setText(String.valueOf(stars));
