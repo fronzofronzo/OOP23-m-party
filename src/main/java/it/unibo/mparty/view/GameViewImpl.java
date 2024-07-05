@@ -20,7 +20,6 @@ import it.unibo.mparty.controller.GameController;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class GameViewImpl extends Application implements GameView{
 
@@ -28,30 +27,45 @@ public class GameViewImpl extends Application implements GameView{
     private final static String PATH = "/layouts/";
     private final static String PATH_MINIGAMES = "/layouts/minigames/";
     private final static String EXTENSION = ".fxml";
-    private final static String shopName = "Shop";
+    private final static String SHOP_NAME = "Shop";
+    
+    private final GameController controller = new GameControllerImpl(this);
     private GameBoardView boardView;
     private Scene boardScene;
-
     private Stage stage;
-    private final GameController controller = new GameControllerImpl(this);
 
-
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
         this.setBoardView();
+
+        //FAKE START
         PlayerBuilder pb = new PlayerBuilderImplementation();
         Player p1 = pb.username("Mario").character("Mario").buildPlayer();
         Player p2 = pb.username("Luigi").character("Luigi").buildPlayer();
         Player p3 = pb.username("Daisy").character("Luigi").buildPlayer();
         Player p4 = pb.username("Peach").character("Luigi").buildPlayer();
         this.controller.startGame(new GameModelImpl(List.of(p1,p2,p3,p4), "MEDIUM"));
+
         this.stage.setMaximized(true);
         this.stage.show();
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> usernames) {
+        this.boardView.setUpBoard(dimension, board, usernames);
+    }
 
+
+    /* 
     @Override
     public void setScene(SceneType sceneType) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + sceneType.getSceneName() + EXTENSION)); ;
@@ -63,12 +77,7 @@ public class GameViewImpl extends Application implements GameView{
         this.stage.setMinWidth(1000);
         this.stage.setMinHeight(700);
         this.stage.show();
-    }
-
-    @Override
-    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> nicknames) {
-        this.boardView.setUpBoard(dimension, board, nicknames);
-    }
+    }*/
 
     @Override
     public void setMinigameScene(String name) throws IOException {
@@ -92,8 +101,8 @@ public class GameViewImpl extends Application implements GameView{
 
     @Override
     public void setShopScene() throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + shopName + EXTENSION));
-        final Parent root = loader.load(getClass().getResourceAsStream(PATH + shopName + EXTENSION));
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + SHOP_NAME + EXTENSION));
+        final Parent root = loader.load(getClass().getResourceAsStream(PATH + SHOP_NAME + EXTENSION));
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
         final ShopView shopView = loader.<ShopView>getController();
         shopView.init(this,this.controller);
