@@ -31,6 +31,11 @@ public interface GameController {
      */
     void action() throws IOException;
 
+    /**
+     * Handle the request of the player to use an item
+     * @param item {@link ItemName} that player wants to use
+     */
+    void useItem(ItemName item);
 
     /**
      * Manage the acquisition of an item of the player's playing the
