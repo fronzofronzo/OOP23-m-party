@@ -68,6 +68,7 @@ public class GameModelImpl implements GameModel{
     public void movePlayer(Optional<Direction> dir) {
         if (this.status.equals(GameStatus.MOVE_PLAYER)) {
             while (this.steps < this.players.get(actualPlayerIndex).getDice().getResult()) {
+                this.checkStartAcquisition();
                 final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
                 final Map<Direction, Position> nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition);
                 if (nextPlayerPosition.size() == 1 && dir.isEmpty()) {
