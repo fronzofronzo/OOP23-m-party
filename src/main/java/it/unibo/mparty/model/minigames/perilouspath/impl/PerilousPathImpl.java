@@ -50,10 +50,10 @@ public class PerilousPathImpl implements PerilousPath{
     @Override
     public Type hit(AbstractPosition p) {
         if(p.isSafe(this.path,this.getBalls())){
-            if(this.bombs.stream().anyMatch(b -> b.getX() == p.getX() && b.getY() == p.getY())){
+            if(this.bombs.stream().anyMatch(b -> this.samePosition(b,p))){
                 return Type.BOMB;
             }
-            if(this.balls.stream().anyMatch(b -> b.getX() == p.getX() && b.getY() == p.getY()) && !p.equals(this.getBalls().get(0))){
+            if(this.balls.stream().anyMatch(b -> this.samePosition(b,p)) && !p.equals(this.getBalls().get(0))){
                 return Type.BALL;
             }
             this.path.add(p);
@@ -112,6 +112,10 @@ public class PerilousPathImpl implements PerilousPath{
             b = new BallPosition(this.random.nextInt(this.getSize() - 1), y, this.getSize());
         }while(!b.isSafe(List.of(), List.of()));
         return b;
+    }
+
+    private boolean samePosition(AbstractPosition p1, AbstractPosition p2){
+        return p1.getX() == p2.getX() && p1.getY() == p2.getY();
     }
 
 }
