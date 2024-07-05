@@ -84,6 +84,11 @@ public class GameControllerImpl implements GameController{
     }
 
     @Override
+    public void initMinigame() {
+        this.view.initMinigame(this.model.getPlayers().stream().map(Player::getUsername).toList());
+    }
+
+    @Override
     public void setUpShop(ShopView shopView) {
         Map<ItemName,Integer> itemMap = new HashMap<>();
         this.model.getItemsFromShop().stream().forEach(it -> itemMap.put(it.getName(), it.getCost()));

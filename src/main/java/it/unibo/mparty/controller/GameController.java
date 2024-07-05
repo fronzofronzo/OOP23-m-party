@@ -23,7 +23,7 @@ public interface GameController {
 
     /**
      * Select an item and check if the player can add it
-     * @param itemString the item the player wants to buy
+     * @param itemName the item the player wants to buy
      */
     void buyItem(ItemName itemName, ShopView shopView);
 
@@ -62,4 +62,6 @@ public interface GameController {
     void saveMinigameResult(Pair<String, Integer> result);
 
     void endGame();
+
+    void initMinigame();
 }
