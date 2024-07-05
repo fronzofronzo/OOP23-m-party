@@ -13,6 +13,9 @@ class DiceImplTest {
 
     private Dice testDice;
 
+    /**
+     * Configuration step: this is performed before each step.
+     */
     @BeforeEach
     public void init(){
         testDice = new DiceImpl();
