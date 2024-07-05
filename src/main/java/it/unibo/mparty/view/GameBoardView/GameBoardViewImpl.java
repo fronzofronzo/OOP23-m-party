@@ -30,6 +30,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private static final String TEXT_STARS = "STELLE: ";
     private static final String TEXT_ITEMS = "OGGETTI: ";
     private static final String TEXT_VOID_ITEM = "NESSUN OGGETTO";
+    private static final String TEXT_DICE = "RISULTATO: ";
 
     private static final Map<SlotType,Color> SLOT_COLOR = Map.of(SlotType.ACTIVE_STAR, Color.GOLD,
                                                                  SlotType.BONUS, Color.LIGHTGREEN,
@@ -197,7 +198,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
 
     @Override
     public void showResultDice(int result) {
-        this.resultDice.setText(String.valueOf(result));
+        this.resultDice.setText(TEXT_DICE + String.valueOf(result));
     }
 
     @FXML
