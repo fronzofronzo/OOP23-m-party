@@ -2,6 +2,7 @@ package it.unibo.mparty.model;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
+import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.minigameHandler.MinigameHandler;
 import it.unibo.mparty.model.minigameHandler.MinigameHandlerImplementation;
 import it.unibo.mparty.model.minigames.MinigameType;
@@ -197,6 +198,11 @@ public class GameModelImpl implements GameModel{
     @Override
     public Pair<Integer, Integer> getBoardDimensions() {
         return this.board.getDimension();
+    }
+
+    @Override
+    public void useItem(ItemName item) {
+        this.players.get(actualPlayerIndex).getPlayerBag().useItem(item);
     }
 
     /**
