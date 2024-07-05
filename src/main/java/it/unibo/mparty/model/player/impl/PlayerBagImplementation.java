@@ -1,9 +1,12 @@
 package it.unibo.mparty.model.player.impl;
 
+import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.PlayerBag;
 import it.unibo.mparty.model.item.api.Item;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -12,7 +15,8 @@ import java.util.Optional;
  */
 public class PlayerBagImplementation implements PlayerBag {
 
-    private final Optional[] items;
+    private final List<Item> items;
+    private final int capacity;
 
     /**
      * Initialise a {@link PlayerBag} implementation with selected amount
@@ -20,10 +24,8 @@ public class PlayerBagImplementation implements PlayerBag {
      * @param numberOfItems dimension of the bag
      */
     public PlayerBagImplementation(int numberOfItems) {
-        this.items = new Optional[numberOfItems];
-        for(int i = 0; i < numberOfItems; i++ ){
-            items[i] = Optional.empty();
-        }
+        this.items = new ArrayList<>();
+        this.capacity = numberOfItems;
     }
 
     /**
@@ -43,30 +45,24 @@ public class PlayerBagImplementation implements PlayerBag {
      */
     @Override
     public void addItem(Item item) {
-        int i = 0;
-        while(items[i].isPresent()){
-            i++;
-        }
-        items[i] = Optional.of(item);
+        this.items.add(item);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void removeItem(int i) throws IllegalAccessException {
-        if(items[i].isEmpty()){
-            throw new IllegalAccessException("No element is present");
-        } else {
-            items[i] = Optional.empty();
-        }
+    public void useItem(ItemName item) {
+        Optional<Item> itemOptional = Arrays.stream(this.items).filter(i -> i.isPresent()).filter(i -> i.get().)
     }
+
+
 
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean isFull() {
-        return Arrays.stream(items).filter(Optional::isPresent).count() == items.length;
+        return items.size() == capacity;
     }
 }
