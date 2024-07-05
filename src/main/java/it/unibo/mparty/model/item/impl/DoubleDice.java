@@ -1,6 +1,9 @@
 package it.unibo.mparty.model.item.impl;
 
+import java.util.Optional;
+
 import it.unibo.mparty.model.player.api.Player;
+import it.unibo.mparty.utilities.Position;
 
 /**
  * class that implements the Double Dice item
@@ -15,13 +18,13 @@ public class DoubleDice extends AbstractItem{
     }
 
     @Override
-    public void activate(Player player) {
-        player.getDice().setNumberOfAttempts(2);
+    public String getDescription() {
+        return "Si lancia 2 dadi per avanzare";
     }
 
     @Override
-    public String getDescription() {
-        return "Si lancia 2 dadi per avanzare";
+    public void activate(Player player, Optional<Player> target, Optional<Position> position) {
+        player.getDice().setNumberOfAttempts(2);
     }
 
 }

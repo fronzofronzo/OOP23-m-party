@@ -2,12 +2,18 @@ package it.unibo.mparty.model;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
+import it.unibo.mparty.model.item.api.Item;
+import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.minigameHandler.MinigameHandler;
 import it.unibo.mparty.model.minigameHandler.MinigameHandlerImplementation;
 import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.shop.api.Shop;
 import it.unibo.mparty.model.shop.impl.ShopImpl;
+import it.unibo.mparty.utilities.BoardType;
+import it.unibo.mparty.utilities.Pair;
+import it.unibo.mparty.utilities.Position;
+import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.utilities.*;
 
 import java.util.ArrayList;
@@ -150,38 +156,6 @@ public class GameModelImpl implements GameModel{
         }
     }
 
-    private void activateSlot() {
-        final Player actualPlayer = this.players.get(actualPlayerIndex);
-        final SlotType slot = this.board.getSlotType(actualPlayer.getPosition());
-        final Random random = new Random();
-        if(this.status.equals(GameStatus.ACTIVE_SLOT)){
-            switch (slot) {
-                case SINGLEPLAYER -> {
-                    try {
-                        this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.SINGLE_PLAYER);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                case MULTIPLAYER -> {
-                    try {
-                        this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.MULTI_PLAYER);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                case BONUS -> {
-                    actualPlayer.addCoins(random.nextInt(MIN_COINS, MAX_COINS));
-                }
-                case MALUS -> {
-                    actualPlayer.removeCoins(random.nextInt(MIN_COINS, MAX_COINS));
-                }
-                case ACTIVE_STAR -> {
-                }
-                default -> {break;}
-            };
-        }
-    }
 
     /**
      * {@inheritDoc}
@@ -197,6 +171,14 @@ public class GameModelImpl implements GameModel{
     @Override
     public Pair<Integer, Integer> getBoardDimensions() {
         return this.board.getDimension();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void useItem(ItemName item) {
+        this.players.get(actualPlayerIndex).getPlayerBag().useItem(item);
     }
 
     /**
@@ -241,13 +223,65 @@ public class GameModelImpl implements GameModel{
     public String getMessage() {
         String output = this.players.get(actualPlayerIndex).getUsername();
         switch (this.status) {
-            case ROLL_DICE: output = output + " tira i dadi"; break;
-            case MOVE_PLAYER: output = output + " muovi la pedina"; break;
-            case ACTIVE_SLOT: output = output + " attiva l'effetto dello slot"; break;
-            case END_TURN: output = output + " passa il turno"; break;
-            default: break;
+            case ROLL_DICE:
+                output = output + " tira i dadi";
+                break;
+            case MOVE_PLAYER:
+                output = output + " muovi la pedina";
+                break;
+            case ACTIVE_SLOT:
+                output = output + " attiva l'effetto dello slot";
+                break;
+            case END_TURN:
+                output = output + " passa il turno";
+                break;
+            default:
+                break;
         }
         return output;
+    }
+
+    @Override
+    public boolean buyItem(ItemName itemName) {
+        return this.shop.buyItem(this.players.get(actualPlayerIndex), itemName);
+    }
+
+    @Override
+    public List<Item> getItemsFromShop() {
+        return this.shop.getItemList().stream().toList();
+    }
+
+    private void activateSlot() {
+        final Player actualPlayer = this.players.get(actualPlayerIndex);
+        final SlotType slot = this.board.getSlotType(actualPlayer.getPosition());
+        final Random random = new Random();
+        if(this.status.equals(GameStatus.ACTIVE_SLOT)){
+            switch (slot) {
+                case SINGLEPLAYER -> {
+                    try {
+                        this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.SINGLE_PLAYER);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                case MULTIPLAYER -> {
+                    try {
+                        this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.MULTI_PLAYER);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                case BONUS -> {
+                    actualPlayer.addCoins(random.nextInt(MIN_COINS, MAX_COINS));
+                }
+                case MALUS -> {
+                    actualPlayer.removeCoins(random.nextInt(MIN_COINS, MAX_COINS));
+                }
+                case ACTIVE_STAR -> {
+                }
+                default -> {break;}
+            };
+        }
     }
 
 

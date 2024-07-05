@@ -20,10 +20,10 @@ import java.util.List;
 public interface GameView {
 
     /**
-     * Sets the next scene to show
-     * @param path of the scene to show
+     * Sets the next sceneType to show
+     * @param sceneType {@link SceneType} of the sceneType to set
      */
-    void setScene(String path) throws IOException;
+    void setScene(SceneType sceneType) throws IOException;
 
     void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> nicknames, Position startingPosition);
 
@@ -34,9 +34,12 @@ public interface GameView {
     void setMinigameScene(String name) throws IOException;
 
     /**
-     * Set the shop scene in the view
+     * Set the scene of the board
      */
-    void setShopScene();
+
+    void setBoardScene() throws IOException;
+
+    void setShopScene() throws IOException;
 
     void showResultDice(int result);
 
