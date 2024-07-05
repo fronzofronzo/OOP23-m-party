@@ -7,8 +7,8 @@ import javafx.scene.control.Button;
 
 public interface PerilousPathController extends MinigameController {
 
-    public void setUp() throws InterruptedException;
+    void setUp() throws InterruptedException;
 
-    public void hit(AbstractPosition p);
+    void hit(AbstractPosition p);
 
 }
