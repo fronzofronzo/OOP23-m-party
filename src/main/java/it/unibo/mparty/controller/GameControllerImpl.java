@@ -59,7 +59,7 @@ public class GameControllerImpl implements GameController{
     public void startGame(GameModel model) throws IOException {
         this.model = model;
         List<String> usernames = this.model.getPlayers().stream().map(p -> p.getUsername()).toList();
-        this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), usernames);
+        this.view.setUpBoard(this.model.getBoardDimension(), this.model.getBoardConfiguration(), usernames);
         this.model.getPlayers().forEach(p -> this.view.updatePlayerPos(new Pair<String,Position>(p.getUsername(), p.getPosition())));
         this.view.setBoardScene();
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());

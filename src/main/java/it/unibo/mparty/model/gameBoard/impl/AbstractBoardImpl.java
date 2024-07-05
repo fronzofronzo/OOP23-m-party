@@ -132,7 +132,7 @@ public abstract class AbstractBoardImpl implements GameBoard{
     }
 
     @Override
-    public Map<Position,SlotType> getSlotTypeBoard() {
+    public Map<Position,SlotType> getSlotTypeBoardConfiguration() {
         Map<Position,SlotType> output = new HashMap<>();
         for (Entry<Position, Slot> entry : this.board.entrySet()) {
             output.put(entry.getKey(), entry.getValue().getSlotType());

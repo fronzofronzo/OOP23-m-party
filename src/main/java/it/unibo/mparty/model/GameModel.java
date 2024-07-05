@@ -39,7 +39,7 @@ public interface GameModel {
      * Make the player that's playing its turn use the selected item
      * @param item {@link ItemName} to use
      */
-    void useItem(ItemName item);
+    void useItem(ItemName itemName);
 
     /**
      * Buy an item from the shop if the player can
@@ -60,6 +60,12 @@ public interface GameModel {
      * @return true if the game is over, false otherwise
      */
     boolean isOver();
+
+    /**
+     * Checks if the slot of the actual player is on a SlotType.SHOP
+     * @return true if the actual player is on a SlotType.SHOP, false otherwise
+     */
+    boolean isShop();
 
     /**
      * Get the username of the player that has won
@@ -91,7 +97,7 @@ public interface GameModel {
      * Get the board width and height
      * @return {@link Pair} containing dimensions
      */
-    Pair<Integer, Integer> getBoardDimensions();
+    Pair<Integer, Integer> getBoardDimension();
 
     /**
      * Get a list of items in the shop
