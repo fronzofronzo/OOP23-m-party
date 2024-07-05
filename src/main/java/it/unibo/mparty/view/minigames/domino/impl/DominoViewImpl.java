@@ -3,8 +3,7 @@ package it.unibo.mparty.view.minigames.domino.impl;
 import it.unibo.mparty.controller.minigames.domino.api.DominoController;
 import it.unibo.mparty.controller.minigames.domino.impl.DominoControllerImpl;
 import it.unibo.mparty.model.minigames.domino.api.Tile;
-import it.unibo.mparty.model.player.api.Player;
-import it.unibo.mparty.model.player.impl.PlayerImplementation;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.minigames.domino.DominoMessage;
 import it.unibo.mparty.view.minigames.domino.api.DominoView;
@@ -23,7 +22,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-
 
 import java.util.LinkedList;
 import java.util.Set;
@@ -58,8 +56,6 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     @FXML
     private ScrollPane scrollPane;
 
-    //private GridPane tilesGrid;
-
     private DominoController controller;
     private Integer selectedSideA;
     private Integer selectedSideB;
@@ -67,6 +63,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
 
     @FXML
     private void initialize() {
+        this.controller = new DominoControllerImpl(this);
         this.tilesContainer = new VBox();
         this.tilesContainer.setSpacing(SPACING);
         this.tilesContainer.setAlignment(Pos.CENTER);
@@ -74,16 +71,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         this.scrollPane.setFitToWidth(true);
         this.scrollPane.setFitToHeight(true);
         this.messageLabel.setText("");
-        //todo: da cancellare
-        this.initPlayers(new PlayerImplementation("Player1", "Luigi"),
-                new PlayerImplementation("Player2", "Mario"));
         this.playerCantDraw();
-    }
-
-    //todo: da mettere nell'interfaccia e deve essere chiamato da fuori (gioco principale)
-    public void initPlayers(final Player player1, final Player player2) {
-        this.controller = new DominoControllerImpl(this, player1, player2);
-        this.controller.setUp();
     }
 
     @FXML
@@ -134,12 +122,6 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         }
     }
 
-    private void highlightPlayerTurn(final Label currentPlayerLabel, final Label otherPlayerLabel) {
-        currentPlayerLabel.setBackground(new Background(new BackgroundFill
-                (Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-        otherPlayerLabel.setBackground(Background.EMPTY);
-    }
-
     @Override
     public void playerCanDraw() {
         this.drawButton.setDisable(false);
@@ -176,8 +158,8 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     }
 
     @Override
-    public void gameEnd(final String winner) {
-        this.messageLabel.setText(winner + DominoMessage.WIN);
+    public void showResult(final Pair<String, Integer> winner) {
+        this.messageLabel.setText(DominoMessage.WIN.getFormattedMessage(winner.getFirst(), winner.getSecond()));
 
         this.drawButton.setDisable(true);
         this.playButton.setDisable(true);
@@ -190,6 +172,12 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
                 ((HBox) node).getChildren().forEach(tileNode -> tileNode.setDisable(true));
             }
         });
+    }
+
+    private void highlightPlayerTurn(final Label currentPlayerLabel, final Label otherPlayerLabel) {
+        currentPlayerLabel.setBackground(new Background(new BackgroundFill
+                (Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+        otherPlayerLabel.setBackground(Background.EMPTY);
     }
 
     private void disableTiles(final HBox playerTilesBox) {

@@ -1,6 +1,7 @@
 package it.unibo.mparty.view.minigames.domino.api;
 
 import it.unibo.mparty.model.minigames.domino.api.Tile;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.SceneView;
 import it.unibo.mparty.view.minigames.domino.DominoMessage;
 
@@ -22,5 +23,5 @@ public interface DominoView extends SceneView {
 
     void setMessage(DominoMessage message);
 
-    void gameEnd(String winner);
+    void showResult(Pair<String, Integer> winner);
 }
