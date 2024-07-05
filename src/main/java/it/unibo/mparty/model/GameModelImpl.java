@@ -72,7 +72,11 @@ public class GameModelImpl implements GameModel{
      */
     @Override
     public void movePlayer(Optional<Direction> dir) {
-        if (this.status.equals(GameStatus.MOVE_PLAYER)) {
+        if (this.status.equals(GameStatus.MOVE_PLAYER) ||
+            this.status.equals(GameStatus.MOVING_PLAYER)) {
+            if (this.status.equals(GameStatus.MOVE_PLAYER)) {
+                this.status = this.status.switchStatus();
+            }
             final int diceResult = this.players.get(actualPlayerIndex).getDice().getResult(); 
             while (this.steps < diceResult) {
                 this.checkStartAcquisition();
