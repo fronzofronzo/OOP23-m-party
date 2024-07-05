@@ -6,7 +6,7 @@ public enum DominoMessage {
 
     DRAW_TILE("Tessere non compattibili. Pesca una tessera."),
 
-    WIN(" ha vinto!"),
+    WIN("%s ha vinto! Guadagnando %d monete"),
 
     SELECT_TILE("Seleziona una tessera per giocare.");
 
@@ -14,6 +14,10 @@ public enum DominoMessage {
 
     DominoMessage(final String message) {
         this.message = message;
+    }
+
+    public String getFormattedMessage(String winnerName, int coins) {
+        return String.format(this.message, winnerName, coins);
     }
 
     @Override
