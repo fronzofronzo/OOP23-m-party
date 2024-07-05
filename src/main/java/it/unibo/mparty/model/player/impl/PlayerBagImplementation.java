@@ -8,6 +8,7 @@ import it.unibo.mparty.model.item.api.Item;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * This class implements a {@code PlayerBag}. It also offers an implementation
@@ -58,5 +59,10 @@ public class PlayerBagImplementation implements PlayerBag {
     @Override
     public boolean isFull() {
         return items.size() == capacity;
+    }
+
+    @Override
+    public List<ItemName> getItems() {
+        return (items.stream().map(Item::getName).toList());
     }
 }
