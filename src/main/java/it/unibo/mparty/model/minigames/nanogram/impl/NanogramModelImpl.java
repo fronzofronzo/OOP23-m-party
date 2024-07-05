@@ -4,6 +4,7 @@ import it.unibo.mparty.model.minigames.nanogram.api.Board;
 import it.unibo.mparty.model.minigames.nanogram.api.Live;
 import it.unibo.mparty.model.minigames.nanogram.api.NanogramModel;
 import it.unibo.mparty.model.minigames.nanogram.api.SimpleBoard;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class NanogramModelImpl implements NanogramModel {
     private final SimpleBoard solutionBoard;
     private final Board hittedBoard;
     private final Live lives;
+    private String player;
 
     /**
      * Constructs a {@code NanogramModelImpl} instance initializing the game state with default parameters.
@@ -94,11 +96,24 @@ public class NanogramModelImpl implements NanogramModel {
                 .allMatch(this.hittedBoard::getState);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public boolean isGameOver() {
+    public Pair<String, Integer> getResult() {
+        //todo
+        return null;
+    }
+
+    @Override
+    public void setUpPlayers(List<String> players) {
+        this.player = players.get(0);
+    }
+
+    @Override
+    public boolean isOver() {
         return this.lives.isDeath();
+    }
+
+    @Override
+    public String getPlayer() {
+        return player;
     }
 }

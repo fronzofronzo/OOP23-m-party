@@ -181,6 +181,12 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         boardButtons.forEach(button -> button.setGraphic(drawCross(Color.valueOf("#38475f"))));
     }
 
+    @Override
+    public void showResult(Pair<String, Integer> result) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'showResult'");
+    }
+
     private void setHints(final GridPane grid, final List<List<Integer>> hintsList, final boolean isRowHints) {
         grid.getChildren().clear();
         final int numLines = hintsList.size();
@@ -206,7 +212,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     }
 
     private void clearMessageLabel() {
-        this.messageLabel.setText(" ");
+        this.messageLabel.setText("");
     }
 
     private final EventHandler<MouseEvent> handleCellClicked = event -> {
@@ -228,11 +234,5 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         svgPath.setContent(path);
         svgPath.setFill(color);
         return svgPath;
-    }
-
-    @Override
-    public void showResult(Pair<String, Integer> result) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showResult'");
     }
 }
