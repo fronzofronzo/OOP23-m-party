@@ -109,6 +109,12 @@ public class PerilousPathImpl implements PerilousPath{
         return b;
     }
 
+    /**
+     * a private method to know if 2 positions are in the same place
+     * @param p1 the first position
+     * @param p2 the second position
+     * @return true if they are in the same position false otherwise
+     */
     private boolean samePosition(AbstractPosition p1, AbstractPosition p2){
         return p1.getX() == p2.getX() && p1.getY() == p2.getY();
     }
