@@ -49,19 +49,10 @@ public class GameControllerImpl implements GameController{
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
-<<<<<<< HEAD
     @Override
     public void useItem(ItemName item) {
         this.model.useItem(item);
     }
-
-    @Override
-    public boolean buyItem(ItemName item) {
-       // return this.model.buyItem()
-        return true;
-    }
-=======
->>>>>>> develop
 
     @Override
     public void startGame(GameModel model) throws IOException {
@@ -90,11 +81,9 @@ public class GameControllerImpl implements GameController{
         //shopView.updateMoney(this.model.getPlayer());
     }
 
-
     @Override
     public void buyItem(ItemName itemName, ShopView shopView) {
-        if (this.model.buyItem(itemName)) {
-            //shopView.updateMoney(this.model.getPlayer());
-        }
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'buyItem'");
     }
 }
