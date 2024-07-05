@@ -9,6 +9,7 @@ import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.view.GameBoardView.GameBoardView;
+import it.unibo.mparty.view.endGame.api.EndGameView;
 import it.unibo.mparty.view.minigames.MinigameView;
 import it.unibo.mparty.view.shop.api.ShopView;
 import javafx.application.Application;
@@ -31,6 +32,7 @@ public class GameViewImpl extends Application implements GameView{
     private final static String shopName = "Shop";
     private GameBoardView boardView;
     private Scene boardScene;
+    private EndGameView endGameView;
 
     private Stage stage;
     private final GameController controller = new GameControllerImpl(this);
@@ -130,6 +132,10 @@ public class GameViewImpl extends Application implements GameView{
     @Override
     public void showResults(List<String> players, List<Integer> stars, List<Integer> coins) {
         //order result, and get(0) for winner
+        //todo: switch scene
+        this.endGameView.setPlayerColumn(players);
+        this.endGameView.setStarColumn(stars);
+        this.endGameView.setCoinColumn(coins);
     }
 
     private void setBoardView() throws IOException {

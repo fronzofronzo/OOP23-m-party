@@ -1,24 +1,19 @@
 package it.unibo.mparty.controller;
 
 import java.io.IOException;
-
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
 import java.util.Optional;
 
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
+import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Direction;
-import it.unibo.mparty.utilities.GameStatus;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
 import it.unibo.mparty.view.shop.api.ShopView;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import it.unibo.mparty.model.item.impl.ItemName;
-
 
 
 public class GameControllerImpl implements GameController{
@@ -74,6 +69,10 @@ public class GameControllerImpl implements GameController{
     @Override
     public void endGame() {
         // this.view.showWinner(this.model.getWinner)
+        List<String> playersName = this.model.getPlayers().stream().map(Player::getUsername).toList();
+        List<Integer> stars = this.model.getPlayers().stream().map(Player::getNumStars).toList();
+        List<Integer> coins = this.model.getPlayers().stream().map(Player::getNumCoins).toList();
+        this.view.showResults(playersName, stars, coins);
     }
 
     @Override
