@@ -2,7 +2,6 @@ package it.unibo.mparty.model;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
-import it.unibo.mparty.model.gameBoard.util.RandomFromSet;
 import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.minigameHandler.MinigameHandler;
@@ -11,10 +10,6 @@ import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.shop.api.Shop;
 import it.unibo.mparty.model.shop.impl.ShopImpl;
-import it.unibo.mparty.utilities.BoardType;
-import it.unibo.mparty.utilities.Pair;
-import it.unibo.mparty.utilities.Position;
-import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.utilities.*;
 
 import java.util.Collections;
