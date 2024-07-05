@@ -24,22 +24,10 @@ public interface MiniScreen extends Initializable {
     void handleBackButton(ActionEvent e);
 
     /**
-     * method that handles the event that happens when you click the choice box
-     * @param e event that happens when you click the choice box
-     */
-    void handleCharacterChoiceBox(ActionEvent e);
-
-    /**
-     * method that handles the event that happens when you write in the text field area
-     * @param e event that happens when you start writing in the text field area
-     */
-    void handleUsernameTextField(ActionEvent e);
-
-    /**
      *  method that attaches a GameModelBuilder object to the view
-     * @param builder an object that the view calls when it is needed to create the Game model
+     * @param controller an object that the view calls when it is needed to create the Game model
      */
-    void setUp(GameModelBuilder builder);
+    void setUp(InitialScreen controller);
 
 
 

@@ -37,4 +37,6 @@ public interface InitialScreen extends Initializable{
       */
      void handleStartButton(ActionEvent event);
 
+     void setNewPlayer(String username,String character);
+
 }
