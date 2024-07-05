@@ -1,22 +1,18 @@
 package it.unibo.mparty.model.minigames.domino.api;
 
-import it.unibo.mparty.model.player.api.Player;
+import it.unibo.mparty.model.minigames.MinigameModel;
 
 import java.util.List;
 
-public interface DominoModel {
+public interface DominoModel extends MinigameModel {
 
-    void setPlayerTiles(Player p1, Player p2);
+    boolean initializeTurn(String p1, String p2);
 
-    boolean initializeTurn(Player p1, Player p2);
+    boolean checkAndAddToBoard(String player, Tile domino);
 
-    boolean checkAndAddToBoard(Player player, Tile domino);
+    boolean canDrawTile(String player);
 
-    boolean canDrawTile(Player player);
-
-    void drawTile(Player player);
-
-    Player getWinner(Player p1, Player p2);
+    void drawTile(String player);
 
     List<Tile> getDominoSet();
 
