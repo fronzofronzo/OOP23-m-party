@@ -12,6 +12,14 @@ import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.GameStatus;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
+import it.unibo.mparty.view.shop.api.ShopView;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import it.unibo.mparty.model.item.impl.ItemName;
+
+
 
 public class GameControllerImpl implements GameController{
 
@@ -50,12 +58,6 @@ public class GameControllerImpl implements GameController{
     }
 
     @Override
-    public boolean buyItem(ItemName item) {
-       // return this.model.buyItem()
-        return true;
-    }
-
-    @Override
     public void startGame(GameModel model) throws IOException {
         this.model = model;
         this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.getActualPlayerInfo().getY());
@@ -71,5 +73,22 @@ public class GameControllerImpl implements GameController{
     @Override
     public void endGame() {
         // this.view.showWinner(this.model.getWinner)
+    }
+
+    @Override
+    public void setUpShop(ShopView shopView) {
+        Map<ItemName,Integer> itemMap = new HashMap<>();
+        this.model.getItemsFromShop().stream().forEach(it -> itemMap.put(it.getName(), it.getCost()));
+        itemMap.forEach((str, i) -> shopView.addButton(str, i));
+        this.model.getItemsFromShop().stream().forEach(it -> shopView.addDescription(it.getDescription()));
+        //shopView.updateMoney(this.model.getPlayer());
+    }
+
+
+    @Override
+    public void buyItem(ItemName itemName, ShopView shopView) {
+        if (this.model.buyItem(itemName)) {
+            //shopView.updateMoney(this.model.getPlayer());
+        }
     }
 }
