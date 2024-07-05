@@ -151,38 +151,6 @@ public class GameModelImpl implements GameModel{
         }
     }
 
-    private void activateSlot() {
-        final Player actualPlayer = this.players.get(actualPlayerIndex);
-        final SlotType slot = this.board.getSlotType(actualPlayer.getPosition());
-        final Random random = new Random();
-        if(this.status.equals(GameStatus.ACTIVE_SLOT)){
-            switch (slot) {
-                case SINGLEPLAYER -> {
-                    try {
-                        this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.SINGLE_PLAYER);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                case MULTIPLAYER -> {
-                    try {
-                        this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.MULTI_PLAYER);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                case BONUS -> {
-                    actualPlayer.addCoins(random.nextInt(MIN_COINS, MAX_COINS));
-                }
-                case MALUS -> {
-                    actualPlayer.removeCoins(random.nextInt(MIN_COINS, MAX_COINS));
-                }
-                case ACTIVE_STAR -> {
-                }
-                default -> {break;}
-            };
-        }
-    }
 
     /**
      * {@inheritDoc}
@@ -250,13 +218,55 @@ public class GameModelImpl implements GameModel{
     public String getMessage() {
         String output = this.players.get(actualPlayerIndex).getUsername();
         switch (this.status) {
-            case ROLL_DICE: output = output + " tira i dadi"; break;
-            case MOVE_PLAYER: output = output + " muovi la pedina"; break;
-            case ACTIVE_SLOT: output = output + " attiva l'effetto dello slot"; break;
-            case END_TURN: output = output + " passa il turno"; break;
-            default: break;
+            case ROLL_DICE:
+                output = output + " tira i dadi";
+                break;
+            case MOVE_PLAYER:
+                output = output + " muovi la pedina";
+                break;
+            case ACTIVE_SLOT:
+                output = output + " attiva l'effetto dello slot";
+                break;
+            case END_TURN:
+                output = output + " passa il turno";
+                break;
+            default:
+                break;
         }
         return output;
+    }
+
+    private void activateSlot() {
+        final Player actualPlayer = this.players.get(actualPlayerIndex);
+        final SlotType slot = this.board.getSlotType(actualPlayer.getPosition());
+        final Random random = new Random();
+        if(this.status.equals(GameStatus.ACTIVE_SLOT)){
+            switch (slot) {
+                case SINGLEPLAYER -> {
+                    try {
+                        this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.SINGLE_PLAYER);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                case MULTIPLAYER -> {
+                    try {
+                        this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.MULTI_PLAYER);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                case BONUS -> {
+                    actualPlayer.addCoins(random.nextInt(MIN_COINS, MAX_COINS));
+                }
+                case MALUS -> {
+                    actualPlayer.removeCoins(random.nextInt(MIN_COINS, MAX_COINS));
+                }
+                case ACTIVE_STAR -> {
+                }
+                default -> {break;}
+            };
+        }
     }
 
 
