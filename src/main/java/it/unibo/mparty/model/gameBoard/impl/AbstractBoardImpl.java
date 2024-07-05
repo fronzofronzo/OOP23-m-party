@@ -3,24 +3,26 @@ package it.unibo.mparty.model.gameBoard.impl;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
-import it.unibo.mparty.model.gameBoard.util.BoardType;
-import it.unibo.mparty.model.gameBoard.util.Direction;
-import it.unibo.mparty.model.gameBoard.util.Pair;
+import it.unibo.mparty.utilities.BoardType;
+import it.unibo.mparty.utilities.Direction;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
+import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.model.gameBoard.util.RandomFromSet;
 import it.unibo.mparty.model.gameBoard.util.RandomListGenerator;
 import it.unibo.mparty.model.gameBoard.api.Slot;
-import it.unibo.mparty.model.gameBoard.util.SlotType;
 
 /**
  * This is an Abstract class that implements GameBoard that could be considerated as a
@@ -129,6 +131,15 @@ public abstract class AbstractBoardImpl implements GameBoard{
         return Collections.unmodifiableMap(this.board);
     }
 
+    @Override
+    public Map<Position,SlotType> getSlotTypeBoard() {
+        Map<Position,SlotType> output = new HashMap<>();
+        for (Entry<Position, Slot> entry : this.board.entrySet()) {
+            output.put(entry.getKey(), entry.getValue().getSlotType());
+        }
+        return Collections.unmodifiableMap(output);
+    }
+
     /**
      * If the slot is not in the board and the position is accepted,
      * then create and add the slot to the board
@@ -195,7 +206,11 @@ public abstract class AbstractBoardImpl implements GameBoard{
      * @param filePath file path of the file to read
      */
     protected void createPathFromFile(String filePath){
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        InputStream inputStream = ClassLoader.getSystemResourceAsStream(this.filePath);
+        if (Objects.isNull(inputStream)) {
+            throw new IllegalStateException();
+        }
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(" ");
@@ -254,10 +269,9 @@ public abstract class AbstractBoardImpl implements GameBoard{
         if (this.avaiableSlotTypes.isEmpty()) {
             this.avaiableSlotTypes = setAviableSlotType();
         }
-        //SlotType output = this.avaiableSlotTypes.getFirst();
-        //this.avaiableSlotTypes.removeFirst();
-        //return output;
-        return null;
+        SlotType output = this.avaiableSlotTypes.get(0);
+        this.avaiableSlotTypes.remove(0);
+        return output;
     }
     
     /**

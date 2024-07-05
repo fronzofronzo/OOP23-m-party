@@ -2,9 +2,21 @@ package it.unibo.mparty.controller;
 
 import java.io.IOException;
 
+import java.util.Collections;
+import java.util.Optional;
+
 import it.unibo.mparty.model.GameModel;
-import it.unibo.mparty.utilities.Position;
+import it.unibo.mparty.utilities.Direction;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
+import it.unibo.mparty.view.shop.api.ShopView;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import it.unibo.mparty.model.item.impl.ItemName;
+
+
 
 public class GameControllerImpl implements GameController{
 
@@ -16,33 +28,64 @@ public class GameControllerImpl implements GameController{
     }
 
     @Override
-    public int rollDice() {
-        return this.model.rollDice();        
+    public void rollDice() {
+        this.view.showResultDice(this.model.rollDice());
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
     @Override
-    public Position movePlayer() {
-        return this.model.movePlayer();
+    public void movePlayer(Optional<Direction> dir) {
+        this.model.movePlayer(dir);
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
+        this.view.updatePlayerPos(this.model.getActualPlayerInfo());
     }
 
     @Override
-    public boolean buyItem() {
-        return false;
+    public void action() throws IOException {
+        this.model.action();
+        if (this.model.getActiveMinigame().isPresent()) {
+           this.view.setMinigameScene(this.model.getActiveMinigame().get());
+        }
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
+
 
     @Override
     public void startGame(GameModel model) {
         this.model = model;
         try {
-            this.view.setScene("GameBoard.fxml");
+            this.view.setScene("GameBoard");
+            this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.getActualPlayerInfo().getY());
+            this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
     @Override
-    public void endGame() {
+    public void saveMinigameResult(Pair<String, Integer> result) {
+        this.model.endMinigame(result);
+    }
 
+    @Override
+    public void endGame() {
+        // this.view.showWinner(this.model.getWinner)
+    }
+
+    @Override
+    public void setUpShop(ShopView shopView) {
+        Map<ItemName,Integer> itemMap = new HashMap<>();
+        this.model.getItemsFromShop().stream().forEach(it -> itemMap.put(it.getName(), it.getCost()));
+        itemMap.forEach((str, i) -> shopView.addButton(str, i));
+        this.model.getItemsFromShop().stream().forEach(it -> shopView.addDescription(it.getDescription()));
+        //shopView.updateMoney(this.model.getPlayer());
+    }
+
+
+    @Override
+    public void buyItem(ItemName itemName, ShopView shopView) {
+        if (this.model.buyItem(itemName)) {
+            //shopView.updateMoney(this.model.getPlayer());
+        }
     }
 }

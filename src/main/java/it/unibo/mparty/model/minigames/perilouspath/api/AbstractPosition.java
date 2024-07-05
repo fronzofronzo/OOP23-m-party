@@ -46,7 +46,7 @@ public abstract class AbstractPosition {
      * @return true if they are adjacent, false otherwise
      */
     public boolean adjacent(AbstractPosition p){
-        return Math.abs(this.getX() - p.getX()) <= ADJ || Math.abs(this.getY() - p.getY()) <= ADJ;
+        return Math.abs(this.getX() - p.getX()) <= ADJ && Math.abs(this.getY() - p.getY()) <= ADJ;
     }
 
     /**
@@ -62,7 +62,7 @@ public abstract class AbstractPosition {
      * @return true if they are adjacent and in orizzontal, false otherwise
      */
     public boolean inOrizzontal(AbstractPosition p){
-        return this.getX() == p.getX() && adjacent(p);
+        return this.getX() == p.getX() && this.adjacent(p);
     }
 
     /**
@@ -71,7 +71,7 @@ public abstract class AbstractPosition {
      * @return true if they are adjacent and in vertical, false otherwise
      */
     public boolean inVertical(AbstractPosition p){
-        return this.getY() == p.getY() && adjacent(p);
+        return this.getY() == p.getY() && this.adjacent(p);
     }
 
     /**

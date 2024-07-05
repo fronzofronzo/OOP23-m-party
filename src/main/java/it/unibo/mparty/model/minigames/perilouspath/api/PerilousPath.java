@@ -7,8 +7,8 @@ public interface PerilousPath {
     /**
      * the types of buttons present a grid
      * a button can either be a ball,bomb or a path.
-     * the type wrong signifies that that button is a path-type button but 
-     * it does not respects the politics of the path-type buttons
+     * the type wrong signifies that that button is a path-type button, but
+     * it does not respect the politics of the path-type buttons
      */
     public enum Type{
         BOMB,BALL,PATH,WRONG
