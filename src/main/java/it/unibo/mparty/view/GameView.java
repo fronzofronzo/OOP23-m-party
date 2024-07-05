@@ -34,6 +34,8 @@ public interface GameView {
      */
     void setMinigameScene(String name) throws IOException;
 
+    void initMinigame(List<String> players);
+
     /**
      * Set the shop scene in the view
      */

@@ -35,6 +35,7 @@ public class GameViewImpl extends Application implements GameView{
     private Stage stage;
     private final GameController controller = new GameControllerImpl(this);
     private SceneView sceneView;
+    private MinigameView minigameView;
 
 
     @Override
@@ -75,8 +76,9 @@ public class GameViewImpl extends Application implements GameView{
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH_MINIGAMES + name+ EXTENSION)); ;
         final Parent root = loader.load(getClass().getResourceAsStream( PATH_MINIGAMES + name + EXTENSION));
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        final MinigameView minigameView = loader.<MinigameView>getController();
-        minigameView.init(this,this.controller);
+        this.minigameView = loader.<MinigameView>getController();
+        this.minigameView.init(this,this.controller);
+        this.controller.initMinigame();
         this.stage.setScene(scene);
         this.stage.setMinWidth(1000);
         this.stage.setMinHeight(700);
