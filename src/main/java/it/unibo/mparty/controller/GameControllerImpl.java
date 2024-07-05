@@ -55,6 +55,7 @@ public class GameControllerImpl implements GameController{
     @Override
     public void useItem(ItemName item) {
         this.model.useItem(item);
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
     @Override
