@@ -60,9 +60,4 @@ public interface GameController {
      * @param result of the game
      */
     void saveMinigameResult(Pair<String, Integer> result);
-
-    /**
-     * End the game
-     */
-    void endGame();
 }

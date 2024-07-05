@@ -10,7 +10,6 @@ import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
-import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.GameView;
 import it.unibo.mparty.view.shop.api.ShopView;
 
@@ -42,11 +41,6 @@ public class GameControllerImpl implements GameController{
         
     }
 
-    private void updatePlayersView() {
-        List<Player> players = this.model.getPlayers();
-        players.forEach(p -> this.view.updatePlayer(p.getUsername(), p.getNumCoins(), p.getNumStars(), p.getPlayerBag().getItems().stream().map(i -> i.name()).toList(), p.getPosition()));
-    }
-
     /**
      *
      * {@inheritDoc}
@@ -57,38 +51,48 @@ public class GameControllerImpl implements GameController{
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void rollDice() {
         this.view.showResultDice(this.model.rollDice());
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void movePlayer(Optional<Direction> dir) {
         this.model.movePlayer(dir);
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
-       this.updatePlayersView();
+        this.updatePlayersView();
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void action() throws IOException {
         this.model.action();
         if (this.model.getActiveMinigame().isPresent()) {
            this.view.setMinigameScene(this.model.getActiveMinigame().get());
+        } else if (this.model.isShop()) {
+            //set view shop
         }
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
+        this.updatePlayersView();
+        this.checkEndGame();
     }
 
-    @Override
-    public void saveMinigameResult(Pair<String, Integer> result) {
-        this.model.endMinigame(result);
-    }
-
-    @Override
-    public void endGame() {
-        // this.view.showWinner(this.model.getWinner)
-    }
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void setUpShop(ShopView shopView) {
         Map<ItemName,Integer> itemMap = new HashMap<>();
@@ -98,9 +102,33 @@ public class GameControllerImpl implements GameController{
         //shopView.updateMoney(this.model.getPlayer());
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void buyItem(ItemName itemName, ShopView shopView) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'buyItem'");
+    }
+
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public void saveMinigameResult(Pair<String, Integer> result) {
+        this.model.endMinigame(result);
+    }
+
+    private void checkEndGame() {
+        if (this.model.isOver()) {
+            //set view end game
+        }
+    }
+
+    private void updatePlayersView() {
+        List<Player> players = this.model.getPlayers();
+        players.forEach(p -> this.view.updatePlayer(p.getUsername(), p.getNumCoins(), p.getNumStars(), p.getPlayerBag().getItems().stream().map(i -> i.name()).toList(), p.getPosition()));
     }
 }
