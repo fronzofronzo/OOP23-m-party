@@ -51,6 +51,9 @@ public class GameViewImpl extends Application implements GameView{
         Player p4 = pb.username("Peach").character("Luigi").buildPlayer();
         this.controller.startGame(new GameModelImpl(List.of(p1,p2,p3,p4), "MEDIUM"));
 
+        this.stage.setMinWidth(1000);
+        this.stage.setMinHeight(700);
+
         this.stage.setMaximized(true);
         this.stage.show();
     }
@@ -62,6 +65,11 @@ public class GameViewImpl extends Application implements GameView{
     @Override
     public void setBoardScene() throws IOException {
         this.stage.setScene(boardScene);
+        this.stage.setMinWidth(1000);
+        this.stage.setMinHeight(700);
+
+        this.stage.setMaximized(true);
+        this.stage.show();
     }
 
     /**

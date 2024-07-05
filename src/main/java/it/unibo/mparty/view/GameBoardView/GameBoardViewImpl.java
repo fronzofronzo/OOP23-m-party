@@ -83,7 +83,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private Label itemP4;
     @FXML
-    private Pane paneCommand;
+    private SplitPane paneCommand;
     @FXML 
     private Button useItem1;
     @FXML 
