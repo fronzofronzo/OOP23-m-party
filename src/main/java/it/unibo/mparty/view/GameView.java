@@ -46,4 +46,6 @@ public interface GameView {
     void updatePlayerStats(String player, int coins, int stars, List<String> items);
 
     void updateCommands(List<String> items, String message);
+
+    void showResults(List<String> players, List<Integer> stars, List<Integer> coins);
 }
