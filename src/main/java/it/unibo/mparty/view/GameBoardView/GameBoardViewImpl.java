@@ -236,6 +236,15 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.getMainController().action();
     }
 
+    @FXML
+    private void useItem(ActionEvent e){
+        Button bt = (Button)e.getSource();
+        String text = bt.getText();
+        if (!text.equals(TEXT_VOID_ITEM)) {
+            //this.getMainController().useItem(text);
+        }
+    }
+
     private String printItems(List<String> items) {
         String output = "";
         if (!items.isEmpty()) {

@@ -129,10 +129,10 @@
          <items>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label text="USA OGGETTI:" />
-                  <Button fx:id="useItem1" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" prefWidth="200.0" />
-                  <Button fx:id="useItem2" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" prefWidth="200.0" />
-                  <Button fx:id="useItem3" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" prefWidth="200.0" />
+                  <Label text="USA OGGETTO:" />
+                  <Button fx:id="useItem1" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#useItem" prefWidth="200.0" />
+                  <Button fx:id="useItem2" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#useItem" prefWidth="200.0" />
+                  <Button fx:id="useItem3" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#useItem" prefWidth="200.0" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">

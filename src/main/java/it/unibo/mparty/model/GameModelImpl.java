@@ -32,7 +32,7 @@ public class GameModelImpl implements GameModel{
     private static final String MESSAGE_ROLL_DICE = " tira i dadi.";
     private static final String MESSAGE_MOVE_PLAYER = " muovi la pedina.";
     private static final String MESSAGE_MOVING_PLAYER = " muovi la pedina in una delle direzioni possibili:";
-    private static final String MESSAGE_ACTIVE_SLOT = " attiva l'effetto dello slot.";
+    private static final String MESSAGE_ACTIVE_SLOT = " attiva l'effetto dello slot: ";
     private static final String MESSAGE_END_TURN = " passa il turno.";
 
     private final List<Player> players;
@@ -225,7 +225,7 @@ public class GameModelImpl implements GameModel{
                 output = output + MESSAGE_MOVING_PLAYER + getDirections();
                 break;
             case ACTIVE_SLOT:
-                output = output + MESSAGE_ACTIVE_SLOT;
+                output = output + MESSAGE_ACTIVE_SLOT + this.board.getSlotType(this.players.get(actualPlayerIndex).getPosition()) + ".";
                 break;
             case END_TURN:
                 output = output + MESSAGE_END_TURN;
