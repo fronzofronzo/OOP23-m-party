@@ -12,21 +12,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DominoFactoryImplTest {
 
-    private final int DOMINO_SET_SIZE = 28;
+    private static final int DOMINO_SET_SIZE = 28;
     private TileFactoryImpl dominoFactory;
 
 
     @BeforeEach
     void setUp() {
-        dominoFactory = new TileFactoryImpl();
+        this.dominoFactory = new TileFactoryImpl();
     }
 
     @Test
     void testCreateFullSet() {
-        List<Tile> fullSet = dominoFactory.createDoubleSixSet();
+        List<Tile> fullSet = this.dominoFactory.createDoubleSixSet();
         Set<Tile> expectedSet = generateFullSet();
 
-        assertEquals(DOMINO_SET_SIZE, dominoFactory.createDoubleSixSet().size());
+        assertEquals(DOMINO_SET_SIZE, this.dominoFactory.createDoubleSixSet().size());
         assertTrue(fullSet.containsAll(expectedSet));
     }
 

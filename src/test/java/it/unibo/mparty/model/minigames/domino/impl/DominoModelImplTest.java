@@ -2,11 +2,10 @@ package it.unibo.mparty.model.minigames.domino.impl;
 
 import it.unibo.mparty.model.minigames.domino.api.DominoModel;
 import it.unibo.mparty.model.minigames.domino.api.Tile;
-import it.unibo.mparty.model.player.api.Player;
-import it.unibo.mparty.model.player.impl.PlayerImplementation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,20 +18,21 @@ class DominoModelImplTest {
     private static final int SIDE2 = 2;
     private static final int SIDE3 = 3;
     private DominoModel model;
-    private Player player1;
-    private Player player2;
+    private List<String> players;
+    private String player1;
+    private String player2;
 
     @BeforeEach
     void setUp() {
         this.model = new DominoModelImpl();
-
-        this.player1 = new PlayerImplementation("player1", "Mario");
-        this.player2 = new PlayerImplementation("player2", "Luigi");
+        this.players = List.of("player1", "player2");
+        this.player1 = this.players.get(0);
+        this.player2 = this.players.get(1);
     }
 
     @Test
     void testDistributionTiles() {
-        this.model.setPlayerTiles(this.player1, this.player2);
+        this.model.setUpPlayers(this.players);
 
         // Verify players' domino sets are not empty after initialization
         assertFalse(this.model.getPlayersTiles().getPlayerTiles(this.player1).isEmpty());
@@ -82,7 +82,7 @@ class DominoModelImplTest {
 
     @Test
     void testCanDrawTile() {
-        this.model.setPlayerTiles(this.player1, this.player2);
+        this.model.setUpPlayers(this.players);
 
         // Get initial set of player1
         Set<Tile> initialTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
@@ -116,21 +116,21 @@ class DominoModelImplTest {
         this.model.getPlayersTiles().getPlayerTiles(this.player1).clear();
 
         // Verify player1 is declared the winner
-        assertEquals(this.player1, this.model.getWinner(this.player1, this.player2));
+        assertEquals(this.player1, this.model.getResult().getFirst());
 
         // Simulate player2 winning by emptying their tile set
         this.model.getPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE1));
         this.model.getPlayersTiles().getPlayerTiles(this.player2).clear();
 
         // Verify player2 is declared the winner
-        assertEquals(this.player2, this.model.getWinner(this.player1, this.player2));
+        assertEquals(this.player2, this.model.getResult().getFirst());
 
         // No winner case
         this.model.getPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE3));
         this.model.getPlayersTiles().getPlayerTiles(this.player2).add(new TileImpl(SIDE2, SIDE2));
 
         // Verify no winner
-        assertNull(this.model.getWinner(this.player1, this.player2));
+        assertNull(this.model.getResult().getFirst());
     }
 
 
