@@ -66,17 +66,22 @@ public class GameModelImpl implements GameModel{
     @Override
     public void movePlayer(Optional<Direction> dir) {
         if (this.status.equals(GameStatus.MOVE_PLAYER)) {
-            while (this.steps < this.players.get(actualPlayerIndex).getDice().getResult()) {
+            final int diceResult = this.players.get(actualPlayerIndex).getDice().getResult(); 
+            while (this.steps < diceResult) {
                 this.checkStartAcquisition();
-                final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
-                final Map<Direction, Position> nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition);
-                if (nextPlayerPosition.size() == 1 && dir.isEmpty()) {
-                    this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.entrySet().stream().findFirst().get().getValue());
+                final Position playerPos = this.players.get(actualPlayerIndex).getPosition();
+                final Map<Direction, Position> nextPlayerPos = this.board.getNextPositions(playerPos);
+                if (nextPlayerPos.size() == 1 && dir.isEmpty()) {
+                    this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.entrySet()
+                                                                                 .stream()
+                                                                                 .findFirst()
+                                                                                 .get()
+                                                                                 .getValue());
                 } else {
-                    if (dir.isEmpty() || nextPlayerPosition.size() < 1 || !nextPlayerPosition.containsKey(dir.get())) {
+                    if (dir.isEmpty() || nextPlayerPos.size() < 1 || !nextPlayerPos.containsKey(dir.get())) {
                         return;
                     } else {
-                        this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.get(dir.get()));
+                        this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.get(dir.get()));
                         dir = Optional.empty();
                     }
                 }
@@ -104,11 +109,9 @@ public class GameModelImpl implements GameModel{
      */
     @Override
     public Optional<String> getActiveMinigame() {
-        if(this.minigameHandler.isInGame()){
-            return Optional.of(this.minigameHandler.getMinigame());
-        } else {
-            return Optional.empty();
-        }
+        return this.minigameHandler.isInGame() ?
+               Optional.of(this.minigameHandler.getMinigame()) :
+               Optional.empty();
     }
 
     private void nextPlayer() {
