@@ -34,11 +34,9 @@ public interface GameView {
     void setMinigameScene(String name) throws IOException;
 
     /**
-     * Set the scene of the board
+     * Set the shop scene in the view
      */
-
     void setBoardScene() throws IOException;
-
     void setShopScene() throws IOException;
 
     void showResultDice(int result);
