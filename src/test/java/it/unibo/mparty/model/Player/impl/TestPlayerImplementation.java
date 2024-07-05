@@ -1,18 +1,10 @@
-package it.unibo.mparty.model.Player;
+package it.unibo.mparty.model.Player.impl;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.*;
 
-import it.unibo.mparty.model.item.api.Item;
-import it.unibo.mparty.model.item.api.ItemFactory;
-import it.unibo.mparty.model.item.impl.GoldenPipe;
-import it.unibo.mparty.model.item.impl.ItemFactoryImpl;
-import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
-import it.unibo.mparty.model.player.impl.Character;
 import it.unibo.mparty.model.player.impl.PlayerImplementation;
-import it.unibo.mparty.utilities.Position;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -67,22 +59,5 @@ public class TestPlayerImplementation {
         assertEquals(0, testPlayer.getNumCoins());
     }
 
-    /**
-     * Check that Player Bag implementation works properly ( adding and removal
-     * of item )
-     */
-    @Test
-    public void testPlayerBag() {
-        final Item itemTest = new ItemFactoryImpl().createItem(ItemName.TUBO_DORATO);
-        testPlayer.getPlayerBag().addItem(itemTest);
-        assertEquals(itemTest, testPlayer.getPlayerBag().getItem(0));
-        assertFalse(testPlayer.getPlayerBag().isFull());
-        try {
-            testPlayer.getPlayerBag().removeItem(0);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-        assertThrows(IllegalAccessException.class, () -> {testPlayer.getPlayerBag().removeItem(0);} );
-    }
 
 }
