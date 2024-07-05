@@ -19,7 +19,6 @@ import java.util.ResourceBundle;
 
 public class MiniScreenImpl implements MiniScreen {
 
-    private GameModelBuilder builder;
     private final List<String> characterList = new ArrayList<>();
     private InitialScreen controller;
 
