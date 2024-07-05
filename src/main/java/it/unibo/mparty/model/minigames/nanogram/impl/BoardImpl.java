@@ -54,7 +54,8 @@ public class BoardImpl implements Board {
      *
      * @return the board map.
      */
-    protected Map<Position, Boolean> getBoard() {
+    @Override
+    public Map<Position, Boolean> getBoard() {
         return this.board;
     }
 }
