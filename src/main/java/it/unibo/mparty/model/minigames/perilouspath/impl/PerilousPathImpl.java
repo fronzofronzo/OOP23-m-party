@@ -80,11 +80,6 @@ public class PerilousPathImpl implements PerilousPath{
     }
 
     @Override
-    public List<AbstractPosition> getPath() {
-        return Collections.unmodifiableList(this.path);
-    }
-
-    @Override
     public int getSize() {
         return this.size;
     }
