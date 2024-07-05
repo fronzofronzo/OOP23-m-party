@@ -1,6 +1,5 @@
 package it.unibo.mparty.model.item.impl;
 
-import edu.umd.cs.findbugs.annotations.OverrideMustInvoke;
 import it.unibo.mparty.model.player.api.Player;
 
 /**
