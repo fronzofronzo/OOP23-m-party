@@ -1,8 +1,12 @@
+<<<<<<< HEAD:src/test/java/it/unibo/mparty/model/minigames/perilouspath/TestPerilousPath.java
 package it.unibo.mparty.model.minigames.perilouspath;
 
 
 
 
+=======
+package it.unibo.samplejavafx.model.minigames.perilouspath;
+>>>>>>> develop:src/test/java/it/unibo/samplejavafx/model/minigames/perilouspath/TestPerilousPath.java
 import static org.junit.jupiter.api.Assertions.*;
 
 import it.unibo.mparty.model.minigames.perilouspath.impl.BallPosition;
