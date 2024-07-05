@@ -35,6 +35,16 @@ class DiceImplTest {
         assertEquals(maxBound, this.testDice.getBounds().getY());
     }
 
+    /**
+     * Check if the number of attempts modify is correct
+     */
+    @Test
+    public void testAttemptsModify(){
+        final int numAttempts = 3;
+        this.testDice.setNumberOfAttempts(numAttempts);
+        assertEquals(numAttempts, this.testDice.getNumOfAttempts());
+    }
+
 
 
 }
