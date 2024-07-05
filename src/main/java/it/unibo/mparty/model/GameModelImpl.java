@@ -200,6 +200,9 @@ public class GameModelImpl implements GameModel{
         return this.board.getDimension();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void useItem(ItemName item) {
         this.players.get(actualPlayerIndex).getPlayerBag().useItem(item);
