@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.endGame.impl.EndGameViewImpl">
+<BorderPane minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.endGame.impl.EndGameViewImpl">
     <center>
         <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
@@ -36,7 +36,7 @@
     <bottom>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="menuButton" mnemonicParsing="false" onMouseClicked="#menuClicked" text="MENÙ">
+                <Button fx:id="exitButton" mnemonicParsing="false" onMouseClicked="#exitClicked" text="ESCI DAL GIOCO">
                     <font>
                         <Font name="AdLib WGL4 BT" size="18.0" />
                     </font>
