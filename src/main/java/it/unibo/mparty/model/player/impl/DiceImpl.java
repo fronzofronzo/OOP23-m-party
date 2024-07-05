@@ -1,6 +1,7 @@
 package it.unibo.mparty.model.player.impl;
 
 import it.unibo.mparty.model.player.api.Dice;
+import it.unibo.mparty.utilities.Pair;
 
 import java.util.Random;
 
@@ -43,6 +44,23 @@ public class DiceImpl implements Dice {
     @Override
     public int getResult() {
         return this.result;
+    }
+
+    @Override
+    public Pair<Integer, Integer> getBounds() {
+        return new Pair<>(this.minNumber, this.maxNumber);
+    }
+
+    @Override
+    public int getNumOfAttempts() {
+        return this.numberOfAttempts;
+    }
+
+    @Override
+    public void resetDice() {
+        numberOfAttempts = ATTEMPTS;
+        maxNumber = MAX_NUMBER;
+        minNumber = MIN_NUMBER;
     }
 
 }

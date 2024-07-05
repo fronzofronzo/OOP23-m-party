@@ -3,6 +3,8 @@ package it.unibo.mparty.controller;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Optional;
 
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
@@ -15,7 +17,6 @@ public class GameControllerImpl implements GameController{
 
     private final GameView view;
     private GameModel model;
-    private GameStatus status = GameStatus.ROLL_DICE;
 
     public GameControllerImpl(final GameView view){
         this.view = view;
@@ -23,17 +24,24 @@ public class GameControllerImpl implements GameController{
 
     @Override
     public void rollDice() {
-        if(this.status.equals(GameStatus.ROLL_DICE)){
-            this.view.showResultDice(this.model.rollDice());
-            this.switchStatus();
-        }
+        this.view.showResultDice(this.model.rollDice());
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
     @Override
-    public void movePlayer() {
-        if (!this.model.movePlayer()) {
-            this.view.updateCommands(null, this.model.getDirections());   
+    public void movePlayer(Optional<Direction> dir) {
+        this.model.movePlayer(dir);
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
+        this.view.updatePlayerPos(this.model.getActualPlayerInfo());
+    }
+
+    @Override
+    public void action() throws IOException {
+        this.model.action();
+        if (this.model.getActiveMinigame().isPresent()) {
+           this.view.setMinigameScene(this.model.getActiveMinigame().get());
         }
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
     @Override
@@ -46,8 +54,9 @@ public class GameControllerImpl implements GameController{
     public void startGame(GameModel model) {
         this.model = model;
         try {
-            this.view.setScene("GameBoard.fxml");
-            this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), new ArrayList<>());
+            this.view.setScene("GameBoard");
+            this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.getActualPlayerInfo().getY());
+            this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -61,23 +70,5 @@ public class GameControllerImpl implements GameController{
     @Override
     public void endGame() {
         // this.view.showWinner(this.model.getWinner)
-    }
-
-    private void switchStatus(){
-        switch (this.status) {
-            case ROLL_DICE -> {
-                this.status = GameStatus.MOVE_PLAYER;
-            }
-            case MOVE_PLAYER -> {
-
-            }
-        };
-
-    }
-
-    @Override
-    public void movePlayerWithDirection(Direction dir) {
-        this.model.movePlayerWithDirection(dir);
-        this.movePlayer();
     }
 }

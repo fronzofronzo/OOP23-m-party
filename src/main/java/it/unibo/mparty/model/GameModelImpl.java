@@ -8,12 +8,10 @@ import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.shop.api.Shop;
 import it.unibo.mparty.model.shop.impl.ShopImpl;
-import it.unibo.mparty.utilities.BoardType;
-import it.unibo.mparty.utilities.Direction;
-import it.unibo.mparty.utilities.Pair;
-import it.unibo.mparty.utilities.Position;
-import it.unibo.mparty.utilities.SlotType;
+import it.unibo.mparty.utilities.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -34,9 +32,9 @@ public class GameModelImpl implements GameModel{
     private final GameBoard board;
     private final Shop shop;
     private int turn = 1 ;
+    private GameStatus status = GameStatus.ROLL_DICE;
     private int actualPlayerIndex = 0;
     private int steps = 0;
-    private int dice = 0;
     private final MinigameHandler minigameHandler;
 
     /**
@@ -51,6 +49,7 @@ public class GameModelImpl implements GameModel{
        this.shop = new ShopImpl();
        final SimpleBoardFactory boardFactory = new SimpleBoardFactory();
        this.board = boardFactory.createBoard(BoardType.valueOf(difficulty));
+       this.players.forEach(p -> p.setPosition(this.board.getStrartingPosition()));
     }
 
     /**
@@ -58,19 +57,26 @@ public class GameModelImpl implements GameModel{
      * {@inheritDoc}
      */
     @Override
-    public boolean movePlayer() {
-        while (this.steps < this.dice) {
-            final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
-            final Map<Direction, Position> nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition);
-            if (nextPlayerPosition.size() == 1) {
-                this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.entrySet().stream().findFirst().get().getValue());
-            } else {
-                return false;
+    public void movePlayer(Optional<Direction> dir) {
+        if (this.status.equals(GameStatus.MOVE_PLAYER)) {
+            while (this.steps < this.players.get(actualPlayerIndex).getDice().getResult()) {
+                final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
+                final Map<Direction, Position> nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition);
+                if (nextPlayerPosition.size() == 1 && dir.isEmpty()) {
+                    this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.entrySet().stream().findFirst().get().getValue());
+                } else {
+                    if (dir.isEmpty() || nextPlayerPosition.size() < 1 || !nextPlayerPosition.containsKey(dir.get())) {
+                        return;
+                    } else {
+                        this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.get(dir.get()));
+                        dir = Optional.empty();
+                    }
+                }
+                this.steps++;
             }
-            this.steps++;
+            this.steps = 0;
+            this.status = this.status.switchStatus();
         }
-        this.steps = 0;
-        return true;
     }
 
     /**
@@ -78,7 +84,10 @@ public class GameModelImpl implements GameModel{
      */
     @Override
     public int rollDice() {
-        this.players.get(actualPlayerIndex).getDice().rollDice();
+       if(this.status == GameStatus.ROLL_DICE){
+           this.players.get(actualPlayerIndex).getDice().rollDice();
+           this.status = this.status.switchStatus();
+       }
         return this.players.get(actualPlayerIndex).getDice().getResult();
     }
 
@@ -131,36 +140,47 @@ public class GameModelImpl implements GameModel{
      * {@inheritDoc}
      */
     @Override
-    public void activateSlot() {
+    public void action() {
+        if (this.status.equals(GameStatus.ACTIVE_SLOT)) {
+            this.activateSlot();
+            this.status = this.status.switchStatus();
+        } else if (this.status.equals(GameStatus.END_TURN)) {
+            this.nextPlayer();
+            this.status = this.status.switchStatus();
+        }
+    }
+
+    private void activateSlot() {
         final Player actualPlayer = this.players.get(actualPlayerIndex);
         final SlotType slot = this.board.getSlotType(actualPlayer.getPosition());
         final Random random = new Random();
-        switch (slot) {
-            case SINGLEPLAYER -> {
-                try {
-                    this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.SINGLE_PLAYER);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
+        if(this.status.equals(GameStatus.ACTIVE_SLOT)){
+            switch (slot) {
+                case SINGLEPLAYER -> {
+                    try {
+                        this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.SINGLE_PLAYER);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-            }
-            case MULTIPLAYER -> {
-                try {
-                    this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.MULTI_PLAYER);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
+                case MULTIPLAYER -> {
+                    try {
+                        this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.MULTI_PLAYER);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-            }
-            case BONUS -> {
-                actualPlayer.addCoins(random.nextInt(MIN_COINS, MAX_COINS));
-            }
-            case MALUS -> {
-                actualPlayer.removeCoins(random.nextInt(MIN_COINS, MAX_COINS));
-            }
-            case ACTIVE_STAR -> {
-            }
-            default -> {break;}
-        };
-
+                case BONUS -> {
+                    actualPlayer.addCoins(random.nextInt(MIN_COINS, MAX_COINS));
+                }
+                case MALUS -> {
+                    actualPlayer.removeCoins(random.nextInt(MIN_COINS, MAX_COINS));
+                }
+                case ACTIVE_STAR -> {
+                }
+                default -> {break;}
+            };
+        }
     }
 
     /**
@@ -189,16 +209,46 @@ public class GameModelImpl implements GameModel{
         this.minigameHandler.stopMinigame();
     }
 
+    /*
+    private Set<Direction> getDirections() {
+        if (this.status.equals(GameStatus.MOVE_PLAYER)) {
+            Map<Direction,Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
+            if (pos.size() > 1) {
+                return pos.entrySet().stream().map(entry -> entry.getKey()).collect(Collectors.toSet());
+            }
+        }
+        return Collections.emptySet();
+    } */
+
     @Override
-    public Set<Direction> getDirections() {
-        Map<Direction,Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
-        return pos.entrySet().stream().map(entry -> entry.getKey()).collect(Collectors.toSet());
+    public List<String> getPlayersNicknames() {
+        List<String> output = new ArrayList<>();
+        this.players.stream().forEach(p -> output.add(p.getUsername()));
+        return Collections.unmodifiableList(output);
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return
+     */
+    @Override
+    public Pair<String, Position> getActualPlayerInfo() {
+        final Player pl = this.players.get(actualPlayerIndex);
+        return new Pair<>(pl.getUsername(),pl.getPosition());
     }
 
     @Override
-    public void movePlayerWithDirection(Direction dir) {
-        Map<Direction,Position> p = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
-        this.players.get(actualPlayerIndex).setPosition(p.get(dir));
-        this.steps++;
+    public String getMessage() {
+        String output = this.players.get(actualPlayerIndex).getUsername();
+        switch (this.status) {
+            case ROLL_DICE: output = output + " tira i dadi"; break;
+            case MOVE_PLAYER: output = output + " muovi la pedina"; break;
+            case ACTIVE_SLOT: output = output + " attiva l'effetto dello slot"; break;
+            case END_TURN: output = output + " passa il turno"; break;
+            default: break;
+        }
+        return output;
     }
+
+
 }

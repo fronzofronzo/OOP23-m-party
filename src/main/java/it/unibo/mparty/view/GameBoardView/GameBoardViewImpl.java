@@ -2,8 +2,10 @@ package it.unibo.mparty.view.GameBoardView;
 
 import java.util.Map;
 import java.util.List;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import it.unibo.mparty.utilities.Direction;
@@ -11,6 +13,7 @@ import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.view.AbstractSceneView;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -108,11 +111,14 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private SplitPane rightSplitPane;
     @FXML
     private Label resultDice;
+    @FXML
+    private Label labelMessage;
 
-    private Circle player1 = new Circle(10, Color.ORANGE);
-    private Circle player2 = new Circle(10, Color.PURPLE);
-    private Circle player3 = new Circle(10, Color.BLUE);
-    private Circle player4 = new Circle(10, Color.PINK);
+    private static final int RADIUS = 7;
+    private Circle player1 = new Circle(RADIUS, Color.ORANGE);
+    private Circle player2 = new Circle(RADIUS, Color.PURPLE);
+    private Circle player3 = new Circle(RADIUS, Color.BLUE);
+    private Circle player4 = new Circle(RADIUS, Color.PINK);
 
     private List<Label> labelPlayersNames = new ArrayList<>();     
     private List<Label> labelPlayersCoins = new ArrayList<>(); 
@@ -134,7 +140,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @Override
-    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> map, List<String> nicknames) {
+    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> map, List<String> nicknames, Position stratingPosition) {
         this.populateGridPane(dimension, map);
         this.setSize();
         this.createData();
@@ -142,6 +148,9 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
             this.labelPlayersNames.get(i).setText(nicknames.get(i));
             this.labelPlayersStars.get(i).setText(String.valueOf(0));
             this.labelPlayersCoins.get(i).setText(String.valueOf(0));
+        }
+        for (int i = 0; i < nicknames.size(); i++) {
+            this.board.add(this.players.get(i), stratingPosition.getX(), stratingPosition.getY());
         }
     }
         
@@ -153,6 +162,21 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.buttonsItem.addAll(List.of(this.useItem1, this.useItem2, this.useItem3));
         this.buttonsDirection.addAll(List.of(this.buttonUP, this.buttonDOWN, this.buttonLEFT, this.buttonRIGHT));
         this.players.addAll(List.of(this.player1, this.player2, this.player3, this.player4));
+        this.setUpPlayers();
+    }
+
+    private void setUpPlayers() {
+        double cellWidth = this.board.getWidth() / this.board.getColumnCount();
+        double cellHeight = this.board.getHeight() / this.board.getRowCount();
+        //double padding = 3.0;
+        double offsetX = cellWidth;
+        double offsetY = cellHeight - (RADIUS / 2);
+        this.player1.setTranslateY(-offsetY); // Sposta il primo cerchio in alto
+        this.player2.setTranslateX(offsetX); // Sposta il secondo cerchio a destra
+        this.player2.setTranslateY(-offsetY); // Sposta il secondo cerchio in alto
+        this.player3.setTranslateY(offsetY); // Sposta il terzo cerchio in basso
+        this.player4.setTranslateX(offsetX); // Sposta il quarto cerchio a destra
+        this.player4.setTranslateY(offsetY); // Sposta il quarto cerchio in basso
     }
 
     private void setSize() {
@@ -186,9 +210,9 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @Override
-    public void updateCommands(List<String> items, Set<Direction> directions) {
-        for (int i = 0; i <= this.buttonsItem.size(); i++) {
-            if (i <= items.size()) {
+    public void updateCommands(List<String> items, String message) {
+        for (int i = 0; i < this.buttonsItem.size(); i++) {
+            if (i < items.size()) {
                 this.buttonsItem.get(i).setText(items.get(i));
                 this.buttonsItem.get(i).setDisable(false);
             } else {
@@ -196,19 +220,10 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                 this.buttonsItem.get(i).setDisable(true);
             }
         }
-        this.buttonsDirection.stream().forEach(b -> b.setDisable(true));
-        for (Direction d : directions) {
-            switch (d) {
-                case Direction.UP: this.buttonUP.setDisable(true);
-                case Direction.DOWN: this.buttonDOWN.setDisable(true);
-                case Direction.LEFT: this.buttonLEFT.setDisable(true);
-                case Direction.RIGHT: this.buttonRIGHT.setDisable(true);            
-                default: break;
-            }
-        }
+        this.labelMessage.setText(message);
     }
     
-    @SuppressWarnings("unused")
+    @FXML
     private void rollDice(){
         this.getMainController().rollDice();
     }
@@ -218,17 +233,35 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.resultDice.setText(String.valueOf(result));
     }
 
-    @SuppressWarnings("unused")
-    private void movePlayer(){
-        this.getMainController().movePlayer();
+    @FXML
+    private void movePlayer(ActionEvent e){
+        final Button bt = (Button)e.getSource();
+        Optional<Direction> dir = Optional.empty();
+        if (bt.equals(buttonMove)) {
+            
+        } else if (bt.equals(buttonDOWN)) {
+            dir = Optional.of(Direction.DOWN);
+        } else if (bt.equals(buttonUP)) {
+            dir = Optional.of(Direction.UP);
+        } else if (bt.equals(buttonLEFT)) {
+            dir = Optional.of(Direction.LEFT);
+        } else if (bt.equals(buttonRIGHT)) {
+            dir = Optional.of(Direction.RIGHT);
+        }
+        this.getMainController().movePlayer(dir);
+    }
+
+    @FXML
+    private void action() throws IOException{
+        this.getMainController().action();
     }
 
     @Override
-    public void updatePlayerPos(String player, Position position) {
-        for (int i = 0; i <= this.labelPlayersNames.size(); i++) {
-            if (this.labelPlayersNames.get(i).getText().equals(player)) {
+    public void updatePlayerPos(Pair<String,Position> playerInfo) {
+        for (int i = 0; i < this.labelPlayersNames.size(); i++) {
+            if (this.labelPlayersNames.get(i).getText().equals(playerInfo.getX())) {
                 this.board.getChildren().remove(this.players.get(i));
-                this.board.getChildren().add(this.players.get(i));
+                this.board.add(this.players.get(i), playerInfo.getY().getX(), playerInfo.getY().getY());
             }
         }
     }    
