@@ -4,6 +4,7 @@ import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBag;
 import it.unibo.mparty.model.item.api.Item;
+import it.unibo.mparty.utilities.Position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,11 +44,11 @@ public class PlayerBagImplementation implements PlayerBag {
      * {@inheritDoc}
      */
     @Override
-    public void useItem(ItemName item) {
+    public void useItem(ItemName item, Optional<Player> target, Optional<Position> position) {
         final Optional<Item> itemOptional = items.stream().filter(i -> i.getName().equals(item)).findAny();
         if(itemOptional.isPresent()){
             final Item it = itemOptional.get();
-            it.activate(this.owner);
+            it.activate(this.owner, target, position);
             items.remove(it);
         }
     }
