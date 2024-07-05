@@ -76,5 +76,6 @@ public class NanogramControllerImpl implements NanogramController {
             this.view.fillRemainingCellsWithCrosses();
             this.view.displayStatusMessage(NanogramMessage.WIN);
         }
+        this.view.getMainController().saveMinigameResult(this.model.getResult());
     }
 }
