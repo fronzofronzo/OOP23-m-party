@@ -118,7 +118,7 @@ public class GameViewImpl extends Application implements GameView{
 
     @Override
     public void updatePlayerStats(String player, int coins, int stars, List<String> items) {
-        this.updatePlayerStats(player, coins, stars, items);
+        this.boardView.updatePlayerStats(player, coins, stars, items);
     }
 
 
