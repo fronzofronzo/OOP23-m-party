@@ -3,8 +3,6 @@ package it.unibo.mparty.model.minigames.domino.impl;
 import it.unibo.mparty.model.minigames.domino.api.PlayerTiles;
 import it.unibo.mparty.model.minigames.domino.api.Tile;
 import it.unibo.mparty.model.minigames.domino.api.TileFactory;
-import it.unibo.mparty.model.player.api.Player;
-import it.unibo.mparty.model.player.impl.PlayerImplementation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +18,8 @@ class PlayerTilesImplTest {
     private PlayerTiles playerTiles;
     private Tile tile;
     private TileFactory tileFactory;
-    private Player p1;
-    private Player p2;
+    private String player1;
+    private String player2;
 
     @BeforeEach
     void setUp() {
@@ -29,8 +27,8 @@ class PlayerTilesImplTest {
         this.tile = new TileImpl(sideA, sideB);
         this.tileFactory = new TileFactoryImpl();
 
-        p1 = new PlayerImplementation("player1", "Mario");
-        p2 = new PlayerImplementation("player2", "Luigi");
+        player1 = "player1";
+        player2 = "player2";
     }
 
     @Test
@@ -38,29 +36,29 @@ class PlayerTilesImplTest {
         var fullSet = this.tileFactory.createDoubleSixSet();
         var toDistributeP1 = fullSet.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet());
 
-        this.playerTiles.initializePlayerTiles(this.p1, toDistributeP1);
+        this.playerTiles.initializePlayerTiles(this.player1, toDistributeP1);
         fullSet.removeAll(toDistributeP1);
-        assertFalse(this.playerTiles.getPlayerTiles(this.p1).isEmpty());
-        assertEquals(DISTRIBUTION_TILES, this.playerTiles.getPlayerTiles(this.p1).size());
+        assertFalse(this.playerTiles.getPlayerTiles(this.player1).isEmpty());
+        assertEquals(DISTRIBUTION_TILES, this.playerTiles.getPlayerTiles(this.player1).size());
 
         var toDistributeP2 = fullSet.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet());
 
-        this.playerTiles.initializePlayerTiles(this.p2, toDistributeP2);
+        this.playerTiles.initializePlayerTiles(this.player2, toDistributeP2);
         fullSet.removeAll(toDistributeP2);
-        assertFalse(this.playerTiles.getPlayerTiles(this.p2).isEmpty());
-        assertEquals(DISTRIBUTION_TILES, this.playerTiles.getPlayerTiles(this.p2).size());
+        assertFalse(this.playerTiles.getPlayerTiles(this.player2).isEmpty());
+        assertEquals(DISTRIBUTION_TILES, this.playerTiles.getPlayerTiles(this.player2).size());
     }
 
     @Test
     void testRemoveTilesFromPlayer() {
         this.testInitializePlayerTiles();
 
-        var pickTile = this.playerTiles.getPlayerTiles(p1).iterator().next();
-        assertTrue(this.playerTiles.getPlayerTiles(this.p1).contains(pickTile));
-        this.playerTiles.removeTilesFromPlayer(this.p1, pickTile);
-        assertFalse(this.playerTiles.getPlayerTiles(this.p1).contains(pickTile));
+        var pickTile = this.playerTiles.getPlayerTiles(player1).iterator().next();
+        assertTrue(this.playerTiles.getPlayerTiles(this.player1).contains(pickTile));
+        this.playerTiles.removeTilesFromPlayer(this.player1, pickTile);
+        assertFalse(this.playerTiles.getPlayerTiles(this.player1).contains(pickTile));
 
-        this.playerTiles.removeTilesFromPlayer(this.p2, this.tile);
-        assertFalse(this.playerTiles.getPlayerTiles(this.p2).contains(this.tile));
+        this.playerTiles.removeTilesFromPlayer(this.player2, this.tile);
+        assertFalse(this.playerTiles.getPlayerTiles(this.player2).contains(this.tile));
     }
 }

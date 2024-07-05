@@ -1,17 +1,15 @@
 package it.unibo.mparty.model.minigames.domino.api;
 
-import it.unibo.mparty.model.player.api.Player;
-
 import java.util.Set;
 
 public interface PlayerTiles {
-    void initializePlayerTiles(Player player, Set<Tile> tiles);
+    void initializePlayerTiles(String player, Set<Tile> tiles);
 
-    void addTileToPlayer(Player player, Tile tile);
+    void addTileToPlayer(String player, Tile tile);
 
-    boolean canPlayerPlace(Player player, BoardTile boardTile);
+    boolean canPlayerPlace(String player, BoardTile boardTile);
 
-    void removeTilesFromPlayer(Player player, Tile tile);
+    void removeTilesFromPlayer(String player, Tile tile);
 
-    Set<Tile> getPlayerTiles(Player player);
+    Set<Tile> getPlayerTiles(String player);
 }
