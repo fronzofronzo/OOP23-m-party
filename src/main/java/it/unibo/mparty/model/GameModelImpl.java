@@ -33,6 +33,7 @@ public class GameModelImpl implements GameModel{
     private static final int TURNS_NUMBER = 10;
     private static final int MIN_COINS = 4;
     private static final int MAX_COINS = 10;
+    private static final int STAR_COST  =20;
 
     private final List<Player> players;
     private final GameBoard board;
@@ -281,6 +282,15 @@ public class GameModelImpl implements GameModel{
                 }
                 default -> {break;}
             };
+        }
+    }
+
+    private void checkStartAcquisition(){
+        final Player actualPlayer = this.players.get(actualPlayerIndex);
+        final Position starPosition = this.board.getStarPosition();
+        if(actualPlayer.getPosition().equals(starPosition) && actualPlayer.getNumCoins() >= STAR_COST){
+            actualPlayer.addStar();
+            actualPlayer.removeCoins(STAR_COST);
         }
     }
 
