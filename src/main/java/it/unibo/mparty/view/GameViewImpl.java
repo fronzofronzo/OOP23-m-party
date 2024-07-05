@@ -60,10 +60,87 @@ public class GameViewImpl extends Application implements GameView{
      * {@inheritDoc}
      */
     @Override
+    public void setBoardScene() throws IOException {
+        this.stage.setScene(boardScene);
+    }
+
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public void setMinigameScene(String name) throws IOException {
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH_MINIGAMES + name+ EXTENSION)); ;
+        final Parent root = loader.load(getClass().getResourceAsStream( PATH_MINIGAMES + name + EXTENSION));
+        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
+        final MinigameView minigameView = loader.<MinigameView>getController();
+        minigameView.init(this,this.controller);
+        this.stage.setScene(scene);
+        this.stage.setMinWidth(1000);
+        this.stage.setMinHeight(700);
+        this.stage.show();
+    }
+
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public void setShopScene() throws IOException {
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + SHOP_NAME + EXTENSION));
+        final Parent root = loader.load(getClass().getResourceAsStream(PATH + SHOP_NAME + EXTENSION));
+        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
+        final ShopView shopView = loader.<ShopView>getController();
+        shopView.init(this,this.controller);
+        this.stage.setScene(scene);
+        this.stage.setMinWidth(1000);
+        this.stage.setMinHeight(700);
+        this.stage.show();
+    }
+
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
     public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> usernames) {
         this.boardView.setUpBoard(dimension, board, usernames);
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public void showResultDice(int result) {
+        this.boardView.showResultDice(result);
+    }
+
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public void updatePlayer(String player, int coins, int stars, List<String> items, Position position) {
+        this.boardView.updatePlayer(player, coins, stars, items, position);
+    }
+
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateCommands(List<String> items, String message) {
+        this.boardView.updateCommands(items, message);
+    }
+
+    private void setBoardView() throws IOException {
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + "GameBoard" + EXTENSION)); ;
+        final Parent root = loader.load(getClass().getResourceAsStream(PATH + "GameBoard" + EXTENSION));
+        this.boardScene = new Scene(root,root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
+        this.boardView = loader.<GameBoardView>getController();
+        this.boardView.init(this, this.controller);
+    }
 
     /* 
     @Override
@@ -78,62 +155,4 @@ public class GameViewImpl extends Application implements GameView{
         this.stage.setMinHeight(700);
         this.stage.show();
     }*/
-
-    @Override
-    public void setMinigameScene(String name) throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH_MINIGAMES + name+ EXTENSION)); ;
-        final Parent root = loader.load(getClass().getResourceAsStream( PATH_MINIGAMES + name + EXTENSION));
-        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        final MinigameView minigameView = loader.<MinigameView>getController();
-        minigameView.init(this,this.controller);
-        this.stage.setScene(scene);
-        this.stage.setMinWidth(1000);
-        this.stage.setMinHeight(700);
-        this.stage.show();
-    }
-
-
-
-    @Override
-    public void setBoardScene() throws IOException {
-        this.stage.setScene(boardScene);
-    }
-
-    @Override
-    public void setShopScene() throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + SHOP_NAME + EXTENSION));
-        final Parent root = loader.load(getClass().getResourceAsStream(PATH + SHOP_NAME + EXTENSION));
-        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        final ShopView shopView = loader.<ShopView>getController();
-        shopView.init(this,this.controller);
-        this.stage.setScene(scene);
-        this.stage.setMinWidth(1000);
-        this.stage.setMinHeight(700);
-        this.stage.show();
-    }
-
-
-    @Override
-    public void showResultDice(int result) {
-        this.boardView.showResultDice(result);
-    }
-
-    @Override
-    public void updatePlayer(String player, int coins, int stars, List<String> items, Position position) {
-        this.boardView.updatePlayer(player, coins, stars, items, position);
-    }
-
-
-    @Override
-    public void updateCommands(List<String> items, String message) {
-        this.boardView.updateCommands(items, message);
-    }
-
-    private void setBoardView() throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + "GameBoard" + EXTENSION)); ;
-        final Parent root = loader.load(getClass().getResourceAsStream(PATH + "GameBoard" + EXTENSION));
-        this.boardScene = new Scene(root,root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        this.boardView = loader.<GameBoardView>getController();
-        this.boardView.init(this, this.controller);
-    }
 }
