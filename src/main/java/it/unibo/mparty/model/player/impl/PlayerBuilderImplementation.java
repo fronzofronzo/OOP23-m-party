@@ -2,7 +2,6 @@ package it.unibo.mparty.model.player.impl;
 
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBuilder;
-import it.unibo.mparty.utilities.Position;
 
 public class PlayerBuilderImplementation implements PlayerBuilder {
 
