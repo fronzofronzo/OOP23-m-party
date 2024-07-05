@@ -22,12 +22,11 @@ public interface PlayerBag {
     void addItem(Item item);
 
     /**
-     * Method that makes player owner of the bag to use the selected item
-     * ( if the player's bag contains it ). Once the player has used the item,
-     * it will be removed from player's bag.
-     * @param item {@link ItemName} to use
+     *
+     * @param name
+     * @return
      */
-    void useItem(ItemName item, Optional<Player> target, Optional<Position> position);
+    Item useItem(ItemName name);
 
     /**
      * Check if the player's bag is full
