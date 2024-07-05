@@ -50,6 +50,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
 
         this.playerChoiceBox.getItems().addAll(difficulties);
         this.difficulty = this.playerChoiceBox.getValue();
+        this.builder.difficulty(this.difficulty);
     }
 
     @Override
