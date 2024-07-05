@@ -246,7 +246,7 @@ public class GameModelImpl implements GameModel{
      * {@inheritDoc}
      */
     @Override
-    public Map<Position, SlotType> getBoardConfiguration() {
+    public Map<Position, SlotType> getBoardConfig() {
         return this.board.getSlotTypeBoardConfiguration();
     }
 
@@ -254,7 +254,7 @@ public class GameModelImpl implements GameModel{
      * {@inheritDoc}
      */
     @Override
-    public Pair<Integer, Integer> getBoardDimension() {
+    public Pair<Integer, Integer> getBoardDim() {
         return this.board.getDimension();
     }
 

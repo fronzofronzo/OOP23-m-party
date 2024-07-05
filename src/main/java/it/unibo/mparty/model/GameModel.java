@@ -91,13 +91,13 @@ public interface GameModel {
      * Get the board configuration: for each slot, returns the relative slot type
      * @return {@link Map} of {@link Position} and {@link SlotType}
      */
-    Map<Position, SlotType> getBoardConfiguration();
+    Map<Position, SlotType> getBoardConfig();
 
     /**
      * Get the board width and height
      * @return {@link Pair} containing dimensions
      */
-    Pair<Integer, Integer> getBoardDimension();
+    Pair<Integer, Integer> getBoardDim();
 
     /**
      * Get a list of items in the shop
