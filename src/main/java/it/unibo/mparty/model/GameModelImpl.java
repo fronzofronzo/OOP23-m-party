@@ -261,6 +261,11 @@ public class GameModelImpl implements GameModel{
         return this.shop.getItemList().stream().toList();
     }
 
+    @Override
+    public List<Player> getPlayers() {
+        return Collections.unmodifiableList(this.players);
+    }
+
     private void activateSlot() {
         final Player actualPlayer = this.players.get(actualPlayerIndex);
         final SlotType slot = this.board.getSlotType(actualPlayer.getPosition());
