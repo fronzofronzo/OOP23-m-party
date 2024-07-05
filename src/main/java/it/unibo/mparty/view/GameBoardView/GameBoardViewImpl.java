@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
