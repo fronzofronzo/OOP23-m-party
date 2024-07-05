@@ -13,6 +13,7 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
+import it.unibo.mparty.view.SceneType;
 import it.unibo.mparty.view.shop.api.ShopView;
 
 
@@ -64,15 +65,22 @@ public class GameControllerImpl implements GameController{
     @Override
     public void saveMinigameResult(Pair<String, Integer> result) {
         this.model.endMinigame(result);
+        this.endGame();//todo: remove
     }
 
     @Override
     public void endGame() {
+        try {
+            this.view.setScene(SceneType.END);
+            this.view.showResults(this.model.getPlayers());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         // this.view.showWinner(this.model.getWinner)
-        List<String> playersName = this.model.getPlayers().stream().map(Player::getUsername).toList();
-        List<Integer> stars = this.model.getPlayers().stream().map(Player::getNumStars).toList();
-        List<Integer> coins = this.model.getPlayers().stream().map(Player::getNumCoins).toList();
-        this.view.showResults(playersName, stars, coins);
+        //List<String> playersName = this.model.getPlayers().stream().map(Player::getUsername).toList();
+        //List<Integer> stars = this.model.getPlayers().stream().map(Player::getNumStars).toList();
+        //List<Integer> coins = this.model.getPlayers().stream().map(Player::getNumCoins).toList();
+
     }
 
     @Override
