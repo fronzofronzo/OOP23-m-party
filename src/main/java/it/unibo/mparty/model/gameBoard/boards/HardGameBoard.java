@@ -25,7 +25,7 @@ public class HardGameBoard extends AbstractBoardImpl{
     private static final double PROB_SHOP = 0.15;
     private static final double PROB_BONUS = 0.1;
 
-    private static final String FILE_PATH = "C:\\Users\\81W1019HIX\\OneDrive\\Desktop\\MARIO PARTY\\OOP23-m-party\\src\\main\\java\\it\\unibo\\mparty\\model\\gameBoard\\file\\HardGameBoard.txt";
+    private static final String FILE_PATH = "HardGameBoard.txt";
 
     private static final Set<Pair<SlotType,Double>> RULES = 
         Set.of(new Pair<>(SlotType.PATH, PROB_PATH),

@@ -1,8 +1,12 @@
 package it.unibo.mparty.controller;
 
+import java.io.IOException;
+import java.util.Optional;
+
 import it.unibo.mparty.view.shop.ShopView;
 
 import it.unibo.mparty.model.GameModel;
+import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 
 /**
@@ -27,14 +31,20 @@ public interface GameController {
 
     /**
      * Handle the request of the user to roll dice
-     * @return the result of rolling dice
      */
-    int rollDice();
+    void rollDice();
 
     /**
      * Handle the action of moving the player in the {@code GameBoard }
      */
-    void movePlayer();
+    void movePlayer(Optional<Direction> dir);
+
+    /**
+     * handle the activation of the slot where is located the actual player
+     * @throws IOException 
+     */
+    void action() throws IOException;
+
 
     /**
      * Manage the start of a new game
