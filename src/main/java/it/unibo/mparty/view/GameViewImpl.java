@@ -36,19 +36,6 @@ public class GameViewImpl extends Application implements GameView{
     private Stage stage;
     private final GameController controller = new GameControllerImpl(this);
 
-    @Override
-    public void setScene(String path) throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + path + EXTENSION)); ;
-        final Parent root = loader.load(getClass().getResourceAsStream(PATH + path + EXTENSION));
-        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        final  SceneView sceneView = loader.<SceneView>getController();
-        sceneView.init(this,this.controller);
-        this.boardView = loader.<GameBoardView>getController();
-        this.stage.setScene(scene);
-        this.stage.setMinWidth(1000);
-        this.stage.setMinHeight(700);
-        this.stage.show();
-    }
 
 
     @Override
