@@ -1,7 +1,9 @@
 package it.unibo.mparty.view.shop;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import it.unibo.mparty.view.AbstractSceneView;
 import javafx.event.ActionEvent;
@@ -57,6 +59,11 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
     @Override
     public void updateMoney(int money) {
         moneyLabel.setText("Monete rimaste: " + money);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.getMainController().setUpShop(this);
     }
     
 }

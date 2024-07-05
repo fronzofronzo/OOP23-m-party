@@ -2,11 +2,12 @@ package it.unibo.mparty.view.shop;
 
 
 import it.unibo.mparty.view.SceneView;
+import javafx.fxml.Initializable;
 
 /**
  * This interface models the view for the shop
  */
-public interface ShopView extends SceneView{
+public interface ShopView extends SceneView,Initializable{
     
     /**
      * Add the button to the view for buying items

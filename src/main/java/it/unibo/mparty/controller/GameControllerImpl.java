@@ -11,6 +11,8 @@ import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
 
 import java.util.HashMap;
+import java.util.Map;
+
 import it.unibo.mparty.model.shop.impl.ShopImpl;
 import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.player.api.Player;
@@ -24,9 +26,11 @@ public class GameControllerImpl implements GameController{
 
     private final GameView view;
     private GameModel model;
+    private final Shop shop;
 
     public GameControllerImpl(final GameView view){
         this.view = view;
+        this.shop= new ShopImpl();
     }
 
     @Override
@@ -73,21 +77,14 @@ public class GameControllerImpl implements GameController{
     public void endGame() {
         // this.view.showWinner(this.model.getWinner)
     }
-    
-    private Player player = new PlayerImplementation("ferro", "Mario");
-    final private Shop shop = new ShopImpl();
-    private ShopView shopview;
-    private HashMap<String,Integer> itemMap = new HashMap<>();
-
 
     @Override
-    public void setUpShop(ShopView sceneView) {
-        this.shopview=sceneView;
+    public void setUpShop(ShopView shopView) {
+        Map<String,Integer> itemMap = new HashMap<>();
         shop.getItemList().stream().forEach(it -> itemMap.put(it.getName().getNametoString(), it.getCost()));
-        itemMap.forEach((str, i) -> shopview.addButton(str, i));
-        shop.getItemList().stream().forEach(it -> this.shopview.addDescription(it.getDescription()));
-        this.shopview.updateMoney(player.getNumCoins());
-        player.addCoins(50);
+        itemMap.forEach((str, i) -> shopView.addButton(str, i));
+        shop.getItemList().stream().forEach(it -> shopView.addDescription(it.getDescription()));
+        shopView.updateMoney(this.model.getActualPlayerInfo().getX()); //player
     }
 
 
@@ -96,8 +93,8 @@ public class GameControllerImpl implements GameController{
         Optional<Item> item = shop.getItemList().stream().filter(it -> itemString.equals(it.getName().getNametoString()))
         .findFirst();
         if (item.isPresent()) {
-            if (shop.buyItem(player, item.get())) {
-                this.shopview.updateMoney(player.getNumCoins());
+            if (shop.buyItem//(player, item.get())) {
+                this.shopview.updateMoney//(player.getNumCoins());
                 return true;
             }
         }

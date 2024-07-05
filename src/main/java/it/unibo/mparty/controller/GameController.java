@@ -18,9 +18,8 @@ public interface GameController {
 
     /**
      * Set up the shop view
-     * @param scenView the view of the shop
      */
-    public void setUpShop(ShopView scenView);
+    public void setUpShop(ShopView shopView);
 
     /**
      * Select an item and check if the player can add it
