@@ -1,9 +1,13 @@
 package it.unibo.mparty.controller;
 
+import java.io.IOException;
+import java.util.Optional;
+
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
+import it.unibo.mparty.view.shop.api.ShopView;
 
 /**
  * This interface models the Controller ( pattern MVC ) of the main game. After the game
@@ -13,6 +17,17 @@ import it.unibo.mparty.utilities.Pair;
 public interface GameController {
 
     /**
+     * Set up the shop view
+     */
+    public void setUpShop(ShopView shopView);
+
+    /**
+     * Select an item and check if the player can add it
+     * @param itemString the item the player wants to buy
+     */
+    public void buyItem(ItemName itemName, ShopView shopView);
+
+    /**
      * Handle the request of the user to roll dice
      */
     void rollDice();
@@ -20,27 +35,25 @@ public interface GameController {
     /**
      * Handle the action of moving the player in the {@code GameBoard }
      */
-    void movePlayer();
+    void movePlayer(Optional<Direction> dir);
 
     /**
-     * Handle the action of moving the player in the {@code GameBoard } towards the input direction
-     * @param dir direction
+     * handle the activation of the slot where is located the actual player
+     * @throws IOException 
      */
-    void movePlayerWithDirection(Direction dir);
+    void action() throws IOException;
 
     /**
-     * Manage the acquisition of an item of the player's playing the
-     * turn
-     * @param item that player wants to buy
-     * @return true if the player is able to buy it, false otherwise
+     * Handle the request of the player to use an item
+     * @param item {@link ItemName} that player wants to use
      */
-    boolean buyItem(ItemName item);
+    void useItem(ItemName item);
 
     /**
      * Manage the start of a new game
      * @param model to set, created during the initial game phase
      */
-    void startGame(GameModel model);
+    void startGame(GameModel model) throws IOException;
 
     /**
      * Get the result of a minigame and update the model with it

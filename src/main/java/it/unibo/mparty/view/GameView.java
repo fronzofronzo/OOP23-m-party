@@ -20,20 +20,32 @@ import java.util.List;
 public interface GameView {
 
     /**
-     * Sets the next scene to show
-     * @param path of the scene to show
+     * Sets the next sceneType to show
+     * @param sceneType {@link SceneType} of the sceneType to set
      */
-    void setScene(String path) throws IOException;
+    void setScene(SceneType sceneType) throws IOException;
 
-    void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> nicknames);
+    void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> nicknames, Position startingPosition);
+
     /**
-     * Switch to te board scene
+     * Method to set the view scene with a minigame
+     * @param name of the minigame to set
      */
+    void setMinigameScene(String name) throws IOException;
+
+    /**
+     * Set the scene of the board
+     */
+
+    void setBoardScene() throws IOException;
+
+    void setShopScene() throws IOException;
+
     void showResultDice(int result);
 
-    void updatePlayerPos(String player, Position position);
+    void updatePlayerPos(Pair<String,Position> playerInfo);
 
     void updatePlayerStats(String player, int coins, int stars, List<String> items);
 
-    void updateCommands(List<String> items, Set<Direction> directions);
+    void updateCommands(List<String> items, String message);
 }

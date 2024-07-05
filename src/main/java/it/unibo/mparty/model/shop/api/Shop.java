@@ -1,16 +1,25 @@
 package it.unibo.mparty.model.shop.api;
 
 import it.unibo.mparty.model.item.api.Item;
+import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
+import java.util.List;
 
 /**
  * This interface models the shop
  */
 public interface Shop {
     /**
-     * buy an item from the shop
+     * Make the player buy the item if he can
      * @param player the player who is buying the item
-     * @param item the name of the item 
+     * @param itemName the item to buy
+     * @return true if the player can buy the item or false otherwise
      */
-    void buyItem(Player player, Item item);
+    boolean buyItem(Player player, ItemName itemName);
+
+    /**
+     * It gets the items in the shop in a list
+     * @return list of items in the shop
+     */
+    List<Item> getItemList ();
 }

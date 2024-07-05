@@ -3,6 +3,8 @@ package it.unibo.mparty.controller;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Optional;
 
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
@@ -10,12 +12,19 @@ import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.GameStatus;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
+import it.unibo.mparty.view.shop.api.ShopView;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import it.unibo.mparty.model.item.impl.ItemName;
+
+
 
 public class GameControllerImpl implements GameController{
 
     private final GameView view;
     private GameModel model;
-    private GameStatus status = GameStatus.ROLL_DICE;
 
     public GameControllerImpl(final GameView view){
         this.view = view;
@@ -23,34 +32,37 @@ public class GameControllerImpl implements GameController{
 
     @Override
     public void rollDice() {
-        if(this.status.equals(GameStatus.ROLL_DICE)){
-            this.view.showResultDice(this.model.rollDice());
-            this.switchStatus();
+        this.view.showResultDice(this.model.rollDice());
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
+    }
+
+    @Override
+    public void movePlayer(Optional<Direction> dir) {
+        this.model.movePlayer(dir);
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
+        this.view.updatePlayerPos(this.model.getActualPlayerInfo());
+    }
+
+    @Override
+    public void action() throws IOException {
+        this.model.action();
+        if (this.model.getActiveMinigame().isPresent()) {
+           this.view.setMinigameScene(this.model.getActiveMinigame().get());
         }
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
     @Override
-    public void movePlayer() {
-        if (!this.model.movePlayer()) {
-            this.view.updateCommands(null, this.model.getDirections());   
-        }
+    public void useItem(ItemName item) {
+        this.model.useItem(item);
     }
 
     @Override
-    public boolean buyItem(ItemName item) {
-       // return this.model.buyItem()
-        return true;
-    }
-
-    @Override
-    public void startGame(GameModel model) {
+    public void startGame(GameModel model) throws IOException {
         this.model = model;
-        try {
-            this.view.setScene("GameBoard.fxml");
-            this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), new ArrayList<>());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.getActualPlayerInfo().getY());
+        this.view.setBoardScene();
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
     @Override
@@ -63,21 +75,20 @@ public class GameControllerImpl implements GameController{
         // this.view.showWinner(this.model.getWinner)
     }
 
-    private void switchStatus(){
-        switch (this.status) {
-            case ROLL_DICE -> {
-                this.status = GameStatus.MOVE_PLAYER;
-            }
-            case MOVE_PLAYER -> {
-
-            }
-        };
-
+    @Override
+    public void setUpShop(ShopView shopView) {
+        Map<ItemName,Integer> itemMap = new HashMap<>();
+        this.model.getItemsFromShop().stream().forEach(it -> itemMap.put(it.getName(), it.getCost()));
+        itemMap.forEach((str, i) -> shopView.addButton(str, i));
+        this.model.getItemsFromShop().stream().forEach(it -> shopView.addDescription(it.getDescription()));
+        //shopView.updateMoney(this.model.getPlayer());
     }
 
+
     @Override
-    public void movePlayerWithDirection(Direction dir) {
-        this.model.movePlayerWithDirection(dir);
-        this.movePlayer();
+    public void buyItem(ItemName itemName, ShopView shopView) {
+        if (this.model.buyItem(itemName)) {
+            //shopView.updateMoney(this.model.getPlayer());
+        }
     }
 }
