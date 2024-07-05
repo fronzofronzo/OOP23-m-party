@@ -5,13 +5,11 @@ import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
-import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * Interface that models the model of the main game
