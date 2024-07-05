@@ -3,12 +3,13 @@ package it.unibo.mparty.view.minigames.domino.api;
 import it.unibo.mparty.model.minigames.domino.api.Tile;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.SceneView;
+import it.unibo.mparty.view.minigames.MinigameView;
 import it.unibo.mparty.view.minigames.domino.DominoMessage;
 
 import java.util.LinkedList;
 import java.util.Set;
 
-public interface DominoView extends SceneView {
+public interface DominoView extends MinigameView {
     void setPlayerTiles(boolean isPlayer1, Set<Tile> playerTiles);
 
     void setPlayerName(boolean isPlayer1, String playerName);

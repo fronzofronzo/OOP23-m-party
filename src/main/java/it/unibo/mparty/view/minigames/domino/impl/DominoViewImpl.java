@@ -24,6 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public class DominoViewImpl extends AbstractSceneView implements DominoView {
@@ -172,6 +173,11 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
                 ((HBox) node).getChildren().forEach(tileNode -> tileNode.setDisable(true));
             }
         });
+    }
+
+    @Override
+    public void startMinigame(List<String> players) {
+        this.controller.initGame(players);
     }
 
     private void highlightPlayerTurn(final Label currentPlayerLabel, final Label otherPlayerLabel) {
