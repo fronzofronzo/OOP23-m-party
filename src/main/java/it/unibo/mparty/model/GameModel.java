@@ -90,8 +90,17 @@ public interface GameModel {
      */
     Pair<String, Position> getActualPlayerInfo();
 
+    /**
+     * Buy an item from the shop if the player can
+     * @param itemName name of the item
+     * @return true if the player can buy the item, false otherwise
+     */
     boolean buyItem (ItemName itemName);
 
+    /**
+     * Get a list of items in the shop
+     * @return a list of the items in the shop
+     */
     List<Item> getItemsFromShop ();
 
 }
