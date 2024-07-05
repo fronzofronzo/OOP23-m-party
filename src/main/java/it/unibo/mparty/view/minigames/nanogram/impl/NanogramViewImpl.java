@@ -183,8 +183,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
 
     @Override
     public void showResult(Pair<String, Integer> result) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showResult'");
+        this.messageLabel.setText(NanogramMessage.WIN.getFormattedMessage(result.getFirst(), result.getSecond()));
     }
 
     private void setHints(final GridPane grid, final List<List<Integer>> hintsList, final boolean isRowHints) {
