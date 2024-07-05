@@ -16,18 +16,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class GameBoardViewImpl extends AbstractSceneView implements GameBoardView{
+
+    private static final String TEXT_COINS = "MONETE: ";
+    private static final String TEXT_STARS = "STELLE: ";
+    private static final String TEXT_ITEMS = "OGGETTI: ";
+    //private static final String TEXT_VOID_ITEM = "NESSUN OGGETTO";
 
     private static final Map<SlotType,Color> SLOT_COLOR = Map.of(SlotType.ACTIVE_STAR, Color.GOLD,
                                                                  SlotType.BONUS, Color.LIGHTGREEN,
@@ -41,10 +43,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private GridPane board;
     @FXML 
-    private BorderPane borderPane;
-    @FXML 
-    private VBox sectionP1;
-    @FXML 
     private Label nameP1;
     @FXML 
     private Label coinsP1;
@@ -52,8 +50,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label starsP1;
     @FXML
     private Label itemP1;
-    @FXML 
-    private VBox sectionP2;
     @FXML 
     private Label nameP2;
     @FXML 
@@ -63,8 +59,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private Label itemP2;
     @FXML 
-    private VBox sectionP3;
-    @FXML 
     private Label nameP3;
     @FXML 
     private Label coinsP3;
@@ -73,8 +67,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private Label itemP3;
     @FXML 
-    private VBox sectionP4;
-    @FXML 
     private Label nameP4;
     @FXML 
     private Label coinsP4;
@@ -82,8 +74,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label starsP4;
     @FXML
     private Label itemP4;
-    @FXML
-    private SplitPane paneCommand;
     @FXML 
     private Button useItem1;
     @FXML 
@@ -104,10 +94,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Button buttonMove;
     @FXML
     private Button buttonEnter;
-    @FXML
-    private SplitPane leftSplitPane;
-    @FXML
-    private SplitPane rightSplitPane;
     @FXML
     private Label resultDice;
     @FXML
@@ -131,9 +117,9 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     public void updatePlayer(String palyer, int coins, int stars, List<String> items, Position position) {
         for (int i = 0; i < this.labelPlayersNames.size(); i++) {
             if (this.labelPlayersNames.get(i).getText().equals(palyer)) {
-                this.labelPlayersCoins.get(i).setText(String.valueOf(coins));
-                this.labelPlayersStars.get(i).setText(String.valueOf(stars));
-                this.labelPlayersItems.get(i).setText(items.toString());
+                this.labelPlayersCoins.get(i).setText(TEXT_COINS + String.valueOf(coins));
+                this.labelPlayersStars.get(i).setText(TEXT_STARS + String.valueOf(stars));
+                this.labelPlayersItems.get(i).setText(TEXT_ITEMS + this.printItems(items));
                 this.board.getChildren().remove(this.players.get(i));
                 this.board.add(this.players.get(i), position.getX(), position.getY());
             }
@@ -144,10 +130,11 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> map, List<String> nicknames) {
         this.populateGridPane(dimension, map);
         this.createData();
-        for(int i=0; i< nicknames.size(); i++){
+        for(int i=0; i < nicknames.size(); i++){
             this.labelPlayersNames.get(i).setText(nicknames.get(i));
-            this.labelPlayersStars.get(i).setText(String.valueOf(0));
-            this.labelPlayersCoins.get(i).setText(String.valueOf(0));
+            this.labelPlayersStars.get(i).setText(TEXT_STARS + String.valueOf(0));
+            this.labelPlayersCoins.get(i).setText(TEXT_COINS + String.valueOf(0));
+            this.labelPlayersItems.get(i).setText(TEXT_ITEMS);
         }
     }
         
@@ -241,5 +228,15 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private void action() throws IOException{
         this.getMainController().action();
+    }
+
+    private String printItems(List<String> items) {
+        String output = "";
+        if (!items.isEmpty()) {
+            for (String i : items) {
+                output = output.concat("\n- " + i.toString());
+            }
+        }
+        return output;
     }
 }
