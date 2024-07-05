@@ -27,6 +27,32 @@ public class GameControllerImpl implements GameController{
         this.view = view;
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public void startGame(GameModel model) throws IOException {
+        this.model = model;
+        List<String> usernames = this.model.getPlayers().stream().map(p -> p.getUsername()).toList();
+        this.view.setUpBoard(this.model.getBoardDimension(), this.model.getBoardConfiguration(), usernames);
+        
+        this.view.setBoardScene();
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
+        List<Player> players = this.model.getPlayers();
+        players.forEach(p -> this.view.updatePlayerStats(p.getUsername(), p.getNumCoins(), p.getNumStars(), p.getPlayerBag().getItems().stream().map(i -> i.name()).toList()));
+    }
+
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public void useItem(ItemName item) {
+        this.model.useItem(item);
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
+    }
+
     @Override
     public void rollDice() {
         this.view.showResultDice(this.model.rollDice());
@@ -47,24 +73,6 @@ public class GameControllerImpl implements GameController{
            this.view.setMinigameScene(this.model.getActiveMinigame().get());
         }
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
-    }
-
-    @Override
-    public void useItem(ItemName item) {
-        this.model.useItem(item);
-        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
-    }
-
-    @Override
-    public void startGame(GameModel model) throws IOException {
-        this.model = model;
-        List<String> usernames = this.model.getPlayers().stream().map(p -> p.getUsername()).toList();
-        this.view.setUpBoard(this.model.getBoardDimension(), this.model.getBoardConfiguration(), usernames);
-        this.model.getPlayers().forEach(p -> this.view.updatePlayerPos(new Pair<String,Position>(p.getUsername(), p.getPosition())));
-        this.view.setBoardScene();
-        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
-        List<Player> players = this.model.getPlayers();
-        players.forEach(p -> this.view.updatePlayerStats(p.getUsername(), p.getNumCoins(), p.getNumStars(), p.getPlayerBag().getItems().stream().map(i -> i.name()).toList()));
     }
 
     @Override
