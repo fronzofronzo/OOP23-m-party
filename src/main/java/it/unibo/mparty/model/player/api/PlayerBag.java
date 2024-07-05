@@ -10,13 +10,6 @@ import it.unibo.mparty.model.item.impl.ItemName;
 public interface PlayerBag {
 
     /**
-     * Get a certain {@link Item} from player items collection
-     * @param i index of the selected {@link Item}
-     * @return the selected {@link Item}
-     */
-    Item getItem(int i);
-
-    /**
      * Add an item to the player bag. The item is added in the first free
      * space of player bag
      * @param item to add
@@ -24,8 +17,8 @@ public interface PlayerBag {
     void addItem(Item item);
 
     /**
-     * Method that makes player use the selected item ( if the player's
-     * bag contains it )
+     * Method that makes player owner of the bag to use the selected item
+     * ( if the player's bag contains it )
      * @param item {@link ItemName} to use
      */
     void useItem(ItemName item);
