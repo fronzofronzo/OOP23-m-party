@@ -66,8 +66,8 @@ public class GameViewImpl extends Application implements GameView{
     }
 
     @Override
-    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> nicknames, Position startingPosition) {
-        this.boardView.setUpBoard(dimension, board, nicknames, startingPosition);
+    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> nicknames) {
+        this.boardView.setUpBoard(dimension, board, nicknames);
     }
 
     @Override

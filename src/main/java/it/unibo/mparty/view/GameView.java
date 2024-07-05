@@ -25,7 +25,7 @@ public interface GameView {
      */
     void setScene(SceneType sceneType) throws IOException;
 
-    void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> nicknames, Position startingPosition);
+    void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> nicknames);
 
     /**
      * Method to set the view scene with a minigame
