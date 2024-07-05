@@ -20,6 +20,12 @@ public interface MinigameHandler {
     String getMinigame();
 
     /**
+     * Check if there's a minigame running
+     * @return true if there's a minigame active, false otherwise
+     */
+    boolean isInGame();
+
+    /**
      * Stop current minigame
      */
     void stopMinigame();

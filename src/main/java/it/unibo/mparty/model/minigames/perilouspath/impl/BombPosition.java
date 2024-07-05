@@ -7,7 +7,7 @@ import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 
 public class BombPosition extends AbstractPosition{
 
-    final private static int MAX_NEAR_BOMBS = 2;
+    final private static int MAX_NEAR_BOMBS = 3;
     final private static int EMPTY = 0;
 
     /*
@@ -23,11 +23,14 @@ public class BombPosition extends AbstractPosition{
      */
     @Override
     public boolean isSafe(List<AbstractPosition> list1,List<AbstractPosition> list2) {
-        if(list1.size() == EMPTY){
+        if(list1.isEmpty() && !this.SamePosition(list2)){
             return true;
         }
-        return list1.stream().filter(b -> this.adjacent(b)).collect(Collectors.toList()).size() <= MAX_NEAR_BOMBS;
+        return list1.stream().filter(this::adjacent).count() <= MAX_NEAR_BOMBS && !this.SamePosition(list2);
     }
 
-    
+    private boolean SamePosition(List<AbstractPosition> list){
+        return list.stream().anyMatch(b -> (this.getX() == b.getX() && this.getY() == b.getY()));
+    }
+
 }

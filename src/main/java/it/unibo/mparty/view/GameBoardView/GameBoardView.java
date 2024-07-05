@@ -9,9 +9,11 @@ import java.util.Map;
 
 public interface GameBoardView extends SceneView{
 
-    void updatePlayer(String nickname, int coins, int money, List<String> items);
+    void showResultDice(int result);
 
-    void updateCommands(List<String> items);
+    void updatePlayer(String player, int coins, int stars, List<String> items, Position position);
 
-    void setUpBoard(Pair<Integer,Integer> dimension, Map<Position,SlotType> map, List<String> nicknames);
+    void updateCommands(List<String> items, String message);
+
+    void setUpBoard(Pair<Integer,Integer> dimension, Map<Position,SlotType> board, List<String> players);
 }

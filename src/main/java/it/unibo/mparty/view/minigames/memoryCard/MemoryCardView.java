@@ -1,9 +1,10 @@
 package it.unibo.mparty.view.minigames.memoryCard;
 
 import it.unibo.mparty.view.SceneView;
+import it.unibo.mparty.view.minigames.MinigameView;
 import javafx.scene.control.Button;
 
-public interface MemoryCardView extends SceneView {
+public interface MemoryCardView extends MinigameView {
 
     /**
      * set if the selected card can be clicked or not
@@ -19,12 +20,6 @@ public interface MemoryCardView extends SceneView {
      * @param type to set
      */
     void setCardType(int index, String type);
-
-    /**
-     * show the results of the game
-     * @param n coins earned by the player
-     */
-    void showResult(int n);
 
     /**
      * Add a card to the game table
