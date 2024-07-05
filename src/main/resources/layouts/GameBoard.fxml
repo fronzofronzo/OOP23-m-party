@@ -129,6 +129,7 @@
          <items>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
+                  <Label text="USA OGGETTI:" />
                   <Button fx:id="useItem1" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="item1" />
                   <Button fx:id="useItem2" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="item2" />
                   <Button fx:id="useItem3" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="item3" />
@@ -174,10 +175,10 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button fx:id="buttonRollDice" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#rollDice" prefWidth="100.0" text="Roll Dice" />
+                  <Button fx:id="buttonRollDice" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#rollDice" prefWidth="100.0" text="TIRA I DADI" />
                   <Label fx:id="resultDice" />
-                  <Button fx:id="buttonMove" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#movePlayer" prefWidth="100.0" text="Move" />
-                  <Button fx:id="buttonEnter" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#action" prefWidth="100.0" text="Enter" />
+                  <Button fx:id="buttonMove" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#movePlayer" prefWidth="100.0" text="MUOVI" />
+                  <Button fx:id="buttonEnter" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#action" prefWidth="100.0" text="AVANTI" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">

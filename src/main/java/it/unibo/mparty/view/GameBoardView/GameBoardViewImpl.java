@@ -29,7 +29,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private static final String TEXT_COINS = "MONETE: ";
     private static final String TEXT_STARS = "STELLE: ";
     private static final String TEXT_ITEMS = "OGGETTI: ";
-    //private static final String TEXT_VOID_ITEM = "NESSUN OGGETTO";
+    private static final String TEXT_VOID_ITEM = "NESSUN OGGETTO";
 
     private static final Map<SlotType,Color> SLOT_COLOR = Map.of(SlotType.ACTIVE_STAR, Color.GOLD,
                                                                  SlotType.BONUS, Color.LIGHTGREEN,
@@ -180,13 +180,9 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @Override
     public void updateCommands(List<String> items, String message) {
         for (int i = 0; i < this.buttonsItem.size(); i++) {
-            if (i < items.size()) {
-                this.buttonsItem.get(i).setText(items.get(i));
-                this.buttonsItem.get(i).setDisable(false);
-            } else {
-                this.buttonsItem.get(i).setText("");
-                this.buttonsItem.get(i).setDisable(true);
-            }
+            this.buttonsItem.get(i).setText(i < items.size() ?
+                                            items.get(i) :
+                                            TEXT_VOID_ITEM);
         }
         this.labelMessage.setText(message);
     }
