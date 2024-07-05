@@ -5,27 +5,16 @@ import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.endGame.api.EndGameView;
 
 import javafx.application.Platform;
-import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.util.Collections;
 import java.util.List;
 
 public class EndGameViewImpl extends AbstractSceneView implements EndGameView {
-
-    @FXML
-    private TableColumn<Player, Integer> coinColumn;
-
-    @FXML
-    private TableColumn<Player, String> playerColumn;
-
-    @FXML
-    private TableColumn<Player, Integer> rankColumn;
-
-    @FXML
-    private TableColumn<Player, Integer> starColumn;
 
     @FXML
     private TableView<Player> tableView;
