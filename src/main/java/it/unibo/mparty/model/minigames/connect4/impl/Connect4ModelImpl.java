@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.minigames.connect4.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,9 +19,16 @@ public class Connect4ModelImpl implements Connect4Model{
     private String player1;
     private String player2;
     private String turnPlayer;
-    private Position lastSelected = new Position(-1, -1);
-    private int coinsWon;
-    private Map<Position,String> selectedMap = new HashMap<>();
+    private Position lastSelected;
+    private int coinsWon=0;
+    private Map<Position,String> selectedMap;
+    private List<Position> checkList;
+
+    public Connect4ModelImpl() {
+        selectedMap = new HashMap<>();
+        lastSelected = new Position(-1, -1);
+        checkList = new ArrayList<>();
+    }
 
     @Override
     public boolean isOver() {
@@ -30,7 +38,7 @@ public class Connect4ModelImpl implements Connect4Model{
             return true;
         }
         if (hasWon(lastSelected.getX(), lastSelected.getY())) {
-            coinsWon = 15;
+            coinsWon = 10;
             return true;
         }
         manageTurn();
@@ -64,14 +72,16 @@ public class Connect4ModelImpl implements Connect4Model{
         if (row ==-1) {
             return false;
         }
-        lastSelected = new Position(column, row);
+        lastSelected = new Position(row, column);
         selectedMap.put(lastSelected, getTurnPlayer());
         return true;
     }
 
-    private int getAvailableRow (int column) {
+    @Override
+    public int getAvailableRow (int column) {
         return IntStream.range(0, ROW_NUMBER)
-        .filter(i -> !(selectedMap.keySet().contains(new Position(i,column))))
+        .map(it -> ROW_NUMBER -1 -it)
+        .filter(i -> !selectedMap.containsKey(new Position(i, column)))
         .findFirst()
         .orElse(-1);
     }
@@ -83,6 +93,7 @@ public class Connect4ModelImpl implements Connect4Model{
         else {
             turnPlayer=player1;
         }
+        checkList.clear();
     }
 
     private boolean hasWon(int i, int j) {
@@ -94,15 +105,27 @@ public class Connect4ModelImpl implements Connect4Model{
     {
         return IntStream.rangeClosed(-3, 3)
         .map(off -> countMatches(i, j, direction, off))
-        .sum() >= 4;
+        .max().getAsInt() >= 4;
     }
 
     private int countMatches (int i,int j, Connect4Directions direction, int offset) {
         Position check = new Position(i + offset * direction.getPosition().getX(), j + offset * direction.getPosition().getY());
-        if (selectedMap.containsKey(check) && selectedMap.get(check).equals(getTurnPlayer())) {
-            return 1;
+        if (selectedMap.containsKey(check) && selectedMap.get(check).equals(getTurnPlayer()) && isAvailable(check)) {
+            checkList.add(check);
         }
-        return 0;
+        else {
+            checkList.clear();
+        }
+        return checkList.size();
+    }
+
+    private boolean isAvailable (Position pos) {
+        return pos.getX() >= 0 && pos.getX() <ROW_NUMBER && pos.getY()>=0 && pos.getY()<COLUMN_NUMBER;
+    }
+
+    @Override
+    public String getPlayer1() {
+        return this.player1;
     }
 
 }

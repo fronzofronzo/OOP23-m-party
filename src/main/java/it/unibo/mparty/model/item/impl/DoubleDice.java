@@ -7,8 +7,11 @@ import it.unibo.mparty.model.player.api.Player;
  */
 public class DoubleDice extends AbstractItem{
 
+    /**
+     * Construct a new istance of DoubleDice item
+     */
     public DoubleDice() {
-        super(ItemName.DOPPIO_DADO, 5);
+        super(ItemName.DOPPIO_DADO, 7);
     }
 
     @Override
