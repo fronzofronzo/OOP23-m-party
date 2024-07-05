@@ -61,6 +61,9 @@ public class PlayerBagImplementation implements PlayerBag {
         return items.size() == capacity;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<ItemName> getItems() {
         return (items.stream().map(Item::getName).toList());

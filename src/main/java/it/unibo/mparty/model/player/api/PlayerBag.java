@@ -21,7 +21,8 @@ public interface PlayerBag {
 
     /**
      * Method that makes player owner of the bag to use the selected item
-     * ( if the player's bag contains it )
+     * ( if the player's bag contains it ). Once the player has used the item,
+     * it will be removed from player's bag.
      * @param item {@link ItemName} to use
      */
     void useItem(ItemName item);
