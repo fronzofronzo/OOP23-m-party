@@ -23,4 +23,9 @@ public class CursedDice extends AbstractItem{
         return "Il dado ha solo numeri da 1 a 3. Può essere attivato su un giocatore a tua scelta";
     }
 
+    @Override
+    public boolean isOnOthers () {
+        return true;
+    }
+
 }
