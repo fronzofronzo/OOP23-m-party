@@ -204,8 +204,8 @@ public class GameModelImpl implements GameModel{
      */
     @Override
     public void endMinigame(Pair<String, Integer> result) {
-        final Player winner = this.players.stream().filter(p -> p.getUsername().equals(result.getX())).findAny().get();
-        winner.addCoins(result.getY());
+        final Player winner = this.players.stream().filter(p -> p.getUsername().equals(result.getFirst())).findAny().get();
+        winner.addCoins(result.getSecond());
         this.minigameHandler.stopMinigame();
     }
 

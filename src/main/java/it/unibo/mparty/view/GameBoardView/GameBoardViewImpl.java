@@ -190,8 +190,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
-        for (int i = 0; i < dimension.getX(); i++) {
-            for (int j = 0; j < dimension.getY(); j++) {
+        for (int i = 0; i < dimension.getFirst(); i++) {
+            for (int j = 0; j < dimension.getSecond(); j++) {
                 Pane tmp = new Pane();
                 BackgroundFill backgroundfill = new BackgroundFill(getColor(map.get(new Position(i, j))),CornerRadii.EMPTY, null);
                 Background background = new Background(backgroundfill);
@@ -259,9 +259,9 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @Override
     public void updatePlayerPos(Pair<String,Position> playerInfo) {
         for (int i = 0; i < this.labelPlayersNames.size(); i++) {
-            if (this.labelPlayersNames.get(i).getText().equals(playerInfo.getX())) {
+            if (this.labelPlayersNames.get(i).getText().equals(playerInfo.getFirst())) {
                 this.board.getChildren().remove(this.players.get(i));
-                this.board.add(this.players.get(i), playerInfo.getY().getX(), playerInfo.getY().getY());
+                this.board.add(this.players.get(i), playerInfo.getSecond().getX(), playerInfo.getSecond().getY());
             }
         }
     }    
