@@ -84,7 +84,7 @@ public class GameControllerImpl implements GameController{
         shop.getItemList().stream().forEach(it -> itemMap.put(it.getName().getNametoString(), it.getCost()));
         itemMap.forEach((str, i) -> shopView.addButton(str, i));
         shop.getItemList().stream().forEach(it -> shopView.addDescription(it.getDescription()));
-        shopView.updateMoney(this.model.getActualPlayerInfo().getX()); //player
+        //shopView.updateMoney(this.model.getActualPlayerInfo().getX()); player
     }
 
 
@@ -93,10 +93,10 @@ public class GameControllerImpl implements GameController{
         Optional<Item> item = shop.getItemList().stream().filter(it -> itemString.equals(it.getName().getNametoString()))
         .findFirst();
         if (item.isPresent()) {
-            if (shop.buyItem//(player, item.get())) {
+            /*if (shop.buyItem//(player, item.get())) {
                 this.shopview.updateMoney//(player.getNumCoins());
                 return true;
-            }
+            } */
         }
         return false;
     }
