@@ -11,6 +11,7 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
+import it.unibo.mparty.view.SceneType;
 import it.unibo.mparty.view.shop.api.ShopView;
 
 import java.util.HashMap;
@@ -82,7 +83,7 @@ public class GameControllerImpl implements GameController{
         if (this.model.getActiveMinigame().isPresent()) {
            this.view.setMinigameScene(this.model.getActiveMinigame().get());
         } else if (this.model.isShop()) {
-            //set view shop
+            this.view.setScene(SceneType.SHOP);
         }
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
         this.updatePlayersView();
