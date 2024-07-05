@@ -143,7 +143,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @Override
     public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> map, List<String> nicknames) {
         this.populateGridPane(dimension, map);
-        this.setSize();
         this.createData();
         for(int i=0; i< nicknames.size(); i++){
             this.labelPlayersNames.get(i).setText(nicknames.get(i));
@@ -175,16 +174,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.player3.setTranslateY(offsetY); // Sposta il terzo cerchio in basso
         this.player4.setTranslateX(offsetX); // Sposta il quarto cerchio a destra
         this.player4.setTranslateY(offsetY); // Sposta il quarto cerchio in basso
-    }
-
-    private void setSize() {
-        this.borderPane.setMinSize(1000, 600);
-        this.leftSplitPane.setMinSize(150, 400);
-        this.rightSplitPane.setMinSize(150, 400);
-        this.board.setMinSize(700, 400);
-        this.paneCommand.setMinSize(1000, 100);
-        this.paneCommand.prefHeight(100);
-        this.paneCommand.maxHeight(100);
     }
 
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
