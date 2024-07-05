@@ -54,6 +54,4 @@ public interface NanogramModel extends MinigameModel {
      * @return true if the game is complete, otherwise false.
      */
     boolean isGameComplete();
-
-    String getPlayer();
 }

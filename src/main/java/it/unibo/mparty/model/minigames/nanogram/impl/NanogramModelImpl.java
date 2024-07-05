@@ -126,12 +126,4 @@ public class NanogramModelImpl implements NanogramModel {
     public boolean isOver() {
         return this.lives.isDeath();
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getPlayer() {
-        return player;
-    }
 }
