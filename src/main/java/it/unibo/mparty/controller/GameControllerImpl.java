@@ -17,6 +17,7 @@ import java.util.Optional;
 
 import it.unibo.mparty.model.shop.impl.ShopImpl;
 import it.unibo.mparty.model.item.api.Item;
+import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.impl.PlayerImplementation;
 import it.unibo.mparty.model.shop.api.Shop;
@@ -55,11 +56,6 @@ public class GameControllerImpl implements GameController{
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
-    @Override
-    public boolean buyItem(ItemName item) {
-       // return this.model.buyItem()
-        return true;
-    }
 
     @Override
     public void startGame(GameModel model) {
