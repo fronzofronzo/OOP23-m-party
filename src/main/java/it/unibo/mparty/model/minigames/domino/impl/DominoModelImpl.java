@@ -15,6 +15,7 @@ import java.util.stream.IntStream;
 public class DominoModelImpl implements DominoModel {
 
     private static final int DISTRIBUTION_TILES = 7;
+    private static final int COINS = 10;
     private final BoardTile boardTile;
     private final PlayerTiles playerTiles;
     private final List<Tile> dominoSet;
@@ -84,15 +85,9 @@ public class DominoModelImpl implements DominoModel {
         Set<Tile> player2Tiles = this.playerTiles.getPlayerTiles(this.player2);
 
         if (player1Tiles.isEmpty() && !player2Tiles.isEmpty()) {
-            int player2Score = player2Tiles.stream()
-                    .mapToInt(tile -> tile.getSideA().getValue() + tile.getSideB().getValue())
-                    .sum();
-            return new Pair<>(this.player1, player2Score);
+            return new Pair<>(this.player1, COINS);
         } else if (player2Tiles.isEmpty() && !player1Tiles.isEmpty()) {
-            int player1Score = player1Tiles.stream()
-                    .mapToInt(tile -> tile.getSideA().getValue() + tile.getSideB().getValue())
-                    .sum();
-            return new Pair<>(this.player2, player1Score);
+            return new Pair<>(this.player2, COINS);
         } else {
             return new Pair<>(null, 0);
         }
