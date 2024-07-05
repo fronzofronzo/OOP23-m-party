@@ -5,6 +5,7 @@ import it.unibo.mparty.model.minigames.domino.api.DominoModel;
 import it.unibo.mparty.model.minigames.domino.api.PlayerTiles;
 import it.unibo.mparty.model.minigames.domino.api.Tile;
 import it.unibo.mparty.utilities.Pair;
+import javafx.beans.property.SimpleObjectProperty;
 
 import java.util.List;
 import java.util.Random;
@@ -19,6 +20,7 @@ public class DominoModelImpl implements DominoModel {
     private final BoardTile boardTile;
     private final PlayerTiles playerTiles;
     private final List<Tile> dominoSet;
+    private final SimpleObjectProperty<Void> invalidationProperty;
     private String player1;
     private String player2;
 
@@ -26,6 +28,7 @@ public class DominoModelImpl implements DominoModel {
         this.boardTile = new BoardTileImpl();
         this.playerTiles = new PlayerTilesImpl();
         this.dominoSet = new TileFactoryImpl().createDoubleSixSet();
+        this.invalidationProperty = new SimpleObjectProperty<>();
     }
 
     @Override
@@ -34,11 +37,13 @@ public class DominoModelImpl implements DominoModel {
         this.player2 = players.get(1);
         this.distribution(this.player1);
         this.distribution(this.player2);
+        this.notifyListeners();
     }
 
     @Override
     public boolean initializeTurn(final String p1, final String p2) {
         Random random = new Random();
+        this.notifyListeners();
         return getDoubleTiles(p1) > getDoubleTiles(p2) || random.nextBoolean();
     }
 
@@ -47,6 +52,7 @@ public class DominoModelImpl implements DominoModel {
         if (this.boardTile.canMatchBoardTile(tile)) {
             this.boardTile.addTileToBoard(tile);
             this.playerTiles.removeTilesFromPlayer(player, tile);
+            this.notifyListeners();
             return true;
         }
         return false;
@@ -54,6 +60,7 @@ public class DominoModelImpl implements DominoModel {
 
     @Override
     public boolean canDrawTile(final String player) {
+        this.notifyListeners();
         return !this.playerTiles.canPlayerPlace(player, this.boardTile) && !this.dominoSet.isEmpty();
     }
 
@@ -62,6 +69,7 @@ public class DominoModelImpl implements DominoModel {
         Tile newTile = this.dominoSet.iterator().next();
         this.dominoSet.remove(newTile);
         this.playerTiles.addTileToPlayer(player, newTile);
+        this.notifyListeners();
     }
 
     @Override
@@ -95,8 +103,13 @@ public class DominoModelImpl implements DominoModel {
 
     @Override
     public boolean isOver() {
+        this.notifyListeners();
         return this.playerTiles.getPlayerTiles(this.player1).isEmpty()
                 || this.playerTiles.getPlayerTiles(this.player2).isEmpty();
+    }
+
+    private void notifyListeners() {
+        invalidationProperty.setValue(null); // Trigger the invalidation
     }
 
     private int getDoubleTiles(final String player) {
@@ -111,5 +124,6 @@ public class DominoModelImpl implements DominoModel {
         this.playerTiles.initializePlayerTiles(player,
                 this.dominoSet.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet()));
         this.dominoSet.removeAll(this.playerTiles.getPlayerTiles(player));
+        this.notifyListeners();
     }
 }
