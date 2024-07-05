@@ -9,11 +9,34 @@ import java.util.Map;
 
 public interface GameBoardView extends SceneView{
 
-    void showResultDice(int result);
-
-    void updatePlayer(String player, int coins, int stars, List<String> items, Position position);
-
-    void updateCommands(List<String> items, String message);
-
+    /**
+     * Create the board based on the input property 
+     * @param dimension that defines width and height
+     * @param board that defines for each slot his slot type
+     * @param usernames that are the players' username
+     */
     void setUpBoard(Pair<Integer,Integer> dimension, Map<Position,SlotType> board, List<String> players);
+    
+    /**
+     * Update in the board the stats and the position of a player
+     * @param player that is the name of the player to update
+     * @param coins that are the player'coins
+     * @param stars that are the player'stars
+     * @param items that are the player'items
+     * @param position that is the player'position
+     */
+    void updatePlayer(String player, int coins, int stars, List<String> items, Position position);
+    
+    /**
+     * Update the section of the view dedicated to the buttons' items and the message to display
+     * @param items that are the items of the actual player
+     * @param message that is the message to display
+     */
+    void updateCommands(List<String> items, String message);
+    
+    /**
+     * Show in the view the result of the dice roll
+     * @param result that is the result of the dice roll
+     */
+    void showResultDice(int result);
 }
