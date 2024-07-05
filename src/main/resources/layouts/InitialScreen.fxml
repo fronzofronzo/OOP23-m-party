@@ -7,13 +7,14 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="337.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.InitialScreen.impl.InitialScreenImpl">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.InitialScreen.impl.InitialScreenImpl">
    <children>
-      <ImageView fitHeight="359.0" fitWidth="602.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="634.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
          <image>
             <Image url="@../images/MarioPartyInitialScreen.jpeg" />
-         </image></ImageView>
-      <VBox alignment="CENTER" prefHeight="424.0" prefWidth="600.0">
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="1000.0">
          <children>
             <Button fx:id="addPlayers" mnemonicParsing="false" onAction="#handleAddPlayerButton" prefHeight="42.0" prefWidth="248.0" text="AGGIUNGI GIOCATORE" />
             <ChoiceBox fx:id="playerChoiceBox" onDragDetected="#handleDifficultyButton" prefHeight="42.0" prefWidth="248.0" />
