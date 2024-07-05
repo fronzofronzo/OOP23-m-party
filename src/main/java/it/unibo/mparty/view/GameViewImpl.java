@@ -59,8 +59,8 @@ public class GameViewImpl extends Application implements GameView{
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + sceneType.getSceneName() + EXTENSION)); ;
         final Parent root = loader.load(getClass().getResourceAsStream(PATH + sceneType.getSceneName() + EXTENSION));
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        final SceneView sceneView = loader.<SceneView>getController();
-        sceneView.init(this,this.controller);
+        this.sceneView = loader.<SceneView>getController();
+        this.sceneView.init(this,this.controller);
         this.stage.setScene(scene);
         this.stage.setMinWidth(1000);
         this.stage.setMinHeight(700);
