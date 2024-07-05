@@ -30,15 +30,15 @@ public class TileImpl implements Tile {
 
     @Override
     public boolean match(final Tile tile){
-        Optional<Side> matchedSideA = this.canMatchSide(sideA, tile);
+        Optional<Side> matchedSideA = this.canMatchSide(this.sideA, tile);
         if (matchedSideA.isPresent()) {
-            sideA.setMatched();
+            this.sideA.setMatched();
             matchedSideA.get().setMatched();
             return true;
         }
-        Optional<Side> matchedSideB = this.canMatchSide(sideB, tile);
+        Optional<Side> matchedSideB = this.canMatchSide(this.sideB, tile);
         if (matchedSideB.isPresent()) {
-            sideB.setMatched();
+            this.sideB.setMatched();
             matchedSideB.get().setMatched();
             return true;
         }
@@ -46,8 +46,8 @@ public class TileImpl implements Tile {
     }
 
     @Override
-    public boolean canMatch(Tile tile){
-        return this.canMatchSide(sideA, tile).isPresent() || this.canMatchSide(sideB, tile).isPresent();
+    public boolean canMatch(final Tile tile){
+        return this.canMatchSide(this.sideA, tile).isPresent() || this.canMatchSide(this.sideB, tile).isPresent();
     }
 
     @Override
@@ -57,32 +57,32 @@ public class TileImpl implements Tile {
 
     @Override
     public Side getSideA() {
-        return sideA;
+        return this.sideA;
     }
 
     @Override
     public Side getSideB() {
-        return sideB;
+        return this.sideB;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TileImpl tile = (TileImpl) o;
-        return Objects.equals(sideA.getValue(), tile.sideA.getValue()) && Objects.equals(sideB.getValue(), tile.sideB.getValue());
+        return Objects.equals(this.sideA.getValue(), tile.sideA.getValue()) && Objects.equals(this.sideB.getValue(), tile.sideB.getValue());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sideA.getValue(), sideB.getValue());
+        return Objects.hash(this.sideA.getValue(), this.sideB.getValue());
     }
 
     @Override
     public String toString() {
         return "TileImpl{" +
-                "sideA=" + sideA +
-                ", sideB=" + sideB +
+                "sideA=" + this.sideA +
+                ", sideB=" + this.sideB +
                 '}';
     }
 }
