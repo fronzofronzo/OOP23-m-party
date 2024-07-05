@@ -81,4 +81,10 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
         //this.controller.endGame();
     }
 
+    @Override
+    public void startMinigame(List<String> players) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'startMinigame'");
+    }
+
 }

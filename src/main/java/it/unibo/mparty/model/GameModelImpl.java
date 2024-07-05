@@ -34,11 +34,11 @@ public class GameModelImpl implements GameModel{
     private static final int MIN_COINS = 4;
     private static final int MAX_COINS = 10;
     private static final int STAR_COST  =20;
-    private static final String MESSAGE_ROLL_DICE = " tira i dadi";
-    private static final String MESSAGE_MOVE_PLAYER = " muovi la pedina";
-    private static final String MESSAGE_MOVING_PLAYER = " muovi la pedina in una delle direzioni possibili: ";
-    private static final String MESSAGE_ACTIVE_SLOT = " attiva l'effetto dello slot";
-    private static final String MESSAGE_END_TURN = " passa il turno";
+    private static final String MESSAGE_ROLL_DICE = " tira i dadi.";
+    private static final String MESSAGE_MOVE_PLAYER = " muovi la pedina.";
+    private static final String MESSAGE_MOVING_PLAYER = " muovi la pedina in una delle direzioni possibili:";
+    private static final String MESSAGE_ACTIVE_SLOT = " attiva l'effetto dello slot.";
+    private static final String MESSAGE_END_TURN = " passa il turno.";
 
     private final List<Player> players;
     private final GameBoard board;
@@ -285,7 +285,13 @@ public class GameModelImpl implements GameModel{
     private String getDirections() {
         Map<Direction,Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
         String output = "";
-        pos.entrySet().stream().forEach(entry -> output.concat(" " + entry.getKey().toString()));
+        for (Map.Entry<Direction,Position> entry : pos.entrySet()) {
+            if (!output.isBlank()) {
+                output = output.concat(",");   
+            }
+            output = output.concat(" " + entry.getKey().toString());
+        }
+        output = output.concat("."); 
         return output;
     } 
 
