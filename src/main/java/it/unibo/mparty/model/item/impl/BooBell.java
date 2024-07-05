@@ -24,6 +24,9 @@ public class BooBell extends AbstractItem{
         return "Boo ruba delle monete ad un avversario.";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isOnOthers () {
         return true;
