@@ -68,7 +68,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     }
 
     @Override
-    public void handleStartButton(ActionEvent event) {
+    public void handleStartButton(ActionEvent event) throws IOException {
         this.builder = this.builder.difficulty(this.difficulty);
         this.controller.startGame(this.builder.build());
     }

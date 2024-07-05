@@ -35,7 +35,7 @@ public interface InitialScreen extends Initializable{
       * method that handles the event that happens when you click the start button
       * @param event event that happens when you click the start button
       */
-     void handleStartButton(ActionEvent event);
+     void handleStartButton(ActionEvent event) throws IOException;
 
      void setNewPlayer(String username,String character);
 
