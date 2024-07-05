@@ -7,8 +7,11 @@ import it.unibo.mparty.model.player.api.Player;
  */
 public class LuckyDice extends AbstractItem{
 
+    /**
+     * Constructs a new instance of LuckyDice item
+     */
     public LuckyDice() {
-        super(ItemName.DADO_FORTUNATO, 7);
+        super(ItemName.DADO_FORTUNATO, 5);
     }
 
     @Override
