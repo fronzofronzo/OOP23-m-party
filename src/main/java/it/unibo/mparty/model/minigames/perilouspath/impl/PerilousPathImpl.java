@@ -9,9 +9,9 @@ import it.unibo.mparty.utilities.Pair;
 
 public class PerilousPathImpl implements PerilousPath{
 
-    private Optional<List<AbstractPosition>> bombs = Optional.empty();
-    private Optional<List<AbstractPosition>> balls = Optional.empty();
-    private Optional<List<AbstractPosition>> path = Optional.empty();
+    private final List<AbstractPosition> bombs;
+    private final List<AbstractPosition> balls;
+    private final List<AbstractPosition> path;
     private final Random random;
     private final int size;
     private static final int NUM_BOMBS = 8;
@@ -19,44 +19,44 @@ public class PerilousPathImpl implements PerilousPath{
 
 
     public PerilousPathImpl(int size){
-        this.bombs = Optional.of(new LinkedList<>());
-        this.balls = Optional.of(new LinkedList<>());
-        this.path = Optional.of(new LinkedList<>());
+        this.bombs = new LinkedList<>();
+        this.balls = new LinkedList<>();
+        this.path = new LinkedList<>();
         this.random = new Random();
         this.size = size;
     }
 
     @Override
     public void setBombs() {
-        IntStream.iterate(0, i -> i + 1).limit(NUM_BOMBS).forEach(b -> this.bombs.get().add(setNewBombPosition()));
+        IntStream.iterate(0, i -> i + 1).limit(NUM_BOMBS).forEach(b -> this.bombs.add(setNewBombPosition()));
     }
 
     @Override
     public void setBalls() {
-        this.balls.get().add(this.setNewBallPosition(0));
-        this.balls.get().add(this.setNewBallPosition(this.getSize() - 1));
+        this.balls.add(this.setNewBallPosition(0));
+        this.balls.add(this.setNewBallPosition(this.getSize() - 1));
     }
 
     @Override
     public List<AbstractPosition> getBombs() {
-        return Collections.unmodifiableList(this.bombs.get());
+        return Collections.unmodifiableList(this.bombs);
     }
 
     @Override
     public List<AbstractPosition> getBalls() {
-        return Collections.unmodifiableList(this.balls.get());
+        return Collections.unmodifiableList(this.balls);
     }
 
     @Override
     public Type hit(AbstractPosition p) {
-        if(p.isSafe(this.path.get(),this.getBalls())){
-            if(this.bombs.get().stream().anyMatch(b -> b.getX() == p.getX() && b.getY() == p.getY())){
+        if(p.isSafe(this.path,this.getBalls())){
+            if(this.bombs.stream().anyMatch(b -> b.getX() == p.getX() && b.getY() == p.getY())){
                 return Type.BOMB;
             }
-            if(this.balls.get().stream().anyMatch(b -> b.getX() == p.getX() && b.getY() == p.getY()) && !p.equals(this.getBalls().get(0))){
+            if(this.balls.stream().anyMatch(b -> b.getX() == p.getX() && b.getY() == p.getY()) && !p.equals(this.getBalls().get(0))){
                 return Type.BALL;
             }
-            this.path.get().add(p);
+            this.path.add(p);
             return Type.PATH;
         }
         return Type.WRONG;
@@ -75,13 +75,13 @@ public class PerilousPathImpl implements PerilousPath{
 
     @Override
     public boolean isOver() {
-        var p = this.path.get().get(this.path.get().size() - 1);
+        var p = this.path.get(this.path.size() - 1);
         return p.inOrizzontal(getBalls().get(1)) || p.inVertical(getBalls().get(1));
     }
 
     @Override
     public List<AbstractPosition> getPath() {
-        return Collections.unmodifiableList(this.path.get());
+        return Collections.unmodifiableList(this.path);
     }
 
     @Override
