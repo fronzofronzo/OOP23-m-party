@@ -36,6 +36,7 @@ public class GameModelImpl implements GameModel{
     private static final int STAR_COST  =20;
     private static final String MESSAGE_ROLL_DICE = " tira i dadi";
     private static final String MESSAGE_MOVE_PLAYER = " muovi la pedina";
+    private static final String MESSAGE_MOVING_PLAYER = " muovi la pedina in una delle direzioni possibili: ";
     private static final String MESSAGE_ACTIVE_SLOT = " attiva l'effetto dello slot";
     private static final String MESSAGE_END_TURN = " passa il turno";
 
@@ -221,6 +222,9 @@ public class GameModelImpl implements GameModel{
             case MOVE_PLAYER:
                 output = output + MESSAGE_MOVE_PLAYER;
                 break;
+            case MOVING_PLAYER:
+                output = output + MESSAGE_MOVING_PLAYER + getDirections();
+                break;
             case ACTIVE_SLOT:
                 output = output + MESSAGE_ACTIVE_SLOT;
                 break;
@@ -273,16 +277,13 @@ public class GameModelImpl implements GameModel{
         }
     }
 
-    /*
-    private Set<Direction> getDirections() {
-        if (this.status.equals(GameStatus.MOVE_PLAYER)) {
-            Map<Direction,Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
-            if (pos.size() > 1) {
-                return pos.entrySet().stream().map(entry -> entry.getKey()).collect(Collectors.toSet());
-            }
-        }
-        return Collections.emptySet();
-    } */
+    
+    private String getDirections() {
+        Map<Direction,Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
+        String output = "";
+        pos.entrySet().stream().forEach(entry -> output.concat(" " + entry.getKey().toString()));
+        return output;
+    } 
 
     private void activateSlot() {
         final Player actualPlayer = this.players.get(actualPlayerIndex);
