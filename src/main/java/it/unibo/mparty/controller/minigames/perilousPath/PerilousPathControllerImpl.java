@@ -42,11 +42,12 @@ public class PerilousPathControllerImpl implements  PerilousPathController{
             this.view.showBombs(this.model.getBombs());
         }
         this.view.hitTile(type);
+        this.endGame();
     }
 
     @Override
     public void endGame() {
-
+        this.view.showResult(this.model.getResult());
     }
 
     @Override

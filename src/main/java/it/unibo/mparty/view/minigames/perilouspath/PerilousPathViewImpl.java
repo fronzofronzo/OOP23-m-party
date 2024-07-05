@@ -8,6 +8,7 @@ import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
 import it.unibo.mparty.model.minigames.perilouspath.impl.BallPosition;
 import it.unibo.mparty.model.minigames.perilouspath.impl.BombPosition;
 import it.unibo.mparty.model.minigames.perilouspath.impl.PathPosition;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.GameView;
 import javafx.event.ActionEvent;
@@ -150,5 +151,8 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     }
 
 
-
+    @Override
+    public void showResult(Pair<String, Integer> result) {
+        this.gameLabel.setText("il giocatore :" + result.getX() + "ha vinto " + result.getY());
+    }
 }
