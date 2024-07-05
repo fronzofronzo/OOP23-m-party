@@ -1,6 +1,7 @@
 package it.unibo.mparty.model;
 
 import it.unibo.mparty.model.item.impl.ItemName;
+import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemName;
@@ -108,6 +109,12 @@ public interface GameModel {
      * Get a list of items in the shop
      * @return a list of the items in the shop
      */
-    List<Item> getItemsFromShop ();
+    List<Item> getItemsFromShop();
+
+    /**
+     * Get the players that are participating
+     * @return {@link List} of {@link Player} with all players
+     */
+    List<Player> getPlayers();
 
 }
