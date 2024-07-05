@@ -21,7 +21,6 @@ import it.unibo.mparty.controller.GameController;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class GameViewImpl extends Application implements GameView{
 
@@ -32,11 +31,10 @@ public class GameViewImpl extends Application implements GameView{
     private final static String shopName = "Shop";
     private GameBoardView boardView;
     private Scene boardScene;
-    private EndGameView endGameView;
 
     private Stage stage;
     private final GameController controller = new GameControllerImpl(this);
-
+    private SceneView sceneView;
 
 
     @Override
@@ -130,12 +128,8 @@ public class GameViewImpl extends Application implements GameView{
     }
 
     @Override
-    public void showResults(List<String> players, List<Integer> stars, List<Integer> coins) {
-        //order result, and get(0) for winner
-        //todo: switch scene
-        this.endGameView.setPlayerColumn(players);
-        this.endGameView.setStarColumn(stars);
-        this.endGameView.setCoinColumn(coins);
+    public void showResults(List<Player> players) {
+        ((EndGameView) this.sceneView).showResults(players);
     }
 
     private void setBoardView() throws IOException {
