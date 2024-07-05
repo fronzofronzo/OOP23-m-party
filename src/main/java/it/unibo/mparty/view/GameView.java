@@ -2,11 +2,13 @@ package it.unibo.mparty.view;
 
 import java.io.IOException;
 
+import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.List;
 
 
@@ -32,7 +34,7 @@ public interface GameView {
     void setMinigameScene(String name) throws IOException;
 
     /**
-     * Set the scene of the board
+     * Set the shop scene in the view
      */
     void setBoardScene() throws IOException;
     void setShopScene() throws IOException;

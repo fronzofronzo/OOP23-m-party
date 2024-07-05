@@ -20,6 +20,7 @@ import it.unibo.mparty.controller.GameController;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class GameViewImpl extends Application implements GameView{
 
@@ -33,6 +34,8 @@ public class GameViewImpl extends Application implements GameView{
 
     private Stage stage;
     private final GameController controller = new GameControllerImpl(this);
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -86,7 +89,7 @@ public class GameViewImpl extends Application implements GameView{
     public void setBoardScene() throws IOException {
         this.stage.setScene(boardScene);
     }
-    
+
     @Override
     public void setShopScene() throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + shopName + EXTENSION));

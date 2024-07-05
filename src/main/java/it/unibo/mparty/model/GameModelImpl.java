@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Models the core structure of the game
@@ -239,6 +241,16 @@ public class GameModelImpl implements GameModel{
         return output;
     }
 
+    @Override
+    public boolean buyItem(ItemName itemName) {
+        return this.shop.buyItem(this.players.get(actualPlayerIndex), itemName);
+    }
+
+    @Override
+    public List<Item> getItemsFromShop() {
+        return this.shop.getItemList().stream().toList();
+    }
+
     private void activateSlot() {
         final Player actualPlayer = this.players.get(actualPlayerIndex);
         final SlotType slot = this.board.getSlotType(actualPlayer.getPosition());
@@ -270,16 +282,6 @@ public class GameModelImpl implements GameModel{
                 default -> {break;}
             };
         }
-    }
-
-    @Override
-    public boolean buyItem(ItemName itemName) {
-        return this.shop.buyItem(this.players.get(actualPlayerIndex), itemName);
-    }
-
-    @Override
-    public List<Item> getItemsFromShop() {
-        return this.shop.getItemList().stream().toList();
     }
 
 
