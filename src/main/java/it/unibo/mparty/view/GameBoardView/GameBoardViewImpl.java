@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -41,6 +42,15 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                                                                  SlotType.SHOP, Color.SKYBLUE,
                                                                  SlotType.SINGLEPLAYER, Color.LIGHTGRAY,
                                                                  SlotType.VOID, Color.BLACK);
+    private static final Map<SlotType,String> TEXT_TOOL_TIP = Map.of(SlotType.ACTIVE_STAR, "SLOT STELLA",
+                                                                 SlotType.BONUS, "SLOT BONUS",
+                                                                 SlotType.MALUS, "SLOT MALUS",
+                                                                 SlotType.MULTIPLAYER, "SLOT GIOCO",
+                                                                 SlotType.NOT_ACTIVE_STAR, "SENTIERO",
+                                                                 SlotType.PATH, "SENTIERO",
+                                                                 SlotType.SHOP, "NEGOZIO",
+                                                                 SlotType.SINGLEPLAYER, "GIOCO",
+                                                                 SlotType.VOID, "");
     @FXML
     private GridPane board;
     @FXML 
@@ -164,20 +174,22 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
         for (int i = 0; i < dimension.getX(); i++) {
             for (int j = 0; j < dimension.getY(); j++) {
+                Position pos = new Position(i, j);
+                SlotType slotType = Objects.isNull(map.get(pos)) ? 
+                                                   SlotType.VOID :
+                                                   map.get(pos);
                 Pane tmp = new Pane();
-                BackgroundFill backgroundfill = new BackgroundFill(getColor(map.get(new Position(i, j))),CornerRadii.EMPTY, null);
+                BackgroundFill backgroundfill = new BackgroundFill(SLOT_COLOR.get(slotType), 
+                                                                   CornerRadii.EMPTY, 
+                                                                   null);
                 Background background = new Background(backgroundfill);
                 tmp.setBackground(background);
+                if (!slotType.equals(SlotType.VOID)) {
+                    Tooltip tt = new Tooltip(TEXT_TOOL_TIP.get(slotType));
+                    Tooltip.install(tmp, tt);
+                }
                 this.board.add(tmp, i, j);
             }
-        }
-    }
-
-    private Color getColor(SlotType slotType) {
-        if (Objects.isNull(slotType)) {
-            return SLOT_COLOR.get(SlotType.VOID);
-        } else {
-            return SLOT_COLOR.get(slotType);
         }
     }
 
