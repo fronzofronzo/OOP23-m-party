@@ -43,6 +43,11 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     }
 
     @Override
+    public void startMinigame(List<String> players) {
+
+    }
+
+    @Override
     public void updateDisplayLabel(String msg) {
         displayLabel.setText(msg);
     }

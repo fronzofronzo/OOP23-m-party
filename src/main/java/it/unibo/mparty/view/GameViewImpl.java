@@ -121,10 +121,14 @@ public class GameViewImpl extends Application implements GameView{
         this.updatePlayerStats(player, coins, stars, items);
     }
 
-
     @Override
     public void updateCommands(List<String> items, String message) {
         this.boardView.updateCommands(items, message);
+    }
+
+    @Override
+    public void showResults(List<String> players, List<Integer> stars, List<Integer> coins) {
+
     }
 
     private void setBoardView() throws IOException {

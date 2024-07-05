@@ -61,7 +61,7 @@ public class GameControllerImpl implements GameController{
     @Override
     public void startGame(GameModel model) throws IOException {
         this.model = model;
-        this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.getActualPlayerInfo().getY());
+        this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.getActualPlayerInfo().getSecond());
         this.view.setBoardScene();
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
