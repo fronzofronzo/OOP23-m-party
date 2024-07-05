@@ -125,10 +125,21 @@ public class GameControllerImpl implements GameController{
 
     private void updatePlayersView() {
         List<Player> players = this.model.getPlayers();
-        players.forEach(p -> this.view.updatePlayer(p.getUsername(), p.getNumCoins(), p.getNumStars(), p.getPlayerBag().getItems().stream().map(i -> i.name()).toList(), p.getPosition()));
+        players.forEach(p -> this.view.updatePlayer(p.getUsername(), 
+                                                    p.getNumCoins(), 
+                                                    p.getNumStars(), 
+                                                    p.getPlayerBag()
+                                                     .getItems()
+                                                     .stream()
+                                                     .map(i -> i.name()).toList(),
+                                                    p.getPosition()));
     }
 
     private void updateCommandView() {
-        this.view.updateCommands(this.model.getItemsOfCurrentPlayer().stream().map(i -> i.toString()).toList(), this.model.getMessage());
+        this.view.updateCommands(this.model.getItemsOfCurrentPlayer()
+                                           .stream()
+                                           .map(i -> i.toString())
+                                           .toList(),
+                                 this.model.getMessage());
     }
 }
