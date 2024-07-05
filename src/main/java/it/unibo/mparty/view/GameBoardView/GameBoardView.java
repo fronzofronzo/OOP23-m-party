@@ -13,11 +13,11 @@ public interface GameBoardView extends SceneView{
 
     void showResultDice(int result);
 
-    void updatePlayerPos(String player, Position position);
+    void updatePlayerPos(Pair<String,Position> playerInfo);
 
     void updatePlayerStats(String player, int coins, int stars, List<String> items);
 
-    void updateCommands(List<String> items, Set<Direction> directions);
+    void updateCommands(List<String> items, String message);
 
-    void setUpBoard(Pair<Integer,Integer> dimension, Map<Position,SlotType> board, List<String> players);
+    void setUpBoard(Pair<Integer,Integer> dimension, Map<Position,SlotType> board, List<String> players, Position startingPosition);
 }

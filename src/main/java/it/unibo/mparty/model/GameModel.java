@@ -6,6 +6,7 @@ import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -20,11 +21,9 @@ public interface GameModel {
      *
      * @return
      */
-    boolean movePlayer();
+    void movePlayer(Optional<Direction> dir);
 
-    Set<Direction> getDirections();
-    
-    void movePlayerWithDirection(Direction dir);
+    String getMessage();
 
     /**
      * Roll dices of the actual player
@@ -61,7 +60,7 @@ public interface GameModel {
     /**
      * Activate the effect of slot where is the player that's playing its turn
      */
-    void activateSlot();
+    void action();
 
     /**
      * Get the board configuration: for each slot, returns the relative slot type
@@ -81,5 +80,14 @@ public interface GameModel {
      * @param result of the minigame
      */
     void endMinigame(Pair<String,Integer> result);
+
+    List<String> getPlayersNicknames();
+
+    /**
+     * Get the information of the player that's playing the actual turn
+     * @return {@link Pair} containing nickname of player and it's
+     * {@link Position}
+     */
+    Pair<String, Position> getActualPlayerInfo();
 
 }
