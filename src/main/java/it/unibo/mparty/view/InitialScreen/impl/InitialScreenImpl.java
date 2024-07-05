@@ -1,11 +1,9 @@
 package it.unibo.mparty.view.InitialScreen.impl;
 
 import it.unibo.mparty.controller.GameController;
-import it.unibo.mparty.controller.GameControllerImpl;
 import it.unibo.mparty.model.GameModelBuilder;
 import it.unibo.mparty.model.GameModelBuilderImpl;
 import it.unibo.mparty.view.AbstractSceneView;
-import it.unibo.mparty.view.GameViewImpl;
 import it.unibo.mparty.view.InitialScreen.api.InitialScreen;
 import it.unibo.mparty.view.InitialScreen.api.MiniScreen;
 import javafx.event.ActionEvent;
@@ -18,10 +16,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -29,7 +25,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
 
     private GameModelBuilder builder;
     private final GameController controller = this.getMainController();
-    private final Set<String> temp = Set.of("Easy","Medium","Difficult");
+    private final Set<String> difficulties = Set.of("Easy","Medium","Difficult");
     private String difficulty;
 
     @FXML
@@ -52,7 +48,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     @Override
     public void handleDifficultyButton(ActionEvent event) {
 
-        this.playerChoiceBox.getItems().addAll(temp);
+        this.playerChoiceBox.getItems().addAll(difficulties);
         this.difficulty = this.playerChoiceBox.getValue();
     }
 
@@ -80,7 +76,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.startGame.setDisable(true);
-        this.playerChoiceBox.getItems().addAll(temp);
+        this.playerChoiceBox.getItems().addAll(difficulties);
         this.builder = new GameModelBuilderImpl();
     }
 
