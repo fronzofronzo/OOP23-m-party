@@ -186,6 +186,11 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         this.messageLabel.setText(NanogramMessage.WIN.getFormattedMessage(result.getFirst(), result.getSecond()));
     }
 
+    @Override
+    public void startMinigame(List<String> players) {
+        this.controller.initGame(players);
+    }
+
     private void setHints(final GridPane grid, final List<List<Integer>> hintsList, final boolean isRowHints) {
         grid.getChildren().clear();
         final int numLines = hintsList.size();
