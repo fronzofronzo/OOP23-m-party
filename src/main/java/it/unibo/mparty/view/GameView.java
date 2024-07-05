@@ -2,13 +2,11 @@ package it.unibo.mparty.view;
 
 import java.io.IOException;
 
-import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.List;
 
 
@@ -20,10 +18,10 @@ import java.util.List;
 public interface GameView {
 
     /**
-     * Sets the next scene to show
-     * @param path of the scene to show
+     * Sets the next sceneType to show
+     * @param sceneType {@link SceneType} of the sceneType to set
      */
-    void setScene(String path) throws IOException;
+    void setScene(SceneType sceneType) throws IOException;
 
     void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> nicknames, Position startingPosition);
 
@@ -34,9 +32,9 @@ public interface GameView {
     void setMinigameScene(String name) throws IOException;
 
     /**
-     * Set the shop scene in the view
+     * Set the scene of the board
      */
-    void setShopScene();
+    void setBoardScene() throws IOException;
 
     void showResultDice(int result);
 

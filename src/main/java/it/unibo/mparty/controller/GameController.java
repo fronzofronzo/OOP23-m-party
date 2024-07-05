@@ -49,7 +49,7 @@ public interface GameController {
      * Manage the start of a new game
      * @param model to set, created during the initial game phase
      */
-    void startGame(GameModel model);
+    void startGame(GameModel model) throws IOException;
 
     /**
      * Get the result of a minigame and update the model with it
