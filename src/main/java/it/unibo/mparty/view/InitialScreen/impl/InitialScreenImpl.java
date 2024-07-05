@@ -62,8 +62,8 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     public void handleAddPlayerButton(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/MiniScreen.fxml"));
         Parent root = loader.load();
-        MiniScreen controller = new MiniScreenImpl();
-        controller.setUp(this.builder);
+        MiniScreen miniScreenController = loader.getController();
+        miniScreenController.setUp(this);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Add player");
@@ -84,5 +84,10 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
         this.startGame.setDisable(true);
         this.playerChoiceBox.getItems().addAll(temp);
         this.builder = new GameModelBuilderImpl();
+    }
+
+    @Override
+    public void setNewPlayer(String username,String character){
+        this.builder = this.builder.addPlayer(username,character);
     }
 }

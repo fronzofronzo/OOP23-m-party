@@ -2,6 +2,7 @@ package it.unibo.mparty.view.InitialScreen.impl;
 
 import it.unibo.mparty.model.GameModelBuilder;
 import it.unibo.mparty.model.player.impl.Character;
+import it.unibo.mparty.view.InitialScreen.api.InitialScreen;
 import it.unibo.mparty.view.InitialScreen.api.MiniScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ public class MiniScreenImpl implements MiniScreen {
 
     private GameModelBuilder builder;
     private final List<String> characterList = new ArrayList<>();
+    private InitialScreen controller;
 
     @FXML
     private ChoiceBox<String> choiceBox;
@@ -33,14 +35,13 @@ public class MiniScreenImpl implements MiniScreen {
     @FXML
     private Button backButton;
 
-    private Optional<String> username = Optional.empty();
-    private Optional<String> character = Optional.empty();
     private static final int MAX_SIZE = 10;
+
 
     @Override
     public void handleOkButton(ActionEvent e) {
-        if(this.username.isPresent() && this.character.isPresent()) {
-            this.builder = this.builder.addPlayer(this.username.get(), this.character.get());
+        if(this.isShort(this.textField.getText()) && !this.choiceBox.getValue().isEmpty()) {
+            this.controller.setNewPlayer(this.textField.getText(), this.choiceBox.getValue());
         }
         Stage stage = (Stage) this.okButton.getScene().getWindow();
         stage.close();
@@ -53,21 +54,10 @@ public class MiniScreenImpl implements MiniScreen {
         stage.close();
     }
 
-    @Override
-    public void handleCharacterChoiceBox(ActionEvent e) {
-        this.character = Optional.of(this.choiceBox.getValue());
-    }
 
     @Override
-    public void handleUsernameTextField(ActionEvent e) {
-        if(this.textField.getText().length() > MAX_SIZE){
-            this.username = Optional.of(this.textField.getText());
-        }
-    }
-
-    @Override
-    public void setUp(GameModelBuilder builder){
-        this.builder = builder;
+    public void setUp(InitialScreen controller){
+        this.controller = controller;
     }
 
     @Override
@@ -76,5 +66,9 @@ public class MiniScreenImpl implements MiniScreen {
             this.characterList.add(character.getName());
         }
         this.choiceBox.getItems().addAll(this.characterList);
+    }
+
+    private boolean isShort(String text){
+        return text.length() < MAX_SIZE;
     }
 }
