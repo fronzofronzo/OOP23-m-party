@@ -1,12 +1,15 @@
 package it.unibo.mparty.model;
 
 import it.unibo.mparty.utilities.Position;
-
+import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * Interface that models the model of the main game
@@ -18,7 +21,9 @@ public interface GameModel {
      *
      * @return
      */
-    Position movePlayer();
+    void movePlayer(Optional<Direction> dir);
+
+    String getMessage();
 
     /**
      * Roll dices of the actual player
@@ -27,16 +32,12 @@ public interface GameModel {
     int rollDice();
 
     /**
-     * Get the name of the minigame that is active
-     * @return the name of the minigame
+     * If is active, get the name of the minigame.
+     * @return {@link Optional}: it's empty if there is no minigame running
+     * at that moment. If there's a minigame playing, the Optional contains
+     * its name
      */
-    String getActiveMinigame();
-
-    /**
-     * Check if during the actual player turn, there is a minigame active
-     * @return true if there is a minigame active, false otherwise
-     */
-    boolean isActiveMinigame();
+    Optional<String> getActiveMinigame();
 
     /**
      * End the turn of the actual player and starts the turn of the
@@ -59,7 +60,7 @@ public interface GameModel {
     /**
      * Activate the effect of slot where is the player that's playing its turn
      */
-    void activateSlot();
+    void action();
 
     /**
      * Get the board configuration: for each slot, returns the relative slot type
@@ -79,5 +80,14 @@ public interface GameModel {
      * @param result of the minigame
      */
     void endMinigame(Pair<String,Integer> result);
+
+    List<String> getPlayersNicknames();
+
+    /**
+     * Get the information of the player that's playing the actual turn
+     * @return {@link Pair} containing nickname of player and it's
+     * {@link Position}
+     */
+    Pair<String, Position> getActualPlayerInfo();
 
 }

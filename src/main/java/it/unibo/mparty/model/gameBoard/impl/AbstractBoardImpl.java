@@ -10,8 +10,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.utilities.BoardType;
@@ -205,7 +206,11 @@ public abstract class AbstractBoardImpl implements GameBoard{
      * @param filePath file path of the file to read
      */
     protected void createPathFromFile(String filePath){
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        InputStream inputStream = ClassLoader.getSystemResourceAsStream(this.filePath);
+        if (Objects.isNull(inputStream)) {
+            throw new IllegalStateException();
+        }
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(" ");
@@ -264,10 +269,9 @@ public abstract class AbstractBoardImpl implements GameBoard{
         if (this.avaiableSlotTypes.isEmpty()) {
             this.avaiableSlotTypes = setAviableSlotType();
         }
-        //SlotType output = this.avaiableSlotTypes.getFirst();
-        //this.avaiableSlotTypes.removeFirst();
-        //return output;
-        return null;
+        SlotType output = this.avaiableSlotTypes.get(0);
+        this.avaiableSlotTypes.remove(0);
+        return output;
     }
     
     /**

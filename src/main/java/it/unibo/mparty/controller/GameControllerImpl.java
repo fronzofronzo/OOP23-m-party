@@ -2,8 +2,14 @@ package it.unibo.mparty.controller;
 
 import java.io.IOException;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Optional;
+
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
+import it.unibo.mparty.utilities.Direction;
+import it.unibo.mparty.utilities.GameStatus;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
 
@@ -17,15 +23,25 @@ public class GameControllerImpl implements GameController{
     }
 
     @Override
-    public int rollDice() {
-        return this.model.rollDice();        
+    public void rollDice() {
+        this.view.showResultDice(this.model.rollDice());
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
     @Override
-    public void movePlayer() {
-        this.model.movePlayer();
-        // this.view.clean()
-        // this.view.drawBoard()
+    public void movePlayer(Optional<Direction> dir) {
+        this.model.movePlayer(dir);
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
+        this.view.updatePlayerPos(this.model.getActualPlayerInfo());
+    }
+
+    @Override
+    public void action() throws IOException {
+        this.model.action();
+        if (this.model.getActiveMinigame().isPresent()) {
+           this.view.setMinigameScene(this.model.getActiveMinigame().get());
+        }
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
     @Override
@@ -38,8 +54,9 @@ public class GameControllerImpl implements GameController{
     public void startGame(GameModel model) {
         this.model = model;
         try {
-            this.view.setScene("GameBoard.fxml");
-            this.drawBoard();
+            this.view.setScene("GameBoard");
+            this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.getActualPlayerInfo().getY());
+            this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,13 +65,6 @@ public class GameControllerImpl implements GameController{
     @Override
     public void saveMinigameResult(Pair<String, Integer> result) {
         this.model.endMinigame(result);
-    }
-
-    private void drawBoard() {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-            }
-        }
     }
 
     @Override
