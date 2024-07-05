@@ -14,7 +14,8 @@ public class PerilousPathImpl implements PerilousPath{
     private final List<AbstractPosition> path;
     private final Random random;
     private final int size;
-    private static final int NUM_BOMBS = 8;
+    private final static int NUM_BOMBS = 8;
+    private final static int COINS = 10;
     private List<String> players = new LinkedList<>();
 
 
@@ -64,8 +65,7 @@ public class PerilousPathImpl implements PerilousPath{
 
     @Override
     public Pair<String, Integer> getResult() {
-        int coins = 20;
-        return isOver() ? new Pair<>(this.players.get(0), coins) : new Pair<>(this.players.get(0),0);
+        return isOver() ? new Pair<>(this.players.get(0), COINS) : new Pair<>(this.players.get(0),0);
     }
 
     @Override
