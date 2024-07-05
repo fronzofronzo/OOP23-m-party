@@ -127,9 +127,12 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @Override
-    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
+    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> map, List<String> usernames) {
         this.populateGridPane(dimension, map);
         this.createData();
+        for (int i = 0; i < usernames.size(); i++) {
+            this.labelPlayersNames.get(i).setText(usernames.get(i));
+        }
     }
         
     private void createData() {

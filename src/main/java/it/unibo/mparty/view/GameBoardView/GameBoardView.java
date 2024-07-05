@@ -13,8 +13,9 @@ public interface GameBoardView extends SceneView{
      * Create the board based on the input property 
      * @param dimension that defines width and height
      * @param board that defines for each slot his slot type
+     * @param usernames players 
      */
-    void setUpBoard(Pair<Integer,Integer> dimension, Map<Position,SlotType> board);
+    void setUpBoard(Pair<Integer,Integer> dimension, Map<Position,SlotType> board, List<String> usernames);
     
     /**
      * Update in the board the stats and the position of a player
