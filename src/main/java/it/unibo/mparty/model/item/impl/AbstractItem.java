@@ -29,6 +29,18 @@ public abstract class AbstractItem implements Item{
     public int getCost() {
         return this.cost;
     }
+
+    @Override
+    public boolean isOnOthers() {
+        return false;
+    }
+
+    @Override
+    public boolean needPosition() {
+        return false;
+    }
+
+    
     
     
 }

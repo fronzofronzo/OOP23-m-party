@@ -2,15 +2,15 @@ package it.unibo.mparty.model;
 
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.utilities.Position;
+import it.unibo.mparty.model.item.api.Item;
+import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
-import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * Interface that models the model of the main game
@@ -96,5 +96,18 @@ public interface GameModel {
      * {@link Position}
      */
     Pair<String, Position> getActualPlayerInfo();
+
+    /**
+     * Buy an item from the shop if the player can
+     * @param itemName name of the item
+     * @return true if the player can buy the item, false otherwise
+     */
+    boolean buyItem (ItemName itemName);
+
+    /**
+     * Get a list of items in the shop
+     * @return a list of the items in the shop
+     */
+    List<Item> getItemsFromShop ();
 
 }
