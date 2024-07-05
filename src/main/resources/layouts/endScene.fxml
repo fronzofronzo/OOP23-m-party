@@ -14,7 +14,7 @@
         <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="rankColumn" prefWidth="150.0" text="Posto" />
-                <TableColumn fx:id="playerColumn" prefWidth="268.0" text="Player" />
+                <TableColumn fx:id="playerColumn" prefWidth="268.0" text="Giocatore" />
                 <TableColumn fx:id="starColumn" prefWidth="200.0" text="Stelle" />
                 <TableColumn fx:id="coinColumn" prefWidth="200.79998779296875" text="Monete" />
             </columns>
