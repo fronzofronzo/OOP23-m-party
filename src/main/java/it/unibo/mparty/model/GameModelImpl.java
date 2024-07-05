@@ -17,7 +17,6 @@ import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.utilities.*;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -112,11 +111,7 @@ public class GameModelImpl implements GameModel{
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void nextPlayer() {
+    private void nextPlayer() {
         this.actualPlayerIndex = (this.actualPlayerIndex + 1) % players.size();
         if(this.actualPlayerIndex == 0){
             this.turn++;
@@ -211,23 +206,6 @@ public class GameModelImpl implements GameModel{
         }
         return Collections.emptySet();
     } */
-
-    @Override
-    public List<String> getPlayersNicknames() {
-        List<String> output = new ArrayList<>();
-        this.players.stream().forEach(p -> output.add(p.getUsername()));
-        return Collections.unmodifiableList(output);
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return
-     */
-    @Override
-    public Pair<String, Position> getActualPlayerInfo() {
-        final Player pl = this.players.get(actualPlayerIndex);
-        return new Pair<>(pl.getUsername(),pl.getPosition());
-    }
 
     @Override
     public String getMessage() {

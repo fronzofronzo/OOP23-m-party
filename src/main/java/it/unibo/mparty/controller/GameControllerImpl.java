@@ -2,24 +2,20 @@ package it.unibo.mparty.controller;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.utilities.Direction;
-import it.unibo.mparty.utilities.GameStatus;
 import it.unibo.mparty.utilities.Pair;
+import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.GameView;
 import it.unibo.mparty.view.shop.api.ShopView;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
-import it.unibo.mparty.model.item.impl.ItemName;
-
-
 
 public class GameControllerImpl implements GameController{
 
@@ -40,7 +36,7 @@ public class GameControllerImpl implements GameController{
     public void movePlayer(Optional<Direction> dir) {
         this.model.movePlayer(dir);
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
-        this.view.updatePlayerPos(this.model.getActualPlayerInfo());
+        this.model.getPlayers().forEach(p -> this.view.updatePlayerPos(new Pair<String,Position>(p.getUsername(), p.getPosition())));
     }
 
     @Override
@@ -61,9 +57,12 @@ public class GameControllerImpl implements GameController{
     @Override
     public void startGame(GameModel model) throws IOException {
         this.model = model;
-        this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.getActualPlayerInfo().getY());
+        List<String> usernames = this.model.getPlayers().stream().map(p -> p.getUsername()).toList();
+        this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), usernames);
+        this.model.getPlayers().forEach(p -> this.view.updatePlayerPos(new Pair<String,Position>(p.getUsername(), p.getPosition())));
         this.view.setBoardScene();
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
+        this.model.getPlayers().stream().forEach(p -> this.view.updatePlayerStats(p.getUsername(), p.getNumCoins(), p.getNumStars(), p.getPlayerBag().getItems().stream().map(i -> i.name()).toList()));
     }
 
     @Override

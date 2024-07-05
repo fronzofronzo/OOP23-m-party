@@ -140,7 +140,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @Override
-    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> map, List<String> nicknames, Position stratingPosition) {
+    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> map, List<String> nicknames) {
         this.populateGridPane(dimension, map);
         this.setSize();
         this.createData();
@@ -148,9 +148,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
             this.labelPlayersNames.get(i).setText(nicknames.get(i));
             this.labelPlayersStars.get(i).setText(String.valueOf(0));
             this.labelPlayersCoins.get(i).setText(String.valueOf(0));
-        }
-        for (int i = 0; i < nicknames.size(); i++) {
-            this.board.add(this.players.get(i), stratingPosition.getX(), stratingPosition.getY());
         }
     }
         

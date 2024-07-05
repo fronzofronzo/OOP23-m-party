@@ -42,12 +42,6 @@ public interface GameModel {
     Optional<String> getActiveMinigame();
 
     /**
-     * End the turn of the actual player and starts the turn of the
-     * next player
-     */
-    void nextPlayer();
-
-    /**
      * Get the username of the player that has won
      * @return the username of winner
      */
@@ -88,15 +82,6 @@ public interface GameModel {
      * @param result of the minigame
      */
     void endMinigame(Pair<String,Integer> result);
-
-    List<String> getPlayersNicknames();
-
-    /**
-     * Get the information of the player that's playing the actual turn
-     * @return {@link Pair} containing nickname of player and it's
-     * {@link Position}
-     */
-    Pair<String, Position> getActualPlayerInfo();
 
     /**
      * Buy an item from the shop if the player can
