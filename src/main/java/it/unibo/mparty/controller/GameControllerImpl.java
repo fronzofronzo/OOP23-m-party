@@ -45,6 +45,11 @@ public class GameControllerImpl implements GameController{
     }
 
     @Override
+    public void useItem(ItemName item) {
+        this.model.useItem(item);
+    }
+
+    @Override
     public boolean buyItem(ItemName item) {
        // return this.model.buyItem()
         return true;

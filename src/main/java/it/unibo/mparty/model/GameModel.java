@@ -1,5 +1,6 @@
 package it.unibo.mparty.model;
 
+import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
@@ -73,6 +74,12 @@ public interface GameModel {
      * @return {@link Pair} containing dimensions
      */
     Pair<Integer, Integer> getBoardDimensions();
+
+    /**
+     * Make the player that's playing its turn use the selected item
+     * @param item {@link ItemName} to use
+     */
+    void useItem(ItemName item);
 
     /**
      * Method to end the current minigame and update the model
