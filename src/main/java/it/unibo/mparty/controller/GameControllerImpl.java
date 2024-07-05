@@ -33,12 +33,10 @@ public class GameControllerImpl implements GameController{
     @Override
     public void startGame(GameModel model) throws IOException {
         this.model = model;
-        List<String> usernames = this.model.getPlayers().stream().map(p -> p.getUsername()).toList();
-        this.view.setUpBoard(this.model.getBoardDimension(), this.model.getBoardConfiguration(), usernames);
+        this.view.setUpBoard(this.model.getBoardDimension(), this.model.getBoardConfiguration());
         this.view.setBoardScene();
         this.updatePlayersView();;
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
-        
     }
 
     /**

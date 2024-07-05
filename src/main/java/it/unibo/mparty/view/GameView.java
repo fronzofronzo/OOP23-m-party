@@ -39,9 +39,8 @@ public interface GameView {
      * Create the board based on the input property 
      * @param dimension that defines width and height
      * @param board that defines for each slot his slot type
-     * @param usernames that are the players' username
      */
-    void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> usernames);
+    void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board);
 
     /**
      * Show in the view the result of the dice roll

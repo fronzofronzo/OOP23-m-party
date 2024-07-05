@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.List;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -30,6 +31,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private static final String TEXT_STARS = "STELLE: ";
     private static final String TEXT_ITEMS = "OGGETTI: ";
     //private static final String TEXT_VOID_ITEM = "NESSUN OGGETTO";
+    private static final int STARTING_STATS = 0;
 
     private static final Map<SlotType,Color> SLOT_COLOR = Map.of(SlotType.ACTIVE_STAR, Color.GOLD,
                                                                  SlotType.BONUS, Color.LIGHTGREEN,
@@ -127,15 +129,9 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @Override
-    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> map, List<String> nicknames) {
+    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
         this.populateGridPane(dimension, map);
         this.createData();
-        for(int i=0; i < nicknames.size(); i++){
-            this.labelPlayersNames.get(i).setText(nicknames.get(i));
-            this.labelPlayersStars.get(i).setText(TEXT_STARS + String.valueOf(0));
-            this.labelPlayersCoins.get(i).setText(TEXT_COINS + String.valueOf(0));
-            this.labelPlayersItems.get(i).setText(TEXT_ITEMS);
-        }
     }
         
     private void createData() {
