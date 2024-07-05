@@ -2,9 +2,6 @@ package it.unibo.mparty.controller;
 
 import java.io.IOException;
 
-import java.util.Collections;
-import java.util.Optional;
-
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
@@ -16,6 +13,7 @@ import it.unibo.mparty.view.shop.api.ShopView;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class GameControllerImpl implements GameController{
 
@@ -36,7 +34,7 @@ public class GameControllerImpl implements GameController{
         this.view.setUpBoard(this.model.getBoardDimension(), this.model.getBoardConfiguration());
         this.view.setBoardScene();
         this.updatePlayersView();;
-        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
+        this.updateCommandView();
     }
 
     /**
@@ -46,7 +44,7 @@ public class GameControllerImpl implements GameController{
     @Override
     public void useItem(ItemName item) {
         this.model.useItem(item);
-        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
+        this.updateCommandView();
     }
 
     /**
@@ -56,7 +54,7 @@ public class GameControllerImpl implements GameController{
     @Override
     public void rollDice() {
         this.view.showResultDice(this.model.rollDice());
-        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
+        this.updateCommandView();
     }
 
     /**
@@ -66,7 +64,7 @@ public class GameControllerImpl implements GameController{
     @Override
     public void movePlayer(Optional<Direction> dir) {
         this.model.movePlayer(dir);
-        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
+        this.updateCommandView();
         this.updatePlayersView();
     }
 
@@ -82,7 +80,7 @@ public class GameControllerImpl implements GameController{
         } else if (this.model.isShop()) {
             //this.view.setScene(SceneType.SHOP);
         }
-        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
+        this.updateCommandView();
         this.updatePlayersView();
         this.checkEndGame();
     }
@@ -96,7 +94,7 @@ public class GameControllerImpl implements GameController{
         Map<ItemName,Integer> itemMap = new HashMap<>();
         this.model.getItemsFromShop().stream().forEach(it -> itemMap.put(it.getName(), it.getCost()));
         itemMap.forEach((str, i) -> shopView.addButton(str, i));
-        this.model.getItemsFromShop().stream().forEach(it -> shopView.addDescription(it.getDescription()));
+        this.updateCommandView();
         //shopView.updateMoney(this.model.getPlayer());
     }
 
@@ -128,5 +126,9 @@ public class GameControllerImpl implements GameController{
     private void updatePlayersView() {
         List<Player> players = this.model.getPlayers();
         players.forEach(p -> this.view.updatePlayer(p.getUsername(), p.getNumCoins(), p.getNumStars(), p.getPlayerBag().getItems().stream().map(i -> i.name()).toList(), p.getPosition()));
+    }
+
+    private void updateCommandView() {
+        this.view.updateCommands(this.model.getItemsOfCurrentPlayer().stream().map(i -> i.toString()).toList(), this.model.getMessage());
     }
 }
