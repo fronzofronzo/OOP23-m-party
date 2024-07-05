@@ -35,14 +35,11 @@ public class BoardTileImpl implements BoardTile {
         }
 
         if (this.boardTiles.getFirst().match(tile)) {
-            //tile = new TileImpl(tile.getSideB().getValue(), tile.getSideA().getValue());
             this.boardTiles.addFirst(tile);
         } else if (this.boardTiles.getLast().match(tile)) {
             this.boardTiles.addLast(tile);
         }
-
     }
-
 
     @Override
     public boolean equals(final Object o) {
