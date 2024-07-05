@@ -37,6 +37,7 @@ public interface GameView {
      * Set the shop scene in the view
      */
     void setBoardScene() throws IOException;
+
     void setShopScene() throws IOException;
 
     void showResultDice(int result);

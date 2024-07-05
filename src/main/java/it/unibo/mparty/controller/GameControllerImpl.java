@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
+import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
@@ -62,7 +63,8 @@ public class GameControllerImpl implements GameController{
         this.model.getPlayers().forEach(p -> this.view.updatePlayerPos(new Pair<String,Position>(p.getUsername(), p.getPosition())));
         this.view.setBoardScene();
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
-        this.model.getPlayers().stream().forEach(p -> this.view.updatePlayerStats(p.getUsername(), p.getNumCoins(), p.getNumStars(), p.getPlayerBag().getItems().stream().map(i -> i.name()).toList()));
+        List<Player> players = this.model.getPlayers();
+        players.forEach(p -> this.view.updatePlayerStats(p.getUsername(), p.getNumCoins(), p.getNumStars(), p.getPlayerBag().getItems().stream().map(i -> i.name()).toList()));
     }
 
     @Override
