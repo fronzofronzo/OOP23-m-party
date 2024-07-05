@@ -14,12 +14,7 @@ import it.unibo.mparty.view.shop.api.ShopView;
 import java.util.HashMap;
 import java.util.Map;
 
-import it.unibo.mparty.model.shop.impl.ShopImpl;
-import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemName;
-import it.unibo.mparty.model.player.api.Player;
-import it.unibo.mparty.model.player.impl.PlayerImplementation;
-import it.unibo.mparty.model.shop.api.Shop;
 
 
 

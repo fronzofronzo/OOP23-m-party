@@ -12,8 +12,6 @@ import it.unibo.mparty.model.shop.api.Shop;
 import it.unibo.mparty.model.shop.impl.ShopImpl;
 import it.unibo.mparty.utilities.BoardType;
 import it.unibo.mparty.utilities.Pair;
-import it.unibo.mparty.model.shop.api.Shop;
-import it.unibo.mparty.model.shop.impl.ShopImpl;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.utilities.*;
@@ -24,8 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Models the core structure of the game
