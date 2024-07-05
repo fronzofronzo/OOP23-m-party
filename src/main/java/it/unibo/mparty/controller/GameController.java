@@ -23,7 +23,7 @@ public interface GameController {
 
     /**
      * Select an item and check if the player can add it
-     * @param itemString the item theplayer wants to buy
+     * @param itemString the item the player wants to buy
      * @return true if he can buy it, false otherwise
      */
     public boolean buyItem(String itemString);
