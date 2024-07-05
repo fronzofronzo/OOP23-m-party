@@ -143,11 +143,6 @@
         </rowConstraints>
       </GridPane>
    </center>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> develop
    <left>
       <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
         <items>
@@ -172,10 +167,4 @@
         </items>
       </SplitPane>
    </right>
-<<<<<<< HEAD
->>>>>>> develop
-=======
-=======
->>>>>>> 65644270695742d91e6d6d501e3c02d60581317e
->>>>>>> develop
 </BorderPane>
