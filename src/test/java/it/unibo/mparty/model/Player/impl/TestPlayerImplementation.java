@@ -1,18 +1,10 @@
-package it.unibo.mparty.model.Player;
+package it.unibo.mparty.model.Player.impl;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.*;
 
-import it.unibo.mparty.model.item.api.Item;
-import it.unibo.mparty.model.item.api.ItemFactory;
-import it.unibo.mparty.model.item.impl.GoldenPipe;
-import it.unibo.mparty.model.item.impl.ItemFactoryImpl;
-import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
-import it.unibo.mparty.model.player.impl.Character;
 import it.unibo.mparty.model.player.impl.PlayerImplementation;
-import it.unibo.mparty.utilities.Position;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
