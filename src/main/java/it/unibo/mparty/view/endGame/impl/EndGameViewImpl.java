@@ -7,9 +7,7 @@ import it.unibo.mparty.view.endGame.api.EndGameView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,26 +18,8 @@ public class EndGameViewImpl extends AbstractSceneView implements EndGameView {
     private TableView<Player> tableView;
 
     @Override
-    public void setPlayerColumn(List<String> playerNames){
-        for (String playerName : playerNames) {
-            this.playerColumn.setCellValueFactory(new PropertyValueFactory<>(playerName));
-        }
-        this.rankColumn.setCellValueFactory(cellData ->
-                new ReadOnlyObjectWrapper<>(tableView.getItems().indexOf(cellData.getValue()) + 1));
-    }
-
-    @Override
-    public void setCoinColumn(List<Integer> playerCoins){
-        for (Integer coin : playerCoins) {
-            this.coinColumn.setCellValueFactory(new PropertyValueFactory<>(String.valueOf(coin)));
-        }
-    }
-
-    @Override
-    public void setStarColumn(List<Integer> playerStars){
-        for (Integer star : playerStars) {
-            this.starColumn.setCellValueFactory(new PropertyValueFactory<>(String.valueOf(star)));
-        }
+    public void showResults(List<Player> players) {
+        tableView.setItems(FXCollections.observableArrayList(players));
     }
 
     @FXML

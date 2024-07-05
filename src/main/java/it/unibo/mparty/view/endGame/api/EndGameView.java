@@ -1,12 +1,9 @@
 package it.unibo.mparty.view.endGame.api;
 
+import it.unibo.mparty.model.player.api.Player;
+
 import java.util.List;
 
 public interface EndGameView {
-
-    void setPlayerColumn(List<String> playerNames);
-
-    void setCoinColumn(List<Integer> playerCoins);
-
-    void setStarColumn(List<Integer> playerStars);
+    void showResults(List<Player> players);
 }
