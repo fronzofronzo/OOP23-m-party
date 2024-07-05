@@ -26,11 +26,9 @@ public class GameControllerImpl implements GameController{
 
     private final GameView view;
     private GameModel model;
-    private final Shop shop;
 
     public GameControllerImpl(final GameView view){
         this.view = view;
-        this.shop= new ShopImpl();
     }
 
     @Override
@@ -80,17 +78,17 @@ public class GameControllerImpl implements GameController{
 
     @Override
     public void setUpShop(ShopView shopView) {
-        Map<String,Integer> itemMap = new HashMap<>();
-        shop.getItemList().stream().forEach(it -> itemMap.put(it.getName().getNametoString(), it.getCost()));
+        /*Map<String,Integer> itemMap = new HashMap<>();
+        this.model.getItemList().stream().forEach(it -> itemMap.put(it.getName().getNametoString(), it.getCost()));
         itemMap.forEach((str, i) -> shopView.addButton(str, i));
-        shop.getItemList().stream().forEach(it -> shopView.addDescription(it.getDescription()));
+        shop.getItemList().stream().forEach(it -> shopView.addDescription(it.getDescription()));*/
         //shopView.updateMoney(this.model.getActualPlayerInfo().getX()); player
     }
 
 
     @Override
     public boolean buyItem(String itemString) {
-        Optional<Item> item = shop.getItemList().stream().filter(it -> itemString.equals(it.getName().getNametoString()))
+        /*Optional<Item> item = shop.getItemList().stream().filter(it -> itemString.equals(it.getName().getNametoString()))
         .findFirst();
         if (item.isPresent()) {
             /*if (shop.buyItem//(player, item.get())) {
@@ -100,5 +98,4 @@ public class GameControllerImpl implements GameController{
         }
         return false;
     }
-
 }

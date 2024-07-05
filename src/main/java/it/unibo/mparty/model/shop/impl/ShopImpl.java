@@ -23,7 +23,8 @@ public class ShopImpl implements Shop {
     }
 
     @Override
-    public boolean buyItem(Player player, Item item) {
+    public boolean buyItem(Player player, ItemName itemName) {
+        Item item = itemList.stream().filter(it -> it.getName().equals(itemName)).findFirst().get();
         if (canAfford(player, item) && !player.getPlayerBag().isFull()) {
             player.removeCoins(item.getCost());
             player.getPlayerBag().addItem(item);

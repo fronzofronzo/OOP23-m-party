@@ -2,6 +2,7 @@ package it.unibo.mparty.model;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
+import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.minigameHandler.MinigameHandler;
 import it.unibo.mparty.model.minigameHandler.MinigameHandlerImplementation;
 import it.unibo.mparty.model.minigames.MinigameType;
@@ -254,6 +255,16 @@ public class GameModelImpl implements GameModel{
             default: break;
         }
         return output;
+    }
+
+    @Override
+    public boolean buyItem(ItemName itemName) {
+        return this.shop.buyItem(this.players.get(actualPlayerIndex), itemName);
+    }
+
+    @Override
+    public List<ItemName> getItems() {
+        return this.shop.getItemList().stream().map(it -> it.getName()).toList();
     }
 
 
