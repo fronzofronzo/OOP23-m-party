@@ -36,11 +36,15 @@ public class GameControllerImpl implements GameController{
         this.model = model;
         List<String> usernames = this.model.getPlayers().stream().map(p -> p.getUsername()).toList();
         this.view.setUpBoard(this.model.getBoardDimension(), this.model.getBoardConfiguration(), usernames);
-        
         this.view.setBoardScene();
+        this.updatePlayersView();;
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
+        
+    }
+
+    private void updatePlayersView() {
         List<Player> players = this.model.getPlayers();
-        players.forEach(p -> this.view.updatePlayerStats(p.getUsername(), p.getNumCoins(), p.getNumStars(), p.getPlayerBag().getItems().stream().map(i -> i.name()).toList()));
+        players.forEach(p -> this.view.updatePlayer(p.getUsername(), p.getNumCoins(), p.getNumStars(), p.getPlayerBag().getItems().stream().map(i -> i.name()).toList(), p.getPosition()));
     }
 
     /**
@@ -63,7 +67,7 @@ public class GameControllerImpl implements GameController{
     public void movePlayer(Optional<Direction> dir) {
         this.model.movePlayer(dir);
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
-        this.model.getPlayers().forEach(p -> this.view.updatePlayerPos(new Pair<String,Position>(p.getUsername(), p.getPosition())));
+       this.updatePlayersView();
     }
 
     @Override

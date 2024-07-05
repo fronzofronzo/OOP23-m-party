@@ -128,12 +128,14 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private List<Circle> players = new ArrayList<>();
 
     @Override
-    public void updatePlayerStats(String palyer, int coins, int stars, List<String> items) {
+    public void updatePlayer(String palyer, int coins, int stars, List<String> items, Position position) {
         for (int i = 0; i < this.labelPlayersNames.size(); i++) {
             if (this.labelPlayersNames.get(i).getText().equals(palyer)) {
                 this.labelPlayersCoins.get(i).setText(String.valueOf(coins));
                 this.labelPlayersStars.get(i).setText(String.valueOf(stars));
                 this.labelPlayersItems.get(i).setText(items.toString());
+                this.board.getChildren().remove(this.players.get(i));
+                this.board.add(this.players.get(i), position.getX(), position.getY());
             }
         }
     }
@@ -251,14 +253,4 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private void action() throws IOException{
         this.getMainController().action();
     }
-
-    @Override
-    public void updatePlayerPos(Pair<String,Position> playerInfo) {
-        for (int i = 0; i < this.labelPlayersNames.size(); i++) {
-            if (this.labelPlayersNames.get(i).getText().equals(playerInfo.getX())) {
-                this.board.getChildren().remove(this.players.get(i));
-                this.board.add(this.players.get(i), playerInfo.getY().getX(), playerInfo.getY().getY());
-            }
-        }
-    }    
 }

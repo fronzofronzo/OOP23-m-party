@@ -42,9 +42,7 @@ public interface GameView {
 
     void showResultDice(int result);
 
-    void updatePlayerPos(Pair<String,Position> playerInfo);
-
-    void updatePlayerStats(String player, int coins, int stars, List<String> items);
+    void updatePlayer(String player, int coins, int stars, List<String> items, Position position);
 
     void updateCommands(List<String> items, String message);
 }
