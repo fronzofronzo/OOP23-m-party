@@ -29,16 +29,6 @@ import javafx.scene.shape.Circle;
 
 public class GameBoardViewImpl extends AbstractSceneView implements GameBoardView{
 
-<<<<<<< HEAD
-    private static final Map<SlotType,Color> SLOT_COLOR = Map.of(SlotType.ACTIVE_STAR, Color.GOLD, 
-                                                                 SlotType.BONUS, Color.LIGHTGREEN, 
-                                                                 SlotType.MALUS, Color.LIGHTCORAL, 
-                                                                 SlotType.MULTIPLAYER, Color.LIGHTGRAY, 
-                                                                 SlotType.NOT_ACTIVE_STAR, Color.WHEAT, 
-                                                                 SlotType.PATH, Color.WHEAT, 
-                                                                 SlotType.SHOP, Color.SKYBLUE, 
-                                                                 SlotType.SINGLEPLAYER, Color.LIGHTGRAY, 
-=======
     private static final Map<SlotType,Color> SLOT_COLOR = Map.of(SlotType.ACTIVE_STAR, Color.GOLD,
                                                                  SlotType.BONUS, Color.LIGHTGREEN,
                                                                  SlotType.MALUS, Color.LIGHTCORAL,
@@ -47,7 +37,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                                                                  SlotType.PATH, Color.WHEAT,
                                                                  SlotType.SHOP, Color.SKYBLUE,
                                                                  SlotType.SINGLEPLAYER, Color.LIGHTGRAY,
->>>>>>> feature/mainGame
                                                                  SlotType.VOID, Color.BLACK);
     @FXML
     private GridPane board;
