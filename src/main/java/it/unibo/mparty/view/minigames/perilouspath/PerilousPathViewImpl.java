@@ -153,6 +153,6 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
 
     @Override
     public void showResult(Pair<String, Integer> result) {
-        this.gameLabel.setText("il giocatore :" + result.getX() + "ha vinto " + result.getY());
+        this.gameLabel.setText("il giocatore :" + result.getX() + "ha vinto " + result.getY() + "coins");
     }
 }
