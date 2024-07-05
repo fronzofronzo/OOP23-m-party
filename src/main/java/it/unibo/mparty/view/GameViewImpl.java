@@ -5,7 +5,6 @@ import it.unibo.mparty.model.GameModelImpl;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBuilder;
 import it.unibo.mparty.model.player.impl.PlayerBuilderImplementation;
-import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
@@ -21,7 +20,6 @@ import it.unibo.mparty.controller.GameController;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class GameViewImpl extends Application implements GameView{
 
@@ -29,11 +27,11 @@ public class GameViewImpl extends Application implements GameView{
     private final static String PATH = "/layouts/";
     private final static String PATH_MINIGAMES = "/layouts/minigames/";
     private final static String EXTENSION = ".fxml";
+    private final static String shopName = "Shop";
     private GameBoardView boardView;
 
     private Stage stage;
     private final GameController controller = new GameControllerImpl(this);
-    private SceneView view;
 
     @Override
     public void setScene(String path) throws IOException {
@@ -41,7 +39,6 @@ public class GameViewImpl extends Application implements GameView{
         final Parent root = loader.load(getClass().getResourceAsStream(PATH + path + EXTENSION));
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
         final  SceneView sceneView = loader.<SceneView>getController();
-        view = sceneView;
         sceneView.init(this,this.controller);
         this.boardView = loader.<GameBoardView>getController();
         this.stage.setScene(scene);
@@ -86,8 +83,16 @@ public class GameViewImpl extends Application implements GameView{
     }
 
     @Override
-    public void setShopScene() {
-
+    public void setShopScene() throws IOException {
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + shopName + EXTENSION));
+        final Parent root = loader.load(getClass().getResourceAsStream(PATH + shopName + EXTENSION));
+        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
+        final ShopView shopView = loader.<ShopView>getController();
+        shopView.init(this,this.controller);
+        this.stage.setScene(scene);
+        this.stage.setMinWidth(1000);
+        this.stage.setMinHeight(700);
+        this.stage.show();
     }
 
 

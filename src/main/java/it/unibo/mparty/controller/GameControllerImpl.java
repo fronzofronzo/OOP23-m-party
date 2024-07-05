@@ -2,22 +2,17 @@ package it.unibo.mparty.controller;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.utilities.Direction;
-import it.unibo.mparty.utilities.GameStatus;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
 
 import java.util.HashMap;
-import java.util.Optional;
-
 import it.unibo.mparty.model.shop.impl.ShopImpl;
 import it.unibo.mparty.model.item.api.Item;
-import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.impl.PlayerImplementation;
 import it.unibo.mparty.model.shop.api.Shop;
