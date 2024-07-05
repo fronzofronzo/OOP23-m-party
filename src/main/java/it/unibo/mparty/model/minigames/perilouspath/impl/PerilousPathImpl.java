@@ -12,8 +12,8 @@ public class PerilousPathImpl implements PerilousPath{
     private Optional<List<AbstractPosition>> bombs = Optional.empty();
     private Optional<List<AbstractPosition>> balls = Optional.empty();
     private Optional<List<AbstractPosition>> path = Optional.empty();
-    private Random random;
-    private int size;
+    private final Random random;
+    private final int size;
     private static final int NUM_BOMBS = 8;
     private List<String> players = new LinkedList<>();
     private int coins = 20;
