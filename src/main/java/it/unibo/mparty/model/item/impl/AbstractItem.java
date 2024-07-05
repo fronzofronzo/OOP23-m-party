@@ -9,7 +9,6 @@ public abstract class AbstractItem implements Item{
     
     private final ItemName name;
     private final int cost;
-    private boolean target=false;
 
     /**
      * Constructs a new istance of AbstractItem with the specified ItemName and cost
@@ -33,7 +32,12 @@ public abstract class AbstractItem implements Item{
 
     @Override
     public boolean isOnOthers() {
-        return this.target;
+        return false;
+    }
+
+    @Override
+    public boolean needPosition() {
+        return false;
     }
 
     
