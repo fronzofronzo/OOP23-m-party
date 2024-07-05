@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.item.impl;
 
+import edu.umd.cs.findbugs.annotations.OverrideMustInvoke;
 import it.unibo.mparty.model.player.api.Player;
 
 /**
@@ -21,6 +22,14 @@ public class CursedDice extends AbstractItem{
     @Override
     public String getDescription() {
         return "Il dado ha solo numeri da 1 a 3. Puo' essere attivato su un giocatore a tua scelta";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isOnOthers () {
+        return true;
     }
 
 }

@@ -20,7 +20,7 @@ public enum ItemName {
      * Get the name of the item
      * @return the string representing the item
      */
-    public String getNametoString() {
+    public String getNameToString() {
         return this.name;
     }
 
