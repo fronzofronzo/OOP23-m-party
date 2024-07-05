@@ -35,5 +35,11 @@ public interface Item {
      * @return the name of the item
      */
     ItemName getName();
+
+    /**
+     * Check if the item effect is on the player who use it or on another player
+     * @return true if the effect is on another player, false otherwise
+     */
+    boolean isOnOthers();
 }
 
