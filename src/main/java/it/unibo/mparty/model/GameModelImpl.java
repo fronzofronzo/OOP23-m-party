@@ -2,6 +2,7 @@ package it.unibo.mparty.model;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
+import it.unibo.mparty.model.gameBoard.util.RandomFromSet;
 import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.minigameHandler.MinigameHandler;
@@ -179,7 +180,14 @@ public class GameModelImpl implements GameModel{
      */
     @Override
     public void useItem(ItemName item) {
-        this.players.get(actualPlayerIndex).getPlayerBag().useItem(item);
+        Item actualItem = this.players.get(actualPlayerIndex).getPlayerBag().useItem(item);
+        Optional<Position> pos = actualItem.needPosition() ? Optional.of(this.board.getStarPosition()) : Optional.empty();
+        Optional<Player> target = Optional.empty();
+        if (actualItem.isOnOthers()) {
+            Set<Player> targets = this.players.stream().filter(p -> !p.equals(this.players.get(actualPlayerIndex))).collect(Collectors.toSet());
+            target = Optional.of(RandomFromSet.get(targets));
+        }
+        actualItem.activate(this.players.get(actualPlayerIndex), target, pos);
     }
 
     /**
