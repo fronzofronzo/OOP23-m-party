@@ -11,7 +11,7 @@
 
 <BorderPane minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.endGame.impl.EndGameViewImpl">
     <center>
-        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="rankColumn" prefWidth="150.0" text="Posto" />
                 <TableColumn fx:id="playerColumn" prefWidth="268.0" text="Player" />
@@ -35,13 +35,11 @@
     </top>
     <bottom>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <children>
-                <Button fx:id="exitButton" mnemonicParsing="false" onMouseClicked="#exitClicked" text="ESCI DAL GIOCO">
-                    <font>
-                        <Font name="AdLib WGL4 BT" size="18.0" />
-                    </font>
-                </Button>
-            </children>
+            <Button mnemonicParsing="false" onMouseClicked="#exitClicked" text="ESCI DAL GIOCO">
+                <font>
+                    <Font name="AdLib WGL4 BT" size="18.0" />
+                </font>
+            </Button>
         </HBox>
     </bottom>
 </BorderPane>
