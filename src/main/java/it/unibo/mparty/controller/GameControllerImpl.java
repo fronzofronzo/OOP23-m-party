@@ -11,7 +11,6 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
-import it.unibo.mparty.view.SceneType;
 import it.unibo.mparty.view.shop.api.ShopView;
 
 import java.util.HashMap;

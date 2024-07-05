@@ -1,8 +1,5 @@
 package it.unibo.mparty.model.player.api;
 
-import it.unibo.mparty.model.player.impl.Character;
-import it.unibo.mparty.utilities.Position;
-
 /**
  * The {@code PlayerBuilder} interface defines the methods to create a new
  * player. It applies the creation pattern Builder

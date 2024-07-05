@@ -1,11 +1,8 @@
 package it.unibo.mparty.model.player.api;
 import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemName;
-import it.unibo.mparty.utilities.Position;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 /**
  * This interface models the bag of each player. Each player has a bag of items
