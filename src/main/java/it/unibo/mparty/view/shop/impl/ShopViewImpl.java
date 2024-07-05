@@ -21,6 +21,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
     private int i=1;
     private int j=1;
     private List<ItemName> itemNameList = new ArrayList<>();
+    private final static double DISTANCE_FROM_BUTTON = 70.0;
 
     @FXML
     private AnchorPane descriptionPane;
@@ -41,7 +42,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
         but.setText("Acquista "+ itemName.getNameToString() + ": " + cost);
         but.setOnAction(this::selectItem);
         buttonPane.getChildren().add(but);
-        AnchorPane.setTopAnchor(but, i*50.0);
+        AnchorPane.setTopAnchor(but, i*DISTANCE_FROM_BUTTON);
         i++;
         itemNameList.add(itemName);
     }
@@ -50,7 +51,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
     {
         final Label lb = new Label(description);
         descriptionPane.getChildren().add(lb);
-        AnchorPane.setTopAnchor(lb,j*50.0);
+        AnchorPane.setTopAnchor(lb,j*DISTANCE_FROM_BUTTON);
         j++;
     }
 
