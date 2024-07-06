@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -28,6 +29,7 @@ import javafx.scene.shape.Circle;
 
 public class GameBoardViewImpl extends AbstractSceneView implements GameBoardView{
 
+    private static final String SLOT_STYLE = "-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;";
     private static final String TEXT_COINS = "MONETE: ";
     private static final String TEXT_STARS = "STELLE: ";
     private static final String TEXT_ITEMS = "OGGETTI: ";
@@ -196,6 +198,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                 Background background = new Background(backgroundfill);
                 tmp.setBackground(background);
                 if (!slotType.equals(SlotType.VOID)) {
+                    tmp.setStyle(SLOT_STYLE);
                     Tooltip tt = new Tooltip(TEXT_TOOL_TIP.get(slotType));
                     Tooltip.install(tmp, tt);
                     this.mapSlots.put(pos, tmp);
