@@ -8,9 +8,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+/**
+ * Test class for a {@link PlayerBuilderImplementation} class
+ */
 class PlayerBuilderImplementationTest {
 
+    /**
+     * Check if the player is created correctly
+     */
     @Test
     public void testPlayerCreation(){
         final String username = "username";
