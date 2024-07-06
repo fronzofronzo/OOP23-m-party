@@ -18,8 +18,6 @@ public interface PerilousPathView  extends MinigameView {
 
     void hitTile(PerilousPath.Type type);
 
-    void buttonClicked(ActionEvent e);
-
     void handleStartButton(ActionEvent e) throws InterruptedException;
 
     void showBombs(List<AbstractPosition> bombs);

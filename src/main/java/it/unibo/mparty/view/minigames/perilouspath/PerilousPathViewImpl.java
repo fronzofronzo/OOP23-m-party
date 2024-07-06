@@ -12,10 +12,12 @@ import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.GameView;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
@@ -102,16 +104,17 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         }
     }
 
-    @Override
-    public void buttonClicked(ActionEvent e) {
+
+
+    private final EventHandler<MouseEvent> buttonClicked = e -> {
         this.button = (Button) e.getSource();
         var pos = this.buttonPosition(this.button);
         this.observer.hit(pos);
-    }
+    };
 
     @Override
     public void handleStartButton(ActionEvent e) throws InterruptedException {
-        //creazione griglia
+        this.gridCreation();
         this.observer.setUp();
         this.startButton.setDisable(true);
     }
@@ -160,5 +163,17 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     @Override
     public void startMinigame(List<String> players) {
         this.observer.initGame(players);
+    }
+
+    private void gridCreation(){
+        for(int i = 0; i < SIZE; i++){
+            for(int j = 0; j < SIZE; j++){
+                final Button button = new Button();
+                button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                button.setMinSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                button.setOnMouseClicked(buttonClicked);
+                this.myGridPane.add(button,i,j);
+            }
+        }
     }
 }
