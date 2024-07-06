@@ -46,6 +46,10 @@ class GameModelBuilderImplTest {
         assertTrue(this.builder.isFull());
     }
 
+    /**
+     * Check that adding two players with same username and/or same character
+     * throws {@link IllegalArgumentException}
+     */
     @Test
     public void testInsertSamePlayer(){
         final String user1 = "user1";
