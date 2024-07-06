@@ -20,7 +20,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -114,10 +113,15 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label labelMessage;
 
     private static final int RADIUS = 8;
-    private Circle player1 = new Circle(RADIUS, Color.ORANGE);
-    private Circle player2 = new Circle(RADIUS, Color.PURPLE);
-    private Circle player3 = new Circle(RADIUS, Color.BLUE);
-    private Circle player4 = new Circle(RADIUS, Color.PINK);
+    private static final Map<Integer,Color> PLAYER_COLOR = Map.of(0, Color.ORANGE,
+                                                                  1, Color.PURPLE, 
+                                                                  2, Color.BLUE,
+                                                                  3, Color.WHITE);
+
+    private Circle player1 = new Circle(RADIUS);
+    private Circle player2 = new Circle(RADIUS);
+    private Circle player3 = new Circle(RADIUS);
+    private Circle player4 = new Circle(RADIUS);
 
     private List<Label> labelPlayersNames = new ArrayList<>();     
     private List<Label> labelPlayersCoins = new ArrayList<>(); 
@@ -150,6 +154,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.createData();
         for (int i = 0; i < usernames.size(); i++) {
             this.labelPlayersNames.get(i).setText(usernames.get(i));
+            this.players.get(i).setFill(PLAYER_COLOR.get(i));
         }
     }
         
