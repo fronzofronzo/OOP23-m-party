@@ -41,11 +41,6 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     @FXML
     private ChoiceBox<String> playerChoiceBox;
 
-
-
-
-
-
     @Override
     public void handleExitButton(ActionEvent event) {
         System.exit(0);
