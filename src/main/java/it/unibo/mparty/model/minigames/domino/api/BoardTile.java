@@ -3,7 +3,7 @@ package it.unibo.mparty.model.minigames.domino.api;
 import java.util.LinkedList;
 import java.util.List;
 
-public interface BoardTile extends ESource<List<Tile>> {
+public interface BoardTile extends ESource<List<Pair<Integer, Integer>>> {
 
     LinkedList<Tile> getBoardTiles();
 
@@ -13,5 +13,5 @@ public interface BoardTile extends ESource<List<Tile>> {
 
     void addObserver(EObserver<? super List<Tile>> obs);
 
-    void notifyObservers(List<Tile> tile);
+    void notifyObservers(List<Pair<Integer, Integer>> tile);
 }

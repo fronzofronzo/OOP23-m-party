@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-public class BoardTileImpl implements BoardTile {
+public class BoardTileImpl extends ESourceImpl<List<Pair<Integer, Integer>>> implements BoardTile {
 
     private final LinkedList<Tile> boardTiles;
 
@@ -38,8 +38,8 @@ public class BoardTileImpl implements BoardTile {
         } else if (this.boardTiles.getLast().match(tile)) {
             this.boardTiles.addLast(tile);
         }
-        System.out.println("[BoardTileImpl] Added tile " + tile); //ok ora non si vede sul board
-        this.notifyObservers(this.boardTiles);
+        System.out.println("[BoardTileImpl] Added tile " + tile);
+        this.notifyObservers(this.boardTiles.stream().map(t->new Pair<>(t.getSideA().getValue(), t.getSideB().getValue())).toList());
     }
 
     @Override
