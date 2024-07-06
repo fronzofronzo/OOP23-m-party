@@ -1,13 +1,18 @@
 package it.unibo.mparty.model.minigames.domino.impl;
 
-import it.unibo.mparty.model.minigames.domino.api.Tile;
+import it.unibo.mparty.model.minigames.domino.board.impl.BoardTileImpl;
+import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
+import it.unibo.mparty.model.minigames.domino.tile.impl.TileImpl;
+import it.unibo.mparty.utilities.Pair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-
 
 class BoardTileImplTest {
 
@@ -22,16 +27,16 @@ class BoardTileImplTest {
 
     @BeforeEach
     void setUp() {
-        boardTile = new BoardTileImpl();
+        this.boardTile = new BoardTileImpl();
     }
 
     @Test
-    void canMatchBoardTile() {
-        Tile tile1 = new TileImpl(SIDE3, SIDE5);
-        Tile tile2 = new TileImpl(SIDE5, SIDE2);
-        Tile tile3 = new TileImpl(SIDE2, SIDE4);
-        Tile tile4 = new TileImpl(SIDE6, SIDE3);
-        Tile tile5 = new TileImpl(SIDE1, SIDE4);
+    void testCanMatchBoardTile() {
+        final Tile tile1 = new TileImpl(SIDE3, SIDE5);
+        final Tile tile2 = new TileImpl(SIDE5, SIDE2);
+        final Tile tile3 = new TileImpl(SIDE2, SIDE4);
+        final Tile tile4 = new TileImpl(SIDE6, SIDE3);
+        final Tile tile5 = new TileImpl(SIDE1, SIDE4);
 
         // Test placing the first tile on an empty board
         assertTrue(this.boardTile.canMatchBoardTile(tile1));
@@ -61,5 +66,61 @@ class BoardTileImplTest {
         this.boardTile.addTileToBoard(tile3);
         assertEquals(4, this.boardTile.getBoardTiles().size());
         assertTrue(this.boardTile.getBoardTiles().contains(tile3));
+    }
+
+    @Test
+    void testGetBoardTiles() {
+        final Tile tile1 = new TileImpl(SIDE1, SIDE2);
+        final Tile tile2 = new TileImpl(SIDE2, SIDE4);
+        final Tile tile3 = new TileImpl(SIDE5, SIDE1);
+
+        this.boardTile.addTileToBoard(tile1);
+        this.boardTile.addTileToBoard(tile2);
+        this.boardTile.addTileToBoard(tile3);
+
+        final LinkedList<Tile> tiles = this.boardTile.getBoardTiles();
+        assertEquals(3, tiles.size());
+        assertTrue(tiles.contains(tile1));
+        assertTrue(tiles.contains(tile2));
+        assertTrue(tiles.contains(tile3));
+    }
+
+    @Test
+    void testAddTileToBoard() {
+        final Tile tile1 = new TileImpl(SIDE1, SIDE2);
+        final Tile tile2 = new TileImpl(SIDE2, SIDE3);
+        final Tile tile3 = new TileImpl(SIDE3, SIDE4);
+
+        this.boardTile.addTileToBoard(tile1);
+        assertEquals(1, this.boardTile.getBoardTiles().size());
+        assertTrue(this.boardTile.getBoardTiles().contains(tile1));
+
+        this.boardTile.addTileToBoard(tile2);
+        assertEquals(2, this.boardTile.getBoardTiles().size());
+        assertTrue(this.boardTile.getBoardTiles().contains(tile2));
+
+        this.boardTile.addTileToBoard(tile3);
+        assertEquals(3, this.boardTile.getBoardTiles().size());
+        assertTrue(this.boardTile.getBoardTiles().contains(tile3));
+    }
+
+    @Test
+    void testNotifyObservers() {
+        final Tile tile1 = new TileImpl(SIDE1, SIDE2);
+        final Tile tile2 = new TileImpl(SIDE2, SIDE3);
+
+        this.boardTile.addTileToBoard(tile1);
+        this.boardTile.addTileToBoard(tile2);
+
+        final List<Pair<Integer, Integer>> expectedPairs = List.of(
+                new Pair<>(SIDE1, SIDE2),
+                new Pair<>(SIDE2, SIDE3)
+        );
+
+        final List<Pair<Integer, Integer>> actualPairs = this.boardTile.getBoardTiles().stream()
+                .map(t -> new Pair<>(t.getSideA().getValue(), t.getSideB().getValue()))
+                .toList();
+
+        assertEquals(expectedPairs, actualPairs);
     }
 }
