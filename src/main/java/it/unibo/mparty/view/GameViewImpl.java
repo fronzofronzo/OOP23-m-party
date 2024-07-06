@@ -41,7 +41,6 @@ public class GameViewImpl extends Application implements GameView{
     private Stage stage;
 
     /**
-     *
      * {@inheritDoc}
      */
     @Override
