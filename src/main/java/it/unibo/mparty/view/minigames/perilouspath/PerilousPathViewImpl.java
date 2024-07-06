@@ -99,7 +99,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     public void hitTile(PerilousPath.Type type) {
         switch(type){
             case PATH -> {
-                this.button.setText("*");
+                button.setStyle("-fx-background-color: #f3f5f8;");
                 this.gameLabel.setText("MOSSA VALIDA");
             }
             case WRONG ->
@@ -160,7 +160,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
 
     @Override
     public void showResult(Pair<String, Integer> result) {
-        this.gameLabel.setText("il giocatore : " + result.getX() + "ha vinto " + result.getY() + "coins");
+        this.gameLabel.setText("il giocatore : " + result.getX() + " ha vinto " + result.getY() + " coins");
     }
 
     @Override
@@ -179,10 +179,10 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         }
     }
 
-    private void setImage(Button button,ImageView image){
-        button.setGraphic(image);
-        image.setFitHeight(50);
-        image.setFitWidth(50);
-        image.setPreserveRatio(false);
+    private void setImage(Button button,ImageView imageView){
+        button.setGraphic(imageView);
+        imageView.setFitHeight(50);
+        imageView.setFitWidth(50);
+        imageView.setPreserveRatio(false);
     }
 }
