@@ -1,12 +1,22 @@
+<<<<<<< HEAD
+<<<<<<< HEAD:src/test/java/it/unibo/mparty/model/minigames/perilouspath/TestPerilousPath.java
+=======
 <<<<<<< HEAD:src/test/java/it/unibo/samplejavafx/model/minigames/perilouspath/TestPerilousPath.java
 package it.unibo.samplejavafx.model.minigames.perilouspath;
 =======
+>>>>>>> develop
 package it.unibo.mparty.model.minigames.perilouspath;
 
 
 
 
+<<<<<<< HEAD
+=======
+package it.unibo.samplejavafx.model.minigames.perilouspath;
+>>>>>>> develop:src/test/java/it/unibo/samplejavafx/model/minigames/perilouspath/TestPerilousPath.java
+=======
 >>>>>>> 65644270695742d91e6d6d501e3c02d60581317e:src/test/java/it/unibo/mparty/model/minigames/perilouspath/TestPerilousPath.java
+>>>>>>> develop
 import static org.junit.jupiter.api.Assertions.*;
 
 import it.unibo.mparty.model.minigames.perilouspath.impl.BallPosition;

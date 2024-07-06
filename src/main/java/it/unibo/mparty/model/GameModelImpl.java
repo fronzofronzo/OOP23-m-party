@@ -2,6 +2,7 @@ package it.unibo.mparty.model;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
+import it.unibo.mparty.model.gameBoard.util.RandomFromSet;
 import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.minigameHandler.MinigameHandler;
@@ -33,6 +34,7 @@ public class GameModelImpl implements GameModel{
     private static final int TURNS_NUMBER = 10;
     private static final int MIN_COINS = 4;
     private static final int MAX_COINS = 10;
+    private static final int STAR_COST  =20;
 
     private final List<Player> players;
     private final GameBoard board;
@@ -66,6 +68,7 @@ public class GameModelImpl implements GameModel{
     public void movePlayer(Optional<Direction> dir) {
         if (this.status.equals(GameStatus.MOVE_PLAYER)) {
             while (this.steps < this.players.get(actualPlayerIndex).getDice().getResult()) {
+                this.checkStartAcquisition();
                 final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
                 final Map<Direction, Position> nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition);
                 if (nextPlayerPosition.size() == 1 && dir.isEmpty()) {
@@ -178,7 +181,14 @@ public class GameModelImpl implements GameModel{
      */
     @Override
     public void useItem(ItemName item) {
-        this.players.get(actualPlayerIndex).getPlayerBag().useItem(item);
+        Item actualItem = this.players.get(actualPlayerIndex).getPlayerBag().useItem(item);
+        Optional<Position> pos = actualItem.needPosition() ? Optional.of(this.board.getStarPosition()) : Optional.empty();
+        Optional<Player> target = Optional.empty();
+        if (actualItem.isOnOthers()) {
+            Set<Player> targets = this.players.stream().filter(p -> !p.equals(this.players.get(actualPlayerIndex))).collect(Collectors.toSet());
+            target = Optional.of(RandomFromSet.get(targets));
+        }
+        actualItem.activate(this.players.get(actualPlayerIndex), target, pos);
     }
 
     /**
@@ -251,6 +261,11 @@ public class GameModelImpl implements GameModel{
         return this.shop.getItemList().stream().toList();
     }
 
+    @Override
+    public List<Player> getPlayers() {
+        return Collections.unmodifiableList(this.players);
+    }
+
     private void activateSlot() {
         final Player actualPlayer = this.players.get(actualPlayerIndex);
         final SlotType slot = this.board.getSlotType(actualPlayer.getPosition());
@@ -281,6 +296,15 @@ public class GameModelImpl implements GameModel{
                 }
                 default -> {break;}
             };
+        }
+    }
+
+    private void checkStartAcquisition(){
+        final Player actualPlayer = this.players.get(actualPlayerIndex);
+        final Position starPosition = this.board.getStarPosition();
+        if(actualPlayer.getPosition().equals(starPosition) && actualPlayer.getNumCoins() >= STAR_COST){
+            actualPlayer.addStar();
+            actualPlayer.removeCoins(STAR_COST);
         }
     }
 

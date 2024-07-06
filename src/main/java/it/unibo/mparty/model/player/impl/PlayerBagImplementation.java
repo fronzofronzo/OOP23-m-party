@@ -4,6 +4,7 @@ import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBag;
 import it.unibo.mparty.model.item.api.Item;
+import it.unibo.mparty.utilities.Position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,17 +40,13 @@ public class PlayerBagImplementation implements PlayerBag {
         this.items.add(item);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void useItem(ItemName item) {
-        final Optional<Item> itemOptional = items.stream().filter(i -> i.getName().equals(item)).findAny();
-        if(itemOptional.isPresent()){
-            final Item it = itemOptional.get();
-            it.activate(this.owner);
-            items.remove(it);
+    public Item useItem(ItemName name) {
+        Optional<Item> output = this.items.stream().filter(i -> i.getName().equals(name)).findAny();
+        if (output.isEmpty()){
+            throw new IllegalStateException("Player should have the item");
         }
+        return output.get();
     }
 
 

@@ -34,11 +34,9 @@ public interface GameView {
     void setMinigameScene(String name) throws IOException;
 
     /**
-     * Set the scene of the board
+     * Set the shop scene in the view
      */
-
     void setBoardScene() throws IOException;
-
     void setShopScene() throws IOException;
 
     void showResultDice(int result);
@@ -48,4 +46,6 @@ public interface GameView {
     void updatePlayerStats(String player, int coins, int stars, List<String> items);
 
     void updateCommands(List<String> items, String message);
+
+    void showResults(List<String> players, List<Integer> stars, List<Integer> coins);
 }

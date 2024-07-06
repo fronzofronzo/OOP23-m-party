@@ -5,7 +5,6 @@ import it.unibo.mparty.model.GameModelImpl;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBuilder;
 import it.unibo.mparty.model.player.impl.PlayerBuilderImplementation;
-import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
@@ -87,6 +86,11 @@ public class GameViewImpl extends Application implements GameView{
 
 
     @Override
+    public void setBoardScene() throws IOException {
+        this.stage.setScene(boardScene);
+    }
+
+    @Override
     public void setShopScene() throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + shopName + EXTENSION));
         final Parent root = loader.load(getClass().getResourceAsStream(PATH + shopName + EXTENSION));
@@ -97,12 +101,8 @@ public class GameViewImpl extends Application implements GameView{
         this.stage.setMinWidth(1000);
         this.stage.setMinHeight(700);
         this.stage.show();
-
     }
 
-    public void setBoardScene() throws IOException {
-        this.stage.setScene(boardScene);
-    }
 
     @Override
     public void showResultDice(int result) {
