@@ -116,4 +116,10 @@ public interface GameModel {
      * @return {@link List} of {@link Player} with all players
      */
     List<Player> getPlayers();
+
+    /**
+     * Get the player that's actually playing his turn
+     * @return {@link Player} that's playing
+     */
+    Player getActualPlayer();
 }

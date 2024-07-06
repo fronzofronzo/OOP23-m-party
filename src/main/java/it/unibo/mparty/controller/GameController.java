@@ -23,10 +23,10 @@ public interface GameController {
     void startGame(GameModel model) throws IOException;
 
     /**
-     * Select an item and check if the player can add it
-     * @param itemName the {@link ItemName} of the item the player wants to buy
+     * Handle the request of the player to use an item
+     * @param item that player wants to use
      */
-    void useItem(ItemName itemName);
+    void useItem(String item);
 
     /**
      * Handle the request of the user to roll dice
