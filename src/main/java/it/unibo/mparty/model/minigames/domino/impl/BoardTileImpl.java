@@ -1,6 +1,7 @@
 package it.unibo.mparty.model.minigames.domino.impl;
 
 import it.unibo.mparty.model.minigames.domino.api.BoardTile;
+import it.unibo.mparty.model.minigames.domino.api.EObserver;
 import it.unibo.mparty.model.minigames.domino.api.Tile;
 
 import java.util.LinkedList;
@@ -37,6 +38,8 @@ public class BoardTileImpl implements BoardTile {
         } else if (this.boardTiles.getLast().match(tile)) {
             this.boardTiles.addLast(tile);
         }
+        System.out.println("[BoardTileImpl] Added tile " + tile); //ok ora non si vede sul board
+        this.notifyObservers(this.boardTiles);
     }
 
     @Override
@@ -50,5 +53,15 @@ public class BoardTileImpl implements BoardTile {
     @Override
     public int hashCode() {
         return Objects.hashCode(boardTiles);
+    }
+
+    @Override
+    public void addObserver(EObserver<? super List<Tile>> obs) {
+
+    }
+
+    @Override
+    public void notifyObservers(List<Tile> tile) {
+
     }
 }
