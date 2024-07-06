@@ -6,15 +6,17 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Position;
 
 /**
- * class that implements the Double Dice item
+ * class that implements the Double Dice item.
  */
-public class DoubleDice extends AbstractItem{
+public class DoubleDice extends AbstractItem {
+
+    private final static int DOUBLEDICE_COST =7;
 
     /**
-     * Construct a new istance of DoubleDice item
+     * Construct a new istance of DoubleDice item.
      */
     public DoubleDice() {
-        super(ItemName.DOPPIO_DADO, 7);
+        super(ItemName.DOPPIO_DADO, DOUBLEDICE_COST);
     }
 
     /**

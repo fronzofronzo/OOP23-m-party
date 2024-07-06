@@ -11,7 +11,7 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.shop.api.Shop;
 
 public class ShopImpl implements Shop {
-    ItemFactory itemFactory = new ItemFactoryImpl();
+    private ItemFactory itemFactory = new ItemFactoryImpl();
     private final List<Item> itemList = new ArrayList<>();
 
     public ShopImpl() {
@@ -22,6 +22,9 @@ public class ShopImpl implements Shop {
         itemList.add(itemFactory.createItem(ItemName.TUBO_DORATO));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean buyItem(Player player, ItemName itemName) {
         Item item = itemList.stream().filter(it -> it.getName().equals(itemName)).findFirst().get();
@@ -37,6 +40,9 @@ public class ShopImpl implements Shop {
         return player.getNumCoins()>= item.getCost();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Item> getItemList() {
         return itemList;

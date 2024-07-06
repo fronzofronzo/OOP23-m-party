@@ -11,10 +11,6 @@ import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.shop.api.Shop;
 import it.unibo.mparty.model.shop.impl.ShopImpl;
-import it.unibo.mparty.utilities.BoardType;
-import it.unibo.mparty.utilities.Pair;
-import it.unibo.mparty.utilities.Position;
-import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.utilities.*;
 
 import java.util.ArrayList;
@@ -251,11 +247,17 @@ public class GameModelImpl implements GameModel{
         return output;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean buyItem(ItemName itemName) {
         return this.shop.buyItem(this.players.get(actualPlayerIndex), itemName);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Item> getItemsFromShop() {
         return this.shop.getItemList().stream().toList();

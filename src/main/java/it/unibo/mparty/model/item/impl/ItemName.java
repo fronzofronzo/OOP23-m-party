@@ -1,7 +1,7 @@
 package it.unibo.mparty.model.item.impl;
 
 /**
- * enum of Item
+ * enum of Item.
  */
 public enum ItemName {
     DADO_MALEDETTO("Dado Maledetto"),
@@ -12,7 +12,7 @@ public enum ItemName {
 
     private final String name;
 
-    private ItemName (String name) {
+    ItemName(String name) {
         this.name=name;
     }
 

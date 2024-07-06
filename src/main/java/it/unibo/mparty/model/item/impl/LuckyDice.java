@@ -6,15 +6,17 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Position;
 
 /**
- * class that implements the Lucky Dice item
+ * class that implements the Lucky Dice item.
  */
-public class LuckyDice extends AbstractItem{
+public class LuckyDice extends AbstractItem {
+
+    private final static int LUCKYDICE_COST =5;
 
     /**
-     * Constructs a new instance of LuckyDice item
+     * Constructs a new instance of LuckyDice item.
      */
     public LuckyDice() {
-        super(ItemName.DADO_FORTUNATO, 5);
+        super(ItemName.DADO_FORTUNATO, LUCKYDICE_COST);
     }
 
     /**
