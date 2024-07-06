@@ -50,9 +50,9 @@ public class DominoControllerImpl implements DominoController {
             this.isPlayer1Turn = !this.isPlayer1Turn;
             this.updateTurn();
             this.checkDraw();
-            this.endGame();
-        } else if (this.model.isOver()){
-            this.endGame();
+            if (this.model.isOver()) {
+                this.endGame();
+            }
         } else {
             this.view.setMessage(DominoMessage.MOVE_NOT_VALID);
         }
@@ -64,10 +64,12 @@ public class DominoControllerImpl implements DominoController {
         if (this.model.canDrawTile(currentPlayer)) {
             this.view.setMessage(DominoMessage.DRAW_TILE);
             this.view.playerCanDraw();
-        } else if (this.model.isOver()) {
-            this.endGame();
         } else {
             this.view.playerCantDraw();
+        }
+
+        if (this.model.isOver()) {
+            this.endGame();
         }
     }
 

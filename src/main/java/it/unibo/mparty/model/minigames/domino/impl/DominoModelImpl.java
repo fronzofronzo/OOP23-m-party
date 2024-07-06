@@ -95,7 +95,7 @@ public class DominoModelImpl implements DominoModel {
             return new Pair<>(this.player1, COINS);
         } else if (player2Tiles.isEmpty() && !player1Tiles.isEmpty()) {
             return new Pair<>(this.player2, COINS);
-        } else if (!this.canPlayerPlace(player1) && !this.canPlayerPlace(player2)) {
+        } else if (!this.canPlayerPlace(player1) && !this.canPlayerPlace(player2) && this.dominoSet.isEmpty()) {
             return new Pair<>(this.lastPlayerToPlay, COINS);
         } else {
             return new Pair<>(null, 0);
@@ -104,8 +104,9 @@ public class DominoModelImpl implements DominoModel {
 
     @Override
     public boolean isOver() {
-        return (this.playerTiles.getPlayerTiles(this.player1).isEmpty() || this.playerTiles.getPlayerTiles(this.player2).isEmpty())
-                || (!this.canDrawTile(player1) && !this.canDrawTile(player2));
+        return this.playerTiles.getPlayerTiles(this.player1).isEmpty()
+                || this.playerTiles.getPlayerTiles(this.player2).isEmpty()
+                || (!this.canPlayerPlace(player1) && !this.canPlayerPlace(player2) && this.dominoSet.isEmpty());
     }
 
     private int getDoubleTiles(final String player) {
