@@ -50,7 +50,7 @@ public class PlayerTilesImpl implements PlayerTiles {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(playersTiles);
+        return Objects.hash(playersTiles);
     }
 
     @Override
