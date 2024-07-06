@@ -234,4 +234,9 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     public void showResult(Pair<String, Integer> result) {
 
     }
+
+    @Override
+    public void startMinigame(List<String> players) {
+
+    }
 }

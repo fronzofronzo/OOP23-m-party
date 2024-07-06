@@ -11,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
 
+import java.util.List;
+
 public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardView{
 
     private final MemoryCardController controller = new MemoryCardControllerImpl(this);
@@ -78,6 +80,11 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     public void showResult(Pair<String, Integer> result) {
         this.textLabel.setText(  result.getFirst() + " ha guadagnato " +  String.valueOf(result.getSecond()) + " monete." );
         this.controlButton.setOnAction(e -> {/*this.getMainView.showBoard*/});
+    }
+
+    @Override
+    public void startMinigame(List<String> players) {
+
     }
 
 }
