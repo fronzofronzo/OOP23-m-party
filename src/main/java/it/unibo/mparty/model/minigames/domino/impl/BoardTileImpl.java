@@ -46,6 +46,8 @@ public class BoardTileImpl extends ESourceImpl<List<Pair<Integer, Integer>>> imp
         } else if (this.boardTiles.getLast().match(tile)) {
             this.boardTiles.addLast(tile);
         }
+        System.out.println("BOARD TILES STATUS: "+boardTiles);
+        System.out.println(" ");
         this.notifyObservers(this.boardTiles.stream().map(t->new Pair<>(t.getSideA().getValue(), t.getSideB().getValue())).toList());
     }
 
