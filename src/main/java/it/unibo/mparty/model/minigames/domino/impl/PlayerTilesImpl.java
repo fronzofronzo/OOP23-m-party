@@ -27,12 +27,7 @@ public class PlayerTilesImpl implements PlayerTiles {
 
     @Override
     public boolean canPlayerPlace(final String player, final BoardTile boardTile){
-        for (final Tile tile : this.playersTiles.get(player)) {
-            if (boardTile.canMatchBoardTile(tile)){
-                return true;
-            }
-        }
-        return false;
+        return this.playersTiles.get(player).stream().anyMatch(boardTile::canMatchBoardTile);
     }
 
     @Override
