@@ -36,7 +36,7 @@ public class TileImpl implements Tile {
             this.sideA.setMatched();
             matchedTileSide.setMatched();
 
-            if (matchedTileSide.getValue() == tile.getSideA().getValue()){
+            if (!tile.isDoubleSide() && (matchedTileSide.getValue() == tile.getSideA().getValue())){
                 tile.reverse();
             }
             return true;
@@ -44,9 +44,10 @@ public class TileImpl implements Tile {
         Optional<Side> matchedSideB = this.canMatchSide(this.sideB, tile);
         if (matchedSideB.isPresent()) {
             Side matchedTileSide = matchedSideB.get();
+            this.sideB.setMatched();
             matchedTileSide.setMatched();
 
-            if (matchedTileSide.getValue() == tile.getSideB().getValue()){
+            if (!tile.isDoubleSide() && (matchedTileSide.getValue() == tile.getSideB().getValue())){
                 tile.reverse();
             }
             return true;
