@@ -277,11 +277,17 @@ public class GameModelImpl implements GameModel{
         return Collections.unmodifiableList(this.players);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Player getActualPlayer() {
         return this.players.get(this.actualPlayerIndex);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getPlayersInGame() {
         return this.minigameHandler.getUsersPlaying();
