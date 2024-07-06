@@ -27,6 +27,7 @@ public class DominoControllerImpl implements DominoController {
     @Override
     public void initGame(List<String> players) {
         this.model.setUpPlayers(players);
+        this.model.getBoardTile().addObserver(this.view);
         this.player1 = players.get(0);
         this.player2 = players.get(1);
 
@@ -49,7 +50,8 @@ public class DominoControllerImpl implements DominoController {
             this.isPlayer1Turn = !this.isPlayer1Turn;
             this.updateTurn();
             this.checkDraw();
-            this.updateBoard(selectedTile.isDoubleSide());
+
+            //this.updateBoard(selectedTile.isDoubleSide()); todo: check
             this.endGame();
         } else {
             this.view.setMessage(DominoMessage.MOVE_NOT_VALID);
