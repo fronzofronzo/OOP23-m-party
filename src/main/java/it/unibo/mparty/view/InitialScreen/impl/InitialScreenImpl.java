@@ -34,7 +34,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     private GameModelBuilder builder;
     private final GameController controller = this.getMainController();
     private final List<String> difficulties = new ArrayList<>();
-    private String difficulty;
+    private String difficulty = "";
 
     @FXML
     private Button addPlayers;
@@ -82,7 +82,10 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
             this.difficulties.add(difficulty.toString());
         }
         this.playerChoiceBox.getItems().addAll(this.difficulties);
-        this.playerChoiceBox.setOnAction(e -> this.difficulty = this.playerChoiceBox.getValue());
+        this.playerChoiceBox.setOnAction(e -> {
+            this.difficulty = this.playerChoiceBox.getValue();
+            this.startGame.setDisable(!(this.builder.enoughPlayers() && !this.difficulty.isEmpty()));
+        });
         this.builder = new GameModelBuilderImpl();
     }
 
