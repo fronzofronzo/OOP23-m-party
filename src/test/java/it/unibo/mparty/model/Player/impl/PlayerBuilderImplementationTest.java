@@ -28,6 +28,9 @@ class PlayerBuilderImplementationTest {
         assertEquals(character, player.getCharacter().getName());
     }
 
+    /**
+     * Check that building a player with not enough information fails
+     */
     @Test
     public void testNotEnoughInformation(){
         final String username = "username";
