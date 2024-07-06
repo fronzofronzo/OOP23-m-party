@@ -83,7 +83,7 @@ public class TestItemImplementation {
         assertEquals(2, testPlayer.getDice().getNumOfAttempts());
         Item item2 = testPlayer.getPlayerBag().useItem(testPlayer.getPlayerBag().getItems().get(1));
         item2.activate(testPlayer, Optional.of(testPlayer2), null);
-        assertEquals(7,testPlayer2.getNumCoins());
+        assertEquals(7, testPlayer2.getNumCoins());
         assertEquals(3, testPlayer.getNumCoins());
     }
 }
