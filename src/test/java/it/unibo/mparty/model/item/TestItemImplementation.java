@@ -2,6 +2,8 @@ package it.unibo.mparty.model.item;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -75,10 +77,12 @@ public class TestItemImplementation {
         testPlayer2.addCoins(10);
         testPlayer.getPlayerBag().addItem(doubleDice);
         testPlayer.getPlayerBag().addItem(booBell);
-        testPlayer.getPlayerBag().useItem(testPlayer.getPlayerBag().getItems().get(0));
+        Item item = testPlayer.getPlayerBag().useItem(testPlayer.getPlayerBag().getItems().get(0));
+        item.activate(testPlayer, null, null);
         assertEquals(2, testPlayer.getDice().getNumOfAttempts());
-        testPlayer.getPlayerBag().useItem(testPlayer.getPlayerBag().getItems().get(1));
-        assertEquals(5,testPlayer2.getNumCoins());
+        Item item2 = testPlayer.getPlayerBag().useItem(testPlayer.getPlayerBag().getItems().get(1));
+        item2.activate(testPlayer, Optional.of(testPlayer2), null);
+        assertEquals(7,testPlayer2.getNumCoins());
+        assertEquals(3, testPlayer.getNumCoins());
     }
-
 }
