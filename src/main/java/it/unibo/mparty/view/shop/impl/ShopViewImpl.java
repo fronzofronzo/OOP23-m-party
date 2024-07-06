@@ -1,10 +1,7 @@
 package it.unibo.mparty.view.shop.impl;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
-
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.shop.api.ShopView;
