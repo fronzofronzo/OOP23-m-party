@@ -66,5 +66,10 @@ public interface GameView {
      */
     void updateCommands(List<String> items, String message);
 
+    /**
+     * Method to switch the view directly to the board scene
+     */
+    void switchToBoard();
+
     void showResults(List<String> players, List<Integer> stars, List<Integer> coins);
 }
