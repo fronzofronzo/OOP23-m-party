@@ -62,6 +62,9 @@ class GameModelBuilderImplTest {
                 () -> {this.builder.addPlayer(user2,charact2);});
     }
 
+    /**
+     * Check if the building of a new GameModel instance is created properly
+     */
     @Test
     public void testBuildingModel(){
         final String user1 = "user1";
