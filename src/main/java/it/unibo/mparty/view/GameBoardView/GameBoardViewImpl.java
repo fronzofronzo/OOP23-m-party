@@ -28,6 +28,7 @@ import javafx.scene.shape.Circle;
 
 public class GameBoardViewImpl extends AbstractSceneView implements GameBoardView{
 
+    private static final String SLOT_STYLE = "-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;";
     private static final String TEXT_COINS = "MONETE: ";
     private static final String TEXT_STARS = "STELLE: ";
     private static final String TEXT_ITEMS = "OGGETTI: ";
@@ -52,6 +53,14 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                                                                  SlotType.SHOP, "NEGOZIO",
                                                                  SlotType.SINGLEPLAYER, "GIOCO",
                                                                  SlotType.VOID, "");
+    private static final Map<Integer,Color> PLAYER_COLOR = Map.of(0, Color.ORANGE,
+                                                                  1, Color.PURPLE,
+                                                                  2, Color.BLUE,
+                                                                  3, Color.WHITE);
+    private static final Map<Color,String> COLOR_TO_TEXT = Map.of(Color.ORANGE, "Arancione",
+                                                                  Color.PURPLE, "Viola",
+                                                                  Color.BLUE, "Blu",
+                                                                  Color.WHITE, "Bianco");
     @FXML
     private GridPane board;
     @FXML 
@@ -62,6 +71,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label starsP1;
     @FXML
     private Label itemP1;
+    @FXML
+    private Label colorP1;
     @FXML 
     private Label nameP2;
     @FXML 
@@ -70,6 +81,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label starsP2;
     @FXML
     private Label itemP2;
+    @FXML
+    private Label colorP2;
     @FXML 
     private Label nameP3;
     @FXML 
@@ -78,6 +91,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label starsP3;
     @FXML
     private Label itemP3;
+    @FXML
+    private Label colorP3;
     @FXML 
     private Label nameP4;
     @FXML 
@@ -86,6 +101,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label starsP4;
     @FXML
     private Label itemP4;
+    @FXML
+    private Label colorP4;
     @FXML 
     private Button useItem1;
     @FXML 
@@ -112,15 +129,16 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label labelMessage;
 
     private static final int RADIUS = 8;
-    private Circle player1 = new Circle(RADIUS, Color.ORANGE);
-    private Circle player2 = new Circle(RADIUS, Color.PURPLE);
-    private Circle player3 = new Circle(RADIUS, Color.BLUE);
-    private Circle player4 = new Circle(RADIUS, Color.PINK);
+    private Circle player1 = new Circle(RADIUS);
+    private Circle player2 = new Circle(RADIUS);
+    private Circle player3 = new Circle(RADIUS);
+    private Circle player4 = new Circle(RADIUS);
 
     private List<Label> labelPlayersNames = new ArrayList<>();     
     private List<Label> labelPlayersCoins = new ArrayList<>(); 
     private List<Label> labelPlayersStars = new ArrayList<>();
     private List<Label> labelPlayersItems = new ArrayList<>();
+    private List<Label> labelPlayersColor = new ArrayList<>();
     private List<Button> buttonsItem = new ArrayList<>();
     private List<Button> buttonsDirection = new ArrayList<>();
     private List<Circle> players = new ArrayList<>();
@@ -148,6 +166,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.createData();
         for (int i = 0; i < usernames.size(); i++) {
             this.labelPlayersNames.get(i).setText(usernames.get(i));
+            this.players.get(i).setFill(PLAYER_COLOR.get(i));
+            this.labelPlayersColor.get(i).setText("(" + COLOR_TO_TEXT.get(PLAYER_COLOR.get(i)) + ")");
         }
     }
         
@@ -156,6 +176,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.labelPlayersCoins.addAll(List.of(this.coinsP1, this.coinsP2, this.coinsP3, this.coinsP4));
         this.labelPlayersStars.addAll(List.of(this.starsP1, this.starsP2, this.starsP3, this.starsP4));
         this.labelPlayersItems.addAll(List.of(this.itemP1, this.itemP2, this.itemP3, this.itemP4));
+        this.labelPlayersColor.addAll(List.of(this.colorP1, this.colorP2, this.colorP3, this.colorP4));
         this.buttonsItem.addAll(List.of(this.useItem1, this.useItem2, this.useItem3));
         this.buttonsDirection.addAll(List.of(this.buttonUP, this.buttonDOWN, this.buttonLEFT, this.buttonRIGHT));
         this.players.addAll(List.of(this.player1, this.player2, this.player3, this.player4));
@@ -196,6 +217,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                 Background background = new Background(backgroundfill);
                 tmp.setBackground(background);
                 if (!slotType.equals(SlotType.VOID)) {
+                    tmp.setStyle(SLOT_STYLE);
                     Tooltip tt = new Tooltip(TEXT_TOOL_TIP.get(slotType));
                     Tooltip.install(tmp, tt);
                     this.mapSlots.put(pos, tmp);

@@ -12,11 +12,20 @@ import it.unibo.mparty.view.shop.api.ShopView;
 
 import java.util.*;
 
+/**
+ * This class implements the {@link GameController} interface. This class
+ * provides an implementation for interface methods and handles the different
+ * situation with view and model of the game
+ */
 public class GameControllerImpl implements GameController{
 
     private final GameView view;
     private GameModel model;
 
+    /**
+     * Constructor for a new {@link GameController} implementation
+     * @param view to set like {@link GameView} reference to the game
+     */
     public GameControllerImpl(final GameView view){
         this.view = view;
     }
@@ -80,7 +89,7 @@ public class GameControllerImpl implements GameController{
     public void action() throws IOException {
         this.model.action();
         if (this.model.getActiveMinigame().isPresent()) {
-           this.view.setMinigameScene(this.model.getActiveMinigame().get());
+           this.view.setMinigameScene(this.model.getActiveMinigame().get(), this.model.getPlayersInGame());
         } else if (this.model.isShop()) {
             this.view.setShopScene();
         }

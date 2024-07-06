@@ -21,6 +21,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class implements the {@link GameView} interface using JavaFX as graphic
+ * library. It extends the {@link Application} class and implements the method
+ * {@code start(Stage primaryStage} to start correctly ad JavaFX application. It
+ * handles the switching and the loading of different game scenes.
+ */
 public class GameViewImpl extends Application implements GameView{
 
     private final static double DEFAULT_DIMENSION_VALUE = -1;
@@ -77,13 +83,12 @@ public class GameViewImpl extends Application implements GameView{
      * {@inheritDoc}
      */
     @Override
-    public void setMinigameScene(String name) throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH_MINIGAMES + name + EXTENSION)); ;
-        final Parent root = loader.load(getClass().getResourceAsStream( PATH_MINIGAMES + name + EXTENSION));
-        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        final MinigameView minigameView = loader.<MinigameView>getController();
-        minigameView.init(this,this.controller);
-        this.stage.setScene(scene);
+    public void setMinigameScene(String name, List<String> players) throws IOException {
+        final Pair<Scene,SceneView> pair = this.loadScene(name);
+        final Scene minigameScene = pair.getX();
+        final MinigameView minigameView = (MinigameView) pair.getY();
+        minigameView.startMinigame(players);
+        this.stage.setScene(minigameScene);
         this.stage.setMinWidth(1000);
         this.stage.setMinHeight(700);
         this.stage.setMaximized(true);
@@ -162,6 +167,21 @@ public class GameViewImpl extends Application implements GameView{
     public void showResults(List<String> players, List<Integer> stars, List<Integer> coins) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'showResults'");
+    }
+
+    private Pair<Scene,SceneView> loadScene(String name) throws IOException {
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH_MINIGAMES + name + EXTENSION));
+        final Parent root = loader.load(getClass().getResourceAsStream( PATH_MINIGAMES + name + EXTENSION));
+        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
+        final SceneView sceneView = loader.<SceneView>getController();
+        sceneView.init(this,this.controller);
+        return new Pair<>(scene,sceneView);
+    }
+
+    private void setStageSize(){
+        this.stage.setMinWidth(1000);
+        this.stage.setMinHeight(700);
+        this.stage.setMaximized(true);
     }
 
     /* 
