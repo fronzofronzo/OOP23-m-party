@@ -20,12 +20,6 @@ public interface InitialScreen extends SceneView {
      void handleExitButton(ActionEvent event);
 
      /**
-      * method that handles the event that happens when you click the difficulty choice box
-      * @param event event that happens when you click the difficulty choice box
-      */
-     void handleDifficultyButton(ActionEvent event);
-
-     /**
       * method that handles the event that happens when you click the add player button
       * @param event event that happens when you click the difficulty choice box
       * @throws IOException catches the exception that the method might throw

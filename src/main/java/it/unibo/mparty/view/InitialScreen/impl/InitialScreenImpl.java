@@ -54,11 +54,6 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     }
 
     @Override
-    public void handleDifficultyButton(ActionEvent event) {
-        this.difficulty = this.playerChoiceBox.getValue();
-    }
-
-    @Override
     public void handleAddPlayerButton(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/MiniScreen.fxml"));
         Parent root = loader.load();
@@ -70,6 +65,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
         stage.setScene(new Scene(root));
         stage.showAndWait();
         this.startGame.setDisable(!(this.builder.enoughPlayers() && !this.difficulty.isEmpty()));
+        System.out.println(" enough players:" + this.builder.enoughPlayers() + " difficulty: " + this.difficulty);
         this.addPlayers.setDisable(this.builder.isFull());
     }
 
@@ -86,6 +82,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
             this.difficulties.add(difficulty.toString());
         }
         this.playerChoiceBox.getItems().addAll(this.difficulties);
+        this.playerChoiceBox.setOnAction(e -> this.difficulty = this.playerChoiceBox.getValue());
         this.builder = new GameModelBuilderImpl();
     }
 
