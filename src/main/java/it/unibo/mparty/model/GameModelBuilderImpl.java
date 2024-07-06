@@ -16,7 +16,7 @@ public class GameModelBuilderImpl implements GameModelBuilder{
     private String difficulty;
 
     @Override
-    public GameModelBuilder addPlayer(String nickname, String character) {
+    public GameModelBuilder addPlayer(String nickname, String character) throws IllegalArgumentException {
         final PlayerBuilder builder = new PlayerBuilderImplementation();
         final Player pl = builder.username(nickname)
                                     .character(character)

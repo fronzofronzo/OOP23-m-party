@@ -7,11 +7,15 @@ package it.unibo.mparty.model;
 public interface GameModelBuilder {
 
     /**
-     * add a player to the game
-     * @param nickname of the player
-     * @param character chosen by the Player
+     * Method to add a player to the game. It is forbidden to add a player with
+     * a nickname or character that is already used by someone else.
+     * @param nickname of the player;
+     * @param character chosen by the player;
+     * @return the builder itself;
+     * @throws IllegalArgumentException if there is already another player with
+     * same nickname and/or username.
      */
-    GameModelBuilder addPlayer(String nickname, String character);
+    GameModelBuilder addPlayer(String nickname, String character) throws IllegalArgumentException;
 
     /**
      * Chose the difficulty of the game
