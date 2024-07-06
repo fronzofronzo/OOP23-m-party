@@ -82,7 +82,7 @@ public class GameControllerImpl implements GameController{
         if (this.model.getActiveMinigame().isPresent()) {
            this.view.setMinigameScene(this.model.getActiveMinigame().get());
         } else if (this.model.isShop()) {
-            //this.view.setScene(SceneType.SHOP);
+            this.view.setShopScene();
         }
         this.updateCommandView();
         this.updatePlayersView();
