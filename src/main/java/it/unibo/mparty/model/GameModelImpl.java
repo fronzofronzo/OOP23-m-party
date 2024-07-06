@@ -23,7 +23,7 @@ public class GameModelImpl implements GameModel{
     private static final int TURNS_NUMBER = 10;
     private static final int MIN_COINS = 4;
     private static final int MAX_COINS = 10;
-    private static final int STAR_COST  =20;
+    private static final int STAR_COST = 20;
     private static final String MESSAGE_ROLL_DICE = " tira i dadi.";
     private static final String MESSAGE_MOVE_PLAYER = " muovi la pedina.";
     private static final String MESSAGE_MOVING_PLAYER = " muovi la pedina in una delle direzioni possibili:";
