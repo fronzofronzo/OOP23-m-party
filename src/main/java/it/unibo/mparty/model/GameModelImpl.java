@@ -12,12 +12,7 @@ import it.unibo.mparty.model.shop.api.Shop;
 import it.unibo.mparty.model.shop.impl.ShopImpl;
 import it.unibo.mparty.utilities.*;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -57,7 +52,9 @@ public class GameModelImpl implements GameModel{
         this.minigameHandler = new MinigameHandlerImplementation();
         this.shop = new ShopImpl();
         final SimpleBoardFactory boardFactory = new SimpleBoardFactory();
-        this.board = boardFactory.createBoard(BoardType.valueOf(difficulty));
+        this.board = boardFactory.createBoard(Arrays.stream(BoardType.values())
+                .filter(b -> b.toString().equals(difficulty))
+                .findAny().get());
         this.players.forEach(p -> p.setPosition(this.board.getStrartingPosition()));
     }
 
