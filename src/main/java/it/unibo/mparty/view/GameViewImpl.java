@@ -153,6 +153,12 @@ public class GameViewImpl extends Application implements GameView{
         this.boardView.init(this, this.controller);
     }
 
+    @Override
+    public void showResults(List<String> players, List<Integer> stars, List<Integer> coins) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'showResults'");
+    }
+
     /* 
     @Override
     public void setScene(SceneType sceneType) throws IOException {
