@@ -171,6 +171,12 @@ public class GameViewImpl extends Application implements GameView{
         return new Pair<>(scene,sceneView);
     }
 
+    private void setStageSize(){
+        this.stage.setMinWidth(1000);
+        this.stage.setMinHeight(700);
+        this.stage.setMaximized(true);
+    }
+
     /* 
     @Override
     public void setScene(SceneType sceneType) throws IOException {
