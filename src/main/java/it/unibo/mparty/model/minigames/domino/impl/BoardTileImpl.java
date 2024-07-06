@@ -4,6 +4,7 @@ import it.unibo.mparty.model.minigames.domino.api.BoardTile;
 import it.unibo.mparty.model.minigames.domino.api.Tile;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 public class BoardTileImpl implements BoardTile {
@@ -31,10 +32,7 @@ public class BoardTileImpl implements BoardTile {
     public void addTileToBoard(final Tile tile) {
         if (this.boardTiles.isEmpty()) {
             this.boardTiles.add(tile);
-            return;
-        }
-
-        if (this.boardTiles.getFirst().match(tile)) {
+        } else if (this.boardTiles.getFirst().match(tile)) {
             this.boardTiles.addFirst(tile);
         } else if (this.boardTiles.getLast().match(tile)) {
             this.boardTiles.addLast(tile);
