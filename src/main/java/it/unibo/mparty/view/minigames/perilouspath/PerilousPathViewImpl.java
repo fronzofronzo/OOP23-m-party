@@ -111,6 +111,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
 
     @Override
     public void handleStartButton(ActionEvent e) throws InterruptedException {
+        //creazione griglia
         this.observer.setUp();
         this.startButton.setDisable(true);
     }
