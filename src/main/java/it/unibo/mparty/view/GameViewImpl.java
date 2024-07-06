@@ -21,6 +21,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class implements the {@link GameView} interface using JavaFX as graphic
+ * library. It extends the {@link Application} class and implements the method
+ * {@code start(Stage primaryStage} to start correctly ad JavaFX application. It
+ * handles the switching and the loading of different game scenes.
+ */
 public class GameViewImpl extends Application implements GameView{
 
     private final static double DEFAULT_DIMENSION_VALUE = -1;
