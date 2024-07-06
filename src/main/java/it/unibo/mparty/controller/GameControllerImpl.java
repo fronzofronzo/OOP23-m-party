@@ -2,11 +2,14 @@ package it.unibo.mparty.controller;
 
 import java.io.IOException;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 
 import it.unibo.mparty.model.GameModel;
+import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.utilities.Direction;
+import it.unibo.mparty.utilities.GameStatus;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
 import it.unibo.mparty.view.shop.api.ShopView;
@@ -49,17 +52,18 @@ public class GameControllerImpl implements GameController{
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
+    @Override
+    public void useItem(ItemName item) {
+        this.model.useItem(item);
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
+    }
 
     @Override
-    public void startGame(GameModel model) {
+    public void startGame(GameModel model) throws IOException {
         this.model = model;
-        try {
-            this.view.setScene("GameBoard");
-            this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.getActualPlayerInfo().getY());
-            this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.view.setUpBoard(this.model.getBoardDimensions(), this.model.getBoardConfiguration(), this.model.getPlayersNicknames(), this.model.getActualPlayerInfo().getY());
+        this.view.setBoardScene();
+        this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
     @Override
@@ -81,11 +85,9 @@ public class GameControllerImpl implements GameController{
         //shopView.updateMoney(this.model.getPlayer());
     }
 
-
     @Override
     public void buyItem(ItemName itemName, ShopView shopView) {
-        if (this.model.buyItem(itemName)) {
-            //shopView.updateMoney(this.model.getPlayer());
-        }
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'buyItem'");
     }
 }

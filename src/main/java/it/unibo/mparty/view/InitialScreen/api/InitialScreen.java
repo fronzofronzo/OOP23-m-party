@@ -3,24 +3,14 @@ package it.unibo.mparty.view.InitialScreen.api;
 import it.unibo.mparty.model.GameModelBuilder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 
 import java.io.IOException;
 
 /**
  * interface that model the starting screen view you see when you start playing the game
  */
-public interface InitialScreen {
-
-     /**
-      * method that attaches a GameModelBuilder object to the view
-      * @param builder an object that the view calls when it is needed to create the Game model
-      */
-     void setBuilder(GameModelBuilder builder);
-
-     /**
-      * method for setting up the view, it disables the button Start and set up the choiceBox choices
-      */
-     void setUp();
+public interface InitialScreen extends Initializable{
 
      /**
       * method that handles the event that happens when you click the exit button
@@ -44,7 +34,10 @@ public interface InitialScreen {
      /**
       * method that handles the event that happens when you click the start button
       * @param event event that happens when you click the start button
+     * @throws IOException 
       */
-     void handleStartButton(ActionEvent event);
+     void handleStartButton(ActionEvent event) throws IOException;
+
+     void setNewPlayer(String username,String character);
 
 }

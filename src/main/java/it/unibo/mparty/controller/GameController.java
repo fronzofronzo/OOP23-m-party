@@ -19,13 +19,13 @@ public interface GameController {
     /**
      * Set up the shop view
      */
-    public void setUpShop(ShopView shopView);
+    void setUpShop(ShopView shopView);
 
     /**
      * Select an item and check if the player can add it
      * @param itemString the item the player wants to buy
      */
-    public void buyItem(ItemName itemName, ShopView shopView);
+    void buyItem(ItemName itemName, ShopView shopView);
 
     /**
      * Handle the request of the user to roll dice
@@ -43,12 +43,17 @@ public interface GameController {
      */
     void action() throws IOException;
 
+    /**
+     * Handle the request of the player to use an item
+     * @param item {@link ItemName} that player wants to use
+     */
+    void useItem(ItemName item);
 
     /**
      * Manage the start of a new game
      * @param model to set, created during the initial game phase
      */
-    void startGame(GameModel model);
+    void startGame(GameModel model) throws IOException;
 
     /**
      * Get the result of a minigame and update the model with it

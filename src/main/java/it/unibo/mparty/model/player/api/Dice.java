@@ -2,6 +2,12 @@ package it.unibo.mparty.model.player.api;
 
 import it.unibo.mparty.utilities.Pair;
 
+/**
+ * This interface models the concept of dice that players use during the game
+ * to move. It has methods to set dice parameters ( like number of attempts,
+ * minimum and maximum number that can be generated ) and to get them. In addition,
+ * it has methods to roll the dice and generate a new number and a method to get it.
+ */
 public interface Dice {
 
     /**
