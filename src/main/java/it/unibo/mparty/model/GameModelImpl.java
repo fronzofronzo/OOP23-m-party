@@ -284,7 +284,7 @@ public class GameModelImpl implements GameModel{
 
     @Override
     public List<String> getPlayersInGame() {
-        return this.minigameHandler.;
+        return this.minigameHandler.getUsersPlaying();
     }
 
     private void nextPlayer() {

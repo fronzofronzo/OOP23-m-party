@@ -80,7 +80,7 @@ public class GameControllerImpl implements GameController{
     public void action() throws IOException {
         this.model.action();
         if (this.model.getActiveMinigame().isPresent()) {
-           this.view.setMinigameScene(this.model.getActiveMinigame().get(), this.model.);
+           this.view.setMinigameScene(this.model.getActiveMinigame().get(), this.model.getPlayersInGame());
         } else if (this.model.isShop()) {
             this.view.setShopScene();
         }
