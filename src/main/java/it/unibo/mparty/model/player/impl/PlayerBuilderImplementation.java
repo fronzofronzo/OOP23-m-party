@@ -22,7 +22,7 @@ public class PlayerBuilderImplementation implements PlayerBuilder {
 
 
     @Override
-    public Player buildPlayer() {
+    public Player buildPlayer() throws IllegalStateException{
         if (this.username == null  || this.character == null){
             throw new IllegalStateException("Missing fields: cannot create a new Player");
         }
