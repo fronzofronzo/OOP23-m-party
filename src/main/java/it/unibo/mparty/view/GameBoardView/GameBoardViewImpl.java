@@ -204,8 +204,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }*/
 
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
-        for (int i = 0; i < dimension.getX(); i++) {
-            for (int j = 0; j < dimension.getY(); j++) {
+        for (int i = 0; i < dimension.getFirst(); i++) {
+            for (int j = 0; j < dimension.getSecond(); j++) {
                 Position pos = new Position(i, j);
                 SlotType slotType = Objects.isNull(map.get(pos)) ? 
                                                    SlotType.VOID :

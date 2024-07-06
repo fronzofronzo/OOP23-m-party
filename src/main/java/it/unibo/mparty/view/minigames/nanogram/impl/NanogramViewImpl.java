@@ -241,9 +241,4 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'startMinigame'");
     }
-
-    @Override
-    public void startMinigame(List<String> players) {
-
-    }
 }
