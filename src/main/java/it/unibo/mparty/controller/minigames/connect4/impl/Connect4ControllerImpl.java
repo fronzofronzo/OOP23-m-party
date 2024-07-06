@@ -20,7 +20,7 @@ public class Connect4ControllerImpl implements Connect4Controller {
     @Override
     public void endGame() {
         this.view.getMainController().saveMinigameResult(this.model.getResult());
-        //this.view.getMainView().setBoardScene();;
+        this.view.getMainView().switchToBoard();
     }
 
     @Override
