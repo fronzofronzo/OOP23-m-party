@@ -23,7 +23,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -225,8 +224,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     }
 
     @Override
-    public void update(List<Tile> boardTiles) {
-        System.out.println("AGGIUNGI TILE "+boardTiles); //non si vede ancora sul board //what are u doing
+    public void update(List<Pair<Integer, Integer>> boardTiles) {
         tilesContainer.getChildren().clear();
 
         HBox rowBox = new HBox();
@@ -235,7 +233,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
 
         for (Pair<Integer, Integer> tile : boardTiles) {
             HBox tileBox = new HBox();
-            generateTile(tileBox, tile.getSideA().getValue(), tile.getSideB().getValue());
+            generateTile(tileBox, tile.getFirst(), tile.getSecond());
             tileBox.setAlignment(Pos.CENTER);
             tileBox.setDisable(true);
             VBox.setMargin(tileBox, new Insets(0, PREF_SIZE, 0, PREF_SIZE));

@@ -49,7 +49,7 @@ public class DominoModelImpl implements DominoModel {
             this.playerTiles.removeTilesFromPlayer(player, tile);
             return true;
         }
-        return false;
+        return false; //ora cambia le cose dell'observer, da List<Tile> a List<Pair<Integer, Integer>> -_- devo provare capi?vai
     }
 
     @Override

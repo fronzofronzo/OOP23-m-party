@@ -1,8 +1,8 @@
 package it.unibo.mparty.model.minigames.domino.impl;
 
 import it.unibo.mparty.model.minigames.domino.api.BoardTile;
-import it.unibo.mparty.model.minigames.domino.api.EObserver;
 import it.unibo.mparty.model.minigames.domino.api.Tile;
+import it.unibo.mparty.utilities.Pair;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -55,13 +55,4 @@ public class BoardTileImpl extends ESourceImpl<List<Pair<Integer, Integer>>> imp
         return Objects.hashCode(boardTiles);
     }
 
-    @Override
-    public void addObserver(EObserver<? super List<Tile>> obs) {
-
-    }
-
-    @Override
-    public void notifyObservers(List<Tile> tile) {
-
-    }
 }

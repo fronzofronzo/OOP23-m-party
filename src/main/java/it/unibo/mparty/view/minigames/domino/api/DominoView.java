@@ -9,7 +9,7 @@ import it.unibo.mparty.view.minigames.domino.DominoMessage;
 import java.util.List;
 import java.util.Set;
 
-public interface DominoView extends MinigameView, EObserver<List<Tile>> {
+public interface DominoView extends MinigameView, EObserver<List<Pair<Integer, Integer>>> {
     void setPlayerTiles(boolean isPlayer1, Set<Tile> playerTiles);
 
     void setPlayerName(boolean isPlayer1, String playerName);
