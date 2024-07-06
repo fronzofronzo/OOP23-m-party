@@ -1,8 +1,11 @@
 package it.unibo.mparty.model.minigames.domino.impl;
 
-import it.unibo.mparty.model.minigames.domino.api.PlayerTiles;
-import it.unibo.mparty.model.minigames.domino.api.Tile;
-import it.unibo.mparty.model.minigames.domino.api.TileFactory;
+import it.unibo.mparty.model.minigames.domino.player.api.PlayerTiles;
+import it.unibo.mparty.model.minigames.domino.player.impl.PlayerTilesImpl;
+import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
+import it.unibo.mparty.model.minigames.domino.tile.api.TileFactory;
+import it.unibo.mparty.model.minigames.domino.tile.impl.TileFactoryImpl;
+import it.unibo.mparty.model.minigames.domino.tile.impl.TileImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
