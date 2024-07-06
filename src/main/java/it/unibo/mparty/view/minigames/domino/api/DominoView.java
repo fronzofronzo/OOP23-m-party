@@ -1,6 +1,6 @@
 package it.unibo.mparty.view.minigames.domino.api;
 
-import it.unibo.mparty.model.minigames.domino.api.EObserver;
+import it.unibo.mparty.utilities.api.EObserver;
 import it.unibo.mparty.model.minigames.domino.api.Tile;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.minigames.MinigameView;
