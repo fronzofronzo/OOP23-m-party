@@ -164,6 +164,15 @@ public class GameViewImpl extends Application implements GameView{
         throw new UnsupportedOperationException("Unimplemented method 'showResults'");
     }
 
+    private Pair<Scene,SceneView> loadScene(String name) throws IOException {
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH_MINIGAMES + name + EXTENSION));
+        final Parent root = loader.load(getClass().getResourceAsStream( PATH_MINIGAMES + name + EXTENSION));
+        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
+        final SceneView sceneView = loader.<SceneView>getController();
+        sceneView.init(this,this.controller);
+        return new Pair<>(scene,sceneView);
+    }
+
     /* 
     @Override
     public void setScene(SceneType sceneType) throws IOException {
