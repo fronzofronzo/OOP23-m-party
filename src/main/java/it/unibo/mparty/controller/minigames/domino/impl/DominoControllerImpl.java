@@ -94,8 +94,4 @@ public class DominoControllerImpl implements DominoController {
     private void updateTurn() {
         this.view.setTurn(this.isPlayer1Turn);
     }
-
-    private void updateBoard(boolean isDoubleSide) {
-        this.view.setBoard(this.model.getBoardTile().getBoardTiles(), isDoubleSide); //todo doubleSide
-    }
 }
