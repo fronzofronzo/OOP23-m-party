@@ -225,7 +225,7 @@ public class GameModelImpl implements GameModel{
                 output = output + MESSAGE_MOVING_PLAYER + getDirections();
                 break;
             case ACTIVE_SLOT:
-                output = output + MESSAGE_ACTIVE_SLOT + this.board.getSlotType(this.players.get(actualPlayerIndex).getPosition()) + ".";
+                output = output + MESSAGE_ACTIVE_SLOT + "\n" + this.board.getSlotType(this.players.get(actualPlayerIndex).getPosition()) + ".";
                 break;
             case END_TURN:
                 output = output + MESSAGE_END_TURN;
