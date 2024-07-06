@@ -77,10 +77,11 @@ public class GameViewImpl extends Application implements GameView{
      * {@inheritDoc}
      */
     @Override
-    public void setMinigameScene(String name) throws IOException {
+    public void setMinigameScene(String name, List<String> players) throws IOException {
         final Pair<Scene,SceneView> pair = this.loadScene(name);
         final Scene minigameScene = pair.getX();
         final MinigameView minigameView = (MinigameView) pair.getY();
+        minigameView.startMinigame(players);
         this.stage.setScene(minigameScene);
         this.stage.setMinWidth(1000);
         this.stage.setMinHeight(700);
