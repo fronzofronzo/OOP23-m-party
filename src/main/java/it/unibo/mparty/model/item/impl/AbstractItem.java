@@ -3,22 +3,21 @@ package it.unibo.mparty.model.item.impl;
 import it.unibo.mparty.model.item.api.Item;
 
 /**
- * This is an abstract class that represents a generical item
+ * This is an abstract class that represents a generical item.
  */
-public abstract class AbstractItem implements Item{
-    
+public abstract class AbstractItem implements Item {
     private final ItemName name;
     private final int cost;
 
     /**
-     * Constructs a new istance of AbstractItem with the specified ItemName and cost
+     * Constructs a new istance of AbstractItem with the specified ItemName and cost.
      * 
      * @param name the name of the item
      * @param cost the cost of the item
      */
-    public AbstractItem (ItemName name,int cost) {
-        this.name=name;
-        this.cost=cost;
+    public AbstractItem(ItemName name, int cost) {
+        this.name = name;
+        this.cost = cost;
     }
 
     /**
@@ -52,8 +51,4 @@ public abstract class AbstractItem implements Item{
     public boolean needPosition() {
         return false;
     }
-
-    
-    
-    
 }

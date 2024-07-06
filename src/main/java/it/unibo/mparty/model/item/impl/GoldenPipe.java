@@ -6,15 +6,16 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Position;
 
 /**
- * class that implements the Golden Pipe item
+ * class that implements the Golden Pipe item.
  */
-public class GoldenPipe extends AbstractItem{
+public class GoldenPipe extends AbstractItem {
+    private final static int GOLDENPIPE_COST = 10;
 
     /**
-     * Construct a new istance of GoldenPipe item
+     * Construct a new istance of GoldenPipe item.
      */
     public GoldenPipe() {
-        super(ItemName.TUBO_DORATO, 10);
+        super(ItemName.TUBO_DORATO, GOLDENPIPE_COST);
     }
     
 
@@ -42,5 +43,4 @@ public class GoldenPipe extends AbstractItem{
     public boolean needPosition() {
         return true;
     }
-
 }

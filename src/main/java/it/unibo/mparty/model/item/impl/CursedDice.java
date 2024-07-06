@@ -6,15 +6,17 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Position;
 
 /**
- * class that implements the CursedDice item
+ * class that implements the CursedDice item.
  */
-public class CursedDice extends AbstractItem{
+public class CursedDice extends AbstractItem {
+
+    private final static int CURSEDICE_COST = 5;
 
     /**
-     * Construct a new istance of CursedDice item
+     * Construct a new istance of CursedDice item.
      */
-    public CursedDice (){
-        super (ItemName.DADO_MALEDETTO,5);
+    public CursedDice() {
+        super(ItemName.DADO_MALEDETTO, CURSEDICE_COST);
     }
 
     /**
@@ -37,7 +39,7 @@ public class CursedDice extends AbstractItem{
      * {@inheritDoc}
      */
     @Override
-    public boolean isOnOthers () {
+    public boolean isOnOthers() {
         return true;
     }
 
