@@ -1,9 +1,13 @@
 package it.unibo.mparty.model.minigames.domino.impl;
 
-import it.unibo.mparty.model.minigames.domino.api.Tile;
+import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
+import it.unibo.mparty.model.minigames.domino.tile.impl.TileImpl;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 class TileImplTest {
 
@@ -20,8 +24,8 @@ class TileImplTest {
     @Test
     void testTile() {
         this.tile = new TileImpl(SIDE_0, SIDE_1);
-        assertEquals(this.tile.getSideA().getValue(), SIDE_0);
-        assertEquals(this.tile.getSideB().getValue(), SIDE_1);
+        assertEquals(SIDE_0, this.tile.getSideA().getValue());
+        assertEquals(SIDE_1, this.tile.getSideB().getValue());
     }
 
     @Test
@@ -36,7 +40,6 @@ class TileImplTest {
         assertFalse(this.tile.match(tile3));
     }
 
-
     @Test
     void testIsDoubleSide() {
         this.tile = new TileImpl(SIDE_3, SIDE_3);
@@ -50,5 +53,25 @@ class TileImplTest {
 
         this.tile = new TileImpl(SIDE_5, SIDE_2);
         assertFalse(this.tile.isDoubleSide());
+    }
+
+    @Test
+    void testReverse() {
+        this.tile = new TileImpl(SIDE_1, SIDE_2);
+        this.tile.reverse();
+        assertEquals(SIDE_2, this.tile.getSideA().getValue());
+        assertEquals(SIDE_1, this.tile.getSideB().getValue());
+    }
+
+    @Test
+    void testCanMatch() {
+        this.tile = new TileImpl(SIDE_2, SIDE_5);
+        Tile tile1 = new TileImpl(SIDE_1, SIDE_2);
+        Tile tile2 = new TileImpl(SIDE_6, SIDE_5);
+        Tile tile3 = new TileImpl(SIDE_3, SIDE_4);
+
+        assertTrue(this.tile.canMatch(tile1));
+        assertTrue(this.tile.canMatch(tile2));
+        assertFalse(this.tile.canMatch(tile3));
     }
 }
