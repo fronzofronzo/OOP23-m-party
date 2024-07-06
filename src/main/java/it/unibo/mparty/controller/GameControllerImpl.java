@@ -1,11 +1,7 @@
 package it.unibo.mparty.controller;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
@@ -65,22 +61,21 @@ public class GameControllerImpl implements GameController{
     @Override
     public void saveMinigameResult(Pair<String, Integer> result) {
         this.model.endMinigame(result);
-        this.endGame();//todo: remove
     }
 
     @Override
     public void endGame() {
         try {
             this.view.setScene(SceneType.END);
-            this.view.showResults(this.model.getPlayers());
+            List<Player> players = this.model.getPlayers();
+            players.sort(Comparator
+                    .comparingInt(Player::getNumStars)
+                    .thenComparingInt(Player::getNumCoins)
+                    .reversed());
+            this.view.showResults(players);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        // this.view.showWinner(this.model.getWinner)
-        //List<String> playersName = this.model.getPlayers().stream().map(Player::getUsername).toList();
-        //List<Integer> stars = this.model.getPlayers().stream().map(Player::getNumStars).toList();
-        //List<Integer> coins = this.model.getPlayers().stream().map(Player::getNumCoins).toList();
-
     }
 
     @Override
