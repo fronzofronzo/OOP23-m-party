@@ -13,19 +13,27 @@ public class PlayerBuilderImplementation implements PlayerBuilder {
     private String username;
     private String character;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PlayerBuilder username(String username) {
         this.username = username;
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PlayerBuilder character(String character) {
         this.character = character;
         return this;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Player buildPlayer() throws IllegalStateException{
         if (this.username == null  || this.character == null){
