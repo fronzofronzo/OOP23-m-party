@@ -4,6 +4,7 @@ import it.unibo.mparty.controller.GameController;
 import it.unibo.mparty.controller.GameControllerImpl;
 import it.unibo.mparty.model.GameModelBuilder;
 import it.unibo.mparty.model.GameModelBuilderImpl;
+import it.unibo.mparty.utilities.BoardType;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.GameViewImpl;
 import it.unibo.mparty.view.InitialScreen.api.InitialScreen;
@@ -11,6 +12,7 @@ import it.unibo.mparty.view.InitialScreen.api.MiniScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,16 +23,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class InitialScreenImpl extends AbstractSceneView implements InitialScreen {
+public class InitialScreenImpl extends AbstractSceneView implements InitialScreen, Initializable {
+
 
     private GameModelBuilder builder;
-    private final GameController controller = new GameControllerImpl(new GameViewImpl());
-    private final Set<String> temp = Set.of("Easy","Medium","Difficult");
-    private String difficulty;
+    private final List<String> difficulties = new ArrayList<>();
+    private String difficulty = "";
 
     @FXML
     private Button addPlayers;
@@ -41,21 +44,12 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     @FXML
     private ChoiceBox<String> playerChoiceBox;
 
-
-
-
-
+    @FXML
+    private Label exceptionLabel;
 
     @Override
     public void handleExitButton(ActionEvent event) {
         System.exit(0);
-    }
-
-    @Override
-    public void handleDifficultyButton(ActionEvent event) {
-
-        this.playerChoiceBox.getItems().addAll(temp);
-        this.difficulty = this.playerChoiceBox.getValue();
     }
 
     @Override
@@ -69,25 +63,39 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
         stage.setTitle("Add player");
         stage.setScene(new Scene(root));
         stage.showAndWait();
-        this.startGame.setDisable(!this.builder.enoughPlayers());
+        this.startGame.setDisable(!(this.builder.enoughPlayers() && !this.difficulty.isEmpty()));
+        System.out.println(" enough players:" + this.builder.enoughPlayers() + " difficulty: " + this.difficulty);
         this.addPlayers.setDisable(this.builder.isFull());
     }
 
     @Override
     public void handleStartButton(ActionEvent event) throws IOException {
-        this.builder.difficulty(this.difficulty);
-        this.controller.startGame(this.builder.build());
+        this.builder = this.builder.difficulty(this.difficulty);
+        GameController controller = this.getMainController();
+        controller.startGame(this.builder.build());
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.startGame.setDisable(true);
-        this.playerChoiceBox.getItems().addAll(temp);
+        for(BoardType difficulty: BoardType.values()){
+            this.difficulties.add(difficulty.toString());
+        }
+        this.playerChoiceBox.getItems().addAll(this.difficulties);
+        this.playerChoiceBox.setOnAction(e -> {
+            this.difficulty = this.playerChoiceBox.getValue();
+            this.startGame.setDisable(!(this.builder.enoughPlayers() && !this.difficulty.isEmpty()));
+        });
         this.builder = new GameModelBuilderImpl();
     }
 
     @Override
     public void setNewPlayer(String username,String character){
-        this.builder = this.builder.addPlayer(username,character);
+        try{
+            this.builder = this.builder.addPlayer(username,character);
+            this.exceptionLabel.setText("player was added correctly");
+        }catch(IllegalArgumentException e){
+            this.exceptionLabel.setText(e.getMessage());
+        }
     }
 }
