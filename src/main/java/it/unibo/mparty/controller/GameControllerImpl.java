@@ -12,6 +12,11 @@ import it.unibo.mparty.view.shop.api.ShopView;
 
 import java.util.*;
 
+/**
+ * This class implements the {@link GameController} interface. This class
+ * provides an implementation for interface methods and handles the different
+ * situation with view and model of the game
+ */
 public class GameControllerImpl implements GameController{
 
     private final GameView view;
