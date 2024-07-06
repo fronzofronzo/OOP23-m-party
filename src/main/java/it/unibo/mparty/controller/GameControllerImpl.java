@@ -102,6 +102,7 @@ public class GameControllerImpl implements GameController{
         //shopView.updateMoney(this.model.getPlayer());
     }
 
+
     /**
      *
      * {@inheritDoc}
@@ -116,7 +117,6 @@ public class GameControllerImpl implements GameController{
     }
 
     /**
-     *
      * {@inheritDoc}
      */
     @Override
