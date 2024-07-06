@@ -68,13 +68,13 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
         stage.setTitle("Add player");
         stage.setScene(new Scene(root));
         stage.showAndWait();
-        this.startGame.setDisable(!this.builder.enoughPlayers());
+        this.startGame.setDisable(!(this.builder.enoughPlayers() && !this.difficulty.isEmpty()));
         this.addPlayers.setDisable(this.builder.isFull());
     }
 
     @Override
     public void handleStartButton(ActionEvent event) throws IOException {
-        this.builder.difficulty(this.difficulty);
+        this.builder = this.builder.difficulty(this.difficulty);
         this.controller.startGame(this.builder.build());
     }
 
