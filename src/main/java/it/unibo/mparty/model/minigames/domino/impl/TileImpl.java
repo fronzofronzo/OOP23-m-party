@@ -87,12 +87,15 @@ public class TileImpl implements Tile {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TileImpl tile = (TileImpl) o;
-        return Objects.equals(this.sideA.getValue(), tile.sideA.getValue()) && Objects.equals(this.sideB.getValue(), tile.sideB.getValue());
+        return (this.sideA.getValue() == tile.sideA.getValue() && this.sideB.getValue() == tile.sideB.getValue()) ||
+                (this.sideA.getValue() == tile.sideB.getValue() && this.sideB.getValue() == tile.sideA.getValue());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.sideA.getValue(), this.sideB.getValue());
+        int valueA = this.sideA.getValue();
+        int valueB = this.sideB.getValue();
+        return valueA <= valueB ? Objects.hash(valueA, valueB) : Objects.hash(valueB, valueA);
     }
 
     @Override
@@ -102,4 +105,5 @@ public class TileImpl implements Tile {
                 ", sideB=" + this.sideB +
                 '}';
     }
+
 }
