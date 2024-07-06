@@ -27,4 +27,15 @@ class PlayerBuilderImplementationTest {
         assertEquals(username, player.getUsername());
         assertEquals(character, player.getCharacter().getName());
     }
+
+    @Test
+    public void testNotEnoughInformation(){
+        final String username = "username";
+        final String character = Character.CHAR_MARIO.getName();
+        final PlayerBuilder builder = new PlayerBuilderImplementation();
+        assertThrows(IllegalStateException.class,
+                () -> {
+                    builder.username(username).buildPlayer();
+                });
+    }
 }
