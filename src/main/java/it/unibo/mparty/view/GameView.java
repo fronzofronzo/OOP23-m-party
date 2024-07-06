@@ -18,7 +18,7 @@ import java.util.List;
 public interface GameView {
 
     //void setScene(SceneType sceneType) throws IOException;
-    
+
     /**
      * Set the board scene in the view
      */
@@ -36,9 +36,9 @@ public interface GameView {
      * Set the shop scene in the view
      */
     void setShopScene() throws IOException;
-    
+
     /**
-     * Create the board based on the input property 
+     * Create the board based on the input property
      * @param dimension that defines width and height
      * @param board that defines for each slot his slot type
      * @param usernames

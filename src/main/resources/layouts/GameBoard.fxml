@@ -7,17 +7,17 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.GameBoardView.GameBoardViewImpl">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.GameBoardView.GameBoardViewImpl">
    <left>
-      <SplitPane fx:id="leftSplitPane" dividerPositions="0.5" minHeight="400.0" minWidth="150.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+      <SplitPane fx:id="leftSplitPane" dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
          <items>
             <VBox fx:id="sectionP1" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                <children>
                   <Label fx:id="nameP1" />
-                  <Label fx:id="colorP1" />
                   <Label fx:id="coinsP1" />
                   <Label fx:id="starsP1" />
                   <Label fx:id="itemP1" />
@@ -28,7 +28,6 @@
             <VBox fx:id="sectionP3" prefHeight="265.0" prefWidth="116.0" spacing="5.0">
                <children>
                   <Label fx:id="nameP3" />
-                  <Label fx:id="colorP3" />
                   <Label fx:id="coinsP3" />
                   <Label fx:id="starsP3" />
                   <Label fx:id="itemP3" />
@@ -40,12 +39,11 @@
       </SplitPane>
    </left>
    <right>
-      <SplitPane fx:id="rightSplitPane" dividerPositions="0.5" minHeight="400.0" minWidth="150.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+      <SplitPane fx:id="rightSplitPane" dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
          <items>
             <VBox fx:id="sectionP2" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                <children>
                   <Label fx:id="nameP2" />
-                  <Label fx:id="colorP2" />
                   <Label fx:id="coinsP2" />
                   <Label fx:id="starsP2" />
                   <Label fx:id="itemP2" />
@@ -56,7 +54,6 @@
             <VBox fx:id="sectionP4" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                <children>
                   <Label fx:id="nameP4" />
-                  <Label fx:id="colorP4" />
                   <Label fx:id="coinsP4" />
                   <Label fx:id="starsP4" />
                   <Label fx:id="itemP4" />
@@ -67,11 +64,29 @@
          </items>
       </SplitPane>
    </right>
+   <bottom>
+      <Pane fx:id="paneCommand" prefHeight="100.0" prefWidth="854.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="buttonUP" layoutX="415.0" layoutY="12.0" maxHeight="30.0" maxWidth="25.0" minHeight="30.0" minWidth="25.0" mnemonicParsing="false" onAction="#movePlayer" prefHeight="30.0" prefWidth="25.0" text="↑" />
+            <Button fx:id="buttonDOWN" layoutX="415.0" layoutY="64.0" maxHeight="30.0" maxWidth="25.0" minHeight="30.0" minWidth="25.0" mnemonicParsing="false" onAction="#movePlayer" prefHeight="30.0" prefWidth="25.0" text="↓" />
+            <Button fx:id="buttonLEFT" layoutX="385.0" layoutY="40.0" maxHeight="25.0" maxWidth="30.0" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onAction="#movePlayer" prefHeight="25.0" prefWidth="30.0" text="←" />
+            <Button fx:id="buttonRIGHT" layoutX="440.0" layoutY="40.0" maxHeight="25.0" maxWidth="30.0" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onAction="#movePlayer" prefHeight="25.0" prefWidth="30.0" text="→" />
+            <Button fx:id="buttonRollDice" layoutX="598.0" layoutY="14.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#rollDice" prefWidth="100.0" text="Roll Dice" />
+            <Button fx:id="buttonMove" layoutX="598.0" layoutY="40.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#movePlayer" prefWidth="100.0" text="Move" />
+            <Button fx:id="useItem1" layoutX="157.0" layoutY="14.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="item1" />
+            <Button fx:id="useItem2" layoutX="157.0" layoutY="40.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="item2" />
+            <Button fx:id="useItem3" layoutX="157.0" layoutY="66.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefWidth="100.0" text="item3" />
+            <Button fx:id="Enter" layoutX="598.0" layoutY="66.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#action" prefWidth="100.0" text="Enter" />
+            <Label fx:id="resultDice" layoutX="709.0" layoutY="19.0" />
+            <Label fx:id="labelMessage" layoutX="758.0" layoutY="44.0" />
+         </children>
+      </Pane>
+   </bottom>
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
    <center>
-      <GridPane fx:id="board" gridLinesVisible="true" minHeight="300.0" minWidth="700.0" prefHeight="300.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+      <GridPane fx:id="board" alignment="CENTER" gridLinesVisible="true" BorderPane.alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -128,69 +143,4 @@
         </rowConstraints>
       </GridPane>
    </center>
-   <bottom>
-      <SplitPane fx:id="paneCommand" dividerPositions="0.25, 0.5, 0.75" maxHeight="100.0" minWidth="1000.0" prefHeight="100.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
-         <items>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label text="USA OGGETTO:" />
-                  <Button fx:id="useItem1" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#useItem" prefWidth="200.0" />
-                  <Button fx:id="useItem2" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#useItem" prefWidth="200.0" />
-                  <Button fx:id="useItem3" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#useItem" prefWidth="200.0" />
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <GridPane alignment="CENTER">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
-                           <children>
-                              <Button fx:id="buttonUP" maxHeight="30.0" maxWidth="25.0" minHeight="30.0" minWidth="25.0" mnemonicParsing="false" onAction="#movePlayer" prefHeight="30.0" prefWidth="25.0" text="↑" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
-                           <children>
-                              <Button fx:id="buttonLEFT" maxHeight="25.0" maxWidth="30.0" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onAction="#movePlayer" prefHeight="25.0" prefWidth="30.0" text="←" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <children>
-                              <Button fx:id="buttonDOWN" maxHeight="30.0" maxWidth="25.0" minHeight="30.0" minWidth="25.0" mnemonicParsing="false" onAction="#movePlayer" prefHeight="30.0" prefWidth="25.0" text="↓" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                           <children>
-                              <Button fx:id="buttonRIGHT" maxHeight="25.0" maxWidth="30.0" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onAction="#movePlayer" prefHeight="25.0" prefWidth="30.0" text="→" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </GridPane>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Button fx:id="buttonRollDice" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#rollDice" prefWidth="100.0" text="TIRA I DADI" />
-                  <Label fx:id="resultDice" />
-                  <Button fx:id="buttonMove" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#movePlayer" prefWidth="100.0" text="MUOVI" />
-                  <Button fx:id="buttonEnter" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#action" prefWidth="100.0" text="AVANTI" />
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label fx:id="labelMessage" />
-               </children>
-            </VBox>
-         </items>
-      </SplitPane>
-   </bottom>
 </BorderPane>

@@ -1,3 +1,4 @@
+
 package it.unibo.mparty.controller;
 
 import java.io.IOException;
@@ -38,9 +39,9 @@ public class GameControllerImpl implements GameController{
     public void startGame(GameModel model) throws IOException {
         this.model = model;
         List<String> usernames = this.model.getPlayers()
-                                           .stream()
-                                           .map(p -> p.getUsername())
-                                           .toList();
+                .stream()
+                .map(p -> p.getUsername())
+                .toList();
         this.view.setUpBoard(this.model.getBoardDim(), this.model.getBoardConfig(), usernames);
         this.view.setBoardScene();
         this.updatePlayersView();;
@@ -89,7 +90,7 @@ public class GameControllerImpl implements GameController{
     public void action() throws IOException {
         this.model.action();
         if (this.model.getActiveMinigame().isPresent()) {
-           this.view.setMinigameScene(this.model.getActiveMinigame().get(), this.model.getPlayersInGame());
+            this.view.setMinigameScene(this.model.getActiveMinigame().get(), this.model.getPlayersInGame());
         } else if (this.model.isShop()) {
             this.view.setShopScene();
         }
@@ -140,21 +141,21 @@ public class GameControllerImpl implements GameController{
 
     private void updatePlayersView() {
         List<Player> players = this.model.getPlayers();
-        players.forEach(p -> this.view.updatePlayer(p.getUsername(), 
-                                                    p.getNumCoins(), 
-                                                    p.getNumStars(), 
-                                                    p.getPlayerBag()
-                                                     .getItems()
-                                                     .stream()
-                                                     .map(i -> i.name()).toList(),
-                                                    p.getPosition()));
+        players.forEach(p -> this.view.updatePlayer(p.getUsername(),
+                p.getNumCoins(),
+                p.getNumStars(),
+                p.getPlayerBag()
+                        .getItems()
+                        .stream()
+                        .map(i -> i.name()).toList(),
+                p.getPosition()));
     }
 
     private void updateCommandView() {
         this.view.updateCommands(this.model.getItemsOfCurrentPlayer()
-                                           .stream()
-                                           .map(i -> i.toString())
-                                           .toList(),
-                                 this.model.getMessage());
+                        .stream()
+                        .map(i -> i.toString())
+                        .toList(),
+                this.model.getMessage());
     }
 }
