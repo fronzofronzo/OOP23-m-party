@@ -98,15 +98,8 @@ public class GameControllerImpl implements GameController{
         Map<ItemName,Integer> itemMap = new HashMap<>();
         this.model.getItemsFromShop().stream().forEach(it -> itemMap.put(it.getName(), it.getCost()));
         itemMap.forEach((str, i) -> shopView.addButton(str, i));
-<<<<<<< HEAD
         this.updateCommandView();
         //shopView.updateMoney(this.model.getPlayer());
-=======
-        this.model.getItemsFromShop().stream().forEach(it -> shopView.addDescription(it.getDescription()));
-        shopView.updateMoney(this.model.getPlayers().stream()
-        .filter(pl -> pl.getUsername().equals(this.model.getActualPlayerInfo().getX()))
-        .findAny().get().getNumCoins());
->>>>>>> develop
     }
 
     /**
@@ -116,9 +109,9 @@ public class GameControllerImpl implements GameController{
     @Override
     public void buyItem(ItemName itemName, ShopView shopView) {
         if (this.model.buyItem(itemName)) {
-            shopView.updateMoney(this.model.getPlayers().stream()
-            .filter(pl -> pl.getUsername().equals(this.model.getActualPlayerInfo().getX()))
-            .findAny().get().getNumCoins());
+            //shopView.updateMoney(this.model.getPlayers().stream()
+            //.filter(pl -> pl.getUsername().equals(this.model.get))
+            //.findAny().get().getNumCoins());
         }
     }
 
