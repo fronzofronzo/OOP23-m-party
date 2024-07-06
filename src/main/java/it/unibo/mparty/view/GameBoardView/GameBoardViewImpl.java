@@ -1,6 +1,7 @@
 package it.unibo.mparty.view.GameBoardView;
 
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,8 +21,8 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -123,6 +124,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private List<Button> buttonsItem = new ArrayList<>();
     private List<Button> buttonsDirection = new ArrayList<>();
     private List<Circle> players = new ArrayList<>();
+    private Map<Position,FlowPane> mapFLow = new HashMap<>();
 
     @Override
     public void updatePlayer(String palyer, int coins, int stars, List<String> items, Position position) {
@@ -131,8 +133,11 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                 this.labelPlayersCoins.get(i).setText(TEXT_COINS + String.valueOf(coins));
                 this.labelPlayersStars.get(i).setText(TEXT_STARS + String.valueOf(stars));
                 this.labelPlayersItems.get(i).setText(TEXT_ITEMS + this.printItems(items));
-                this.board.getChildren().remove(this.players.get(i));
-                this.board.add(this.players.get(i), position.getX(), position.getY());
+                for (Map.Entry<Position,FlowPane> entry : this.mapFLow.entrySet()) {
+                    entry.getValue().getChildren().remove(this.players.get(i));
+                }
+                //this.board.add(this.players.get(i), position.getX(), position.getY());
+                this.mapFLow.get(position).getChildren().add(this.players.get(i));
             }
         }
     }
@@ -154,10 +159,14 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.buttonsItem.addAll(List.of(this.useItem1, this.useItem2, this.useItem3));
         this.buttonsDirection.addAll(List.of(this.buttonUP, this.buttonDOWN, this.buttonLEFT, this.buttonRIGHT));
         this.players.addAll(List.of(this.player1, this.player2, this.player3, this.player4));
-        this.setUpPlayers();
+        //this.setUpPlayers();
     }
 
+    /* 
     private void setUpPlayers() {
+        var ff = this.board.getCellBounds(RADIUS, RADIUS);
+        var g = ff.getWidth();
+        var h = ff.getHeight();
         double cellWidth = this.board.getWidth() / this.board.getColumnCount();
         double cellHeight = this.board.getHeight() / this.board.getRowCount();
         //double padding = 3.0;
@@ -169,7 +178,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.player3.setTranslateY(offsetY); // Sposta il terzo cerchio in basso
         this.player4.setTranslateX(offsetX); // Sposta il quarto cerchio a destra
         this.player4.setTranslateY(offsetY); // Sposta il quarto cerchio in basso
-    }
+    }*/
 
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
         for (int i = 0; i < dimension.getX(); i++) {
@@ -178,7 +187,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                 SlotType slotType = Objects.isNull(map.get(pos)) ? 
                                                    SlotType.VOID :
                                                    map.get(pos);
-                Pane tmp = new Pane();
+                FlowPane tmp = new FlowPane();
                 BackgroundFill backgroundfill = new BackgroundFill(SLOT_COLOR.get(slotType), 
                                                                    CornerRadii.EMPTY, 
                                                                    null);
@@ -187,6 +196,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                 if (!slotType.equals(SlotType.VOID)) {
                     Tooltip tt = new Tooltip(TEXT_TOOL_TIP.get(slotType));
                     Tooltip.install(tmp, tt);
+                    this.mapFLow.put(pos, tmp);
                 }
                 this.board.add(tmp, i, j);
             }
