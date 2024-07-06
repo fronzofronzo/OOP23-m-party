@@ -233,7 +233,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         rowBox.setAlignment(Pos.CENTER);
         rowBox.setSpacing(SPACING);
 
-        for (Tile tile : boardTiles) {
+        for (Pair<Integer, Integer> tile : boardTiles) {
             HBox tileBox = new HBox();
             generateTile(tileBox, tile.getSideA().getValue(), tile.getSideB().getValue());
             tileBox.setAlignment(Pos.CENTER);
