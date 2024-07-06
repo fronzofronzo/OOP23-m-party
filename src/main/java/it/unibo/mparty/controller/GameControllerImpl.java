@@ -82,12 +82,17 @@ public class GameControllerImpl implements GameController{
         this.model.getItemsFromShop().stream().forEach(it -> itemMap.put(it.getName(), it.getCost()));
         itemMap.forEach((str, i) -> shopView.addButton(str, i));
         this.model.getItemsFromShop().stream().forEach(it -> shopView.addDescription(it.getDescription()));
-        //shopView.updateMoney(this.model.getPlayer());
+        shopView.updateMoney(this.model.getPlayers().stream()
+        .filter(pl -> pl.getUsername().equals(this.model.getActualPlayerInfo().getX()))
+        .findAny().get().getNumCoins());
     }
 
     @Override
     public void buyItem(ItemName itemName, ShopView shopView) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buyItem'");
+        if (this.model.buyItem(itemName)) {
+            shopView.updateMoney(this.model.getPlayers().stream()
+            .filter(pl -> pl.getUsername().equals(this.model.getActualPlayerInfo().getX()))
+            .findAny().get().getNumCoins());
+        }
     }
 }
