@@ -106,11 +106,11 @@ public class GameViewImpl extends Application implements GameView{
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
         final ShopView shopView = loader.<ShopView>getController();
         shopView.init(this,this.controller);
-        shopView.initShopView();
         this.stage.setScene(scene);
         this.stage.setMinWidth(1000);
         this.stage.setMinHeight(700);
         this.stage.setMaximized(true);
+        shopView.initShopView();
         this.stage.show();
     }
 

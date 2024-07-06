@@ -107,6 +107,7 @@ public class GameControllerImpl implements GameController{
         Map<ItemName,Integer> itemMap = new HashMap<>();
         this.model.getItemsFromShop().stream().forEach(it -> itemMap.put(it.getName(), it.getCost()));
         itemMap.forEach((str, i) -> shopView.addButton(str, i));
+        this.model.getItemsFromShop().stream().forEach(it -> shopView.addDescription(it.getDescription()));
         this.updateCommandView();
         shopView.updateMoney(this.model.getActualPlayer().getNumCoins());
     }
