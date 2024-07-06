@@ -84,6 +84,9 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         tilesContainer.getChildren().add(this.boardHBox);
 
         this.playerCantDraw();
+
+        //todo: to delete
+        this.startMinigame(List.of("player1", "player2"));
     }
 
     @FXML
@@ -219,5 +222,26 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         Button button = new Button(String.valueOf(value));
         button.setPrefSize(PREF_SIZE, PREF_SIZE);
         return button;
+    }
+
+    @Override
+    public void update(List<Tile> boardTiles) {
+        System.out.println("AGGIUNGI TILE "+boardTiles); //non si vede ancora sul board //what are u doing
+        tilesContainer.getChildren().clear();
+
+        HBox rowBox = new HBox();
+        rowBox.setAlignment(Pos.CENTER);
+        rowBox.setSpacing(SPACING);
+
+        for (Tile tile : boardTiles) {
+            HBox tileBox = new HBox();
+            generateTile(tileBox, tile.getSideA().getValue(), tile.getSideB().getValue());
+            tileBox.setAlignment(Pos.CENTER);
+            tileBox.setDisable(true);
+            VBox.setMargin(tileBox, new Insets(0, PREF_SIZE, 0, PREF_SIZE));
+
+            rowBox.getChildren().add(tileBox);
+        }
+        tilesContainer.getChildren().add(rowBox);
     }
 }
