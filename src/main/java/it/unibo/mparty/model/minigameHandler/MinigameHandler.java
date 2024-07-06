@@ -14,12 +14,6 @@ public interface MinigameHandler {
     void startMinigame(List<Player> players, MinigameType type) throws Exception;
 
     /**
-     * Get the name of the minigame actually played
-     * @return the mini-game's name
-     */
-    String getMinigame();
-
-    /**
      * Check if there's a minigame running
      * @return true if there's a minigame active, false otherwise
      */
@@ -29,4 +23,17 @@ public interface MinigameHandler {
      * Stop current minigame
      */
     void stopMinigame();
+
+    /**
+     * Get the name of the minigame actually played
+     * @return the mini-game's name
+     */
+    String getMinigame();
+
+    /**
+     * Method to get the username of players that are playing the minigame
+     * @return {@link List} of nicknames of players
+     */
+    List<String> getUsersPlaying();
 }
+

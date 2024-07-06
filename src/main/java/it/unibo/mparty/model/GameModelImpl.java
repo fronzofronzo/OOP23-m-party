@@ -282,6 +282,11 @@ public class GameModelImpl implements GameModel{
         return this.players.get(this.actualPlayerIndex);
     }
 
+    @Override
+    public List<String> getPlayersInGame() {
+        return this.minigameHandler.;
+    }
+
     private void nextPlayer() {
         this.actualPlayerIndex = (this.actualPlayerIndex + 1) % players.size();
         if(this.actualPlayerIndex == 0){
