@@ -2,7 +2,7 @@ package it.unibo.mparty.view.minigames.domino.impl;
 
 import it.unibo.mparty.controller.minigames.domino.api.DominoController;
 import it.unibo.mparty.controller.minigames.domino.impl.DominoControllerImpl;
-import it.unibo.mparty.model.minigames.domino.api.Tile;
+import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.minigames.domino.DominoMessage;
@@ -71,15 +71,15 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         this.tilesContainer = new VBox();
         this.tilesContainer.setSpacing(SPACING);
         this.tilesContainer.setAlignment(Pos.CENTER);
-        this.scrollPane.setContent(tilesContainer);
+        this.scrollPane.setContent(this.tilesContainer);
         this.scrollPane.setFitToWidth(true);
         this.scrollPane.setFitToHeight(true);
         this.messageLabel.setText("");
 
-        HBox boardHBox = new HBox();
+        final HBox boardHBox = new HBox();
         boardHBox.setAlignment(Pos.CENTER);
         boardHBox.setSpacing(SPACING);
-        tilesContainer.getChildren().add(boardHBox);
+        this.tilesContainer.getChildren().add(boardHBox);
 
         this.playerCantDraw();
     }
@@ -105,11 +105,19 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
      * {@inheritDoc}
      */
     @Override
+    public void startMinigame(final List<String> players) {
+        this.controller.initGame(players);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setPlayerTiles(final boolean isPlayer1, final Set<Tile> playerTiles) {
-        HBox playerTilesBox = isPlayer1 ? this.player1Tiles : this.player2Tiles;
+        final HBox playerTilesBox = isPlayer1 ? this.player1Tiles : this.player2Tiles;
         playerTilesBox.getChildren().clear();
-        for (Tile tile : playerTiles) {
-            VBox tileBox = new VBox();
+        for (final Tile tile : playerTiles) {
+            final VBox tileBox = new VBox();
             tileBox.setAlignment(Pos.CENTER);
             VBox.setVgrow(tileBox, Priority.ALWAYS);
             VBox.setMargin(tileBox, new Insets(0, PREF_SIZE, 0, PREF_SIZE));
@@ -123,7 +131,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
      */
     @Override
     public void setPlayerName(final boolean isPlayer1, final String playerName) {
-        Label targetLabel = isPlayer1 ? this.player1Label : this.player2Label;
+        final Label targetLabel = isPlayer1 ? this.player1Label : this.player2Label;
         targetLabel.setText(" " + playerName + " ");
     }
 
@@ -134,10 +142,10 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     public void setTurn(final boolean isPlayer1Turn) {
         if (isPlayer1Turn) {
             this.highlightPlayerTurn(this.player1Label, this.player2Label);
-            clearTileValues(this.player2Tiles);
+            this.clearTileValues(this.player2Tiles);
         } else {
             this.highlightPlayerTurn(this.player2Label, this.player1Label);
-            clearTileValues(this.player1Tiles);
+            this.clearTileValues(this.player1Tiles);
         }
     }
 
@@ -175,10 +183,10 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         this.drawButton.setDisable(true);
         this.playButton.setDisable(true);
 
-        disableTiles(this.player1Tiles);
-        disableTiles(this.player2Tiles);
+        this.disableTiles(this.player1Tiles);
+        this.disableTiles(this.player2Tiles);
 
-        tilesContainer.getChildren().forEach(node -> {
+        this.tilesContainer.getChildren().forEach(node -> {
             if (node instanceof HBox) {
                 ((HBox) node).getChildren().forEach(tileNode -> tileNode.setDisable(true));
             }
@@ -189,31 +197,23 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
      * {@inheritDoc}
      */
     @Override
-    public void startMinigame(final List<String> players) {
-        this.controller.initGame(players);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void update(final List<Pair<Integer, Integer>> boardTiles) {
-        tilesContainer.getChildren().clear();
+        this.tilesContainer.getChildren().clear();
 
-        HBox rowBox = new HBox();
+        final HBox rowBox = new HBox();
         rowBox.setAlignment(Pos.CENTER);
         rowBox.setSpacing(SPACING);
 
-        for (Pair<Integer, Integer> tile : boardTiles) {
-            HBox tileBox = new HBox();
-            generateTile(tileBox, tile.getFirst(), tile.getSecond());
+        for (final Pair<Integer, Integer> tile : boardTiles) {
+            final HBox tileBox = new HBox();
+            this.generateTile(tileBox, tile.getFirst(), tile.getSecond());
             tileBox.setAlignment(Pos.CENTER);
             tileBox.setDisable(true);
             VBox.setMargin(tileBox, new Insets(0, PREF_SIZE, 0, PREF_SIZE));
 
             rowBox.getChildren().add(tileBox);
         }
-        tilesContainer.getChildren().add(rowBox);
+        this.tilesContainer.getChildren().add(rowBox);
     }
 
     private void highlightPlayerTurn(final Label currentPlayerLabel, final Label otherPlayerLabel) {
@@ -245,14 +245,14 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     private void generateTile(final Pane box, final int valueA, final int valueB) {
         box.setPrefSize(PREF_SIZE * 2, PREF_SIZE);
 
-        Button sideA = generateSide(valueA);
-        Button sideB = generateSide(valueB);
+        final Button sideA = this.generateSide(valueA);
+        final Button sideB = this.generateSide(valueB);
 
         box.getChildren().add(sideA);
         box.getChildren().add(sideB);
 
         box.setOnMouseClicked(event -> {
-            VBox clicked = (VBox) event.getSource();
+            final VBox clicked = (VBox) event.getSource();
             this.messageLabel.setText("");
             this.selectedSideA = Integer.parseInt(((Button) clicked.getChildren().get(0)).getText());
             this.selectedSideB = Integer.parseInt(((Button) clicked.getChildren().get(1)).getText());
@@ -260,7 +260,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     }
 
     private Button generateSide(final int value) {
-        Button button = new Button(String.valueOf(value));
+        final Button button = new Button(String.valueOf(value));
         button.setPrefSize(PREF_SIZE, PREF_SIZE);
         return button;
     }
