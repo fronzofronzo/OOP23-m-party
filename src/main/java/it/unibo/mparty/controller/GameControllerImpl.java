@@ -10,10 +10,7 @@ import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
 import it.unibo.mparty.view.shop.api.ShopView;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class GameControllerImpl implements GameController{
 
@@ -46,8 +43,11 @@ public class GameControllerImpl implements GameController{
      * {@inheritDoc}
      */
     @Override
-    public void useItem(ItemName item) {
-        this.model.useItem(item);
+    public void useItem(String item) {
+        this.model.useItem(Arrays.stream(ItemName.values())
+                .filter(i -> i.toString().equals(item))
+                .findAny()
+                .get());
         this.updateCommandView();
     }
 
@@ -82,7 +82,7 @@ public class GameControllerImpl implements GameController{
         if (this.model.getActiveMinigame().isPresent()) {
            this.view.setMinigameScene(this.model.getActiveMinigame().get());
         } else if (this.model.isShop()) {
-            //this.view.setScene(SceneType.SHOP);
+            this.view.setShopScene();
         }
         this.updateCommandView();
         this.updatePlayersView();

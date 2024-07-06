@@ -24,9 +24,9 @@ public interface GameController {
 
     /**
      * Handle the request of the player to use an item
-     * @param item {@link ItemName} that player wants to use
+     * @param item that player wants to use
      */
-    void useItem(ItemName item);
+    void useItem(String item);
 
     /**
      * Handle the request of the user to roll dice
