@@ -1,9 +1,8 @@
 package it.unibo.mparty.view.minigames.connect4.api;
 
 import it.unibo.mparty.view.minigames.MinigameView;
-import javafx.fxml.Initializable;
 
-public interface Connect4View extends MinigameView, Initializable{
+public interface Connect4View extends MinigameView {
 
     /**
      * Add a circle to the gameGrid

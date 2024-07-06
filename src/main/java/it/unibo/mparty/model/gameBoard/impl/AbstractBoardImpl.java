@@ -19,8 +19,8 @@ import it.unibo.mparty.utilities.BoardType;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
+import it.unibo.mparty.utilities.RandomFromSet;
 import it.unibo.mparty.utilities.SlotType;
-import it.unibo.mparty.model.gameBoard.util.RandomFromSet;
 import it.unibo.mparty.model.gameBoard.util.RandomListGenerator;
 import it.unibo.mparty.model.gameBoard.api.Slot;
 
@@ -132,7 +132,7 @@ public abstract class AbstractBoardImpl implements GameBoard{
     }
 
     @Override
-    public Map<Position,SlotType> getSlotTypeBoard() {
+    public Map<Position,SlotType> getSlotTypeBoardConfiguration() {
         Map<Position,SlotType> output = new HashMap<>();
         for (Entry<Position, Slot> entry : this.board.entrySet()) {
             output.put(entry.getKey(), entry.getValue().getSlotType());

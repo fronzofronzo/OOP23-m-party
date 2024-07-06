@@ -3,7 +3,7 @@ package it.unibo.mparty.view;
 public enum SceneType {
     START("initialScreen"),
     END("finalScreen"),
-    SHOP("shopScene");
+    SHOP("Shop");
 
     private String scene;
 

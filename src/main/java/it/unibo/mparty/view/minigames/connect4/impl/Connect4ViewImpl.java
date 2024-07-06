@@ -1,9 +1,6 @@
 package it.unibo.mparty.view.minigames.connect4.impl;
 
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
-
 import it.unibo.mparty.controller.minigames.connect4.api.Connect4Controller;
 import it.unibo.mparty.controller.minigames.connect4.impl.Connect4ControllerImpl;
 import it.unibo.mparty.utilities.Pair;
@@ -71,14 +68,14 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
         this.controller.check(index);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        this.controller.initGame(List.of("filo","dan"));
-    }
-
     @FXML
     private void closeView() {
-        //this.controller.endGame();
+        this.controller.endGame();
+    }
+
+    @Override
+    public void startMinigame(List<String> players) {
+        this.controller.initGame(players);
     }
 
 }
