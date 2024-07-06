@@ -32,7 +32,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
 
 
     private GameModelBuilder builder;
-    private final GameController controller = this.getMainController();
+    private GameController controller;
     private final List<String> difficulties = new ArrayList<>();
     private String difficulty = "";
 
@@ -72,6 +72,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     @Override
     public void handleStartButton(ActionEvent event) throws IOException {
         this.builder = this.builder.difficulty(this.difficulty);
+        this.controller = this.getMainController();
         this.controller.startGame(this.builder.build());
     }
 
