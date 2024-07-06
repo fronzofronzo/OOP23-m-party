@@ -17,11 +17,17 @@ public class LuckyDice extends AbstractItem{
         super(ItemName.DADO_FORTUNATO, 5);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void activate(Player player, Optional<Player> target, Optional<Position> position) {
         player.getDice().setMinNumber(4);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getDescription() {
         return "Il dado ha solo numeri da 4 a 6";

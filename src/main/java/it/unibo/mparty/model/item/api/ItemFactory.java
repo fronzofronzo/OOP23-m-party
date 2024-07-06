@@ -7,8 +7,9 @@ import it.unibo.mparty.model.item.impl.ItemName;
  */
 public interface ItemFactory {
     /**
-     * Create an item 
-     * @param name the name of the item to be created
+     * Create the item corrisponding at the name
+     * 
+     * @param name the {@link ItemName} of the item to be created
      * @return the item created
      * @throws IllegalArgumentException in case you try to create an item which is not implemented
      */

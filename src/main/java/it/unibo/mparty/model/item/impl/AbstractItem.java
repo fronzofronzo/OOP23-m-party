@@ -12,6 +12,7 @@ public abstract class AbstractItem implements Item{
 
     /**
      * Constructs a new istance of AbstractItem with the specified ItemName and cost
+     * 
      * @param name the name of the item
      * @param cost the cost of the item
      */
@@ -20,21 +21,33 @@ public abstract class AbstractItem implements Item{
         this.cost=cost;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ItemName getName() {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getCost() {
         return this.cost;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isOnOthers() {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean needPosition() {
         return false;

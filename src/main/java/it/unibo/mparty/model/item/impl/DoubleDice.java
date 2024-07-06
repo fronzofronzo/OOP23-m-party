@@ -17,11 +17,17 @@ public class DoubleDice extends AbstractItem{
         super(ItemName.DOPPIO_DADO, 7);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getDescription() {
         return "Si lancia 2 dadi per avanzare";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void activate(Player player, Optional<Player> target, Optional<Position> position) {
         player.getDice().setNumberOfAttempts(2);

@@ -18,12 +18,18 @@ public class GoldenPipe extends AbstractItem{
     }
     
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void activate(Player player, Optional<Player> target, Optional<Position> position) {
         player.setPosition(position.get());
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getDescription() {
         return "Vieni teletrasportato nella casella prima della stella";

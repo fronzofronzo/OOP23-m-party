@@ -43,12 +43,14 @@ public interface Item {
 
     /**
      * Check if the item effect is on the player who use it or on another player
+     * 
      * @return true if the effect is on another player, false otherwise
      */
     boolean isOnOthers();
 
     /**
      * Check if the item needs a position to activate it
+     * 
      * @return true if the item requires a position for its effect, false otherwise
      */
     boolean needPosition();

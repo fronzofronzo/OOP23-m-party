@@ -17,6 +17,9 @@ public class BooBell extends AbstractItem{
         super(ItemName.CAMPANA_BOO, 7);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void activate(Player player, Optional<Player> target, Optional<Position> position) {
         int coins = target.get().getNumCoins()/3;
@@ -24,6 +27,9 @@ public class BooBell extends AbstractItem{
         player.addCoins(coins);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getDescription() {
         return "Boo ruba delle monete ad un avversario.";
