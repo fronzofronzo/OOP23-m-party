@@ -8,6 +8,8 @@ public interface Tile {
 
     boolean match(Tile tile);
 
+    void reverse();
+
     boolean canMatch(Tile tile);
 
     boolean isDoubleSide();

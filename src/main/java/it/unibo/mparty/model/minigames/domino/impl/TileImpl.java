@@ -8,15 +8,15 @@ import java.util.Optional;
 
 public class TileImpl implements Tile {
 
-    private final Side sideA;
-    private final Side sideB;
+    private Side sideA;
+    private Side sideB;
 
     public TileImpl(int sideA, int sideB) {
         this.sideA = new SideImpl(sideA);
         this.sideB = new SideImpl(sideB);
     }
 
-    private Optional<Side> canMatchSide(final Side side, final Tile tile){
+    private Optional<Side> canMatchSide(final Side side, final Tile tile) {
         if (side.isMatched()) {
             return Optional.empty();
         } else if (side.getValue() == tile.getSideA().getValue()) {
@@ -29,24 +29,40 @@ public class TileImpl implements Tile {
     }
 
     @Override
-    public boolean match(final Tile tile){
+    public boolean match(final Tile tile) {
         Optional<Side> matchedSideA = this.canMatchSide(this.sideA, tile);
         if (matchedSideA.isPresent()) {
+            Side matchedTileSide = matchedSideA.get();
             this.sideA.setMatched();
-            matchedSideA.get().setMatched();
+            matchedTileSide.setMatched();
+
+            if (matchedTileSide.getValue() == tile.getSideA().getValue()){
+                tile.reverse();
+            }
             return true;
         }
         Optional<Side> matchedSideB = this.canMatchSide(this.sideB, tile);
         if (matchedSideB.isPresent()) {
-            this.sideB.setMatched();
-            matchedSideB.get().setMatched();
+            Side matchedTileSide = matchedSideB.get();
+            matchedTileSide.setMatched();
+
+            if (matchedTileSide.getValue() == tile.getSideB().getValue()){
+                tile.reverse();
+            }
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean canMatch(final Tile tile){
+    public void reverse() {
+        Side tempA = this.sideA.copy();
+        this.sideA = this.sideB.copy();
+        this.sideB = tempA;
+    }
+
+    @Override
+    public boolean canMatch(final Tile tile) {
         return this.canMatchSide(this.sideA, tile).isPresent() || this.canMatchSide(this.sideB, tile).isPresent();
     }
 
