@@ -65,4 +65,9 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
     public void initShopView() {
         this.getMainController().setUpShop(this);
     }
+
+    @FXML
+    private void closeShop() {
+        this.getMainView().switchToBoard();
+    }
 }
