@@ -122,4 +122,11 @@ public interface GameModel {
      * @return {@link Player} that's playing
      */
     Player getActualPlayer();
+
+    /**
+     * Method to get the nicknames of the players that are playing the
+     * actual minigame
+     * @return {@link List} of nicknames of players
+     */
+    List<String> getPlayersInGame();
 }
