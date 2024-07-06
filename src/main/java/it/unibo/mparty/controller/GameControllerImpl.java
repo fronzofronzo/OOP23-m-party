@@ -2,7 +2,6 @@ package it.unibo.mparty.controller;
 
 import java.io.IOException;
 
-import java.util.Collections;
 import java.util.Optional;
 
 import it.unibo.mparty.model.GameModel;
@@ -50,8 +49,8 @@ public class GameControllerImpl implements GameController{
      * {@inheritDoc}
      */
     @Override
-    public void useItem(ItemName item) {
-        this.model.useItem(item);
+    public void useItem(ItemName itemName) {
+        this.model.useItem(itemName);
         this.updateCommandView();
     }
 

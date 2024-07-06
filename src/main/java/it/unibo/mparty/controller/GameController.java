@@ -26,7 +26,7 @@ public interface GameController {
      * Select an item and check if the player can add it
      * @param itemName the {@link ItemName} of the item the player wants to buy
      */
-    void useItem(ItemName item);
+    void useItem(ItemName itemName);
 
     /**
      * Handle the request of the user to roll dice
