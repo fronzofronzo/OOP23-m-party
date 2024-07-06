@@ -1,10 +1,10 @@
 package it.unibo.mparty.controller.minigames.domino.impl;
 
 import it.unibo.mparty.controller.minigames.domino.api.DominoController;
-import it.unibo.mparty.model.minigames.domino.api.DominoModel;
-import it.unibo.mparty.model.minigames.domino.impl.DominoModelImpl;
-import it.unibo.mparty.model.minigames.domino.api.Tile;
-import it.unibo.mparty.model.minigames.domino.impl.TileImpl;
+import it.unibo.mparty.model.minigames.domino.game.api.DominoModel;
+import it.unibo.mparty.model.minigames.domino.game.impl.DominoModelImpl;
+import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
+import it.unibo.mparty.model.minigames.domino.tile.impl.TileImpl;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.minigames.domino.DominoMessage;
 import it.unibo.mparty.view.minigames.domino.api.DominoView;

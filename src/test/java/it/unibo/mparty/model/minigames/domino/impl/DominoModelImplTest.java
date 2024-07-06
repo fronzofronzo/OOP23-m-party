@@ -1,14 +1,19 @@
 package it.unibo.mparty.model.minigames.domino.impl;
 
-import it.unibo.mparty.model.minigames.domino.api.DominoModel;
-import it.unibo.mparty.model.minigames.domino.api.Tile;
+import it.unibo.mparty.model.minigames.domino.game.api.DominoModel;
+import it.unibo.mparty.model.minigames.domino.game.impl.DominoModelImpl;
+import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
+import it.unibo.mparty.model.minigames.domino.tile.impl.TileImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class DominoModelImplTest {
 
@@ -17,6 +22,10 @@ class DominoModelImplTest {
     private static final int SIDE1 = 1;
     private static final int SIDE2 = 2;
     private static final int SIDE3 = 3;
+    private static final int SIDE4 = 4;
+    private static final int SIDE5 = 5;
+    private static final int SIDE6 = 6;
+
     private DominoModel model;
     private List<String> players;
     private String player1;
@@ -55,9 +64,9 @@ class DominoModelImplTest {
 
     @Test
     void testTurn() {
-        testDistributionTiles();
+        this.testDistributionTiles();
 
-        // Assuming the turn is set correctly, it should be either p1 or p2's turn
+        // Assuming the turn is set correctly, it should be either player1 or player2's turn
         assertTrue(this.model.initializeTurn(this.player1, this.player2)
                 || !this.model.initializeTurn(this.player1, this.player2));
     }
@@ -65,10 +74,10 @@ class DominoModelImplTest {
     @Test
     void testMove() {
         this.testDistributionTiles();
-        Set<Tile> p1Tiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
+        final Set<Tile> p1Tiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
 
-        Tile tileToMove = p1Tiles.iterator().next();
-        boolean moveResult = this.model.checkAndAddToBoard(this.player1, tileToMove);
+        final Tile tileToMove = p1Tiles.iterator().next();
+        final boolean moveResult = this.model.checkAndAddToBoard(this.player1, tileToMove);
 
         // Verify the move result
         assertTrue(moveResult);
@@ -85,28 +94,27 @@ class DominoModelImplTest {
         this.model.setUpPlayers(this.players);
 
         // Get initial set of player1
-        Set<Tile> initialTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
-        int initialSize = initialTiles.size();
+        final Set<Tile> initialTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
+        final int initialSize = initialTiles.size();
 
         // Simulate a valid move
-        Tile validTile = new TileImpl(SIDE1, SIDE1);
+        final Tile validTile = new TileImpl(SIDE1, SIDE1);
         this.model.checkAndAddToBoard(this.player1, validTile);
 
         // Simulate an invalid move
-        Tile invalidTile = new TileImpl(SIDE2, SIDE2);
+        final Tile invalidTile = new TileImpl(SIDE2, SIDE2);
         this.model.checkAndAddToBoard(this.player1, invalidTile);
 
         // Draw a tile from tileSet to player1
         this.model.drawTile(this.player1);
 
         // Get update set of player1
-        Set<Tile> updatedTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
-        int updatedSize = updatedTiles.size();
+        final Set<Tile> updatedTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
+        final int updatedSize = updatedTiles.size();
 
-        // Verify the size is update 1 more
+        // Verify the size is updated by 1 more
         assertEquals(initialSize + 1, updatedSize);
     }
-
 
     @Test
     void testWinner() {
@@ -133,5 +141,61 @@ class DominoModelImplTest {
         assertNull(this.model.getResult().getFirst());
     }
 
+    @Test
+    void testIsOver() {
+        this.model.setUpPlayers(this.players);
 
+        // Verify game is not over at the start
+        assertFalse(this.model.isOver());
+
+        // Simulate player1 winning by emptying their tile set
+        this.model.getPlayersTiles().getPlayerTiles(this.player1).clear();
+
+        // Verify game is over
+        assertTrue(this.model.isOver());
+
+        // Reset player1's tiles and empty player2's tiles
+        this.model.getPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE1));
+        this.model.getPlayersTiles().getPlayerTiles(this.player2).clear();
+
+        // Verify game is over
+        assertTrue(this.model.isOver());
+
+        // Reset tiles and simulate no moves left
+        this.model.getPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE6));
+        this.model.getPlayersTiles().getPlayerTiles(this.player2).add(new TileImpl(SIDE2, SIDE2));
+        this.model.getDominoSet().clear();
+
+        // Verify game is not over when players have tiles
+        assertFalse(this.model.isOver());
+
+        // Simulate no valid moves
+        this.model.checkAndAddToBoard(this.player1, new TileImpl(SIDE3, SIDE4));
+        this.model.checkAndAddToBoard(this.player2, new TileImpl(SIDE4, SIDE5));
+
+        // Verify game is over when no moves left and no tiles in domino set
+        assertTrue(this.model.isOver());
+    }
+
+    @Test
+    void testDrawTile() {
+        this.model.setUpPlayers(this.players);
+
+        // Get initial set of player1
+        final Set<Tile> initialTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
+        final int initialSize = initialTiles.size();
+
+        // Draw a tile from tileSet to player1
+        this.model.drawTile(this.player1);
+
+        // Get updated set of player1
+        final Set<Tile> updatedTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
+        final int updatedSize = updatedTiles.size();
+
+        // Verify the size is updated by 1 more
+        assertEquals(initialSize + 1, updatedSize);
+
+        // Verify the drawn tile is removed from the domino set
+        assertEquals(DOMINO_SET_SIZE - (DISTRIBUTION_TILES * 2) - 1, this.model.getDominoSet().size());
+    }
 }
