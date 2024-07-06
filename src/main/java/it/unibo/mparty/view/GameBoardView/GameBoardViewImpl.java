@@ -111,7 +111,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private Label labelMessage;
 
-    private static final int RADIUS = 7;
+    private static final int RADIUS = 8;
     private Circle player1 = new Circle(RADIUS, Color.ORANGE);
     private Circle player2 = new Circle(RADIUS, Color.PURPLE);
     private Circle player3 = new Circle(RADIUS, Color.BLUE);
@@ -159,6 +159,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.buttonsItem.addAll(List.of(this.useItem1, this.useItem2, this.useItem3));
         this.buttonsDirection.addAll(List.of(this.buttonUP, this.buttonDOWN, this.buttonLEFT, this.buttonRIGHT));
         this.players.addAll(List.of(this.player1, this.player2, this.player3, this.player4));
+        this.players.forEach(c -> c.setStroke(Color.BLACK));
+        this.players.forEach(c -> c.setStrokeWidth(2));
         //this.setUpPlayers();
     }
 
