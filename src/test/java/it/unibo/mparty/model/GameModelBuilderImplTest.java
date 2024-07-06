@@ -15,11 +15,18 @@ class GameModelBuilderImplTest {
 
     private GameModelBuilder builder;
 
+    /**
+     * Tests initialisation that is performed before each test
+     */
     @BeforeEach
     public void init(){
         this.builder = new GameModelBuilderImpl();
     }
 
+    /**
+     * Check if the number of minimum and maximum players is handled correctly
+     * by the Game Model builder.
+     */
     @Test
     public void testNumberOfPlayers(){
         final String user1 = "user1";
@@ -30,6 +37,15 @@ class GameModelBuilderImplTest {
         final String charact2 = Character.CHAR_DK.getName();
         this.builder = this.builder.addPlayer(user2,charact2);
         assertTrue(this.builder.enoughPlayers());
+        final String user3 = "user3";
+        final String charact3 = Character.CHAR_PEACH.getName();
+        this.builder = this.builder.addPlayer(user3,charact3);
+        final String user4 =  "user4";
+        final String charact4 = Character.CHAR_YOSHI.getName();
+        this.builder = this.builder.addPlayer(user4,charact4);
+        assertTrue(this.builder.isFull());
     }
+
+
 
 }
