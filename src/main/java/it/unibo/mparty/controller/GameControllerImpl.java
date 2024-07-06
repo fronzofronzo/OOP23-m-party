@@ -99,7 +99,7 @@ public class GameControllerImpl implements GameController{
         this.model.getItemsFromShop().stream().forEach(it -> itemMap.put(it.getName(), it.getCost()));
         itemMap.forEach((str, i) -> shopView.addButton(str, i));
         this.updateCommandView();
-        //shopView.updateMoney(this.model.getPlayer());
+        shopView.updateMoney(this.model.getActualPlayer().getNumCoins());
     }
 
 
@@ -110,9 +110,7 @@ public class GameControllerImpl implements GameController{
     @Override
     public void buyItem(ItemName itemName, ShopView shopView) {
         if (this.model.buyItem(itemName)) {
-            //shopView.updateMoney(this.model.getPlayers().stream()
-            //.filter(pl -> pl.getUsername().equals(this.model.get))
-            //.findAny().get().getNumCoins());
+            shopView.updateMoney(this.model.getActualPlayer().getNumCoins());;
         }
     }
 
