@@ -17,10 +17,10 @@ public enum ItemName {
     }
 
     /**
-     * Get the name of the item
-     * @return the string representing the item
+     * {@inheritDoc}
      */
-    public String getNameToString() {
+    @Override
+    public String toString() {
         return this.name;
     }
 

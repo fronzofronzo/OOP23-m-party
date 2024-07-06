@@ -3,12 +3,11 @@ package it.unibo.mparty.view.shop.api;
 
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.view.SceneView;
-import javafx.fxml.Initializable;
 
 /**
  * This interface models the view for the shop
  */
-public interface ShopView extends SceneView,Initializable{
+public interface ShopView extends SceneView{
     
     /**
      * Add the button to the view for buying items
@@ -24,5 +23,7 @@ public interface ShopView extends SceneView,Initializable{
     public void addDescription(String description);
 
     public void updateMoney(int money);
+
+    public void initShopView();
 
 }

@@ -39,7 +39,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
     public void addButton (ItemName itemName, int cost)
     {
         final Button but = new Button();
-        but.setText("Acquista "+ itemName.getNameToString() + ": " + cost);
+        but.setText("Acquista "+ itemName.toString() + ": " + cost);
         but.setOnAction(this::selectItem);
         buttonPane.getChildren().add(but);
         AnchorPane.setTopAnchor(but, i*DISTANCE_FROM_BUTTON);
@@ -65,8 +65,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initShopView() {
         this.getMainController().setUpShop(this);
     }
-    
 }
