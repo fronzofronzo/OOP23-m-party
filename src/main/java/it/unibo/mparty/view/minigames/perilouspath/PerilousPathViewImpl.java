@@ -40,10 +40,9 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
 
     private Button button;
     private final static int SIZE = 8;
-    /*private final Image bombImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/BombImage.png")));
-    private final Image ballImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Image2")));
-    private final ImageView bombImageView = new ImageView(bombImage);
-    private final ImageView ballImageView = new ImageView(ballImage);*/
+    private final Image bombImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/BombImage.png")));
+    private final Image ballImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/pallaCalcio.jpg")));
+    //private final ImageView ballImageView = new ImageView(ballImage);
 
 
 
@@ -56,13 +55,12 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
             var bombPos = this.bombPosition(child);
             if(balls.stream().anyMatch(b -> b.getX() == ballPos.getX() && b.getY() == ballPos.getY())){
                 if (child instanceof Button) {
-                    ((Button) child).setText("O");
+                    this.setImage(((Button) child),new ImageView(ballImage));
                 }
             }
             if(bombs.stream().anyMatch(b -> b.getX() == bombPos.getX() && b.getY() == bombPos.getY())){
                 if (child instanceof Button) {
-                    //this.setImage(((Button) child));
-                    ((Button) child).setText("X");
+                    this.setImage(((Button) child),new ImageView(bombImage));
                 }
             }
         }
@@ -75,8 +73,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
             var bombPos = this.bombPosition(child);
             if(bombs.stream().anyMatch(b -> b.getX() == bombPos.getX() && b.getY() == bombPos.getY())){
                 if (child instanceof Button) {
-                    //((Button) child).setGraphic(null);
-                    ((Button) child).setText(" ");
+                    ((Button) child).setGraphic(null);
                 }
             }
         }
@@ -89,7 +86,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
             var bombPos = this.bombPosition(child);
             if(bombs.stream().anyMatch(b -> b.getX() == bombPos.getX() && b.getY() == bombPos.getY())){
                 if (child instanceof Button) {
-                    ((Button) child).setText("X");
+                    this.setImage(((Button) child),new ImageView(bombImage));
                 }
             }
         }
@@ -163,7 +160,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
 
     @Override
     public void showResult(Pair<String, Integer> result) {
-        this.gameLabel.setText("il giocatore :" + result.getX() + "ha vinto " + result.getY() + "coins");
+        this.gameLabel.setText("il giocatore : " + result.getX() + "ha vinto " + result.getY() + "coins");
     }
 
     @Override
@@ -182,10 +179,10 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         }
     }
 
-    /*private void setImage(Button button){
-        button.setGraphic(this.bombImageView);
-        this.bombImageView.setFitHeight(button.getMaxHeight());
-        this.bombImageView.setFitWidth(button.getMaxWidth());
-        this.bombImageView.setPreserveRatio(true);
-    }*/
+    private void setImage(Button button,ImageView image){
+        button.setGraphic(image);
+        image.setFitHeight(50);
+        image.setFitWidth(50);
+        image.setPreserveRatio(false);
+    }
 }
