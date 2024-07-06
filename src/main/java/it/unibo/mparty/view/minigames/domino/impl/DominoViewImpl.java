@@ -57,10 +57,12 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     @FXML
     private ScrollPane scrollPane;
 
+    @FXML
+    private VBox tilesContainer;
+
     private DominoController controller;
     private Integer selectedSideA;
     private Integer selectedSideB;
-    private VBox tilesContainer;
 
     @FXML
     private void initialize() {
