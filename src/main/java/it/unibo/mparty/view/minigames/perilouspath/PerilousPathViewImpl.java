@@ -94,11 +94,6 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
                 this.button.setText("*");
                 this.gameLabel.setText("MOSSA VALIDA");
             }
-            case BOMB ->
-                    this.gameLabel.setText("HAI PERSO");
-
-            case BALL ->
-                    this.gameLabel.setText("HAI VINTO");
             case WRONG ->
                     this.gameLabel.setText("MOSSA NON VALIDA");
         }
@@ -170,7 +165,6 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
             for(int j = 0; j < SIZE; j++){
                 final Button button = new Button();
                 button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                button.setMinSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 button.setOnMouseClicked(buttonClicked);
                 this.myGridPane.add(button,i,j);
             }

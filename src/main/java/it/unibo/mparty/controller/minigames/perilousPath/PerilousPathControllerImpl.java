@@ -40,9 +40,9 @@ public class PerilousPathControllerImpl implements  PerilousPathController{
         var type = this.model.hit(p);
         if(type.equals(PerilousPath.Type.BOMB) || type.equals(PerilousPath.Type.BALL)){
             this.view.showBombs(this.model.getBombs());
+            this.endGame();
         }
         this.view.hitTile(type);
-        this.endGame();
     }
 
     @Override
