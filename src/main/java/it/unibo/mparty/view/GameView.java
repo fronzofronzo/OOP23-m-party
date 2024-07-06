@@ -65,4 +65,6 @@ public interface GameView {
      * @param message that is the message to display
      */
     void updateCommands(List<String> items, String message);
+
+    void showResults(List<String> players, List<Integer> stars, List<Integer> coins);
 }

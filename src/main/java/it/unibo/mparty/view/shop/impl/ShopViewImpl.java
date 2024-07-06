@@ -1,10 +1,7 @@
 package it.unibo.mparty.view.shop.impl;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
-
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.shop.api.ShopView;
@@ -21,6 +18,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
     private int i=1;
     private int j=1;
     private List<ItemName> itemNameList = new ArrayList<>();
+    private final static double DISTANCE_FROM_BUTTON = 70.0;
 
     @FXML
     private AnchorPane descriptionPane;
@@ -38,10 +36,10 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
     public void addButton (ItemName itemName, int cost)
     {
         final Button but = new Button();
-        but.setText("Acquista "+ itemName.getNameToString() + ": " + cost);
+        but.setText("Acquista "+ itemName.toString() + ": " + cost);
         but.setOnAction(this::selectItem);
         buttonPane.getChildren().add(but);
-        AnchorPane.setTopAnchor(but, i*50.0);
+        AnchorPane.setTopAnchor(but, i*DISTANCE_FROM_BUTTON);
         i++;
         itemNameList.add(itemName);
     }
@@ -50,7 +48,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
     {
         final Label lb = new Label(description);
         descriptionPane.getChildren().add(lb);
-        AnchorPane.setTopAnchor(lb,j*50.0);
+        AnchorPane.setTopAnchor(lb,j*DISTANCE_FROM_BUTTON);
         j++;
     }
 
@@ -64,8 +62,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView{
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initShopView() {
         this.getMainController().setUpShop(this);
     }
-    
 }

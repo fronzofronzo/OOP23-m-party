@@ -5,26 +5,34 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <SplitPane id="principalPane" dividerPositions="0.10050251256281408" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.shop.impl.ShopViewImpl">
+=======
+<SplitPane id="principalPane" dividerPositions="0.10050251256281408" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="1000.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.shop.ShopViewImpl">
+>>>>>>> develop
   <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+    <AnchorPane minHeight="100.0" minWidth="1000.0" prefHeight="100.0" prefWidth="1000.0">
          <children>
-            <SplitPane dividerPositions="0.75" prefHeight="160.0" prefWidth="598.0">
+            <SplitPane dividerPositions="0.75" minHeight="100.0" minWidth="1000.0" prefHeight="100.0" prefWidth="1000.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="444.0">
                      <children>
-                        <Label alignment="CENTER" layoutX="22.0" layoutY="-1.0" prefHeight="31.0" prefWidth="208.0" text="Seleziona l'Item che desideri acquistare" textAlignment="CENTER">
+                        <Label alignment="CENTER" layoutX="14.0" layoutY="26.0" prefHeight="50.0" prefWidth="585.0" text="Seleziona l'Item che desideri acquistare" textAlignment="CENTER">
                            <padding>
                               <Insets top="5.0" />
                            </padding>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
                         </Label>
-                        <Label fx:id="moneyLabel" layoutX="286.0" layoutY="6.0" prefHeight="22.0" prefWidth="135.0" />
+                        <Label fx:id="moneyLabel" layoutX="559.0" layoutY="36.0" prefHeight="31.0" prefWidth="154.0" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <Button alignment="CENTER" layoutX="48.0" layoutY="8.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="50.0" text="Esci" textAlignment="CENTER">
+                        <Button alignment="CENTER" layoutX="98.0" layoutY="39.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="50.0" text="Esci" textAlignment="CENTER">
                            <padding>
                               <Insets top="5.0" />
                            </padding>
@@ -37,10 +45,10 @@
       </AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
-            <SplitPane dividerPositions="0.7491638795986622" prefHeight="355.0" prefWidth="600.0">
+            <SplitPane dividerPositions="0.7491638795986622" minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0">
               <items>
-                <AnchorPane fx:id="descriptionPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-                <AnchorPane fx:id="buttonPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                <AnchorPane fx:id="descriptionPane" minHeight="600.0" minWidth="700.0" prefHeight="600.0" prefWidth="700.0" />
+                <AnchorPane fx:id="buttonPane" minHeight="600.0" minWidth="200.0" prefHeight="600.0" prefWidth="200.0" />
               </items>
             </SplitPane>
          </children>

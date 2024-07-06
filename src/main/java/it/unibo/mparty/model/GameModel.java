@@ -97,7 +97,40 @@ public interface GameModel {
      * Get the board width and height
      * @return {@link Pair} containing dimensions
      */
+<<<<<<< HEAD
     Pair<Integer, Integer> getBoardDim();
+=======
+    Pair<Integer, Integer> getBoardDimensions();
+
+    /**
+     * Make the player that's playing its turn use the selected item
+     * @param item {@link ItemName} to use
+     */
+    void useItem(ItemName item);
+
+    /**
+     * Method to end the current minigame and update the model
+     * with the results
+     * @param result of the minigame
+     */
+    void endMinigame(Pair<String,Integer> result);
+
+    List<String> getPlayersNicknames();
+
+    /**
+     * Get the information of the player that's playing the actual turn
+     * @return {@link Pair} containing nickname of player and it's
+     * {@link Position}
+     */
+    Pair<String, Position> getActualPlayerInfo();
+
+    /**
+     * Buy an item from the shop if the player can
+     * @param itemName {@link ItemName} of the item
+     * @return true if the player can buy the item, false otherwise
+     */
+    boolean buyItem (ItemName itemName);
+>>>>>>> develop
 
     /**
      * Get a list of items in the shop
