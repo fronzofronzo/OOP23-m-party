@@ -2,22 +2,18 @@ package it.unibo.mparty.controller;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 
 import it.unibo.mparty.model.GameModel;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.utilities.Direction;
-import it.unibo.mparty.utilities.GameStatus;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
 import it.unibo.mparty.view.shop.api.ShopView;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import it.unibo.mparty.model.item.impl.ItemName;
 
 
 
@@ -52,9 +48,12 @@ public class GameControllerImpl implements GameController{
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void useItem(ItemName item) {
-        this.model.useItem(item);
+    public void useItem(ItemName itemName) {
+        this.model.useItem(itemName);
         this.view.updateCommands(Collections.emptyList(), this.model.getMessage());
     }
 
@@ -87,6 +86,9 @@ public class GameControllerImpl implements GameController{
         .findAny().get().getNumCoins());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void buyItem(ItemName itemName, ShopView shopView) {
         if (this.model.buyItem(itemName)) {

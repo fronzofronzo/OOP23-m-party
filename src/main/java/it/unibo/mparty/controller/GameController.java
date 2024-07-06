@@ -23,7 +23,7 @@ public interface GameController {
 
     /**
      * Select an item and check if the player can add it
-     * @param itemString the item the player wants to buy
+     * @param itemName the {@link ItemName} of the item the player wants to buy
      */
     void buyItem(ItemName itemName, ShopView shopView);
 
@@ -45,9 +45,9 @@ public interface GameController {
 
     /**
      * Handle the request of the player to use an item
-     * @param item {@link ItemName} that player wants to use
+     * @param itemName {@link ItemName} that player wants to use
      */
-    void useItem(ItemName item);
+    void useItem(ItemName itemName);
 
     /**
      * Manage the start of a new game
