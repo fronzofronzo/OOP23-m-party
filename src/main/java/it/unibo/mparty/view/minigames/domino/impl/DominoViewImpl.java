@@ -60,6 +60,9 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     @FXML
     private VBox tilesContainer;
 
+    @FXML
+    private HBox boardHBox;
+
     private DominoController controller;
     private Integer selectedSideA;
     private Integer selectedSideB;
@@ -74,6 +77,12 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         this.scrollPane.setFitToWidth(true);
         this.scrollPane.setFitToHeight(true);
         this.messageLabel.setText("");
+
+        this.boardHBox = new HBox();
+        this.boardHBox.setAlignment(Pos.CENTER);
+        this.boardHBox.setSpacing(SPACING);
+        tilesContainer.getChildren().add(this.boardHBox);
+
         this.playerCantDraw();
     }
 
@@ -133,26 +142,6 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     @Override
     public void playerCantDraw() {
         this.drawButton.setDisable(true);
-    }
-
-    @Override
-    public void setBoard(final LinkedList<Tile> boardTiles, final boolean isDoubleSide) {
-        tilesContainer.getChildren().clear();
-
-        HBox rowBox = new HBox();
-        rowBox.setAlignment(Pos.CENTER);
-        rowBox.setSpacing(SPACING);
-
-        for (Tile tile : boardTiles) {
-            HBox tileBox = new HBox();
-            generateTile(tileBox, tile.getSideA().getValue(), tile.getSideB().getValue());
-            tileBox.setAlignment(Pos.CENTER);
-            tileBox.setDisable(true);
-            VBox.setMargin(tileBox, new Insets(0, PREF_SIZE, 0, PREF_SIZE));
-
-            rowBox.getChildren().add(tileBox);
-        }
-        tilesContainer.getChildren().add(rowBox);
     }
 
     @Override

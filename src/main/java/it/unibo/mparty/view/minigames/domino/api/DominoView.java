@@ -9,7 +9,7 @@ import it.unibo.mparty.view.minigames.domino.DominoMessage;
 import java.util.LinkedList;
 import java.util.Set;
 
-public interface DominoView extends MinigameView {
+public interface DominoView extends MinigameView, EObserver<List<Tile>> {
     void setPlayerTiles(boolean isPlayer1, Set<Tile> playerTiles);
 
     void setPlayerName(boolean isPlayer1, String playerName);
@@ -19,8 +19,6 @@ public interface DominoView extends MinigameView {
     void playerCanDraw();
 
     void playerCantDraw();
-
-    void setBoard(LinkedList<Tile> board, boolean isDoubleSide);
 
     void setMessage(DominoMessage message);
 
