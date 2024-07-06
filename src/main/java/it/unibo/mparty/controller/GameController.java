@@ -19,13 +19,13 @@ public interface GameController {
     /**
      * Set up the shop view
      */
-    public void setUpShop(ShopView shopView);
+    void setUpShop(ShopView shopView);
 
     /**
      * Select an item and check if the player can add it
      * @param itemString the item the player wants to buy
      */
-    public void buyItem(ItemName itemName, ShopView shopView);
+    void buyItem(ItemName itemName, ShopView shopView);
 
     /**
      * Handle the request of the user to roll dice
