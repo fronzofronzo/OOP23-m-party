@@ -43,7 +43,7 @@ public class GameControllerImpl implements GameController{
      * {@inheritDoc}
      */
     @Override
-    public void useItem(String item) {
+    public void useItem(final String item) {
         this.model.useItem(Arrays.stream(ItemName.values())
                 .filter(i -> i.toString().equals(item))
                 .findAny()
@@ -108,7 +108,7 @@ public class GameControllerImpl implements GameController{
      * {@inheritDoc}
      */
     @Override
-    public void buyItem(ItemName itemName, ShopView shopView) {
+    public void buyItem(final ItemName itemName, ShopView shopView) {
         if (this.model.buyItem(itemName)) {
             shopView.updateMoney(this.model.getActualPlayer().getNumCoins());;
         }

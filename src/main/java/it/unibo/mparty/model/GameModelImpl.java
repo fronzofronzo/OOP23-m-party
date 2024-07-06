@@ -128,7 +128,7 @@ public class GameModelImpl implements GameModel{
      * {@inheritDoc}
      */
     @Override
-    public void useItem(ItemName itemName) {
+    public void useItem(final ItemName itemName) {
         Item item = this.players.get(actualPlayerIndex).getPlayerBag().useItem(itemName);
         Optional<Position> position = item.needPosition() ? 
                                       Optional.of(this.board.getStarPosition()) : 
@@ -147,7 +147,7 @@ public class GameModelImpl implements GameModel{
      * {@inheritDoc}
      */
     @Override
-    public boolean buyItem(ItemName itemName) {
+    public boolean buyItem(final ItemName itemName) {
         return this.shop.buyItem(this.players.get(actualPlayerIndex), itemName);
     }
 

@@ -15,7 +15,7 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.impl.PlayerImplementation;
 
 /**
- * Test class for the Items
+ * Test class for the Items.
  */
 public class TestItemImplementation {
 
@@ -26,9 +26,10 @@ public class TestItemImplementation {
     private Item doubleDice;
     private Item booBell;
     private Item goldenPipe;
-    
+    private static final int EXP_GOLDENPIPE = 10;
+    private static final int EXP_DOUBLEDICE = 7;
     /**
-     * Initialize the items and the player used in all tests
+     * Initialize the items and the player used in all tests.
      */
     @BeforeEach
     public void init() {
@@ -37,11 +38,11 @@ public class TestItemImplementation {
         doubleDice = factory.createItem(ItemName.DOPPIO_DADO);
         booBell = factory.createItem(ItemName.CAMPANA_BOO);
         goldenPipe = factory.createItem(ItemName.TUBO_DORATO);
-        testPlayer= new PlayerImplementation("test", "Mario");
+        testPlayer = new PlayerImplementation("test", "Mario");
     }
 
     /**
-     * Test the getDescription method of the items
+     * Test the getDescription method of the items.
      */
     @Test
     public void testGetDescription() {
@@ -51,16 +52,16 @@ public class TestItemImplementation {
     }
 
     /**
-     * Test the getCost method of the items
+     * Test the getCost method of the items.
      */
     @Test
     public void testGetCost() {
-        assertEquals(10, goldenPipe.getCost());
-        assertEquals(7, doubleDice.getCost());
+        assertEquals(EXP_GOLDENPIPE, goldenPipe.getCost());
+        assertEquals(EXP_DOUBLEDICE, doubleDice.getCost());
     }
 
     /**
-     * test the getName method of the item
+     * Test the getName method of the item.
      */
     @Test
     public void testGetName() {
@@ -69,7 +70,7 @@ public class TestItemImplementation {
     }
 
     /**
-     * Test the activation of the items and the effect on the playesr
+     * Test the activation of the items and the effect on the players.
      */
     @Test
     public void testActivation () {

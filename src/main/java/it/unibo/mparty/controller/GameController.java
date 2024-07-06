@@ -46,12 +46,14 @@ public interface GameController {
 
     /**
      * Set up the shop view
+     * @param shopView the view of the shop
      */
     void setUpShop(ShopView shopView);
 
     /**
      * Select an item and check if the player can add it
-     * @param itemString the item the player wants to buy
+     * @param itemName the {@link ItemName} of the item the player wants to buy
+     * @param shopView the view of the shop
      */
     void buyItem(ItemName itemName, ShopView shopView);
 
