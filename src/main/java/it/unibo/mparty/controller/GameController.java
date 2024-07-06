@@ -23,8 +23,8 @@ public interface GameController {
     void startGame(GameModel model) throws IOException;
 
     /**
-     * Handle the request of the player to use an item
-     * @param item {@link ItemName} that player wants to use
+     * Select an item and check if the player can add it
+     * @param itemName the {@link ItemName} of the item the player wants to buy
      */
     void useItem(ItemName item);
 
