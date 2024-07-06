@@ -54,12 +54,18 @@ public class BoardTileImpl extends ESourceImpl<List<Pair<Integer, Integer>>> imp
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BoardTileImpl boardTile = (BoardTileImpl) o;
-        return Objects.equals(this.boardTiles, boardTile.boardTiles);
+        return Objects.equals(boardTiles, boardTile.boardTiles);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(boardTiles);
+        return Objects.hash(boardTiles);
     }
 
+    @Override
+    public String toString() {
+        return "BoardTileImpl{" +
+                "boardTiles=" + boardTiles +
+                '}';
+    }
 }
