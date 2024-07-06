@@ -29,6 +29,7 @@ import java.util.Set;
 
 public class InitialScreenImpl extends AbstractSceneView implements InitialScreen {
 
+
     private GameModelBuilder builder;
     private final GameController controller = new GameControllerImpl(new GameViewImpl());
     private final List<String> difficulties = new ArrayList<>();
@@ -42,6 +43,9 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
 
     @FXML
     private ChoiceBox<String> playerChoiceBox;
+
+    @FXML
+    private Label exceptionLabel;
 
     @Override
     public void handleExitButton(ActionEvent event) {
@@ -86,6 +90,10 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
 
     @Override
     public void setNewPlayer(String username,String character){
-        this.builder = this.builder.addPlayer(username,character);
+        try{
+            this.builder = this.builder.addPlayer(username,character);
+        }catch(IllegalArgumentException e){
+            this.exceptionLabel.setText(e.getMessage());
+        }
     }
 }
