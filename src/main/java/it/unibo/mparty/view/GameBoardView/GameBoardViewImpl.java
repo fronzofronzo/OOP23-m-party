@@ -124,7 +124,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private List<Button> buttonsItem = new ArrayList<>();
     private List<Button> buttonsDirection = new ArrayList<>();
     private List<Circle> players = new ArrayList<>();
-    private Map<Position,FlowPane> mapFLow = new HashMap<>();
+    private Map<Position,FlowPane> mapSlots = new HashMap<>();
 
     @Override
     public void updatePlayer(String palyer, int coins, int stars, List<String> items, Position position) {
@@ -133,11 +133,11 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                 this.labelPlayersCoins.get(i).setText(TEXT_COINS + String.valueOf(coins));
                 this.labelPlayersStars.get(i).setText(TEXT_STARS + String.valueOf(stars));
                 this.labelPlayersItems.get(i).setText(TEXT_ITEMS + this.printItems(items));
-                for (Map.Entry<Position,FlowPane> entry : this.mapFLow.entrySet()) {
+                for (Map.Entry<Position,FlowPane> entry : this.mapSlots.entrySet()) {
                     entry.getValue().getChildren().remove(this.players.get(i));
                 }
                 //this.board.add(this.players.get(i), position.getX(), position.getY());
-                this.mapFLow.get(position).getChildren().add(this.players.get(i));
+                this.mapSlots.get(position).getChildren().add(this.players.get(i));
             }
         }
     }
@@ -196,7 +196,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                 if (!slotType.equals(SlotType.VOID)) {
                     Tooltip tt = new Tooltip(TEXT_TOOL_TIP.get(slotType));
                     Tooltip.install(tmp, tt);
-                    this.mapFLow.put(pos, tmp);
+                    this.mapSlots.put(pos, tmp);
                 }
                 this.board.add(tmp, i, j);
             }
