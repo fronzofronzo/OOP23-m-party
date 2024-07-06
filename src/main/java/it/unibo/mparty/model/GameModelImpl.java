@@ -277,6 +277,11 @@ public class GameModelImpl implements GameModel{
         return Collections.unmodifiableList(this.players);
     }
 
+    @Override
+    public Player getActualPlayer() {
+        return this.players.get(this.actualPlayerIndex);
+    }
+
     private void nextPlayer() {
         this.actualPlayerIndex = (this.actualPlayerIndex + 1) % players.size();
         if(this.actualPlayerIndex == 0){
