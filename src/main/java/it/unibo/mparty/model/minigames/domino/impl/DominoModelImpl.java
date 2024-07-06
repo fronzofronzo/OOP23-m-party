@@ -21,6 +21,7 @@ public class DominoModelImpl implements DominoModel {
     private final List<Tile> dominoSet;
     private String player1;
     private String player2;
+    private String lastPlayerToPlay;
 
     public DominoModelImpl() {
         this.boardTile = new BoardTileImpl();
@@ -47,14 +48,20 @@ public class DominoModelImpl implements DominoModel {
         if (this.boardTile.canMatchBoardTile(tile)) {
             this.boardTile.addTileToBoard(tile);
             this.playerTiles.removeTilesFromPlayer(player, tile);
+            this.lastPlayerToPlay = player;
             return true;
         }
-        return false; //ora cambia le cose dell'observer, da List<Tile> a List<Pair<Integer, Integer>> -_- devo provare capi?vai
+        return false;
     }
 
     @Override
     public boolean canDrawTile(final String player) {
-        return !this.playerTiles.canPlayerPlace(player, this.boardTile) && !this.dominoSet.isEmpty();
+        return !canPlayerPlace(player) && !this.dominoSet.isEmpty();
+    }
+
+    @Override
+    public boolean canPlayerPlace(final String player){
+        return this.playerTiles.canPlayerPlace(player, this.boardTile);
     }
 
     @Override
@@ -81,13 +88,15 @@ public class DominoModelImpl implements DominoModel {
 
     @Override
     public Pair<String, Integer> getResult() {
-        Set<Tile> player1Tiles = this.playerTiles.getPlayerTiles(this.player1);
-        Set<Tile> player2Tiles = this.playerTiles.getPlayerTiles(this.player2);
+        final Set<Tile> player1Tiles = this.playerTiles.getPlayerTiles(this.player1);
+        final Set<Tile> player2Tiles = this.playerTiles.getPlayerTiles(this.player2);
 
         if (player1Tiles.isEmpty() && !player2Tiles.isEmpty()) {
             return new Pair<>(this.player1, COINS);
         } else if (player2Tiles.isEmpty() && !player1Tiles.isEmpty()) {
             return new Pair<>(this.player2, COINS);
+        } else if (!this.canPlayerPlace(player1) && !this.canPlayerPlace(player2)) {
+            return new Pair<>(this.lastPlayerToPlay, COINS);
         } else {
             return new Pair<>(null, 0);
         }
@@ -95,8 +104,8 @@ public class DominoModelImpl implements DominoModel {
 
     @Override
     public boolean isOver() {
-        return this.playerTiles.getPlayerTiles(this.player1).isEmpty()
-                || this.playerTiles.getPlayerTiles(this.player2).isEmpty();
+        return (this.playerTiles.getPlayerTiles(this.player1).isEmpty() || this.playerTiles.getPlayerTiles(this.player2).isEmpty())
+                || (!this.canDrawTile(player1) && !this.canDrawTile(player2));
     }
 
     private int getDoubleTiles(final String player) {

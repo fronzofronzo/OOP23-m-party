@@ -12,6 +12,8 @@ public interface DominoModel extends MinigameModel {
 
     boolean canDrawTile(String player);
 
+    boolean canPlayerPlace(String player);
+
     void drawTile(String player);
 
     List<Tile> getDominoSet();
