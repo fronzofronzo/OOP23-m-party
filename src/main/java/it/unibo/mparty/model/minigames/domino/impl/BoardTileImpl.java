@@ -33,12 +33,19 @@ public class BoardTileImpl extends ESourceImpl<List<Pair<Integer, Integer>>> imp
     public void addTileToBoard(final Tile tile) {
         if (this.boardTiles.isEmpty()) {
             this.boardTiles.add(tile);
-        } else if (this.boardTiles.getFirst().match(tile)) {
+        } else if (this.boardTiles.size() == 1) {
+            var firstTile = this.boardTiles.getFirst();
+            firstTile.match(tile);
+            if (tile.getSideA().isMatched()){
+                this.boardTiles.addLast(tile);
+            } else if (tile.getSideB().isMatched()){
+                this.boardTiles.addFirst(tile);
+            }
+        } else if (this.boardTiles.getFirst().match(tile) ) {
             this.boardTiles.addFirst(tile);
         } else if (this.boardTiles.getLast().match(tile)) {
             this.boardTiles.addLast(tile);
         }
-        System.out.println("[BoardTileImpl] Added tile " + tile);
         this.notifyObservers(this.boardTiles.stream().map(t->new Pair<>(t.getSideA().getValue(), t.getSideB().getValue())).toList());
     }
 
