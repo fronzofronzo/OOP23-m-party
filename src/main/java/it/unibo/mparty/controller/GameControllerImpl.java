@@ -22,6 +22,10 @@ public class GameControllerImpl implements GameController{
     private final GameView view;
     private GameModel model;
 
+    /**
+     * Constructor for a new {@link GameController} implementation
+     * @param view to set like {@link GameView} reference to the game
+     */
     public GameControllerImpl(final GameView view){
         this.view = view;
     }
