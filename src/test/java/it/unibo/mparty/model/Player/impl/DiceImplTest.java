@@ -31,8 +31,8 @@ class DiceImplTest {
         final int maxBound = 5;
         this.testDice.setMinNumber(minBound);
         this.testDice.setMaxNumber(maxBound);
-        assertEquals(minBound, this.testDice.getBounds().getX());
-        assertEquals(maxBound, this.testDice.getBounds().getY());
+        assertEquals(minBound, this.testDice.getBounds().getFirst());
+        assertEquals(maxBound, this.testDice.getBounds().getSecond());
     }
 
     /**
