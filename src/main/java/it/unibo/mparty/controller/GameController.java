@@ -17,15 +17,16 @@ import it.unibo.mparty.view.shop.api.ShopView;
 public interface GameController {
 
     /**
-     * Set up the shop view
+     * Manage the start of a new game
+     * @param model to set, created during the initial game phase
      */
-    void setUpShop(ShopView shopView);
+    void startGame(GameModel model) throws IOException;
 
     /**
      * Select an item and check if the player can add it
-     * @param itemString the item the player wants to buy
+     * @param itemName the {@link ItemName} of the item the player wants to buy
      */
-    void buyItem(ItemName itemName, ShopView shopView);
+    void useItem(ItemName itemName);
 
     /**
      * Handle the request of the user to roll dice
@@ -44,22 +45,19 @@ public interface GameController {
     void action() throws IOException;
 
     /**
-     * Handle the request of the player to use an item
-     * @param item {@link ItemName} that player wants to use
+     * Set up the shop view
      */
-    void useItem(ItemName item);
+    void setUpShop(ShopView shopView);
 
     /**
-     * Manage the start of a new game
-     * @param model to set, created during the initial game phase
+     * Select an item and check if the player can add it
+     * @param itemString the item the player wants to buy
      */
-    void startGame(GameModel model) throws IOException;
+    void buyItem(ItemName itemName, ShopView shopView);
 
     /**
      * Get the result of a minigame and update the model with it
      * @param result of the game
      */
     void saveMinigameResult(Pair<String, Integer> result);
-
-    void endGame();
 }

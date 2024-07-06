@@ -4,7 +4,6 @@ import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.model.item.api.Item;
-import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.SlotType;
@@ -25,13 +24,54 @@ public interface GameModel {
      */
     void movePlayer(Optional<Direction> dir);
 
-    String getMessage();
-
     /**
      * Roll dices of the actual player
      * @return the result of the roll
      */
     int rollDice();
+
+    /**
+     * Activate the effect of slot where is the player that's playing its turn
+     */
+    void action();
+
+    /**
+     * Make the player that's playing its turn use the selected item
+     * @param item {@link ItemName} to use
+     */
+    void useItem(ItemName itemName);
+
+    /**
+     * Buy an item from the shop if the player can
+     * @param itemName name of the item
+     * @return true if the player can buy the item, false otherwise
+     */
+    boolean buyItem (ItemName itemName);
+
+    /**
+     * Method to end the current minigame and update the model
+     * with the results
+     * @param result of the minigame
+     */
+    void endMinigame(Pair<String,Integer> result);
+
+    /**
+     * Checks if the game's over
+     * @return true if the game is over, false otherwise
+     */
+    boolean isOver();
+
+    /**
+     * Checks if the slot of the actual player is on a SlotType.SHOP
+     * @return true if the actual player is on a SlotType.SHOP, false otherwise
+     */
+    boolean isShop();
+
+    /**
+     * Get the username of the player that has won
+     * @return the username of winner
+     */
+    String getWinner();
 
     /**
      * If is active, get the name of the minigame.
@@ -42,68 +82,22 @@ public interface GameModel {
     Optional<String> getActiveMinigame();
 
     /**
-     * End the turn of the actual player and starts the turn of the
-     * next player
+     * Return the message to print according to the actual game status
+     * @return the message
      */
-    void nextPlayer();
-
-    /**
-     * Get the username of the player that has won
-     * @return the username of winner
-     */
-    String getWinner();
-
-    /**
-     * Checks if the game's over
-     * @return true if the game is over, false otherwise
-     */
-    boolean isOver();
-
-    /**
-     * Activate the effect of slot where is the player that's playing its turn
-     */
-    void action();
+    String getMessage();
 
     /**
      * Get the board configuration: for each slot, returns the relative slot type
      * @return {@link Map} of {@link Position} and {@link SlotType}
      */
-    Map<Position, SlotType> getBoardConfiguration();
+    Map<Position, SlotType> getBoardConfig();
 
     /**
      * Get the board width and height
      * @return {@link Pair} containing dimensions
      */
-    Pair<Integer, Integer> getBoardDimensions();
-
-    /**
-     * Make the player that's playing its turn use the selected item
-     * @param item {@link ItemName} to use
-     */
-    void useItem(ItemName item);
-
-    /**
-     * Method to end the current minigame and update the model
-     * with the results
-     * @param result of the minigame
-     */
-    void endMinigame(Pair<String,Integer> result);
-
-    List<String> getPlayersNicknames();
-
-    /**
-     * Get the information of the player that's playing the actual turn
-     * @return {@link Pair} containing nickname of player and it's
-     * {@link Position}
-     */
-    Pair<String, Position> getActualPlayerInfo();
-
-    /**
-     * Buy an item from the shop if the player can
-     * @param itemName name of the item
-     * @return true if the player can buy the item, false otherwise
-     */
-    boolean buyItem (ItemName itemName);
+    Pair<Integer, Integer> getBoardDim();
 
     /**
      * Get a list of items in the shop
@@ -112,9 +106,14 @@ public interface GameModel {
     List<Item> getItemsFromShop();
 
     /**
+     * Get a list of items in the shop
+     * @return a list of the items in the shop
+     */
+    List<ItemName> getItemsOfCurrentPlayer();
+
+    /**
      * Get the players that are participating
      * @return {@link List} of {@link Player} with all players
      */
     List<Player> getPlayers();
-
 }

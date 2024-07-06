@@ -1,10 +1,8 @@
 package it.unibo.mparty.model;
 
-import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBuilder;
 import it.unibo.mparty.model.player.impl.PlayerBuilderImplementation;
-import it.unibo.mparty.model.player.impl.PlayerImplementation;
 
 import java.util.ArrayList;
 import java.util.List;

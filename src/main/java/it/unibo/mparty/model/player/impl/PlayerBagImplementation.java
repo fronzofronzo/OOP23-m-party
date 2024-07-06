@@ -4,12 +4,10 @@ import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBag;
 import it.unibo.mparty.model.item.api.Item;
-import it.unibo.mparty.utilities.Position;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * This class implements a {@code PlayerBag}. It also offers an implementation

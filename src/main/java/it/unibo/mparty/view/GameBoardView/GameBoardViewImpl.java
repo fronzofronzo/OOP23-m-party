@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
@@ -17,18 +16,22 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class GameBoardViewImpl extends AbstractSceneView implements GameBoardView{
+
+    private static final String TEXT_COINS = "MONETE: ";
+    private static final String TEXT_STARS = "STELLE: ";
+    private static final String TEXT_ITEMS = "OGGETTI: ";
+    private static final String TEXT_VOID_ITEM = "NESSUN OGGETTO";
+    private static final String TEXT_DICE = "RISULTATO: ";
 
     private static final Map<SlotType,Color> SLOT_COLOR = Map.of(SlotType.ACTIVE_STAR, Color.GOLD,
                                                                  SlotType.BONUS, Color.LIGHTGREEN,
@@ -39,12 +42,17 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                                                                  SlotType.SHOP, Color.SKYBLUE,
                                                                  SlotType.SINGLEPLAYER, Color.LIGHTGRAY,
                                                                  SlotType.VOID, Color.BLACK);
+    private static final Map<SlotType,String> TEXT_TOOL_TIP = Map.of(SlotType.ACTIVE_STAR, "SLOT STELLA",
+                                                                 SlotType.BONUS, "SLOT BONUS",
+                                                                 SlotType.MALUS, "SLOT MALUS",
+                                                                 SlotType.MULTIPLAYER, "SLOT GIOCO",
+                                                                 SlotType.NOT_ACTIVE_STAR, "SENTIERO",
+                                                                 SlotType.PATH, "SENTIERO",
+                                                                 SlotType.SHOP, "NEGOZIO",
+                                                                 SlotType.SINGLEPLAYER, "GIOCO",
+                                                                 SlotType.VOID, "");
     @FXML
     private GridPane board;
-    @FXML 
-    private BorderPane borderPane;
-    @FXML 
-    private VBox sectionP1;
     @FXML 
     private Label nameP1;
     @FXML 
@@ -54,8 +62,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private Label itemP1;
     @FXML 
-    private VBox sectionP2;
-    @FXML 
     private Label nameP2;
     @FXML 
     private Label coinsP2;
@@ -63,8 +69,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label starsP2;
     @FXML
     private Label itemP2;
-    @FXML 
-    private VBox sectionP3;
     @FXML 
     private Label nameP3;
     @FXML 
@@ -74,8 +78,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private Label itemP3;
     @FXML 
-    private VBox sectionP4;
-    @FXML 
     private Label nameP4;
     @FXML 
     private Label coinsP4;
@@ -83,8 +85,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label starsP4;
     @FXML
     private Label itemP4;
-    @FXML
-    private Pane paneCommand;
     @FXML 
     private Button useItem1;
     @FXML 
@@ -106,10 +106,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private Button buttonEnter;
     @FXML
-    private SplitPane leftSplitPane;
-    @FXML
-    private SplitPane rightSplitPane;
-    @FXML
     private Label resultDice;
     @FXML
     private Label labelMessage;
@@ -129,28 +125,24 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private List<Circle> players = new ArrayList<>();
 
     @Override
-    public void updatePlayerStats(String palyer, int coins, int stars, List<String> items) {
-        for (int i = 0; i <= this.labelPlayersNames.size(); i++) {
+    public void updatePlayer(String palyer, int coins, int stars, List<String> items, Position position) {
+        for (int i = 0; i < this.labelPlayersNames.size(); i++) {
             if (this.labelPlayersNames.get(i).getText().equals(palyer)) {
-                this.labelPlayersCoins.get(i).setText(String.valueOf(coins));
-                this.labelPlayersStars.get(i).setText(String.valueOf(stars));
-                this.labelPlayersItems.get(i).setText(items.toString());
+                this.labelPlayersCoins.get(i).setText(TEXT_COINS + String.valueOf(coins));
+                this.labelPlayersStars.get(i).setText(TEXT_STARS + String.valueOf(stars));
+                this.labelPlayersItems.get(i).setText(TEXT_ITEMS + this.printItems(items));
+                this.board.getChildren().remove(this.players.get(i));
+                this.board.add(this.players.get(i), position.getX(), position.getY());
             }
         }
     }
 
     @Override
-    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> map, List<String> nicknames, Position stratingPosition) {
+    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> map, List<String> usernames) {
         this.populateGridPane(dimension, map);
-        this.setSize();
         this.createData();
-        for(int i=0; i< nicknames.size(); i++){
-            this.labelPlayersNames.get(i).setText(nicknames.get(i));
-            this.labelPlayersStars.get(i).setText(String.valueOf(0));
-            this.labelPlayersCoins.get(i).setText(String.valueOf(0));
-        }
-        for (int i = 0; i < nicknames.size(); i++) {
-            this.board.add(this.players.get(i), stratingPosition.getX(), stratingPosition.getY());
+        for (int i = 0; i < usernames.size(); i++) {
+            this.labelPlayersNames.get(i).setText(usernames.get(i));
         }
     }
         
@@ -179,46 +171,34 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.player4.setTranslateY(offsetY); // Sposta il quarto cerchio in basso
     }
 
-    private void setSize() {
-        this.borderPane.setMinSize(1000, 600);
-        this.leftSplitPane.setMinSize(150, 400);
-        this.rightSplitPane.setMinSize(150, 400);
-        this.board.setMinSize(700, 400);
-        this.paneCommand.setMinSize(1000, 100);
-        this.paneCommand.prefHeight(100);
-        this.paneCommand.maxHeight(100);
-    }
-
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
         for (int i = 0; i < dimension.getX(); i++) {
             for (int j = 0; j < dimension.getY(); j++) {
+                Position pos = new Position(i, j);
+                SlotType slotType = Objects.isNull(map.get(pos)) ? 
+                                                   SlotType.VOID :
+                                                   map.get(pos);
                 Pane tmp = new Pane();
-                BackgroundFill backgroundfill = new BackgroundFill(getColor(map.get(new Position(i, j))),CornerRadii.EMPTY, null);
+                BackgroundFill backgroundfill = new BackgroundFill(SLOT_COLOR.get(slotType), 
+                                                                   CornerRadii.EMPTY, 
+                                                                   null);
                 Background background = new Background(backgroundfill);
                 tmp.setBackground(background);
+                if (!slotType.equals(SlotType.VOID)) {
+                    Tooltip tt = new Tooltip(TEXT_TOOL_TIP.get(slotType));
+                    Tooltip.install(tmp, tt);
+                }
                 this.board.add(tmp, i, j);
             }
-        }
-    }
-
-    private Color getColor(SlotType slotType) {
-        if (Objects.isNull(slotType)) {
-            return Color.BLACK;
-        } else {
-            return SLOT_COLOR.get(slotType);
         }
     }
 
     @Override
     public void updateCommands(List<String> items, String message) {
         for (int i = 0; i < this.buttonsItem.size(); i++) {
-            if (i < items.size()) {
-                this.buttonsItem.get(i).setText(items.get(i));
-                this.buttonsItem.get(i).setDisable(false);
-            } else {
-                this.buttonsItem.get(i).setText("");
-                this.buttonsItem.get(i).setDisable(true);
-            }
+            this.buttonsItem.get(i).setText(i < items.size() ?
+                                            items.get(i) :
+                                            TEXT_VOID_ITEM);
         }
         this.labelMessage.setText(message);
     }
@@ -230,7 +210,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
 
     @Override
     public void showResultDice(int result) {
-        this.resultDice.setText(String.valueOf(result));
+        this.resultDice.setText(TEXT_DICE + String.valueOf(result));
     }
 
     @FXML
@@ -256,13 +236,22 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.getMainController().action();
     }
 
-    @Override
-    public void updatePlayerPos(Pair<String,Position> playerInfo) {
-        for (int i = 0; i < this.labelPlayersNames.size(); i++) {
-            if (this.labelPlayersNames.get(i).getText().equals(playerInfo.getX())) {
-                this.board.getChildren().remove(this.players.get(i));
-                this.board.add(this.players.get(i), playerInfo.getY().getX(), playerInfo.getY().getY());
+    @FXML
+    private void useItem(ActionEvent e){
+        Button bt = (Button)e.getSource();
+        String text = bt.getText();
+        if (!text.equals(TEXT_VOID_ITEM)) {
+            //this.getMainController().useItem(text);
+        }
+    }
+
+    private String printItems(List<String> items) {
+        String output = "";
+        if (!items.isEmpty()) {
+            for (String i : items) {
+                output = output.concat("\n- " + i.toString());
             }
         }
-    }    
+        return output;
+    }
 }

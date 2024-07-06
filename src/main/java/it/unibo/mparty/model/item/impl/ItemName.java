@@ -1,26 +1,41 @@
 package it.unibo.mparty.model.item.impl;
 
 /**
- * enum of Item
+ * enum of Item.
  */
 public enum ItemName {
+    /**
+     * Cursed dice item.
+     */
     DADO_MALEDETTO("Dado Maledetto"),
+    /**
+     * Lucky dice item.
+     */
     DADO_FORTUNATO("Dado Fortunato"),
+    /**
+     * Golden Pipe item.
+     */
     TUBO_DORATO("Tubo Dorato"),
+    /**
+     * Boo bell item.
+     */
     CAMPANA_BOO("Campana Boo"),
+    /**
+     * Double dice item.
+     */
     DOPPIO_DADO("Doppio Dado");
 
     private final String name;
 
-    private ItemName (String name) {
-        this.name=name;
+    ItemName(String name) {
+        this.name = name;
     }
 
     /**
-     * Get the name of the item
-     * @return the string representing the item
+     * {@inheritDoc}
      */
-    public String getNameToString() {
+    @Override
+    public String toString() {
         return this.name;
     }
 
