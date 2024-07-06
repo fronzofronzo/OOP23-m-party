@@ -10,10 +10,16 @@ import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.shop.api.Shop;
 
+/**
+ * Implementation of the shop.
+ */
 public class ShopImpl implements Shop {
     private ItemFactory itemFactory = new ItemFactoryImpl();
     private final List<Item> itemList = new ArrayList<>();
 
+    /**
+     * Constructs a new istance of shopImpl.
+     */
     public ShopImpl() {
         itemList.add(itemFactory.createItem(ItemName.CAMPANA_BOO));
         itemList.add(itemFactory.createItem(ItemName.DADO_MALEDETTO));
@@ -36,8 +42,8 @@ public class ShopImpl implements Shop {
         return false;
     }
 
-    private boolean canAfford (Player player, Item item) {
-        return player.getNumCoins()>= item.getCost();
+    private boolean canAfford(Player player, Item item) {
+        return player.getNumCoins() >= item.getCost();
     }
 
     /**

@@ -128,7 +128,7 @@ public class GameModelImpl implements GameModel{
      * {@inheritDoc}
      */
     @Override
-    public void useItem(ItemName itemName) {
+    public void useItem(final ItemName itemName) {
         Item item = this.players.get(actualPlayerIndex).getPlayerBag().useItem(itemName);
         Optional<Position> position = item.needPosition() ? 
                                       Optional.of(this.board.getStarPosition()) : 
@@ -147,7 +147,7 @@ public class GameModelImpl implements GameModel{
      * {@inheritDoc}
      */
     @Override
-    public boolean buyItem(ItemName itemName) {
+    public boolean buyItem(final ItemName itemName) {
         return this.shop.buyItem(this.players.get(actualPlayerIndex), itemName);
     }
 
@@ -225,7 +225,7 @@ public class GameModelImpl implements GameModel{
                 output = output + MESSAGE_MOVING_PLAYER + getDirections();
                 break;
             case ACTIVE_SLOT:
-                output = output + MESSAGE_ACTIVE_SLOT + this.board.getSlotType(this.players.get(actualPlayerIndex).getPosition()) + ".";
+                output = output + MESSAGE_ACTIVE_SLOT + "\n" + this.board.getSlotType(this.players.get(actualPlayerIndex).getPosition()) + ".";
                 break;
             case END_TURN:
                 output = output + MESSAGE_END_TURN;
@@ -275,6 +275,22 @@ public class GameModelImpl implements GameModel{
     @Override
     public List<Player> getPlayers() {
         return Collections.unmodifiableList(this.players);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Player getActualPlayer() {
+        return this.players.get(this.actualPlayerIndex);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<String> getPlayersInGame() {
+        return this.minigameHandler.getUsersPlaying();
     }
 
     private void nextPlayer() {

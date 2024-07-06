@@ -1,2 +1,2 @@
-connect4start
+connect4
 nanogram

@@ -13,7 +13,9 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Interface that models the model of the main game
+ * Interface that models the model of the main game. It provides methods to
+ * change model status and to get information about it. It represents the
+ * entry point of the Model of the application in the MVC pattern.
  */
 public interface GameModel {
 
@@ -37,7 +39,7 @@ public interface GameModel {
 
     /**
      * Make the player that's playing its turn use the selected item
-     * @param item {@link ItemName} to use
+     * @param itemName {@link ItemName} to use
      */
     void useItem(ItemName itemName);
 
@@ -116,4 +118,17 @@ public interface GameModel {
      * @return {@link List} of {@link Player} with all players
      */
     List<Player> getPlayers();
+
+    /**
+     * Get the player that's actually playing his turn
+     * @return {@link Player} that's playing
+     */
+    Player getActualPlayer();
+
+    /**
+     * Method to get the nicknames of the players that are playing the
+     * actual minigame
+     * @return {@link List} of nicknames of players
+     */
+    List<String> getPlayersInGame();
 }

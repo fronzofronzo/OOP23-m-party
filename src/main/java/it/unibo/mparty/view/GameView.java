@@ -25,10 +25,12 @@ public interface GameView {
     void setBoardScene() throws IOException;
 
     /**
-     * Method to set the view scene with a minigame
-     * @param name of the minigame to set
+     * Set the scene with the minigame that is played at the moment
+     * @param name of the minigame to start
+     * @param players that participate in the game
+     * @throws IOException if the scene of the minigame is not found
      */
-    void setMinigameScene(String name) throws IOException;
+    void setMinigameScene(String name, List<String> players) throws IOException;
 
     /**
      * Set the shop scene in the view
