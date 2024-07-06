@@ -17,11 +17,14 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class PerilousPathViewImpl extends AbstractSceneView implements PerilousPathView{
@@ -37,6 +40,12 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
 
     private Button button;
     private final static int SIZE = 8;
+    /*private final Image bombImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/BombImage.png")));
+    private final Image ballImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Image2")));
+    private final ImageView bombImageView = new ImageView(bombImage);
+    private final ImageView ballImageView = new ImageView(ballImage);*/
+
+
 
     private final PerilousPathController observer = new PerilousPathControllerImpl(this);
 
@@ -52,6 +61,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
             }
             if(bombs.stream().anyMatch(b -> b.getX() == bombPos.getX() && b.getY() == bombPos.getY())){
                 if (child instanceof Button) {
+                    //this.setImage(((Button) child));
                     ((Button) child).setText("X");
                 }
             }
@@ -65,6 +75,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
             var bombPos = this.bombPosition(child);
             if(bombs.stream().anyMatch(b -> b.getX() == bombPos.getX() && b.getY() == bombPos.getY())){
                 if (child instanceof Button) {
+                    //((Button) child).setGraphic(null);
                     ((Button) child).setText(" ");
                 }
             }
@@ -170,4 +181,11 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
             }
         }
     }
+
+    /*private void setImage(Button button){
+        button.setGraphic(this.bombImageView);
+        this.bombImageView.setFitHeight(button.getMaxHeight());
+        this.bombImageView.setFitWidth(button.getMaxWidth());
+        this.bombImageView.setPreserveRatio(true);
+    }*/
 }
