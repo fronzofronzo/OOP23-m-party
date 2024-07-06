@@ -26,10 +26,12 @@ import javafx.scene.paint.Color;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Implementation of the {@link DominoView} interface.
+ */
 public class DominoViewImpl extends AbstractSceneView implements DominoView {
 
     private static final int PREF_SIZE = 50;
-
     private static final int SPACING = 10;
 
     @FXML
@@ -59,9 +61,6 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     @FXML
     private VBox tilesContainer;
 
-    @FXML
-    private HBox boardHBox;
-
     private DominoController controller;
     private Integer selectedSideA;
     private Integer selectedSideB;
@@ -77,15 +76,12 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         this.scrollPane.setFitToHeight(true);
         this.messageLabel.setText("");
 
-        this.boardHBox = new HBox();
-        this.boardHBox.setAlignment(Pos.CENTER);
-        this.boardHBox.setSpacing(SPACING);
-        tilesContainer.getChildren().add(this.boardHBox);
+        HBox boardHBox = new HBox();
+        boardHBox.setAlignment(Pos.CENTER);
+        boardHBox.setSpacing(SPACING);
+        tilesContainer.getChildren().add(boardHBox);
 
         this.playerCantDraw();
-
-        //todo: to delete
-        this.startMinigame(List.of("player1", "player2"));
     }
 
     @FXML
@@ -105,6 +101,9 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPlayerTiles(final boolean isPlayer1, final Set<Tile> playerTiles) {
         HBox playerTilesBox = isPlayer1 ? this.player1Tiles : this.player2Tiles;
@@ -119,12 +118,18 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPlayerName(final boolean isPlayer1, final String playerName) {
         Label targetLabel = isPlayer1 ? this.player1Label : this.player2Label;
         targetLabel.setText(" " + playerName + " ");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setTurn(final boolean isPlayer1Turn) {
         if (isPlayer1Turn) {
@@ -136,21 +141,33 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void playerCanDraw() {
         this.drawButton.setDisable(false);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void playerCantDraw() {
         this.drawButton.setDisable(true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMessage(final DominoMessage message) {
         this.messageLabel.setText(message.toString());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showResult(final Pair<String, Integer> winner) {
         this.messageLabel.setText(DominoMessage.WIN.getFormattedMessage(winner.getFirst(), winner.getSecond()));
@@ -168,14 +185,39 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void startMinigame(List<String> players) {
+    public void startMinigame(final List<String> players) {
         this.controller.initGame(players);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void update(final List<Pair<Integer, Integer>> boardTiles) {
+        tilesContainer.getChildren().clear();
+
+        HBox rowBox = new HBox();
+        rowBox.setAlignment(Pos.CENTER);
+        rowBox.setSpacing(SPACING);
+
+        for (Pair<Integer, Integer> tile : boardTiles) {
+            HBox tileBox = new HBox();
+            generateTile(tileBox, tile.getFirst(), tile.getSecond());
+            tileBox.setAlignment(Pos.CENTER);
+            tileBox.setDisable(true);
+            VBox.setMargin(tileBox, new Insets(0, PREF_SIZE, 0, PREF_SIZE));
+
+            rowBox.getChildren().add(tileBox);
+        }
+        tilesContainer.getChildren().add(rowBox);
+    }
+
     private void highlightPlayerTurn(final Label currentPlayerLabel, final Label otherPlayerLabel) {
-        currentPlayerLabel.setBackground(new Background(new BackgroundFill
-                (Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+        currentPlayerLabel.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
         otherPlayerLabel.setBackground(Background.EMPTY);
     }
 
@@ -221,25 +263,5 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         Button button = new Button(String.valueOf(value));
         button.setPrefSize(PREF_SIZE, PREF_SIZE);
         return button;
-    }
-
-    @Override
-    public void update(List<Pair<Integer, Integer>> boardTiles) {
-        tilesContainer.getChildren().clear();
-
-        HBox rowBox = new HBox();
-        rowBox.setAlignment(Pos.CENTER);
-        rowBox.setSpacing(SPACING);
-
-        for (Pair<Integer, Integer> tile : boardTiles) {
-            HBox tileBox = new HBox();
-            generateTile(tileBox, tile.getFirst(), tile.getSecond());
-            tileBox.setAlignment(Pos.CENTER);
-            tileBox.setDisable(true);
-            VBox.setMargin(tileBox, new Insets(0, PREF_SIZE, 0, PREF_SIZE));
-
-            rowBox.getChildren().add(tileBox);
-        }
-        tilesContainer.getChildren().add(rowBox);
     }
 }
