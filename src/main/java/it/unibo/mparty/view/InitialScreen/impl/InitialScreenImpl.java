@@ -12,6 +12,7 @@ import it.unibo.mparty.view.InitialScreen.api.MiniScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,11 +28,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class InitialScreenImpl extends AbstractSceneView implements InitialScreen {
+public class InitialScreenImpl extends AbstractSceneView implements InitialScreen, Initializable {
 
 
     private GameModelBuilder builder;
-    private final GameController controller = new GameControllerImpl(new GameViewImpl());
+    private final GameController controller = this.getMainController();
     private final List<String> difficulties = new ArrayList<>();
     private String difficulty;
 
