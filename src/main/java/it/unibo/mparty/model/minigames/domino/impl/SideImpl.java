@@ -25,6 +25,11 @@ public class SideImpl implements Side {
     }
 
     @Override
+    public Side copy(){
+        return new SideImpl(this.value, this.isMatched);
+    }
+
+    @Override
     public boolean isMatched() {
         return this.isMatched;
     }
