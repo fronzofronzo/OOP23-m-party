@@ -46,6 +46,15 @@ class GameModelBuilderImplTest {
         assertTrue(this.builder.isFull());
     }
 
-
+    @Test
+    public void testInsertSamePlayer(){
+        final String user1 = "user1";
+        final String charact1 = Character.CHAR_MARIO.getName();
+        this.builder = this.builder.addPlayer(user1,charact1);
+        final String user2 = "user1";
+        final String charact2 = Character.CHAR_MARIO.getName();
+        assertThrows(IllegalArgumentException.class,
+                () -> {this.builder.addPlayer(user2,charact2);});
+    }
 
 }
