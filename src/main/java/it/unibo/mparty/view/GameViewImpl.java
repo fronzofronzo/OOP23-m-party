@@ -145,6 +145,11 @@ public class GameViewImpl extends Application implements GameView{
         this.boardView.updateCommands(items, message);
     }
 
+    @Override
+    public void switchToBoard() {
+        this.stage.setScene(boardScene);
+    }
+
     private void setBoardView() throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + "GameBoard" + EXTENSION)); ;
         final Parent root = loader.load(getClass().getResourceAsStream(PATH + "GameBoard" + EXTENSION));
