@@ -2,7 +2,6 @@ package it.unibo.mparty.view;
 
 import java.io.IOException;
 
-import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
@@ -61,6 +60,12 @@ public interface GameView {
      * @param position that is the player'position
      */
     void updatePlayer(String player, int coins, int stars, List<String> items, Position position);
+
+    /**
+     * Update the board
+     * @param boardUpdates
+     */
+    void updateBoard(Map<Position,SlotType> boardUpdates);
 
     /**
      * Update the section of the view dedicated to the buttons' items and the message to display

@@ -15,7 +15,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import it.unibo.mparty.controller.GameController;
 import java.io.IOException;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -168,9 +167,7 @@ public class GameViewImpl extends Application implements GameView{
         final EndGameView endGameView = ((EndGameView) loader.<SceneView>getController());
         endGameView.showResults(result);
         this.stage.setScene(scene);
-        this.stage.setMinWidth(1000);
-        this.stage.setMinHeight(700);
-        this.stage.show();
+        this.setStageSize();
     }
 
     private Pair<Scene,SceneView> loadScene(String name) throws IOException {
@@ -186,6 +183,11 @@ public class GameViewImpl extends Application implements GameView{
         this.stage.setMinWidth(1000);
         this.stage.setMinHeight(700);
         this.stage.setMaximized(true);
+    }
+
+    @Override
+    public void updateBoard(Map<Position, SlotType> boardUpdates) {
+        this.boardView.updateBoard(boardUpdates);
     }
 
     /*

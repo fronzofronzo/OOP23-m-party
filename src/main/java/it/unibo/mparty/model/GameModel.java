@@ -132,4 +132,6 @@ public interface GameModel {
      * @return {@link List} of nicknames of players
      */
     List<String> getPlayersInGame();
+
+    Map<Position, SlotType> getSlotsToUpdate();
 }
