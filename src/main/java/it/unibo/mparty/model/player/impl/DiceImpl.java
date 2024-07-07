@@ -19,7 +19,7 @@ public class DiceImpl implements Dice {
     private int maxNumber = MAX_NUMBER;
     private int minNumber = MIN_NUMBER;
     private int result;
-    private Random random;
+    private final Random random;
 
     /**
      * Creates a new instance od {@link Dice}
@@ -57,7 +57,11 @@ public class DiceImpl implements Dice {
      */
     @Override
     public void rollDice() {
-        this.result = random.nextInt(minNumber, maxNumber+1);
+        this.result = 0;
+        for(int i = 0;  i < this.numberOfAttempts; i ++){
+            this.result += this.random.nextInt(this.minNumber, this.maxNumber+1);
+        }
+        this.resetDice();
     }
 
     /**
