@@ -60,6 +60,7 @@ public class GameControllerImpl implements GameController{
                 .findAny()
                 .get());
         this.updateCommandView();
+        this.updatePlayersView();
     }
 
     /**
