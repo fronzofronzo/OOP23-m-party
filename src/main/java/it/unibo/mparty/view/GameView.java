@@ -75,11 +75,6 @@ public interface GameView {
     void updateCommands(List<String> items, String message, Pair<String,String> turn);
 
     /**
-     * Method to switch the view directly to the board scene
-     */
-    void switchToBoard();
-
-    /**
      * Displays the results of the game in the view.
      *
      * @param result A map containing the players' results where the key is the player's username,
