@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  */
 public class GameModelImpl implements GameModel{
 
-    private static final int TURNS_NUMBER = 10;
+    private static final int TURNS_NUMBER = 15;
     private static final int MIN_COINS = 4;
     private static final int MAX_COINS = 10;
     private static final int STAR_COST = 20;
