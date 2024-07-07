@@ -124,6 +124,6 @@ public class NanogramModelImpl implements NanogramModel {
      */
     @Override
     public boolean isOver() {
-        return this.lives.isDeath();
+        return this.lives.isDeath() || this.isGameComplete();
     }
 }

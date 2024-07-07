@@ -70,11 +70,11 @@ public class NanogramControllerImpl implements NanogramController {
     public void endGame() {
         if (this.model.isOver()) {
             this.view.disableAllCells();
-            this.view.displayStatusMessage(NanogramMessage.LOSE);
-        } else if (this.model.isGameComplete()) {
-            this.view.disableAllCells();
-            this.view.fillRemainingCellsWithCrosses();
-            this.view.displayStatusMessage(NanogramMessage.WIN);
+            if (this.model.isGameComplete()) {
+                this.view.fillRemainingCellsWithCrosses();
+            }
+            this.view.showResult(this.model.getResult());
+            this.view.getMainController().saveMinigameResult(this.model.getResult());
         }
     }
 }
