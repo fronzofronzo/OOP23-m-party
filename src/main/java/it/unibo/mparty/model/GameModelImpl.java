@@ -354,4 +354,9 @@ public class GameModelImpl implements GameModel{
             actualPlayer.removeCoins(STAR_COST);
         }
     }
+
+    @Override
+    public Map<Position, SlotType> getSlotsToUpdate() {
+        return this.board.getSlotsToUpdate();
+    }
 }

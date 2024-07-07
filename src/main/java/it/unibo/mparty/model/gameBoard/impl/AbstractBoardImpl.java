@@ -45,6 +45,7 @@ public abstract class AbstractBoardImpl implements GameBoard{
     private final Set<Position> starsPositions;
     private Map<Position,Slot> board = new HashMap<>();
     private List<SlotType> avaiableSlotTypes;
+    private boolean updateStarsSlot = false;
 
     public AbstractBoardImpl(int width,
                              int height,
@@ -119,6 +120,7 @@ public abstract class AbstractBoardImpl implements GameBoard{
         Position oldStarPosition = this.getStarPosition();
         this.board.get(newStarPosition).changeSlotType(SlotType.ACTIVE_STAR);
         this.board.get(oldStarPosition).changeSlotType(SlotType.NOT_ACTIVE_STAR);
+        this.updateStarsSlot = true;
     }
 
     @Override
@@ -138,6 +140,17 @@ public abstract class AbstractBoardImpl implements GameBoard{
             output.put(entry.getKey(), entry.getValue().getSlotType());
         }
         return Collections.unmodifiableMap(output);
+    }
+
+    @Override
+    public Map<Position, SlotType> getSlotsToUpdate() {
+        if (this.updateStarsSlot) {
+            Map<Position,SlotType> slotsToUpdate = new HashMap<>();
+            this.starsPositions.stream().forEach(p -> slotsToUpdate.put(p, this.getSlotType(p)));
+            this.updateStarsSlot = false;
+            return Collections.unmodifiableMap(slotsToUpdate);
+        }
+        return Collections.emptyMap();
     }
 
     /**
