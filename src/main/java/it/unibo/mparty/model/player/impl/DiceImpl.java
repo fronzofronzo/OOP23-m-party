@@ -12,7 +12,7 @@ import java.util.Random;
 public class DiceImpl implements Dice {
 
     private static final int ATTEMPTS = 1;
-    private static final int MAX_NUMBER = 6;
+    private static final int MAX_NUMBER = 10;
     private static final int MIN_NUMBER = 1;
 
     private int numberOfAttempts = ATTEMPTS;
@@ -57,7 +57,7 @@ public class DiceImpl implements Dice {
      */
     @Override
     public void rollDice() {
-        this.result = random.nextInt(minNumber, maxNumber);
+        this.result = random.nextInt(minNumber, maxNumber+1);
     }
 
     /**
