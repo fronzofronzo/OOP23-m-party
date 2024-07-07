@@ -46,7 +46,7 @@ public class TestItemImplementation {
      */
     @Test
     public void testGetDescription() {
-        assertEquals("Il dado ha solo numeri da 1 a 3. Può essere attivato su un giocatore a tua scelta",
+        assertEquals("Il dado ha solo numeri da 1 a 3. Puo' essere attivato su un giocatore a tua scelta",
         cursedDice.getDescription());
         assertEquals("Boo ruba delle monete ad un avversario.", booBell.getDescription());
     }
