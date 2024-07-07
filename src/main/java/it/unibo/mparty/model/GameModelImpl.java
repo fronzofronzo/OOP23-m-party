@@ -356,11 +356,17 @@ public class GameModelImpl implements GameModel{
         if(actualPlayer.getPosition().equals(starPosition) && actualPlayer.getNumCoins() >= STAR_COST){
             actualPlayer.addStar();
             actualPlayer.removeCoins(STAR_COST);
+            this.board.changeStarPosition();
         }
     }
 
     @Override
     public Map<Position, SlotType> getSlotsToUpdate() {
         return this.board.getSlotsToUpdate();
+    }
+
+    @Override
+    public Pair<String, String> getTurn() {
+        return new Pair<String,String>(String.valueOf(this.turn), String.valueOf(TURNS_NUMBER));
     }
 }
