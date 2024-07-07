@@ -43,7 +43,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     private final static int SIZE = 8;
     private final Image bombImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/BombImage.png")));
     private final Image ballImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/pallaCalcio.jpg")));
-    //private final ImageView ballImageView = new ImageView(ballImage);
+
 
 
 
