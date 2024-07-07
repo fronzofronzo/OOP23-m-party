@@ -2,6 +2,7 @@ package it.unibo.mparty.view;
 
 import java.io.IOException;
 
+import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
@@ -73,5 +74,5 @@ public interface GameView {
      */
     void switchToBoard();
 
-    void showResults(List<String> players, List<Integer> stars, List<Integer> coins);
+    void showResults(List<Player> players) throws IOException;
 }

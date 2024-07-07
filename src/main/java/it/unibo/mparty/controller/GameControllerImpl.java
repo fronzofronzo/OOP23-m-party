@@ -132,9 +132,14 @@ public class GameControllerImpl implements GameController{
         this.model.endMinigame(result);
     }
 
-    private void checkEndGame() {
+    private void checkEndGame() throws IOException {
         if (this.model.isOver()) {
-            //set view end game
+            List<Player> players = this.model.getPlayers();
+            players.sort(Comparator
+                    .comparingInt(Player::getNumStars)
+                    .thenComparingInt(Player::getNumCoins)
+                    .reversed());
+            this.view.showResults(players);
         }
     }
 

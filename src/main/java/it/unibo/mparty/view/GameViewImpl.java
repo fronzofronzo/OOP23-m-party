@@ -9,6 +9,7 @@ import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.view.GameBoardView.GameBoardView;
+import it.unibo.mparty.view.endGame.api.EndGameView;
 import it.unibo.mparty.view.minigames.MinigameView;
 import it.unibo.mparty.view.shop.api.ShopView;
 import javafx.application.Application;
@@ -163,9 +164,16 @@ public class GameViewImpl extends Application implements GameView{
     }
 
     @Override
-    public void showResults(List<String> players, List<Integer> stars, List<Integer> coins) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showResults'");
+    public void showResults(List<Player> players) throws IOException {
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + "endGame" + EXTENSION)); ;
+        final Parent root = loader.load(getClass().getResourceAsStream(PATH + "endGame" + EXTENSION));
+        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
+        final EndGameView endGameView = ((EndGameView) loader.<SceneView>getController());
+        endGameView.showResults(players);
+        this.stage.setScene(scene);
+        this.stage.setMinWidth(1000);
+        this.stage.setMinHeight(700);
+        this.stage.show();
     }
 
     private Pair<Scene,SceneView> loadScene(String name) throws IOException {
