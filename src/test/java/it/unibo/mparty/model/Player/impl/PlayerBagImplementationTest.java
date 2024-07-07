@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlayerBagImplementationTest {
 
     private PlayerBag bag;
+    private int capacity;
 
     /**
      * Configuration step: this is performed before each test
@@ -29,8 +30,8 @@ class PlayerBagImplementationTest {
                 .username("user")
                 .character("Mario")
                 .buildPlayer();
-        final int num = 3;
-        this.bag = new PlayerBagImplementation(num,pl1);
+        capacity =  3;
+        this.bag = new PlayerBagImplementation(capacity,pl1);
     }
 
     /**
@@ -47,11 +48,20 @@ class PlayerBagImplementationTest {
      * Check if an item is correctly removed from the bag
      */
     @Test
-    public void removeItem(){
+    public void testRemoveItem(){
         final Item item = new ItemFactoryImpl().createItem(ItemName.DADO_FORTUNATO);
         this.bag.addItem(item);
         assertEquals(item, this.bag.useItem(item.getName()));
         assertFalse(this.bag.getItems().contains(item.getName()));
+    }
+
+    @Test
+    public void testFull(){
+        final Item item = new ItemFactoryImpl().createItem(ItemName.DADO_FORTUNATO);
+        for (int i=0; i<capacity; i++){
+            this.bag.addItem(item);
+        }
+        assertTrue(this.bag.isFull());
     }
 
 }
