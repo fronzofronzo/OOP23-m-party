@@ -134,7 +134,7 @@ public class GameViewImpl extends Application implements GameView{
      * {@inheritDoc}
      */
     @Override
-    public void updatePlayer(String player, int coins, int stars, List<String> items, Position position) {
+    public void updatePlayer(String player, int coins, int stars, final List<String> items, Position position) {
         this.boardView.updatePlayer(player, coins, stars, items, position);
     }
 
@@ -143,7 +143,7 @@ public class GameViewImpl extends Application implements GameView{
      * {@inheritDoc}
      */
     @Override
-    public void updateCommands(List<String> items, String message) {
+    public void updateCommands(final List<String> items, String message) {
         this.boardView.updateCommands(items, message);
     }
 

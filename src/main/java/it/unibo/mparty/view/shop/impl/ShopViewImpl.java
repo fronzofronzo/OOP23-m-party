@@ -37,7 +37,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView {
      * {@inheritDoc}
      */
     @Override
-    public void addButton(ItemName itemName, int cost) {
+    public void addButton(final ItemName itemName, final int cost) {
         final Button but = new Button();
         but.setText("Acquista " + itemName.toString() + ": " + cost);
         but.setOnAction(this::selectItem);

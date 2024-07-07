@@ -15,7 +15,7 @@ public abstract class AbstractItem implements Item {
      * @param name the name of the item
      * @param cost the cost of the item
      */
-    public AbstractItem(ItemName name, int cost) {
+    public AbstractItem(final ItemName name, final int cost) {
         this.name = name;
         this.cost = cost;
     }

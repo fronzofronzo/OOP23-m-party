@@ -10,7 +10,7 @@ import it.unibo.mparty.utilities.Position;
  */
 public class CursedDice extends AbstractItem {
 
-    private final static int CURSEDICE_COST = 5;
+    private static final int CURSEDICE_COST = 5;
 
     /**
      * Construct a new istance of CursedDice item.
@@ -23,7 +23,7 @@ public class CursedDice extends AbstractItem {
      * {@inheritDoc}
      */
     @Override
-    public void activate(Player player, Optional<Player> target, Optional<Position> position) {
+    public void activate(final Player player, final Optional<Player> target, final Optional<Position> position) {
         target.get().getDice().setMaxNumber(3);
     }
 
