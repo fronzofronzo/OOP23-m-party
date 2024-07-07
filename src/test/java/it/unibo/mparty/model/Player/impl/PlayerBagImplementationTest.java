@@ -43,4 +43,15 @@ class PlayerBagImplementationTest {
         assertTrue(this.bag.getItems().contains(item.getName()));
     }
 
+    /**
+     * Check if an item is correctly removed from the bag
+     */
+    @Test
+    public void removeItem(){
+        final Item item = new ItemFactoryImpl().createItem(ItemName.DADO_FORTUNATO);
+        this.bag.addItem(item);
+        assertEquals(item, this.bag.useItem(item.getName()));
+        assertFalse(this.bag.getItems().contains(item.getName()));
+    }
+
 }
