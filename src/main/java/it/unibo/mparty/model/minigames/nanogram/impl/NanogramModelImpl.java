@@ -102,6 +102,14 @@ public class NanogramModelImpl implements NanogramModel {
      * {@inheritDoc}
      */
     @Override
+    public boolean isOver() {
+        return this.lives.isDeath();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Pair<String, Integer> getResult() {
         return switch (lives.getLive()) {
             case 1 -> new Pair<>(this.player, COINS / COIN_CALCULATION_FACTOR);
@@ -115,15 +123,7 @@ public class NanogramModelImpl implements NanogramModel {
      * {@inheritDoc}
      */
     @Override
-    public void setUpPlayers(List<String> players) {
+    public void setUpPlayers(final List<String> players) {
         this.player = players.get(0);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isOver() {
-        return this.lives.isDeath();
     }
 }

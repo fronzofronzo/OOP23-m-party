@@ -13,7 +13,7 @@ public enum NanogramMessage {
     /**
      * Message indicating the player has won the game, and coins that earned.
      */
-    WIN("%s ha vinto! Guadagnando %d monete"),
+    WIN("%s ha vinto! Guadagnando %d monete."),
 
     /**
      * Message indicating the game is over.
