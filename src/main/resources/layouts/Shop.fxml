@@ -13,22 +13,25 @@
          <children>
             <SplitPane dividerPositions="0.75" minHeight="100.0" minWidth="1000.0" prefHeight="100.0" prefWidth="1000.0">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="444.0">
+                <AnchorPane minHeight="100.0" minWidth="700.0" prefHeight="100.0" prefWidth="700.0">
                      <children>
-                        <Label alignment="CENTER" layoutX="14.0" layoutY="26.0" minHeight="50.0" minWidth="585.0" prefHeight="50.0" prefWidth="585.0" text="Seleziona l'Item che desideri acquistare" textAlignment="CENTER">
+                        <Label alignment="CENTER" layoutY="20.0" minHeight="60.0" minWidth="400.0" prefHeight="60.0" prefWidth="400.0" text="Seleziona l'Item che desideri acquistare" textAlignment="CENTER">
                            <padding>
                               <Insets top="5.0" />
                            </padding>
                            <font>
-                              <Font size="20.0" />
+                              <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="moneyLabel" layoutX="559.0" layoutY="36.0" prefHeight="31.0" prefWidth="154.0" />
+                        <Label fx:id="moneyLabel" alignment="CENTER" layoutX="429.0" layoutY="20.0" minHeight="60.0" minWidth="250.0" prefHeight="60.0" prefWidth="250.0" textAlignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Label>
                      </children>
                   </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane minHeight="100.0" minWidth="300.0" prefHeight="100.0" prefWidth="300.0">
                      <children>
-                        <Button alignment="CENTER" layoutX="98.0" layoutY="39.0" minHeight="22.0" minWidth="50.0" mnemonicParsing="false" onAction="#closeShop" prefHeight="22.0" prefWidth="50.0" text="Esci" textAlignment="CENTER">
+                        <Button alignment="CENTER" layoutX="127.0" layoutY="41.0" minHeight="30.0" minWidth="60.0" mnemonicParsing="false" onAction="#closeShop" prefHeight="30.0" prefWidth="60.0" text="Esci" textAlignment="CENTER">
                            <padding>
                               <Insets top="5.0" />
                            </padding>
@@ -39,12 +42,12 @@
             </SplitPane>
          </children>
       </AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+    <AnchorPane minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0">
          <children>
             <SplitPane dividerPositions="0.7491638795986622" minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0">
               <items>
                 <AnchorPane fx:id="descriptionPane" minHeight="600.0" minWidth="700.0" prefHeight="600.0" prefWidth="700.0" />
-                <AnchorPane fx:id="buttonPane" minHeight="600.0" minWidth="200.0" prefHeight="600.0" prefWidth="200.0" />
+                <AnchorPane fx:id="buttonPane" minHeight="600.0" minWidth="300.0" prefHeight="600.0" prefWidth="300.0" />
               </items>
             </SplitPane>
          </children>

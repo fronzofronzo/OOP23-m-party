@@ -55,6 +55,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView {
         final Label lb = new Label(description);
         descriptionPane.getChildren().add(lb);
         AnchorPane.setTopAnchor(lb, j * DISTANCE_FROM_BUTTON);
+        AnchorPane.setLeftAnchor(lb, DISTANCE_FROM_BUTTON);
         j++;
     }
 

@@ -7,6 +7,8 @@ import it.unibo.mparty.view.minigames.perilouspath.PerilousPathViewImpl;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 
+import java.util.List;
+
 public class PerilousPathControllerImpl implements  PerilousPathController{
 
     private final PerilousPath model;
@@ -38,8 +40,18 @@ public class PerilousPathControllerImpl implements  PerilousPathController{
         var type = this.model.hit(p);
         if(type.equals(PerilousPath.Type.BOMB) || type.equals(PerilousPath.Type.BALL)){
             this.view.showBombs(this.model.getBombs());
+            this.endGame();
         }
         this.view.hitTile(type);
     }
 
+    @Override
+    public void endGame() {
+        this.view.showResult(this.model.getResult());
+    }
+
+    @Override
+    public void initGame(List<String> players) {
+        this.model.setUpPlayers(players);
+    }
 }

@@ -1,14 +1,11 @@
 package it.unibo.mparty.view;
 
 import it.unibo.mparty.controller.GameControllerImpl;
-import it.unibo.mparty.model.GameModelImpl;
-import it.unibo.mparty.model.player.api.Player;
-import it.unibo.mparty.model.player.api.PlayerBuilder;
-import it.unibo.mparty.model.player.impl.PlayerBuilderImplementation;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.view.GameBoardView.GameBoardView;
+import it.unibo.mparty.view.endGame.api.EndGameView;
 import it.unibo.mparty.view.minigames.MinigameView;
 import it.unibo.mparty.view.shop.api.ShopView;
 import javafx.application.Application;
@@ -18,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import it.unibo.mparty.controller.GameController;
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +32,7 @@ public class GameViewImpl extends Application implements GameView{
     private final static String PATH_MINIGAMES = "minigames/";
     private final static String EXTENSION = ".fxml";
     private final static String SHOP_NAME = "Shop";
-    
+
     private final GameController controller = new GameControllerImpl(this);
     private GameBoardView boardView;
     private Scene boardScene;
@@ -57,7 +55,7 @@ public class GameViewImpl extends Application implements GameView{
         this.controller.startGame(new GameModelImpl(List.of(p1,p2,p3,p4), "MEDIUM"));
         */
         final Pair<Scene, SceneView> scenePair = this.loadScene("initialScreen");
-        this.stage.setScene(scenePair.getX());
+        this.stage.setScene(scenePair.getFirst());
         this.stage.setMinWidth(1000);
         this.stage.setMinHeight(700);
         this.stage.show();
@@ -84,8 +82,8 @@ public class GameViewImpl extends Application implements GameView{
     @Override
     public void setMinigameScene(String name, List<String> players) throws IOException {
         final Pair<Scene,SceneView> pair = this.loadScene(PATH_MINIGAMES + name);
-        final Scene minigameScene = pair.getX();
-        final MinigameView minigameView = (MinigameView) pair.getY();
+        final Scene minigameScene = pair.getFirst();
+        final MinigameView minigameView = (MinigameView) pair.getSecond();
         minigameView.startMinigame(players);
         this.stage.setScene(minigameScene);
         this.stage.setMinWidth(1000);
@@ -105,11 +103,11 @@ public class GameViewImpl extends Application implements GameView{
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
         final ShopView shopView = loader.<ShopView>getController();
         shopView.init(this,this.controller);
-        shopView.initShopView();
         this.stage.setScene(scene);
         this.stage.setMinWidth(1000);
         this.stage.setMinHeight(700);
         this.stage.setMaximized(true);
+        shopView.initShopView();
         this.stage.show();
     }
 
@@ -163,9 +161,16 @@ public class GameViewImpl extends Application implements GameView{
     }
 
     @Override
-    public void showResults(List<String> players, List<Integer> stars, List<Integer> coins) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showResults'");
+    public void showResults(Map<String, Pair<Integer, Integer>> result) throws IOException {
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + "endGame" + EXTENSION)); ;
+        final Parent root = loader.load(getClass().getResourceAsStream(PATH + "endGame" + EXTENSION));
+        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
+        final EndGameView endGameView = ((EndGameView) loader.<SceneView>getController());
+        endGameView.showResults(result);
+        this.stage.setScene(scene);
+        this.stage.setMinWidth(1000);
+        this.stage.setMinHeight(700);
+        this.stage.show();
     }
 
     private Pair<Scene,SceneView> loadScene(String name) throws IOException {
@@ -183,7 +188,7 @@ public class GameViewImpl extends Application implements GameView{
         this.stage.setMaximized(true);
     }
 
-    /* 
+    /*
     @Override
     public void setScene(SceneType sceneType) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + sceneType.getSceneName() + EXTENSION)); ;

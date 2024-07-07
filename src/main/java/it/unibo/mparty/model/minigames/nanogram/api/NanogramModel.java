@@ -1,12 +1,14 @@
 package it.unibo.mparty.model.minigames.nanogram.api;
 
+import it.unibo.mparty.model.minigames.MinigameModel;
+
 import java.util.List;
 
 /**
  * Interface representing the model for a Nanogram game.
  * This interface defines methods to interact with and retrieve the state of the Nanogram game.
  */
-public interface NanogramModel {
+public interface NanogramModel extends MinigameModel {
 
     /**
      * Checks if the selected cell matches the expected state and updates the game state accordingly.
@@ -52,11 +54,4 @@ public interface NanogramModel {
      * @return true if the game is complete, otherwise false.
      */
     boolean isGameComplete();
-
-    /**
-     * Checks if the game is over (no more lives left).
-     *
-     * @return true if the game is over, otherwise false.
-     */
-    boolean isGameOver();
 }

@@ -2,6 +2,7 @@ package it.unibo.mparty.view;
 
 import java.io.IOException;
 
+import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
@@ -18,7 +19,7 @@ import java.util.List;
 public interface GameView {
 
     //void setScene(SceneType sceneType) throws IOException;
-    
+
     /**
      * Set the board scene in the view
      */
@@ -36,9 +37,9 @@ public interface GameView {
      * Set the shop scene in the view
      */
     void setShopScene() throws IOException;
-    
+
     /**
-     * Create the board based on the input property 
+     * Create the board based on the input property
      * @param dimension that defines width and height
      * @param board that defines for each slot his slot type
      * @param usernames
@@ -73,5 +74,12 @@ public interface GameView {
      */
     void switchToBoard();
 
-    void showResults(List<String> players, List<Integer> stars, List<Integer> coins);
+    /**
+     * Displays the results of the game in the view.
+     *
+     * @param result A map containing the players' results where the key is the player's username,
+     *               and the value is a Pair containing the number of stars (first) and the number of coins (second).
+     * @throws IOException If an input or output exception occurred.
+     */
+    void showResults(Map<String, Pair<Integer, Integer>> result) throws IOException;
 }

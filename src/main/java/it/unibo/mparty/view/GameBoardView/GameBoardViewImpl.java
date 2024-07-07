@@ -36,78 +36,78 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private static final String TEXT_DICE = "RISULTATO: ";
 
     private static final Map<SlotType,Color> SLOT_COLOR = Map.of(SlotType.ACTIVE_STAR, Color.GOLD,
-                                                                 SlotType.BONUS, Color.LIGHTGREEN,
-                                                                 SlotType.MALUS, Color.LIGHTCORAL,
-                                                                 SlotType.MULTIPLAYER, Color.LIGHTGRAY,
-                                                                 SlotType.NOT_ACTIVE_STAR, Color.WHEAT,
-                                                                 SlotType.PATH, Color.WHEAT,
-                                                                 SlotType.SHOP, Color.SKYBLUE,
-                                                                 SlotType.SINGLEPLAYER, Color.LIGHTGRAY,
-                                                                 SlotType.VOID, Color.BLACK);
+            SlotType.BONUS, Color.LIGHTGREEN,
+            SlotType.MALUS, Color.LIGHTCORAL,
+            SlotType.MULTIPLAYER, Color.LIGHTGRAY,
+            SlotType.NOT_ACTIVE_STAR, Color.WHEAT,
+            SlotType.PATH, Color.WHEAT,
+            SlotType.SHOP, Color.SKYBLUE,
+            SlotType.SINGLEPLAYER, Color.LIGHTGRAY,
+            SlotType.VOID, Color.BLACK);
     private static final Map<SlotType,String> TEXT_TOOL_TIP = Map.of(SlotType.ACTIVE_STAR, "SLOT STELLA",
-                                                                 SlotType.BONUS, "SLOT BONUS",
-                                                                 SlotType.MALUS, "SLOT MALUS",
-                                                                 SlotType.MULTIPLAYER, "SLOT GIOCO",
-                                                                 SlotType.NOT_ACTIVE_STAR, "SENTIERO",
-                                                                 SlotType.PATH, "SENTIERO",
-                                                                 SlotType.SHOP, "NEGOZIO",
-                                                                 SlotType.SINGLEPLAYER, "GIOCO",
-                                                                 SlotType.VOID, "");
+            SlotType.BONUS, "SLOT BONUS",
+            SlotType.MALUS, "SLOT MALUS",
+            SlotType.MULTIPLAYER, "SLOT GIOCO",
+            SlotType.NOT_ACTIVE_STAR, "SENTIERO",
+            SlotType.PATH, "SENTIERO",
+            SlotType.SHOP, "NEGOZIO",
+            SlotType.SINGLEPLAYER, "GIOCO",
+            SlotType.VOID, "");
     private static final Map<Integer,Color> PLAYER_COLOR = Map.of(0, Color.ORANGE,
-                                                                  1, Color.PURPLE,
-                                                                  2, Color.BLUE,
-                                                                  3, Color.WHITE);
+            1, Color.PURPLE,
+            2, Color.BLUE,
+            3, Color.WHITE);
     private static final Map<Color,String> COLOR_TO_TEXT = Map.of(Color.ORANGE, "Arancione",
-                                                                  Color.PURPLE, "Viola",
-                                                                  Color.BLUE, "Blu",
-                                                                  Color.WHITE, "Bianco");
+            Color.PURPLE, "Viola",
+            Color.BLUE, "Blu",
+            Color.WHITE, "Bianco");
     @FXML
     private GridPane board;
-    @FXML 
+    @FXML
     private Label nameP1;
-    @FXML 
+    @FXML
     private Label coinsP1;
-    @FXML 
+    @FXML
     private Label starsP1;
     @FXML
     private Label itemP1;
     @FXML
     private Label colorP1;
-    @FXML 
+    @FXML
     private Label nameP2;
-    @FXML 
+    @FXML
     private Label coinsP2;
-    @FXML 
+    @FXML
     private Label starsP2;
     @FXML
     private Label itemP2;
     @FXML
     private Label colorP2;
-    @FXML 
+    @FXML
     private Label nameP3;
-    @FXML 
+    @FXML
     private Label coinsP3;
-    @FXML 
+    @FXML
     private Label starsP3;
     @FXML
     private Label itemP3;
     @FXML
     private Label colorP3;
-    @FXML 
+    @FXML
     private Label nameP4;
-    @FXML 
+    @FXML
     private Label coinsP4;
-    @FXML 
+    @FXML
     private Label starsP4;
     @FXML
     private Label itemP4;
     @FXML
     private Label colorP4;
-    @FXML 
+    @FXML
     private Button useItem1;
-    @FXML 
+    @FXML
     private Button useItem2;
-    @FXML 
+    @FXML
     private Button useItem3;
     @FXML
     private Button buttonUP;
@@ -134,8 +134,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Circle player3 = new Circle(RADIUS);
     private Circle player4 = new Circle(RADIUS);
 
-    private List<Label> labelPlayersNames = new ArrayList<>();     
-    private List<Label> labelPlayersCoins = new ArrayList<>(); 
+    private List<Label> labelPlayersNames = new ArrayList<>();
+    private List<Label> labelPlayersCoins = new ArrayList<>();
     private List<Label> labelPlayersStars = new ArrayList<>();
     private List<Label> labelPlayersItems = new ArrayList<>();
     private List<Label> labelPlayersColor = new ArrayList<>();
@@ -170,7 +170,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
             this.labelPlayersColor.get(i).setText("(" + COLOR_TO_TEXT.get(PLAYER_COLOR.get(i)) + ")");
         }
     }
-        
+
     private void createData() {
         this.labelPlayersNames.addAll(List.of(this.nameP1, this.nameP2, this.nameP3, this.nameP4));
         this.labelPlayersCoins.addAll(List.of(this.coinsP1, this.coinsP2, this.coinsP3, this.coinsP4));
@@ -185,7 +185,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         //this.setUpPlayers();
     }
 
-    /* 
+    /*
     private void setUpPlayers() {
         var ff = this.board.getCellBounds(RADIUS, RADIUS);
         var g = ff.getWidth();
@@ -204,16 +204,16 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }*/
 
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
-        for (int i = 0; i < dimension.getX(); i++) {
-            for (int j = 0; j < dimension.getY(); j++) {
+        for (int i = 0; i < dimension.getFirst(); i++) {
+            for (int j = 0; j < dimension.getSecond(); j++) {
                 Position pos = new Position(i, j);
-                SlotType slotType = Objects.isNull(map.get(pos)) ? 
-                                                   SlotType.VOID :
-                                                   map.get(pos);
+                SlotType slotType = Objects.isNull(map.get(pos)) ?
+                        SlotType.VOID :
+                        map.get(pos);
                 FlowPane tmp = new FlowPane();
-                BackgroundFill backgroundfill = new BackgroundFill(SLOT_COLOR.get(slotType), 
-                                                                   CornerRadii.EMPTY, 
-                                                                   null);
+                BackgroundFill backgroundfill = new BackgroundFill(SLOT_COLOR.get(slotType),
+                        CornerRadii.EMPTY,
+                        null);
                 Background background = new Background(backgroundfill);
                 tmp.setBackground(background);
                 if (!slotType.equals(SlotType.VOID)) {
@@ -231,12 +231,12 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     public void updateCommands(List<String> items, String message) {
         for (int i = 0; i < this.buttonsItem.size(); i++) {
             this.buttonsItem.get(i).setText(i < items.size() ?
-                                            items.get(i) :
-                                            TEXT_VOID_ITEM);
+                    items.get(i) :
+                    TEXT_VOID_ITEM);
         }
         this.labelMessage.setText(message);
     }
-    
+
     @FXML
     private void rollDice(){
         this.getMainController().rollDice();
@@ -252,7 +252,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         final Button bt = (Button)e.getSource();
         Optional<Direction> dir = Optional.empty();
         if (bt.equals(buttonMove)) {
-            
+
         } else if (bt.equals(buttonDOWN)) {
             dir = Optional.of(Direction.DOWN);
         } else if (bt.equals(buttonUP)) {

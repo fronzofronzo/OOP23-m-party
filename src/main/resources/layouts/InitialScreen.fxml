@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="562.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.InitialScreen.impl.InitialScreenImpl">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="691.0" prefWidth="1031.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.InitialScreen.impl.InitialScreenImpl">
    <children>
-      <ImageView fitHeight="634.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+      <ImageView fitHeight="710.0" fitWidth="1226.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
          <image>
-            <Image url="@../images/MarioPartyInitialScreen.jpeg" />
+            <Image url="@../images/MarioPartyInitialScreen2.jpg" />
          </image>
       </ImageView>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -32,10 +32,10 @@
             </Label>
          </children>
       </AnchorPane>
-      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="1000.0">
+      <VBox alignment="CENTER" prefHeight="755.0" prefWidth="1014.0">
          <children>
             <Button fx:id="addPlayers" mnemonicParsing="false" onAction="#handleAddPlayerButton" prefHeight="42.0" prefWidth="248.0" text="AGGIUNGI GIOCATORE" />
-            <ChoiceBox fx:id="playerChoiceBox" onDragDetected="#handleDifficultyButton" prefHeight="42.0" prefWidth="248.0" />
+            <ChoiceBox fx:id="playerChoiceBox" prefHeight="42.0" prefWidth="248.0" />
             <Button mnemonicParsing="false" onAction="#handleExitButton" prefHeight="42.0" prefWidth="248.0" text="ESCI" />
             <Button fx:id="startGame" mnemonicParsing="false" onAction="#handleStartButton" prefHeight="42.0" prefWidth="248.0" text="START" />
          </children>
