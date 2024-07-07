@@ -133,6 +133,7 @@ public class GameControllerImpl implements GameController{
     @Override
     public void saveMinigameResult(Pair<String, Integer> result) {
         this.model.endMinigame(result);
+        this.updatePlayersView();
     }
 
     private void checkEndGame() throws IOException {
