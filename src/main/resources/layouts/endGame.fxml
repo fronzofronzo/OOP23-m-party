@@ -11,7 +11,7 @@
 
 <BorderPane minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.endGame.impl.EndGameViewImpl">
     <center>
-        <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="150.0" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="rankColumn" prefWidth="150.0" text="Posto" />
                 <TableColumn fx:id="playerColumn" prefWidth="268.0" text="Giocatore" />
@@ -19,7 +19,7 @@
                 <TableColumn fx:id="coinColumn" prefWidth="200.79998779296875" text="Monete" />
             </columns>
             <BorderPane.margin>
-                <Insets left="100.0" right="100.0" top="50.0" />
+                <Insets left="100.0" right="100.0" top="30.0" />
             </BorderPane.margin>
         </TableView>
     </center>
@@ -34,7 +34,7 @@
         </Label>
     </top>
     <bottom>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <HBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <Button mnemonicParsing="false" onMouseClicked="#exitClicked" text="ESCI DAL GIOCO">
                 <font>
                     <Font name="AdLib WGL4 BT" size="18.0" />

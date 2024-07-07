@@ -1,10 +1,6 @@
 package it.unibo.mparty.view;
 
 import it.unibo.mparty.controller.GameControllerImpl;
-import it.unibo.mparty.model.GameModelImpl;
-import it.unibo.mparty.model.player.api.Player;
-import it.unibo.mparty.model.player.api.PlayerBuilder;
-import it.unibo.mparty.model.player.impl.PlayerBuilderImplementation;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
@@ -19,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import it.unibo.mparty.controller.GameController;
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -164,12 +161,12 @@ public class GameViewImpl extends Application implements GameView{
     }
 
     @Override
-    public void showResults(List<Player> players) throws IOException {
+    public void showResults(Map<String, Pair<Integer, Integer>> result) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + "endGame" + EXTENSION)); ;
         final Parent root = loader.load(getClass().getResourceAsStream(PATH + "endGame" + EXTENSION));
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
         final EndGameView endGameView = ((EndGameView) loader.<SceneView>getController());
-        endGameView.showResults(players);
+        endGameView.showResults(result);
         this.stage.setScene(scene);
         this.stage.setMinWidth(1000);
         this.stage.setMinHeight(700);

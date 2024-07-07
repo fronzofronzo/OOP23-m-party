@@ -11,6 +11,7 @@ import it.unibo.mparty.view.GameView;
 import it.unibo.mparty.view.shop.api.ShopView;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * This class implements the {@link GameController} interface. This class
@@ -135,11 +136,18 @@ public class GameControllerImpl implements GameController{
     private void checkEndGame() throws IOException {
         if (this.model.isOver()) {
             List<Player> players = this.model.getPlayers();
-            players.sort(Comparator
-                    .comparingInt(Player::getNumStars)
-                    .thenComparingInt(Player::getNumCoins)
-                    .reversed());
-            this.view.showResults(players);
+            Map<String, Pair<Integer, Integer>> result = players.stream()
+                    .sorted(Comparator
+                            .comparingInt(Player::getNumStars)
+                            .thenComparingInt(Player::getNumCoins)
+                            .reversed())
+                    .collect(Collectors.toMap(
+                            Player::getUsername,
+                            p -> new Pair<>(p.getNumStars(), p.getNumCoins()),
+                            (e1, e2) -> e1,
+                            LinkedHashMap::new
+                    ));
+            this.view.showResults(result);
         }
     }
 

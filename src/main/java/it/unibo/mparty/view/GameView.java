@@ -74,5 +74,12 @@ public interface GameView {
      */
     void switchToBoard();
 
-    void showResults(List<Player> players) throws IOException;
+    /**
+     * Displays the results of the game in the view.
+     *
+     * @param result A map containing the players' results where the key is the player's username,
+     *               and the value is a Pair containing the number of stars (first) and the number of coins (second).
+     * @throws IOException If an input or output exception occurred.
+     */
+    void showResults(Map<String, Pair<Integer, Integer>> result) throws IOException;
 }
