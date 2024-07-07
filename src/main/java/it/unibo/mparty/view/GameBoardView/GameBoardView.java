@@ -28,6 +28,13 @@ public interface GameBoardView extends SceneView{
     void updatePlayer(String player, int coins, int stars, List<String> items, Position position);
 
     /**
+     * Update the board
+     * @param boardUpdates
+     */
+    void updateBoard(Map<Position,SlotType> boardUpdates);
+
+
+    /**
      * Update the section of the view dedicated to the buttons' items and the message to display
      * @param items that are the items of the actual player
      * @param message that is the message to display
