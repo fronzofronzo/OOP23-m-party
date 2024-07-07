@@ -97,6 +97,7 @@ public class GameControllerImpl implements GameController{
         }
         this.updateCommandView();
         this.updatePlayersView();
+        this.view.updateBoard(this.model.getSlotsToUpdate());
         this.checkEndGame();
     }
 
