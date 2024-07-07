@@ -26,12 +26,8 @@ class PlayerBagImplementationTest {
      */
     @BeforeEach
     public void init(){
-        final Player pl1 = new PlayerBuilderImplementation()
-                .username("user")
-                .character("Mario")
-                .buildPlayer();
         capacity =  3;
-        this.bag = new PlayerBagImplementation(capacity,pl1);
+        this.bag = new PlayerBagImplementation(capacity);
     }
 
     /**
