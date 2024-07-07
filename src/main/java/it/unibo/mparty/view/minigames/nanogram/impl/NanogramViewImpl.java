@@ -20,6 +20,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -79,6 +80,14 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
 
         this.filledButton.setOnAction(event -> this.controller.setFillState(true));
         this.crossButton.setOnAction(event -> this.controller.setFillState(false));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void startMinigame(final List<String> players) {
+        this.controller.initGame(players);
     }
 
     /**
@@ -181,6 +190,28 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         boardButtons.forEach(button -> button.setGraphic(drawCross(Color.valueOf("#38475f"))));
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showResult(Pair<String, Integer> result) {
+        this.messageLabel.setText(NanogramMessage.END.getFormattedMessage(result.getFirst(), result.getSecond()));
+
+        Button returnButton = new Button("Torna al gioco principale");
+        returnButton.setStyle("-fx-font-size: 18pt;");
+        returnButton.setOnAction(e -> {
+            try {
+                this.getMainView().setBoardScene();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        pane.setBottom(returnButton);
+        BorderPane.setMargin(returnButton, new Insets(MARGIN));
+        BorderPane.setAlignment(returnButton, Pos.CENTER);
+    }
+
     private void setHints(final GridPane grid, final List<List<Integer>> hintsList, final boolean isRowHints) {
         grid.getChildren().clear();
         final int numLines = hintsList.size();
@@ -228,15 +259,5 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         svgPath.setContent(path);
         svgPath.setFill(color);
         return svgPath;
-    }
-
-    @Override
-    public void showResult(Pair<String, Integer> result) {
-
-    }
-
-    @Override
-    public void startMinigame(List<String> players) {
-
     }
 }

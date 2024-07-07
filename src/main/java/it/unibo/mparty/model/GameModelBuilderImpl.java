@@ -1,10 +1,8 @@
 package it.unibo.mparty.model;
 
-import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBuilder;
 import it.unibo.mparty.model.player.impl.PlayerBuilderImplementation;
-import it.unibo.mparty.model.player.impl.PlayerImplementation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +16,14 @@ public class GameModelBuilderImpl implements GameModelBuilder{
     private String difficulty;
 
     @Override
-    public GameModelBuilder addPlayer(String nickname, String character) {
+    public GameModelBuilder addPlayer(String nickname, String character) throws IllegalArgumentException {
         final PlayerBuilder builder = new PlayerBuilderImplementation();
         final Player pl = builder.username(nickname)
                                     .character(character)
                                     .buildPlayer();
+        if(players.stream().anyMatch(p -> p.getUsername().equals(pl.getUsername()) || p.getCharacter().equals(pl.getCharacter()))){
+            throw new IllegalArgumentException("This player is already present ");
+        }
         players.add(pl);
         return this;
     }

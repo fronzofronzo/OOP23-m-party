@@ -4,6 +4,7 @@ import it.unibo.mparty.model.minigames.nanogram.api.Board;
 import it.unibo.mparty.model.minigames.nanogram.api.Live;
 import it.unibo.mparty.model.minigames.nanogram.api.NanogramModel;
 import it.unibo.mparty.model.minigames.nanogram.api.SimpleBoard;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 
 import java.util.List;
@@ -15,13 +16,16 @@ import java.util.stream.IntStream;
  */
 public class NanogramModelImpl implements NanogramModel {
 
-    private static final int SIZE_SIMPLE_BOARD = 5;
     private static final double SIMPLE_FILL_PERCENTAGE = 0.6;
+    private static final int SIZE_SIMPLE_BOARD = 5;
+    private static final int COINS = 10;
+    private static final int COIN_CALCULATION_FACTOR = 2;
     private final List<List<Integer>> rowHints;
     private final List<List<Integer>> columnHints;
     private final SimpleBoard solutionBoard;
     private final Board hittedBoard;
     private final Live lives;
+    private String player;
 
     /**
      * Constructs a {@code NanogramModelImpl} instance initializing the game state with default parameters.
@@ -98,7 +102,28 @@ public class NanogramModelImpl implements NanogramModel {
      * {@inheritDoc}
      */
     @Override
-    public boolean isGameOver() {
-        return this.lives.isDeath();
+    public Pair<String, Integer> getResult() {
+        return switch (lives.getLive()) {
+            case 1 -> new Pair<>(this.player, COINS / COIN_CALCULATION_FACTOR);
+            case 2 -> new Pair<>(this.player, COINS - COIN_CALCULATION_FACTOR);
+            case 3 -> new Pair<>(this.player, COINS);
+            default -> new Pair<>(this.player, 0);
+        };
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setUpPlayers(final List<String> players) {
+        this.player = players.get(0);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isOver() {
+        return this.lives.isDeath() || this.isGameComplete();
     }
 }
