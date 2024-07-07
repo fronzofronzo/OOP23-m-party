@@ -12,7 +12,7 @@ public class ItemFactoryImpl implements ItemFactory {
      * {@inheritDoc}
      */
     @Override
-    public Item createItem(ItemName name) throws IllegalArgumentException {
+    public Item createItem(final ItemName name) throws IllegalArgumentException {
         switch (name) {
             case DADO_FORTUNATO:
                 return new LuckyDice();

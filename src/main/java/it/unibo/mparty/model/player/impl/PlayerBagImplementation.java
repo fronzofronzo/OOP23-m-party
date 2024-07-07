@@ -34,10 +34,13 @@ public class PlayerBagImplementation implements PlayerBag {
      * {@inheritDoc}
      */
     @Override
-    public void addItem(Item item) {
+    public void addItem(final Item item) {
         this.items.add(item);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item useItem(ItemName name) {
         Optional<Item> output = this.items.stream().filter(i -> i.getName().equals(name)).findAny();
