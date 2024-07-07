@@ -325,8 +325,12 @@ public class GameModelImpl implements GameModel{
                     }
                 }
                 case MULTIPLAYER -> {
+                    final Player otherPlayer = this.players.stream()
+                            .filter(p -> !p.equals(actualPlayer))
+                            .findAny()
+                            .get();
                     try {
-                        this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.MULTI_PLAYER);
+                        this.minigameHandler.startMinigame(List.of(actualPlayer,otherPlayer), MinigameType.MULTI_PLAYER);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
