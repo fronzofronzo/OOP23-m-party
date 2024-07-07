@@ -63,7 +63,6 @@ public class DominoControllerImpl implements DominoController {
             this.isPlayer1Turn = !this.isPlayer1Turn;
             this.updateTurn();
             this.checkDraw();
-            this.endGame();
         } else {
             this.view.setMessage(DominoMessage.MOVE_NOT_VALID);
         }
