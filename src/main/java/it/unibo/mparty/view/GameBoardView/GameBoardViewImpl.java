@@ -173,9 +173,11 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
 
     @Override
     public void updateBoard(Map<Position, SlotType> boardUpdates) {
-        for (Map.Entry<Position, SlotType> entry : boardUpdates.entrySet()) {
-            FlowPane tmp = this.board.get(entry.getKey());
-            tmp = setUpFlowPane(tmp, entry.getValue());
+        if (!boardUpdates.isEmpty()) {
+            for (Map.Entry<Position, SlotType> entry : boardUpdates.entrySet()) {
+                FlowPane tmp = this.board.get(entry.getKey());
+                tmp = setUpFlowPane(tmp, entry.getValue());
+            }
         }
     }
 
