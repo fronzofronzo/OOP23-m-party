@@ -44,6 +44,9 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     private Button playButton;
 
     @FXML
+    private VBox buttonBox;
+
+    @FXML
     private Label player1Label;
 
     @FXML
@@ -191,6 +194,18 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
                 ((HBox) node).getChildren().forEach(tileNode -> tileNode.setDisable(true));
             }
         });
+
+        Button returnButton = new Button("Torna al \ngioco principale");
+        returnButton.setStyle("-fx-font-size: 13pt; -fx-text-alignment: center;");
+        returnButton.setOnAction(e -> {
+            try {
+                this.getMainView().setBoardScene();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        this.buttonBox.getChildren().add(returnButton);
     }
 
     /**
