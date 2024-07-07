@@ -12,6 +12,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import it.unibo.mparty.controller.GameController;
 import java.io.IOException;
@@ -43,6 +44,7 @@ public class GameViewImpl extends Application implements GameView{
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
+        this.stage.getIcons().add(new Image("/images/marioParty.png"));
         this.setBoardView();
         /*
         //FAKE START
