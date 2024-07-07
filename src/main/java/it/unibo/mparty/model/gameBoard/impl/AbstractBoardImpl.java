@@ -87,12 +87,11 @@ public abstract class AbstractBoardImpl implements GameBoard{
         return this.initialPosition;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public Map<Direction, Position> getNextPositions(Position position) {
         return this.getSlot(position).hasNext() ? 
         Collections.unmodifiableMap(this.getSlot(position).getNextConnections()) :
-        Collections.EMPTY_MAP;
+        Collections.emptyMap();
     }
 
     @Override
