@@ -1,3 +1,4 @@
+
 package it.unibo.mparty.controller;
 
 import java.io.IOException;
@@ -17,15 +18,16 @@ import it.unibo.mparty.view.shop.api.ShopView;
 public interface GameController {
 
     /**
-     * Set up the shop view
+     * Manage the start of a new game
+     * @param model to set, created during the initial game phase
      */
-    void setUpShop(ShopView shopView);
+    void startGame(GameModel model) throws IOException;
 
     /**
-     * Select an item and check if the player can add it
-     * @param itemString the item the player wants to buy
+     * Handle the request of the player to use an item
+     * @param item that player wants to use
      */
-    void buyItem(ItemName itemName, ShopView shopView);
+    void useItem(String item);
 
     /**
      * Handle the request of the user to roll dice
@@ -39,27 +41,26 @@ public interface GameController {
 
     /**
      * handle the activation of the slot where is located the actual player
-     * @throws IOException 
+     * @throws IOException
      */
     void action() throws IOException;
 
     /**
-     * Handle the request of the player to use an item
-     * @param item {@link ItemName} that player wants to use
+     * Set up the shop view
+     * @param shopView the view of the shop
      */
-    void useItem(ItemName item);
+    void setUpShop(ShopView shopView);
 
     /**
-     * Manage the start of a new game
-     * @param model to set, created during the initial game phase
+     * Select an item and check if the player can add it
+     * @param itemName the {@link ItemName} of the item the player wants to buy
+     * @param shopView the view of the shop
      */
-    void startGame(GameModel model) throws IOException;
+    void buyItem(ItemName itemName, ShopView shopView);
 
     /**
      * Get the result of a minigame and update the model with it
      * @param result of the game
      */
     void saveMinigameResult(Pair<String, Integer> result);
-
-    void endGame();
 }

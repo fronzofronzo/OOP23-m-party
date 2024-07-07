@@ -1,8 +1,5 @@
 package it.unibo.mparty.model.player.api;
 
-import it.unibo.mparty.model.player.impl.Character;
-import it.unibo.mparty.utilities.Position;
-
 /**
  * The {@code PlayerBuilder} interface defines the methods to create a new
  * player. It applies the creation pattern Builder
@@ -34,5 +31,5 @@ public interface PlayerBuilder {
      * Create the player instance with the specified parameters
      * @return player instance
      */
-    Player buildPlayer();
+    Player buildPlayer() throws IllegalStateException;
 }

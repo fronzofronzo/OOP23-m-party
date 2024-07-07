@@ -6,21 +6,30 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Position;
 
 /**
- * class that implements the CursedDice item
+ * class that implements the CursedDice item.
  */
-public class CursedDice extends AbstractItem{
+public class CursedDice extends AbstractItem {
+
+    private final static int CURSEDICE_COST = 5;
 
     /**
-     * Construct a new istance of CursedDice item
+     * Construct a new istance of CursedDice item.
      */
-    public CursedDice (){
-        super (ItemName.DADO_MALEDETTO,5);
+    public CursedDice() {
+        super(ItemName.DADO_MALEDETTO, CURSEDICE_COST);
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void activate(Player player, Optional<Player> target, Optional<Position> position) {
         target.get().getDice().setMaxNumber(3);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getDescription() {
         return "Il dado ha solo numeri da 1 a 3. Puo' essere attivato su un giocatore a tua scelta";
@@ -30,7 +39,7 @@ public class CursedDice extends AbstractItem{
      * {@inheritDoc}
      */
     @Override
-    public boolean isOnOthers () {
+    public boolean isOnOthers() {
         return true;
     }
 

@@ -31,7 +31,7 @@ public class NanogramControllerImpl implements NanogramController {
      * {@inheritDoc}
      */
     @Override
-    public void initGame(List<String> players) {
+    public void initGame(final List<String> players) {
         this.model.setUpPlayers(players);
         this.view.updateLives(this.model.getLives());
         this.view.initGrid(this.model.getBoardSize());
@@ -75,6 +75,8 @@ public class NanogramControllerImpl implements NanogramController {
             }
             this.view.showResult(this.model.getResult());
             this.view.getMainController().saveMinigameResult(this.model.getResult());
+
         }
+        this.view.getMainController().saveMinigameResult(this.model.getResult());
     }
 }

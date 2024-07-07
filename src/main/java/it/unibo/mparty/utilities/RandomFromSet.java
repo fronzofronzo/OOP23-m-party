@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.gameBoard.util;
+package it.unibo.mparty.utilities;
 
 import java.util.Set;
 import java.util.Random;

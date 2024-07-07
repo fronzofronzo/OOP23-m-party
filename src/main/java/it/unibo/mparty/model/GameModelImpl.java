@@ -1,8 +1,8 @@
+
 package it.unibo.mparty.model;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
-import it.unibo.mparty.model.gameBoard.util.RandomFromSet;
 import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.minigameHandler.MinigameHandler;
@@ -11,19 +11,9 @@ import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.shop.api.Shop;
 import it.unibo.mparty.model.shop.impl.ShopImpl;
-import it.unibo.mparty.utilities.BoardType;
-import it.unibo.mparty.utilities.Pair;
-import it.unibo.mparty.utilities.Position;
-import it.unibo.mparty.utilities.SlotType;
 import it.unibo.mparty.utilities.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -34,11 +24,17 @@ public class GameModelImpl implements GameModel{
     private static final int TURNS_NUMBER = 10;
     private static final int MIN_COINS = 4;
     private static final int MAX_COINS = 10;
-    private static final int STAR_COST  =20;
+    private static final int STAR_COST = 20;
+    private static final String MESSAGE_ROLL_DICE = " tira i dadi.";
+    private static final String MESSAGE_MOVE_PLAYER = " muovi la pedina.";
+    private static final String MESSAGE_MOVING_PLAYER = " muovi la pedina in una delle direzioni possibili:";
+    private static final String MESSAGE_ACTIVE_SLOT = " attiva l'effetto dello slot: ";
+    private static final String MESSAGE_END_TURN = " passa il turno.";
 
     private final List<Player> players;
     private final GameBoard board;
     private final Shop shop;
+    private boolean activateShop;
     private int turn = 1 ;
     private GameStatus status = GameStatus.ROLL_DICE;
     private int actualPlayerIndex = 0;
@@ -52,12 +48,15 @@ public class GameModelImpl implements GameModel{
      * @param difficulty of the game. It's related to the {@link BoardType}
      */
     public GameModelImpl(List<Player> players, String difficulty){
-       this.players = players;
-       this.minigameHandler = new MinigameHandlerImplementation();
-       this.shop = new ShopImpl();
-       final SimpleBoardFactory boardFactory = new SimpleBoardFactory();
-       this.board = boardFactory.createBoard(BoardType.valueOf(difficulty));
-       this.players.forEach(p -> p.setPosition(this.board.getStrartingPosition()));
+        this.activateShop = false;
+        this.players = players;
+        this.minigameHandler = new MinigameHandlerImplementation();
+        this.shop = new ShopImpl();
+        final SimpleBoardFactory boardFactory = new SimpleBoardFactory();
+        this.board = boardFactory.createBoard(Arrays.stream(BoardType.values())
+                .filter(b -> b.toString().equals(difficulty))
+                .findAny().get());
+        this.players.forEach(p -> p.setPosition(this.board.getStrartingPosition()));
     }
 
     /**
@@ -66,18 +65,27 @@ public class GameModelImpl implements GameModel{
      */
     @Override
     public void movePlayer(Optional<Direction> dir) {
-        if (this.status.equals(GameStatus.MOVE_PLAYER)) {
-            while (this.steps < this.players.get(actualPlayerIndex).getDice().getResult()) {
+        if (this.status.equals(GameStatus.MOVE_PLAYER) ||
+                this.status.equals(GameStatus.MOVING_PLAYER)) {
+            if (this.status.equals(GameStatus.MOVE_PLAYER)) {
+                this.status = this.status.switchStatus();
+            }
+            final int diceResult = this.players.get(actualPlayerIndex).getDice().getResult();
+            while (this.steps < diceResult) {
                 this.checkStartAcquisition();
-                final Position actualPlayerPosition = this.players.get(actualPlayerIndex).getPosition();
-                final Map<Direction, Position> nextPlayerPosition = this.board.getNextPositions(actualPlayerPosition);
-                if (nextPlayerPosition.size() == 1 && dir.isEmpty()) {
-                    this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.entrySet().stream().findFirst().get().getValue());
+                final Position playerPos = this.players.get(actualPlayerIndex).getPosition();
+                final Map<Direction, Position> nextPlayerPos = this.board.getNextPositions(playerPos);
+                if (nextPlayerPos.size() == 1 && dir.isEmpty()) {
+                    this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.entrySet()
+                            .stream()
+                            .findFirst()
+                            .get()
+                            .getValue());
                 } else {
-                    if (dir.isEmpty() || nextPlayerPosition.size() < 1 || !nextPlayerPosition.containsKey(dir.get())) {
+                    if (dir.isEmpty() || nextPlayerPos.size() < 1 || !nextPlayerPos.containsKey(dir.get())) {
                         return;
                     } else {
-                        this.players.get(actualPlayerIndex).setPosition(nextPlayerPosition.get(dir.get()));
+                        this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.get(dir.get()));
                         dir = Optional.empty();
                     }
                 }
@@ -93,10 +101,10 @@ public class GameModelImpl implements GameModel{
      */
     @Override
     public int rollDice() {
-       if(this.status == GameStatus.ROLL_DICE){
-           this.players.get(actualPlayerIndex).getDice().rollDice();
-           this.status = this.status.switchStatus();
-       }
+        if(this.status == GameStatus.ROLL_DICE){
+            this.players.get(actualPlayerIndex).getDice().rollDice();
+            this.status = this.status.switchStatus();
+        }
         return this.players.get(actualPlayerIndex).getDice().getResult();
     }
 
@@ -104,11 +112,13 @@ public class GameModelImpl implements GameModel{
      * {@inheritDoc}
      */
     @Override
-    public Optional<String> getActiveMinigame() {
-        if(this.minigameHandler.isInGame()){
-            return Optional.of(this.minigameHandler.getMinigame());
-        } else {
-            return Optional.empty();
+    public void action() {
+        if (this.status.equals(GameStatus.ACTIVE_SLOT)) {
+            this.activateSlot();
+            this.status = this.status.switchStatus();
+        } else if (this.status.equals(GameStatus.END_TURN)) {
+            this.nextPlayer();
+            this.status = this.status.switchStatus();
         }
     }
 
@@ -116,11 +126,60 @@ public class GameModelImpl implements GameModel{
      * {@inheritDoc}
      */
     @Override
-    public void nextPlayer() {
-        this.actualPlayerIndex = (this.actualPlayerIndex + 1) % players.size();
-        if(this.actualPlayerIndex == 0){
-            this.turn++;
+    public void useItem(final ItemName itemName) {
+        Item item = this.players.get(actualPlayerIndex).getPlayerBag().useItem(itemName);
+        Optional<Position> position = item.needPosition() ?
+                Optional.of(this.board.getStarPosition()) :
+                Optional.empty();
+        Optional<Player> target = Optional.empty();
+        if (item.isOnOthers()) {
+            Set<Player> targets = this.players.stream()
+                    .filter(p -> !p.equals(this.players.get(actualPlayerIndex)))
+                    .collect(Collectors.toSet());
+            target = Optional.of(RandomFromSet.get(targets));
         }
+        item.activate(this.players.get(actualPlayerIndex), target, position);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean buyItem(final ItemName itemName) {
+        return this.shop.buyItem(this.players.get(actualPlayerIndex), itemName);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void endMinigame(Pair<String, Integer> result) {
+        final Player winner = this.players.stream()
+                .filter(p -> p.getUsername().equals(result.getFirst()))
+                .findAny()
+                .get();
+        winner.addCoins(result.getSecond());
+        this.minigameHandler.stopMinigame();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isOver() {
+        return this.turn == TURNS_NUMBER;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isShop() {
+        if (this.activateShop) {
+            this.activateShop = false;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -141,109 +200,33 @@ public class GameModelImpl implements GameModel{
      * {@inheritDoc}
      */
     @Override
-    public boolean isOver() {
-        return turn == TURNS_NUMBER;
+    public Optional<String> getActiveMinigame() {
+        return this.minigameHandler.isInGame() ?
+                Optional.of(this.minigameHandler.getMinigame()) :
+                Optional.empty();
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public void action() {
-        if (this.status.equals(GameStatus.ACTIVE_SLOT)) {
-            this.activateSlot();
-            this.status = this.status.switchStatus();
-        } else if (this.status.equals(GameStatus.END_TURN)) {
-            this.nextPlayer();
-            this.status = this.status.switchStatus();
-        }
-    }
-
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Map<Position, SlotType> getBoardConfiguration() {
-        return this.board.getSlotTypeBoard();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Pair<Integer, Integer> getBoardDimensions() {
-        return this.board.getDimension();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void useItem(ItemName item) {
-        Item actualItem = this.players.get(actualPlayerIndex).getPlayerBag().useItem(item);
-        Optional<Position> pos = actualItem.needPosition() ? Optional.of(this.board.getStarPosition()) : Optional.empty();
-        Optional<Player> target = Optional.empty();
-        if (actualItem.isOnOthers()) {
-            Set<Player> targets = this.players.stream().filter(p -> !p.equals(this.players.get(actualPlayerIndex))).collect(Collectors.toSet());
-            target = Optional.of(RandomFromSet.get(targets));
-        }
-        actualItem.activate(this.players.get(actualPlayerIndex), target, pos);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void endMinigame(Pair<String, Integer> result) {
-        final Player winner = this.players.stream().filter(p -> p.getUsername().equals(result.getFirst())).findAny().get();
-        winner.addCoins(result.getSecond());
-        this.minigameHandler.stopMinigame();
-    }
-
-    /*
-    private Set<Direction> getDirections() {
-        if (this.status.equals(GameStatus.MOVE_PLAYER)) {
-            Map<Direction,Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
-            if (pos.size() > 1) {
-                return pos.entrySet().stream().map(entry -> entry.getKey()).collect(Collectors.toSet());
-            }
-        }
-        return Collections.emptySet();
-    } */
-
-    @Override
-    public List<String> getPlayersNicknames() {
-        List<String> output = new ArrayList<>();
-        this.players.stream().forEach(p -> output.add(p.getUsername()));
-        return Collections.unmodifiableList(output);
-    }
-
-    /**
-     * {@inheritDoc}
-     * @return
-     */
-    @Override
-    public Pair<String, Position> getActualPlayerInfo() {
-        final Player pl = this.players.get(actualPlayerIndex);
-        return new Pair<>(pl.getUsername(),pl.getPosition());
-    }
-
     @Override
     public String getMessage() {
         String output = this.players.get(actualPlayerIndex).getUsername();
         switch (this.status) {
             case ROLL_DICE:
-                output = output + " tira i dadi";
+                output = output + MESSAGE_ROLL_DICE;
                 break;
             case MOVE_PLAYER:
-                output = output + " muovi la pedina";
+                output = output + MESSAGE_MOVE_PLAYER;
+                break;
+            case MOVING_PLAYER:
+                output = output + MESSAGE_MOVING_PLAYER + getDirections();
                 break;
             case ACTIVE_SLOT:
-                output = output + " attiva l'effetto dello slot";
+                output = output + MESSAGE_ACTIVE_SLOT + "\n" + this.board.getSlotType(this.players.get(actualPlayerIndex).getPosition()) + ".";
                 break;
             case END_TURN:
-                output = output + " passa il turno";
+                output = output + MESSAGE_END_TURN;
                 break;
             default:
                 break;
@@ -251,19 +234,82 @@ public class GameModelImpl implements GameModel{
         return output;
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean buyItem(ItemName itemName) {
-        return this.shop.buyItem(this.players.get(actualPlayerIndex), itemName);
+    public Map<Position, SlotType> getBoardConfig() {
+        return this.board.getSlotTypeBoardConfiguration();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Pair<Integer, Integer> getBoardDim() {
+        return this.board.getDimension();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Item> getItemsFromShop() {
-        return this.shop.getItemList().stream().toList();
+        return Collections.unmodifiableList(this.shop.getItemList().stream().toList());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ItemName> getItemsOfCurrentPlayer() {
+        return Collections.unmodifiableList(this.players.get(actualPlayerIndex).getPlayerBag().getItems());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Player> getPlayers() {
         return Collections.unmodifiableList(this.players);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Player getActualPlayer() {
+        return this.players.get(this.actualPlayerIndex);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<String> getPlayersInGame() {
+        return this.minigameHandler.getUsersPlaying();
+    }
+
+    private void nextPlayer() {
+        this.actualPlayerIndex = (this.actualPlayerIndex + 1) % players.size();
+        if(this.actualPlayerIndex == 0){
+            this.turn++;
+        }
+    }
+
+
+    private String getDirections() {
+        Map<Direction,Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
+        String output = "";
+        for (Map.Entry<Direction,Position> entry : pos.entrySet()) {
+            if (!output.isBlank()) {
+                output = output.concat(",");
+            }
+            output = output.concat(" " + entry.getKey().toString());
+        }
+        output = output.concat(".");
+        return output;
     }
 
     private void activateSlot() {
@@ -292,7 +338,8 @@ public class GameModelImpl implements GameModel{
                 case MALUS -> {
                     actualPlayer.removeCoins(random.nextInt(MIN_COINS, MAX_COINS));
                 }
-                case ACTIVE_STAR -> {
+                case SHOP -> {
+                    this.activateShop = true;
                 }
                 default -> {break;}
             };
@@ -307,6 +354,4 @@ public class GameModelImpl implements GameModel{
             actualPlayer.removeCoins(STAR_COST);
         }
     }
-
-
 }

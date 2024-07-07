@@ -115,7 +115,7 @@ public class NanogramModelImpl implements NanogramModel {
      * {@inheritDoc}
      */
     @Override
-    public void setUpPlayers(List<String> players) {
+    public void setUpPlayers(final List<String> players) {
         this.player = players.get(0);
     }
 

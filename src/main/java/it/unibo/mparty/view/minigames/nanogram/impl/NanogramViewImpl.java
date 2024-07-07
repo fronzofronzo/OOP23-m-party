@@ -86,6 +86,14 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
      * {@inheritDoc}
      */
     @Override
+    public void startMinigame(final List<String> players) {
+        this.controller.initGame(players);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void initGrid(final int size) {
         this.boardButtons = new HashSet<>();
         this.boardGrid.setHgap(2);
@@ -182,6 +190,9 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         boardButtons.forEach(button -> button.setGraphic(drawCross(Color.valueOf("#38475f"))));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showResult(Pair<String, Integer> result) {
         this.messageLabel.setText(NanogramMessage.END.getFormattedMessage(result.getFirst(), result.getSecond()));
@@ -199,11 +210,6 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         pane.setBottom(returnButton);
         BorderPane.setMargin(returnButton, new Insets(MARGIN));
         BorderPane.setAlignment(returnButton, Pos.CENTER);
-    }
-
-    @Override
-    public void startMinigame(List<String> players) {
-        this.controller.initGame(players);
     }
 
     private void setHints(final GridPane grid, final List<List<Integer>> hintsList, final boolean isRowHints) {
@@ -231,7 +237,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     }
 
     private void clearMessageLabel() {
-        this.messageLabel.setText("");
+        this.messageLabel.setText(" ");
     }
 
     private final EventHandler<MouseEvent> handleCellClicked = event -> {

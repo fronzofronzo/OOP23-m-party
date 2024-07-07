@@ -32,6 +32,11 @@ public class MinigameHandlerImplementation implements MinigameHandler{
     }
 
     @Override
+    public List<String> getUsersPlaying() {
+        return this.players.stream().map(Player::getUsername).toList();
+    }
+
+    @Override
     public boolean isInGame() {
         return actualMinigame != null;
     }
