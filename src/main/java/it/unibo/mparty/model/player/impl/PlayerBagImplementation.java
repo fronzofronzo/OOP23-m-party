@@ -47,6 +47,7 @@ public class PlayerBagImplementation implements PlayerBag {
         if (output.isEmpty()){
             throw new IllegalStateException("Player should have the item");
         }
+        this.items.remove(output.get());
         return output.get();
     }
 
