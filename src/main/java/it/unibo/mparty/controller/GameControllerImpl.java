@@ -172,6 +172,7 @@ public class GameControllerImpl implements GameController{
                         .stream()
                         .map(i -> i.toString())
                         .toList(),
-                this.model.getMessage());
+                this.model.getMessage(),
+                this.model.getTurn());
     }
 }

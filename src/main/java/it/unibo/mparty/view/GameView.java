@@ -72,12 +72,7 @@ public interface GameView {
      * @param items that are the items of the actual player
      * @param message that is the message to display
      */
-    void updateCommands(List<String> items, String message);
-
-    /**
-     * Method to switch the view directly to the board scene
-     */
-    void switchToBoard();
+    void updateCommands(List<String> items, String message, Pair<String,String> turn);
 
     /**
      * Displays the results of the game in the view.

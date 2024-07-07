@@ -34,6 +34,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private static final String TEXT_ITEMS = "OGGETTI: ";
     private static final String TEXT_VOID_ITEM = "NESSUN OGGETTO";
     private static final String TEXT_DICE_RESULT = "RISULTATO: ";
+    private static final String TEXT_TURN = "TURNO: ";
 
     private static final int RADIUS = 8;
 
@@ -133,6 +134,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private Label resultDice;
     @FXML
     private Label labelMessage;
+    @FXML
+    private Label labelTurn;
 
     private Circle player1 = new Circle(RADIUS);
     private Circle player2 = new Circle(RADIUS);
@@ -230,11 +233,12 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @Override
-    public void updateCommands(final List<String> items, String message) {
+    public void updateCommands(final List<String> items, String message, Pair<String,String> turn) {
         for (int i = 0; i < this.buttonsItem.size(); i++) {
             this.buttonsItem.get(i).setText(i < items.size() ? items.get(i) : TEXT_VOID_ITEM);
         }
         this.labelMessage.setText(message);
+        this.labelTurn.setText(TEXT_TURN + turn.getFirst() + "/" + turn.getSecond());
     }
 
     @FXML

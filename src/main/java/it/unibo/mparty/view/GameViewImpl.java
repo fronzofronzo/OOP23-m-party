@@ -135,13 +135,8 @@ public class GameViewImpl extends Application implements GameView{
      * {@inheritDoc}
      */
     @Override
-    public void updateCommands(final List<String> items, String message) {
-        this.boardView.updateCommands(items, message);
-    }
-
-    @Override
-    public void switchToBoard() {
-        this.stage.setScene(boardScene);
+    public void updateCommands(final List<String> items, String message, Pair<String,String> turn) {
+        this.boardView.updateCommands(items, message, turn);
     }
 
     private void setBoardView() throws IOException {

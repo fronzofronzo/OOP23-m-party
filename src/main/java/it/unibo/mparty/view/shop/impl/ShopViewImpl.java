@@ -1,5 +1,6 @@
 package it.unibo.mparty.view.shop.impl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import it.unibo.mparty.model.item.impl.ItemName;
@@ -81,7 +82,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView {
     }
 
     @FXML
-    private void closeShop() {
-        this.getMainView().switchToBoard();
+    private void closeShop() throws IOException {
+        this.getMainView().setBoardScene();
     }
 }
