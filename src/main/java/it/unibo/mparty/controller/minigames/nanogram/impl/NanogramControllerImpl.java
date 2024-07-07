@@ -75,8 +75,6 @@ public class NanogramControllerImpl implements NanogramController {
             }
             this.view.showResult(this.model.getResult());
             this.view.getMainController().saveMinigameResult(this.model.getResult());
-
         }
-        this.view.getMainController().saveMinigameResult(this.model.getResult());
     }
 }
