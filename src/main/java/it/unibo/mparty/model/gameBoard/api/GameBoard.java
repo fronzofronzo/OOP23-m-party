@@ -67,4 +67,6 @@ public interface GameBoard {
      * @return the {@link BoardType}
      */
     BoardType getBoardType();
+
+    Map<Position, SlotType> getSlotsToUpdate();
 }
