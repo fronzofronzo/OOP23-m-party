@@ -58,7 +58,7 @@ public class MemoryCardControllerImpl implements MemoryCardController{
     @Override
     public void endGame() {
         this.view.getMainController().saveMinigameResult(this.model.getResult());
-        //this.view.showResult()
+        this.view.getMainView().switchToBoard();
     }
 
     @Override
