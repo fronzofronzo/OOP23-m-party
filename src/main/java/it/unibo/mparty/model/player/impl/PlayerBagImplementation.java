@@ -35,7 +35,9 @@ public class PlayerBagImplementation implements PlayerBag {
      */
     @Override
     public void addItem(final Item item) {
-        this.items.add(item);
+        if(this.items.size() < this.capacity){
+            this.items.add(item);
+        }
     }
 
     /**
