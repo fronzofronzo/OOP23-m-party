@@ -146,7 +146,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private List<Label> labelPlayersColor = new ArrayList<>();
     private List<Button> buttonsItem = new ArrayList<>();
     private List<Button> buttonsDirection = new ArrayList<>();
-    private List<Circle> players = new ArrayList<>();
+    private List<Circle> pawns = new ArrayList<>();
     private Map<Position,FlowPane> board = new HashMap<>();
 
     @Override
@@ -157,9 +157,9 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
                 this.labelPlayersStars.get(i).setText(TEXT_STARS + String.valueOf(stars));
                 this.labelPlayersItems.get(i).setText(TEXT_ITEMS + this.printItems(items));
                 for (Map.Entry<Position,FlowPane> entry : this.board.entrySet()) {
-                    entry.getValue().getChildren().remove(this.players.get(i));
+                    entry.getValue().getChildren().remove(this.pawns.get(i));
                 }
-                this.board.get(position).getChildren().add(this.players.get(i));
+                this.board.get(position).getChildren().add(this.pawns.get(i));
             }
         }
     }
@@ -174,7 +174,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private void setUpPlayers(List<String> usernames) {
         for (int i = 0; i < usernames.size(); i++) {
             this.labelPlayersNames.get(i).setText(usernames.get(i));
-            this.players.get(i).setFill(PLAYER_COLOR.get(i));
+            this.pawns.get(i).setFill(PLAYER_COLOR.get(i));
             this.labelPlayersColor.get(i).setText("(" + COLOR_TO_TEXT.get(PLAYER_COLOR.get(i)) + ")");
         }
     }
@@ -187,10 +187,9 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.labelPlayersColor.addAll(List.of(this.colorP1, this.colorP2, this.colorP3, this.colorP4));
         this.buttonsItem.addAll(List.of(this.useItem1, this.useItem2, this.useItem3));
         this.buttonsDirection.addAll(List.of(this.buttonUP, this.buttonDOWN, this.buttonLEFT, this.buttonRIGHT));
-        this.players.addAll(List.of(this.player1, this.player2, this.player3, this.player4));
-        this.players.forEach(c -> c.setStroke(Color.BLACK));
-        this.players.forEach(c -> c.setStrokeWidth(2));
-        //this.setUpPlayers();
+        this.pawns.addAll(List.of(this.player1, this.player2, this.player3, this.player4));
+        this.pawns.forEach(c -> c.setStroke(Color.BLACK));
+        this.pawns.forEach(c -> c.setStrokeWidth(2));
     }
 
     private void populateGridPane(Pair<Integer,Integer> dimension, Map<Position, SlotType> map) {
@@ -241,9 +240,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private void movePlayer(ActionEvent e){
         final Button bt = (Button)e.getSource();
         Optional<Direction> dir = Optional.empty();
-        if (bt.equals(buttonMove)) {
-
-        } else if (bt.equals(buttonDOWN)) {
+        if (bt.equals(buttonDOWN)) {
             dir = Optional.of(Direction.DOWN);
         } else if (bt.equals(buttonUP)) {
             dir = Optional.of(Direction.UP);
@@ -265,7 +262,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         Button bt = (Button)e.getSource();
         String text = bt.getText();
         if (!text.equals(TEXT_VOID_ITEM)) {
-            //this.getMainController().useItem(text);
+            this.getMainController().useItem(text);
         }
     }
 
