@@ -104,7 +104,7 @@ public class GameControllerImpl implements GameController{
      * {@inheritDoc}
      */
     @Override
-    public void setUpShop(ShopView shopView) {
+    public void setUpShop(final ShopView shopView) {
         Map<ItemName,Integer> itemMap = new HashMap<>();
         this.model.getItemsFromShop().stream().forEach(it -> itemMap.put(it.getName(), it.getCost()));
         itemMap.forEach((str, i) -> shopView.addButton(str, i));
@@ -119,7 +119,7 @@ public class GameControllerImpl implements GameController{
      * {@inheritDoc}
      */
     @Override
-    public void buyItem(final ItemName itemName, ShopView shopView) {
+    public void buyItem(final ItemName itemName, final ShopView shopView) {
         if (this.model.buyItem(itemName)) {
             shopView.updateMoney(this.model.getActualPlayer().getNumCoins());;
         }
