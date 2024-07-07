@@ -21,6 +21,7 @@ public class Connect4ModelImpl implements Connect4Model {
     private static final int COLUMN_NUMBER = 8;
     private static final int COINS_FROM_DRAW = 5;
     private static final int COINS_FROM_WIN = 10;
+    private static final int CHECK_START = -3;
     private String player1;
     private String player2;
     private String turnPlayer;
@@ -30,7 +31,7 @@ public class Connect4ModelImpl implements Connect4Model {
     private List<Position> checkList;
 
     /**
-     * Construct a new istance of {@link Connect4ModelImpl}
+     * Construct a new istance of {@link Connect4ModelImpl}.
      */
     public Connect4ModelImpl() {
         selectedMap = new HashMap<>();
@@ -127,7 +128,7 @@ public class Connect4ModelImpl implements Connect4Model {
     }
 
     private boolean checkDirections(final int i, final int j, final Connect4Directions direction) {
-        return IntStream.rangeClosed(-3, 3)
+        return IntStream.rangeClosed(CHECK_START, 3)
         .map(off -> countMatches(i, j, direction, off))
         .max().getAsInt() >= 4;
     }
@@ -142,7 +143,7 @@ public class Connect4ModelImpl implements Connect4Model {
         return checkList.size();
     }
 
-    private boolean isAvailable(Position pos) {
+    private boolean isAvailable(final Position pos) {
         return pos.getX() >= 0 && pos.getX() < ROW_NUMBER && pos.getY() >= 0 && pos.getY() < COLUMN_NUMBER;
     }
 
