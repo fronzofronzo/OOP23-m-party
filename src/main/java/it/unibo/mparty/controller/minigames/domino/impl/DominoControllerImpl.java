@@ -5,7 +5,6 @@ import it.unibo.mparty.model.minigames.domino.game.api.DominoModel;
 import it.unibo.mparty.model.minigames.domino.game.impl.DominoModelImpl;
 import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
 import it.unibo.mparty.model.minigames.domino.tile.impl.TileImpl;
-import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.minigames.domino.DominoMessage;
 import it.unibo.mparty.view.minigames.domino.api.DominoView;
 
@@ -64,9 +63,7 @@ public class DominoControllerImpl implements DominoController {
             this.isPlayer1Turn = !this.isPlayer1Turn;
             this.updateTurn();
             this.checkDraw();
-            if (this.model.isOver()) {
-                this.endGame();
-            }
+            this.endGame();
         } else {
             this.view.setMessage(DominoMessage.MOVE_NOT_VALID);
         }
@@ -88,9 +85,8 @@ public class DominoControllerImpl implements DominoController {
      */
     @Override
     public void endGame() {
-        final Pair<String, Integer> winner = this.model.getResult();
-        if (winner != null && winner.getFirst() != null) {
-            this.view.showResult(winner);
+        if (this.model.isOver()) {
+            this.view.showResult(this.model.getResult());
             this.view.getMainController().saveMinigameResult(this.model.getResult());
         }
     }
@@ -104,9 +100,7 @@ public class DominoControllerImpl implements DominoController {
             this.view.playerCantDraw();
         }
 
-        if (this.model.isOver()) {
-            this.endGame();
-        }
+        this.endGame();
     }
 
     private void updatePlayersTiles() {
