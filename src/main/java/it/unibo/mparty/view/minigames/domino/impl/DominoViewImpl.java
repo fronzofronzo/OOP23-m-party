@@ -126,6 +126,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
             VBox.setVgrow(tileBox, Priority.ALWAYS);
             VBox.setMargin(tileBox, new Insets(0, PREF_SIZE, 0, PREF_SIZE));
             this.generateTile(tileBox, tile.getSideA().getValue(), tile.getSideB().getValue());
+            tileBox.setStyle("-fx-border-color: black; -fx-border-width: 1px; -fx-border-style: solid;");
             playerTilesBox.getChildren().add(tileBox);
         }
     }
