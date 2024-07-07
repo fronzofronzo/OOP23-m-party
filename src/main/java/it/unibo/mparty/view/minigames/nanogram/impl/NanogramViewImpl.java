@@ -191,8 +191,8 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         returnButton.setOnAction(e -> {
             try {
                 this.getMainView().setBoardScene();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         });
 
