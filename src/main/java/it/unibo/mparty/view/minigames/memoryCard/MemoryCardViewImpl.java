@@ -87,6 +87,8 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
                 throw new RuntimeException(ex);
             }
         });
+        this.controlButton.setText("Torna al gioco principale");
+        this.controlButton.setDisable(false);
     }
 
     @Override
