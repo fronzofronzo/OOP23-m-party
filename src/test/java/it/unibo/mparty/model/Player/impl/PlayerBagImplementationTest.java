@@ -51,6 +51,9 @@ class PlayerBagImplementationTest {
         assertFalse(this.bag.getItems().contains(item.getName()));
     }
 
+    /**
+     * Check if the {@code isFull} function works properly
+     */
     @Test
     public void testFull(){
         final Item item = new ItemFactoryImpl().createItem(ItemName.DADO_FORTUNATO);
