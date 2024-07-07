@@ -51,7 +51,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView {
      * {@inheritDoc}
      */
     @Override
-    public void addDescription(String description) {
+    public void addDescription(final String description) {
         final Label lb = new Label(description);
         descriptionPane.getChildren().add(lb);
         AnchorPane.setTopAnchor(lb, j * DISTANCE_FROM_BUTTON);
@@ -59,7 +59,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView {
         j++;
     }
 
-    private void selectItem(ActionEvent e) {
+    private void selectItem(final ActionEvent e) {
         this.getMainController().buyItem(itemNameList
         .get(this.buttonPane.getChildren().indexOf((Button) (e.getSource()))), this);
     }
@@ -68,7 +68,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView {
      * {@inheritDoc}
      */
     @Override
-    public void updateMoney(int money) {
+    public void updateMoney(final int money) {
         moneyLabel.setText("Monete rimaste: " + money);
     }
 
