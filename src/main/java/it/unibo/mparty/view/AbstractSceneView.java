@@ -33,7 +33,7 @@ public abstract class AbstractSceneView implements SceneView{
      * {@inheritDoc}
      */
     @Override
-    public GameController getMainController(){
+    public GameController getMainController() {
         return this.mainController;
     }
 }
