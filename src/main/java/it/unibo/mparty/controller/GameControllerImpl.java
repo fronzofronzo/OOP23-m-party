@@ -60,6 +60,7 @@ public class GameControllerImpl implements GameController{
                 .findAny()
                 .get());
         this.updateCommandView();
+        this.updatePlayersView();
     }
 
     /**
@@ -135,6 +136,7 @@ public class GameControllerImpl implements GameController{
     @Override
     public void saveMinigameResult(Pair<String, Integer> result) {
         this.model.endMinigame(result);
+        this.updatePlayersView();
     }
 
     private void checkEndGame() throws IOException {
@@ -172,6 +174,7 @@ public class GameControllerImpl implements GameController{
                         .stream()
                         .map(i -> i.toString())
                         .toList(),
-                this.model.getMessage());
+                this.model.getMessage(),
+                this.model.getTurn());
     }
 }

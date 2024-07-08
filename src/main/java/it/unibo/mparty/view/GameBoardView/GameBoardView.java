@@ -39,7 +39,7 @@ public interface GameBoardView extends SceneView{
      * @param items that are the items of the actual player
      * @param message that is the message to display
      */
-    void updateCommands(List<String> items, String message);
+    void updateCommands(List<String> items, String message, Pair<String,String> turn);
 
     /**
      * Show in the view the result of the dice roll

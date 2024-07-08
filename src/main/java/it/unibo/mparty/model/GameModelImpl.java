@@ -21,11 +21,11 @@ import java.util.stream.Collectors;
  */
 public class GameModelImpl implements GameModel{
 
-    private static final int TURNS_NUMBER = 10;
+    private static final int TURNS_NUMBER = 15;
     private static final int MIN_COINS = 4;
     private static final int MAX_COINS = 10;
     private static final int STAR_COST = 20;
-    private static final String MESSAGE_ROLL_DICE = " tira i dadi.";
+    private static final String MESSAGE_ROLL_DICE = " puoi usare un oggetto o tirare solo i dadi.";
     private static final String MESSAGE_MOVE_PLAYER = " muovi la pedina.";
     private static final String MESSAGE_MOVING_PLAYER = " muovi la pedina in una delle direzioni possibili:";
     private static final String MESSAGE_ACTIVE_SLOT = " attiva l'effetto dello slot: ";
@@ -356,11 +356,17 @@ public class GameModelImpl implements GameModel{
         if(actualPlayer.getPosition().equals(starPosition) && actualPlayer.getNumCoins() >= STAR_COST){
             actualPlayer.addStar();
             actualPlayer.removeCoins(STAR_COST);
+            this.board.changeStarPosition();
         }
     }
 
     @Override
     public Map<Position, SlotType> getSlotsToUpdate() {
         return this.board.getSlotsToUpdate();
+    }
+
+    @Override
+    public Pair<String, String> getTurn() {
+        return new Pair<String,String>(String.valueOf(this.turn), String.valueOf(TURNS_NUMBER));
     }
 }

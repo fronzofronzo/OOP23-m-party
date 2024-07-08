@@ -17,17 +17,15 @@ public class PlayerBagImplementation implements PlayerBag {
 
     private final List<Item> items;
     private final int capacity;
-    private final Player owner;
 
     /**
      * Initialise a {@link PlayerBag} implementation with selected amount
      * of items
      * @param numberOfItems dimension of the bag
      */
-    public PlayerBagImplementation(final int numberOfItems, final Player pl) {
+    public PlayerBagImplementation(final int numberOfItems) {
         this.items = new ArrayList<>();
         this.capacity = numberOfItems;
-        this.owner = pl;
     }
 
     /**
@@ -35,7 +33,9 @@ public class PlayerBagImplementation implements PlayerBag {
      */
     @Override
     public void addItem(final Item item) {
-        this.items.add(item);
+        if(this.items.size() < this.capacity){
+            this.items.add(item);
+        }
     }
 
     /**
@@ -47,6 +47,7 @@ public class PlayerBagImplementation implements PlayerBag {
         if (output.isEmpty()){
             throw new IllegalStateException("Player should have the item");
         }
+        this.items.remove(output.get());
         return output.get();
     }
 

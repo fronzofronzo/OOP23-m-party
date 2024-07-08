@@ -23,11 +23,11 @@ public class TestItemImplementation {
     private Player testPlayer;
     private Item cursedDice;
     private Item luckyDice;
-    private Item doubleDice;
+    private Item tripleDice;
     private Item booBell;
     private Item goldenPipe;
-    private static final int EXP_GOLDENPIPE = 10;
-    private static final int EXP_DOUBLEDICE = 7;
+    private static final int EXP_GOLDENPIPE = 12;
+    private static final int EXP_TRIPLEDICE = 10;
     /**
      * Initialize the items and the player used in all tests.
      */
@@ -35,7 +35,7 @@ public class TestItemImplementation {
     public void init() {
         cursedDice = factory.createItem(ItemName.DADO_MALEDETTO);
         luckyDice = factory.createItem(ItemName.DADO_FORTUNATO);
-        doubleDice = factory.createItem(ItemName.DOPPIO_DADO);
+        tripleDice = factory.createItem(ItemName.TRIPLO_DADO);
         booBell = factory.createItem(ItemName.CAMPANA_BOO);
         goldenPipe = factory.createItem(ItemName.TUBO_DORATO);
         testPlayer = new PlayerImplementation("test", "Mario");
@@ -57,7 +57,7 @@ public class TestItemImplementation {
     @Test
     public void testGetCost() {
         assertEquals(EXP_GOLDENPIPE, goldenPipe.getCost());
-        assertEquals(EXP_DOUBLEDICE, doubleDice.getCost());
+        assertEquals(EXP_TRIPLEDICE, tripleDice.getCost());
     }
 
     /**
@@ -76,12 +76,13 @@ public class TestItemImplementation {
     public void testActivation () {
         final Player testPlayer2 = new PlayerImplementation("test2", "Luigi");
         testPlayer2.addCoins(10);
-        testPlayer.getPlayerBag().addItem(doubleDice);
+        testPlayer.getPlayerBag().addItem(tripleDice);
         testPlayer.getPlayerBag().addItem(booBell);
+        assertEquals(2, testPlayer.getPlayerBag().getItems().size());
         Item item = testPlayer.getPlayerBag().useItem(testPlayer.getPlayerBag().getItems().get(0));
         item.activate(testPlayer, null, null);
-        assertEquals(2, testPlayer.getDice().getNumOfAttempts());
-        Item item2 = testPlayer.getPlayerBag().useItem(testPlayer.getPlayerBag().getItems().get(1));
+        assertEquals(3, testPlayer.getDice().getNumOfAttempts());
+        Item item2 = testPlayer.getPlayerBag().useItem(testPlayer.getPlayerBag().getItems().get(0));
         item2.activate(testPlayer, Optional.of(testPlayer2), null);
         assertEquals(7, testPlayer2.getNumCoins());
         assertEquals(3, testPlayer.getNumCoins());

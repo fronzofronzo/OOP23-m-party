@@ -12,6 +12,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import it.unibo.mparty.controller.GameController;
 import java.io.IOException;
@@ -43,6 +44,7 @@ public class GameViewImpl extends Application implements GameView{
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
+        this.stage.getIcons().add(new Image("/images/marioParty.png"));
         this.setBoardView();
         /*
         //FAKE START
@@ -57,6 +59,7 @@ public class GameViewImpl extends Application implements GameView{
         this.stage.setScene(scenePair.getFirst());
         this.stage.setMinWidth(1000);
         this.stage.setMinHeight(700);
+        this.stage.setMaximized(true);
         this.stage.show();
     }
 
@@ -67,11 +70,7 @@ public class GameViewImpl extends Application implements GameView{
     @Override
     public void setBoardScene() throws IOException {
         this.stage.setScene(boardScene);
-        this.stage.setMinWidth(1000);
-        this.stage.setMinHeight(700);
-
-        this.stage.setMaximized(true);
-        this.stage.show();
+        this.setStageSize();
     }
 
     /**
@@ -85,10 +84,7 @@ public class GameViewImpl extends Application implements GameView{
         final MinigameView minigameView = (MinigameView) pair.getSecond();
         minigameView.startMinigame(players);
         this.stage.setScene(minigameScene);
-        this.stage.setMinWidth(1000);
-        this.stage.setMinHeight(700);
-        this.stage.setMaximized(true);
-        this.stage.show();
+        this.setStageSize();
     }
 
     /**
@@ -103,11 +99,8 @@ public class GameViewImpl extends Application implements GameView{
         final ShopView shopView = loader.<ShopView>getController();
         shopView.init(this,this.controller);
         this.stage.setScene(scene);
-        this.stage.setMinWidth(1000);
-        this.stage.setMinHeight(700);
-        this.stage.setMaximized(true);
         shopView.initShopView();
-        this.stage.show();
+        this.setStageSize();
     }
 
     /**
@@ -142,13 +135,8 @@ public class GameViewImpl extends Application implements GameView{
      * {@inheritDoc}
      */
     @Override
-    public void updateCommands(final List<String> items, String message) {
-        this.boardView.updateCommands(items, message);
-    }
-
-    @Override
-    public void switchToBoard() {
-        this.stage.setScene(boardScene);
+    public void updateCommands(final List<String> items, String message, Pair<String,String> turn) {
+        this.boardView.updateCommands(items, message, turn);
     }
 
     private void setBoardView() throws IOException {
@@ -182,7 +170,8 @@ public class GameViewImpl extends Application implements GameView{
     private void setStageSize(){
         this.stage.setMinWidth(1000);
         this.stage.setMinHeight(700);
-        this.stage.setMaximized(true);
+        this.stage.setFullScreen(true);
+        this.stage.show();
     }
 
     @Override

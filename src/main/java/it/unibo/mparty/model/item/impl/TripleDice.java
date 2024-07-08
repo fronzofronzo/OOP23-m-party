@@ -6,17 +6,17 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Position;
 
 /**
- * class that implements the Double Dice item.
+ * class that implements the Triple Dice item.
  */
-public class DoubleDice extends AbstractItem {
+public class TripleDice extends AbstractItem {
 
-    private static final int DOUBLEDICE_COST = 7;
+    private static final int TRIPLEDICE_COST = 10;
 
     /**
-     * Construct a new istance of DoubleDice item.
+     * Construct a new istance of TripleDice item.
      */
-    public DoubleDice() {
-        super(ItemName.DOPPIO_DADO, DOUBLEDICE_COST);
+    public TripleDice() {
+        super(ItemName.TRIPLO_DADO, TRIPLEDICE_COST);
     }
 
     /**
@@ -24,7 +24,7 @@ public class DoubleDice extends AbstractItem {
      */
     @Override
     public String getDescription() {
-        return "Si lancia 2 dadi per avanzare";
+        return "Si lancia 3 dadi per avanzare";
     }
 
     /**
@@ -32,7 +32,7 @@ public class DoubleDice extends AbstractItem {
      */
     @Override
     public void activate(final Player player, final Optional<Player> target, final Optional<Position> position) {
-        player.getDice().setNumberOfAttempts(2);
+        player.getDice().setNumberOfAttempts(3);
     }
 
 }

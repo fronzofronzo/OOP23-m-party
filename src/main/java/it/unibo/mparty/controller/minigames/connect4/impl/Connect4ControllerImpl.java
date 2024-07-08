@@ -1,5 +1,6 @@
 package it.unibo.mparty.controller.minigames.connect4.impl;
 
+import java.io.IOException;
 import java.util.List;
 
 import it.unibo.mparty.controller.minigames.connect4.api.Connect4Controller;
@@ -30,7 +31,11 @@ public class Connect4ControllerImpl implements Connect4Controller {
     @Override
     public void endGame() {
         this.view.getMainController().saveMinigameResult(this.model.getResult());
-        this.view.getMainView().switchToBoard();
+        try {
+            this.view.getMainView().setBoardScene();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**

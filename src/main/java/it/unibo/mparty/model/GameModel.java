@@ -134,4 +134,6 @@ public interface GameModel {
     List<String> getPlayersInGame();
 
     Map<Position, SlotType> getSlotsToUpdate();
+
+    Pair<String, String> getTurn();
 }
