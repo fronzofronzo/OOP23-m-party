@@ -1,11 +1,11 @@
 package it.unibo.mparty.controller.minigames.memoryCard;
 
 import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
-import it.unibo.mparty.model.minigames.memoryCard.impl.CardType;
 import it.unibo.mparty.model.minigames.memoryCard.impl.MemoryCardModelImpl;
 import it.unibo.mparty.view.minigames.memoryCard.MemoryCardView;
 
-import java.util.Map;
+import java.io.IOException;
+import java.util.List;
 
 public class MemoryCardControllerImpl implements MemoryCardController{
 
@@ -21,36 +21,49 @@ public class MemoryCardControllerImpl implements MemoryCardController{
     @Override
     public void selectCard(int index) {
         if(this.model.flip(index)){
-            this.view.disableButton(index);
-            this.view.setTextButton(index, this.model.getCards().get(index).getName());
+            this.view.setCardStatus(index,false);
+            this.view.setCardType(index, this.model.getCards().get(index).getName());
         } else {
-            if (this.model.isDone()) {
-                this.view.showResult(this.model.getResults());
+            if (this.model.isOver()) {
+                this.view.showResult(this.model.getResult());
             } else {
                 this.updateGameView();
             }
         }
     }
 
-    @Override
-    public void setUpGame() {
-        final int n = this.model.getCards().size();
-        for(int i = 0; i < n; i++ ){
-            this.view.addButton(this.model.getCards().get(i).getName());
-        }
-    }
-
     private void updateGameView(){
         final var guessed  = this.model.guessedCardsType();
+        this.view.setMistakesNumber(this.model.getMistakes());
         for(var e : this.model.getCards().entrySet()){
             var type = e.getValue();
             var i = e.getKey();
             if(guessed.contains(type)){
-                this.view.setTextButton(i,type.getName());
-                this.view.disableButton(i);
+                this.view.setCardType(i,type.getName());
+                this.view.setCardStatus(i,false);
             } else {
-                this.view.setTextButton(i, "");
+                this.view.setCardType(i, "");
+                this.view.setCardStatus(i,true);
             }
+        }
+    }
+
+    @Override
+    public void endGame() {
+        this.view.getMainController().saveMinigameResult(this.model.getResult());
+        try {
+            this.view.getMainView().setBoardScene();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void initGame(List<String> players) {
+        this.model.setUpPlayers(players);
+        final int n = this.model.getCards().size();
+        for(int i = 0; i < n; i++ ){
+            this.view.addCard(this.model.getCards().get(i).getName());
         }
     }
 }

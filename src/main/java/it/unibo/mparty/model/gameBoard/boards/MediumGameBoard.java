@@ -1,10 +1,11 @@
 package it.unibo.mparty.model.gameBoard.boards;
 
 import it.unibo.mparty.model.gameBoard.impl.AbstractBoardImpl;
-import it.unibo.mparty.model.gameBoard.util.BoardType;
-import it.unibo.mparty.model.gameBoard.util.Pair;
+import it.unibo.mparty.utilities.BoardType;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
-import it.unibo.mparty.model.gameBoard.util.SlotType;
+import it.unibo.mparty.utilities.SlotType;
+
 import java.util.Set;
 
 public class MediumGameBoard extends AbstractBoardImpl{
@@ -21,10 +22,10 @@ public class MediumGameBoard extends AbstractBoardImpl{
     private static final double PROB_SINGLEPLAYER = 0.1;
     private static final double PROB_MALUS = 0.15;
     private static final double PROB_MULTIPLAYER = 0.15;
-    private static final double PROB_SHOP = 0.1;
-    private static final double PROB_BONUS = 0.15;
+    private static final double PROB_SHOP = 0.05;
+    private static final double PROB_BONUS = 0.2;
 
-    private static final String FILE_PATH = "C:\\Users\\81W1019HIX\\OneDrive\\Desktop\\MARIO PARTY\\OOP23-m-party\\src\\main\\java\\it\\unibo\\mparty\\model\\gameBoard\\file\\MediumBoardGame.txt";
+    private static final String FILE_PATH = "MediumBoardGame.txt";
 
     private static final Set<Pair<SlotType,Double>> RULES = 
         Set.of(new Pair<>(SlotType.PATH, PROB_PATH),

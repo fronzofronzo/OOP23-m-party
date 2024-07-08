@@ -17,7 +17,7 @@ public abstract class AbstractPosition {
      * 
      * @param x 
      * @param y
-     * @param size the size of the gri
+     * @param size the size of the side of the grid
      */
     public AbstractPosition(int x,int y,int size){
         this.position = new Pair<>(x,y);
@@ -46,7 +46,7 @@ public abstract class AbstractPosition {
      * @return true if they are adjacent, false otherwise
      */
     public boolean adjacent(AbstractPosition p){
-        return Math.abs(this.getX() - p.getX()) <= ADJ || Math.abs(this.getY() - p.getY()) <= ADJ;
+        return Math.abs(this.getX() - p.getX()) <= ADJ && Math.abs(this.getY() - p.getY()) <= ADJ;
     }
 
     /**
@@ -62,7 +62,7 @@ public abstract class AbstractPosition {
      * @return true if they are adjacent and in orizzontal, false otherwise
      */
     public boolean inOrizzontal(AbstractPosition p){
-        return this.getX() == p.getX() && adjacent(p);
+        return this.getX() == p.getX() && this.adjacent(p);
     }
 
     /**
@@ -71,13 +71,15 @@ public abstract class AbstractPosition {
      * @return true if they are adjacent and in vertical, false otherwise
      */
     public boolean inVertical(AbstractPosition p){
-        return this.getY() == p.getY() && adjacent(p);
+        return this.getY() == p.getY() && this.adjacent(p);
     }
 
     /**
      * the politics regarding wheter the position of a button inside a grid is safe or not, it dipends on the implementation 
-     * @param list list of positions of buttons to compare to this to know if it is safe
+     * @param list1 the first list of positions of buttons to compare to this to know if it is safe
+     * @param list2 the second list of positions of buttons to compare to this to know if it is safe
      * @return true if the position is safe, false otherwise
      */
-    public abstract boolean isSafe(List<AbstractPosition> list);
+    public abstract boolean isSafe(List<AbstractPosition> list1,List<AbstractPosition> list2); // template method
 }
+

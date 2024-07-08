@@ -1,20 +1,29 @@
 package it.unibo.mparty.model.minigameHandler;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import it.unibo.mparty.model.minigames.MinigameType;
+import it.unibo.mparty.model.player.api.Player;
+
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public class MinigameHandlerImplementation implements MinigameHandler{
 
     private String actualMinigame = null;
+    private List<Player> players;
+    private MinigameType type = null;
+
+    public MinigameHandlerImplementation(){
+        this.players = Collections.emptyList();
+    }
 
     @Override
-    public void startMinigame() throws Exception {
-        this.actualMinigame = generateRandomMinigame();
+    public void startMinigame(List<Player> players, MinigameType type) throws Exception {
+        this.actualMinigame = generateRandomMinigame(type);
+        this.type = type;
+        this.players = players;
     }
 
     @Override
@@ -23,12 +32,24 @@ public class MinigameHandlerImplementation implements MinigameHandler{
     }
 
     @Override
-    public void stopMinigame() {
-        this.actualMinigame = null;
+    public List<String> getUsersPlaying() {
+        return this.players.stream().map(Player::getUsername).toList();
     }
 
-    private String generateRandomMinigame() throws Exception {
-        final BufferedReader reader = new BufferedReader(new FileReader("singlePlayerMinigames.txt"));
+    @Override
+    public boolean isInGame() {
+        return actualMinigame != null;
+    }
+
+    @Override
+    public void stopMinigame() {
+        this.actualMinigame = null;
+        this.players = Collections.emptyList();
+        this.type = null;
+    }
+
+    private String generateRandomMinigame(MinigameType type) throws Exception {
+        final BufferedReader reader = new BufferedReader(new InputStreamReader( ClassLoader.getSystemResourceAsStream(type + ".txt")));
         String name = null;
         final List<String> minigames = new ArrayList<>();
         while ((name = reader.readLine()) != null){

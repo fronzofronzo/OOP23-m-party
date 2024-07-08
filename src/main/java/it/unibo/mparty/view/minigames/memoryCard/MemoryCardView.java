@@ -1,32 +1,36 @@
 package it.unibo.mparty.view.minigames.memoryCard;
 
+import it.unibo.mparty.view.SceneView;
+import it.unibo.mparty.view.minigames.MinigameView;
 import javafx.scene.control.Button;
 
-public interface MemoryCardView {
+public interface MemoryCardView extends MinigameView {
 
     /**
-     * Disable the button with the relative index
-     * @param index of the button to disable
+     * set if the selected card can be clicked or not
+     * @param index of the card to select
+     * @param status true if it's clickable, false
+     *              otherwise
      */
-    void disableButton(int index);
+    void setCardStatus(int index, boolean status);
 
     /**
-     * Set text string to a certain button
-     * @param index of the button
-     * @param text to set
+     * Set the type of card
+     * @param index of card
+     * @param type to set
      */
-    void setTextButton(int index, String text);
+    void setCardType(int index, String type);
 
     /**
-     * show the results of the game
-     * @param n coins earned by the player
+     * Add a card to the game table
+     * @param text to write on the card
      */
-    void showResult(int n);
+    void addCard(String text);
 
     /**
-     * Add a {@link Button} to the central pane
-     * @param text to set on the button
+     * set the mistake number made by the player
+     * @param n number of mistakes
      */
-    void addButton(String text);
+    void setMistakesNumber(int n);
 
 }

@@ -2,15 +2,19 @@ package it.unibo.mparty.view.minigames.memoryCard;
 
 import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardController;
 import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardControllerImpl;
+import it.unibo.mparty.utilities.Pair;
+import it.unibo.mparty.view.AbstractSceneView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Font;
 
-import javax.swing.*;
+import java.io.IOException;
+import java.util.List;
 
-public class MemoryCardViewImpl implements MemoryCardView{
+public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardView{
 
     private final MemoryCardController controller = new MemoryCardControllerImpl(this);
 
@@ -24,47 +28,67 @@ public class MemoryCardViewImpl implements MemoryCardView{
     private Label textLabel;
 
     @Override
-    public void disableButton(int index) {
-        ((Button)this.cardsPane.getChildren().get(index)).setDisable(true);
+    public void setCardStatus(int index, boolean status) {
+        ((Button)this.cardsPane.getChildren().get(index)).setDisable(!status);
     }
 
     @Override
-    public void setTextButton(int index, String text) {
+    public void setCardType(int index, String type) {
         final Button bt = (Button)this.cardsPane.getChildren().get(index);
-        bt.setText(text);
+        bt.setText(type);
     }
 
     @Override
-    public void showResult(int n) {
-        this.textLabel.setText("Il giocatore ha guadagnato " + String.valueOf(n) + " monete");
-        // this.getController.endMinigame(n)
-        this.controlButton.setText("Lascia il minigioco ");
-        this.controlButton.setOnAction(e -> {
-            // this.getView.setScene(mainScene.xml)
-        });
+    public void addCard(String text) {
+        final Button bt = new Button(text);
+        bt.setOnAction(this::tryCard);
+        bt.setPrefSize(100,100);
+        bt.setDisable(true);
+        bt.setStyle("-fx-opacity: 1.0; ");
+        bt.setFont(new Font("Segoe UI Light", 15));
+        this.cardsPane.getChildren().add(bt);
     }
 
     @Override
-    public void addButton(String text) {
-        this.cardsPane.getChildren().add(new Button(text));
+    public void setMistakesNumber(int n) {
+        this.textLabel.setText("Errori: " + String.valueOf(n));
     }
 
     @FXML
     private void startGame(ActionEvent event){
         final Button bt = (Button)event.getSource();
-        this.controller.setUpGame();
         bt.setText("Pronto !");
-        bt.setOnAction(e -> this.hideCards() );
-        this.textLabel.setText("Quando si è pronti, spingere il pulsante 'Pronto' ");
+        bt.setOnAction(this::hideCards);
+        this.textLabel.setText("Quando si e' pronti, spingere il pulsante 'Pronto' ");
     }
 
-    private void hideCards(){
-        this.cardsPane.getChildren().stream().map(e -> (Button)e).forEach(b -> b.setText(""));
-        this.textLabel.setText("  ");
+    private void hideCards(ActionEvent event){
+        this.cardsPane.getChildren().stream().map(e -> (Button)e).forEach(b -> {
+            b.setText("");
+            b.setDisable(false);
+        });
+        ((Button)event.getSource()).setDisable(true);
+        this.textLabel.setText("Errori: 0");
     }
 
     private void tryCard(ActionEvent e){
         this.controller.selectCard(this.cardsPane.getChildren().indexOf((Button)e.getSource()));
+    }
+
+
+    @Override
+    public void showResult(Pair<String, Integer> result) {
+        this.textLabel.setText(  result.getFirst() + " ha guadagnato " +  String.valueOf(result.getSecond()) + " monete." );
+        this.controlButton.setOnAction(e -> {
+            this.controller.endGame();
+        });
+        this.controlButton.setText("Torna al gioco principale");
+        this.controlButton.setDisable(false);
+    }
+
+    @Override
+    public void startMinigame(List<String> players) {
+        this.controller.initGame(players);
     }
 
 }

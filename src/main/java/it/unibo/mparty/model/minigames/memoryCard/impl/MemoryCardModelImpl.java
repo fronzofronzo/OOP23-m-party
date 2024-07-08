@@ -1,7 +1,8 @@
 package it.unibo.mparty.model.minigames.memoryCard.impl;
 
 import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
-import it.unibo.mparty.model.player.Position;
+import it.unibo.mparty.utilities.Pair;
+import it.unibo.mparty.utilities.Position;
 import java.util.*;
 
 public class MemoryCardModelImpl implements MemoryCardModel {
@@ -9,17 +10,18 @@ public class MemoryCardModelImpl implements MemoryCardModel {
     private static final int MAX_MISTAKES = 3;
     private static final double SCORE_MULTIPLIER = 1.5;
     private static final int NOT_SELECTED = -1;
+    private static final int FIRST = 0;
 
     private final Map<Integer, CardType> cards;
     private final Set<CardType> guessed;
+    private String player = null;
     private int selected = NOT_SELECTED ;
-    private int mistakesNumber;
+    private int mistakesNumber = 0;
 
     public MemoryCardModelImpl(){
         this.cards = new HashMap<>();
         this.guessed = new HashSet<>();
-        this.mistakesNumber = 0;
-        final int size = CardType.values().length;
+        final int size = CardType.values().length * 2;
         final Random random = new Random();
         for(var type : CardType.values()){
             var i = random.nextInt(size);
@@ -43,25 +45,12 @@ public class MemoryCardModelImpl implements MemoryCardModel {
         } else {
             if(cards.get(selected) == cards.get(card)){
                 guessed.add(cards.get(card));
+            } else {
+                this.mistakesNumber++;
             }
             selected = NOT_SELECTED;
             return false;
         }
-    }
-
-    @Override
-    public void addMistake() {
-        this.mistakesNumber++;
-    }
-
-    @Override
-    public boolean isDone() {
-        return mistakesNumber == MAX_MISTAKES || guessed.size() == CardType.values().length;
-    }
-
-    @Override
-    public int getResults() {
-        return (int)(guessed.size() * SCORE_MULTIPLIER);
     }
 
     @Override
@@ -74,4 +63,23 @@ public class MemoryCardModelImpl implements MemoryCardModel {
         return Set.copyOf(guessed);
     }
 
+    @Override
+    public int getMistakes() {
+        return this.mistakesNumber;
+    }
+
+    @Override
+    public Pair<String, Integer> getResult() {
+        return new Pair<>(player, (int)(guessed.size() * SCORE_MULTIPLIER));
+    }
+
+    @Override
+    public void setUpPlayers(List<String> players) {
+        player = players.get(FIRST);
+    }
+
+    @Override
+    public boolean isOver() {
+        return mistakesNumber == MAX_MISTAKES || guessed.size() == CardType.values().length;
+    }
 }

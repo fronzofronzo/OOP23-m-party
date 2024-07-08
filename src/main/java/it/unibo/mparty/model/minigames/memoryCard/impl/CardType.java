@@ -1,11 +1,15 @@
 package it.unibo.mparty.model.minigames.memoryCard.impl;
 
+/**
+ * This enum contains all the types of card of the Memory card mini-game
+ */
 public enum CardType {
-    PEAR("PEAR"),
-    APPLE("APPLE"),
+    PEAR("PERA"),
+    APPLE("MELA"),
     BANANA("BANANA"),
-    STRAWBERRY("STRAWBERRY"),
-    LEMON("LEMON");
+    STRAWBERRY("FRAGOLA"),
+    LEMON("LIMONE"),
+    PEACH("PESCA");
 
     private final String name;
 
