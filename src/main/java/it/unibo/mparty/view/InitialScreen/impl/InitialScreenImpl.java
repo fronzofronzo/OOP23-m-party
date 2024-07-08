@@ -101,6 +101,6 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
 
     @Override
     public void setLabelText(String text){
-        this.exceptionLabel.setText("text");
+        this.exceptionLabel.setText(text);
     }
 }
