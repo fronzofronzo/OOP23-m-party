@@ -24,7 +24,7 @@ public class ShopImpl implements Shop {
         itemList.add(itemFactory.createItem(ItemName.CAMPANA_BOO));
         itemList.add(itemFactory.createItem(ItemName.DADO_MALEDETTO));
         itemList.add(itemFactory.createItem(ItemName.DADO_FORTUNATO));
-        itemList.add(itemFactory.createItem(ItemName.DOPPIO_DADO));
+        itemList.add(itemFactory.createItem(ItemName.TRIPLO_DADO));
         itemList.add(itemFactory.createItem(ItemName.TUBO_DORATO));
     }
 

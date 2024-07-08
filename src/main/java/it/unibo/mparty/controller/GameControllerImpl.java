@@ -124,7 +124,9 @@ public class GameControllerImpl implements GameController{
     @Override
     public void buyItem(final ItemName itemName, final ShopView shopView) {
         if (this.model.buyItem(itemName)) {
-            shopView.updateMoney(this.model.getActualPlayer().getNumCoins());;
+            shopView.updateMoney(this.model.getActualPlayer().getNumCoins());
+            this.updateCommandView();
+            this.updatePlayersView();
         }
     }
 
