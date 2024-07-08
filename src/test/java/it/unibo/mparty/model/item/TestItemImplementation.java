@@ -28,6 +28,10 @@ public class TestItemImplementation {
     private Item goldenPipe;
     private static final int EXP_GOLDENPIPE = 12;
     private static final int EXP_TRIPLEDICE = 10;
+    private static final int EXP_PL2_COINS = 7;
+    private static final int EXP_PL1_COINS = 3;
+
+
     /**
      * Initialize the items and the player used in all tests.
      */
@@ -73,7 +77,7 @@ public class TestItemImplementation {
      * Test the activation of the items and the effect on the players.
      */
     @Test
-    public void testActivation () {
+    public void testActivation() {
         final Player testPlayer2 = new PlayerImplementation("test2", "Luigi");
         testPlayer2.addCoins(10);
         testPlayer.getPlayerBag().addItem(tripleDice);
@@ -84,7 +88,7 @@ public class TestItemImplementation {
         assertEquals(3, testPlayer.getDice().getNumOfAttempts());
         Item item2 = testPlayer.getPlayerBag().useItem(testPlayer.getPlayerBag().getItems().get(0));
         item2.activate(testPlayer, Optional.of(testPlayer2), null);
-        assertEquals(7, testPlayer2.getNumCoins());
-        assertEquals(3, testPlayer.getNumCoins());
+        assertEquals(EXP_PL2_COINS, testPlayer2.getNumCoins());
+        assertEquals(EXP_PL1_COINS, testPlayer.getNumCoins());
     }
 }

@@ -139,14 +139,6 @@ public class GameViewImpl extends Application implements GameView{
         this.boardView.updateCommands(items, message, turn);
     }
 
-    private void setBoardView() throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + "GameBoard" + EXTENSION)); ;
-        final Parent root = loader.load(getClass().getResourceAsStream(PATH + "GameBoard" + EXTENSION));
-        this.boardScene = new Scene(root,root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        this.boardView = loader.<GameBoardView>getController();
-        this.boardView.init(this, this.controller);
-    }
-
     @Override
     public void showResults(Map<String, Pair<Integer, Integer>> result) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + "endGame" + EXTENSION)); ;
@@ -157,6 +149,16 @@ public class GameViewImpl extends Application implements GameView{
         this.stage.setScene(scene);
         this.setStageSize();
     }
+
+    private void setBoardView() throws IOException {
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + "GameBoard" + EXTENSION)); ;
+        final Parent root = loader.load(getClass().getResourceAsStream(PATH + "GameBoard" + EXTENSION));
+        this.boardScene = new Scene(root,root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
+        this.boardView = loader.<GameBoardView>getController();
+        this.boardView.init(this, this.controller);
+    }
+
+
 
     private Pair<Scene,SceneView> loadScene(String name) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + name + EXTENSION));
