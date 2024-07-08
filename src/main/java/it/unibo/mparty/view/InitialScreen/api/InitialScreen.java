@@ -34,4 +34,6 @@ public interface InitialScreen extends SceneView {
      void handleStartButton(ActionEvent event) throws IOException;
 
      void setNewPlayer(String username,String character);
+
+     void setLabelText(String text);
 }
