@@ -2,9 +2,10 @@ package it.unibo.mparty.model.minigames.memorysweep.api;
 
 import java.util.Set;
 
+import it.unibo.mparty.model.minigames.MinigameModel;
 import it.unibo.mparty.utilities.*;
 
-public interface MemorySweep {
+public interface MemorySweep extends MinigameModel {
 
     /**
      * enum describing the types of event that can appen when a button is clicked:

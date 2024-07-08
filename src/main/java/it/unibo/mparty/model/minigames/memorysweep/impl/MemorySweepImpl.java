@@ -1,24 +1,25 @@
 package it.unibo.mparty.model.minigames.memorysweep.impl;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 
 public class MemorySweepImpl implements MemorySweep{
 
-    private Set<Position> randomList;
+    private final Set<Position> randomList;
     private int counter;
-    private Set<Position> player1;
-    private Set<Position> player2;
-    private Random random;
-    private int side;
+    private final Set<Position> player1;
+    private final Set<Position> player2;
+    private final Random random;
+    private final int side;
     private boolean turn = true;
     private Set<Position> winner;
-    private static int START = 3;
 
     public MemorySweepImpl(int side){
         this.random = new Random();
@@ -26,7 +27,7 @@ public class MemorySweepImpl implements MemorySweep{
         this.player1 = new HashSet<>();
         this.player2 = new HashSet<>();
         this.side = side;
-        this.counter = START;
+        this.counter = 3;
     }
 
     @Override
@@ -105,5 +106,19 @@ public class MemorySweepImpl implements MemorySweep{
         return this.counter;
     }
 
-    
+
+    @Override
+    public Pair<String, Integer> getResult() {
+        return null;
+    }
+
+    @Override
+    public void setUpPlayers(List<String> players) {
+
+    }
+
+    @Override
+    public boolean isOver() {
+        return false;
+    }
 }

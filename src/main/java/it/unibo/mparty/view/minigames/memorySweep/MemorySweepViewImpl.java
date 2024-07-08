@@ -2,15 +2,21 @@ package it.unibo.mparty.view.minigames.memorySweep;
 
 import it.unibo.mparty.controller.minigames.memorySweep.MemorySweepController;
 import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
+import it.unibo.mparty.view.AbstractSceneView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Set;
 
-public class MemorySweepViewImpl implements MemorySweepView {
+public class MemorySweepViewImpl extends AbstractSceneView implements MemorySweepView, Initializable {
 
     private MemorySweepController observer;
 
@@ -52,5 +58,20 @@ public class MemorySweepViewImpl implements MemorySweepView {
         var x = GridPane.getRowIndex(button);
         var y = GridPane.getColumnIndex(button);
         return new Position(x,y);
+    }
+
+    @Override
+    public void showResult(Pair<String, Integer> result) {
+
+    }
+
+    @Override
+    public void startMinigame(List<String> players) {
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }
