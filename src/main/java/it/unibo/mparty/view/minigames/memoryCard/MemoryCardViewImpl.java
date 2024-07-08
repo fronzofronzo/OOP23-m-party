@@ -57,7 +57,6 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     @FXML
     private void startGame(ActionEvent event){
         final Button bt = (Button)event.getSource();
-        this.controller.setUpGame();
         bt.setText("Pronto !");
         bt.setOnAction(this::hideCards);
         this.textLabel.setText("Quando si e' pronti, spingere il pulsante 'Pronto' ");
