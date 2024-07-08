@@ -18,16 +18,16 @@ import java.util.stream.Collectors;
  * provides an implementation for interface methods and handles the different
  * situation with view and model of the game.
  */
-public class GameControllerImpl implements GameController{
+public class GameControllerImpl implements GameController {
 
     private final GameView view;
     private GameModel model;
 
     /**
-     * Constructor for a new {@link GameController} implementation
+     * Constructor for a new {@link GameController} implementation.
      * @param view to set like {@link GameView} reference to the game.
      */
-    public GameControllerImpl(final GameView view){
+    public GameControllerImpl(final GameView view) {
         this.view = view;
     }
 
@@ -35,11 +35,11 @@ public class GameControllerImpl implements GameController{
      * {@inheritDoc}
      */
     @Override
-    public void startGame(GameModel model) throws IOException {
+    public void startGame(final GameModel model) throws IOException {
         this.model = model;
         List<String> usernames = this.model.getPlayers()
                 .stream()
-                .map(p -> p.getUsername())
+                .map(Player::getUsername)
                 .toList();
         this.view.setUpBoard(this.model.getBoardDim(), this.model.getBoardConfig(), usernames);
         this.view.setBoardScene();
@@ -48,8 +48,6 @@ public class GameControllerImpl implements GameController{
     }
 
     /**
-     * 
-     *
      * {@inheritDoc}
      */
     @Override
@@ -63,7 +61,6 @@ public class GameControllerImpl implements GameController{
     }
 
     /**
-     *
      * {@inheritDoc}
      */
     @Override
@@ -77,7 +74,7 @@ public class GameControllerImpl implements GameController{
      * {@inheritDoc}
      */
     @Override
-    public void movePlayer(Optional<Direction> dir) {
+    public void movePlayer(final Optional<Direction> dir) {
         this.model.movePlayer(dir);
         this.updateCommandView();
         this.updatePlayersView();
@@ -117,7 +114,6 @@ public class GameControllerImpl implements GameController{
 
 
     /**
-     *
      * {@inheritDoc}
      */
     @Override
@@ -133,7 +129,7 @@ public class GameControllerImpl implements GameController{
      * {@inheritDoc}
      */
     @Override
-    public void saveMinigameResult(Pair<String, Integer> result) {
+    public void saveMinigameResult(final Pair<String, Integer> result) {
         this.model.endMinigame(result);
         this.updatePlayersView();
     }
