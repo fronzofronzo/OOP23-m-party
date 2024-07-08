@@ -9,6 +9,12 @@ import it.unibo.mparty.view.SceneView;
  */
 public interface ShopView extends SceneView {
     
+    /**
+     * Add the item with his cost and description to the view.
+     * @param itemName the {@link ItemName} of the item to be added
+     * @param cost the cost of the item
+     * @param description description of the effect of the item
+     */
     void addItemView(ItemName itemName, int cost, String description);
 
     /**

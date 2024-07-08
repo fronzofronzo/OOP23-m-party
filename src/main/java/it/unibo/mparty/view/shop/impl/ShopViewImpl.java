@@ -60,8 +60,11 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView {
         this.getMainView().setBoardScene();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void addItemView(ItemName itemName, int cost, String description) {
+    public void addItemView(final ItemName itemName, final int cost, final String description) {
         final Button but = new Button();
         final Label lb = new Label(description);
         but.setText("Acquista " + itemName.toString() + ": " + cost);

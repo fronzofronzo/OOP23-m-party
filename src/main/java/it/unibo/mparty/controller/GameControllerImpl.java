@@ -10,7 +10,12 @@ import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
 import it.unibo.mparty.view.shop.api.ShopView;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -104,7 +109,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void setUpShop(final ShopView shopView) {
-        Map<ItemName,Pair<Integer, String>> itemMap = new HashMap<>();
+        Map<ItemName,Pair<Integer, String>> itemMap = new LinkedHashMap<>();
         this.model.getItemsFromShop().stream().forEachOrdered(it -> itemMap.put(it.getName(), 
         new Pair<Integer,String>(it.getCost(), it.getDescription())));
         itemMap.forEach((it, p) -> shopView.addItemView(it, p.getFirst(), p.getSecond()));
