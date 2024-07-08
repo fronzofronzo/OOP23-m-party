@@ -32,7 +32,7 @@ public class Connect4ViewImplTest extends ApplicationTest {
     public void start(final Stage stage) throws Exception {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/minigames/connect4.fxml"));
         this.testRoot = loader.load();
-        final Scene scene = new Scene (testRoot);
+        final Scene scene = new Scene(testRoot);
         stage.setScene(scene);
         stage.show();
     }
