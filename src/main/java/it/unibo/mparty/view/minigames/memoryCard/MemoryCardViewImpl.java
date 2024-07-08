@@ -10,10 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
-
-import java.io.IOException;
 import java.util.List;
 
+/**
+ * This class provides a graphic implementation for {@link MemoryCardView}.
+ * This class uses the graphic library of JavaFX to implement the GUI.
+ */
 public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardView{
 
     private final MemoryCardController controller = new MemoryCardControllerImpl(this);
@@ -27,17 +29,26 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     @FXML
     private Label textLabel;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCardStatus(int index, boolean status) {
         ((Button)this.cardsPane.getChildren().get(index)).setDisable(!status);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCardType(int index, String type) {
         final Button bt = (Button)this.cardsPane.getChildren().get(index);
         bt.setText(type);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addCard(String text) {
         final Button bt = new Button(text);
@@ -49,9 +60,33 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
         this.cardsPane.getChildren().add(bt);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMistakesNumber(int n) {
         this.textLabel.setText("Errori: " + String.valueOf(n));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showResult(Pair<String, Integer> result) {
+        this.textLabel.setText(  result.getFirst() + " ha guadagnato " +  String.valueOf(result.getSecond()) + " monete." );
+        this.controlButton.setOnAction(e -> {
+            this.controller.endGame();
+        });
+        this.controlButton.setText("Torna al gioco principale");
+        this.controlButton.setDisable(false);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void startMinigame(List<String> players) {
+        this.controller.initGame(players);
     }
 
     @FXML
@@ -73,22 +108,6 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
 
     private void tryCard(ActionEvent e){
         this.controller.selectCard(this.cardsPane.getChildren().indexOf((Button)e.getSource()));
-    }
-
-
-    @Override
-    public void showResult(Pair<String, Integer> result) {
-        this.textLabel.setText(  result.getFirst() + " ha guadagnato " +  String.valueOf(result.getSecond()) + " monete." );
-        this.controlButton.setOnAction(e -> {
-            this.controller.endGame();
-        });
-        this.controlButton.setText("Torna al gioco principale");
-        this.controlButton.setDisable(false);
-    }
-
-    @Override
-    public void startMinigame(List<String> players) {
-        this.controller.initGame(players);
     }
 
 }
