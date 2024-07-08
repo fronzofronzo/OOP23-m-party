@@ -10,57 +10,22 @@ import it.unibo.mparty.utilities.Pair;
 
 public class SecretCodeModelImpl implements SecretCodeModel{
 
-    private static final int TURN = 8;
-
-    
-
-    @Override
-    public Pair<String, Integer> getResult() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getResult'");
-    }
-
-    @Override
-    public void setUpPlayers(List<String> players) {
-        for (int i = 0; i < players.size(); i++){
-            //this.players.add(new Secre)
-        }
-    }
-
-    @Override
-    public boolean isOver() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isOver'");
-    }
-
 	@Override
-	public void guess() {
+	public Pair<String, Integer> getResult() {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'guess'");
+		throw new UnsupportedOperationException("Unimplemented method 'getResult'");
 	}
 
 	@Override
-	public void addColor(SecretCodeColors color) {
+	public void setUpPlayers(List<String> players) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'addColor'");
+		throw new UnsupportedOperationException("Unimplemented method 'setUpPlayers'");
 	}
 
 	@Override
-	public void removeColor() {
+	public boolean isOver() {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'removeColor'");
-	}
-
-	@Override
-	public List<SecretCodeResults> resultGuess() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'resultGuess'");
-	}
-
-	@Override
-	public String getMessage() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getMessage'");
+		throw new UnsupportedOperationException("Unimplemented method 'isOver'");
 	}
     
 }
