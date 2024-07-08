@@ -263,14 +263,6 @@ public class GameModelImpl implements GameModel{
      * {@inheritDoc}
      */
     @Override
-    public List<ItemName> getItemsOfCurrentPlayer() {
-        return Collections.unmodifiableList(this.players.get(actualPlayerIndex).getPlayerBag().getItems());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public List<Player> getPlayers() {
         return Collections.unmodifiableList(this.players);
     }

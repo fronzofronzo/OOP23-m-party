@@ -107,12 +107,6 @@ public interface GameModel {
     List<Item> getItemsFromShop();
 
     /**
-     * Get a list of items in the shop.
-     * @return a list of the items in the shop.
-     */
-    List<ItemName> getItemsOfCurrentPlayer();
-
-    /**
      * Get the players that are participating.
      * @return {@link List} of {@link Player} with all players.
      */
