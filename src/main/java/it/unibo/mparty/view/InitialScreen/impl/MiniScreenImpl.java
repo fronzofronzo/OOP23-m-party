@@ -70,7 +70,7 @@ public class MiniScreenImpl implements MiniScreen {
     }
 
     private boolean isShort(String text){
-        return text.length() < MAX_SIZE;
+        return text.length() < MAX_SIZE && !text.isEmpty();
     }
 
     private boolean isChoiceSelected(String choice){
