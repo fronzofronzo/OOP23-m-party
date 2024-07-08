@@ -3,8 +3,17 @@ package it.unibo.mparty.model.minigames.memoryCard.impl;
 import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
-import java.util.*;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.List;
+import java.util.Random;
+
+/**
+ * This class provides an implementation of {@link MemoryCardModel} interface.
+ */
 public class MemoryCardModelImpl implements MemoryCardModel {
 
     private static final int MAX_MISTAKES = 3;
@@ -18,12 +27,15 @@ public class MemoryCardModelImpl implements MemoryCardModel {
     private int selected = NOT_SELECTED ;
     private int mistakesNumber = 0;
 
-    public MemoryCardModelImpl(){
+    /**
+     * Constructor of a new instance of {@link MemoryCardModel}
+     */
+    public MemoryCardModelImpl() {
         this.cards = new HashMap<>();
         this.guessed = new HashSet<>();
         final int size = CardType.values().length * 2;
         final Random random = new Random();
-        for(var type : CardType.values()){
+        for (var type : CardType.values()){
             var i = random.nextInt(size);
             while (cards.containsKey(i)){
                 i = random.nextInt(size);
@@ -33,17 +45,20 @@ public class MemoryCardModelImpl implements MemoryCardModel {
             while (cards.containsKey(j)){
                 j = random.nextInt(size);
             }
-            cards.put(j,type);
+            cards.put(j, type);
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean flip(int card) {
-        if(selected == NOT_SELECTED){
+    public boolean flip(final int card) {
+        if (selected == NOT_SELECTED){
             selected = card;
             return true;
         } else {
-            if(cards.get(selected) == cards.get(card)){
+            if (cards.get(selected) == cards.get(card)) {
                 guessed.add(cards.get(card));
             } else {
                 this.mistakesNumber++;
@@ -53,31 +68,49 @@ public class MemoryCardModelImpl implements MemoryCardModel {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Map<Integer, CardType> getCards() {
         return Map.copyOf(cards);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<CardType> guessedCardsType() {
         return Set.copyOf(guessed);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getMistakes() {
         return this.mistakesNumber;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Pair<String, Integer> getResult() {
         return new Pair<>(player, (int)(guessed.size() * SCORE_MULTIPLIER));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setUpPlayers(List<String> players) {
+    public void setUpPlayers(final List<String> players) {
         player = players.get(FIRST);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isOver() {
         return mistakesNumber == MAX_MISTAKES || guessed.size() == CardType.values().length;

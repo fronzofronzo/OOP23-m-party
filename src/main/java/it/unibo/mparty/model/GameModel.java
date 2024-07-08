@@ -22,7 +22,6 @@ public interface GameModel {
 
     /**
      * Moves the current player to a new position.
-     * @return
      */
     void movePlayer(Optional<Direction> dir);
 
