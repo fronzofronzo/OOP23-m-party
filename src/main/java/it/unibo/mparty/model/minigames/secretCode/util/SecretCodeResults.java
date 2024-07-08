@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.secretCode.impl;
+package it.unibo.mparty.model.minigames.secretCode.util;
 
 public enum SecretCodeResults {
     CORRECT_COLOR_AND_POSITION,

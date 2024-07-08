@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import it.unibo.mparty.model.minigames.secretCode.api.SecreteCodePlayer;
+import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
+import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
 
 public class SecreteCodePlayerImpl implements SecreteCodePlayer{
 

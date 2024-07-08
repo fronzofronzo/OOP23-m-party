@@ -5,6 +5,8 @@ import java.util.Set;
 
 import it.unibo.mparty.model.minigames.secretCode.api.SecretCodeGame;
 import it.unibo.mparty.model.minigames.secretCode.api.SecreteCodePlayer;
+import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
+import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
 import it.unibo.mparty.utilities.RandomFromSet;
 
 public class SecretCodeGameImpl implements SecretCodeGame{
