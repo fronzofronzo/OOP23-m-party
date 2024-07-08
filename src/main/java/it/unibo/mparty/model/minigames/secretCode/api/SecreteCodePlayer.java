@@ -3,7 +3,6 @@ package it.unibo.mparty.model.minigames.secretCode.api;
 import java.util.List;
 
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
-import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
 
 public interface SecreteCodePlayer {
 
@@ -11,7 +10,9 @@ public interface SecreteCodePlayer {
 
     void removeColor();
     
-    List<SecretCodeResults> guess();
+    List<SecretCodeColors> guess();
+    
+    void addPoints(int points);
 
     String getMessage();
 

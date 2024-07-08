@@ -6,25 +6,28 @@ import java.util.List;
 
 import it.unibo.mparty.model.minigames.secretCode.api.SecreteCodePlayer;
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
-import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
 
 public class SecreteCodePlayerImpl implements SecreteCodePlayer{
 
+    private static final  int INITIAL_POINTS = 0;
+
     private final String player;
-    private final List<SecretCodeColors> soluction;
-    private List<SecretCodeColors> myGuess = new ArrayList<>();
+    private List<SecretCodeColors> myGuess;
     private String message = "";
     private int points;
+    private final int soluctionSize;
 
 
-    public SecreteCodePlayerImpl(String player, List<SecretCodeColors> soluction){
+    public SecreteCodePlayerImpl(String player, int soluctionSize){
         this.player = player;
-        this.soluction = soluction;
+        this.myGuess = new ArrayList<>();
+        this.points = INITIAL_POINTS;
+        this.soluctionSize = soluctionSize;
     }
 
     @Override
     public void addColor(SecretCodeColors color) {
-        if (this.myGuess.size() < this.soluction.size()) {
+        if (this.myGuess.size() < this.soluctionSize) {
             this.myGuess.add(color);
         }
     }
@@ -39,27 +42,12 @@ public class SecreteCodePlayerImpl implements SecreteCodePlayer{
     }
 
     @Override
-    public List<SecretCodeResults> guess() {
-        if (this.myGuess.size() == this.soluction.size()) {
-            return this.getReultGuess();
+    public List<SecretCodeColors> guess() {
+        if (this.myGuess.size() == this.soluctionSize) {
+            return Collections.unmodifiableList(this.myGuess);
         } else {
             return Collections.emptyList();
         }
-    }
-
-    private List<SecretCodeResults> getReultGuess() {
-        List<SecretCodeResults> results = new ArrayList<>();
-        for (int i = 0; i < this.myGuess.size(); i++) {
-            if (this.soluction.contains(this.myGuess.get(i)) &&
-                i == this.soluction.indexOf(this.myGuess.get(i))) {
-                results.add(SecretCodeResults.CORRECT_COLOR_AND_POSITION);
-            } else if (this.soluction.contains(this.myGuess.get(i))) {
-                results.add(SecretCodeResults.CORRECT_COLOR);
-            } else {
-                results.add(SecretCodeResults.WRONG_COLOR);
-            }
-        }
-        return results;
     }
 
     @Override
@@ -75,6 +63,11 @@ public class SecreteCodePlayerImpl implements SecreteCodePlayer{
     @Override
     public int getPoints() {
         return this.points;
+    }
+
+    @Override
+    public void addPoints(int points) {
+        this.points += points;
     }
     
 }
