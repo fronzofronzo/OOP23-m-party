@@ -9,7 +9,7 @@ public interface SecretCodePlayer {
     /**
      * Add the input color at the current guess if it is possible,
      * @param color the color to be added
-     * @return true if it was added correctly, false otherwisw.
+     * @return true if it was added correctly, false otherwise.
      */
     boolean addColor(SecretCodeColors color);
     

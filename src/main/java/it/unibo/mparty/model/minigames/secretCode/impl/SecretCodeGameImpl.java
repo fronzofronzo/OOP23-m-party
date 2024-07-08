@@ -74,16 +74,28 @@ public class SecretCodeGameImpl implements SecretCodeGame{
                && !results.contains(SecretCodeResults.WRONG_COLOR); 
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
-    public void addColor(SecretCodeColors color) {
-        this.players.get(actualPlayerIndex).addColor(color);
+    public boolean addColor(SecretCodeColors color) {
+        return this.players.get(actualPlayerIndex).addColor(color);
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public String getCurrentPlayer() {
         return this.players.get(actualPlayerIndex).getNamePlayer();
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public boolean isOver() {
         return this.turn == TURNS || this.winner.isPresent();
@@ -96,6 +108,10 @@ public class SecretCodeGameImpl implements SecretCodeGame{
         }
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public String getWinner() {
         if (this.winner.isEmpty()) {
@@ -111,11 +127,19 @@ public class SecretCodeGameImpl implements SecretCodeGame{
         return this.winner.get();
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
 	@Override
 	public List<SecretCodeColors> getCurrentGuess() {
 		return this.players.get(actualPlayerIndex).getGuess();
 	}
 
+    /**
+     *
+     * {@inheritDoc}
+     */
 	@Override
 	public List<SecretCodeColors> getSoluction() {
 		return Collections.unmodifiableList(this.soluction);
