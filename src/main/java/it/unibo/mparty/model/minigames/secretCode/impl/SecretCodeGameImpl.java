@@ -27,7 +27,7 @@ public class SecretCodeGameImpl implements SecretCodeGame{
     public SecretCodeGameImpl(List<String> players)  {
         generateSoluction();
         players.stream()
-            .forEach(p -> this.players.add(new SecretCodePlayerImpl(p, this.soluction.size())));
+               .forEach(p -> this.players.add(new SecretCodePlayerImpl(p, this.soluction.size())));
     }
 
     private void generateSoluction() {
@@ -49,7 +49,7 @@ public class SecretCodeGameImpl implements SecretCodeGame{
     } 
 
     private List<SecretCodeResults> computeResult(List<SecretCodeColors> guess) {
-        if (guess.size() != this.soluction.size()) {
+        if (guess.size() != DIM_SOLUCTION) {
             return Collections.emptyList();
         }
         List<SecretCodeResults> results = new ArrayList<>();
@@ -65,29 +65,18 @@ public class SecretCodeGameImpl implements SecretCodeGame{
         }
         if (hasGuessed(results)) {
             this.winner = Optional.of(this.getCurrentPlayer());
-
         }
         return Collections.unmodifiableList(results);
     }
 
     private boolean hasGuessed(List<SecretCodeResults> results) {
-        return !results.contains(SecretCodeResults.CORRECT_COLOR) &&
-               !results.contains(SecretCodeResults.WRONG_COLOR); 
+        return !results.contains(SecretCodeResults.CORRECT_COLOR)
+               && !results.contains(SecretCodeResults.WRONG_COLOR); 
     }
 
     @Override
     public void addColor(SecretCodeColors color) {
         this.players.get(actualPlayerIndex).addColor(color);
-    }
-
-    @Override
-    public void removeColor() {
-        this.players.get(actualPlayerIndex).removeColor();
-    }
-
-    @Override
-    public String getGameMessage() {
-        return this.players.get(actualPlayerIndex).getMessage();
     }
 
     @Override
@@ -124,7 +113,12 @@ public class SecretCodeGameImpl implements SecretCodeGame{
 
 	@Override
 	public List<SecretCodeColors> getCurrentGuess() {
-		return this.players.get(actualPlayerIndex).getCurrentGuess();
+		return this.players.get(actualPlayerIndex).getGuess();
+	}
+
+	@Override
+	public List<SecretCodeColors> getSoluction() {
+		return Collections.unmodifiableList(this.soluction);
 	}
     
 }

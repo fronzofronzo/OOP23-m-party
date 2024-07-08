@@ -12,16 +12,16 @@ public interface SecretCodeGame {
     List<SecretCodeResults> getGuessResult();
 
     List<SecretCodeColors> getCurrentGuess();
+    
+    List<SecretCodeColors> getSoluction();
 
     void addColor(SecretCodeColors color);
-
-    void removeColor();
-
-    String getGameMessage();     
     
     String getCurrentPlayer();
 
     boolean isOver();
 
     String getWinner();
+
+
 }
