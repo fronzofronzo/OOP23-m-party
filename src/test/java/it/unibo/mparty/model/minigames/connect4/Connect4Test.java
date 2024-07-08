@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.minigames.connect4;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -36,5 +37,74 @@ public class Connect4Test {
             assertTrue(testModel.addDisc(2));
         }
         assertFalse(testModel.addDisc(2));
+    }
+
+    /**
+     * Test the horizontal win.
+     */
+    @Test
+    public void checkHorizontalWin() {
+        testModel.addDisc(3);
+        testModel.addDisc(3);
+        testModel.addDisc(4);
+        testModel.addDisc(3);
+        testModel.addDisc(5);
+        testModel.addDisc(3);
+        testModel.addDisc(2);
+        assertTrue(testModel.isOver());
+        assertEquals("testPlayer1", testModel.getTurnPlayer());
+    }
+
+    /**
+     * Test the vertical win.
+     */
+    @Test
+    public void checkVerticalWin() {
+        testModel.addDisc(3);
+        testModel.addDisc(2);
+        testModel.addDisc(3);
+        testModel.addDisc(2);
+        testModel.addDisc(3);
+        testModel.addDisc(2);
+        testModel.addDisc(3);
+        assertTrue(testModel.isOver());
+    }
+
+    /**
+     * Test the diagonal left win.
+     */
+    @Test
+    public void checkDiagonalLeftWin() {
+        testModel.addDisc(2);
+        testModel.addDisc(3);
+        testModel.addDisc(3);
+        testModel.addDisc(4);
+        testModel.addDisc(4);
+        testModel.addDisc(5);
+        testModel.addDisc(4);
+        testModel.addDisc(5);
+        testModel.addDisc(5);
+        testModel.addDisc(0);
+        testModel.addDisc(5);
+        assertTrue(testModel.isOver());
+    }
+
+    /**
+     * Test the diagonal right win.
+     */
+    @Test
+    public void testDiagonalRightWin() {
+        testModel.addDisc(5);
+        testModel.addDisc(4);
+        testModel.addDisc(4);
+        testModel.addDisc(3);
+        testModel.addDisc(3);
+        testModel.addDisc(2);
+        testModel.addDisc(3);
+        testModel.addDisc(2);
+        testModel.addDisc(2);
+        testModel.addDisc(0);
+        testModel.addDisc(2);
+        assertTrue(testModel.isOver());
     }
 }
