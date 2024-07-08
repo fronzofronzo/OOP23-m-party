@@ -9,38 +9,59 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * This class provides an implementation for {@link MinigameHandler} interface.
+ */
 public class MinigameHandlerImplementation implements MinigameHandler{
 
     private String actualMinigame = null;
     private List<Player> players;
     private MinigameType type = null;
 
-    public MinigameHandlerImplementation(){
+    /**
+     * Constructor of a new implementation of a {@link MinigameHandler}
+     */
+    public MinigameHandlerImplementation() {
         this.players = Collections.emptyList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void startMinigame(List<Player> players, MinigameType type) throws Exception {
+    public void startMinigame(final List<Player> players, final MinigameType type) throws Exception {
         this.actualMinigame = generateRandomMinigame(type);
         this.type = type;
         this.players = players;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getMinigame() {
         return this.actualMinigame;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getUsersPlaying() {
         return this.players.stream().map(Player::getUsername).toList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isInGame() {
         return actualMinigame != null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void stopMinigame() {
         this.actualMinigame = null;
@@ -48,7 +69,7 @@ public class MinigameHandlerImplementation implements MinigameHandler{
         this.type = null;
     }
 
-    private String generateRandomMinigame(MinigameType type) throws Exception {
+    private String generateRandomMinigame(final MinigameType type) throws Exception {
         final BufferedReader reader = new BufferedReader(new InputStreamReader( ClassLoader.getSystemResourceAsStream(type + ".txt")));
         String name = null;
         final List<String> minigames = new ArrayList<>();
