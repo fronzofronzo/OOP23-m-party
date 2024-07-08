@@ -26,7 +26,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="moneyLabel" alignment="CENTER" layoutX="429.0" layoutY="20.0" minHeight="60.0" minWidth="250.0" prefHeight="60.0" prefWidth="250.0" textAlignment="CENTER">
+                              <Label fx:id="moneyLabel" alignment="CENTER" layoutX="413.0" layoutY="20.0" minHeight="60.0" minWidth="250.0" prefHeight="60.0" prefWidth="250.0" textAlignment="CENTER">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
