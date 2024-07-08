@@ -7,10 +7,9 @@ import it.unibo.mparty.model.minigames.secretCode.api.SecreteCodePlayer;
 import it.unibo.mparty.utilities.Pair;
 
 public class SecretCodeModelImpl implements SecretCodeModel{
-    
+
     private static final int TURN = 8;
 
-    private List<SecreteCodePlayer> players;
     
 
     @Override

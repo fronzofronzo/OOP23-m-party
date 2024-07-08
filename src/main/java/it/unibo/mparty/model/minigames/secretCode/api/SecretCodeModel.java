@@ -8,13 +8,5 @@ import it.unibo.mparty.model.minigames.secretCode.impl.SecretCodeResults;
 
 public interface SecretCodeModel extends MinigameModel{
 
-    void guess();
-
-    void addColor(SecretCodeColors color);
-
-    void removeColor();
-
-    List<SecretCodeResults> resultGuess();
-
-     String getMessage();    
+       
 }
