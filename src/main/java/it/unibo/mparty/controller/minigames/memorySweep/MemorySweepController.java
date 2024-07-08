@@ -8,4 +8,6 @@ public interface MemorySweepController extends MinigameController {
     void setUp();
 
     void hit(Position p);
+
+    void setRandoms();
 }

@@ -20,7 +20,7 @@ public class MemorySweepControllerImpl implements MemorySweepController {
     public MemorySweepControllerImpl(MemorySweepView view){
         this.view = view;
         this.model = new MemorySweepImpl(SIZE);
-        this.model.setRandomList();
+        this.setRandoms();
     }
     @Override
     public void setUp() {
@@ -31,6 +31,10 @@ public class MemorySweepControllerImpl implements MemorySweepController {
 
     @Override
     public void hit(Position p) {
+        var type = this.model.hit(p);
+        if(type.equals(MemorySweep.HitType.LOSS)){
+            this.endGame();
+        }
         this.view.hit(this.model.hit(p),this.model.getTurn());
     }
 
@@ -45,5 +49,10 @@ public class MemorySweepControllerImpl implements MemorySweepController {
     @Override
     public void initGame(List<String> players) {
         this.model.setUpPlayers(players);
+    }
+
+    @Override
+    public void setRandoms(){
+        this.model.setRandomList();
     }
 }
