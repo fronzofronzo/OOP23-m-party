@@ -12,17 +12,26 @@ public abstract class AbstractSceneView implements SceneView{
     private GameView mainView;
     private GameController mainController;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public GameView getMainView(){
+    public GameView getMainView() {
         return this.mainView;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void init(GameView view, GameController controller){
+    public void init(final GameView view, final GameController controller) {
         this.mainView = view;
         this.mainController = controller;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public GameController getMainController(){
         return this.mainController;
