@@ -22,7 +22,7 @@ public class DiceImpl implements Dice {
     private final Random random;
 
     /**
-     * Creates a new instance od {@link Dice}
+     * Creates a new instance of {@link Dice}.
      */
     public DiceImpl(){
         this.random = new Random();
@@ -32,7 +32,7 @@ public class DiceImpl implements Dice {
      * {@inheritDoc}
      */
     @Override
-    public void setNumberOfAttempts(int num) {
+    public void setNumberOfAttempts(final int num) {
         this.numberOfAttempts = num;
     }
 
@@ -40,7 +40,7 @@ public class DiceImpl implements Dice {
      * {@inheritDoc}
      */
     @Override
-    public void setMaxNumber(int num) {
+    public void setMaxNumber(final int num) {
         this.maxNumber = num;
     }
 
@@ -48,7 +48,7 @@ public class DiceImpl implements Dice {
      * {@inheritDoc}
      */
     @Override
-    public void setMinNumber(int num) {
+    public void setMinNumber(final int num) {
         this.minNumber = num;
     }
 
@@ -58,8 +58,8 @@ public class DiceImpl implements Dice {
     @Override
     public void rollDice() {
         this.result = 0;
-        for(int i = 0;  i < this.numberOfAttempts; i ++){
-            this.result += this.random.nextInt(this.minNumber, this.maxNumber+1);
+        for (int i = 0;  i < this.numberOfAttempts; i++) {
+            this.result += this.random.nextInt(this.minNumber, this.maxNumber + 1);
         }
         this.resetDice();
     }

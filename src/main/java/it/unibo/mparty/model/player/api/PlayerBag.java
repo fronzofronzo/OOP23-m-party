@@ -19,22 +19,22 @@ public interface PlayerBag {
     void addItem(Item item);
 
     /**
-     *
-     * @param name
-     * @return
+     * Method to use an item that is present in the player's bag.
+     * @param name - {@link ItemName} to use.
+     * @return {@link Item} that player is going to use.
      */
     Item useItem(ItemName name);
 
     /**
-     * Check if the player's bag is full
-     * @return true if it's full, false otherwise
+     * Check if the player's bag is full.
+     * @return true if it's full, false otherwise.
      */
     boolean isFull();
 
     /**
-     * Get the set of items contained in the player's bag
+     * Get the set of items contained in the player's bag.
      * @return {@link List} with all the {@link ItemName} present
-     * in the bag
+     * in the bag.
      */
     List<ItemName> getItems();
 
