@@ -26,7 +26,7 @@ public class Connect4ViewImplTest extends ApplicationTest {
     private static final int NUM_BUTTON = 8;
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(final Stage stage) throws Exception {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/minigames/connect4.fxml"));
         this.testRoot = loader.load();
         final Scene scene = new Scene (testRoot);
