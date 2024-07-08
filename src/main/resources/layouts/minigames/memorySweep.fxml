@@ -8,12 +8,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.memorySweep.MemorySweepViewImpl">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="200.0" minWidth="400.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.memorySweep.MemorySweepViewImpl">
    <bottom>
-      <Button fx:id="startButton" mnemonicParsing="false" prefHeight="41.0" prefWidth="152.0" text="Button" BorderPane.alignment="CENTER" />
+      <Button fx:id="startButton" mnemonicParsing="false" onAction="#handleStartButton" prefHeight="41.0" prefWidth="152.0" text="START" BorderPane.alignment="CENTER" />
    </bottom>
    <top>
-      <Label fx:id="label" alignment="TOP_RIGHT" text="Label" BorderPane.alignment="CENTER" />
+      <Label fx:id="label" alignment="TOP_RIGHT" prefHeight="18.0" prefWidth="222.0" BorderPane.alignment="CENTER" />
    </top>
    <center>
       <GridPane fx:id="memorySweepGrid" BorderPane.alignment="CENTER">
