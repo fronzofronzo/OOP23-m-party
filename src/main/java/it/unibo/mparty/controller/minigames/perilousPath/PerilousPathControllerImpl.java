@@ -7,6 +7,7 @@ import it.unibo.mparty.view.minigames.perilouspath.PerilousPathViewImpl;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.util.List;
 
 public class PerilousPathControllerImpl implements  PerilousPathController{
@@ -48,6 +49,7 @@ public class PerilousPathControllerImpl implements  PerilousPathController{
     @Override
     public void endGame() {
         this.view.showResult(this.model.getResult());
+        this.view.getMainController().saveMinigameResult(this.model.getResult());
     }
 
     @Override
