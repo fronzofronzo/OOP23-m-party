@@ -10,7 +10,7 @@ import it.unibo.mparty.utilities.Position;
  */
 public class BooBell extends AbstractItem {
 
-    private static final int BOOBELL_COST = 7;
+    private static final int BOOBELL_COST = 5;
 
     /**
      * Construct a new istance of BooBell item.

@@ -10,7 +10,7 @@ import it.unibo.mparty.utilities.Position;
  */
 public class LuckyDice extends AbstractItem {
 
-    private static final int LUCKYDICE_COST = 5;
+    private static final int LUCKYDICE_COST = 7;
 
     /**
      * Constructs a new instance of LuckyDice item.
