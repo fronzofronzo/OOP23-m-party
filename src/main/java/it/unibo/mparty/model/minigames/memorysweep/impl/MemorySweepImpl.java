@@ -14,18 +14,16 @@ public class MemorySweepImpl implements MemorySweep{
 
     private final Set<Position> randomList;
     private int counter;
-    private final Set<Position> player1;
-    private final Set<Position> player2;
+    private Pair<String,Set<Position>> p1;
+    private Pair<String,Set<Position>> p2;
     private final Random random;
     private final int side;
     private boolean turn = true;
-    private Set<Position> winner;
+    private String winner;
 
     public MemorySweepImpl(int side){
         this.random = new Random();
         this.randomList = new HashSet<>();
-        this.player1 = new HashSet<>();
-        this.player2 = new HashSet<>();
         this.side = side;
         this.counter = 3;
     }
@@ -45,7 +43,7 @@ public class MemorySweepImpl implements MemorySweep{
     
     @Override
     public HitType hit(Position p) {
-        return this.getTurn() ? this.playerTurn(player1, p) : this.playerTurn(player2, p);
+        return this.getTurn() ? this.playerTurn(p1.getSecond(), p) : this.playerTurn(p2.getSecond(), p);
     }
 
     @Override
@@ -54,7 +52,7 @@ public class MemorySweepImpl implements MemorySweep{
     }
 
     @Override
-    public Set<Position> getWinner() {
+    public String getWinner() {
         return this.winner;
     }
     /**
@@ -78,7 +76,8 @@ public class MemorySweepImpl implements MemorySweep{
      * the actual method that manages the players turns
      * @param player the set of the player
      * @param p the position clicked by that player
-     * @return whether his guess was right(in this case returns whether the guess is over or not) or wrong
+     * @return whether his guess was right(in this case returns
+     * whether the guess is over or not) or wrong
      */
     private HitType playerTurn(Set<Position> player,Position p){
         if(this.randomList.contains(p)){
@@ -90,7 +89,7 @@ public class MemorySweepImpl implements MemorySweep{
             }
             return HitType.RIGHT_CHOICE;
         }
-        this.winner = player.equals(this.player1) ? player2 : player1;
+        this.winner = player.equals(this.p1.getSecond()) ? p2.getFirst() : p1.getFirst();
         return HitType.LOSS;//player 1 ha perso,ha vinto player 2
     }
 
@@ -106,19 +105,20 @@ public class MemorySweepImpl implements MemorySweep{
         return this.counter;
     }
 
-
     @Override
     public Pair<String, Integer> getResult() {
-        return null;
+        int COINS = 20;
+        return new Pair<>(this.winner, COINS);
     }
 
     @Override
     public void setUpPlayers(List<String> players) {
-
+        this.p1 = new Pair<>(players.get(0),new HashSet<>());
+        this.p2 = new Pair<>(players.get(1),new HashSet<>());
     }
 
     @Override
     public boolean isOver() {
-        return false;
+        return this.winner.equals(this.p1.getFirst()) || this.winner.equals(this.p2.getFirst());
     }
 }

@@ -45,7 +45,7 @@ public interface MemorySweep extends MinigameModel {
      * method for getting the winner of the game
      * @return the winner of the game
      */
-    Set<Position> getWinner();
+    String getWinner();
 
     /**
      * method for getting the size of the list that needs to be recreated
