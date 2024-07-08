@@ -1,5 +1,7 @@
 package it.unibo.mparty.model.minigames.secretCode.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -23,7 +25,8 @@ public class SecretCodeGameImpl implements SecretCodeGame{
 
     public SecretCodeGameImpl(List<String> players)  {
         generateSoluction();
-        players.stream().forEach(p -> this.players.add(new SecreteCodePlayerImpl(p, soluction)));
+        players.stream()
+            .forEach(p -> this.players.add(new SecreteCodePlayerImpl(p, this.soluction.size())));
     }
 
     private void generateSoluction() {
@@ -36,13 +39,38 @@ public class SecretCodeGameImpl implements SecretCodeGame{
     }
 
     @Override
-    public List<SecretCodeResults> guess() {
-        List<SecretCodeResults> res = this.players.get(actualPlayerIndex).guess();
+    public List<SecretCodeResults> getGuessResult() {
+        List<SecretCodeResults> res = computeResult(this.players.get(actualPlayerIndex).getGuess());
         if (!res.isEmpty()) {
-            
             this.nextPlayer();
         }
         return res;
+    } 
+
+    private List<SecretCodeResults> computeResult(List<SecretCodeColors> guess) {
+        if (guess.size() != this.soluction.size()) {
+            return Collections.emptyList();
+        }
+        List<SecretCodeResults> results = new ArrayList<>();
+        for (int i = 0; i < guess.size(); i++) {
+            if (this.soluction.contains(guess.get(i)) &&
+                i == this.soluction.indexOf(guess.get(i))) {
+                results.add(SecretCodeResults.CORRECT_COLOR_AND_POSITION);
+            } else if (this.soluction.contains(guess.get(i))) {
+                results.add(SecretCodeResults.CORRECT_COLOR);
+            } else {
+                results.add(SecretCodeResults.WRONG_COLOR);
+            }
+        }
+        if (hasGuessed(results)) {
+            this.someoneHasGuessd = true;
+        }
+        return Collections.unmodifiableList(results);
+    }
+
+    private boolean hasGuessed(List<SecretCodeResults> results) {
+        return !results.contains(SecretCodeResults.CORRECT_COLOR) &&
+               !results.contains(SecretCodeResults.WRONG_COLOR); 
     }
 
     @Override
@@ -56,7 +84,7 @@ public class SecretCodeGameImpl implements SecretCodeGame{
     }
 
     @Override
-    public String getMessage() {
+    public String getGameMessage() {
         return this.players.get(actualPlayerIndex).getMessage();
     }
 
@@ -67,7 +95,7 @@ public class SecretCodeGameImpl implements SecretCodeGame{
 
     @Override
     public boolean isOver() {
-        return this.turn == TURNS;
+        return this.turn == TURNS || this.someoneHasGuessd;
     }
 
     private void nextPlayer() {

@@ -42,7 +42,7 @@ public class SecreteCodePlayerImpl implements SecreteCodePlayer{
     }
 
     @Override
-    public List<SecretCodeColors> guess() {
+    public List<SecretCodeColors> getGuess() {
         if (this.myGuess.size() == this.soluctionSize) {
             return Collections.unmodifiableList(this.myGuess);
         } else {

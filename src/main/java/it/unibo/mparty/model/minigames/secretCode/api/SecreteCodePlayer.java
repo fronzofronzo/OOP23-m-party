@@ -10,7 +10,7 @@ public interface SecreteCodePlayer {
 
     void removeColor();
     
-    List<SecretCodeColors> guess();
+    List<SecretCodeColors> getGuess();
     
     void addPoints(int points);
 

@@ -9,13 +9,13 @@ import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
 
 public interface SecretCodeGame {
 
-    List<SecretCodeResults> guess();
+    List<SecretCodeResults> getGuessResult();
 
     void addColor(SecretCodeColors color);
 
     void removeColor();
 
-    String getMessage();     
+    String getGameMessage();     
     
     String getCurrentPlayer();
 
