@@ -12,47 +12,30 @@ public class SecretCodePlayerImpl implements SecretCodePlayer{
     private static final  int INITIAL_POINTS = 0;
 
     private final String player;
-    private List<SecretCodeColors> myGuess;
-    private String message = "";
-    private int points;
     private final int soluctionSize;
+    private List<SecretCodeColors> myGuess;
+    private int points;
 
 
     public SecretCodePlayerImpl(String player, int soluctionSize){
         this.player = player;
+        this.soluctionSize = soluctionSize;
         this.myGuess = new ArrayList<>();
         this.points = INITIAL_POINTS;
-        this.soluctionSize = soluctionSize;
     }
 
     @Override
-    public void addColor(SecretCodeColors color) {
+    public boolean addColor(SecretCodeColors color) {
         if (this.myGuess.size() < this.soluctionSize) {
             this.myGuess.add(color);
+            return true;
         }
-    }
-
-    @Override
-    public void removeColor() {
-        if (this.myGuess.isEmpty()) {
-
-        } else {
-            this.myGuess.removeLast();
-        }
+        return false;
     }
 
     @Override
     public List<SecretCodeColors> getGuess() {
-        if (this.myGuess.size() == this.soluctionSize) {
-            return Collections.unmodifiableList(this.myGuess);
-        } else {
-            return Collections.emptyList();
-        }
-    }
-
-    @Override
-    public String getMessage() {
-        return this.message;
+        return Collections.unmodifiableList(this.myGuess);
     }
 
     @Override
@@ -68,11 +51,5 @@ public class SecretCodePlayerImpl implements SecretCodePlayer{
     @Override
     public void addPoints(int points) {
         this.points += points;
-    }
-
-    @Override
-    public List<SecretCodeColors> getCurrentGuess() {
-        return Collections.unmodifiableList(this.myGuess);
-    }
-    
+    }    
 }
