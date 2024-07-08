@@ -2,7 +2,7 @@ package it.unibo.mparty.model.minigames.secretCode.util;
 
 public enum SecretCodeColors {
     VERDE,
-    AZZURRO,
+    BLU,
     VIOLA,
     ROSA,
     ROSSO,
