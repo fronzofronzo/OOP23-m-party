@@ -6,6 +6,8 @@ import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
 
 public interface SecretCodePlayer {
 
+    List<SecretCodeColors> getCurrentGuess = null;
+
     void addColor(SecretCodeColors color);
 
     void removeColor();
@@ -19,4 +21,6 @@ public interface SecretCodePlayer {
     String getNamePlayer();
 
     int getPoints();
+
+    List<SecretCodeColors> getCurrentGuess();
 }

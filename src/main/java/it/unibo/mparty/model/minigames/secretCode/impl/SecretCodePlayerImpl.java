@@ -69,5 +69,10 @@ public class SecretCodePlayerImpl implements SecretCodePlayer{
     public void addPoints(int points) {
         this.points += points;
     }
+
+    @Override
+    public List<SecretCodeColors> getCurrentGuess() {
+        return Collections.unmodifiableList(this.myGuess);
+    }
     
 }

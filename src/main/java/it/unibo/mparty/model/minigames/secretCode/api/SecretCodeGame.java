@@ -11,6 +11,8 @@ public interface SecretCodeGame {
 
     List<SecretCodeResults> getGuessResult();
 
+    List<SecretCodeColors> getCurrentGuess();
+
     void addColor(SecretCodeColors color);
 
     void removeColor();

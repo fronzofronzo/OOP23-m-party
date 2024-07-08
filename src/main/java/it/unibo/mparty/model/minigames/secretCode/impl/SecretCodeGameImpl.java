@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import it.unibo.mparty.model.minigames.secretCode.api.SecretCodeGame;
@@ -21,7 +22,7 @@ public class SecretCodeGameImpl implements SecretCodeGame{
     private List<SecretCodeColors> soluction;
     private int actualPlayerIndex = 0;
     private int turn = 1 ;
-    private boolean someoneHasGuessd = false;
+    private Optional<String> winner;
 
 
     public SecretCodeGameImpl(List<String> players)  {
@@ -64,7 +65,8 @@ public class SecretCodeGameImpl implements SecretCodeGame{
             }
         }
         if (hasGuessed(results)) {
-            this.someoneHasGuessd = true;
+            this.winner = Optional.of(this.getCurrentPlayer());
+
         }
         return Collections.unmodifiableList(results);
     }
@@ -96,7 +98,7 @@ public class SecretCodeGameImpl implements SecretCodeGame{
 
     @Override
     public boolean isOver() {
-        return this.turn == TURNS || this.someoneHasGuessd;
+        return this.turn == TURNS || this.winner.isPresent();
     }
 
     private void nextPlayer() {
@@ -108,11 +110,22 @@ public class SecretCodeGameImpl implements SecretCodeGame{
 
     @Override
     public String getWinner() {
-        int maxPoints = 0;
-        Set<String> winners = new HashSet<>();
-        for (SecretCodePlayer p : this.players) {
-            if (p.g)
+        if (this.winner.isEmpty()) {
+            double maxPoints = 0;
+            for (int i = 0; i < this.players.size(); i++) {
+                double points = this.players.get(actualPlayerIndex).getPoints() + i == 0 ? 0.5 : 0;
+                if (points > maxPoints) {
+                    maxPoints = points;
+                    this.winner = Optional.of(this.players.get(actualPlayerIndex).getNamePlayer());
+                }
+            }
         }
+        return this.winner.get();
     }
+
+	@Override
+	public List<SecretCodeColors> getCurrentGuess() {
+		return this.players.get(actualPlayerIndex).getCurrentGuess();
+	}
     
 }
