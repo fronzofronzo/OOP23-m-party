@@ -3,8 +3,8 @@ package it.unibo.mparty.controller.minigames.memoryCard;
 import it.unibo.mparty.controller.minigames.MinigameController;
 
 /**
- * Interface that models the controller of the minigame Memory card
- * to
+ * Interface that models the controller of the minigame Memory card. It
+ * represents the Controller of the patter MVC. It
  */
 public interface MemoryCardController extends MinigameController {
 
@@ -14,9 +14,5 @@ public interface MemoryCardController extends MinigameController {
      */
     void selectCard(int index);
 
-    /**
-     * Set up the game view and model at the game start
-     */
-    void setUpGame();
 
 }
