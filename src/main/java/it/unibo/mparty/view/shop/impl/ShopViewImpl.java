@@ -18,7 +18,6 @@ import javafx.scene.control.Label;
  */
 public class ShopViewImpl extends AbstractSceneView implements ShopView {
     private int i = 1;
-    private int j = 1;
     private List<ItemName> itemNameList = new ArrayList<>();
     private static final double DISTANCE_FROM_BUTTON = 70.0;
     private static final double LEFT_MARGIN = 40.0;
@@ -34,33 +33,6 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView {
 
     @FXML 
     private Label moneyLabel;
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addButton(final ItemName itemName, final int cost) {
-        final Button but = new Button();
-        but.setText("Acquista " + itemName.toString() + ": " + cost);
-        but.setOnAction(this::selectItem);
-        buttonPane.getChildren().add(but);
-        AnchorPane.setTopAnchor(but, i * DISTANCE_FROM_BUTTON);
-        AnchorPane.setLeftAnchor(but, LEFT_MARGIN);
-        i++;
-        itemNameList.add(itemName);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addDescription(final String description) {
-        final Label lb = new Label(description);
-        descriptionPane.getChildren().add(lb);
-        AnchorPane.setTopAnchor(lb, j * DISTANCE_FROM_BUTTON);
-        AnchorPane.setLeftAnchor(lb, DISTANCE_FROM_BUTTON);
-        j++;
-    }
 
     private void selectItem(final ActionEvent e) {
         this.getMainController().buyItem(itemNameList
@@ -86,5 +58,21 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView {
     @FXML
     private void closeShop() throws IOException {
         this.getMainView().setBoardScene();
+    }
+
+    @Override
+    public void addItemView(ItemName itemName, int cost, String description) {
+        final Button but = new Button();
+        final Label lb = new Label(description);
+        but.setText("Acquista " + itemName.toString() + ": " + cost);
+        but.setOnAction(this::selectItem);
+        buttonPane.getChildren().add(but);
+        AnchorPane.setTopAnchor(but, i * DISTANCE_FROM_BUTTON);
+        AnchorPane.setLeftAnchor(but, LEFT_MARGIN);
+        descriptionPane.getChildren().add(lb);
+        AnchorPane.setTopAnchor(lb, i * DISTANCE_FROM_BUTTON);
+        AnchorPane.setLeftAnchor(lb, LEFT_MARGIN);
+        i++;
+        itemNameList.add(itemName);
     }
 }
