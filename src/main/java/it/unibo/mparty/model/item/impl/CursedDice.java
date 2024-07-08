@@ -10,7 +10,7 @@ import it.unibo.mparty.utilities.Position;
  */
 public class CursedDice extends AbstractItem {
 
-    private static final int CURSEDICE_COST = 5;
+    private static final int CURSEDICE_COST = 7;
 
     /**
      * Construct a new istance of CursedDice item.

@@ -9,7 +9,7 @@ import it.unibo.mparty.utilities.Position;
  * class that implements the Golden Pipe item.
  */
 public class GoldenPipe extends AbstractItem {
-    private static final int GOLDENPIPE_COST = 10;
+    private static final int GOLDENPIPE_COST = 12;
 
     /**
      * Construct a new istance of GoldenPipe item.
@@ -32,7 +32,7 @@ public class GoldenPipe extends AbstractItem {
      */
     @Override
     public String getDescription() {
-        return "Vieni teletrasportato nella casella prima della stella";
+        return "Vieni teletrasportato nella casella della stella";
     }
 
     /**
