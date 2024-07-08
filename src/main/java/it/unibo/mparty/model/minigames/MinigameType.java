@@ -7,7 +7,7 @@ public enum MinigameType {
 
     private final String type;
 
-    private MinigameType(String type){
+    MinigameType(String type){
         this.type = type;
     }
 

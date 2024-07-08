@@ -1,3 +1,4 @@
+
 package it.unibo.mparty.model;
 
 import it.unibo.mparty.model.item.impl.ItemName;

@@ -1,10 +1,12 @@
 package it.unibo.mparty.controller.minigames.nanogram.api;
 
+import it.unibo.mparty.controller.minigames.MinigameController;
+
 /**
  * Interface representing a controller for managing game logic in a Nanogram game.
  * Implementations of this interface handle interactions with the game board and state.
  */
-public interface NanogramController {
+public interface NanogramController extends MinigameController {
 
     /**
      * Checks and processes the cell at the specified coordinates in the Nanogram grid.

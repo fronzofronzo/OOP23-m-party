@@ -11,9 +11,9 @@ public enum NanogramMessage {
     ERROR("Cella errata"),
 
     /**
-     * Message indicating the player has won the game.
+     * Message indicating the player has won the game, and coins that earned.
      */
-    WIN("Hai vinto!"),
+    WIN("%s ha vinto! Guadagnando %d monete."),
 
     /**
      * Message indicating the game is over.
@@ -29,6 +29,10 @@ public enum NanogramMessage {
      */
     NanogramMessage(final String message) {
         this.message = message;
+    }
+
+    public String getFormattedMessage(String winnerName, int coins) {
+        return String.format(this.message, winnerName, coins);
     }
 
     /**

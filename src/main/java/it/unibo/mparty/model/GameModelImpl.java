@@ -1,3 +1,4 @@
+
 package it.unibo.mparty.model;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
@@ -23,7 +24,7 @@ public class GameModelImpl implements GameModel{
     private static final int TURNS_NUMBER = 10;
     private static final int MIN_COINS = 4;
     private static final int MAX_COINS = 10;
-    private static final int STAR_COST  =20;
+    private static final int STAR_COST = 20;
     private static final String MESSAGE_ROLL_DICE = " tira i dadi.";
     private static final String MESSAGE_MOVE_PLAYER = " muovi la pedina.";
     private static final String MESSAGE_MOVING_PLAYER = " muovi la pedina in una delle direzioni possibili:";
@@ -65,21 +66,21 @@ public class GameModelImpl implements GameModel{
     @Override
     public void movePlayer(Optional<Direction> dir) {
         if (this.status.equals(GameStatus.MOVE_PLAYER) ||
-            this.status.equals(GameStatus.MOVING_PLAYER)) {
+                this.status.equals(GameStatus.MOVING_PLAYER)) {
             if (this.status.equals(GameStatus.MOVE_PLAYER)) {
                 this.status = this.status.switchStatus();
             }
-            final int diceResult = this.players.get(actualPlayerIndex).getDice().getResult(); 
+            final int diceResult = this.players.get(actualPlayerIndex).getDice().getResult();
             while (this.steps < diceResult) {
                 this.checkStartAcquisition();
                 final Position playerPos = this.players.get(actualPlayerIndex).getPosition();
                 final Map<Direction, Position> nextPlayerPos = this.board.getNextPositions(playerPos);
                 if (nextPlayerPos.size() == 1 && dir.isEmpty()) {
                     this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.entrySet()
-                                                                                 .stream()
-                                                                                 .findFirst()
-                                                                                 .get()
-                                                                                 .getValue());
+                            .stream()
+                            .findFirst()
+                            .get()
+                            .getValue());
                 } else {
                     if (dir.isEmpty() || nextPlayerPos.size() < 1 || !nextPlayerPos.containsKey(dir.get())) {
                         return;
@@ -100,10 +101,10 @@ public class GameModelImpl implements GameModel{
      */
     @Override
     public int rollDice() {
-       if(this.status == GameStatus.ROLL_DICE){
-           this.players.get(actualPlayerIndex).getDice().rollDice();
-           this.status = this.status.switchStatus();
-       }
+        if(this.status == GameStatus.ROLL_DICE){
+            this.players.get(actualPlayerIndex).getDice().rollDice();
+            this.status = this.status.switchStatus();
+        }
         return this.players.get(actualPlayerIndex).getDice().getResult();
     }
 
@@ -127,14 +128,14 @@ public class GameModelImpl implements GameModel{
     @Override
     public void useItem(final ItemName itemName) {
         Item item = this.players.get(actualPlayerIndex).getPlayerBag().useItem(itemName);
-        Optional<Position> position = item.needPosition() ? 
-                                      Optional.of(this.board.getStarPosition()) : 
-                                      Optional.empty();
+        Optional<Position> position = item.needPosition() ?
+                Optional.of(this.board.getStarPosition()) :
+                Optional.empty();
         Optional<Player> target = Optional.empty();
         if (item.isOnOthers()) {
             Set<Player> targets = this.players.stream()
-                                              .filter(p -> !p.equals(this.players.get(actualPlayerIndex)))
-                                              .collect(Collectors.toSet());
+                    .filter(p -> !p.equals(this.players.get(actualPlayerIndex)))
+                    .collect(Collectors.toSet());
             target = Optional.of(RandomFromSet.get(targets));
         }
         item.activate(this.players.get(actualPlayerIndex), target, position);
@@ -154,13 +155,13 @@ public class GameModelImpl implements GameModel{
     @Override
     public void endMinigame(Pair<String, Integer> result) {
         final Player winner = this.players.stream()
-                                          .filter(p -> p.getUsername().equals(result.getX()))
-                                          .findAny()
-                                          .get();
-        winner.addCoins(result.getY());
+                .filter(p -> p.getUsername().equals(result.getFirst()))
+                .findAny()
+                .get();
+        winner.addCoins(result.getSecond());
         this.minigameHandler.stopMinigame();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -201,8 +202,8 @@ public class GameModelImpl implements GameModel{
     @Override
     public Optional<String> getActiveMinigame() {
         return this.minigameHandler.isInGame() ?
-               Optional.of(this.minigameHandler.getMinigame()) :
-               Optional.empty();
+                Optional.of(this.minigameHandler.getMinigame()) :
+                Optional.empty();
     }
 
     /**
@@ -297,19 +298,19 @@ public class GameModelImpl implements GameModel{
         }
     }
 
-    
+
     private String getDirections() {
         Map<Direction,Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
         String output = "";
         for (Map.Entry<Direction,Position> entry : pos.entrySet()) {
             if (!output.isBlank()) {
-                output = output.concat(",");   
+                output = output.concat(",");
             }
             output = output.concat(" " + entry.getKey().toString());
         }
-        output = output.concat("."); 
+        output = output.concat(".");
         return output;
-    } 
+    }
 
     private void activateSlot() {
         final Player actualPlayer = this.players.get(actualPlayerIndex);
