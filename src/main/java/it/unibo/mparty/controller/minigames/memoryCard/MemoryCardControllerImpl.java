@@ -7,17 +7,27 @@ import it.unibo.mparty.view.minigames.memoryCard.MemoryCardView;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * This class implements the {@link MemoryCardController} interface.
+ */
 public class MemoryCardControllerImpl implements MemoryCardController{
 
     private final MemoryCardModel model;
     private final MemoryCardView view;
 
+    /**
+     * Constructor of the Memory Card controller. It initialises the reference
+     * to model and controller of the minigame.
+     * @param view of the game.
+     */
     public MemoryCardControllerImpl(MemoryCardView view){
         this.model = new MemoryCardModelImpl();
         this.view = view;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void selectCard(int index) {
         if(this.model.flip(index)){
@@ -29,6 +39,33 @@ public class MemoryCardControllerImpl implements MemoryCardController{
             } else {
                 this.updateGameView();
             }
+        }
+    }
+
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void endGame() {
+        this.view.getMainController().saveMinigameResult(this.model.getResult());
+        try {
+            this.view.getMainView().setBoardScene();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initGame(List<String> players) {
+        this.model.setUpPlayers(players);
+        final int n = this.model.getCards().size();
+        for(int i = 0; i < n; i++ ){
+            this.view.addCard(this.model.getCards().get(i).getName());
         }
     }
 
@@ -48,22 +85,4 @@ public class MemoryCardControllerImpl implements MemoryCardController{
         }
     }
 
-    @Override
-    public void endGame() {
-        this.view.getMainController().saveMinigameResult(this.model.getResult());
-        try {
-            this.view.getMainView().setBoardScene();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public void initGame(List<String> players) {
-        this.model.setUpPlayers(players);
-        final int n = this.model.getCards().size();
-        for(int i = 0; i < n; i++ ){
-            this.view.addCard(this.model.getCards().get(i).getName());
-        }
-    }
 }
