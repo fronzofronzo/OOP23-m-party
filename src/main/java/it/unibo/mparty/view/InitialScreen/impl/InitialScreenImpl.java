@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -34,6 +35,9 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     private GameModelBuilder builder;
     private final List<String> difficulties = new ArrayList<>();
     private String difficulty = "";
+
+    @FXML
+    private ImageView imageView;
 
     @FXML
     private Button addPlayers;
