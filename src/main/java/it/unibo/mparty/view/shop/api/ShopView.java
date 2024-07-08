@@ -1,6 +1,5 @@
 package it.unibo.mparty.view.shop.api;
 
-
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.view.SceneView;
 
