@@ -31,10 +31,5 @@ public class SecretCodeControllerImpl implements SecretCodeController{
     public void addColor(SecretCodeColors color) {
         this.model.getGame().addColor(color);
     }
-
-    @Override
-    public void removeColor() {
-        this.model.getGame().removeColor();
-    }
     
 }

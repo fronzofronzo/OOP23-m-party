@@ -6,7 +6,5 @@ import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
 public interface SecretCodeController extends MinigameController{
 
     void addColor(SecretCodeColors verde);
-
-    void removeColor();
     
 }

@@ -17,11 +17,11 @@ public class SecretCodeGameImpl implements SecretCodeGame{
     private static final int DIM_SOLUCTION = 4;
     private static final int TURNS = 8;
 
-    private List<SecretCodePlayer> players;
-    private List<SecretCodeColors> soluction;
+    private List<SecretCodePlayer> players = new ArrayList<>();;
+    private List<SecretCodeColors> soluction = new ArrayList<>();
     private int actualPlayerIndex = 0;
     private int turn = 1 ;
-    private Optional<String> winner;
+    private Optional<String> winner = Optional.empty();
 
 
     public SecretCodeGameImpl(List<String> players)  {
@@ -33,7 +33,7 @@ public class SecretCodeGameImpl implements SecretCodeGame{
     private void generateSoluction() {
         do {
             SecretCodeColors tmp = RandomFromSet.get(Set.of(SecretCodeColors.values()));
-            if (!this.soluction.contains(tmp)) {
+            if (this.soluction.isEmpty() || !this.soluction.contains(tmp)) {
                 this.soluction.add(tmp);
             }
         } while (this.soluction.size() < DIM_SOLUCTION);
