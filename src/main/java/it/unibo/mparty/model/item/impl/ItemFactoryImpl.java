@@ -18,8 +18,8 @@ public class ItemFactoryImpl implements ItemFactory {
                 return new LuckyDice();
             case DADO_MALEDETTO:
                 return new CursedDice();
-            case DOPPIO_DADO:
-                return new DoubleDice();
+            case TRIPLO_DADO:
+                return new TripleDice();
             case TUBO_DORATO:
                 return new GoldenPipe();
             case CAMPANA_BOO:
