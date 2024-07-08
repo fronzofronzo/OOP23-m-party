@@ -170,7 +170,9 @@ public class GameControllerImpl implements GameController {
     }
 
     private void updateCommandView() {
-        this.view.updateCommands(this.model.getItemsOfCurrentPlayer()
+        this.view.updateCommands(this.model.getActualPlayer()
+                        .getPlayerBag()
+                        .getItems()
                         .stream()
                         .map(i -> i.toString())
                         .toList(),
