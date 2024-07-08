@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
@@ -25,14 +26,16 @@ public class MemorySweepImpl implements MemorySweep{
         this.random = new Random();
         this.randomList = new HashSet<>();
         this.side = side;
-        this.counter = 3;
+        this.counter = 1;
     }
 
     @Override
     public void setRandomList() {
         this.setCounter();
         this.randomList.clear();
-        Stream.iterate(0, i -> i + 1).limit(this.counter).map(i -> this.randomList.add(getNewPosition()));
+        for(var i = 0; i < this.getCounter(); i++){
+            this.randomList.add(getNewPosition());
+        }
     }
 
     @Override
