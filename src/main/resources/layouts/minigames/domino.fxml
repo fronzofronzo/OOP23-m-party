@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.domino.impl.DominoViewImpl">
+<BorderPane minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.domino.impl.DominoViewImpl">
    <top>
       <VBox prefHeight="213.0" prefWidth="1020.0" BorderPane.alignment="CENTER">
          <children>
