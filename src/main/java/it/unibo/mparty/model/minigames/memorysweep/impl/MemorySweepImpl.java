@@ -78,7 +78,7 @@ public class MemorySweepImpl implements MemorySweep{
      * the actual method that manages the players turns
      * @param player the set of the player
      * @param p the position clicked by that player
-     * @return wheter his guess was right(in this case returns wheter the guess is over or not) or wrong
+     * @return whether his guess was right(in this case returns whether the guess is over or not) or wrong
      */
     private HitType playerTurn(Set<Position> player,Position p){
         if(this.randomList.contains(p)){
