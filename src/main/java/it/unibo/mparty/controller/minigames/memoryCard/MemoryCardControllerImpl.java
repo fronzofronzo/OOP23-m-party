@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * This class implements the {@link MemoryCardController} interface.
  */
-public class MemoryCardControllerImpl implements MemoryCardController{
+public class MemoryCardControllerImpl implements MemoryCardController {
 
     private final MemoryCardModel model;
     private final MemoryCardView view;
@@ -20,7 +20,7 @@ public class MemoryCardControllerImpl implements MemoryCardController{
      * to model and controller of the minigame.
      * @param view of the game.
      */
-    public MemoryCardControllerImpl(MemoryCardView view){
+    public MemoryCardControllerImpl(final MemoryCardView view) {
         this.model = new MemoryCardModelImpl();
         this.view = view;
     }
@@ -29,9 +29,9 @@ public class MemoryCardControllerImpl implements MemoryCardController{
      * {@inheritDoc}
      */
     @Override
-    public void selectCard(int index) {
-        if(this.model.flip(index)){
-            this.view.setCardStatus(index,false);
+    public void selectCard(final int index) {
+        if (this.model.flip(index)) {
+            this.view.setCardStatus(index, false);
             this.view.setCardType(index, this.model.getCards().get(index).getName());
         } else {
             if (this.model.isOver()) {
@@ -41,8 +41,6 @@ public class MemoryCardControllerImpl implements MemoryCardController{
             }
         }
     }
-
-
 
     /**
      * {@inheritDoc}
@@ -61,26 +59,26 @@ public class MemoryCardControllerImpl implements MemoryCardController{
      * {@inheritDoc}
      */
     @Override
-    public void initGame(List<String> players) {
+    public void initGame(final List<String> players) {
         this.model.setUpPlayers(players);
         final int n = this.model.getCards().size();
-        for(int i = 0; i < n; i++ ){
+        for (int i = 0; i < n; i++) {
             this.view.addCard(this.model.getCards().get(i).getName());
         }
     }
 
-    private void updateGameView(){
-        final var guessed  = this.model.guessedCardsType();
+    private void updateGameView() {
+        final var guessed = this.model.guessedCardsType();
         this.view.setMistakesNumber(this.model.getMistakes());
-        for(var e : this.model.getCards().entrySet()){
+        for (var e : this.model.getCards().entrySet()) {
             var type = e.getValue();
             var i = e.getKey();
-            if(guessed.contains(type)){
-                this.view.setCardType(i,type.getName());
-                this.view.setCardStatus(i,false);
+            if (guessed.contains(type)) {
+                this.view.setCardType(i, type.getName());
+                this.view.setCardStatus(i, false);
             } else {
                 this.view.setCardType(i, "");
-                this.view.setCardStatus(i,true);
+                this.view.setCardStatus(i, true);
             }
         }
     }

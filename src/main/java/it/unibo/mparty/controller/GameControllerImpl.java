@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 /**
  * This class implements the {@link GameController} interface. This class
  * provides an implementation for interface methods and handles the different
- * situation with view and model of the game
+ * situation with view and model of the game.
  */
 public class GameControllerImpl implements GameController{
 
@@ -25,14 +25,13 @@ public class GameControllerImpl implements GameController{
 
     /**
      * Constructor for a new {@link GameController} implementation
-     * @param view to set like {@link GameView} reference to the game
+     * @param view to set like {@link GameView} reference to the game.
      */
     public GameControllerImpl(final GameView view){
         this.view = view;
     }
 
     /**
-     *
      * {@inheritDoc}
      */
     @Override

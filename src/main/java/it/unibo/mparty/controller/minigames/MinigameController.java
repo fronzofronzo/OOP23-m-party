@@ -10,13 +10,13 @@ import java.util.List;
 public interface MinigameController {
 
     /**
-     * Handles the end phase of a minigame and update the main game
+     * Handles the end phase of a minigame and update the main game.
      */
     void endGame();
 
     /**
      * Initialise the minigame
-     * @param players that participate to the minigame
+     * @param players that participate to the minigame.
      */
     void initGame(List<String> players);
 }
