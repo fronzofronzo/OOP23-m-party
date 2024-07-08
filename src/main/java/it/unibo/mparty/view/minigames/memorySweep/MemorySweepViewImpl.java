@@ -67,7 +67,8 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
                 for(var child : this.memorySweepGrid.getChildren()){
                     child.setStyle(" ");
                 }
-
+                this.controller.setRandoms();
+                this.controller.setUp();
             }
             case LOSS -> {
                 for(var child : this.memorySweepGrid.getChildren()){
@@ -112,14 +113,11 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
                 throw new RuntimeException(ex);
             }
         });
-
-
     }
 
     @Override
     public void startMinigame(List<String> players) {
         this.controller.initGame(players);
-
     }
 
     @Override
@@ -137,5 +135,9 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
             }
         }
         this.memorySweepGrid.setDisable(false);
+    }
+
+    private void setLabelText(String text){
+        this.label.setText(text);
     }
 }
