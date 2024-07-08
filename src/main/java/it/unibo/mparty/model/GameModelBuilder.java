@@ -2,7 +2,14 @@ package it.unibo.mparty.model;
 
 /**
  * Interface of the GameModelBuilder: it's an application of the pattern
- * Builder to build a new instance of GameModel
+ * Builder to build a new instance of GameModel.
+ * Example usage:
+ *  *<pre>{@code
+ *      GameModelBuilder builder = new GameModelBuilder();
+ *      Player player = PlayerBuilder.username("player")
+ *                                   .character("Mario")
+ *                                    .build()
+ *  }</pre>
  */
 public interface GameModelBuilder {
 
