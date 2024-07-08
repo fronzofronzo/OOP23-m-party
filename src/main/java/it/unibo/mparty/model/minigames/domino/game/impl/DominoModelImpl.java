@@ -27,7 +27,6 @@ public class DominoModelImpl implements DominoModel {
     private final List<Tile> dominoSet;
     private String player1;
     private String player2;
-    private String lastPlayerToPlay;
 
     /**
      * Constructs a new {@link DominoModelImpl}.
@@ -66,7 +65,6 @@ public class DominoModelImpl implements DominoModel {
         if (this.boardTile.canMatchBoardTile(tile)) {
             this.boardTile.addTileToBoard(tile);
             this.playerTiles.removeTilesFromPlayer(player, tile);
-            this.lastPlayerToPlay = player;
             return true;
         }
         return false;
@@ -77,7 +75,7 @@ public class DominoModelImpl implements DominoModel {
      */
     @Override
     public boolean canDrawTile(final String player) {
-        return this.cannotPlayerPlace(player) && !this.dominoSet.isEmpty();
+        return !this.playerTiles.canPlayerPlace(player, this.boardTile) && !this.dominoSet.isEmpty();
     }
 
     /**
@@ -85,7 +83,7 @@ public class DominoModelImpl implements DominoModel {
      */
     @Override
     public boolean cannotPlayerPlace(final String player) {
-        return !this.playerTiles.canPlayerPlace(player, this.boardTile);
+        return !this.playerTiles.canPlayerPlace(player, this.boardTile) && this.dominoSet.isEmpty();
     }
 
     /**
@@ -134,9 +132,10 @@ public class DominoModelImpl implements DominoModel {
             return new Pair<>(this.player1, COINS);
         } else if (player2Tiles.isEmpty() && !player1Tiles.isEmpty()) {
             return new Pair<>(this.player2, COINS);
-        } else if (this.cannotPlayerPlace(this.player1) && this.cannotPlayerPlace(this.player2)
-                && this.dominoSet.isEmpty()) {
-            return new Pair<>(this.lastPlayerToPlay, COINS);
+        } else if (this.cannotPlayerPlace(this.player1) && this.cannotPlayerPlace(this.player2)) {
+            final int player1Score = this.calculateTileScore(this.playerTiles.getPlayerTiles(player1));
+            final int player2Score = this.calculateTileScore(this.playerTiles.getPlayerTiles(player2));
+            return player1Score < player2Score ? new Pair<>(this.player1, COINS) : new Pair<>(this.player2, COINS);
         } else {
             return new Pair<>(null, 0);
         }
@@ -149,8 +148,12 @@ public class DominoModelImpl implements DominoModel {
     public boolean isOver() {
         return this.playerTiles.getPlayerTiles(this.player1).isEmpty()
                 || this.playerTiles.getPlayerTiles(this.player2).isEmpty()
-                || (this.cannotPlayerPlace(this.player1) && this.cannotPlayerPlace(this.player2)
-                && this.dominoSet.isEmpty());
+                || (this.cannotPlayerPlace(this.player1)
+                && this.cannotPlayerPlace(this.player2));
+    }
+
+    private int calculateTileScore(Set<Tile> tiles) {
+        return tiles.stream().mapToInt(tile -> tile.getSideA().getValue() + tile.getSideB().getValue()).sum();
     }
 
     private int getDoubleTiles(final String player) {
