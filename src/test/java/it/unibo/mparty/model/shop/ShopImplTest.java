@@ -1,12 +1,9 @@
 package it.unibo.mparty.model.shop;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.unibo.mparty.model.item.impl.DoubleDice;
-import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.impl.PlayerImplementation;
 import it.unibo.mparty.model.shop.api.Shop;
@@ -18,7 +15,6 @@ import it.unibo.mparty.model.shop.impl.ShopImpl;
 public class ShopImplTest {
     private Shop testShop;
     private Player testPlayer;
-    private DoubleDice doubleDice = new DoubleDice();
 
     /**
      * This methods initialize the shop for the test
