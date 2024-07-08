@@ -28,7 +28,7 @@ public class MemoryCardModelImpl implements MemoryCardModel {
     private int mistakesNumber = 0;
 
     /**
-     * Constructor of a new instance of {@link MemoryCardModel}
+     * Constructor of a new instance of {@link MemoryCardModel}.
      */
     public MemoryCardModelImpl() {
         this.cards = new HashMap<>();
