@@ -33,16 +33,16 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
      * {@inheritDoc}
      */
     @Override
-    public void setCardStatus(int index, boolean status) {
-        ((Button)this.cardsPane.getChildren().get(index)).setDisable(!status);
+    public void setCardStatus(final int index, final boolean status) {
+        ((Button) this.cardsPane.getChildren().get(index)).setDisable(!status);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setCardType(int index, String type) {
-        final Button bt = (Button)this.cardsPane.getChildren().get(index);
+    public void setCardType(final int index, final String type) {
+        final Button bt = (Button) this.cardsPane.getChildren().get(index);
         bt.setText(type);
     }
 
@@ -50,7 +50,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
      * {@inheritDoc}
      */
     @Override
-    public void addCard(String text) {
+    public void addCard(final String text) {
         final Button bt = new Button(text);
         bt.setOnAction(this::tryCard);
         bt.setPrefSize(100,100);
@@ -73,7 +73,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
      */
     @Override
     public void showResult(Pair<String, Integer> result) {
-        this.textLabel.setText(  result.getFirst() + " ha guadagnato " +  String.valueOf(result.getSecond()) + " monete." );
+        this.textLabel.setText(result.getFirst() + " ha guadagnato " +  String.valueOf(result.getSecond()) + " monete.");
         this.controlButton.setOnAction(e -> {
             this.controller.endGame();
         });
@@ -85,29 +85,29 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
      * {@inheritDoc}
      */
     @Override
-    public void startMinigame(List<String> players) {
+    public void startMinigame(final List<String> players) {
         this.controller.initGame(players);
     }
 
     @FXML
-    private void startGame(ActionEvent event){
+    private void startGame(final ActionEvent event) {
         final Button bt = (Button)event.getSource();
         bt.setText("Pronto !");
         bt.setOnAction(this::hideCards);
-        this.textLabel.setText("Quando si e' pronti, spingere il pulsante 'Pronto' ");
+        this.textLabel.setText("Quando si e' pronti, spingere il pulsante 'Pronto'");
     }
 
-    private void hideCards(ActionEvent event){
+    private void hideCards(final ActionEvent event) {
         this.cardsPane.getChildren().stream().map(e -> (Button)e).forEach(b -> {
             b.setText("");
             b.setDisable(false);
         });
-        ((Button)event.getSource()).setDisable(true);
+        ((Button) event.getSource()).setDisable(true);
         this.textLabel.setText("Errori: 0");
     }
 
-    private void tryCard(ActionEvent e){
-        this.controller.selectCard(this.cardsPane.getChildren().indexOf((Button)e.getSource()));
+    private void tryCard(final ActionEvent e) {
+        this.controller.selectCard(this.cardsPane.getChildren().indexOf((Button) e.getSource()));
     }
 
 }
