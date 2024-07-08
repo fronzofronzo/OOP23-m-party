@@ -11,8 +11,8 @@ import java.util.List;
 
 public class MemorySweepControllerImpl implements MemorySweepController {
 
-    private MemorySweepView view;
-    private MemorySweep model;
+    private final MemorySweepView view;
+    private final MemorySweep model;
     private final static int SIZE = 8;
     private final static int SECONDS = 3000;
     private final PauseTransition pause = new PauseTransition(new Duration(SECONDS));
@@ -31,7 +31,7 @@ public class MemorySweepControllerImpl implements MemorySweepController {
 
     @Override
     public void hit(Position p) {
-        this.view.hit(this.model.hit(p));
+        this.view.hit(this.model.hit(p),this.model.getTurn());
     }
 
     @Override
