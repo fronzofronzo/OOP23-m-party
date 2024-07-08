@@ -14,7 +14,6 @@ import java.util.stream.IntStream;
  */
 public class TileFactoryImpl implements TileFactory {
 
-
     /**
      * {@inheritDoc}
      */
