@@ -20,7 +20,9 @@ import java.util.Optional;
 public interface GameModel {
 
     /**
-     * Moves the current player to a new position.
+     * Method to move the player in the selected direction.
+     * @param dir - {@link Direction}, if it is necessary, where the player
+     *            wants to move.
      */
     void movePlayer(Optional<Direction> dir);
 
@@ -46,7 +48,7 @@ public interface GameModel {
      * @param itemName name of the item.
      * @return true if the player can buy the item, false otherwise.
      */
-    boolean buyItem (ItemName itemName);
+    boolean buyItem(ItemName itemName);
 
     /**
      * Method to end the current minigame and update the model.

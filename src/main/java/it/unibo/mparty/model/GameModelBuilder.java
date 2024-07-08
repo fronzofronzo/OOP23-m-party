@@ -35,21 +35,21 @@ public interface GameModelBuilder {
     GameModelBuilder difficulty(String difficulty);
 
     /**
-     * Get the instance of the GameModel created with the selected settings
-     * @return a {@link GameModel} instance
+     * Get the instance of the GameModel created with the selected settings.
+     * @return a {@link GameModel} instance.
      */
     GameModel build();
 
     /**
-     * Check if the game is initialized with enough player
-     * @return true if there are enough players, false otherwise
+     * Check if the game is initialized with enough player.
+     * @return true if there are enough players, false otherwise.
      */
     boolean enoughPlayers();
 
     /**
-     * Check if it can be added other players
+     * Check if it can be added other players.
      * @return true if the game is full ( no other players can be added),
-     * false otherwise
+     * false otherwise.
      */
     boolean isFull();
 }

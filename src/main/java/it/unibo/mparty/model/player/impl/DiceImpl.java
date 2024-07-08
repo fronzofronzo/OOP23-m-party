@@ -24,7 +24,7 @@ public class DiceImpl implements Dice {
     /**
      * Creates a new instance of {@link Dice}.
      */
-    public DiceImpl(){
+    public DiceImpl() {
         this.random = new Random();
     }
 

@@ -23,15 +23,17 @@ public class GameModelBuilderImpl implements GameModelBuilder{
      * {@inheritDoc}
      */
     @Override
-    public GameModelBuilder addPlayer(String nickname, String character) throws IllegalArgumentException {
+    public GameModelBuilder addPlayer(final String nickname, final String character) throws IllegalArgumentException {
         final PlayerBuilder builder = new PlayerBuilderImplementation();
         final Player pl = builder.username(nickname)
                                     .character(character)
                                     .buildPlayer();
-        if(players.stream().anyMatch(p -> p.getUsername().equals(pl.getUsername()) || p.getCharacter().equals(pl.getCharacter()))){
-            throw new IllegalArgumentException("Il player con questo nome/personaggio e' gia' presente ");
+        if (players.stream().anyMatch(p -> p.getUsername().equals(pl.getUsername())
+                || p.getCharacter().equals(pl.getCharacter()))) {
+            throw new IllegalArgumentException("Il player con questo " +
+                    "nome/personaggio e' gia' presente ");
         }
-        if(!this.isFull()){
+        if (!this.isFull()) {
             players.add(pl);
         }
         return this;
@@ -51,7 +53,7 @@ public class GameModelBuilderImpl implements GameModelBuilder{
      */
     @Override
     public GameModel build() {
-        if(this.enoughPlayers()){
+        if (this.enoughPlayers()) {
             return new GameModelImpl(players, this.difficulty);
         } else {
             throw new IllegalStateException("There are not enough players.");
