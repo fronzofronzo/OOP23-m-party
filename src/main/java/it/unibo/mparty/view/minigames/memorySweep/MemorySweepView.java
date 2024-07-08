@@ -26,15 +26,7 @@ public interface MemorySweepView extends MinigameView {
      */
     void hit(MemorySweep.HitType type);
 
-    /**
-     * method that handles the click of a button in the grid
-     * @param e the event that needs to be handled
-     */
-    void buttonClicked(ActionEvent e);
+    void hideRandoms(Set<Position> randoms);
 
-    /**
-     * links the controller of the mini-game to this view
-     * @param controller the controller that needs to be linked
-     */
-    void setObserver(MemorySweepController controller);
+    void handleStartButton(ActionEvent e);
 }

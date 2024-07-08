@@ -1,14 +1,18 @@
 package it.unibo.mparty.view.minigames.memorySweep;
 
 import it.unibo.mparty.controller.minigames.memorySweep.MemorySweepController;
+import it.unibo.mparty.controller.minigames.memorySweep.MemorySweepControllerImpl;
 import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.AbstractSceneView;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
@@ -18,22 +22,29 @@ import java.util.Set;
 
 public class MemorySweepViewImpl extends AbstractSceneView implements MemorySweepView, Initializable {
 
-    private MemorySweepController observer;
+    private final MemorySweepController controller = new MemorySweepControllerImpl(this);
+    private final static int SIZE = 8;
+
+    @FXML
+    private Button startButton;
+
+    @FXML
+    private Label label;
 
     @FXML
     private GridPane memorySweepGrid;
 
+    public void handleStartButton(ActionEvent e){
+        this.memorySweepGrid.setDisable(false);
+        //this.setUp(this.controller.getRandoms());
+    }
+
     @Override
     public void setUp(Set<Position> randoms) {
-        for(var child : memorySweepGrid.getChildren()) {
-            if(child instanceof Button) {
-                ((Button) child).setText(" ");
-            }
-        }
         for(var child : this.memorySweepGrid.getChildren()){
             var position = this.buttonPos((Button) child);
             if(randoms.contains(position)){
-                ((Button) child).setText("*");
+                child.setStyle("-fx-background-color: #35e608;");
             }
         }
     }
@@ -44,15 +55,18 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
     }
 
     @Override
-    public void buttonClicked(ActionEvent e) {
-
+    public void hideRandoms(Set<Position> randoms) {
+        for(var child : this.memorySweepGrid.getChildren()){
+            var position = this.buttonPos((Button) child);
+            if(randoms.contains(position)){
+                child.setStyle(" ");
+            }
+        }
     }
 
-    @Override
-    public void setObserver(MemorySweepController controller) {
-        this.observer = controller;
+    private final EventHandler<MouseEvent> click = event -> {
 
-    }
+    };
 
     private Position buttonPos(Button button) {
         var x = GridPane.getRowIndex(button);
@@ -72,6 +86,19 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.gridCreation();
 
+    }
+
+    private void gridCreation(){
+        for(int i = 0; i < SIZE; i++){
+            for(int j = 0; j < SIZE; j++){
+                final Button button = new Button();
+                button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                button.setOnMouseClicked(this.click);
+                this.memorySweepGrid.add(button,i,j);
+            }
+        }
+        this.memorySweepGrid.setDisable(false);
     }
 }
