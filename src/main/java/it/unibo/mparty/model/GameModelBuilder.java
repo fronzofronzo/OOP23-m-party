@@ -6,10 +6,13 @@ package it.unibo.mparty.model;
  * Example usage:
  *  *<pre>{@code
  *      GameModelBuilder builder = new GameModelBuilder();
- *      Player player = PlayerBuilder.username("player")
- *                                   .character("Mario")
- *                                    .build()
+ *      GameModel model = builder.addPlayer()
+ *                                .addPlayer()
+ *                                .difficulty()
+ *                                .build()
  *  }</pre>
+ *  In addition, the Builder offers methods to check the status of the builder
+ *  during the building process.
  */
 public interface GameModelBuilder {
 
@@ -25,13 +28,14 @@ public interface GameModelBuilder {
     GameModelBuilder addPlayer(String nickname, String character) throws IllegalArgumentException;
 
     /**
-     * Chose the difficulty of the game
-     * @param difficulty of the game: it's related to the Board type
+     * Method to set the difficulty of the game
+     * @param difficulty decided by user
+     * @return the builder itself
      */
     GameModelBuilder difficulty(String difficulty);
 
     /**
-     * Get the instance of the GameModel with the selected settings
+     * Get the instance of the GameModel created with the selected settings
      * @return a {@link GameModel} instance
      */
     GameModel build();

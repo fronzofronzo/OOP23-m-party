@@ -2,8 +2,6 @@ package it.unibo.mparty.model.minigameHandler;
 
 import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.player.api.Player;
-
-import java.io.FileNotFoundException;
 import java.util.List;
 
 public interface MinigameHandler {
