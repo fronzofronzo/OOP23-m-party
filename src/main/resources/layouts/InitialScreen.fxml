@@ -19,8 +19,8 @@
       </ImageView>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button layoutX="895.0" layoutY="30.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="32.0" text="?" />
-            <Label alignment="CENTER" layoutX="300.0" layoutY="37.0" prefHeight="106.0" prefWidth="338.0" text="MPARTY">
+            <Button layoutX="895.0" layoutY="30.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="32.0" text="?" AnchorPane.rightAnchor="104.20000000000005" />
+            <Label alignment="CENTER" layoutX="300.0" layoutY="37.0" prefHeight="106.0" prefWidth="338.0" text="MPARTY" AnchorPane.bottomAnchor="472.80000000000007" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="392.80000000000007" AnchorPane.topAnchor="37.0">
                <font>
                   <Font name="System Bold" size="50.0" />
                </font>

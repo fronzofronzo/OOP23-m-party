@@ -42,7 +42,7 @@ public class MiniScreenImpl implements MiniScreen {
         if(this.isShort(this.textField.getText()) && this.isChoiceSelected(this.choiceBox.getValue())) {
             this.controller.setNewPlayer(this.textField.getText(), this.choiceBox.getValue());
         }else{
-            this.controller.setLabelText("username or character were not correctly inserted");
+            this.controller.setLabelText("username o character non correttamente inseriti");
         }
         Stage stage = (Stage) this.okButton.getScene().getWindow();
         stage.close();
