@@ -2,30 +2,34 @@ package it.unibo.mparty.model.minigames.secretCode.impl;
 
 import java.util.List;
 
+import it.unibo.mparty.model.minigames.secretCode.api.SecretCodeGame;
 import it.unibo.mparty.model.minigames.secretCode.api.SecretCodeModel;
-import it.unibo.mparty.model.minigames.secretCode.api.SecretCodePlayer;
-import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
-import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
 import it.unibo.mparty.utilities.Pair;
 
 public class SecretCodeModelImpl implements SecretCodeModel{
 
+	private final static int COINS_WINNER = 10;
+
+	private SecretCodeGame game;;
+
 	@Override
 	public Pair<String, Integer> getResult() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getResult'");
+		return new Pair<String,Integer>(this.game.getWinner(), COINS_WINNER);
 	}
 
 	@Override
 	public void setUpPlayers(List<String> players) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'setUpPlayers'");
+		this.game = new SecretCodeGameImpl(players);
 	}
 
 	@Override
 	public boolean isOver() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'isOver'");
+		return this.game.isOver();
+	}
+
+	@Override
+	public SecretCodeGame getGame() {
+		return this.game;
 	}
     
 }

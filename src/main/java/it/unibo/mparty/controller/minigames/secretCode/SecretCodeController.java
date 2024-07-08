@@ -1,5 +1,7 @@
 package it.unibo.mparty.controller.minigames.secretCode;
 
-public class SecretCodeController {
+import it.unibo.mparty.controller.minigames.MinigameController;
+
+public interface SecretCodeController extends MinigameController{
     
 }

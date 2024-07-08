@@ -1,5 +1,7 @@
 package it.unibo.mparty.view.minigames.secretCode;
 
-public class SecretCodeView {
+import it.unibo.mparty.view.minigames.MinigameView;
+
+public interface SecretCodeView extends MinigameView{
     
 }
