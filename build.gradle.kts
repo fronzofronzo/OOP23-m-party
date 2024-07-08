@@ -42,6 +42,7 @@ dependencies {
             implementation("org.openjfx:javafx-$module:$javaFxVersion:$platform")
         }
     }
+    implementation("org.reflections:reflections:0.10.2")
 
     val jUnitVersion = "5.10.2"
     // JUnit API and testing engine
