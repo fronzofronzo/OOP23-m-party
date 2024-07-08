@@ -2,6 +2,11 @@ package it.unibo.mparty.view;
 
 import it.unibo.mparty.controller.GameController;
 
+/**
+ * This class gives a general implementation of {@link SceneView} interface.
+ * It implements methods that can be also used by other scenes and sets
+ * references to view and controller and provides methods to access them.
+ */
 public abstract class AbstractSceneView implements SceneView{
 
     private GameView mainView;
