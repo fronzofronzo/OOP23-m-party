@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.minigames.connect4;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import it.unibo.mparty.model.minigames.connect4.impl.Connect4ModelImpl;
  */
 public class Connect4Test {
     private Connect4Model testModel;
+    private static final int ROWS = 6;
 
     /**
      * Initialize the game before each test.
@@ -25,9 +27,14 @@ public class Connect4Test {
         testModel.setUpPlayers(List.of("testPlayer1", "testPlayer2"));
     }
 
+    /**
+     * Test adding a disc in the minigame.
+     */
     @Test
     public void testAddDisc() {
-        assertTrue(testModel.addDisc(2));
-        assertTrue(testModel.addDisc(2));
+        for (int i=0; i<ROWS; i++) {
+            assertTrue(testModel.addDisc(2));
+        }
+        assertFalse(testModel.addDisc(2));
     }
 }
