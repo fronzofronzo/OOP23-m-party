@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import it.unibo.mparty.model.minigames.secretCode.api.SecreteCodePlayer;
+import it.unibo.mparty.model.minigames.secretCode.api.SecretCodePlayer;
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
 
-public class SecreteCodePlayerImpl implements SecreteCodePlayer{
+public class SecretCodePlayerImpl implements SecretCodePlayer{
 
     private static final  int INITIAL_POINTS = 0;
 
@@ -18,7 +18,7 @@ public class SecreteCodePlayerImpl implements SecreteCodePlayer{
     private final int soluctionSize;
 
 
-    public SecreteCodePlayerImpl(String player, int soluctionSize){
+    public SecretCodePlayerImpl(String player, int soluctionSize){
         this.player = player;
         this.myGuess = new ArrayList<>();
         this.points = INITIAL_POINTS;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
 
-public interface SecreteCodePlayer {
+public interface SecretCodePlayer {
 
     void addColor(SecretCodeColors color);
 

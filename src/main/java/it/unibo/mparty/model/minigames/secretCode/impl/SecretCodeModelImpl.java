@@ -3,7 +3,7 @@ package it.unibo.mparty.model.minigames.secretCode.impl;
 import java.util.List;
 
 import it.unibo.mparty.model.minigames.secretCode.api.SecretCodeModel;
-import it.unibo.mparty.model.minigames.secretCode.api.SecreteCodePlayer;
+import it.unibo.mparty.model.minigames.secretCode.api.SecretCodePlayer;
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
 import it.unibo.mparty.utilities.Pair;

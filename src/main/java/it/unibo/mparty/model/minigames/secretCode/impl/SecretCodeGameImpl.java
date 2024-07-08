@@ -2,11 +2,12 @@ package it.unibo.mparty.model.minigames.secretCode.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import it.unibo.mparty.model.minigames.secretCode.api.SecretCodeGame;
-import it.unibo.mparty.model.minigames.secretCode.api.SecreteCodePlayer;
+import it.unibo.mparty.model.minigames.secretCode.api.SecretCodePlayer;
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
 import it.unibo.mparty.utilities.RandomFromSet;
@@ -16,7 +17,7 @@ public class SecretCodeGameImpl implements SecretCodeGame{
     private static final int DIM_SOLUCTION = 4;
     private static final int TURNS = 8;
 
-    private List<SecreteCodePlayer> players;
+    private List<SecretCodePlayer> players;
     private List<SecretCodeColors> soluction;
     private int actualPlayerIndex = 0;
     private int turn = 1 ;
@@ -26,7 +27,7 @@ public class SecretCodeGameImpl implements SecretCodeGame{
     public SecretCodeGameImpl(List<String> players)  {
         generateSoluction();
         players.stream()
-            .forEach(p -> this.players.add(new SecreteCodePlayerImpl(p, this.soluction.size())));
+            .forEach(p -> this.players.add(new SecretCodePlayerImpl(p, this.soluction.size())));
     }
 
     private void generateSoluction() {
@@ -107,8 +108,11 @@ public class SecretCodeGameImpl implements SecretCodeGame{
 
     @Override
     public String getWinner() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getWinner'");
+        int maxPoints = 0;
+        Set<String> winners = new HashSet<>();
+        for (SecretCodePlayer p : this.players) {
+            if (p.g)
+        }
     }
     
 }
