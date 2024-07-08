@@ -294,11 +294,17 @@ public class GameModelImpl implements GameModel {
         return this.minigameHandler.getUsersPlaying();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Map<Position, SlotType> getSlotsToUpdate() {
         return this.board.getSlotsToUpdate();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Pair<String, String> getTurn() {
         return new Pair<String,String>(String.valueOf(this.turn), String.valueOf(TURNS_NUMBER));
@@ -306,7 +312,7 @@ public class GameModelImpl implements GameModel {
 
     private void nextPlayer() {
         this.actualPlayerIndex = (this.actualPlayerIndex + 1) % players.size();
-        if(this.actualPlayerIndex == 0){
+        if (this.actualPlayerIndex == 0){
             this.turn++;
         }
     }
