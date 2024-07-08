@@ -36,7 +36,8 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
 
     public void handleStartButton(ActionEvent e){
         this.memorySweepGrid.setDisable(false);
-        //this.setUp(this.controller.getRandoms());
+        this.startButton.setDisable(true);
+        this.controller.setUp();
     }
 
     @Override
@@ -81,13 +82,13 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
 
     @Override
     public void startMinigame(List<String> players) {
+        this.controller.initGame(players);
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.gridCreation();
-
     }
 
     private void gridCreation(){
