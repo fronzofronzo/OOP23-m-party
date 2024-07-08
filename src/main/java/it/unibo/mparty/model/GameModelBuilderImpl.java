@@ -24,7 +24,9 @@ public class GameModelBuilderImpl implements GameModelBuilder{
         if(players.stream().anyMatch(p -> p.getUsername().equals(pl.getUsername()) || p.getCharacter().equals(pl.getCharacter()))){
             throw new IllegalArgumentException("Il player con questo nome/personaggio e' gia' presente ");
         }
-        players.add(pl);
+        if(!this.isFull()){
+            players.add(pl);
+        }
         return this;
     }
 
@@ -36,7 +38,11 @@ public class GameModelBuilderImpl implements GameModelBuilder{
 
     @Override
     public GameModel build() {
-        return new GameModelImpl(players, this.difficulty);
+        if(this.enoughPlayers()){
+            return new GameModelImpl(players, this.difficulty);
+        } else {
+            throw new IllegalStateException("There are not enough players.");
+        }
     }
 
     @Override
