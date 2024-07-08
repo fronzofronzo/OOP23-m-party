@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 @ExtendWith(ApplicationExtension.class)
 public class ShopViewImplTest extends ApplicationTest {
     private Parent testRoot;
-
     /**
      * {@inheritDoc}
      */
