@@ -32,14 +32,6 @@ public class MemoryCardControllerImpl implements MemoryCardController{
         }
     }
 
-    @Override
-    public void setUpGame() {
-        final int n = this.model.getCards().size();
-        for(int i = 0; i < n; i++ ){
-            this.view.addCard(this.model.getCards().get(i).getName());
-        }
-    }
-
     private void updateGameView(){
         final var guessed  = this.model.guessedCardsType();
         this.view.setMistakesNumber(this.model.getMistakes());
@@ -69,5 +61,9 @@ public class MemoryCardControllerImpl implements MemoryCardController{
     @Override
     public void initGame(List<String> players) {
         this.model.setUpPlayers(players);
+        final int n = this.model.getCards().size();
+        for(int i = 0; i < n; i++ ){
+            this.view.addCard(this.model.getCards().get(i).getName());
+        }
     }
 }
