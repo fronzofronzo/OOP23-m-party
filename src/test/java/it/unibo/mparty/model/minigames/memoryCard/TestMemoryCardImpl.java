@@ -1,9 +1,10 @@
 package it.unibo.mparty.model.minigames.memoryCard;
 
-import static org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 
 import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
 import it.unibo.mparty.model.minigames.memoryCard.impl.MemoryCardModelImpl;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +36,7 @@ public class TestMemoryCardImpl {
         final int j = model.getCards().entrySet().stream().filter(e -> e.getValue() == type && e.getKey() != i).map(e -> e.getKey()).reduce(0, (a,b) -> a+b);
         model.flip(i);
         model.flip(j);
-        assertEquals(1,model.guessedCardsType().size());
+        Assertions.assertEquals(1,model.guessedCardsType().size());
     }
 
     /**
@@ -48,6 +49,6 @@ public class TestMemoryCardImpl {
         final int j = model.getCards().entrySet().stream().filter(e -> e.getValue() != type && e.getKey() != i).map(Map.Entry::getKey).findAny().get();
         model.flip(i);
         model.flip(j);
-        assertEquals(1, model.getMistakes());
+        Assertions.assertEquals(1, model.getMistakes());
     }
 }
