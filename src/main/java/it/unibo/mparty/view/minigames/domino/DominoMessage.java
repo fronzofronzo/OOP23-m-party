@@ -23,7 +23,17 @@ public enum DominoMessage {
     /**
      * Message indicating that the player should select a tile to play.
      */
-    SELECT_TILE("Seleziona una tessera per giocare.");
+    SELECT_TILE("Seleziona una tessera per giocare."),
+
+    /**
+     * Message indicating the remaining tiles.
+     */
+    REMAINING_TILE("Tessere \nrestanti: "),
+
+    /**
+     * Message indicating that the player should pass the turn because they have no playable tiles and the deck is empty.
+     */
+    PASS_TURN("Non hai tessere giocabili e il mazzo e' vuoto. Passi il turno.");
 
     private final String message;
 
