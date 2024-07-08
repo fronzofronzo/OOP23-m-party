@@ -18,7 +18,7 @@ public class ShopImpl implements Shop {
     private final List<Item> itemList = new ArrayList<>();
 
     /**
-     * Constructs a new istance of shopImpl.
+     * Constructs a new istance of {@link shopImpl}.
      */
     public ShopImpl() {
         itemList.add(itemFactory.createItem(ItemName.CAMPANA_BOO));
@@ -51,7 +51,7 @@ public class ShopImpl implements Shop {
      */
     @Override
     public List<Item> getItemList() {
-        return itemList;
+        return this.itemList;
     }
 
 }
