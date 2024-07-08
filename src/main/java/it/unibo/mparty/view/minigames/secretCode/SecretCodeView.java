@@ -1,5 +1,5 @@
-package it.unibo.mparty.view.minigames.secreteCode;
+package it.unibo.mparty.view.minigames.secretCode;
 
-public class SecreteCodeView {
+public class SecretCodeView {
     
 }

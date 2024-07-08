@@ -1,5 +1,5 @@
-package it.unibo.mparty.controller.minigames.secreteCode;
+package it.unibo.mparty.controller.minigames.secretCode;
 
-public class SecreteCodeControllerImpl {
+public class SecretCodeControllerImpl {
     
 }

@@ -1,8 +1,8 @@
-package it.unibo.mparty.model.minigames.secreteCode.api;
+package it.unibo.mparty.model.minigames.secretCode.api;
 
 import it.unibo.mparty.model.minigames.MinigameModel;
 
-public interface SecreteCodeModel extends MinigameModel{
+public interface SecretCodeModel extends MinigameModel{
 
     void guess();
 

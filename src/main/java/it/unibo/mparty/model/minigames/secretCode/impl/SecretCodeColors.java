@@ -1,6 +1,6 @@
-package it.unibo.mparty.model.minigames.secreteCode.impl;
+package it.unibo.mparty.model.minigames.secretCode.impl;
 
-public enum SecreteCodeColors {
+public enum SecretCodeColors {
     VERDE,
     AZZURRO,
     VIOLA,
