@@ -175,9 +175,9 @@ public class GameViewImpl extends Application implements GameView{
         return new Pair<>(scene,sceneView);
     }
 
-    private void setStageSize(){
-        this.stage.setMinWidth(1000);
-        this.stage.setMinHeight(700);
+    private void setStageSize() {
+        this.stage.setMinWidth(PREF_WIDTH);
+        this.stage.setMinHeight(PREF_HEIGHT);
         this.stage.setFullScreen(true);
         this.stage.show();
     }
