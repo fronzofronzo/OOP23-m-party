@@ -92,8 +92,6 @@ class DominoModelImplTest {
     @Test
     void testCanDrawTile() {
         this.model.setUpPlayers(this.players);
-
-        // Get initial set of player1
         final Set<Tile> initialTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
         final int initialSize = initialTiles.size();
 
@@ -104,23 +102,16 @@ class DominoModelImplTest {
         // Simulate an invalid move
         final Tile invalidTile = new TileImpl(SIDE2, SIDE2);
         this.model.checkAndAddToBoard(this.player1, invalidTile);
-
-        // Draw a tile from tileSet to player1
         this.model.drawTile(this.player1);
 
-        // Get update set of player1
         final Set<Tile> updatedTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
         final int updatedSize = updatedTiles.size();
-
-        // Verify the size is updated by 1 more
         assertEquals(initialSize + 1, updatedSize);
     }
 
     @Test
     void testWinner() {
         this.testDistributionTiles();
-
-        // Simulate player1 winning by emptying their tile set
         this.model.getPlayersTiles().getPlayerTiles(this.player1).clear();
 
         // Verify player1 is declared the winner
@@ -129,15 +120,11 @@ class DominoModelImplTest {
         // Simulate player2 winning by emptying their tile set
         this.model.getPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE1));
         this.model.getPlayersTiles().getPlayerTiles(this.player2).clear();
-
-        // Verify player2 is declared the winner
         assertEquals(this.player2, this.model.getResult().getFirst());
 
         // No winner case
         this.model.getPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE3));
         this.model.getPlayersTiles().getPlayerTiles(this.player2).add(new TileImpl(SIDE2, SIDE2));
-
-        // Verify no winner
         assertNull(this.model.getResult().getFirst());
     }
 
@@ -150,30 +137,22 @@ class DominoModelImplTest {
 
         // Simulate player1 winning by emptying their tile set
         this.model.getPlayersTiles().getPlayerTiles(this.player1).clear();
-
-        // Verify game is over
         assertTrue(this.model.isOver());
 
         // Reset player1's tiles and empty player2's tiles
         this.model.getPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE1));
         this.model.getPlayersTiles().getPlayerTiles(this.player2).clear();
-
-        // Verify game is over
         assertTrue(this.model.isOver());
 
         // Reset tiles and simulate no moves left
         this.model.getPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE6));
         this.model.getPlayersTiles().getPlayerTiles(this.player2).add(new TileImpl(SIDE2, SIDE2));
         this.model.getDominoSet().clear();
-
-        // Verify game is not over when players have tiles
         assertFalse(this.model.isOver());
 
         // Simulate no valid moves
         this.model.checkAndAddToBoard(this.player1, new TileImpl(SIDE3, SIDE4));
         this.model.checkAndAddToBoard(this.player2, new TileImpl(SIDE4, SIDE5));
-
-        // Verify game is over when no moves left and no tiles in domino set
         assertTrue(this.model.isOver());
     }
 
@@ -181,21 +160,16 @@ class DominoModelImplTest {
     void testDrawTile() {
         this.model.setUpPlayers(this.players);
 
-        // Get initial set of player1
         final Set<Tile> initialTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
         final int initialSize = initialTiles.size();
 
         // Draw a tile from tileSet to player1
         this.model.drawTile(this.player1);
 
-        // Get updated set of player1
         final Set<Tile> updatedTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
         final int updatedSize = updatedTiles.size();
 
-        // Verify the size is updated by 1 more
         assertEquals(initialSize + 1, updatedSize);
-
-        // Verify the drawn tile is removed from the domino set
         assertEquals(DOMINO_SET_SIZE - (DISTRIBUTION_TILES * 2) - 1, this.model.getDominoSet().size());
     }
 }
