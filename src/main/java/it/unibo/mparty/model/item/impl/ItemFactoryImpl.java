@@ -12,14 +12,14 @@ public class ItemFactoryImpl implements ItemFactory {
      * {@inheritDoc}
      */
     @Override
-    public Item createItem(ItemName name) throws IllegalArgumentException {
+    public Item createItem(final ItemName name) throws IllegalArgumentException {
         switch (name) {
             case DADO_FORTUNATO:
                 return new LuckyDice();
             case DADO_MALEDETTO:
                 return new CursedDice();
-            case DOPPIO_DADO:
-                return new DoubleDice();
+            case TRIPLO_DADO:
+                return new TripleDice();
             case TUBO_DORATO:
                 return new GoldenPipe();
             case CAMPANA_BOO:

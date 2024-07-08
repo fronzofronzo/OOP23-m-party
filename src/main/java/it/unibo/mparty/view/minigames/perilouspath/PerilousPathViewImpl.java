@@ -22,6 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Objects;
@@ -161,6 +162,15 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     @Override
     public void showResult(Pair<String, Integer> result) {
         this.gameLabel.setText("il giocatore : " + result.getFirst() + " ha vinto " + result.getSecond() + " coins");
+        this.startButton.setText("RETURN");
+        this.startButton.setDisable(false);
+        this.startButton.setOnAction(e -> {
+            try{
+                this.getMainView().setBoardScene();
+            }catch (IOException ex){
+                throw new RuntimeException(ex);
+            }
+        });
     }
 
     @Override

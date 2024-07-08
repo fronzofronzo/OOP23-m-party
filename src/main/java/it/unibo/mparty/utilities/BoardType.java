@@ -1,9 +1,9 @@
 package it.unibo.mparty.utilities;
 
 public enum BoardType {
-    EASY("Easy"), 
-    MEDIUM("Medium"),
-    HARD("Hard");
+    EASY("Facile"), 
+    MEDIUM("Medio"),
+    HARD("Difficile");
 
     private final String text;
 

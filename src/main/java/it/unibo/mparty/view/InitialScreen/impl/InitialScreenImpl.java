@@ -18,6 +18,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -34,6 +36,12 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     private GameModelBuilder builder;
     private final List<String> difficulties = new ArrayList<>();
     private String difficulty = "";
+
+    @FXML
+    private ImageView imageView;
+
+    @FXML
+    private StackPane stackPane;
 
     @FXML
     private Button addPlayers;
@@ -64,7 +72,6 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
         stage.setScene(new Scene(root));
         stage.showAndWait();
         this.startGame.setDisable(!(this.builder.enoughPlayers() && !this.difficulty.isEmpty()));
-        System.out.println(" enough players:" + this.builder.enoughPlayers() + " difficulty: " + this.difficulty);
         this.addPlayers.setDisable(this.builder.isFull());
     }
 
@@ -87,15 +94,27 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
             this.startGame.setDisable(!(this.builder.enoughPlayers() && !this.difficulty.isEmpty()));
         });
         this.builder = new GameModelBuilderImpl();
+        this.stackPane.sceneProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue != null){
+                this.imageView.fitWidthProperty().bind(this.stackPane.widthProperty());
+                this.imageView.fitHeightProperty().bind(this.stackPane.heightProperty());
+                this.imageView.setPreserveRatio(false);
+            }
+        });
     }
 
     @Override
     public void setNewPlayer(String username,String character){
         try{
             this.builder = this.builder.addPlayer(username,character);
-            this.exceptionLabel.setText("player was added correctly");
+            this.setLabelText("player correttamente aggiunto");
         }catch(IllegalArgumentException e){
-            this.exceptionLabel.setText(e.getMessage());
+            this.setLabelText(e.getMessage());
         }
+    }
+
+    @Override
+    public void setLabelText(String text){
+        this.exceptionLabel.setText(text);
     }
 }

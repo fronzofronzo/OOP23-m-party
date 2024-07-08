@@ -10,7 +10,7 @@ import it.unibo.mparty.utilities.Position;
  */
 public class LuckyDice extends AbstractItem {
 
-    private final static int LUCKYDICE_COST =5;
+    private static final int LUCKYDICE_COST = 7;
 
     /**
      * Constructs a new instance of LuckyDice item.
@@ -23,7 +23,7 @@ public class LuckyDice extends AbstractItem {
      * {@inheritDoc}
      */
     @Override
-    public void activate(Player player, Optional<Player> target, Optional<Position> position) {
+    public void activate(final Player player, final Optional<Player> target, final Optional<Position> position) {
         player.getDice().setMinNumber(4);
     }
 

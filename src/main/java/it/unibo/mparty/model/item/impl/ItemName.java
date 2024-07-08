@@ -21,13 +21,13 @@ public enum ItemName {
      */
     CAMPANA_BOO("Campana Boo"),
     /**
-     * Double dice item.
+     * Triple dice item.
      */
-    DOPPIO_DADO("Doppio Dado");
+    TRIPLO_DADO("Triplo Dado");
 
     private final String name;
 
-    ItemName(String name) {
+    ItemName(final String name) {
         this.name = name;
     }
 

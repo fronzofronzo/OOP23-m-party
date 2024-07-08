@@ -22,8 +22,8 @@ public class MediumGameBoard extends AbstractBoardImpl{
     private static final double PROB_SINGLEPLAYER = 0.1;
     private static final double PROB_MALUS = 0.15;
     private static final double PROB_MULTIPLAYER = 0.15;
-    private static final double PROB_SHOP = 0.1;
-    private static final double PROB_BONUS = 0.15;
+    private static final double PROB_SHOP = 0.05;
+    private static final double PROB_BONUS = 0.2;
 
     private static final String FILE_PATH = "MediumBoardGame.txt";
 

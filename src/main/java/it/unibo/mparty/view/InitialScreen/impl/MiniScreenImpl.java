@@ -41,6 +41,8 @@ public class MiniScreenImpl implements MiniScreen {
     public void handleOkButton(ActionEvent e) {
         if(this.isShort(this.textField.getText()) && this.isChoiceSelected(this.choiceBox.getValue())) {
             this.controller.setNewPlayer(this.textField.getText(), this.choiceBox.getValue());
+        }else{
+            this.controller.setLabelText("username o character non correttamente inseriti");
         }
         Stage stage = (Stage) this.okButton.getScene().getWindow();
         stage.close();
@@ -68,7 +70,7 @@ public class MiniScreenImpl implements MiniScreen {
     }
 
     private boolean isShort(String text){
-        return text.length() < MAX_SIZE;
+        return text.length() < MAX_SIZE && !text.isEmpty();
     }
 
     private boolean isChoiceSelected(String choice){
