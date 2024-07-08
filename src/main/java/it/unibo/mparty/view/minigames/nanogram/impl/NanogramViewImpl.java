@@ -20,6 +20,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -193,8 +194,22 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
      * {@inheritDoc}
      */
     @Override
-    public void showResult(final Pair<String, Integer> result) {
-        this.messageLabel.setText(NanogramMessage.WIN.getFormattedMessage(result.getFirst(), result.getSecond()));
+    public void showResult(Pair<String, Integer> result) {
+        this.messageLabel.setText(NanogramMessage.END.getFormattedMessage(result.getFirst(), result.getSecond()));
+
+        Button returnButton = new Button("Torna al gioco principale");
+        returnButton.setStyle("-fx-font-size: 18pt;");
+        returnButton.setOnAction(e -> {
+            try {
+                this.getMainView().setBoardScene();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        pane.setBottom(returnButton);
+        BorderPane.setMargin(returnButton, new Insets(MARGIN));
+        BorderPane.setAlignment(returnButton, Pos.CENTER);
     }
 
     private void setHints(final GridPane grid, final List<List<Integer>> hintsList, final boolean isRowHints) {

@@ -30,7 +30,10 @@ public interface Dice {
     void setMinNumber(int num);
 
     /**
-     * Simulates the roll of dice in game and generate a number
+     * Simulates the roll of dice in game and generate a number. The result
+     * of the dice generated with the method is the sum of the result of the
+     * roll of dice for the number of attempts set. At the end, the dice is also
+     * reset to default values to cancel effects of items.
      */
     void rollDice();
 
@@ -52,10 +55,5 @@ public interface Dice {
      * @return number of attempts
      */
     int getNumOfAttempts();
-
-    /**
-     * Reset dice to default values
-     */
-    void resetDice();
 
 }

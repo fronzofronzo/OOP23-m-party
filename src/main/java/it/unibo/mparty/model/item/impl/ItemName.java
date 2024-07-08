@@ -27,7 +27,7 @@ public enum ItemName {
 
     private final String name;
 
-    ItemName(String name) {
+    ItemName(final String name) {
         this.name = name;
     }
 

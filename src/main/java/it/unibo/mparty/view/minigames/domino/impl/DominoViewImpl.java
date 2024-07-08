@@ -23,6 +23,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -42,6 +43,9 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
 
     @FXML
     private Button playButton;
+
+    @FXML
+    private VBox buttonBox;
 
     @FXML
     private Label player1Label;
@@ -122,6 +126,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
             VBox.setVgrow(tileBox, Priority.ALWAYS);
             VBox.setMargin(tileBox, new Insets(0, PREF_SIZE, 0, PREF_SIZE));
             this.generateTile(tileBox, tile.getSideA().getValue(), tile.getSideB().getValue());
+            tileBox.setStyle("-fx-border-color: #d3d3d3; -fx-border-width: 1px; -fx-border-style: solid;");
             playerTilesBox.getChildren().add(tileBox);
         }
     }
@@ -191,6 +196,18 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
                 ((HBox) node).getChildren().forEach(tileNode -> tileNode.setDisable(true));
             }
         });
+
+        Button returnButton = new Button("Torna al \ngioco principale");
+        returnButton.setStyle("-fx-font-size: 13pt; -fx-text-alignment: center;");
+        returnButton.setOnAction(e -> {
+            try {
+                this.getMainView().setBoardScene();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        this.buttonBox.getChildren().add(returnButton);
     }
 
     /**

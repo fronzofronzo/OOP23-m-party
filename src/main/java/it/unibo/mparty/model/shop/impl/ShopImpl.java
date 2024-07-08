@@ -32,7 +32,7 @@ public class ShopImpl implements Shop {
      * {@inheritDoc}
      */
     @Override
-    public boolean buyItem(Player player, ItemName itemName) {
+    public boolean buyItem(final Player player, final ItemName itemName) {
         Item item = itemList.stream().filter(it -> it.getName().equals(itemName)).findFirst().get();
         if (canAfford(player, item) && !player.getPlayerBag().isFull()) {
             player.removeCoins(item.getCost());
@@ -42,7 +42,7 @@ public class ShopImpl implements Shop {
         return false;
     }
 
-    private boolean canAfford(Player player, Item item) {
+    private boolean canAfford(final Player player, final Item item) {
         return player.getNumCoins() >= item.getCost();
     }
 

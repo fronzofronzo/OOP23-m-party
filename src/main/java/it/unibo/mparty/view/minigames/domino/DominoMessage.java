@@ -18,7 +18,7 @@ public enum DominoMessage {
     /**
      * Message indicating the winning player and the amount of coins won.
      */
-    WIN("%s ha vinto! Guadagnando %d monete."),
+    WIN("Fine del gioco. %s ha vinto e guadagnato %d monete."),
 
     /**
      * Message indicating that the player should select a tile to play.

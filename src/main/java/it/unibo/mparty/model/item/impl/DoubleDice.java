@@ -10,7 +10,7 @@ import it.unibo.mparty.utilities.Position;
  */
 public class DoubleDice extends AbstractItem {
 
-    private final static int DOUBLEDICE_COST =7;
+    private static final int DOUBLEDICE_COST = 7;
 
     /**
      * Construct a new istance of DoubleDice item.
@@ -31,7 +31,7 @@ public class DoubleDice extends AbstractItem {
      * {@inheritDoc}
      */
     @Override
-    public void activate(Player player, Optional<Player> target, Optional<Position> position) {
+    public void activate(final Player player, final Optional<Player> target, final Optional<Position> position) {
         player.getDice().setNumberOfAttempts(2);
     }
 

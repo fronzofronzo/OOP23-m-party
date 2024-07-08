@@ -11,14 +11,9 @@ public enum NanogramMessage {
     ERROR("Cella errata"),
 
     /**
-     * Message indicating the player has won the game, and coins that earned.
+     * Message indicating the coins that the player has earned.
      */
-    WIN("%s ha vinto! Guadagnando %d monete."),
-
-    /**
-     * Message indicating the game is over.
-     */
-    LOSE("Fine del gioco...");
+    END("Fine del gioco. %s ha guadagnato %d monete");
 
     private final String message;
 

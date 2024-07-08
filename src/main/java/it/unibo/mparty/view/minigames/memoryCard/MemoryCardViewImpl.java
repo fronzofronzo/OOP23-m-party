@@ -81,11 +81,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     public void showResult(Pair<String, Integer> result) {
         this.textLabel.setText(  result.getFirst() + " ha guadagnato " +  String.valueOf(result.getSecond()) + " monete." );
         this.controlButton.setOnAction(e -> {
-            try {
-                this.getMainView().setBoardScene();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+            this.controller.endGame();
         });
         this.controlButton.setText("Torna al gioco principale");
         this.controlButton.setDisable(false);

@@ -1,5 +1,6 @@
 package it.unibo.mparty.view.shop.impl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import it.unibo.mparty.model.item.impl.ItemName;
@@ -37,7 +38,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView {
      * {@inheritDoc}
      */
     @Override
-    public void addButton(ItemName itemName, int cost) {
+    public void addButton(final ItemName itemName, final int cost) {
         final Button but = new Button();
         but.setText("Acquista " + itemName.toString() + ": " + cost);
         but.setOnAction(this::selectItem);
@@ -51,7 +52,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView {
      * {@inheritDoc}
      */
     @Override
-    public void addDescription(String description) {
+    public void addDescription(final String description) {
         final Label lb = new Label(description);
         descriptionPane.getChildren().add(lb);
         AnchorPane.setTopAnchor(lb, j * DISTANCE_FROM_BUTTON);
@@ -59,7 +60,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView {
         j++;
     }
 
-    private void selectItem(ActionEvent e) {
+    private void selectItem(final ActionEvent e) {
         this.getMainController().buyItem(itemNameList
         .get(this.buttonPane.getChildren().indexOf((Button) (e.getSource()))), this);
     }
@@ -68,7 +69,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView {
      * {@inheritDoc}
      */
     @Override
-    public void updateMoney(int money) {
+    public void updateMoney(final int money) {
         moneyLabel.setText("Monete rimaste: " + money);
     }
 
@@ -81,7 +82,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView {
     }
 
     @FXML
-    private void closeShop() {
-        this.getMainView().switchToBoard();
+    private void closeShop() throws IOException {
+        this.getMainView().setBoardScene();
     }
 }

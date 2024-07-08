@@ -4,6 +4,7 @@ import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
 import it.unibo.mparty.model.minigames.memoryCard.impl.MemoryCardModelImpl;
 import it.unibo.mparty.view.minigames.memoryCard.MemoryCardView;
 
+import java.io.IOException;
 import java.util.List;
 
 public class MemoryCardControllerImpl implements MemoryCardController{
@@ -58,7 +59,11 @@ public class MemoryCardControllerImpl implements MemoryCardController{
     @Override
     public void endGame() {
         this.view.getMainController().saveMinigameResult(this.model.getResult());
-        //this.view.showResult()
+        try {
+            this.view.getMainView().setBoardScene();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
