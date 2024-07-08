@@ -24,6 +24,10 @@ public class SecretCodePlayerImpl implements SecretCodePlayer{
         this.points = INITIAL_POINTS;
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public boolean addColor(SecretCodeColors color) {
         if (this.myGuess.size() < this.soluctionSize) {
@@ -33,23 +37,48 @@ public class SecretCodePlayerImpl implements SecretCodePlayer{
         return false;
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public List<SecretCodeColors> getGuess() {
         return Collections.unmodifiableList(this.myGuess);
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public String getNamePlayer() {
         return this.player;
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public int getPoints() {
         return this.points;
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void addPoints(int points) {
         this.points += points;
+    }
+
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public void startNewGuess() {
+        this.myGuess = new ArrayList<>();
     }    
 }
