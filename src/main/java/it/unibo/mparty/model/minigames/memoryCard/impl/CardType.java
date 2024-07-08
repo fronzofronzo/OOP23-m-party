@@ -6,27 +6,27 @@ package it.unibo.mparty.model.minigames.memoryCard.impl;
 public enum CardType {
 
     /**
-     * "Pear" card type
+     * "Pear" card type.
      */
     PEAR("PERA"),
     /**
-     * "Apple" card type
+     * "Apple" card type.
      */
     APPLE("MELA"),
     /**
-     * "Banana" card type
+     * "Banana" card type.
      */
     BANANA("BANANA"),
     /**
-     * "Strawberry" card type
+     * "Strawberry" card type.
      */
     STRAWBERRY("FRAGOLA"),
     /**
-     * "Lemon" card type
+     * "Lemon" card type.
      */
     LEMON("LIMONE"),
     /**
-     * "Peach" card type
+     * "Peach" card type.
      */
     PEACH("PESCA");
 

@@ -2,7 +2,6 @@ package it.unibo.mparty.model.minigames.memoryCard.api;
 
 import it.unibo.mparty.model.minigames.MinigameModel;
 import it.unibo.mparty.model.minigames.memoryCard.impl.CardType;
-import it.unibo.mparty.utilities.Position;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,7 +12,10 @@ import java.util.Set;
  */
 public interface MemoryCardModel extends MinigameModel {
 
-    static final int NOT_SELECTED = -1;
+    /**
+     * Constant number to signal a card that is not selected.
+     */
+    int NOT_SELECTED = -1;
 
     /**
      * Flip the card selected.
