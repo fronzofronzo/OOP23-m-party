@@ -92,21 +92,23 @@ class DominoModelImplTest {
     @Test
     void testCanDrawTile() {
         this.model.setUpPlayers(this.players);
-        final Set<Tile> initialTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
-        final int initialSize = initialTiles.size();
+        this.model.getPlayersTiles().getPlayerTiles(this.player1).clear();
+        // Verify that player1 can draw a tile
+        assertTrue(this.model.canDrawTile(this.player1));
 
-        // Simulate a valid move
-        final Tile validTile = new TileImpl(SIDE1, SIDE1);
-        this.model.checkAndAddToBoard(this.player1, validTile);
+        // Add a tile to the board that can be matched
+        Tile tileOnBoard = new TileImpl(SIDE1, SIDE2);
+        this.model.getBoardTile().addTileToBoard(tileOnBoard);
 
-        // Simulate an invalid move
-        final Tile invalidTile = new TileImpl(SIDE2, SIDE2);
-        this.model.checkAndAddToBoard(this.player1, invalidTile);
-        this.model.drawTile(this.player1);
+        // Add a matching tile to player1
+        Tile matchingTile = new TileImpl(SIDE2, SIDE3);
+        this.model.getPlayersTiles().addTileToPlayer(this.player1, matchingTile);
+        assertFalse(this.model.canDrawTile(this.player1));
 
-        final Set<Tile> updatedTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
-        final int updatedSize = updatedTiles.size();
-        assertEquals(initialSize + 1, updatedSize);
+        // Remove all tiles again and empty the domino set
+        this.model.getPlayersTiles().getPlayerTiles(this.player1).clear();
+        this.model.getDominoSet().clear();
+        assertFalse(this.model.canDrawTile(this.player1));
     }
 
     @Test
