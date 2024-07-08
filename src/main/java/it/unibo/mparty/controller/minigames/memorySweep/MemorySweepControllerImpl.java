@@ -36,6 +36,9 @@ public class MemorySweepControllerImpl implements MemorySweepController {
 
     @Override
     public void endGame() {
+        if(this.model.isOver()){
+            this.view.showResult(this.model.getResult());
+        }
 
     }
 

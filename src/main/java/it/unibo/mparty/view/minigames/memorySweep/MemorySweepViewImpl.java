@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -101,6 +102,17 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
 
     @Override
     public void showResult(Pair<String, Integer> result) {
+        this.memorySweepGrid.setDisable(true);
+        this.startButton.setDisable(false);
+        this.startButton.setText("RETURN");
+        this.startButton.setOnAction(event -> {
+            try{
+                this.getMainView().setBoardScene();
+            }catch (IOException ex){
+                throw new RuntimeException(ex);
+            }
+        });
+
 
     }
 
