@@ -12,7 +12,6 @@
 <BorderPane minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.domino.impl.DominoViewImpl">
    <top>
       <VBox prefHeight="213.0" prefWidth="1020.0" BorderPane.alignment="CENTER">
-         <children>
             <Label fx:id="messageLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Messaggio">
                <font>
                   <Font size="24.0" />
@@ -31,12 +30,10 @@
                   <Insets left="20.0" />
                </VBox.margin>
             </Label>
-         </children>
       </VBox>
    </top>
    <right>
       <VBox fx:id="buttonBox" alignment="CENTER" prefHeight="400.0" prefWidth="148.0" spacing="30.0" BorderPane.alignment="CENTER">
-         <children>
             <Button fx:id="drawButton" mnemonicParsing="false" onMouseClicked="#drawButtonClicked" text="Pesca Tessera">
                <font>
                   <Font size="18.0" />
@@ -47,7 +44,6 @@
                   <Font size="18.0" />
                </font>
             </Button>
-         </children>
          <BorderPane.margin>
             <Insets left="20.0" right="20.0" />
          </BorderPane.margin>
@@ -55,7 +51,6 @@
    </right>
    <bottom>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
             <Label fx:id="player1Label" maxHeight="1.7976931348623157E308" text="Player 1">
                <font>
                   <Font size="24.0" />
@@ -69,7 +64,6 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" />
                </VBox.margin>
             </HBox>
-         </children>
       </VBox>
    </bottom>
    <center>
