@@ -5,7 +5,7 @@ import it.unibo.mparty.utilities.Position;
 
 public interface MemorySweepController extends MinigameController {
 
-    public void setUp();
+    void setUp();
 
-    public void hit(Position p);
+    void hit(Position p);
 }

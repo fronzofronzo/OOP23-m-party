@@ -21,35 +21,35 @@ public interface MemorySweep extends MinigameModel {
      * method for setting the random list that the players should try to recreate
      * @return the list of random buttons to be recreated by players
      */
-    public Set<Position> getRandomList();
+    Set<Position> getRandomList();
 
     /**
      * method for getting the random list that the players should try to recreate
      */
-    public void setRandomList();
+    void setRandomList();
     
     /**
      * method for knowing wheter a player is done with his try
      * @param p the position clicked by a player
      * @return wheter the list of buttons clicked by the players is finished or not
      */
-    public HitType hit(Position p);
+    HitType hit(Position p);
 
     /**
      * method for getting which turn is it
      * @return true if it is the turn of one player, false if it is the turn of the other player
      */
-    public boolean getTurn();
+    boolean getTurn();
 
     /**
      * method for getting the winner of the game
      * @return the winner of the game
      */
-    public Set<Position> getWinner();
+    Set<Position> getWinner();
 
     /**
      * method for getting the size of the list that needs to be recreated
      * @return the size of the list
      */
-    public int getCounter();
+    int getCounter();
 }
