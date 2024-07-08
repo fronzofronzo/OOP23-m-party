@@ -66,7 +66,8 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
     }
 
     private final EventHandler<MouseEvent> click = event -> {
-
+        var button = (Button) event.getSource();
+        this.controller.hit(this.buttonPos(button));
     };
 
     private Position buttonPos(Button button) {

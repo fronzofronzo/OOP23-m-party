@@ -31,7 +31,7 @@ public class MemorySweepControllerImpl implements MemorySweepController {
 
     @Override
     public void hit(Position p) {
-
+        this.view.hit(this.model.hit(p));
     }
 
     @Override
