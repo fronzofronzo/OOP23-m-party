@@ -25,10 +25,10 @@ public class ShopViewImplTest extends ApplicationTest {
      * {@inheritDoc}
      */
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(final Stage stage) throws Exception {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/Shop.fxml"));
         this.testRoot = loader.load();
-        final Scene scene = new Scene (testRoot);
+        final Scene scene = new Scene(testRoot);
         stage.setScene(scene);
         stage.show();
     }
@@ -37,7 +37,7 @@ public class ShopViewImplTest extends ApplicationTest {
      * Test the presence of the exitButton.
      */
     @Test
-    public void should_contain_exitButton() {
+    public void shouldContainExitButton() {
         verifyThat(".button", hasText("Esci"));
     }
 
@@ -45,7 +45,7 @@ public class ShopViewImplTest extends ApplicationTest {
      * Test the presence of the label in the view.
      */
     @Test
-    public void should_contain_label() {
+    public void shouldContainLabel() {
         verifyThat(".label", hasText("Seleziona l'Item che desideri acquistare"));
     }
 }
