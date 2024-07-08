@@ -24,7 +24,7 @@ public interface MemorySweepView extends MinigameView {
      * based on the parameter passed in input the view will be updated accordingly
      * @param type the parameter on which depends the view update
      */
-    void hit(MemorySweep.HitType type);
+    void hit(MemorySweep.HitType type,boolean turn);
 
     void hideRandoms(Set<Position> randoms);
 

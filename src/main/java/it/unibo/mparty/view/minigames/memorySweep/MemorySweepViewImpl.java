@@ -24,6 +24,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
 
     private final MemorySweepController controller = new MemorySweepControllerImpl(this);
     private final static int SIZE = 8;
+    private Button button;
 
     @FXML
     private Button startButton;
@@ -34,6 +35,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
     @FXML
     private GridPane memorySweepGrid;
 
+    @Override
     public void handleStartButton(ActionEvent e){
         this.memorySweepGrid.setDisable(false);
         this.startButton.setDisable(true);
@@ -51,7 +53,28 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
     }
 
     @Override
-    public void hit(MemorySweep.HitType type) {
+    public void hit(MemorySweep.HitType type,boolean turn) {
+        switch (type){
+            case RIGHT_CHOICE -> {
+                if (turn) {
+                    this.button.setStyle("-fx-background-color: #ef0427;");
+                } else {
+                    this.button.setStyle("-fx-background-color: #0623af;");
+                }
+            }
+            case TURN_END -> {
+                for(var child : this.memorySweepGrid.getChildren()){
+                    child.setStyle(" ");
+                }
+
+            }
+            case LOSS -> {
+                for(var child : this.memorySweepGrid.getChildren()){
+                    child.setStyle(" ");
+                }
+                this.memorySweepGrid.setDisable(true);
+            }
+        }
 
     }
 
@@ -66,7 +89,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
     }
 
     private final EventHandler<MouseEvent> click = event -> {
-        var button = (Button) event.getSource();
+        this.button = (Button) event.getSource();
         this.controller.hit(this.buttonPos(button));
     };
 
