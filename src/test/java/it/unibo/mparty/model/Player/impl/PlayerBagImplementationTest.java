@@ -6,8 +6,6 @@ import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBag;
 import it.unibo.mparty.model.player.impl.PlayerBagImplementation;
-import it.unibo.mparty.model.player.impl.PlayerBuilderImplementation;
-import it.unibo.mparty.model.player.impl.PlayerImplementation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -57,7 +55,7 @@ class PlayerBagImplementationTest {
     @Test
     public void testFull() {
         final Item item = new ItemFactoryImpl().createItem(ItemName.DADO_FORTUNATO);
-        for (int i=0; i<capacity; i++){
+        for (int i = 0; i < capacity; i++){
             this.bag.addItem(item);
         }
         assertTrue(this.bag.isFull());
