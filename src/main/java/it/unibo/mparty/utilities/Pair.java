@@ -70,8 +70,9 @@ public class Pair<X, Y> {
         }
         Pair other = (Pair) obj;
         if (this.x == null) {
-            if (other.x != null)
+            if (other.x != null){
                 return false;
+            }
         } else if (!this.x.equals(other.x)) {
             return false;
         }
