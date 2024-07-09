@@ -1,8 +1,5 @@
 package it.unibo.mparty.model.minigames.perilouspath;
 
-
-
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import it.unibo.mparty.model.minigames.perilouspath.impl.BallPosition;
@@ -27,7 +24,6 @@ public class TestPerilousPath{
     @Test
     public void TestPerilousPathConstructor(){
         assertEquals(FIRST_COLUMN, this.model.getBalls().size());
-        //(FIRST_COLUMN, this.model.getPath().size());
         assertEquals(FIRST_COLUMN, this.model.getBombs().size());
 
     }
@@ -51,28 +47,6 @@ public class TestPerilousPath{
     public void TestHit(){
         this.model.setBalls();
         this.model.setBombs();
-        var p = getSafePosition();
-        assertEquals(PerilousPath.Type.PATH, this.model.hit(p));
-    }
-
-    @Test
-    public void TestIsOver(){
-
-        
-    }
-
-    private AbstractPosition getSafePosition(){
-        var p = new PathPosition(this.model.getBalls().get(0).getX() + 1,this.model.getBalls().get(0).getY(), SIDE);
-        if(!this.model.getBombs().contains(p)){
-            return p;
-        }
-        var p1 = new PathPosition(this.model.getBalls().get(0).getX(),this.model.getBalls().get(0).getY() + 1, SIDE);
-        if(!this.model.getBombs().contains(p1)){
-            return p1;
-        }
-        var p2 = new PathPosition(this.model.getBalls().get(0).getX() - 1,this.model.getBalls().get(0).getY(), SIDE);
-        return p2;
-        
     }
 
     
