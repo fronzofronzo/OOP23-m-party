@@ -10,13 +10,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
+
 import java.util.List;
 
 /**
  * This class provides a graphic implementation for {@link MemoryCardView}.
  * This class uses the graphic library of JavaFX to implement the GUI.
  */
-public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardView{
+public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardView {
+
+    private static final int FONT_SIZE = 15;
+    private static final int PREF_BUTTON_SIZE = 100;
 
     private final MemoryCardController controller = new MemoryCardControllerImpl(this);
 
@@ -53,10 +57,10 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     public void addCard(final String text) {
         final Button bt = new Button(text);
         bt.setOnAction(this::tryCard);
-        bt.setPrefSize(100,100);
+        bt.setPrefSize(PREF_BUTTON_SIZE, PREF_BUTTON_SIZE);
         bt.setDisable(true);
         bt.setStyle("-fx-opacity: 1.0; ");
-        bt.setFont(new Font("Segoe UI Light", 15));
+        bt.setFont(new Font("Segoe UI Light", FONT_SIZE));
         this.cardsPane.getChildren().add(bt);
     }
 
@@ -64,7 +68,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
      * {@inheritDoc}
      */
     @Override
-    public void setMistakesNumber(int n) {
+    public void setMistakesNumber(final int n) {
         this.textLabel.setText("Errori: " + String.valueOf(n));
     }
 
@@ -72,8 +76,8 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
      * {@inheritDoc}
      */
     @Override
-    public void showResult(Pair<String, Integer> result) {
-        this.textLabel.setText(result.getFirst() + " ha guadagnato " +  String.valueOf(result.getSecond()) + " monete.");
+    public void showResult(final Pair<String, Integer> result) {
+        this.textLabel.setText(result.getFirst() + " ha guadagnato " + String.valueOf(result.getSecond()) + " monete.");
         this.controlButton.setOnAction(e -> {
             this.controller.endGame();
         });
@@ -91,14 +95,14 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
 
     @FXML
     private void startGame(final ActionEvent event) {
-        final Button bt = (Button)event.getSource();
+        final Button bt = (Button) event.getSource();
         bt.setText("Pronto !");
         bt.setOnAction(this::hideCards);
         this.textLabel.setText("Quando si e' pronti, spingere il pulsante 'Pronto'");
     }
 
     private void hideCards(final ActionEvent event) {
-        this.cardsPane.getChildren().stream().map(e -> (Button)e).forEach(b -> {
+        this.cardsPane.getChildren().stream().map(e -> (Button) e).forEach(b -> {
             b.setText("");
             b.setDisable(false);
         });

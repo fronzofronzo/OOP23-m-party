@@ -3,6 +3,7 @@ package it.unibo.mparty.model.minigames.memoryCard.impl;
 import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
 import it.unibo.mparty.utilities.Pair;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -54,7 +55,7 @@ public class MemoryCardModelImpl implements MemoryCardModel {
      */
     @Override
     public boolean flip(final int card) {
-        if (selected == NOT_SELECTED){
+        if (selected == NOT_SELECTED) {
             selected = card;
             return true;
         } else {
@@ -116,11 +117,17 @@ public class MemoryCardModelImpl implements MemoryCardModel {
         return mistakesNumber == MAX_MISTAKES || guessed.size() == CardType.values().length;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
         return NAME;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public MinigameType getType() {
         return MinigameType.SINGLE_PLAYER;
