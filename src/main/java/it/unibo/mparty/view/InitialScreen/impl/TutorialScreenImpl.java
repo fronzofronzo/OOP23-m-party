@@ -30,13 +30,13 @@ public class TutorialScreenImpl implements TutorialScreen, Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String text = this.readFile("path to tutorial");
+        String text = this.readFile();
         this.textArea.setText(text);
     }
 
-    private String readFile(String filePath) {
+    private String readFile() {
         StringBuilder builder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("/layouts/Tutorial.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 builder.append(line).append("\n");
