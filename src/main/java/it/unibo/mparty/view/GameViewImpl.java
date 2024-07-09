@@ -142,12 +142,9 @@ public class GameViewImpl extends Application implements GameView {
     }
 
     private void setBoardView() throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + "GameBoard" + EXTENSION));
-        ;
-        final Parent root = loader.load(getClass().getResourceAsStream(PATH + "GameBoard" + EXTENSION));
-        this.boardScene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        this.boardView = loader.<GameBoardView>getController();
-        this.boardView.init(this, this.controller);
+        final Pair<Scene, SceneView> pair = this.loadScene("GameBoard");
+        this.boardScene= pair.getFirst();
+        this.boardView = (GameBoardView) pair.getSecond();
     }
 
 
