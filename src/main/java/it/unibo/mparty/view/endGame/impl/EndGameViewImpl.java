@@ -69,7 +69,7 @@ public class EndGameViewImpl extends AbstractSceneView implements EndGameView {
             protected void updateItem(final Map.Entry<String, Pair<Integer, Integer>> item, final boolean empty) {
                 super.updateItem(item, empty);
                 if (getIndex() == 0 && item != null) {
-                    setStyle("-fx-font-weight: bold; -fx-background-color: yellow;");
+                    setStyle("-fx-font-weight: bold; -fx-background-color: yellow; -fx-text-fill: black;");
                 } else {
                     setStyle("-fx-background-color: transparent;");
                 }
