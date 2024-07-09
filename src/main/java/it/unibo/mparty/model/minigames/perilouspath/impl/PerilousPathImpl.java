@@ -38,6 +38,9 @@ public class PerilousPathImpl implements PerilousPath {
         this.size = size;
     }
 
+    /**
+     * constructor of a new instance of this.
+     */
     public PerilousPathImpl() {
         this.bombs = new LinkedList<>();
         this.balls = new LinkedList<>();
