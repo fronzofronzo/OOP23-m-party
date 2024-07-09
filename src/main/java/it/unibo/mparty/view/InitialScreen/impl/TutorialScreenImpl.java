@@ -36,7 +36,7 @@ public class TutorialScreenImpl implements TutorialScreen, Initializable {
 
     private String readFile() {
         StringBuilder builder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader("/layouts/Tutorial.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Tutorial.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 builder.append(line).append("\n");
