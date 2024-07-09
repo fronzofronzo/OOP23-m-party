@@ -65,9 +65,11 @@ public class MinigameHandlerImplementation implements MinigameHandler{
         Set<Class<? extends MinigameModel>> classes = reflections.getSubTypesOf(MinigameModel.class);
         for(Class<? extends MinigameModel> cl : classes){
             try {
-                final MinigameModel minigame = cl.getDeclaredConstructor().newInstance();
-                if(minigame.getType() == type){
-                    minigames.add(minigame.getName());
+                if(!cl.isInterface()){
+                    final MinigameModel minigame = cl.getDeclaredConstructor().newInstance();
+                    if(minigame.getType() == type){
+                        minigames.add(minigame.getName());
+                    }
                 }
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 throw new RuntimeException(e);
