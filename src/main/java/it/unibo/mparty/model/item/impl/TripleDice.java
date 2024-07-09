@@ -6,7 +6,7 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Position;
 
 /**
- * class that implements the Triple Dice item.
+ * Class that implements the Triple Dice item.
  */
 public class TripleDice extends AbstractItem {
 

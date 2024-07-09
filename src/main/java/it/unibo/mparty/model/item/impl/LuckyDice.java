@@ -6,7 +6,7 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Position;
 
 /**
- * class that implements the Lucky Dice item.
+ * Class that implements the Lucky Dice item.
  */
 public class LuckyDice extends AbstractItem {
 

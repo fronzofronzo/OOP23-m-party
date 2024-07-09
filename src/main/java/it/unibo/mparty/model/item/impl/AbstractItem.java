@@ -10,7 +10,7 @@ public abstract class AbstractItem implements Item {
     private final int cost;
 
     /**
-     * Constructs a new istance of AbstractItem with the specified ItemName and cost.
+     * Constructs a new istance of AbstractItem with the specified {@link ItemName} and cost.
      * 
      * @param name the name of the item
      * @param cost the cost of the item
