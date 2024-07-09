@@ -1,0 +1,9 @@
+questo e il tutorial per mparty non so cosa scrivere
+serve solo per provare il testo
+faccio tante righe
+pero ci sono 4 giocatori che giocano in una board
+raccogli piu stelle che puoi
+a fine gioco chi ha piu stelle vince
+durante il gioco puoi giocare ai minigiochi da solo o contro qualcuno per ottenre soldi
+soldi che puoi utilizzare per coppare le stelle
+buona partita!
