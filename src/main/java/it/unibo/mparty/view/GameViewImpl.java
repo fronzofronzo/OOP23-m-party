@@ -58,9 +58,9 @@ public class GameViewImpl extends Application implements GameView {
         Player p4 = pb.username("Peach").character("Luigi").buildPlayer();
         this.controller.startGame(new GameModelImpl(List.of(p1,p2,p3,p4), "MEDIUM"));
         */
-        final Pair<Scene, SceneView> scenePair = this.loadScene("initialScreen");
-        this.stage.setScene(scenePair.getFirst());
-        //this.setMinigameScene("domino", List.of("player2", "player1"));
+        //final Pair<Scene, SceneView> scenePair = this.loadScene("initialScreen");
+        //this.stage.setScene(scenePair.getFirst());
+        this.setMinigameScene("connect4", List.of("player2", "player1"));
         this.stage.setMinWidth(PREF_WIDTH);
         this.stage.setMinHeight(PREF_HEIGHT);
         this.stage.setMaximized(true);

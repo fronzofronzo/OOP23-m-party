@@ -109,7 +109,6 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     public void startMinigame(final List<String> players) {
         this.controller.initGame(players);
         tutorialLabel.setVisible(false);
-        tutorialLabel.setStyle("-fx-background-color: black;");
     }
 
     @FXML
@@ -117,10 +116,12 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
         if (tutorialLabel.isVisible()) {
             tutorialButton.setText("Tutorial");
             tutorialLabel.setVisible(false);
+            gameGrid.setVisible(true);
             activateButtons();
         } else {
             tutorialButton.setText("Chiudi");
             tutorialLabel.setVisible(true);
+            gameGrid.setVisible(false);
             disableButtons();
         }
     }
