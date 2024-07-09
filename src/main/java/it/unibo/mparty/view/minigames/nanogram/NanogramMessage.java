@@ -26,7 +26,14 @@ public enum NanogramMessage {
         this.message = message;
     }
 
-    public String getFormattedMessage(String winnerName, int coins) {
+    /**
+     * Returns the formatted message with the winner's name and the number of coins.
+     *
+     * @param winnerName the name of the winning player.
+     * @param coins      the number of coins earned.
+     * @return the formatted message string.
+     */
+    public String getFormattedMessage(final String winnerName, final int coins) {
         return String.format(this.message, winnerName, coins);
     }
 

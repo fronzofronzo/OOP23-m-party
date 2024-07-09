@@ -22,7 +22,8 @@ import java.util.Map;
  */
 public class EndGameViewImpl extends AbstractSceneView implements EndGameView {
 
-    private static final int FONT_SIZE = 20;
+    private static final int HEADER_FONT_SIZE = 20;
+    private static final int TEXT_FONT_SIZE = 18;
 
     @FXML
     private TableColumn<Map.Entry<String, Pair<Integer, Integer>>, Integer> coinColumn;
@@ -46,9 +47,12 @@ public class EndGameViewImpl extends AbstractSceneView implements EndGameView {
         setHeaderFont(this.coinColumn);
         setHeaderFont(this.rankColumn);
 
-        this.playerColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getKey()));
-        this.starColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleIntegerProperty(cellData.getValue().getValue().getFirst()).asObject());
-        this.coinColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleIntegerProperty(cellData.getValue().getValue().getSecond()).asObject());
+        this.playerColumn.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getKey()));
+        this.starColumn.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleIntegerProperty(cellData.getValue().getValue().getFirst()).asObject());
+        this.coinColumn.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleIntegerProperty(cellData.getValue().getValue().getSecond()).asObject());
 
         this.rankColumn.setCellValueFactory(cellData -> {
             ObservableList<Map.Entry<String, Pair<Integer, Integer>>> items = this.tableView.getItems();
@@ -93,7 +97,7 @@ public class EndGameViewImpl extends AbstractSceneView implements EndGameView {
                 super.updateItem(item, empty);
                 if (item != null) {
                     setText(item.toString());
-                    setFont(Font.font("System", 18));
+                    setFont(Font.font("System", TEXT_FONT_SIZE));
                     setStyle("-fx-alignment: CENTER;");
                 } else {
                     setText(null);
@@ -103,6 +107,6 @@ public class EndGameViewImpl extends AbstractSceneView implements EndGameView {
     }
 
     private void setHeaderFont(final TableColumn<?, ?> column) {
-        column.setStyle("-fx-font-size: " + FONT_SIZE + "px; -fx-font-weight: bold; -fx-alignment: CENTER;");
+        column.setStyle("-fx-font-size: " + HEADER_FONT_SIZE + "px; -fx-font-weight: bold; -fx-alignment: CENTER;");
     }
 }

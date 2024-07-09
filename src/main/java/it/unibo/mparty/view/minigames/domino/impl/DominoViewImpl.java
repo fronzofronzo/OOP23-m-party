@@ -185,8 +185,8 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
      * {@inheritDoc}
      */
     @Override
-    public void updateRemainingTileSize(int size) {
-        this.deckSize.setText(DominoMessage.REMAINING_TILE+String.valueOf(size));
+    public void updateRemainingTileSize(final int size) {
+        this.deckSize.setText(DominoMessage.REMAINING_TILE + String.valueOf(size));
     }
 
     /**

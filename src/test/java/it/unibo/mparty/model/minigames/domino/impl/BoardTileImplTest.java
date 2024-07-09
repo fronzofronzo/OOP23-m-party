@@ -14,6 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+/**
+ * Test class for {@link BoardTileImpl}.
+ */
 class BoardTileImplTest {
 
     private static final int SIDE1 = 1;
@@ -25,11 +28,18 @@ class BoardTileImplTest {
 
     private BoardTileImpl boardTile;
 
+    /**
+     * Sets up the test environment before each test.
+     */
     @BeforeEach
     void setUp() {
         this.boardTile = new BoardTileImpl();
     }
 
+    /**
+     * Tests the {@code canMatchBoardTile} method.
+     * Ensures that tiles can be matched and added to the board correctly.
+     */
     @Test
     void testCanMatchBoardTile() {
         final Tile tile1 = new TileImpl(SIDE3, SIDE5);
@@ -68,6 +78,10 @@ class BoardTileImplTest {
         assertTrue(this.boardTile.getBoardTiles().contains(tile3));
     }
 
+    /**
+     * Tests the {@code getBoardTiles} method.
+     * Ensures that tiles added to the board are retrieved correctly.
+     */
     @Test
     void testGetBoardTiles() {
         final Tile tile1 = new TileImpl(SIDE1, SIDE2);
@@ -85,6 +99,10 @@ class BoardTileImplTest {
         assertTrue(tiles.contains(tile3));
     }
 
+    /**
+     * Tests the {@code addTileToBoard} method.
+     * Ensures that tiles are correctly added to the board.
+     */
     @Test
     void testAddTileToBoard() {
         final Tile tile1 = new TileImpl(SIDE1, SIDE2);
@@ -104,6 +122,10 @@ class BoardTileImplTest {
         assertTrue(this.boardTile.getBoardTiles().contains(tile3));
     }
 
+    /**
+     * Tests the {@code notifyObservers} method.
+     * Ensures that observers are correctly notified when a tile is added to the board.
+     */
     @Test
     void testNotifyObservers() {
         final Tile tile1 = new TileImpl(SIDE1, SIDE2);
