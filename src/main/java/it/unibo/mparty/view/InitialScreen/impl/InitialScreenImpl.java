@@ -1,12 +1,10 @@
 package it.unibo.mparty.view.InitialScreen.impl;
 
 import it.unibo.mparty.controller.GameController;
-import it.unibo.mparty.controller.GameControllerImpl;
 import it.unibo.mparty.model.GameModelBuilder;
 import it.unibo.mparty.model.GameModelBuilderImpl;
 import it.unibo.mparty.utilities.BoardType;
 import it.unibo.mparty.view.AbstractSceneView;
-import it.unibo.mparty.view.GameViewImpl;
 import it.unibo.mparty.view.InitialScreen.api.InitialScreen;
 import it.unibo.mparty.view.InitialScreen.api.MiniScreen;
 import javafx.event.ActionEvent;
@@ -22,13 +20,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 public class InitialScreenImpl extends AbstractSceneView implements InitialScreen, Initializable {
 
@@ -117,4 +113,5 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     public void setLabelText(String text){
         this.exceptionLabel.setText(text);
     }
+
 }

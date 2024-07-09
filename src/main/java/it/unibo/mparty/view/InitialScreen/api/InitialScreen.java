@@ -1,11 +1,7 @@
 package it.unibo.mparty.view.InitialScreen.api;
 
-import it.unibo.mparty.model.GameModelBuilder;
 import it.unibo.mparty.view.SceneView;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-
 import java.io.IOException;
 
 /**
@@ -29,11 +25,20 @@ public interface InitialScreen extends SceneView {
      /**
       * method that handles the event that happens when you click the start button
       * @param event event that happens when you click the start button
-     * @throws IOException 
       */
      void handleStartButton(ActionEvent event) throws IOException;
 
+     /**
+      * method for adding a new player to the game
+      * @param username the username the user gives from input
+      * @param character the character the user chooses
+      */
      void setNewPlayer(String username,String character);
 
+     /**
+      * method for setting the text inside the label in the fxml file
+      * @param text the text that will be set in the label
+      */
      void setLabelText(String text);
+
 }
