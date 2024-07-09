@@ -122,10 +122,8 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         if (this.tutorialText.isVisible()) {
             this.tutorialButton.setText("Tutorial");
             this.tutorialText.setVisible(false);
-            //this.scrollPane.setVisible(true);
         } else {
-            this.tutorialButton.setText("Chiudi\n Tutorial");
-            //this.scrollPane.setVisible(false);
+            this.tutorialButton.setText("Chiudi\nTutorial");
             this.setTutorialTextFromFile();
         }
     }
