@@ -71,7 +71,8 @@ public class TestAbstractPositionImpl {
         assertFalse(new PathPosition(FIFTH, 3, SIDE).isSafe(list1, list2));
         assertTrue(new PathPosition(3, 1, SIDE).isSafe(list1, list2));
         list1.add(new PathPosition(3, 1, SIDE));
-        assertFalse(new PathPosition(2, 5, SIDE).isSafe(list1, list2));
+        assertFalse(new PathPosition(2, FIFTH, SIDE).isSafe(list1, list2));
         assertTrue(new PathPosition(4, 1, SIDE).isSafe(list1, list2));
     }
+
 }

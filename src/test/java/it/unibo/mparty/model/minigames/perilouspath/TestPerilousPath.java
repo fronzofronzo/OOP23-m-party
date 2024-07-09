@@ -55,7 +55,7 @@ public class TestPerilousPath {
     }
 
     /**
-     * test that simulates what happens when a generic button is clicked in the grid
+     * test that simulates what happens when a generic button is clicked in the grid.
      */
     @Test
     public void testHit() {
@@ -65,7 +65,8 @@ public class TestPerilousPath {
         assertEquals(PerilousPath.Type.WRONG, this.model.hit(getPosition(p1)));
     }
 
-    private PathPosition getPosition(final AbstractPosition p){
+    private PathPosition getPosition(final AbstractPosition p) {
         return new PathPosition(p.getX(), p.getY(), this.model.getSize());
     }
+
 }
