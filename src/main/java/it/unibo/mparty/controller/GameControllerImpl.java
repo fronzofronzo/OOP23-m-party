@@ -50,7 +50,6 @@ public class GameControllerImpl implements GameController {
         this.view.setUpBoard(this.model.getBoardDim(), this.model.getBoardConfig(), usernames);
         this.view.setBoardScene();
         this.updatePlayersView();
-        ;
         this.updateCommandView();
     }
 
@@ -110,7 +109,7 @@ public class GameControllerImpl implements GameController {
     public void setUpShop(final ShopView shopView) {
         Map<ItemName, Pair<Integer, String>> itemMap = new LinkedHashMap<>();
         this.model.getItemsFromShop().stream().forEachOrdered(it -> itemMap.put(it.getName(),
-                new Pair<Integer, String>(it.getCost(), it.getDescription())));
+                new Pair<>(it.getCost(), it.getDescription())));
         itemMap.forEach((it, p) -> shopView.addItemView(it, p.getFirst(), p.getSecond()));
         this.updateCommandView();
         shopView.updateMoney(this.model.getActualPlayer().getNumCoins());
@@ -164,7 +163,7 @@ public class GameControllerImpl implements GameController {
                 p.getPlayerBag()
                         .getItems()
                         .stream()
-                        .map(i -> i.name()).toList(),
+                        .map(Enum::name).toList(),
                 p.getPosition()));
     }
 
@@ -173,7 +172,7 @@ public class GameControllerImpl implements GameController {
                         .getPlayerBag()
                         .getItems()
                         .stream()
-                        .map(i -> i.toString())
+                        .map(ItemName::toString)
                         .toList(),
                 this.model.getMessage(),
                 this.model.getTurn());
