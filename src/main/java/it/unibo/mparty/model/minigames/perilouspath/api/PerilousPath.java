@@ -1,11 +1,10 @@
 package it.unibo.mparty.model.minigames.perilouspath.api;
 
 import it.unibo.mparty.model.minigames.MinigameModel;
-
 import java.util.List;
 
 /**
- * interface that model the model for the Perilous Path mini game
+ * interface that model the model for the Perilous Path mini-game.
  */
 public interface PerilousPath extends MinigameModel {
 
@@ -15,17 +14,17 @@ public interface PerilousPath extends MinigameModel {
      * the type wrong signifies that that button is a path-type button, but
      * it does not respect the politics of the path-type buttons
      */
-    enum Type{
-        BOMB,BALL,PATH,WRONG
+    enum Type {
+        BOMB, BALL, PATH, WRONG
     }
 
     /**
-     * sets the positions of bombs in the grid in a pseudo-random manner
+     * sets the positions of bombs in the grid in a pseudo-random manner.
      */
     void setBombs();
 
     /**
-     * sets the positions of balls in the grid in a pseudo-random manner
+     * sets the positions of balls in the grid in a pseudo-random manner.
      */
     void setBalls();
 
@@ -55,5 +54,4 @@ public interface PerilousPath extends MinigameModel {
      * @return the side of the grid which is a square
      */
     int getSize();
-    
 }
