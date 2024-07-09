@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.InitialScreen.impl.InitialScreenImpl">
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.InitialScreen.impl.InitialScreenImpl">
    <children>
       <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
          <image>
@@ -42,9 +42,9 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="playersLabel" alignment="CENTER" maxWidth="1.7976931348623157E308">
+            <Label fx:id="playersLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" textFill="#2b2a2a">
                <font>
-                  <Font size="24.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
          </children>
