@@ -129,8 +129,8 @@ public class TileImpl implements Tile {
      */
     @Override
     public String toString() {
-        return "TileImpl{" +
-                "sideA=" + this.sideA
+        return "TileImpl{"
+                + "sideA=" + this.sideA
                 + ", sideB=" + this.sideB
                 + '}';
     }
