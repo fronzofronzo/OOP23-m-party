@@ -144,5 +144,10 @@ public class SecretCodeGameImpl implements SecretCodeGame{
 	public List<SecretCodeColors> getSoluction() {
 		return Collections.unmodifiableList(this.soluction);
 	}
+
+    @Override
+    public int getTurn() {
+        return this.turn;
+    }
     
 }

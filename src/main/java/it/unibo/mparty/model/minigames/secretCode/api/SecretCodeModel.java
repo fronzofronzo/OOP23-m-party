@@ -6,5 +6,7 @@ import it.unibo.mparty.model.minigames.MinigameModel;
 public interface SecretCodeModel extends MinigameModel{
 
     SecretCodeGame getGame();
+
+    int getTurn();
     
 }

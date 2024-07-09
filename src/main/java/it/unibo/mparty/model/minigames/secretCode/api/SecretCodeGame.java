@@ -51,4 +51,6 @@ public interface SecretCodeGame {
      * @return the name of the winner player if the game is over, null otherwise.
      */
     String getWinner();
+
+    int getTurn();
 }

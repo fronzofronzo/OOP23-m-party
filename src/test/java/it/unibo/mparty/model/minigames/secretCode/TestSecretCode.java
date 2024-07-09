@@ -60,6 +60,5 @@ public class TestSecretCode {
         List<SecretCodeResults> res = model.getGame().getGuessResult();
         assertTrue(model.getGame().isOver());
         assertEquals(p1, model.getGame().getWinner());
-    }
-    
+    }   
 }

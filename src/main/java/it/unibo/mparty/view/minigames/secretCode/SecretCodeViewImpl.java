@@ -91,6 +91,11 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
         }
     }
 
+    @FXML
+    private void guess(){
+        //this.controller.
+    }
+
     @Override
     public void showResult(Pair<String, Integer> result) {
         // TODO Auto-generated method stub

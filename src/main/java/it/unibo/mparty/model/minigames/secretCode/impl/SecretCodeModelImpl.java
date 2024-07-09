@@ -31,5 +31,10 @@ public class SecretCodeModelImpl implements SecretCodeModel{
 	public SecretCodeGame getGame() {
 		return this.game;
 	}
+
+	@Override
+	public int getTurn() {
+		return this.game.getTurn();
+	}
     
 }
