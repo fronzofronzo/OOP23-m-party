@@ -17,6 +17,7 @@ import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -26,6 +27,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
     private final MemorySweepController controller = new MemorySweepControllerImpl(this);
     private final static int SIZE = 8;
     private Button button;
+    private List<String> players = new ArrayList<>();
 
     @FXML
     private Button startButton;
@@ -38,13 +40,13 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
 
     @Override
     public void handleStartButton(ActionEvent e){
-        this.memorySweepGrid.setDisable(false);
         this.startButton.setDisable(true);
         this.controller.setUp();
     }
 
     @Override
     public void setUp(Set<Position> randoms) {
+        this.memorySweepGrid.setDisable(true);
         for(var child : this.memorySweepGrid.getChildren()){
             var position = this.buttonPos((Button) child);
             if(randoms.contains(position)){
@@ -59,13 +61,20 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
             case RIGHT_CHOICE -> {
                 if (turn) {
                     this.button.setStyle("-fx-background-color: #ef0427;");
+                    this.setLabelText( this.players.get(0) + " HA FATTO SCELTA GIUSTA");
                 } else {
                     this.button.setStyle("-fx-background-color: #0623af;");
+                    this.setLabelText(this.players.get(1) + " HA FATTO SCELTA GIUSTA");
                 }
             }
             case TURN_END -> {
                 for(var child : this.memorySweepGrid.getChildren()){
                     child.setStyle(" ");
+                }
+                if(!turn){
+                    this.setLabelText(this.players.get(0) + " HA FINITO IL TURNO, TOCCA A " + this.players.get(1));
+                }else{
+                    this.setLabelText(this.players.get(1) + " HA FINITO IL TURNO, TOCCA A " + this.players.get(0));
                 }
                 this.controller.setRandoms();
                 this.controller.setUp();
@@ -88,6 +97,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
                 child.setStyle(" ");
             }
         }
+        this.memorySweepGrid.setDisable(false);
     }
 
     private final EventHandler<MouseEvent> click = event -> {
@@ -113,11 +123,13 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
                 throw new RuntimeException(ex);
             }
         });
+        this.setLabelText(result.getFirst() + " HA VINTO " + result.getSecond() + " COINS");
     }
 
     @Override
     public void startMinigame(List<String> players) {
         this.controller.initGame(players);
+        this.players = players;
     }
 
     @Override
@@ -134,7 +146,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
                 this.memorySweepGrid.add(button,i,j);
             }
         }
-        this.memorySweepGrid.setDisable(false);
+        this.memorySweepGrid.setDisable(true);
     }
 
     private void setLabelText(String text){
