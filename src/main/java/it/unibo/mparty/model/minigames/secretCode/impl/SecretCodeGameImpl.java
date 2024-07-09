@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.Map;
 
 import it.unibo.mparty.model.minigames.secretCode.api.SecretCodeGame;
 import it.unibo.mparty.model.minigames.secretCode.api.SecretCodePlayer;
@@ -16,6 +17,12 @@ public class SecretCodeGameImpl implements SecretCodeGame{
 
     private static final int DIM_SOLUCTION = 4;
     private static final int TURNS = 8;
+
+    private static final int PUNTI_POS_COL_COR = 5;
+    private static final int PUNTI_COL_COR = 2;
+    private static final int PUNTI_ERRORE = 0;
+
+    private static final Map<SecretCodeResults,Integer> PUNTEGGIO = Map.of(SecretCodeResults.CORRECT_COLOR_AND_POSITION, PUNTI_POS_COL_COR, SecretCodeResults.CORRECT_COLOR, PUNTI_COL_COR, SecretCodeResults.WRONG_COLOR, PUNTI_ERRORE);
 
     private List<SecretCodePlayer> players = new ArrayList<>();;
     private List<SecretCodeColors> soluction = new ArrayList<>();
@@ -44,6 +51,7 @@ public class SecretCodeGameImpl implements SecretCodeGame{
         List<SecretCodeResults> res = computeResult(this.players.get(actualPlayerIndex).getGuess());
         if (!res.isEmpty()) {
             this.players.get(actualPlayerIndex).startNewGuess();
+            res.stream().forEach(r -> this.players.get(actualPlayerIndex).addPoints(PUNTEGGIO.get(r)));
             this.nextPlayer();
         }
         return res;
