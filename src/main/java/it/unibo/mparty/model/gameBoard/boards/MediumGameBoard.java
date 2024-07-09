@@ -6,6 +6,7 @@ import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 
+import java.util.Map;
 import java.util.Set;
 
 public class MediumGameBoard extends AbstractBoardImpl{
@@ -27,13 +28,13 @@ public class MediumGameBoard extends AbstractBoardImpl{
 
     private static final String FILE_PATH = "MediumBoardGame.txt";
 
-    private static final Set<Pair<SlotType,Integer>> RULES = 
-        Set.of(new Pair<>(SlotType.PATH, PROB_PATH),
-               new Pair<>(SlotType.SINGLEPLAYER, PROB_SINGLEPLAYER),
-               new Pair<>(SlotType.MALUS, PROB_MALUS),
-               new Pair<>(SlotType.MULTIPLAYER, PROB_MULTIPLAYER),
-               new Pair<>(SlotType.SHOP, PROB_SHOP),
-               new Pair<>(SlotType.BONUS, PROB_BONUS));
+    private static final Map<SlotType,Integer> RULES = 
+        Map.of(SlotType.PATH, PROB_PATH,
+               SlotType.SINGLEPLAYER, PROB_SINGLEPLAYER,
+               SlotType.MALUS, PROB_MALUS,
+               SlotType.MULTIPLAYER, PROB_MULTIPLAYER,
+               SlotType.SHOP, PROB_SHOP,
+               SlotType.BONUS, PROB_BONUS);
 
     private static final Set<Position> STARS_POSITIONS = Set.of(new Position(5, 1), 
                                                                 new Position(28, 9),

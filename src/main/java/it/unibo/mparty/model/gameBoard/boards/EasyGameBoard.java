@@ -2,10 +2,10 @@ package it.unibo.mparty.model.gameBoard.boards;
 
 import it.unibo.mparty.model.gameBoard.impl.AbstractBoardImpl;
 import it.unibo.mparty.utilities.BoardType;
-import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 
+import java.util.Map;
 import java.util.Set;
 
 public class EasyGameBoard extends AbstractBoardImpl{
@@ -27,13 +27,13 @@ public class EasyGameBoard extends AbstractBoardImpl{
 
     private static final String FILE_PATH = "EasyBoardGame.txt";
 
-    private static final Set<Pair<SlotType,Integer>> RULES = 
-        Set.of(new Pair<>(SlotType.PATH, PROB_PATH),
-               new Pair<>(SlotType.SINGLEPLAYER, PROB_SINGLEPLAYER),
-               new Pair<>(SlotType.MALUS, PROB_MALUS),
-               new Pair<>(SlotType.MULTIPLAYER, PROB_MULTIPLAYER),
-               new Pair<>(SlotType.SHOP, PROB_SHOP),
-               new Pair<>(SlotType.BONUS, PROB_BONUS));
+    private static final Map<SlotType,Integer> RULES = 
+        Map.of(SlotType.PATH, PROB_PATH,
+               SlotType.SINGLEPLAYER, PROB_SINGLEPLAYER,
+               SlotType.MALUS, PROB_MALUS,
+               SlotType.MULTIPLAYER, PROB_MULTIPLAYER,
+               SlotType.SHOP, PROB_SHOP,
+               SlotType.BONUS, PROB_BONUS);
 
     private static final Set<Position> STARS_POSITIONS = Set.of(new Position(5, 7), 
                                                                 new Position(22, 1),

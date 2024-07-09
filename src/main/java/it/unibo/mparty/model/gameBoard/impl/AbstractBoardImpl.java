@@ -38,7 +38,7 @@ public abstract class AbstractBoardImpl implements GameBoard {
     private final int width;
     private final int height;
     private final Position initialPosition;
-    private final Set<Pair<SlotType, Integer>> rules;
+    private final Map<SlotType, Integer> rules;
     private final BoardType boardType;
     private final String filePath;
     private final Set<Position> starsPositions;
@@ -64,7 +64,7 @@ public abstract class AbstractBoardImpl implements GameBoard {
                              Position initialPosition,
                              Set<Position> starPositions,
                              String filePath,
-                             Set<Pair<SlotType, Integer>> rules,
+                             Map<SlotType, Integer> rules,
                              BoardType boardType) {
         this.width = width;
         this.height = height;
