@@ -10,37 +10,41 @@ import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.GameView;
 import it.unibo.mparty.view.shop.api.ShopView;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
  * This class implements the {@link GameController} interface. This class
  * provides an implementation for interface methods and handles the different
- * situation with view and model of the game
+ * situation with view and model of the game.
  */
-public class GameControllerImpl implements GameController{
+public class GameControllerImpl implements GameController {
 
     private final GameView view;
     private GameModel model;
 
     /**
-     * Constructor for a new {@link GameController} implementation
-     * @param view to set like {@link GameView} reference to the game
+     * Constructor for a new {@link GameController} implementation.
+     * @param view to set like {@link GameView} reference to the game.
      */
-    public GameControllerImpl(final GameView view){
+    public GameControllerImpl(final GameView view) {
         this.view = view;
     }
 
     /**
-     *
      * {@inheritDoc}
      */
     @Override
-    public void startGame(GameModel model) throws IOException {
+    public void startGame(final GameModel model) throws IOException {
         this.model = model;
         List<String> usernames = this.model.getPlayers()
                 .stream()
-                .map(p -> p.getUsername())
+                .map(Player::getUsername)
                 .toList();
         this.view.setUpBoard(this.model.getBoardDim(), this.model.getBoardConfig(), usernames);
         this.view.setBoardScene();
@@ -49,8 +53,6 @@ public class GameControllerImpl implements GameController{
     }
 
     /**
-     * 
-     *
      * {@inheritDoc}
      */
     @Override
@@ -64,7 +66,6 @@ public class GameControllerImpl implements GameController{
     }
 
     /**
-     *
      * {@inheritDoc}
      */
     @Override
@@ -78,7 +79,7 @@ public class GameControllerImpl implements GameController{
      * {@inheritDoc}
      */
     @Override
-    public void movePlayer(Optional<Direction> dir) {
+    public void movePlayer(final Optional<Direction> dir) {
         this.model.movePlayer(dir);
         this.updateCommandView();
         this.updatePlayersView();
@@ -108,18 +109,16 @@ public class GameControllerImpl implements GameController{
      */
     @Override
     public void setUpShop(final ShopView shopView) {
-        Map<ItemName,Pair<Integer, String>> itemMap = new HashMap<>();
-        this.model.getItemsFromShop().stream().forEach(it -> itemMap.put(it.getName(), 
+        Map<ItemName,Pair<Integer, String>> itemMap = new LinkedHashMap<>();
+        this.model.getItemsFromShop().stream().forEachOrdered(it -> itemMap.put(it.getName(), 
         new Pair<Integer,String>(it.getCost(), it.getDescription())));
-        itemMap.forEach((str, i) -> shopView.addButton(str, i.getFirst()));
-        itemMap.forEach((str, des) -> shopView.addDescription(des.getSecond()));
+        itemMap.forEach((it, p) -> shopView.addItemView(it, p.getFirst(), p.getSecond()));
         this.updateCommandView();
         shopView.updateMoney(this.model.getActualPlayer().getNumCoins());
     }
 
 
     /**
-     *
      * {@inheritDoc}
      */
     @Override
@@ -135,7 +134,7 @@ public class GameControllerImpl implements GameController{
      * {@inheritDoc}
      */
     @Override
-    public void saveMinigameResult(Pair<String, Integer> result) {
+    public void saveMinigameResult(final Pair<String, Integer> result) {
         this.model.endMinigame(result);
         this.updatePlayersView();
     }
@@ -171,7 +170,9 @@ public class GameControllerImpl implements GameController{
     }
 
     private void updateCommandView() {
-        this.view.updateCommands(this.model.getItemsOfCurrentPlayer()
+        this.view.updateCommands(this.model.getActualPlayer()
+                        .getPlayerBag()
+                        .getItems()
                         .stream()
                         .map(i -> i.toString())
                         .toList(),

@@ -45,6 +45,7 @@ public class DominoControllerImpl implements DominoController {
         this.view.setTurn(this.isPlayer1Turn);
         this.view.setPlayerName(true, this.player1);
         this.view.setPlayerName(false, this.player2);
+        this.view.updateRemainingTileSize(this.model.getDominoSet().size());
 
         this.updatePlayersTiles();
         this.updateTurn();
@@ -58,13 +59,15 @@ public class DominoControllerImpl implements DominoController {
         final Tile selectedTile = new TileImpl(sideA, sideB);
         final String currentPlayer = this.isPlayer1Turn ? this.player1 : this.player2;
         final boolean isValidMove = this.model.checkAndAddToBoard(currentPlayer, selectedTile);
+
         if (isValidMove) {
-            this.updatePlayersTiles();
-            this.isPlayer1Turn = !this.isPlayer1Turn;
-            this.updateTurn();
-            this.checkDraw();
+            this.endTurn();
         } else {
             this.view.setMessage(DominoMessage.MOVE_NOT_VALID);
+            if (this.model.cannotPlayerPlace(currentPlayer) && !this.model.canDrawTile(currentPlayer)) {
+                this.view.setMessage(DominoMessage.PASS_TURN);
+                this.endTurn();
+            }
         }
     }
 
@@ -74,6 +77,7 @@ public class DominoControllerImpl implements DominoController {
     @Override
     public void drawTile() {
         this.model.drawTile(this.isPlayer1Turn ? this.player1 : this.player2);
+        this.view.updateRemainingTileSize(this.model.getDominoSet().size());
         this.updatePlayersTiles();
         this.checkDraw();
         this.updateTurn();
@@ -85,6 +89,7 @@ public class DominoControllerImpl implements DominoController {
     @Override
     public void endGame() {
         if (this.model.isOver()) {
+            this.updatePlayersTiles();
             this.view.showResult(this.model.getResult());
             this.view.getMainController().saveMinigameResult(this.model.getResult());
         }
@@ -98,8 +103,6 @@ public class DominoControllerImpl implements DominoController {
         } else {
             this.view.playerCantDraw();
         }
-
-        this.endGame();
     }
 
     private void updatePlayersTiles() {
@@ -109,5 +112,13 @@ public class DominoControllerImpl implements DominoController {
 
     private void updateTurn() {
         this.view.setTurn(this.isPlayer1Turn);
+    }
+
+    private void endTurn() {
+        this.isPlayer1Turn = !this.isPlayer1Turn;
+        this.updatePlayersTiles();
+        this.updateTurn();
+        this.checkDraw();
+        this.endGame();
     }
 }

@@ -27,11 +27,13 @@ import java.util.Map;
  */
 public class GameViewImpl extends Application implements GameView{
 
-    private final static double DEFAULT_DIMENSION_VALUE = -1;
-    private final static String PATH = "/layouts/";
-    private final static String PATH_MINIGAMES = "minigames/";
-    private final static String EXTENSION = ".fxml";
-    private final static String SHOP_NAME = "Shop";
+    private static final double DEFAULT_DIMENSION_VALUE = -1;
+    private static final String PATH = "/layouts/";
+    private static final String PATH_MINIGAMES = "minigames/";
+    private static final String EXTENSION = ".fxml";
+    private static final String SHOP_NAME = "Shop";
+    private static final int PREF_HEIGHT = 700;
+    private static final int PREF_WIDTH = 1000;
 
     private final GameController controller = new GameControllerImpl(this);
     private GameBoardView boardView;
@@ -42,7 +44,7 @@ public class GameViewImpl extends Application implements GameView{
      * {@inheritDoc}
      */
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(final Stage primaryStage) throws Exception {
         this.stage = primaryStage;
         this.stage.getIcons().add(new Image("/images/marioParty.png"));
         this.setBoardView();
@@ -57,8 +59,8 @@ public class GameViewImpl extends Application implements GameView{
         */
         final Pair<Scene, SceneView> scenePair = this.loadScene("initialScreen");
         this.stage.setScene(scenePair.getFirst());
-        this.stage.setMinWidth(1000);
-        this.stage.setMinHeight(700);
+        this.stage.setMinWidth(PREF_WIDTH);
+        this.stage.setMinHeight(PREF_HEIGHT);
         this.stage.setMaximized(true);
         this.stage.show();
     }
@@ -78,7 +80,7 @@ public class GameViewImpl extends Application implements GameView{
      * {@inheritDoc}
      */
     @Override
-    public void setMinigameScene(String name, List<String> players) throws IOException {
+    public void setMinigameScene(final String name, final List<String> players) throws IOException {
         final Pair<Scene,SceneView> pair = this.loadScene(PATH_MINIGAMES + name);
         final Scene minigameScene = pair.getFirst();
         final MinigameView minigameView = (MinigameView) pair.getSecond();
@@ -108,7 +110,7 @@ public class GameViewImpl extends Application implements GameView{
      * {@inheritDoc}
      */
     @Override
-    public void setUpBoard(Pair<Integer,Integer> dimension, Map<Position, SlotType> board, List<String> usernames) {
+    public void setUpBoard(final Pair<Integer,Integer> dimension, final Map<Position, SlotType> board, final List<String> usernames) {
         this.boardView.setUpBoard(dimension, board, usernames);
     }
 
@@ -117,7 +119,7 @@ public class GameViewImpl extends Application implements GameView{
      * {@inheritDoc}
      */
     @Override
-    public void showResultDice(int result) {
+    public void showResultDice(final int result) {
         this.boardView.showResultDice(result);
     }
 
@@ -126,7 +128,7 @@ public class GameViewImpl extends Application implements GameView{
      * {@inheritDoc}
      */
     @Override
-    public void updatePlayer(String player, int coins, int stars, final List<String> items, Position position) {
+    public void updatePlayer(final String player, final int coins, final int stars, final List<String> items, final Position position) {
         this.boardView.updatePlayer(player, coins, stars, items, position);
     }
 
@@ -135,12 +137,12 @@ public class GameViewImpl extends Application implements GameView{
      * {@inheritDoc}
      */
     @Override
-    public void updateCommands(final List<String> items, String message, Pair<String,String> turn) {
+    public void updateCommands(final List<String> items, final String message, final Pair<String,String> turn) {
         this.boardView.updateCommands(items, message, turn);
     }
 
     @Override
-    public void showResults(Map<String, Pair<Integer, Integer>> result) throws IOException {
+    public void showResults(final Map<String, Pair<Integer, Integer>> result) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + "endGame" + EXTENSION)); ;
         final Parent root = loader.load(getClass().getResourceAsStream(PATH + "endGame" + EXTENSION));
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
@@ -148,6 +150,11 @@ public class GameViewImpl extends Application implements GameView{
         endGameView.showResults(result);
         this.stage.setScene(scene);
         this.setStageSize();
+    }
+
+    @Override
+    public void updateBoard(Map<Position, SlotType> boardUpdates) {
+        this.boardView.updateBoard(boardUpdates);
     }
 
     private void setBoardView() throws IOException {
@@ -159,7 +166,6 @@ public class GameViewImpl extends Application implements GameView{
     }
 
 
-
     private Pair<Scene,SceneView> loadScene(String name) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + name + EXTENSION));
         final Parent root = loader.load(getClass().getResourceAsStream( PATH + name + EXTENSION));
@@ -169,29 +175,11 @@ public class GameViewImpl extends Application implements GameView{
         return new Pair<>(scene,sceneView);
     }
 
-    private void setStageSize(){
-        this.stage.setMinWidth(1000);
-        this.stage.setMinHeight(700);
+    private void setStageSize() {
+        this.stage.setMinWidth(PREF_WIDTH);
+        this.stage.setMinHeight(PREF_HEIGHT);
         this.stage.setFullScreen(true);
         this.stage.show();
     }
 
-    @Override
-    public void updateBoard(Map<Position, SlotType> boardUpdates) {
-        this.boardView.updateBoard(boardUpdates);
-    }
-
-    /*
-    @Override
-    public void setScene(SceneType sceneType) throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + sceneType.getSceneName() + EXTENSION)); ;
-        final Parent root = loader.load(getClass().getResourceAsStream(PATH + sceneType.getSceneName() + EXTENSION));
-        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        final SceneView sceneView = loader.<SceneView>getController();
-        sceneView.init(this,this.controller);
-        this.stage.setScene(scene);
-        this.stage.setMinWidth(1000);
-        this.stage.setMinHeight(700);
-        this.stage.show();
-    }*/
 }

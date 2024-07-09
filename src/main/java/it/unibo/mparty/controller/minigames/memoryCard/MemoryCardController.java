@@ -12,8 +12,8 @@ import it.unibo.mparty.controller.minigames.MinigameController;
 public interface MemoryCardController extends MinigameController {
 
     /**
-     * Handles the selection of a card made by the user
-     * @param index of the card to select
+     * Handles the selection of a card made by the user.
+     * @param index of the card to select.
      */
     void selectCard(int index);
 

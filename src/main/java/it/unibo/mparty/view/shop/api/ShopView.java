@@ -1,6 +1,5 @@
 package it.unibo.mparty.view.shop.api;
 
-
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.view.SceneView;
 
@@ -9,17 +8,12 @@ import it.unibo.mparty.view.SceneView;
  */
 public interface ShopView extends SceneView {
     /**
-     * Add the button to the view for buying items.
-     * @param itemName the {@link ItemName} of the item
+     * Add the item with his cost and description to the view.
+     * @param itemName the {@link ItemName} of the item to be added
      * @param cost the cost of the item
+     * @param description description of the effect of the item
      */
-    void addButton(ItemName itemName, int cost);
-
-    /**
-     * Add the description of the item to the view.
-     * @param description the description of the item
-     */
-    void addDescription(String description);
+    void addItemView(ItemName itemName, int cost, String description);
 
     /**
      * Update how much money the player who's buying in the shop has left.

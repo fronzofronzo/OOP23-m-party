@@ -39,6 +39,9 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     private Label messageLabel;
 
     @FXML
+    private Label deckSize;
+
+    @FXML
     private Button drawButton;
 
     @FXML
@@ -176,6 +179,14 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     @Override
     public void setMessage(final DominoMessage message) {
         this.messageLabel.setText(message.toString());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateRemainingTileSize(int size) {
+        this.deckSize.setText(DominoMessage.REMAINING_TILE+String.valueOf(size));
     }
 
     /**

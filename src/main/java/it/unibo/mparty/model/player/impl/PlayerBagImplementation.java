@@ -1,17 +1,15 @@
 package it.unibo.mparty.model.player.impl;
 
 import it.unibo.mparty.model.item.impl.ItemName;
-import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBag;
 import it.unibo.mparty.model.item.api.Item;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 /**
  * This class implements a {@code PlayerBag}. It also offers an implementation
- * for the methods to access and modify content of the bag
+ * for the methods to access and modify content of the bag.
  */
 public class PlayerBagImplementation implements PlayerBag {
 
@@ -20,8 +18,8 @@ public class PlayerBagImplementation implements PlayerBag {
 
     /**
      * Initialise a {@link PlayerBag} implementation with selected amount
-     * of items
-     * @param numberOfItems dimension of the bag
+     * of items.
+     * @param numberOfItems dimension of the bag.
      */
     public PlayerBagImplementation(final int numberOfItems) {
         this.items = new ArrayList<>();
@@ -33,7 +31,7 @@ public class PlayerBagImplementation implements PlayerBag {
      */
     @Override
     public void addItem(final Item item) {
-        if(this.items.size() < this.capacity){
+        if (this.items.size() < this.capacity) {
             this.items.add(item);
         }
     }
@@ -42,9 +40,9 @@ public class PlayerBagImplementation implements PlayerBag {
      * {@inheritDoc}
      */
     @Override
-    public Item useItem(ItemName name) {
+    public Item useItem(final ItemName name) {
         Optional<Item> output = this.items.stream().filter(i -> i.getName().equals(name)).findAny();
-        if (output.isEmpty()){
+        if (output.isEmpty()) {
             throw new IllegalStateException("Player should have the item");
         }
         this.items.remove(output.get());

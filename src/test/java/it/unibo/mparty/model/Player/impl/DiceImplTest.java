@@ -18,15 +18,15 @@ class DiceImplTest {
      * Configuration step: this is performed before each step.
      */
     @BeforeEach
-    public void init(){
+    public void init() {
         testDice = new DiceImpl();
     }
 
     /**
-     * Check if the bounds modify is correct
+     * Check if the bounds modify is correct.
      */
     @Test
-    public void testBoundsModify(){
+    public void testBoundsModify() {
         final int minBound = 3;
         final int maxBound = 5;
         this.testDice.setMinNumber(minBound);
@@ -36,15 +36,13 @@ class DiceImplTest {
     }
 
     /**
-     * Check if the number of attempts modify is correct
+     * Check if the number of attempts modify is correct.
      */
     @Test
-    public void testAttemptsModify(){
+    public void testAttemptsModify() {
         final int numAttempts = 3;
         this.testDice.setNumberOfAttempts(numAttempts);
         assertEquals(numAttempts, this.testDice.getNumOfAttempts());
     }
-
-
 
 }

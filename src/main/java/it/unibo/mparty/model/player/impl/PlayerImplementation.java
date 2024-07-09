@@ -25,11 +25,11 @@ public class PlayerImplementation implements Player{
     private int numStars;
 
     /**
-     * Creates a new {@code Player} with username and {@link Character} set
-     * @param username of player
-     * @param character of player
+     * Creates a new {@code Player} with username and {@link Character} set.
+     * @param username of player.
+     * @param character of player.
      */
-    public PlayerImplementation(String username, String character){
+    public PlayerImplementation(final String username, final String character){
         this.username = username;
         this.character = Arrays.stream(Character.values())
                 .filter(c -> c.getName().equals(character))
@@ -41,55 +41,85 @@ public class PlayerImplementation implements Player{
         this.numStars = 0;
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public String getUsername() {
         return this.username;
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public Character getCharacter() {
         return this.character;
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public Position getPosition() {
         return this.position;
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
-    public void setPosition(Position position) {
+    public void setPosition(final Position position) {
         this.position = position;
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
-    public void addCoins(int num) {
+    public void addCoins(final int num) {
         this.numCoins += num;
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
-    public void removeCoins(int num) {
-        if(num >= this.getNumCoins()){
+    public void removeCoins(final int num) {
+        if(num >= this.getNumCoins()) {
             this.numCoins = 0;
         } else {
             this.numCoins -= num;
         }
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public int getNumCoins() {
         return this.numCoins;
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public void addStar() {
         this.numStars++;
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public int getNumStars() {
         return this.numStars;
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public void removeStar() {
         if(this.numStars > 0 ){
@@ -97,11 +127,17 @@ public class PlayerImplementation implements Player{
         }
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public PlayerBag getPlayerBag() {
         return this.playerBag;
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public Dice getDice() {
         return this.dice;
