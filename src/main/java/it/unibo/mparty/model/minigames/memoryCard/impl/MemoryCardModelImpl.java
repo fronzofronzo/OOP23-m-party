@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.minigames.memoryCard.impl;
 
+import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
@@ -11,6 +12,7 @@ public class MemoryCardModelImpl implements MemoryCardModel {
     private static final double SCORE_MULTIPLIER = 1.5;
     private static final int NOT_SELECTED = -1;
     private static final int FIRST = 0;
+    private static final String NAME = "memoryCard";
 
     private final Map<Integer, CardType> cards;
     private final Set<CardType> guessed;
@@ -81,5 +83,15 @@ public class MemoryCardModelImpl implements MemoryCardModel {
     @Override
     public boolean isOver() {
         return mistakesNumber == MAX_MISTAKES || guessed.size() == CardType.values().length;
+    }
+
+    @Override
+    public String getName() {
+        return NAME;
+    }
+
+    @Override
+    public MinigameType getType() {
+        return MinigameType.SINGLE_PLAYER;
     }
 }
