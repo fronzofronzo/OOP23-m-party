@@ -4,13 +4,14 @@ package it.unibo.mparty.model.minigames.perilouspath;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.Test;
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 import it.unibo.mparty.model.minigames.perilouspath.impl.BallPosition;
 import it.unibo.mparty.model.minigames.perilouspath.impl.BombPosition;
 import it.unibo.mparty.model.minigames.perilouspath.impl.PathPosition;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestAbstractPositionImpl {
 
@@ -20,7 +21,7 @@ public class TestAbstractPositionImpl {
     @Test
     public void TestBallPosition() {
 
-        AbstractPosition position1 = new BallPosition(random.nextInt(1,SIDE), 0, SIDE);
+        AbstractPosition position1 = new BallPosition(random.nextInt(1, SIDE), 0, SIDE);
         assertTrue(position1.isSafe(List.of(), List.of()));
         assertEquals(0, position1.getY());
         AbstractPosition position2 = new BallPosition(random.nextInt(SIDE), SIDE - 1, SIDE);
