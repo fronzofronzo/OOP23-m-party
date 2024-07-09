@@ -59,7 +59,8 @@ class DominoModelImplTest {
         assertFalse(this.model.getDominoSet().containsAll(this.model.getPlayersTiles().getPlayerTiles(this.player2)));
 
         // Verify players' domino sets are distinct from each other
-        assertFalse(this.model.getPlayersTiles().getPlayerTiles(this.player1).containsAll(this.model.getPlayersTiles().getPlayerTiles(this.player2)));
+        assertFalse(this.model.getPlayersTiles().getPlayerTiles(this.player1)
+                .containsAll(this.model.getPlayersTiles().getPlayerTiles(this.player2)));
     }
 
     @Test

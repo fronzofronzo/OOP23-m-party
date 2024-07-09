@@ -152,7 +152,7 @@ public class DominoModelImpl implements DominoModel {
                 && this.cannotPlayerPlace(this.player2));
     }
 
-    private int calculateTileScore(Set<Tile> tiles) {
+    private int calculateTileScore(final Set<Tile> tiles) {
         return tiles.stream().mapToInt(tile -> tile.getSideA().getValue() + tile.getSideB().getValue()).sum();
     }
 

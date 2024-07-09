@@ -103,11 +103,15 @@ public class TileImpl implements Tile {
      */
     @Override
     public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         final TileImpl tile = (TileImpl) o;
-        return (this.sideA.getValue() == tile.sideA.getValue() && this.sideB.getValue() == tile.sideB.getValue()) ||
-                (this.sideA.getValue() == tile.sideB.getValue() && this.sideB.getValue() == tile.sideA.getValue());
+        return (this.sideA.getValue() == tile.sideA.getValue() && this.sideB.getValue() == tile.sideB.getValue())
+                || (this.sideA.getValue() == tile.sideB.getValue() && this.sideB.getValue() == tile.sideA.getValue());
     }
 
     /**
@@ -126,9 +130,9 @@ public class TileImpl implements Tile {
     @Override
     public String toString() {
         return "TileImpl{" +
-                "sideA=" + this.sideA +
-                ", sideB=" + this.sideB +
-                '}';
+                "sideA=" + this.sideA
+                + ", sideB=" + this.sideB
+                + '}';
     }
 
     private Optional<Side> canMatchSide(final Side side, final Tile tile) {

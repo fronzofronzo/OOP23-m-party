@@ -11,13 +11,15 @@ import org.junit.jupiter.api.Test;
 
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class PlayerTilesImplTest {
 
-    private final static int DISTRIBUTION_TILES = 7;
-    private final static int sideA = 1;
-    private final static int sideB = 0;
+    private static final int DISTRIBUTION_TILES = 7;
+    private static final int SIDEA = 1;
+    private static final int SIDEB = 0;
     private PlayerTiles playerTiles;
     private Tile tile;
     private TileFactory tileFactory;
@@ -27,7 +29,7 @@ class PlayerTilesImplTest {
     @BeforeEach
     void setUp() {
         this.playerTiles = new PlayerTilesImpl();
-        this.tile = new TileImpl(sideA, sideB);
+        this.tile = new TileImpl(SIDEA, SIDEB);
         this.tileFactory = new TileFactoryImpl();
 
         player1 = "player1";

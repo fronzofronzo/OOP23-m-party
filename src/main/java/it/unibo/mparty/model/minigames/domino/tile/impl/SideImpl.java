@@ -51,10 +51,10 @@ public class SideImpl implements Side {
      */
     @Override
     public String toString() {
-        return "SideImpl{" +
-                "value=" + this.value +
-                ", isMatched=" + this.isMatched +
-                "}\n";
+        return "SideImpl{"
+                + "value=" + this.value
+                + ", isMatched=" + this.isMatched
+                + "}\n";
     }
 
     /**
@@ -62,8 +62,12 @@ public class SideImpl implements Side {
      */
     @Override
     public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         final SideImpl side = (SideImpl) o;
         return this.value == side.value && this.isMatched == side.isMatched;
     }

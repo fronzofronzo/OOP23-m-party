@@ -72,8 +72,12 @@ public class BoardTileImpl extends ESourceImpl<List<Pair<Integer, Integer>>> imp
      */
     @Override
     public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         final BoardTileImpl boardTile = (BoardTileImpl) o;
         return Objects.equals(this.boardTiles, boardTile.boardTiles);
     }
@@ -91,8 +95,8 @@ public class BoardTileImpl extends ESourceImpl<List<Pair<Integer, Integer>>> imp
      */
     @Override
     public String toString() {
-        return "BoardTileImpl{" +
-                "boardTiles=" + this.boardTiles +
-                '}';
+        return "BoardTileImpl{"
+                + "boardTiles=" + this.boardTiles
+                + '}';
     }
 }
