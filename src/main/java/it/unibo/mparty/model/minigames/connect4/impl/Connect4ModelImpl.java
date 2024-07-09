@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.minigames.connect4.api.Connect4Model;
 import it.unibo.mparty.utilities.Connect4Directions;
 import it.unibo.mparty.utilities.Pair;
@@ -22,6 +23,7 @@ public class Connect4ModelImpl implements Connect4Model {
     private static final int COINS_FROM_DRAW = 5;
     private static final int COINS_FROM_WIN = 10;
     private static final int CHECK_START = -3;
+    private static final String MINIGAME_NAME = "connect4";
     private String player1;
     private String player2;
     private String turnPlayer;
@@ -153,6 +155,22 @@ public class Connect4ModelImpl implements Connect4Model {
     @Override
     public String getPlayer1() {
         return this.player1;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getName() {
+        return MINIGAME_NAME;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public MinigameType getType() {
+        return MinigameType.MULTI_PLAYER;
     }
 
 }

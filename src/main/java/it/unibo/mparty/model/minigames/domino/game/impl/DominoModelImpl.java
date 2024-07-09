@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.minigames.domino.game.impl;
 
+import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.minigames.domino.board.api.BoardTile;
 import it.unibo.mparty.model.minigames.domino.game.api.DominoModel;
 import it.unibo.mparty.model.minigames.domino.player.api.PlayerTiles;
@@ -154,6 +155,16 @@ public class DominoModelImpl implements DominoModel {
 
     private int calculateTileScore(final Set<Tile> tiles) {
         return tiles.stream().mapToInt(tile -> tile.getSideA().getValue() + tile.getSideB().getValue()).sum();
+    }
+
+    @Override
+    public String getName() {
+        return "domino";
+    }
+
+    @Override
+    public MinigameType getType() {
+        return MinigameType.MULTI_PLAYER;
     }
 
     private int getDoubleTiles(final String player) {
