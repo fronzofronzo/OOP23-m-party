@@ -9,18 +9,18 @@ import it.unibo.mparty.utilities.Pair;
  */
 public abstract class AbstractPosition {
 
-    final private Pair<Integer,Integer> position;
-    final private int size;
-    final private static int ADJ = 1;
+    private final Pair<Integer, Integer> position;
+    private final int size;
+    private static final int ADJ = 1;
 
     /**
-     * constructor of a new instance of {@link AbstractPosition}
+     * constructor of a new instance of {@link AbstractPosition}.
      * @param x the x position of a button in a grid
      * @param y the y position of a button in a grid
      * @param size the size of the side of the grid
      */
-    public AbstractPosition(int x,int y,int size){
-        this.position = new Pair<>(x,y);
+    public AbstractPosition(final int x, final int y, final int size) {
+        this.position = new Pair<>(x, y);
         this.size = size;
     }
 
@@ -28,7 +28,7 @@ public abstract class AbstractPosition {
      * 
      * @return the x position of a button
      */
-    public int getX(){
+    public int getX() {
         return position.getFirst();
     }
 
@@ -36,7 +36,7 @@ public abstract class AbstractPosition {
      * 
      * @return the y position of a button
      */
-    public int getY(){
+    public int getY() {
         return position.getSecond();
     }
 

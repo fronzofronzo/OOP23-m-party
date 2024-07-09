@@ -15,7 +15,22 @@ public interface PerilousPath extends MinigameModel {
      * it does not respect the politics of the path-type buttons
      */
     enum Type {
-        BOMB, BALL, PATH, WRONG
+        /**
+         * represents a bomb in the grid
+         */
+        BOMB,
+        /**
+         * represents a ball in the grid
+         */
+        BALL,
+        /**
+         * represents a generic path
+         */
+        PATH,
+        /**
+         * represents an invalid choice
+         */
+        WRONG
     }
 
     /**
