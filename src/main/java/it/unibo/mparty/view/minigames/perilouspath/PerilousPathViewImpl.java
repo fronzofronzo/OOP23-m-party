@@ -21,11 +21,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-public class PerilousPathViewImpl extends AbstractSceneView implements PerilousPathView{
+public class PerilousPathViewImpl extends AbstractSceneView implements PerilousPathView {
 
     @FXML
     private GridPane myGridPane;
@@ -47,17 +48,17 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
      */
     @Override
     public void setUpView(List<AbstractPosition> balls, List<AbstractPosition> bombs) {
-        for(var child: this.myGridPane.getChildren()){
+        for (var child : this.myGridPane.getChildren()) {
             var ballPos = this.ballPosition(child);
             var bombPos = this.bombPosition(child);
-            if(balls.stream().anyMatch(b -> b.getX() == ballPos.getX() && b.getY() == ballPos.getY())){
+            if (balls.stream().anyMatch(b -> b.getX() == ballPos.getX() && b.getY() == ballPos.getY())) {
                 if (child instanceof Button) {
-                    this.setImage(((Button) child),new ImageView(ballImage));
+                    this.setImage(((Button) child), new ImageView(ballImage));
                 }
             }
-            if(bombs.stream().anyMatch(b -> b.getX() == bombPos.getX() && b.getY() == bombPos.getY())){
+            if (bombs.stream().anyMatch(b -> b.getX() == bombPos.getX() && b.getY() == bombPos.getY())) {
                 if (child instanceof Button) {
-                    this.setImage(((Button) child),new ImageView(bombImage));
+                    this.setImage(((Button) child), new ImageView(bombImage));
                 }
             }
         }
@@ -69,9 +70,9 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
      */
     @Override
     public void hideBombs(List<AbstractPosition> bombs) {
-        for(var child: this.myGridPane.getChildren()){
+        for (var child : this.myGridPane.getChildren()) {
             var bombPos = this.bombPosition(child);
-            if(bombs.stream().anyMatch(b -> b.getX() == bombPos.getX() && b.getY() == bombPos.getY())){
+            if (bombs.stream().anyMatch(b -> b.getX() == bombPos.getX() && b.getY() == bombPos.getY())) {
                 if (child instanceof Button) {
                     ((Button) child).setGraphic(null);
                 }
@@ -85,11 +86,11 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
      */
     @Override
     public void showBombs(List<AbstractPosition> bombs) {
-        for(var child: this.myGridPane.getChildren()){
+        for (var child : this.myGridPane.getChildren()) {
             var bombPos = this.bombPosition(child);
-            if(bombs.stream().anyMatch(b -> b.getX() == bombPos.getX() && b.getY() == bombPos.getY())){
+            if (bombs.stream().anyMatch(b -> b.getX() == bombPos.getX() && b.getY() == bombPos.getY())) {
                 if (child instanceof Button) {
-                    this.setImage(((Button) child),new ImageView(bombImage));
+                    this.setImage(((Button) child), new ImageView(bombImage));
                 }
             }
         }
@@ -101,13 +102,12 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
      */
     @Override
     public void hitTile(PerilousPath.Type type) {
-        switch(type){
+        switch (type) {
             case PATH -> {
                 button.setStyle("-fx-background-color: #f3f5f8;");
                 this.gameLabel.setText("MOSSA VALIDA");
             }
-            case WRONG ->
-                    this.gameLabel.setText("MOSSA NON VALIDA");
+            case WRONG -> this.gameLabel.setText("MOSSA NON VALIDA");
         }
     }
 
@@ -154,9 +154,9 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         this.startButton.setText("RETURN");
         this.startButton.setDisable(false);
         this.startButton.setOnAction(e -> {
-            try{
+            try {
                 this.getMainView().setBoardScene();
-            }catch (IOException ex){
+            } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
@@ -172,35 +172,38 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
 
     /**
      * method that manages the creation of a PathPosition object
+     *
      * @param child the child that is in that position in the grid
      * @return the PathPosition of the child in the grid
      */
-    private AbstractPosition buttonPosition(Node child){
+    private AbstractPosition buttonPosition(Node child) {
         var x = GridPane.getRowIndex(child) == null ? 0 : GridPane.getRowIndex(child);
         var y = GridPane.getColumnIndex(child) == null ? 0 : GridPane.getColumnIndex(child);
-        return new PathPosition(x,y,SIZE);
+        return new PathPosition(x, y, SIZE);
     }
 
     /**
      * method that manages the creation of a BallPosition object
+     *
      * @param child the child that is in that position in the grid
      * @return the BallPosition of the child in the grid
      */
-    private BallPosition ballPosition(Node child){
+    private BallPosition ballPosition(Node child) {
         var x = GridPane.getRowIndex(child) == null ? 0 : GridPane.getRowIndex(child);
         var y = GridPane.getColumnIndex(child) == null ? 0 : GridPane.getColumnIndex(child);
-        return new BallPosition(x,y,SIZE);
+        return new BallPosition(x, y, SIZE);
     }
 
     /**
      * method that manages the creation of a BombPosition object
+     *
      * @param child the child that is in that position in the grid
      * @return the BombPosition of the child in the grid
      */
-    private BombPosition bombPosition(Node child){
+    private BombPosition bombPosition(Node child) {
         var x = GridPane.getRowIndex(child) == null ? 0 : GridPane.getRowIndex(child);
         var y = GridPane.getColumnIndex(child) == null ? 0 : GridPane.getColumnIndex(child);
-        return new BombPosition(x,y,SIZE);
+        return new BombPosition(x, y, SIZE);
     }
 
     /**
@@ -215,23 +218,24 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     /**
      * method for creating a grid dynamically
      */
-    private void gridCreation(){
-        for(int i = 0; i < SIZE; i++){
-            for(int j = 0; j < SIZE; j++){
+    private void gridCreation() {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
                 final Button button = new Button();
                 button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 button.setOnMouseClicked(buttonClicked);
-                this.myGridPane.add(button,i,j);
+                this.myGridPane.add(button, i, j);
             }
         }
     }
 
     /**
      * method for setting an image in a button
-     * @param button the button in which the image needs to be set
+     *
+     * @param button    the button in which the image needs to be set
      * @param imageView the image that will be set in the button
      */
-    private void setImage(Button button,ImageView imageView){
+    private void setImage(Button button, ImageView imageView) {
         button.setGraphic(imageView);
         imageView.setFitHeight(50);
         imageView.setFitWidth(50);

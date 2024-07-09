@@ -1,6 +1,7 @@
 package it.unibo.mparty.model.minigames.perilouspath.api;
 
 import it.unibo.mparty.model.minigames.MinigameModel;
+
 import java.util.List;
 
 /**
@@ -54,7 +55,6 @@ public interface PerilousPath extends MinigameModel {
     List<AbstractPosition> getBalls();
 
     /**
-     * 
      * @param p the position of the button that was hit by the player in the grid
      * @return the type of that button
      */
