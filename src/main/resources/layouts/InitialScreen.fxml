@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.InitialScreen.impl.InitialScreenImpl">
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.InitialScreen.impl.InitialScreenImpl">
    <children>
       <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
          <image>
@@ -20,7 +20,7 @@
       </ImageView>
       <HBox alignment="TOP_RIGHT" maxWidth="1.7976931348623157E308" spacing="900.0">
          <children>
-            <Button mnemonicParsing="false" text="?">
+            <Button fx:id="tutorialButton" mnemonicParsing="false" onAction="#handleTutorialButton" text="?">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
