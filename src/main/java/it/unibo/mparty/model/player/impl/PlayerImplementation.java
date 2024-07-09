@@ -29,7 +29,7 @@ public class PlayerImplementation implements Player{
      * @param username of player.
      * @param character of player.
      */
-    public PlayerImplementation(final String username, final String character){
+    public PlayerImplementation(final String username, final String character) {
         this.username = username;
         this.character = Arrays.stream(Character.values())
                 .filter(c -> c.getName().equals(character))
@@ -86,7 +86,7 @@ public class PlayerImplementation implements Player{
      */
     @Override
     public void removeCoins(final int num) {
-        if(num >= this.getNumCoins()) {
+        if (num >= this.getNumCoins()) {
             this.numCoins = 0;
         } else {
             this.numCoins -= num;
@@ -122,7 +122,7 @@ public class PlayerImplementation implements Player{
      */
     @Override
     public void removeStar() {
-        if(this.numStars > 0 ){
+        if (this.numStars > 0) {
             this.numStars--;
         }
     }
