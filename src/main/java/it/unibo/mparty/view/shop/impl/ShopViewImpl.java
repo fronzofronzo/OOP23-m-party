@@ -14,7 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
- * Implements the view for the shop.
+ * Implements the {@link ShopView} interface.
  */
 public class ShopViewImpl extends AbstractSceneView implements ShopView {
     private int i = 1;

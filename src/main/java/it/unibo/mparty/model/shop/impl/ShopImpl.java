@@ -11,14 +11,14 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.shop.api.Shop;
 
 /**
- * Implementation of the shop.
+ * Implementation of the {@link Shop} interface.
  */
 public class ShopImpl implements Shop {
     private ItemFactory itemFactory = new ItemFactoryImpl();
     private final List<Item> itemList = new ArrayList<>();
 
     /**
-     * Constructs a new istance of {@link shopImpl}.
+     * Constructs a new istance of {@link ShopImpl}.
      */
     public ShopImpl() {
         itemList.add(itemFactory.createItem(ItemName.CAMPANA_BOO));
