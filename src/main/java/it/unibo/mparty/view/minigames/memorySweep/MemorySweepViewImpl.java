@@ -83,6 +83,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
                 for(var child : this.memorySweepGrid.getChildren()){
                     child.setStyle(" ");
                 }
+                button.setText("X");
                 this.memorySweepGrid.setDisable(true);
             }
         }
