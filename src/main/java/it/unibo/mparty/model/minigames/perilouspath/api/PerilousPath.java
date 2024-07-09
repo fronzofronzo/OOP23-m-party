@@ -1,9 +1,11 @@
 package it.unibo.mparty.model.minigames.perilouspath.api;
 
 import it.unibo.mparty.model.minigames.MinigameModel;
-
 import java.util.List;
 
+/**
+ * interface that model the model for the Perilous Path mini-game.
+ */
 public interface PerilousPath extends MinigameModel {
 
     /**
@@ -12,17 +14,32 @@ public interface PerilousPath extends MinigameModel {
      * the type wrong signifies that that button is a path-type button, but
      * it does not respect the politics of the path-type buttons
      */
-    enum Type{
-        BOMB,BALL,PATH,WRONG
+    enum Type {
+        /**
+         * represents a bomb in the grid.
+         */
+        BOMB,
+        /**
+         * represents a ball in the grid.
+         */
+        BALL,
+        /**
+         * represents a generic path.
+         */
+        PATH,
+        /**
+         * represents an invalid choice.
+         */
+        WRONG
     }
 
     /**
-     * sets the positions of bombs in the grid in a pseudo-random manner
+     * sets the positions of bombs in the grid in a pseudo-random manner.
      */
     void setBombs();
 
     /**
-     * sets the positions of balls in the grid in a pseudo-random manner
+     * sets the positions of balls in the grid in a pseudo-random manner.
      */
     void setBalls();
 
@@ -41,10 +58,10 @@ public interface PerilousPath extends MinigameModel {
      * @param p the position of the button that was hit by the player in the grid
      * @return the type of that button
      */
-    Type hit(AbstractPosition p);
+    Type hit(final AbstractPosition p);
 
     /**
-     * @return true wheter the game is over or not
+     * @return true whether the game is over or not
      */
     boolean isOver();
 
@@ -52,5 +69,6 @@ public interface PerilousPath extends MinigameModel {
      * @return the side of the grid which is a square
      */
     int getSize();
-    
+
 }
+

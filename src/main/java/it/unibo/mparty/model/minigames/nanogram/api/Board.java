@@ -33,5 +33,10 @@ public interface Board {
      */
     boolean getState(Position position);
 
+    /**
+     * Retrieves the entire board as a map of positions and their corresponding states.
+     *
+     * @return a map where the key is the position of the cell and the value is the state of the cell.
+     */
     Map<Position, Boolean> getBoard();
 }

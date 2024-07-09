@@ -8,7 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+/**
+ * Test class for {@link TileImpl}.
+ */
 class TileImplTest {
 
     private static final int SIDE_0 = 0;
@@ -21,6 +23,9 @@ class TileImplTest {
 
     private Tile tile;
 
+    /**
+     * Tests the creation of a {@code TileImpl} instance.
+     */
     @Test
     void testTile() {
         this.tile = new TileImpl(SIDE_0, SIDE_1);
@@ -28,6 +33,10 @@ class TileImplTest {
         assertEquals(SIDE_1, this.tile.getSideB().getValue());
     }
 
+    /**
+     * Tests the {@code match} method.
+     * Ensures that tiles match correctly based on their sides.
+     */
     @Test
     void testMatch() {
         this.tile = new TileImpl(SIDE_3, SIDE_5);
@@ -40,6 +49,10 @@ class TileImplTest {
         assertFalse(this.tile.match(tile3));
     }
 
+    /**
+     * Tests the {@code isDoubleSide} method.
+     * Ensures that tiles correctly identify if both sides are the same.
+     */
     @Test
     void testIsDoubleSide() {
         this.tile = new TileImpl(SIDE_3, SIDE_3);
@@ -55,6 +68,10 @@ class TileImplTest {
         assertFalse(this.tile.isDoubleSide());
     }
 
+    /**
+     * Tests the {@code reverse} method.
+     * Ensures that the sides of the tile are correctly reversed.
+     */
     @Test
     void testReverse() {
         this.tile = new TileImpl(SIDE_1, SIDE_2);
@@ -63,6 +80,10 @@ class TileImplTest {
         assertEquals(SIDE_1, this.tile.getSideB().getValue());
     }
 
+    /**
+     * Tests the {@code canMatch} method.
+     * Ensures that tiles can match correctly with another tile based on their sides.
+     */
     @Test
     void testCanMatch() {
         this.tile = new TileImpl(SIDE_2, SIDE_5);

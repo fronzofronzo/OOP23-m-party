@@ -69,8 +69,12 @@ public class PlayerTilesImpl implements PlayerTiles {
      */
     @Override
     public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         final PlayerTilesImpl that = (PlayerTilesImpl) o;
         return Objects.equals(this.playersTiles, that.playersTiles);
     }
@@ -88,8 +92,8 @@ public class PlayerTilesImpl implements PlayerTiles {
      */
     @Override
     public String toString() {
-        return "PlayerTilesImpl{" +
-                "playersTiles=" + this.playersTiles +
-                '}';
+        return "PlayerTilesImpl{"
+                + "playersTiles=" + this.playersTiles
+                + '}';
     }
 }
