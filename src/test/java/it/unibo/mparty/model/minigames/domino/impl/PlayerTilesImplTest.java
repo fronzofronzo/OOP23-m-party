@@ -15,6 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+/**
+ * Test class for {@link PlayerTilesImpl}.
+ */
 class PlayerTilesImplTest {
 
     private static final int DISTRIBUTION_TILES = 7;
@@ -26,6 +29,9 @@ class PlayerTilesImplTest {
     private String player1;
     private String player2;
 
+    /**
+     * Sets up the test environment before each test.
+     */
     @BeforeEach
     void setUp() {
         this.playerTiles = new PlayerTilesImpl();
@@ -36,6 +42,10 @@ class PlayerTilesImplTest {
         player2 = "player2";
     }
 
+    /**
+     * Tests the {@code initializePlayerTiles} method.
+     * Ensures that player tiles are initialized and distributed correctly.
+     */
     @Test
     void testInitializePlayerTiles() {
         var fullSet = this.tileFactory.createDoubleSixSet();
@@ -54,6 +64,10 @@ class PlayerTilesImplTest {
         assertEquals(DISTRIBUTION_TILES, this.playerTiles.getPlayerTiles(this.player2).size());
     }
 
+    /**
+     * Tests the {@code removeTilesFromPlayer} method.
+     * Ensures that tiles are correctly removed from a player's tile set.
+     */
     @Test
     void testRemoveTilesFromPlayer() {
         this.testInitializePlayerTiles();
