@@ -2,6 +2,7 @@ package it.unibo.mparty.model.minigames.secretCode.impl;
 
 import java.util.List;
 
+import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.minigames.secretCode.api.SecretCodeGame;
 import it.unibo.mparty.model.minigames.secretCode.api.SecretCodeModel;
 import it.unibo.mparty.utilities.Pair;
@@ -35,6 +36,16 @@ public class SecretCodeModelImpl implements SecretCodeModel{
 	@Override
 	public int getTurn() {
 		return this.game.getTurn();
+	}
+
+	@Override
+	public String getName() {
+		return "secretCode";
+	}
+
+	@Override
+	public MinigameType getType() {
+		return MinigameType.MULTI_PLAYER;
 	}
     
 }
