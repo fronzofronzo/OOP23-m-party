@@ -134,8 +134,14 @@ public class DominoModelImpl implements DominoModel {
         } else if (player2Tiles.isEmpty() && !player1Tiles.isEmpty()) {
             return new Pair<>(this.player2, COINS);
         } else if (this.cannotPlayerPlace(this.player1) && this.cannotPlayerPlace(this.player2)) {
-            final int player1Score = this.calculateTileScore(this.playerTiles.getPlayerTiles(player1));
-            final int player2Score = this.calculateTileScore(this.playerTiles.getPlayerTiles(player2));
+            final int player1Score = this.calculateTileScore(player1Tiles);
+            final int player2Score = this.calculateTileScore(player2Tiles);
+            if (player1Score == player2Score) {
+                final int smallestTilePlayer1 = this.getSmallestTileValue(player1Tiles);
+                final int smallestTilePlayer2 = this.getSmallestTileValue(player2Tiles);
+                return smallestTilePlayer1 < smallestTilePlayer2 ?
+                        new Pair<>(this.player1, COINS) : new Pair<>(this.player2, COINS);
+            }
             return player1Score < player2Score ? new Pair<>(this.player1, COINS) : new Pair<>(this.player2, COINS);
         } else {
             return new Pair<>(null, 0);
@@ -153,18 +159,31 @@ public class DominoModelImpl implements DominoModel {
                 && this.cannotPlayerPlace(this.player2));
     }
 
-    private int calculateTileScore(final Set<Tile> tiles) {
-        return tiles.stream().mapToInt(tile -> tile.getSideA().getValue() + tile.getSideB().getValue()).sum();
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
         return "domino";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public MinigameType getType() {
         return MinigameType.MULTI_PLAYER;
+    }
+
+    private int calculateTileScore(final Set<Tile> tiles) {
+        return tiles.stream().mapToInt(tile -> tile.getSideA().getValue() + tile.getSideB().getValue()).sum();
+    }
+
+    private int getSmallestTileValue(final Set<Tile> tiles) {
+        return tiles.stream()
+                .flatMapToInt(tile -> IntStream.of(tile.getSideA().getValue(), tile.getSideB().getValue()))
+                .min()
+                .orElse(Integer.MAX_VALUE);
     }
 
     private int getDoubleTiles(final String player) {
