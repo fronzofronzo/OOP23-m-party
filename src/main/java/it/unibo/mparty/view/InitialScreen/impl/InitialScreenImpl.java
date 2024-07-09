@@ -51,6 +51,9 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     @FXML
     private Label exceptionLabel;
 
+    @FXML
+    private Label playersLabel;
+
     @Override
     public void handleExitButton(ActionEvent event) {
         System.exit(0);
@@ -104,6 +107,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
         try{
             this.builder = this.builder.addPlayer(username,character);
             this.setLabelText("player correttamente aggiunto");
+            this.playersLabel.setText(this.playersLabel.getText() + "\n" + username + ": " + character);
         }catch(IllegalArgumentException e){
             this.setLabelText(e.getMessage());
         }
