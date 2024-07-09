@@ -81,10 +81,16 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <Label fx:id="displayLabel" layoutX="157.0" layoutY="631.0" prefHeight="40.0" prefWidth="524.0">
+      <Label fx:id="displayLabel" layoutX="120.0" layoutY="632.0" prefHeight="40.0" prefWidth="524.0">
          <font>
             <Font size="18.0" />
          </font></Label>
       <Button fx:id="exitButton" layoutX="831.0" layoutY="627.0" mnemonicParsing="false" onAction="#closeView" prefHeight="49.0" prefWidth="103.0" text="Esci" />
+      <Button fx:id="tutorialButton" layoutX="719.0" layoutY="627.0" mnemonicParsing="false" onAction="#viewTutorial" prefHeight="49.0" prefWidth="76.0" text="Tutorial" />
+      <Label fx:id="tutorialLabel" alignment="CENTER" minHeight="300.0" minWidth="500.0" prefHeight="120.0" prefWidth="190.0" text="Qui ci sara' il tutorial" textAlignment="CENTER" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="100.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

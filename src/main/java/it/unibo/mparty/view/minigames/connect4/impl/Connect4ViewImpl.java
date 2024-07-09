@@ -35,6 +35,12 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     @FXML
     private GridPane buttonGrid;
 
+    @FXML
+    private Button tutorialButton;
+
+    @FXML
+    private Label tutorialLabel;
+
     /**
      * {@inheritDoc}
      */
@@ -42,7 +48,15 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     public void showResult(final Pair<String, Integer> result) {
         this.updateDisplayLabel(result.getFirst() + " ha vinto " + result.getSecond() + " monete");
         this.activateExitButton(true);
+        disableButtons();
+    }
+
+    private void disableButtons() {
         buttonGrid.getChildren().listIterator().forEachRemaining(it -> it.setDisable(true));
+    }
+
+    private void activateButtons() {
+        buttonGrid.getChildren().listIterator().forEachRemaining(it -> it.setDisable(false));
     }
 
     /**
@@ -94,6 +108,19 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     @Override
     public void startMinigame(final List<String> players) {
         this.controller.initGame(players);
+        tutorialLabel.setVisible(false);
     }
 
+    @FXML
+    private void viewTutorial() {
+        if (tutorialLabel.isVisible()) {
+            tutorialButton.setText("Tutorial");
+            tutorialLabel.setVisible(false);
+            activateButtons();
+        } else {
+            tutorialButton.setText("Chiudi");
+            tutorialLabel.setVisible(true);
+            disableButtons();
+        }
+    }
 }
