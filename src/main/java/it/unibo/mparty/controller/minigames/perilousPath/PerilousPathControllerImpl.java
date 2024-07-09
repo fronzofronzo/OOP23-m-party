@@ -8,7 +8,7 @@ import javafx.util.Duration;
 import java.util.List;
 
 /**
- * implementation of {@link PerilousPathController}
+ * implementation of {@link PerilousPathController}.
  */
 public class PerilousPathControllerImpl implements  PerilousPathController {
 
@@ -19,10 +19,10 @@ public class PerilousPathControllerImpl implements  PerilousPathController {
     private final PauseTransition pause = new PauseTransition(new Duration(SECONDS));
 
     /**
-     * constructor of a new instance of Perilous Path Controller
+     * constructor of a new instance of Perilous Path Controller.
      * @param view the view that will be attached to this controller
      */
-    public PerilousPathControllerImpl(PerilousPathView view){
+    public PerilousPathControllerImpl(final PerilousPathView view) {
 
         this.model = new PerilousPathImpl(SIZE);
         this.view = view;
@@ -36,7 +36,7 @@ public class PerilousPathControllerImpl implements  PerilousPathController {
     @Override
     public void setUp() throws InterruptedException {
 
-        this.view.setUpView(this.model.getBalls(),this.model.getBombs());
+        this.view.setUpView(this.model.getBalls(), this.model.getBombs());
         pause.setOnFinished(e -> this.view.hideBombs(this.model.getBombs()));
         pause.play();
     }
@@ -45,10 +45,10 @@ public class PerilousPathControllerImpl implements  PerilousPathController {
      *{@inheritDoc}
      */
     @Override
-    public void hit(AbstractPosition p) {
+    public void hit(final AbstractPosition p) {
 
         var type = this.model.hit(p);
-        if(type.equals(PerilousPath.Type.BOMB) || type.equals(PerilousPath.Type.BALL)){
+        if (type.equals(PerilousPath.Type.BOMB) || type.equals(PerilousPath.Type.BALL)) {
             this.view.showBombs(this.model.getBombs());
             this.endGame();
         }
@@ -68,7 +68,7 @@ public class PerilousPathControllerImpl implements  PerilousPathController {
      *{@inheritDoc}
      */
     @Override
-    public void initGame(List<String> players) {
+    public void initGame(final List<String> players) {
         this.model.setUpPlayers(players);
     }
 
