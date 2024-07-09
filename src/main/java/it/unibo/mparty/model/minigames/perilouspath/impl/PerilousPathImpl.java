@@ -3,6 +3,7 @@ package it.unibo.mparty.model.minigames.perilouspath.impl;
 import java.util.*;
 import java.util.stream.IntStream;
 
+import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
 import it.unibo.mparty.utilities.Pair;
@@ -25,6 +26,14 @@ public class PerilousPathImpl implements PerilousPath{
         this.path = new LinkedList<>();
         this.random = new Random();
         this.size = size;
+    }
+
+    public PerilousPathImpl(){
+        this.bombs = new LinkedList<>();
+        this.balls = new LinkedList<>();
+        this.path = new LinkedList<>();
+        this.random = new Random();
+        this.size = NUM_BOMBS;
     }
 
     @Override
@@ -77,6 +86,16 @@ public class PerilousPathImpl implements PerilousPath{
     public boolean isOver() {
         var p = this.path.get(this.path.size() - 1);
         return p.inOrizzontal(getBalls().get(1)) || p.inVertical(getBalls().get(1));
+    }
+
+    @Override
+    public String getName() {
+        return "perilousPath";
+    }
+
+    @Override
+    public MinigameType getType() {
+        return MinigameType.SINGLE_PLAYER;
     }
 
     @Override
