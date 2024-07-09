@@ -9,12 +9,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MiniScreenImpl implements MiniScreen {
@@ -46,7 +46,6 @@ public class MiniScreenImpl implements MiniScreen {
         }
         Stage stage = (Stage) this.okButton.getScene().getWindow();
         stage.close();
-
     }
 
     @Override
