@@ -16,19 +16,19 @@ public interface PerilousPath extends MinigameModel {
      */
     enum Type {
         /**
-         * represents a bomb in the grid
+         * represents a bomb in the grid.
          */
         BOMB,
         /**
-         * represents a ball in the grid
+         * represents a ball in the grid.
          */
         BALL,
         /**
-         * represents a generic path
+         * represents a generic path.
          */
         PATH,
         /**
-         * represents an invalid choice
+         * represents an invalid choice.
          */
         WRONG
     }
@@ -58,7 +58,7 @@ public interface PerilousPath extends MinigameModel {
      * @param p the position of the button that was hit by the player in the grid
      * @return the type of that button
      */
-    Type hit(AbstractPosition p);
+    Type hit(final AbstractPosition p);
 
     /**
      * @return true whether the game is over or not
@@ -71,3 +71,4 @@ public interface PerilousPath extends MinigameModel {
     int getSize();
 
 }
+
