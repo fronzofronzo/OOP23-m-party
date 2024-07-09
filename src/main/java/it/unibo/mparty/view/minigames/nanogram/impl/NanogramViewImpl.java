@@ -21,8 +21,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -59,6 +63,12 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     @FXML
     private GridPane rowHints;
 
+    @FXML
+    private Button tutorialButton;
+
+    @FXML
+    private Label tutorialText;
+
     private NanogramController controller;
 
     private Button hitButton;
@@ -80,6 +90,30 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
 
         this.filledButton.setOnAction(event -> this.controller.setFillState(true));
         this.crossButton.setOnAction(event -> this.controller.setFillState(false));
+    }
+
+    @FXML
+    private void tutorialClicked() {
+        this.tutorialText = new Label();
+        if (this.tutorialText.isVisible()) {
+            this.tutorialButton.setText("Tutorial");
+            this.tutorialText.setVisible(false);
+            this.boardGrid.setVisible(true);
+        } else {
+            this.tutorialButton.setText("Chiudi\n Tutorial");
+            this.boardGrid.setVisible(false);
+            this.setTutorialTextFromFile();
+        }
+    }
+
+    private void setTutorialTextFromFile() {
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(Objects.requireNonNull(getClass().getResource("/text/nanogramTutorial.txt")).toURI())));
+            this.tutorialText.setText(content);
+            this.tutorialText.setVisible(true);
+        } catch (IOException | URISyntaxException e) {
+            this.messageLabel.setText("Errore nella lettura del file: " + e.getMessage());
+        }
     }
 
     /**
