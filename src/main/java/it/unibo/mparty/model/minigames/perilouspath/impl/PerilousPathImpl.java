@@ -73,11 +73,11 @@ public class PerilousPathImpl implements PerilousPath {
      */
     @Override
     public Type hit(final AbstractPosition p) {
-        if(p.isSafe(this.path, this.getBalls())) {
-            if(this.bombs.stream().anyMatch(b -> this.samePosition(b,p))) {
+        if (p.isSafe(this.path, this.getBalls())) {
+            if (this.bombs.stream().anyMatch(b -> this.samePosition(b,p))) {
                 return Type.BOMB;
             }
-            if(this.balls.stream().anyMatch(b -> this.samePosition(b,p)) && !p.equals(this.getBalls().get(0))) {
+            if (this.balls.stream().anyMatch(b -> this.samePosition(b, p)) && !p.equals(this.getBalls().get(0))) {
                 return Type.BALL;
             }
             this.path.add(p);
@@ -123,7 +123,7 @@ public class PerilousPathImpl implements PerilousPath {
      * a private method for getting always a new BombPosition in a pseudo-random manner.
      * @return a new BombPosition which is safe
      */
-    private AbstractPosition setNewBombPosition(){
+    private AbstractPosition setNewBombPosition() {
         BombPosition b;
         do {
             b = new BombPosition(random.nextInt(this.getSize() - 1), random.nextInt(this.getSize() - 1), this.getSize());
@@ -136,21 +136,21 @@ public class PerilousPathImpl implements PerilousPath {
      * @param y the already set y position in a generic(x,y) position, meaning that only the x position will be random
      * @return a new BallPosition which is safe
      */
-    private AbstractPosition setNewBallPosition(final int y){
+    private AbstractPosition setNewBallPosition(final int y) {
         BallPosition b;
-        do{
+        do {
             b = new BallPosition(this.random.nextInt(this.getSize() - 1), y, this.getSize());
-        }while(!b.isSafe(List.of(), List.of()));
+        } while (!b.isSafe(List.of(), List.of()));
         return b;
     }
 
     /**
-     * a private method to know if 2 positions are in the same place
+     * a private method to know if 2 positions are in the same place.
      * @param p1 the first position
      * @param p2 the second position
      * @return true if they are in the same position false otherwise
      */
-    private boolean samePosition(AbstractPosition p1, AbstractPosition p2){
+    private boolean samePosition(final AbstractPosition p1, final AbstractPosition p2){
         return p1.getX() == p2.getX() && p1.getY() == p2.getY();
     }
 
