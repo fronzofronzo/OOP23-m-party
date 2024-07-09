@@ -14,6 +14,7 @@ import it.unibo.mparty.view.GameView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -28,7 +29,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class PerilousPathViewImpl extends AbstractSceneView implements PerilousPathView{
+public class PerilousPathViewImpl extends AbstractSceneView implements PerilousPathView, Initializable {
 
     @FXML
     private GridPane myGridPane;
@@ -121,6 +122,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         this.gridCreation();
         this.observer.setUp();
         this.startButton.setDisable(true);
+        this.gameLabel.setText(" ");
     }
 
 
@@ -194,5 +196,10 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         imageView.setFitHeight(50);
         imageView.setFitWidth(50);
         imageView.setPreserveRatio(false);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.gameLabel.setText("COLLEGARE LA PALLA A SINISTRA A QUELLA A DESTRA EVITANDO LE BOMBE");
     }
 }
