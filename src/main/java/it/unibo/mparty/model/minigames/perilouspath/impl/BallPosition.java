@@ -12,6 +12,9 @@ public class BallPosition extends AbstractPosition {
 
     /**
      * constructor which calls the constructor of AbstractPosition.
+     * @param x the x position of a button in a grid
+     * @param y the y position of a button in a grid
+     * @param size the sie of the side of the grid
      */
     public BallPosition(final int x, final int y, final int size) {
         super(x, y, size);   

@@ -54,4 +54,5 @@ public interface PerilousPath extends MinigameModel {
      * @return the side of the grid which is a square
      */
     int getSize();
+
 }

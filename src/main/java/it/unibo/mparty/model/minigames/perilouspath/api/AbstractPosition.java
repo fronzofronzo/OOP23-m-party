@@ -75,7 +75,7 @@ public abstract class AbstractPosition {
     }
 
     /**
-     * the politics regarding whether the position of a button inside a grid is safe or not, it dipends on the implementation
+     * the politics regarding whether the position of a button inside a grid is safe or not, it depends on the implementation
      * @param list1 the first list of positions of buttons to compare to this to know if it is safe
      * @param list2 the second list of positions of buttons to compare to this to know if it is safe
      * @return true if the position is safe, false otherwise
