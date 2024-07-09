@@ -32,11 +32,12 @@ public class TutorialScreenImpl implements TutorialScreen, Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         String text = this.readFile();
         this.textArea.setText(text);
+        this.textArea.setEditable(false);
     }
 
     private String readFile() {
         StringBuilder builder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader("Tutorial.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\LENOVO\\OneDrive\\Desktop\\oop-m-party\\src\\main\\resources\\Tutorial.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 builder.append(line).append("\n");
