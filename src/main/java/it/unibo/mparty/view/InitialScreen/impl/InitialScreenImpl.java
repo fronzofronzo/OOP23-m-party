@@ -106,7 +106,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     public void setNewPlayer(String username,String character){
         try{
             this.builder = this.builder.addPlayer(username,character);
-            this.setLabelText("player correttamente aggiunto");
+            this.setLabelText("giocatore correttamente aggiunto");
             this.playersLabel.setText(this.playersLabel.getText() + "\n" + username + ": " + character);
         }catch(IllegalArgumentException e){
             this.setLabelText(e.getMessage());
