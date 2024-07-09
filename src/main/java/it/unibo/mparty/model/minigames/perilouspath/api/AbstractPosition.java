@@ -1,9 +1,9 @@
 package it.unibo.mparty.model.minigames.perilouspath.api;
 
 import java.util.List;
-import it.unibo.mparty.model.minigames.perilouspath.impl.Pair;
+import it.unibo.mparty.utilities.Pair;
 
-/*
+/**
  * An abstract class for implementing the position  of a button inside a grid.
  * A generic button has a generic position (x,y) inside a cartesian system.
  */
@@ -29,7 +29,7 @@ public abstract class AbstractPosition {
      * @return the x position of a button
      */
     public int getX(){
-        return position.getX();
+        return position.getFirst();
     }
 
     /**
@@ -37,7 +37,7 @@ public abstract class AbstractPosition {
      * @return the y position of a button
      */
     public int getY(){
-        return position.getY();
+        return position.getSecond();
     }
 
     /**
