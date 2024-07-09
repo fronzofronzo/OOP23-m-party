@@ -31,8 +31,14 @@ import java.util.Objects;
  */
 public class PerilousPathViewImpl extends AbstractSceneView implements PerilousPathView {
 
-    public static final int FIT_HEIGHT = 50;
-    public static final int FIT_WIDTH = 50;
+    /**
+     * height of the image
+     */
+    private static final int FIT_HEIGHT = 50;
+    /**
+     * width of the image
+     */
+    private static final int FIT_WIDTH = 50;
     @FXML
     private GridPane myGridPane;
 
