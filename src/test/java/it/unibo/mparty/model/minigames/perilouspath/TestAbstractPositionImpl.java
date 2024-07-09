@@ -11,15 +11,21 @@ import it.unibo.mparty.model.minigames.perilouspath.impl.BallPosition;
 import it.unibo.mparty.model.minigames.perilouspath.impl.BombPosition;
 import it.unibo.mparty.model.minigames.perilouspath.impl.PathPosition;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
+
+/**
+ * testing class for {@link AbstractPosition} implementations.
+ */
 public class TestAbstractPositionImpl {
 
     private final Random random = new Random();
     private static final int SIDE = 8;
 
     @Test
-    public void TestBallPosition() {
+    public void testBallPosition() {
 
         AbstractPosition position1 = new BallPosition(random.nextInt(1, SIDE), 0, SIDE);
         assertTrue(position1.isSafe(List.of(), List.of()));
@@ -30,7 +36,7 @@ public class TestAbstractPositionImpl {
     }
 
     @Test
-    public void TestBombsPosition() {
+    public void testBombsPosition() {
         List<AbstractPosition> list = new LinkedList<>();
 
         list.add(new BombPosition(2, 2, SIDE));
@@ -43,7 +49,7 @@ public class TestAbstractPositionImpl {
     }
 
     @Test
-    public void TestPathPosition() {
+    public void testPathPosition() {
         List<AbstractPosition> list1 = new LinkedList<>();
         List<AbstractPosition> list2 = new LinkedList<>();
 
