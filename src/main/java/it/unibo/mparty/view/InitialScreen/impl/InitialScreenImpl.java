@@ -21,6 +21,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -70,6 +72,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
         MiniScreen miniScreenController = loader.getController();
         miniScreenController.setUp(this);
         Stage stage = new Stage();
+        stage.initStyle(StageStyle.UTILITY);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Aggiungi Giocatore");
         stage.setScene(new Scene(root));
@@ -104,6 +107,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
                 this.imageView.setPreserveRatio(false);
             }
         });
+        this.tutorialButton.toFront();
     }
 
     @Override
