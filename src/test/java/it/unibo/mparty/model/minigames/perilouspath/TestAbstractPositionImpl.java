@@ -23,7 +23,13 @@ public class TestAbstractPositionImpl {
 
     private final Random random = new Random();
     private static final int SIDE = 8;
+    private static final int FIFTH = 5;
+    private static final int SIXTH = 6;
 
+
+    /**
+     * test for {@link BallPosition}.
+     */
     @Test
     public void testBallPosition() {
 
@@ -35,6 +41,9 @@ public class TestAbstractPositionImpl {
         assertEquals(SIDE - 1, position2.getY());
     }
 
+    /**
+     * test class for {@link BombPosition}.
+     */
     @Test
     public void testBombsPosition() {
         List<AbstractPosition> list = new LinkedList<>();
@@ -48,15 +57,18 @@ public class TestAbstractPositionImpl {
 
     }
 
+    /**
+     * test for {@link PathPosition}.
+     */
     @Test
     public void testPathPosition() {
         List<AbstractPosition> list1 = new LinkedList<>();
         List<AbstractPosition> list2 = new LinkedList<>();
 
         list2.add(new BallPosition(3, 0, SIDE));
-        list2.add(new BallPosition(6, SIDE - 1, SIDE));
+        list2.add(new BallPosition(SIXTH, SIDE - 1, SIDE));
 
-        assertFalse(new PathPosition(5, 3, SIDE).isSafe(list1, list2));
+        assertFalse(new PathPosition(FIFTH, 3, SIDE).isSafe(list1, list2));
         assertTrue(new PathPosition(3, 1, SIDE).isSafe(list1, list2));
         list1.add(new PathPosition(3, 1, SIDE));
         assertFalse(new PathPosition(2, 5, SIDE).isSafe(list1, list2));

@@ -1,6 +1,5 @@
 package it.unibo.mparty.model.minigames.perilouspath;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 import it.unibo.mparty.model.minigames.perilouspath.impl.PathPosition;
@@ -9,7 +8,11 @@ import org.junit.jupiter.api.Test;
 import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
 import it.unibo.mparty.model.minigames.perilouspath.impl.PerilousPathImpl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * testing for {@link PerilousPathImpl}.
+ */
 public class TestPerilousPath {
 
     private static final int SIDE = 8;
@@ -20,6 +23,9 @@ public class TestPerilousPath {
 
     private final PerilousPath model = new PerilousPathImpl(SIDE);
 
+    /**
+     * testing for {@link PerilousPathImpl} constructor.
+     */
     @Test
     public void testPerilousPathConstructor() {
         assertEquals(FIRST_COLUMN, this.model.getBalls().size());
@@ -27,30 +33,39 @@ public class TestPerilousPath {
 
     }
 
+    /**
+     * testing for method setBombs which sets the bombs in the grid.
+     */
     @Test
-    public void TestSetBombs() {
+    public void testSetBombs() {
         this.model.setBombs();
         var bombs = this.model.getBombs();
         assertEquals(NUM_BOMBS, bombs.size());
     }
 
+    /**
+     * testing for method setBombs which sets the balls in the grid.
+     */
     @Test
-    public void TestSetBalls() {
+    public void testSetBalls() {
         this.model.setBalls();
         assertEquals(NUM_BALLS, this.model.getBalls().size());
         assertEquals(FIRST_COLUMN, this.model.getBalls().get(0).getY());
         assertEquals(LAST_COLUMN, this.model.getBalls().get(1).getY());
     }
 
+    /**
+     * test that simulates what happens when a generic button is clicked in the grid
+     */
     @Test
-    public void TestHit() {
+    public void testHit() {
         this.model.setBalls();
         this.model.setBombs();
         var p1 = this.model.getBalls().get(1);
         assertEquals(PerilousPath.Type.WRONG, this.model.hit(getPosition(p1)));
     }
 
-    private PathPosition getPosition(AbstractPosition p){
+    private PathPosition getPosition(final AbstractPosition p){
         return new PathPosition(p.getX(), p.getY(), this.model.getSize());
     }
 }
