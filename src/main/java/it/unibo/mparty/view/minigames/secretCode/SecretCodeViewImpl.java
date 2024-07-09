@@ -57,6 +57,8 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
     private Button buttonRed;
     @FXML
     private Button buttonOrange;
+    @FXML
+    private Label labelResult;
 
     private final static Map<SecretCodeResults,Color> COLORS_RES = Map.of(SecretCodeResults.CORRECT_COLOR_AND_POSITION, Color.GREEN,
                                                                           SecretCodeResults.CORRECT_COLOR, Color.RED,
@@ -93,13 +95,12 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
 
     @FXML
     private void guess(){
-        //this.controller.
+        this.controller.guess();
     }
 
     @Override
     public void showResult(Pair<String, Integer> result) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showResult'");
+        this.labelResult.setText(result.getFirst() + " HA VINTO " + result.getSecond() + " MONETE");
     }
 
     @Override
