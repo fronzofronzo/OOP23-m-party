@@ -3,13 +3,13 @@ import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
 import it.unibo.mparty.model.minigames.perilouspath.impl.PerilousPathImpl;
 import it.unibo.mparty.view.minigames.perilouspath.PerilousPathView;
-import it.unibo.mparty.view.minigames.perilouspath.PerilousPathViewImpl;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
-
-import java.io.IOException;
 import java.util.List;
 
+/**
+ * implementation of {@link PerilousPathController}
+ */
 public class PerilousPathControllerImpl implements  PerilousPathController{
 
     private final PerilousPath model;
@@ -18,15 +18,21 @@ public class PerilousPathControllerImpl implements  PerilousPathController{
     private final static int SECONDS = 3000;
     private final PauseTransition pause = new PauseTransition(new Duration(SECONDS));
 
+    /**
+     * constructor of a new instance of Perilous Path Controller
+     * @param view the view that will be attached to this controller
+     */
     public PerilousPathControllerImpl(PerilousPathView view){
 
         this.model = new PerilousPathImpl(SIZE);
         this.view = view;
         this.model.setBalls();
         this.model.setBombs();
-
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setUp() throws InterruptedException {
 
@@ -35,6 +41,9 @@ public class PerilousPathControllerImpl implements  PerilousPathController{
         pause.play();
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void hit(AbstractPosition p) {
 
@@ -46,14 +55,21 @@ public class PerilousPathControllerImpl implements  PerilousPathController{
         this.view.hitTile(type);
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void endGame() {
         this.view.showResult(this.model.getResult());
         this.view.getMainController().saveMinigameResult(this.model.getResult());
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void initGame(List<String> players) {
         this.model.setUpPlayers(players);
     }
+
 }

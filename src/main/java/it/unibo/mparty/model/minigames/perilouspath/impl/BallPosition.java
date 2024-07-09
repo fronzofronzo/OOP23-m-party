@@ -1,10 +1,10 @@
 package it.unibo.mparty.model.minigames.perilouspath.impl;
 
 import java.util.List;
-
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
+
 /**
- * Implementation of AbstractPosition for balls, which has a special isSafe() politics
+ * implementation of {@link AbstractPosition} that models a path in a grid of button
  */
 public class BallPosition extends AbstractPosition{
 
@@ -26,5 +26,4 @@ public class BallPosition extends AbstractPosition{
         return (this.getY() == 0 || this.getY() == this.getSize() - MINUS) && (this.getX() != 0 && this.getX() != this.getSize() - MINUS);
     }
 
-    
 }

@@ -1,8 +1,8 @@
 package it.unibo.mparty.model.minigames.perilouspath.api;
 
 import java.util.List;
-
 import it.unibo.mparty.model.minigames.perilouspath.impl.Pair;
+
 /*
  * An abstract class for implementing the position  of a button inside a grid.
  * A generic button has a generic position (x,y) inside a cartesian system.
@@ -14,9 +14,9 @@ public abstract class AbstractPosition {
     final private static int ADJ = 1;
 
     /**
-     * 
-     * @param x 
-     * @param y
+     * constructor of a new instance of {@link AbstractPosition}
+     * @param x the x position of a button in a grid
+     * @param y the y position of a button in a grid
      * @param size the size of the side of the grid
      */
     public AbstractPosition(int x,int y,int size){
@@ -58,16 +58,16 @@ public abstract class AbstractPosition {
 
     /**
      * 
-     * @param p the position we want to check wheter is adjacent and in orizzontal to this
-     * @return true if they are adjacent and in orizzontal, false otherwise
+     * @param p the position we want to check whether is adjacent and in horizontal to this
+     * @return true if they are adjacent and in horizontal, false otherwise
      */
-    public boolean inOrizzontal(AbstractPosition p){
+    public boolean inHorizontal(AbstractPosition p){
         return this.getX() == p.getX() && this.adjacent(p);
     }
 
     /**
      * 
-     * @param p the position we want to check wheter is adjacent and in vertical to this
+     * @param p the position we want to check whether is adjacent and in vertical to this
      * @return true if they are adjacent and in vertical, false otherwise
      */
     public boolean inVertical(AbstractPosition p){
@@ -75,11 +75,13 @@ public abstract class AbstractPosition {
     }
 
     /**
-     * the politics regarding wheter the position of a button inside a grid is safe or not, it dipends on the implementation 
+     * the politics regarding whether the position of a button inside a grid is safe or not, it dipends on the implementation
      * @param list1 the first list of positions of buttons to compare to this to know if it is safe
      * @param list2 the second list of positions of buttons to compare to this to know if it is safe
      * @return true if the position is safe, false otherwise
      */
-    public abstract boolean isSafe(List<AbstractPosition> list1,List<AbstractPosition> list2); // template method
+    public abstract boolean isSafe(List<AbstractPosition> list1,List<AbstractPosition> list2);
+
 }
+
 

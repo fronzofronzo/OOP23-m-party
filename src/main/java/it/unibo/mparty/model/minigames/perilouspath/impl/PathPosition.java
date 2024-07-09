@@ -1,9 +1,11 @@
 package it.unibo.mparty.model.minigames.perilouspath.impl;
 
 import java.util.List;
-
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 
+/**
+ * implementation of {@link AbstractPosition} that models a path in a grid of button
+ */
 public class PathPosition extends AbstractPosition{
 
     /*
@@ -23,16 +25,15 @@ public class PathPosition extends AbstractPosition{
             var firstBall = list2.get(0);
             return !(this.getX() == firstBall.getX() && this.getY() == firstBall.getY()) && this.isClose(list2.get(0));
         }
-        return list1.stream().anyMatch(p -> this.inOrizzontal(p) || this.inVertical(p));
+        return list1.stream().anyMatch(p -> this.inHorizontal(p) || this.inVertical(p));
     }
 
     /**
-     * @param p the AbstractPosition to check wheter is inVertical or inOrizzontal  to this
-     * @return true if th eAbstractPosition p is inOrizzontal or inVertical to this
+     * @param p the AbstractPosition to check whether is inVertical or inHorizontal  to this
+     * @return true if th eAbstractPosition p is inHorizontal or inVertical to this
      */
     private boolean isClose(AbstractPosition p){
-        return this.inOrizzontal(p) || this.inVertical(p);
+        return this.inHorizontal(p) || this.inVertical(p);
     }
 
-    
 }

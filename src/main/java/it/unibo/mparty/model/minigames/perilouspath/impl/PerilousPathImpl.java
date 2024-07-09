@@ -2,11 +2,13 @@ package it.unibo.mparty.model.minigames.perilouspath.impl;
 
 import java.util.*;
 import java.util.stream.IntStream;
-
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
 import it.unibo.mparty.utilities.Pair;
 
+/**
+ * implementation of {@link PerilousPath} that models the actual model of the mini game
+ */
 public class PerilousPathImpl implements PerilousPath{
 
     private final List<AbstractPosition> bombs;
@@ -18,7 +20,10 @@ public class PerilousPathImpl implements PerilousPath{
     private final static int COINS = 10;
     private List<String> players = new LinkedList<>();
 
-
+    /**
+     * constructor of a new instance of this
+     * @param size the size of the grid
+     */
     public PerilousPathImpl(int size){
         this.bombs = new LinkedList<>();
         this.balls = new LinkedList<>();
@@ -27,27 +32,42 @@ public class PerilousPathImpl implements PerilousPath{
         this.size = size;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBombs() {
         IntStream.iterate(0, i -> i + 1).limit(NUM_BOMBS).forEach(b -> this.bombs.add(setNewBombPosition()));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBalls() {
         this.balls.add(this.setNewBallPosition(0));
         this.balls.add(this.setNewBallPosition(this.getSize() - 1));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<AbstractPosition> getBombs() {
         return Collections.unmodifiableList(this.bombs);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<AbstractPosition> getBalls() {
         return Collections.unmodifiableList(this.balls);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Type hit(AbstractPosition p) {
         if(p.isSafe(this.path,this.getBalls())){
@@ -63,22 +83,34 @@ public class PerilousPathImpl implements PerilousPath{
         return Type.WRONG;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Pair<String, Integer> getResult() {
         return isOver() ? new Pair<>(this.players.get(0), COINS) : new Pair<>(this.players.get(0),0);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setUpPlayers(List<String> players) {
         this.players = players;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isOver() {
         var p = this.path.get(this.path.size() - 1);
-        return p.inOrizzontal(getBalls().get(1)) || p.inVertical(getBalls().get(1));
+        return p.inHorizontal(getBalls().get(1)) || p.inVertical(getBalls().get(1));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getSize() {
         return this.size;

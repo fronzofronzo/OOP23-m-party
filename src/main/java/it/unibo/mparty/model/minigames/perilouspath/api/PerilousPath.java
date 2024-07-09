@@ -4,6 +4,9 @@ import it.unibo.mparty.model.minigames.MinigameModel;
 
 import java.util.List;
 
+/**
+ * interface that model the model for the Perilous Path mini game
+ */
 public interface PerilousPath extends MinigameModel {
 
     /**
@@ -44,7 +47,7 @@ public interface PerilousPath extends MinigameModel {
     Type hit(AbstractPosition p);
 
     /**
-     * @return true wheter the game is over or not
+     * @return true whether the game is over or not
      */
     boolean isOver();
 
