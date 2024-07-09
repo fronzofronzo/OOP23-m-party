@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.connect4.impl.Connect4ViewImpl">
+<AnchorPane minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.connect4.impl.Connect4ViewImpl">
    <children>
-      <SplitPane dividerPositions="0.9045226130653267" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="1000.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="1000.0">
+      <SplitPane dividerPositions="0.9045226130653267" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="1000.0" orientation="VERTICAL">
         <items>
-          <AnchorPane minHeight="500.0" minWidth="1000.0" prefHeight="500.0" prefWidth="1000.0">
+          <AnchorPane minHeight="500.0" minWidth="1000.0">
                <children>
-                  <GridPane fx:id="gameGrid" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="1000.0" prefHeight="500.0" prefWidth="1000.0">
+                  <GridPane fx:id="gameGrid" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="1000.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -38,9 +38,9 @@
                   </GridPane>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="100.0" minWidth="1000.0" prefHeight="100.0" prefWidth="1000.0">
+          <AnchorPane minHeight="100.0" minWidth="1000.0">
                <children>
-                  <GridPane fx:id="buttonGrid" alignment="CENTER" minHeight="100.0" minWidth="1000.0" prefHeight="100.0" prefWidth="1000.0">
+                  <GridPane fx:id="buttonGrid" alignment="CENTER" minHeight="100.0" minWidth="1000.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
