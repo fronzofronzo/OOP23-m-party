@@ -24,6 +24,7 @@ public class MemorySweepControllerImpl implements MemorySweepController {
     }
     @Override
     public void setUp() {
+        this.setRandoms();
         this.view.setUp(this.model.getRandomList());
         this.pause.setOnFinished(event -> this.view.hideRandoms(this.model.getRandomList()));
         this.pause.play();
@@ -35,7 +36,7 @@ public class MemorySweepControllerImpl implements MemorySweepController {
         if(type.equals(MemorySweep.HitType.LOSS)){
             this.endGame();
         }
-        this.view.hit(this.model.hit(p),this.model.getTurn());
+        this.view.hit(type,this.model.getTurn());
     }
 
     @Override
