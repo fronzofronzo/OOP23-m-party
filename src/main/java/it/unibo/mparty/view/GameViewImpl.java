@@ -1,9 +1,6 @@
 package it.unibo.mparty.view;
 
 import it.unibo.mparty.controller.GameControllerImpl;
-import it.unibo.mparty.model.player.api.Player;
-import it.unibo.mparty.model.player.impl.PlayerImplementation;
-import it.unibo.mparty.model.shop.api.Shop;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
@@ -127,6 +124,9 @@ public class GameViewImpl extends Application implements GameView {
         this.boardView.updateCommands(items, message, turn);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showResults(final Map<String, Pair<Integer, Integer>> result) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + "endGame" + EXTENSION));
@@ -138,8 +138,11 @@ public class GameViewImpl extends Application implements GameView {
         this.setStageSize();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void updateBoard(Map<Position, SlotType> boardUpdates) {
+    public void updateBoard(final Map<Position, SlotType> boardUpdates) {
         this.boardView.updateBoard(boardUpdates);
     }
 
@@ -150,11 +153,11 @@ public class GameViewImpl extends Application implements GameView {
     }
 
 
-    private Pair<Scene, SceneView> loadScene(String name) throws IOException {
+    private Pair<Scene, SceneView> loadScene(final String name) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + name + EXTENSION));
         final Parent root = loader.load(getClass().getResourceAsStream(PATH + name + EXTENSION));
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        final SceneView sceneView = loader.<SceneView>getController();
+        final SceneView sceneView = loader.getController();
         sceneView.init(this, this.controller);
         return new Pair<>(scene, sceneView);
     }
@@ -165,5 +168,4 @@ public class GameViewImpl extends Application implements GameView {
         this.stage.setFullScreen(true);
         this.stage.show();
     }
-
 }
