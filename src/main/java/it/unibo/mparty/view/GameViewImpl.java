@@ -1,6 +1,8 @@
 package it.unibo.mparty.view;
 
 import it.unibo.mparty.controller.GameControllerImpl;
+import it.unibo.mparty.model.player.api.Player;
+import it.unibo.mparty.model.player.impl.PlayerImplementation;
 import it.unibo.mparty.model.shop.api.Shop;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;

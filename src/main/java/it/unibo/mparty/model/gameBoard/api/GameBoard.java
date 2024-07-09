@@ -13,11 +13,6 @@ import it.unibo.mparty.utilities.SlotType;
  */
 public interface GameBoard {
 
-    /**
-     * Get a Position in the Board Game then return its Slot Type
-     * @param position
-     * @return the {@link SlotType}
-     */
     SlotType getSlotType(Position position);
 
     /**
@@ -27,8 +22,8 @@ public interface GameBoard {
     Position getStrartingPosition();
 
     /**
-     * Get the next(s) position(s) of the input position
-     * @param position a position
+     * Get the next(s) position(s) that it is possible to move from the input position
+     * @param position a position of the board
      * @return a map that contains directions and positions
      */
     Map<Direction, Position> getNextPositions(Position position);
@@ -68,5 +63,8 @@ public interface GameBoard {
      */
     BoardType getBoardType();
 
+    /**
+     * 
+     */
     Map<Position, SlotType> getSlotsToUpdate();
 }
