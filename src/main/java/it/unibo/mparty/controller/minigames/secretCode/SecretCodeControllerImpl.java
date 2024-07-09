@@ -7,6 +7,7 @@ import it.unibo.mparty.model.minigames.secretCode.api.SecretCodeModel;
 import it.unibo.mparty.model.minigames.secretCode.impl.SecretCodeModelImpl;
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
+import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.minigames.secretCode.SecretCodeView;
 
@@ -39,19 +40,22 @@ public class SecretCodeControllerImpl implements SecretCodeController{
     @Override
     public void addColor(SecretCodeColors color) {
         if (this.model.getGame().addColor(color)) {
-            Position pos = new Position(this.model.getTurn(), this.model.getGame().getCurrentGuess().size() - 1);
+            Position pos = new Position(this.model.getGame().getCurrentGuess().size() - 1, this.model.getTurn());
             this.view.updateGuesses(this.model.getGame().getCurrentPlayer(), pos, color);
         }
     }
 
     @Override
     public void guess() {
+        String player = this.model.getGame().getCurrentPlayer();
+        int turn = this.model.getTurn();
         List<SecretCodeResults> res = this.model.getGame().getGuessResult();
         if (!res.isEmpty()) {
-            this.view.updateResults(this.model.getGame().getCurrentPlayer(), this.model.getTurn(), res);
+            this.view.updateResults(player, turn, res);
         }
         if (this.model.isOver()) {
             this.view.showSolution(this.model.getGame().getSoluction());
+            this.view.showResult(new Pair<String,Integer>(this.model.getGame().getWinner(), 10));
         }
     }
     

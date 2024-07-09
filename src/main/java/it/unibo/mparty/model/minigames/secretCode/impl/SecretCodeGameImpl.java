@@ -43,6 +43,7 @@ public class SecretCodeGameImpl implements SecretCodeGame{
     public List<SecretCodeResults> getGuessResult() {
         List<SecretCodeResults> res = computeResult(this.players.get(actualPlayerIndex).getGuess());
         if (!res.isEmpty()) {
+            this.players.get(actualPlayerIndex).startNewGuess();
             this.nextPlayer();
         }
         return res;

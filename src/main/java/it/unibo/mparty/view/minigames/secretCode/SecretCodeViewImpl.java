@@ -15,9 +15,11 @@ import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.AbstractSceneView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -80,9 +82,9 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
                                                                            SecretCodeColors.VERDE, Color.GREEN, 
                                                                            SecretCodeColors.VIOLA, Color.PURPLE);
 
-    private List<GridPane> gridPaneGuesses = List.of(gridPaneGuessP1, gridPaneGuessP2);
-    private List<GridPane> gridPaneResults = List.of(gridPaneResP1, gridPaneResP2);
-    private List<Circle> solutions = List.of(sol1, sol2, sol3, sol4);
+    private List<GridPane> gridPaneGuesses = new ArrayList<>();
+    private List<GridPane> gridPaneResults = new ArrayList<>();
+    private List<Circle> solutions = new ArrayList<>();
 
     private List<String> playersNames = new ArrayList<>();
 
@@ -125,6 +127,10 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
         for (int i = 0; i < players.size(); i++) {
             this.playersNames.add(players.get(i));
         }
+        this.gridPaneGuesses.add(gridPaneGuessP1);
+        this.gridPaneGuesses.add(gridPaneGuessP2);
+        this.gridPaneResults = List.of(gridPaneResP1, gridPaneResP2);
+        this.solutions = List.of(sol1, sol2, sol3, sol4);
     }
 
     private void setUpLabels() {
@@ -139,7 +145,7 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
         for (int i = 0; i < this.playersNames.size(); i++) {
             if (this.playersNames.get(i).equals(player)) {
                 Circle tmp = new Circle(RADIUS, COLORS_GUESS.get(guess));
-                this.gridPaneGuesses.get(i).add(tmp, pos.getX(), pos.getY());                
+                this.gridPaneGuesses.get(i).add(tmp, pos.getX(), pos.getY() - 1);                
             }
         }
     }
@@ -155,7 +161,10 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
             if (this.playersNames.get(i).equals(player)) {
                 for (int j = 0; j < results.size(); j++) {
                     Circle tmp = new Circle(RADIUS, COLORS_RES.get(results.get(j)));
-                    this.gridPaneResults.get(i).add(tmp, turn, j);
+                    StackPane stack = new StackPane();
+                    stack.setAlignment(Pos.CENTER);
+                    stack.getChildren().add(tmp);
+                    this.gridPaneResults.get(i).add(stack, j, turn -1 );
                 }               
             }
         }
