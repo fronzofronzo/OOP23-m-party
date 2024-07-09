@@ -10,12 +10,12 @@ import java.util.List;
 /**
  * implementation of {@link PerilousPathController}
  */
-public class PerilousPathControllerImpl implements  PerilousPathController{
+public class PerilousPathControllerImpl implements  PerilousPathController {
 
     private final PerilousPath model;
     private final PerilousPathView view;
-    private final static int SIZE = 8;
-    private final static int SECONDS = 3000;
+    private static final int SIZE = 8;
+    private static final int SECONDS = 3000;
     private final PauseTransition pause = new PauseTransition(new Duration(SECONDS));
 
     /**
