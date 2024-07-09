@@ -3,16 +3,13 @@ package it.unibo.mparty.model.minigameHandler;
 import it.unibo.mparty.model.minigames.MinigameModel;
 import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.player.api.Player;
+import it.unibo.mparty.utilities.RandomFromSet;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.Random;
+import java.util.*;
 
 /**
  * This class provides an implementation for {@link MinigameHandler} interface.
@@ -78,7 +75,7 @@ public class MinigameHandlerImplementation implements MinigameHandler {
     }
 
     private String generateMinigame(MinigameType type) {
-        final List<String> minigames = new ArrayList<>();
+        final Set<String> minigames = new HashSet<>();
         final Reflections reflections = new Reflections("it.unibo.mparty.model.minigames");
         Set<Class<? extends MinigameModel>> classes = reflections.getSubTypesOf(MinigameModel.class);
         for (Class<? extends MinigameModel> cl : classes) {
@@ -95,6 +92,6 @@ public class MinigameHandlerImplementation implements MinigameHandler {
             }
         }
         final Random random = new Random();
-        return minigames.get(random.nextInt(minigames.size()));
+        return RandomFromSet.get(minigames);
     }
 }

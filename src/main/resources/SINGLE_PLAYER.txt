@@ -1,3 +1,0 @@
-memoryCard
-perilousPath
-nanogram
