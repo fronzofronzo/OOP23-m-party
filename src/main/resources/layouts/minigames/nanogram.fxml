@@ -71,37 +71,44 @@
          </BorderPane.margin></GridPane>
    </center>
    <bottom>
-      <VBox alignment="CENTER" spacing="20.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="350.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" spacing="30.0">
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                <children>
-                  <RadioButton fx:id="crossButton" mnemonicParsing="false" text="X">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <Label fx:id="tutorialText" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Tutorial">
+                           <font>
+                              <Font name="System Italic" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
                      <HBox.margin>
-                        <Insets top="25.0" />
+                        <Insets bottom="5.0" left="5.0" top="5.0" />
                      </HBox.margin>
-                  </RadioButton>
-                  <RadioButton fx:id="filledButton" text="█">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets top="25.0" />
-                     </HBox.margin>
-                  </RadioButton>
+                  </VBox>
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="30.0">
+                     <children>
+                        <RadioButton fx:id="crossButton" mnemonicParsing="false" text="X">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="filledButton" text="█">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </RadioButton>
+                        <Button fx:id="tutorialButton" mnemonicParsing="false" onMouseClicked="#tutorialClicked" text="Tutorial">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </HBox>
-            <Button fx:id="tutorialButton" mnemonicParsing="false" onMouseClicked="#tutorialClicked" text="Tutorial">
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
          </children>
-      </VBox>
+      </HBox>
    </bottom>
 </BorderPane>
