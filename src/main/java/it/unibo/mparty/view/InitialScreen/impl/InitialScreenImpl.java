@@ -64,7 +64,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
         miniScreenController.setUp(this);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Add player");
+        stage.setTitle("Aggiungi Giocatore");
         stage.setScene(new Scene(root));
         stage.showAndWait();
         this.startGame.setDisable(!(this.builder.enoughPlayers() && !this.difficulty.isEmpty()));
