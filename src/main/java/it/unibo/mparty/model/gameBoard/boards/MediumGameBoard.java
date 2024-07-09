@@ -18,12 +18,12 @@ public class MediumGameBoard extends AbstractBoardImpl{
     private static final int INITIAL_X_MEDIUM_BOARD = 4;
     private static final int INITIAL_Y_MEDIUM_BOARD = 16;
 
-    private static final int PROB_PATH = 35;
-    private static final int PROB_SINGLEPLAYER = 10;
+    private static final int PROB_PATH = 15;
+    private static final int PROB_SINGLEPLAYER = 20;
     private static final int PROB_MALUS = 15;
-    private static final int PROB_MULTIPLAYER = 15;
-    private static final int PROB_SHOP = 5;
-    private static final int PROB_BONUS = 20;
+    private static final int PROB_MULTIPLAYER = 20;
+    private static final int PROB_SHOP = 15;
+    private static final int PROB_BONUS = 15;
 
     private static final String FILE_PATH = "MediumBoardGame.txt";
 

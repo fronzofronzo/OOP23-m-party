@@ -18,12 +18,12 @@ public class EasyGameBoard extends AbstractBoardImpl{
     private static final int INITIAL_X_EASY_BOARD = 7;
     private static final int INITIAL_Y_EASY_BOARD = 18;
 
-    private static final int PROB_PATH = 40;
+    private static final int PROB_PATH = 15;
     private static final int PROB_SINGLEPLAYER = 15;
-    private static final int PROB_MALUS = 5;
-    private static final int PROB_MULTIPLAYER = 10;
-    private static final int PROB_SHOP = 10;
-    private static final int PROB_BONUS = 20;
+    private static final int PROB_MALUS = 10;
+    private static final int PROB_MULTIPLAYER = 15;
+    private static final int PROB_SHOP = 20;
+    private static final int PROB_BONUS = 25;
 
     private static final String FILE_PATH = "EasyBoardGame.txt";
 

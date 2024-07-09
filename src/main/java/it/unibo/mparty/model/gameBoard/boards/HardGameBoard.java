@@ -18,12 +18,12 @@ public class HardGameBoard extends AbstractBoardImpl{
     private static final int INITIAL_X_HARD_BOARD = 28;
     private static final int INITIAL_Y_HARD_BOARD = 14;
 
-    private static final int PROB_PATH = 10;
-    private static final int PROB_SINGLEPLAYER = 15;
-    private static final int PROB_MALUS = 30;
+    private static final int PROB_PATH = 15;
+    private static final int PROB_SINGLEPLAYER = 20;
+    private static final int PROB_MALUS = 20;
     private static final int PROB_MULTIPLAYER = 20;
-    private static final int PROB_SHOP = 15;
-    private static final int PROB_BONUS = 10;
+    private static final int PROB_SHOP = 10;
+    private static final int PROB_BONUS = 15;
 
     private static final String FILE_PATH = "HardGameBoard.txt";
 
