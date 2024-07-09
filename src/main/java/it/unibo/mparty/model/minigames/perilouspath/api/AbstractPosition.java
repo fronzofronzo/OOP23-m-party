@@ -78,7 +78,7 @@ public abstract class AbstractPosition {
      * @param list2 the second list of positions of buttons to compare to this to know if it is safe
      * @return true if the position is safe, false otherwise
      */
-    public abstract boolean isSafe(final List<AbstractPosition> list1, final List<AbstractPosition> list2);
+    public abstract boolean isSafe(List<AbstractPosition> list1, List<AbstractPosition> list2);
 
 }
 

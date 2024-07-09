@@ -58,7 +58,7 @@ public interface PerilousPath extends MinigameModel {
      * @param p the position of the button that was hit by the player in the grid
      * @return the type of that button
      */
-    Type hit(final AbstractPosition p);
+    Type hit(AbstractPosition p);
 
     /**
      * @return true whether the game is over or not
