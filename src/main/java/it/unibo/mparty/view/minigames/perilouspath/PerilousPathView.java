@@ -4,7 +4,6 @@ import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
 import it.unibo.mparty.view.minigames.MinigameView;
 import javafx.event.ActionEvent;
-
 import java.util.List;
 
 /**
@@ -47,6 +46,5 @@ public interface PerilousPathView extends MinigameView {
      * @param bombs the list of bombs that needs to be shown
      */
     void showBombs(List<AbstractPosition> bombs);
-
 
 }
