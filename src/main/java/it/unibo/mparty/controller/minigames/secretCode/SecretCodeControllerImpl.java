@@ -50,6 +50,9 @@ public class SecretCodeControllerImpl implements SecretCodeController{
         if (!res.isEmpty()) {
             this.view.updateResults(this.model.getGame().getCurrentPlayer(), this.model.getTurn(), res);
         }
+        if (this.model.isOver()) {
+            this.view.showSolution(this.model.getGame().getSoluction());
+        }
     }
     
 }

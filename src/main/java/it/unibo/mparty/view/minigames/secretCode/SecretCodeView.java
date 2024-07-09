@@ -13,4 +13,5 @@ public interface SecretCodeView extends MinigameView{
 
     void updateResults(String player, int turn, List<SecretCodeResults> results);
     
+    void showSolution(List<SecretCodeColors> solution);
 }

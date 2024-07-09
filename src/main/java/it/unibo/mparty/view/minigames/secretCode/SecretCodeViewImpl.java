@@ -61,6 +61,14 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
     private Label labelResult;
     @FXML
     private Button buttonBackToBoard;
+    @FXML
+    private Circle sol1;
+    @FXML
+    private Circle sol2;
+    @FXML
+    private Circle sol3;
+    @FXML
+    private Circle sol4;
 
     private final static Map<SecretCodeResults,Color> COLORS_RES = Map.of(SecretCodeResults.CORRECT_COLOR_AND_POSITION, Color.GREEN,
                                                                           SecretCodeResults.CORRECT_COLOR, Color.RED,
@@ -74,6 +82,7 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
 
     private List<GridPane> gridPaneGuesses = List.of(gridPaneGuessP1, gridPaneGuessP2);
     private List<GridPane> gridPaneResults = List.of(gridPaneResP1, gridPaneResP2);
+    private List<Circle> solutions = List.of(sol1, sol2, sol3, sol4);
 
     private List<String> playersNames = new ArrayList<>();
 
@@ -149,6 +158,13 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
                     this.gridPaneResults.get(i).add(tmp, turn, j);
                 }               
             }
+        }
+    }
+
+    @Override
+    public void showSolution(List<SecretCodeColors> solution) {
+        for (int i = 0; i < solution.size(); i++) {
+            this.solutions.get(i).setFill(COLORS_GUESS.get(solution.get(i)));
         }
     }
 
