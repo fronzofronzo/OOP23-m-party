@@ -19,8 +19,9 @@ public class SecretCodeControllerImpl implements SecretCodeController{
 
     @Override
     public void endGame() {
-        this.view.getMainController().saveMinigameResult(this.model.getResult());
-        
+        if (this.model.isOver()) {
+            this.view.getMainController().saveMinigameResult(this.model.getResult());
+        }
     }
 
     @Override

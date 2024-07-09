@@ -59,6 +59,8 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
     private Button buttonOrange;
     @FXML
     private Label labelResult;
+    @FXML
+    private Button buttonBackToBoard;
 
     private final static Map<SecretCodeResults,Color> COLORS_RES = Map.of(SecretCodeResults.CORRECT_COLOR_AND_POSITION, Color.GREEN,
                                                                           SecretCodeResults.CORRECT_COLOR, Color.RED,
@@ -131,6 +133,11 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
                 this.gridPaneGuesses.get(i).add(tmp, pos.getX(), pos.getY());                
             }
         }
+    }
+
+    @FXML
+    private void backToBoard() {
+        this.controller.endGame();
     }
 
     @Override
