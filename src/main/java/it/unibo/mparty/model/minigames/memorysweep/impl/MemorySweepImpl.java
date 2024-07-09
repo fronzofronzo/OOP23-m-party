@@ -46,7 +46,7 @@ public class MemorySweepImpl implements MemorySweep{
     
     @Override
     public HitType hit(Position p) {
-        return this.getTurn() ? this.playerTurn(p1.getSecond(), p) : this.playerTurn(p2.getSecond(), p);
+        return this.getTurn() ? this.playerTurn(this.p1, p) : this.playerTurn(this.p2, p);
     }
 
     @Override
@@ -82,17 +82,17 @@ public class MemorySweepImpl implements MemorySweep{
      * @return whether his guess was right(in this case returns
      * whether the guess is over or not) or wrong
      */
-    private HitType playerTurn(Set<Position> player,Position p){
+    private HitType playerTurn(Pair<String,Set<Position>> player,Position p){
         if(this.randomList.contains(p)){
-            player.add(p);
-            if(player.size() == this.randomList.size()){
+            player.getSecond().add(p);
+            if(player.getSecond().size() == this.randomList.size()){
                 this.changeTurn();
-                player.clear();
+                player.getSecond().clear();
                 return HitType.TURN_END;//player 1 ha passato il turno tocca al player 2
             }
             return HitType.RIGHT_CHOICE;
         }
-        this.winner = player.equals(this.p1.getSecond()) ? p2.getFirst() : p1.getFirst();
+        this.winner = player.equals(this.p1) ? p2.getFirst() : p1.getFirst();
         return HitType.LOSS;//player 1 ha perso,ha vinto player 2
     }
 
