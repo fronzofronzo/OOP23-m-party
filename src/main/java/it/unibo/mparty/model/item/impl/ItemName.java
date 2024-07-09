@@ -1,7 +1,7 @@
 package it.unibo.mparty.model.item.impl;
 
 /**
- * enum of Item.
+ * Enum of Item.
  */
 public enum ItemName {
     /**

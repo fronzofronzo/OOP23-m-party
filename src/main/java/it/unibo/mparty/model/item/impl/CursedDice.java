@@ -6,7 +6,7 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Position;
 
 /**
- * class that implements the CursedDice item.
+ * Class that implements the CursedDice item.
  */
 public class CursedDice extends AbstractItem {
 

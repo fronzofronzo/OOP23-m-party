@@ -14,14 +14,15 @@ import java.util.stream.IntStream;
  */
 public class TileFactoryImpl implements TileFactory {
 
+    private static final int MAX_TILE_VALUE = 6;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public List<Tile> createDoubleSixSet() {
-        List<Tile> tiles = IntStream.rangeClosed(0, 6).boxed()
-                .flatMap(i -> IntStream.rangeClosed(i, 6).mapToObj(j -> new TileImpl(i, j)))
+        List<Tile> tiles = IntStream.rangeClosed(0, MAX_TILE_VALUE).boxed()
+                .flatMap(i -> IntStream.rangeClosed(i, MAX_TILE_VALUE).mapToObj(j -> new TileImpl(i, j)))
                 .collect(Collectors.toList());
         Collections.shuffle(tiles);
         return new LinkedList<>(tiles);

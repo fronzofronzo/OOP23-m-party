@@ -18,6 +18,7 @@ import it.unibo.mparty.model.minigames.connect4.impl.Connect4ModelImpl;
 public class Connect4Test {
     private Connect4Model testModel;
     private static final int ROWS = 6;
+    private static final int COLUMN_5 = 5;
 
     /**
      * Initialize the game before each test.
@@ -33,7 +34,7 @@ public class Connect4Test {
      */
     @Test
     public void testAddDisc() {
-        for (int i=0; i<ROWS; i++) {
+        for (int i = 0; i < ROWS; i++) {
             assertTrue(testModel.addDisc(2));
         }
         assertFalse(testModel.addDisc(2));
@@ -48,7 +49,7 @@ public class Connect4Test {
         testModel.addDisc(3);
         testModel.addDisc(4);
         testModel.addDisc(3);
-        testModel.addDisc(5);
+        testModel.addDisc(COLUMN_5);
         testModel.addDisc(3);
         testModel.addDisc(2);
         assertTrue(testModel.isOver());
@@ -80,12 +81,12 @@ public class Connect4Test {
         testModel.addDisc(3);
         testModel.addDisc(4);
         testModel.addDisc(4);
-        testModel.addDisc(5);
+        testModel.addDisc(COLUMN_5);
         testModel.addDisc(4);
-        testModel.addDisc(5);
-        testModel.addDisc(5);
+        testModel.addDisc(COLUMN_5);
+        testModel.addDisc(COLUMN_5);
         testModel.addDisc(0);
-        testModel.addDisc(5);
+        testModel.addDisc(COLUMN_5);
         assertTrue(testModel.isOver());
     }
 
@@ -94,7 +95,7 @@ public class Connect4Test {
      */
     @Test
     public void testDiagonalRightWin() {
-        testModel.addDisc(5);
+        testModel.addDisc(COLUMN_5);
         testModel.addDisc(4);
         testModel.addDisc(4);
         testModel.addDisc(3);

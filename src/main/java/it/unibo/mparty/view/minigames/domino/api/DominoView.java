@@ -53,4 +53,11 @@ public interface DominoView extends MinigameView, EObserver<List<Pair<Integer, I
      * @param message the message to display.
      */
     void setMessage(DominoMessage message);
+
+    /**
+     * Updates the UI to display the remaining number of tiles in the deck.
+     *
+     * @param size the number of remaining tiles.
+     */
+    void updateRemainingTileSize(int size);
 }

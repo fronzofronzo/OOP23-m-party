@@ -2,15 +2,15 @@ package it.unibo.mparty.utilities;
 
 public record Position(int x, int y) {
 
-    public int getX(){
+    public int getX() {
         return this.x;
     }
 
-    public int getY(){
+    public int getY() {
         return this.y;
     }
 
-    public static Position getStandardPosition(){
-        return new Position(0,0);
+    public static Position getStandardPosition() {
+        return new Position(0, 0);
     }
 }

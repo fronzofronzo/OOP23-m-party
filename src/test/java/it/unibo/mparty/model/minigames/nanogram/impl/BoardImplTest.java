@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+/**
+ * Test class for {@link BoardImpl}.
+ */
 class BoardImplTest {
 
     private static final int BOARD_SIZE = 3;
@@ -17,11 +20,18 @@ class BoardImplTest {
     private static final int THIRD = 3;
     private Board board;
 
+    /**
+     * Sets up the test environment before each test.
+     */
     @BeforeEach
     void setUp() {
         this.board = new BoardImpl(BOARD_SIZE);
     }
 
+    /**
+     * Tests the {@code setCellState} method.
+     * Ensures that the state of specific cells can be set and retrieved correctly.
+     */
     @Test
     void setCellState() {
         Position position1 = new Position(ZERO, ZERO);

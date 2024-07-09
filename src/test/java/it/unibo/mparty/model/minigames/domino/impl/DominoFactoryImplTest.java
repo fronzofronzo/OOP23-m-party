@@ -13,16 +13,27 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Test class for {@link TileFactoryImpl}.
+ */
 class DominoFactoryImplTest {
 
     private static final int DOMINO_SET_SIZE = 28;
+    private static final int MAX_TILE_VALUE = 6;
     private TileFactoryImpl dominoFactory;
 
+    /**
+     * Sets up the test environment before each test.
+     */
     @BeforeEach
     void setUp() {
         this.dominoFactory = new TileFactoryImpl();
     }
 
+    /**
+     * Tests the creation of the full domino set.
+     * Ensures that the set contains the correct number of tiles and all expected tiles.
+     */
     @Test
     void testCreateFullSet() {
         final List<Tile> fullSet = this.dominoFactory.createDoubleSixSet();
@@ -34,8 +45,8 @@ class DominoFactoryImplTest {
 
     private Set<Tile> generateFullSet() {
         final Set<Tile> fullSet = new HashSet<>();
-        for (int i = 0; i <= 6; i++) {
-            for (int j = i; j <= 6; j++) {
+        for (int i = 0; i <= MAX_TILE_VALUE; i++) {
+            for (int j = i; j <= MAX_TILE_VALUE; j++) {
                 fullSet.add(new TileImpl(i, j));
             }
         }

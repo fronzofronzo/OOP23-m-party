@@ -194,7 +194,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
      * {@inheritDoc}
      */
     @Override
-    public void showResult(Pair<String, Integer> result) {
+    public void showResult(final Pair<String, Integer> result) {
         this.messageLabel.setText(NanogramMessage.END.getFormattedMessage(result.getFirst(), result.getSecond()));
 
         Button returnButton = new Button("Torna al gioco principale");

@@ -25,15 +25,21 @@ public class Connect4ViewImplTest extends ApplicationTest {
     private Parent testRoot;
     private static final int NUM_BUTTON = 8;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(final Stage stage) throws Exception {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/minigames/connect4.fxml"));
         this.testRoot = loader.load();
-        final Scene scene = new Scene (testRoot);
+        final Scene scene = new Scene(testRoot);
         stage.setScene(scene);
         stage.show();
     }
 
+    /**
+     * Test the button in the grid pane to add a circle.
+     */
     @Test
     public void testColumnButton() {
         List<Button> buttonList = new ArrayList<>();
@@ -48,6 +54,9 @@ public class Connect4ViewImplTest extends ApplicationTest {
         }
     }
 
+    /**
+     * Test the presence of the exit button.
+     */
     @Test
     public void testExitButton() {
         final Button button = from(this.testRoot).lookup("#exitButton").query();

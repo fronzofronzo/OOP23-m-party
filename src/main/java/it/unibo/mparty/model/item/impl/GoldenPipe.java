@@ -6,7 +6,7 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Position;
 
 /**
- * class that implements the Golden Pipe item.
+ * Class that implements the Golden Pipe item.
  */
 public class GoldenPipe extends AbstractItem {
     private static final int GOLDENPIPE_COST = 12;

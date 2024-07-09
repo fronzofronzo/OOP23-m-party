@@ -2,7 +2,6 @@ package it.unibo.mparty.model.minigames.domino.board.api;
 
 import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
 import it.unibo.mparty.utilities.Pair;
-import it.unibo.mparty.utilities.api.EObserver;
 import it.unibo.mparty.utilities.api.ESource;
 
 import java.util.LinkedList;
@@ -34,18 +33,4 @@ public interface BoardTile extends ESource<List<Pair<Integer, Integer>>> {
      * @param tile the tile to add
      */
     void addTileToBoard(Tile tile);
-
-    /**
-     * Adds an observer to the list of observers.
-     *
-     * @param obs the observer to add
-     */
-    void addObserver(EObserver<? super List<Pair<Integer, Integer>>> obs);
-
-    /**
-     * Notifies all observers of a change.
-     *
-     * @param tile the data to pass to the observers
-     */
-    void notifyObservers(List<Pair<Integer, Integer>> tile);
 }

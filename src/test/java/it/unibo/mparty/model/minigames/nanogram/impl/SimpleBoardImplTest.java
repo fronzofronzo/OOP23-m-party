@@ -12,6 +12,9 @@ import java.util.stream.IntStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+/**
+ * Test class for {@link SimpleBoardImpl}.
+ */
 class SimpleBoardImplTest {
 
     private static final int SIZE = 10;
@@ -19,11 +22,17 @@ class SimpleBoardImplTest {
     private static final int NUM_TEST = 10;
     private SimpleBoard simpleBoard;
 
+    /**
+     * Sets up the test environment before each test.
+     */
     @BeforeEach
     void setUp() {
         this.simpleBoard = new SimpleBoardImpl(SIZE, FILL_PERCENTAGE);
     }
 
+    /**
+     * Tests the creation and correct filling of the simple board.
+     */
     @Test
     void testSimpleBoard() {
         Random random = new Random();
@@ -40,6 +49,9 @@ class SimpleBoardImplTest {
         });
     }
 
+    /**
+     * Tests the generation of hints for the rows and columns of the board.
+     */
     @Test
     void testGenerateHints() {
         List<List<Integer>> rowHints = simpleBoard.generateHints(true);

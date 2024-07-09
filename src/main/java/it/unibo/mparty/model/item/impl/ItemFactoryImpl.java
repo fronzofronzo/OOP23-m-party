@@ -4,7 +4,7 @@ import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.api.ItemFactory;
 
 /**
- * Implementation of the factory method ItemFactory.
+ * Implementation of the factory method {@link ItemFactory}.
  */
 public class ItemFactoryImpl implements ItemFactory {
 

@@ -6,7 +6,7 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Position;
 
 /**
- * class that implements the Boobell item.
+ * Class that implements the Boobell item.
  */
 public class BooBell extends AbstractItem {
 

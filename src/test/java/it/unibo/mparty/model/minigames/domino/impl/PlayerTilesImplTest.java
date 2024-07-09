@@ -11,29 +11,41 @@ import org.junit.jupiter.api.Test;
 
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
+/**
+ * Test class for {@link PlayerTilesImpl}.
+ */
 class PlayerTilesImplTest {
 
-    private final static int DISTRIBUTION_TILES = 7;
-    private final static int sideA = 1;
-    private final static int sideB = 0;
+    private static final int DISTRIBUTION_TILES = 7;
+    private static final int SIDEA = 1;
+    private static final int SIDEB = 0;
     private PlayerTiles playerTiles;
     private Tile tile;
     private TileFactory tileFactory;
     private String player1;
     private String player2;
 
+    /**
+     * Sets up the test environment before each test.
+     */
     @BeforeEach
     void setUp() {
         this.playerTiles = new PlayerTilesImpl();
-        this.tile = new TileImpl(sideA, sideB);
+        this.tile = new TileImpl(SIDEA, SIDEB);
         this.tileFactory = new TileFactoryImpl();
 
         player1 = "player1";
         player2 = "player2";
     }
 
+    /**
+     * Tests the {@code initializePlayerTiles} method.
+     * Ensures that player tiles are initialized and distributed correctly.
+     */
     @Test
     void testInitializePlayerTiles() {
         var fullSet = this.tileFactory.createDoubleSixSet();
@@ -52,6 +64,10 @@ class PlayerTilesImplTest {
         assertEquals(DISTRIBUTION_TILES, this.playerTiles.getPlayerTiles(this.player2).size());
     }
 
+    /**
+     * Tests the {@code removeTilesFromPlayer} method.
+     * Ensures that tiles are correctly removed from a player's tile set.
+     */
     @Test
     void testRemoveTilesFromPlayer() {
         this.testInitializePlayerTiles();

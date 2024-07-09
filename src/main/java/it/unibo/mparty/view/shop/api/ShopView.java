@@ -1,14 +1,12 @@
 package it.unibo.mparty.view.shop.api;
 
-
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.view.SceneView;
 
 /**
- * This interface models the view for the shop.
+ * This interface models the view for the {@link Shop}.
  */
 public interface ShopView extends SceneView {
-    
     /**
      * Add the item with his cost and description to the view.
      * @param itemName the {@link ItemName} of the item to be added
