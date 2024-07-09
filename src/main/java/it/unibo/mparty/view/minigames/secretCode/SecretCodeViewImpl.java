@@ -132,10 +132,10 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
     }
 
     private void setUpLabels() {
-        this.labelGuessP1.setText(TEXT_LABEL_GUESS + this.playersNames.getFirst());
-        this.labelGuessP2.setText(TEXT_LABEL_GUESS + this.playersNames.getLast());
-        this.labelResultP1.setText(TEXT_LABEL_RESULTS + this.playersNames.getFirst());
-        this.labelResultP2.setText(TEXT_LABEL_RESULTS + this.playersNames.getLast());
+        this.labelGuessP1.setText(TEXT_LABEL_GUESS + this.playersNames.get(0));
+        this.labelGuessP2.setText(TEXT_LABEL_GUESS + this.playersNames.get(1));
+        this.labelResultP1.setText(TEXT_LABEL_RESULTS + this.playersNames.get(0));
+        this.labelResultP2.setText(TEXT_LABEL_RESULTS + this.playersNames.get(1));
     }
 
     @Override
