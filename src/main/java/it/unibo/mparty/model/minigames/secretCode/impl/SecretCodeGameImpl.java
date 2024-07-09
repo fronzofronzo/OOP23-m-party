@@ -107,7 +107,7 @@ public class SecretCodeGameImpl implements SecretCodeGame{
      */
     @Override
     public boolean isOver() {
-        return this.turn == TURNS || this.winner.isPresent();
+        return this.turn > TURNS || this.winner.isPresent();
     }
 
     private void nextPlayer() {
