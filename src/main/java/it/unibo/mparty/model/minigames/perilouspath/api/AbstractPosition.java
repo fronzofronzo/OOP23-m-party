@@ -41,7 +41,7 @@ public abstract class AbstractPosition {
     }
 
     /**
-     * @param p the position we want to check wheter is adjacent to this
+     * @param p the position we want to check whether is adjacent to this
      * @return true if they are adjacent, false otherwise
      */
     public boolean adjacent(final AbstractPosition p) {
