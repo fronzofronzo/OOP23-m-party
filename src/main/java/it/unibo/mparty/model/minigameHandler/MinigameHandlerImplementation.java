@@ -3,20 +3,18 @@ package it.unibo.mparty.model.minigameHandler;
 import it.unibo.mparty.model.minigames.MinigameModel;
 import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.player.api.Player;
+import it.unibo.mparty.utilities.RandomFromSet;
 import org.reflections.Reflections;
+
 import java.lang.reflect.InvocationTargetException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.Random;
+import java.util.*;
 
 /**
  * This class provides an implementation for {@link MinigameHandler} interface.
  */
-public class MinigameHandlerImplementation implements MinigameHandler{
+public class MinigameHandlerImplementation implements MinigameHandler {
 
     private String actualMinigame = null;
     private List<Player> players;
@@ -35,7 +33,7 @@ public class MinigameHandlerImplementation implements MinigameHandler{
     @Override
     public void startMinigame(final List<Player> players,
                               final MinigameType type) throws Exception {
-        this.actualMinigame = generateRandomMinigame(type);
+        this.actualMinigame = generateMinigame(type);
         this.type = type;
         this.players = players;
     }
@@ -76,35 +74,24 @@ public class MinigameHandlerImplementation implements MinigameHandler{
         this.type = null;
     }
 
-    private String generateRandomMinigame(final MinigameType type) throws Exception {
-        final BufferedReader reader = new BufferedReader(
-                new InputStreamReader(ClassLoader.getSystemResourceAsStream(type + ".txt")));
-        String name = null;
-        final List<String> minigames = new ArrayList<>();
-        while ((name = reader.readLine()) != null) {
-            minigames.add(name);
-        }
-        final Random random = new Random();
-        return minigames.get(random.nextInt(minigames.size()));
-    }
-
-    private String generateMinigame(MinigameType type){
-        final List<String> minigames = new ArrayList<>();
+    private String generateMinigame(MinigameType type) {
+        final Set<String> minigames = new HashSet<>();
         final Reflections reflections = new Reflections("it.unibo.mparty.model.minigames");
         Set<Class<? extends MinigameModel>> classes = reflections.getSubTypesOf(MinigameModel.class);
-        for(Class<? extends MinigameModel> cl : classes){
+        for (Class<? extends MinigameModel> cl : classes) {
             try {
-                if(!cl.isInterface()){
+                if (!cl.isInterface()) {
                     final MinigameModel minigame = cl.getDeclaredConstructor().newInstance();
-                    if(minigame.getType() == type){
+                    if (minigame.getType().equals(type)) {
                         minigames.add(minigame.getName());
                     }
                 }
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                     NoSuchMethodException e) {
                 throw new RuntimeException(e);
             }
         }
         final Random random = new Random();
-        return minigames.get(random.nextInt(minigames.size()));
+        return RandomFromSet.get(minigames);
     }
 }

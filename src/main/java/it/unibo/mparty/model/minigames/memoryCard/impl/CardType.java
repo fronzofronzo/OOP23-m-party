@@ -32,7 +32,7 @@ public enum CardType {
 
     private final String name;
 
-    private CardType(final String name) {
+    CardType(final String name) {
         this.name = name;
     }
 

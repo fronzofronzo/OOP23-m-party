@@ -27,6 +27,7 @@ public class PerilousPathImpl implements PerilousPath {
 
     /**
      * constructor of a new instance of this.
+     *
      * @param size the size of the grid
      */
     public PerilousPathImpl(final int size) {
@@ -37,7 +38,10 @@ public class PerilousPathImpl implements PerilousPath {
         this.size = size;
     }
 
-    public PerilousPathImpl(){
+    /**
+     * constructor of a new instance of this.
+     */
+    public PerilousPathImpl() {
         this.bombs = new LinkedList<>();
         this.balls = new LinkedList<>();
         this.path = new LinkedList<>();
@@ -45,34 +49,49 @@ public class PerilousPathImpl implements PerilousPath {
         this.size = NUM_BOMBS;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBombs() {
         IntStream.iterate(0, i -> i + 1).limit(NUM_BOMBS).forEach(b -> this.bombs.add(setNewBombPosition()));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBalls() {
         this.balls.add(this.setNewBallPosition(0));
         this.balls.add(this.setNewBallPosition(this.getSize() - 1));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<AbstractPosition> getBombs() {
         return Collections.unmodifiableList(this.bombs);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<AbstractPosition> getBalls() {
         return Collections.unmodifiableList(this.balls);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Type hit(AbstractPosition p) {
-        if(p.isSafe(this.path,this.getBalls())){
-            if(this.bombs.stream().anyMatch(b -> this.samePosition(b,p))){
+    public Type hit(final AbstractPosition p) {
+        if (p.isSafe(this.path, this.getBalls())) {
+            if (this.bombs.stream().anyMatch(b -> this.samePosition(b, p))) {
                 return Type.BOMB;
             }
-            if(this.balls.stream().anyMatch(b -> this.samePosition(b,p)) && !p.equals(this.getBalls().get(0))){
+            if (this.balls.stream().anyMatch(b -> this.samePosition(b, p)) && !p.equals(this.getBalls().get(0))) {
                 return Type.BALL;
             }
             this.path.add(p);
@@ -107,7 +126,6 @@ public class PerilousPathImpl implements PerilousPath {
     }
 
 
-
     /**
      * {@inheritDoc}
      */
@@ -134,6 +152,7 @@ public class PerilousPathImpl implements PerilousPath {
 
     /**
      * a private method for getting always a new BombPosition in a pseudo-random manner.
+     *
      * @return a new BombPosition which is safe
      */
     private AbstractPosition setNewBombPosition() {
@@ -146,6 +165,7 @@ public class PerilousPathImpl implements PerilousPath {
 
     /**
      * a private method for getting always a new BallPosition in a pseudo-random manner.
+     *
      * @param y the already set y position in a generic(x,y) position, meaning that only the x position will be random
      * @return a new BallPosition which is safe
      */
@@ -159,6 +179,7 @@ public class PerilousPathImpl implements PerilousPath {
 
     /**
      * a private method to know if 2 positions are in the same place.
+     *
      * @param p1 the first position
      * @param p2 the second position
      * @return true if they are in the same position false otherwise

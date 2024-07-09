@@ -1,0 +1,22 @@
+Mini-gioco DOMINO
+
+OBIETTIVO: Finire tutte le proprie
+tessere o avere meno punti alla fine
+della partita.
+
+REGOLE: Ogni giocatore deve
+giocare una tessera che combacia
+con uno dei numeri all'estremita'
+delle tessere gia' sul tavolo.
+Se un giocatore non ha una tessera
+valida da giocare, deve pescare
+una tessera dal mazzo. Se il
+mazzo e' vuoto, il giocatore
+passa il turno.
+
+FINE DELLA PARTITA:
+La partita finisce quando un
+giocatore finisce le sue tessere o
+nessuno puo' piu' giocare. Se
+nessuno puo' giocare, vince chi ha
+meno punti nelle tessere rimanenti.

@@ -10,13 +10,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This class provides a graphic implementation for {@link MemoryCardView}.
  * This class uses the graphic library of JavaFX to implement the GUI.
  */
-public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardView{
+public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardView {
+
+    private static final int FONT_SIZE = 15;
+    private static final int PREF_BUTTON_SIZE = 100;
+    private static final String TUTORIAL_PATH = "/text/memoryCardTutorial.txt";
 
     private final MemoryCardController controller = new MemoryCardControllerImpl(this);
 
@@ -53,10 +62,10 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     public void addCard(final String text) {
         final Button bt = new Button(text);
         bt.setOnAction(this::tryCard);
-        bt.setPrefSize(100,100);
+        bt.setPrefSize(PREF_BUTTON_SIZE, PREF_BUTTON_SIZE);
         bt.setDisable(true);
         bt.setStyle("-fx-opacity: 1.0; ");
-        bt.setFont(new Font("Segoe UI Light", 15));
+        bt.setFont(new Font("Segoe UI Light", FONT_SIZE));
         this.cardsPane.getChildren().add(bt);
     }
 
@@ -64,7 +73,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
      * {@inheritDoc}
      */
     @Override
-    public void setMistakesNumber(int n) {
+    public void setMistakesNumber(final int n) {
         this.textLabel.setText("Errori: " + String.valueOf(n));
     }
 
@@ -72,8 +81,8 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
      * {@inheritDoc}
      */
     @Override
-    public void showResult(Pair<String, Integer> result) {
-        this.textLabel.setText(result.getFirst() + " ha guadagnato " +  String.valueOf(result.getSecond()) + " monete.");
+    public void showResult(final Pair<String, Integer> result) {
+        this.textLabel.setText(result.getFirst() + " ha guadagnato " + String.valueOf(result.getSecond()) + " monete.");
         this.controlButton.setOnAction(e -> {
             this.controller.endGame();
         });
@@ -87,18 +96,19 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     @Override
     public void startMinigame(final List<String> players) {
         this.controller.initGame(players);
+        this.showTutorial(textLabel);
     }
 
     @FXML
     private void startGame(final ActionEvent event) {
-        final Button bt = (Button)event.getSource();
+        final Button bt = (Button) event.getSource();
         bt.setText("Pronto !");
         bt.setOnAction(this::hideCards);
         this.textLabel.setText("Quando si e' pronti, spingere il pulsante 'Pronto'");
     }
 
     private void hideCards(final ActionEvent event) {
-        this.cardsPane.getChildren().stream().map(e -> (Button)e).forEach(b -> {
+        this.cardsPane.getChildren().stream().map(e -> (Button) e).forEach(b -> {
             b.setText("");
             b.setDisable(false);
         });
@@ -108,6 +118,26 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
 
     private void tryCard(final ActionEvent e) {
         this.controller.selectCard(this.cardsPane.getChildren().indexOf((Button) e.getSource()));
+    }
+
+    private void showTutorial(final Label label){
+        final BufferedReader input = new BufferedReader(new InputStreamReader(Objects.requireNonNull(getClass()
+                .getResourceAsStream(TUTORIAL_PATH))));
+        try {
+            String line;
+            while ((line = input.readLine()) != null){
+                final String labelText = label.getText();
+                label.setText(labelText+line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                input.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

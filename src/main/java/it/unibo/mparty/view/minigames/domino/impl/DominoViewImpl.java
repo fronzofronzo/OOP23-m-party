@@ -23,8 +23,11 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -68,6 +71,12 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     @FXML
     private VBox tilesContainer;
 
+    @FXML
+    private Button tutorialButton;
+
+    @FXML
+    private Label tutorialText;
+
     private DominoController controller;
     private Integer selectedSideA;
     private Integer selectedSideB;
@@ -105,6 +114,32 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
             this.selectedSideB = null;
         } else if (this.selectedSideA == null && this.selectedSideB == null) {
             this.messageLabel.setText(DominoMessage.SELECT_TILE.toString());
+        }
+    }
+
+    @FXML
+    private void tutorialClicked() {
+        if (this.tutorialText.isVisible()) {
+            this.tutorialButton.setText("Tutorial");
+            this.tutorialText.setVisible(false);
+        } else {
+            this.tutorialButton.setText("Chiudi\nTutorial");
+            this.setTutorialTextFromFile();
+        }
+    }
+
+    private void setTutorialTextFromFile() {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+                Objects.requireNonNull(getClass().getResourceAsStream("/text/dominoTutorial.txt"))))) {
+            StringBuilder content = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+            this.tutorialText.setText(String.valueOf(content));
+            this.tutorialText.setVisible(true);
+        } catch (IOException e) {
+            this.messageLabel.setText("Errore nella lettura del file: " + e.getMessage());
         }
     }
 

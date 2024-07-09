@@ -7,7 +7,7 @@ import it.unibo.mparty.controller.GameController;
  * It implements methods that can be also used by other scenes and sets
  * references to view and controller and provides methods to access them.
  */
-public abstract class AbstractSceneView implements SceneView{
+public abstract class AbstractSceneView implements SceneView {
 
     private GameView mainView;
     private GameController mainController;
