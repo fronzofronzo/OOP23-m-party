@@ -7,6 +7,7 @@ import it.unibo.mparty.utilities.BoardType;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.InitialScreen.api.InitialScreen;
 import it.unibo.mparty.view.InitialScreen.api.MiniScreen;
+import it.unibo.mparty.view.InitialScreen.api.TutorialScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,6 +54,9 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
 
     @FXML
     private Label playersLabel;
+
+    @FXML
+    private Button tutorialButton;
 
     @Override
     public void handleExitButton(ActionEvent event) {
@@ -116,6 +120,18 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     @Override
     public void setLabelText(String text){
         this.exceptionLabel.setText(text);
+    }
+
+    @Override
+    public void handleTutorialButton(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/TutorialScreen.fxml"));
+        Parent root = loader.load();
+        TutorialScreen tutorialScreenController = loader.getController();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("TUTORIAL");
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
     }
 
 }
