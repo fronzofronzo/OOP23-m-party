@@ -32,11 +32,11 @@ import java.util.Objects;
 public class PerilousPathViewImpl extends AbstractSceneView implements PerilousPathView {
 
     /**
-     * height of the image
+     * height of the image.
      */
     private static final int FIT_HEIGHT = 50;
     /**
-     * width of the image
+     * width of the image.
      */
     private static final int FIT_WIDTH = 50;
     @FXML
