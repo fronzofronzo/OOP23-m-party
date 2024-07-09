@@ -141,9 +141,9 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
     @Override
     public void updateGuesses(String player, Position pos, SecretCodeColors guess) {
         for (int i = 0; i < this.playersNames.size(); i++) {
-            if (this.playersNames.get(i).equals(player)) {
-                Circle tmp = new Circle(RADIUS, COLORS_GUESS.get(guess));
-                this.gridPaneGuesses.get(i).add(tmp, pos.getX(), pos.getY() - 1);                
+            if (this.playersNames.get(i).equals(player)) {                
+                StackPane stack = this.createStackPaneWithCircle(COLORS_GUESS.get(guess));
+                this.gridPaneGuesses.get(i).add(stack, pos.getX(), pos.getY() - 1);                
             }
         }
     }
@@ -158,14 +158,19 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
         for (int i = 0; i < this.playersNames.size(); i++) {
             if (this.playersNames.get(i).equals(player)) {
                 for (int j = 0; j < results.size(); j++) {
-                    Circle tmp = new Circle(RADIUS, COLORS_RES.get(results.get(j)));
-                    StackPane stack = new StackPane();
-                    stack.setAlignment(Pos.CENTER);
-                    stack.getChildren().add(tmp);
+                    StackPane stack = this.createStackPaneWithCircle(COLORS_RES.get(results.get(j)));
                     this.gridPaneResults.get(i).add(stack, j, turn -1 );
                 }               
             }
         }
+    }
+
+    private StackPane createStackPaneWithCircle(Color colore) {
+        Circle c = new Circle(RADIUS, colore);
+        StackPane stackPane = new StackPane();
+        stackPane.setAlignment(Pos.CENTER);
+        stackPane.getChildren().add(c);
+        return stackPane;
     }
 
     @Override
