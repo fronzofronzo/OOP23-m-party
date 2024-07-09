@@ -1,30 +1,33 @@
 package it.unibo.mparty.model.minigames.perilouspath.impl;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 import java.util.stream.IntStream;
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
 import it.unibo.mparty.utilities.Pair;
 
 /**
- * implementation of {@link PerilousPath} that models the actual model of the mini game
+ * implementation of {@link PerilousPath} that models the actual model of the mini-game.
  */
-public class PerilousPathImpl implements PerilousPath{
+public class PerilousPathImpl implements PerilousPath {
 
     private final List<AbstractPosition> bombs;
     private final List<AbstractPosition> balls;
     private final List<AbstractPosition> path;
     private final Random random;
     private final int size;
-    private final static int NUM_BOMBS = 8;
-    private final static int COINS = 10;
+    private static final int NUM_BOMBS = 8;
+    private static final int COINS = 10;
     private List<String> players = new LinkedList<>();
 
     /**
-     * constructor of a new instance of this
+     * constructor of a new instance of this.
      * @param size the size of the grid
      */
-    public PerilousPathImpl(int size){
+    public PerilousPathImpl(final int size) {
         this.bombs = new LinkedList<>();
         this.balls = new LinkedList<>();
         this.path = new LinkedList<>();
@@ -69,12 +72,12 @@ public class PerilousPathImpl implements PerilousPath{
      * {@inheritDoc}
      */
     @Override
-    public Type hit(AbstractPosition p) {
-        if(p.isSafe(this.path,this.getBalls())){
-            if(this.bombs.stream().anyMatch(b -> this.samePosition(b,p))){
+    public Type hit(final AbstractPosition p) {
+        if(p.isSafe(this.path, this.getBalls())) {
+            if(this.bombs.stream().anyMatch(b -> this.samePosition(b,p))) {
                 return Type.BOMB;
             }
-            if(this.balls.stream().anyMatch(b -> this.samePosition(b,p)) && !p.equals(this.getBalls().get(0))){
+            if(this.balls.stream().anyMatch(b -> this.samePosition(b,p)) && !p.equals(this.getBalls().get(0))) {
                 return Type.BALL;
             }
             this.path.add(p);
@@ -88,14 +91,14 @@ public class PerilousPathImpl implements PerilousPath{
      */
     @Override
     public Pair<String, Integer> getResult() {
-        return isOver() ? new Pair<>(this.players.get(0), COINS) : new Pair<>(this.players.get(0),0);
+        return isOver() ? new Pair<>(this.players.get(0), COINS) : new Pair<>(this.players.get(0), 0);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setUpPlayers(List<String> players) {
+    public void setUpPlayers(final List<String> players) {
         this.players = players;
     }
 
@@ -117,23 +120,23 @@ public class PerilousPathImpl implements PerilousPath{
     }
 
     /**
-     * a private method for getting always a new BombPosition in a pseudo-random manner
+     * a private method for getting always a new BombPosition in a pseudo-random manner.
      * @return a new BombPosition which is safe
      */
     private AbstractPosition setNewBombPosition(){
         BombPosition b;
-        do{
-            b = new BombPosition(random.nextInt(this.getSize() - 1), random.nextInt(this.getSize()- 1), this.getSize());
-        }while (!b.isSafe(this.getBombs(),this.getBalls()));
+        do {
+            b = new BombPosition(random.nextInt(this.getSize() - 1), random.nextInt(this.getSize() - 1), this.getSize());
+        } while (!b.isSafe(this.getBombs(), this.getBalls()));
         return b;
     }
 
     /**
-     * a private method for getting always a new BallPosition in a pseudo-random manner
+     * a private method for getting always a new BallPosition in a pseudo-random manner.
      * @param y the already set y position in a generic(x,y) position, meaning that only the x position will be random
      * @return a new BallPosition which is safe
      */
-    private AbstractPosition setNewBallPosition(int y){
+    private AbstractPosition setNewBallPosition(final int y){
         BallPosition b;
         do{
             b = new BallPosition(this.random.nextInt(this.getSize() - 1), y, this.getSize());
