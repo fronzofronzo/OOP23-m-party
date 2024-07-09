@@ -7,7 +7,7 @@ import javafx.event.ActionEvent;
 import java.util.List;
 
 /**
- * interface that models the view for Perilous Path mini-game
+ * interface that models the view for Perilous Path mini-game.
  */
 public interface PerilousPathView extends MinigameView {
 
