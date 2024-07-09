@@ -119,7 +119,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     }
 
     @FXML
-    void tutorialClicked() {
+    private void tutorialClicked() {
         if (this.tutorialText.isVisible()) {
             this.tutorialButton.setText("Tutorial");
             this.tutorialText.setVisible(false);
