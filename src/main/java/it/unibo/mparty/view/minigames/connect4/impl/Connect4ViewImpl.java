@@ -15,9 +15,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+/**
+ * This class implements the {@link Connect4View} interface.
+ */
 public class Connect4ViewImpl extends AbstractSceneView implements Connect4View {
 
-    final private Connect4Controller controller = new Connect4ControllerImpl(this);
+    private final Connect4Controller controller = new Connect4ControllerImpl(this);
+    private static final int CIRCLE_DIMENSION = 25;
 
     @FXML
     private Label displayLabel;
@@ -31,27 +35,38 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     @FXML
     private GridPane buttonGrid;
 
-    
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void showResult(Pair<String, Integer> result) {
-        this.updateDisplayLabel(result.getX() + " ha vinto " + result.getY() + " monete");
+    public void showResult(final Pair<String, Integer> result) {
+        this.updateDisplayLabel(result.getFirst() + " ha vinto " + result.getSecond() + " monete");
         this.activateExitButton(true);
         buttonGrid.getChildren().listIterator().forEachRemaining(it -> it.setDisable(true));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void updateDisplayLabel(String msg) {
+    public void updateDisplayLabel(final String msg) {
         displayLabel.setText(msg);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void activateExitButton (boolean pred) {
+    public void activateExitButton(final boolean pred) {
         exitButton.setDisable(!pred);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void addCircle(int col, int row, boolean color) {
-        Circle circle = new Circle(25);
+    public void addCircle(final int col, final int row, final boolean color) {
+        Circle circle = new Circle(CIRCLE_DIMENSION);
         circle.setFill(color ? Color.RED : Color.YELLOW);
         StackPane stack = new StackPane();
         stack.getChildren().add(circle);
@@ -59,11 +74,11 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     }
 
     @FXML
-    private void getColumn(ActionEvent e) {
+    private void getColumn(final ActionEvent e) {
         Button but = (Button) (e.getSource());
         var index = GridPane.getColumnIndex(but);
-        if (index==null) {
-            index=0;
+        if (index == null) {
+            index = 0;
         }
         this.controller.check(index);
     }
@@ -73,8 +88,11 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
         this.controller.endGame();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void startMinigame(List<String> players) {
+    public void startMinigame(final List<String> players) {
         this.controller.initGame(players);
     }
 

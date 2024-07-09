@@ -2,6 +2,8 @@ package it.unibo.mparty.model.minigames.nanogram.api;
 
 import it.unibo.mparty.utilities.Position;
 
+import java.util.Map;
+
 /**
  * Interface representing a board for a Nanogram game.
  * This interface defines methods to manage the state of cells on the board.
@@ -30,4 +32,11 @@ public interface Board {
      * @return true if the cell is filled, false if it is empty or the position is not found.
      */
     boolean getState(Position position);
+
+    /**
+     * Retrieves the entire board as a map of positions and their corresponding states.
+     *
+     * @return a map where the key is the position of the cell and the value is the state of the cell.
+     */
+    Map<Position, Boolean> getBoard();
 }

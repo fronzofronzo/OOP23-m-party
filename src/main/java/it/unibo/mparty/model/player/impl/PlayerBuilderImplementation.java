@@ -17,7 +17,7 @@ public class PlayerBuilderImplementation implements PlayerBuilder {
      * {@inheritDoc}
      */
     @Override
-    public PlayerBuilder username(String username) {
+    public PlayerBuilder username(final String username) {
         this.username = username;
         return this;
     }
@@ -26,7 +26,7 @@ public class PlayerBuilderImplementation implements PlayerBuilder {
      * {@inheritDoc}
      */
     @Override
-    public PlayerBuilder character(String character) {
+    public PlayerBuilder character(final String character) {
         this.character = character;
         return this;
     }
@@ -35,8 +35,8 @@ public class PlayerBuilderImplementation implements PlayerBuilder {
      * {@inheritDoc}
      */
     @Override
-    public Player buildPlayer() throws IllegalStateException{
-        if (this.username == null  || this.character == null){
+    public Player buildPlayer() throws IllegalStateException {
+        if (this.username == null  || this.character == null) {
             throw new IllegalStateException("Missing fields: cannot create a new Player");
         }
         return new PlayerImplementation(this.username, this.character);

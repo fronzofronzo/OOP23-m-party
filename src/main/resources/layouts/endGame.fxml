@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.endGame.impl.EndGameViewImpl">
+    <center>
+        <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="rankColumn" prefWidth="150.0" text="Posto" />
+                <TableColumn fx:id="playerColumn" prefWidth="268.0" text="Giocatore" />
+                <TableColumn fx:id="starColumn" prefWidth="200.0" text="Stelle" />
+                <TableColumn fx:id="coinColumn" prefWidth="200.79998779296875" text="Monete" />
+            </columns>
+            <BorderPane.margin>
+                <Insets left="100.0" right="100.0" top="30.0" />
+            </BorderPane.margin>
+        </TableView>
+    </center>
+    <top>
+        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="CLASSIFICA FINALE" BorderPane.alignment="CENTER">
+            <font>
+                <Font name="AdLib WGL4 BT" size="24.0" />
+            </font>
+            <BorderPane.margin>
+                <Insets top="20.0" />
+            </BorderPane.margin>
+        </Label>
+    </top>
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <Button mnemonicParsing="false" onMouseClicked="#exitClicked" text="ESCI DAL GIOCO">
+                <font>
+                    <Font name="AdLib WGL4 BT" size="18.0" />
+                </font>
+            </Button>
+        </HBox>
+    </bottom>
+</BorderPane>

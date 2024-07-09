@@ -2,8 +2,9 @@ package it.unibo.mparty.controller.minigames.nanogram.impl;
 
 import it.unibo.mparty.controller.minigames.nanogram.api.NanogramController;
 import it.unibo.mparty.model.minigames.nanogram.impl.NanogramModelImpl;
-import it.unibo.mparty.view.minigames.nanogram.NanogramMessage;
 import it.unibo.mparty.view.minigames.nanogram.impl.NanogramViewImpl;
+
+import java.util.List;
 
 /**
  * Implementation of the {@link NanogramController} interface for managing the Nanogram game logic.
@@ -23,10 +24,14 @@ public class NanogramControllerImpl implements NanogramController {
     public NanogramControllerImpl(final NanogramViewImpl view) {
         this.view = view;
         this.model = new NanogramModelImpl();
-        this.initializeGame();
     }
 
-    private void initializeGame() {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initGame(final List<String> players) {
+        this.model.setUpPlayers(players);
         this.view.updateLives(this.model.getLives());
         this.view.initGrid(this.model.getBoardSize());
         this.view.setRowHints(this.model.getRowHints());
@@ -46,15 +51,7 @@ public class NanogramControllerImpl implements NanogramController {
             this.view.crossCell(isCorrect);
         }
         this.view.updateLives(this.model.getLives());
-
-        if (this.model.isGameOver()) {
-            this.view.disableAllCells();
-            this.view.displayStatusMessage(NanogramMessage.LOSE);
-        } else if (this.model.isGameComplete()) {
-            this.view.disableAllCells();
-            this.view.fillRemainingCellsWithCrosses();
-            this.view.displayStatusMessage(NanogramMessage.WIN);
-        }
+        this.endGame();
     }
 
     /**
@@ -63,5 +60,20 @@ public class NanogramControllerImpl implements NanogramController {
     @Override
     public void setFillState(final boolean state) {
         this.fillState = state;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void endGame() {
+        if (this.model.isOver()) {
+            this.view.disableAllCells();
+            if (this.model.isGameComplete()) {
+                this.view.fillRemainingCellsWithCrosses();
+            }
+            this.view.showResult(this.model.getResult());
+            this.view.getMainController().saveMinigameResult(this.model.getResult());
+        }
     }
 }

@@ -6,11 +6,11 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.Position;
 
 /**
- * class that implements the Boobell item.
+ * Class that implements the Boobell item.
  */
 public class BooBell extends AbstractItem {
 
-    private final static int BOOBELL_COST = 7;
+    private static final int BOOBELL_COST = 5;
 
     /**
      * Construct a new istance of BooBell item.
@@ -23,7 +23,7 @@ public class BooBell extends AbstractItem {
      * {@inheritDoc}
      */
     @Override
-    public void activate(Player player, Optional<Player> target, Optional<Position> position) {
+    public void activate(final Player player, final Optional<Player> target, final Optional<Position> position) {
         int coins = target.get().getNumCoins() / 3;
         target.get().removeCoins(coins);
         player.addCoins(coins);

@@ -3,13 +3,20 @@ package it.unibo.mparty.application;
 import it.unibo.mparty.view.GameViewImpl;
 import javafx.application.Application;
 
-public class Main {
+/**
+ * This is the main class to start the application.
+ */
+public final class Main {
 
-    private Main(){
+    private Main() {
 
     }
 
-    public static void main(final String[] args){
+    /**
+     * Main method to start the application.
+     * @param args passed to main.
+     */
+    public static void main(final String[] args) {
         Application.launch(GameViewImpl.class);
     }
 }

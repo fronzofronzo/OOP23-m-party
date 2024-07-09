@@ -1,12 +1,10 @@
 package it.unibo.mparty.view.InitialScreen.impl;
 
 import it.unibo.mparty.controller.GameController;
-import it.unibo.mparty.controller.GameControllerImpl;
 import it.unibo.mparty.model.GameModelBuilder;
 import it.unibo.mparty.model.GameModelBuilderImpl;
 import it.unibo.mparty.utilities.BoardType;
 import it.unibo.mparty.view.AbstractSceneView;
-import it.unibo.mparty.view.GameViewImpl;
 import it.unibo.mparty.view.InitialScreen.api.InitialScreen;
 import it.unibo.mparty.view.InitialScreen.api.MiniScreen;
 import javafx.event.ActionEvent;
@@ -18,15 +16,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 public class InitialScreenImpl extends AbstractSceneView implements InitialScreen, Initializable {
 
@@ -34,6 +32,12 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     private GameModelBuilder builder;
     private final List<String> difficulties = new ArrayList<>();
     private String difficulty = "";
+
+    @FXML
+    private ImageView imageView;
+
+    @FXML
+    private StackPane stackPane;
 
     @FXML
     private Button addPlayers;
@@ -46,6 +50,9 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
 
     @FXML
     private Label exceptionLabel;
+
+    @FXML
+    private Label playersLabel;
 
     @Override
     public void handleExitButton(ActionEvent event) {
@@ -60,11 +67,10 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
         miniScreenController.setUp(this);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Add player");
+        stage.setTitle("Aggiungi Giocatore");
         stage.setScene(new Scene(root));
         stage.showAndWait();
         this.startGame.setDisable(!(this.builder.enoughPlayers() && !this.difficulty.isEmpty()));
-        System.out.println(" enough players:" + this.builder.enoughPlayers() + " difficulty: " + this.difficulty);
         this.addPlayers.setDisable(this.builder.isFull());
     }
 
@@ -87,15 +93,29 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
             this.startGame.setDisable(!(this.builder.enoughPlayers() && !this.difficulty.isEmpty()));
         });
         this.builder = new GameModelBuilderImpl();
+        this.stackPane.sceneProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue != null){
+                this.imageView.fitWidthProperty().bind(this.stackPane.widthProperty());
+                this.imageView.fitHeightProperty().bind(this.stackPane.heightProperty());
+                this.imageView.setPreserveRatio(false);
+            }
+        });
     }
 
     @Override
     public void setNewPlayer(String username,String character){
         try{
             this.builder = this.builder.addPlayer(username,character);
-            this.exceptionLabel.setText("player was added correctly");
+            this.setLabelText("giocatore correttamente aggiunto");
+            this.playersLabel.setText(this.playersLabel.getText() + "\n" + username + ": " + character);
         }catch(IllegalArgumentException e){
-            this.exceptionLabel.setText(e.getMessage());
+            this.setLabelText(e.getMessage());
         }
     }
+
+    @Override
+    public void setLabelText(String text){
+        this.exceptionLabel.setText(text);
+    }
+
 }

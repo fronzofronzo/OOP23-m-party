@@ -15,24 +15,24 @@ public interface GameBoard {
 
     /**
      * Get a Position in the Board Game then return its Slot Type
-     * @param position 
+     * @param position
      * @return the {@link SlotType}
      */
     SlotType getSlotType(Position position);
-    
+
     /**
-     * Get the game board's starting position 
+     * Get the game board's starting position
      * @return the starting position
      */
     Position getStrartingPosition();
-    
+
     /**
      * Get the next(s) position(s) of the input position
-     * @param position a position 
+     * @param position a position
      * @return a map that contains directions and positions
      */
     Map<Direction, Position> getNextPositions(Position position);
-    
+
     /**
      * Get the actual position of the active star
      * @return the actual position of the active star
@@ -67,4 +67,6 @@ public interface GameBoard {
      * @return the {@link BoardType}
      */
     BoardType getBoardType();
+
+    Map<Position, SlotType> getSlotsToUpdate();
 }

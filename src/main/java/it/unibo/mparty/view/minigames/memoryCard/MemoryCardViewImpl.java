@@ -10,10 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
-
-import java.io.IOException;
 import java.util.List;
 
+/**
+ * This class provides a graphic implementation for {@link MemoryCardView}.
+ * This class uses the graphic library of JavaFX to implement the GUI.
+ */
 public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardView{
 
     private final MemoryCardController controller = new MemoryCardControllerImpl(this);
@@ -27,19 +29,28 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     @FXML
     private Label textLabel;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setCardStatus(int index, boolean status) {
-        ((Button)this.cardsPane.getChildren().get(index)).setDisable(!status);
+    public void setCardStatus(final int index, final boolean status) {
+        ((Button) this.cardsPane.getChildren().get(index)).setDisable(!status);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setCardType(int index, String type) {
-        final Button bt = (Button)this.cardsPane.getChildren().get(index);
+    public void setCardType(final int index, final String type) {
+        final Button bt = (Button) this.cardsPane.getChildren().get(index);
         bt.setText(type);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void addCard(String text) {
+    public void addCard(final String text) {
         final Button bt = new Button(text);
         bt.setOnAction(this::tryCard);
         bt.setPrefSize(100,100);
@@ -49,49 +60,54 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
         this.cardsPane.getChildren().add(bt);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMistakesNumber(int n) {
         this.textLabel.setText("Errori: " + String.valueOf(n));
     }
 
-    @FXML
-    private void startGame(ActionEvent event){
-        final Button bt = (Button)event.getSource();
-        this.controller.setUpGame();
-        bt.setText("Pronto !");
-        bt.setOnAction(this::hideCards);
-        this.textLabel.setText("Quando si e' pronti, spingere il pulsante 'Pronto' ");
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showResult(Pair<String, Integer> result) {
+        this.textLabel.setText(result.getFirst() + " ha guadagnato " +  String.valueOf(result.getSecond()) + " monete.");
+        this.controlButton.setOnAction(e -> {
+            this.controller.endGame();
+        });
+        this.controlButton.setText("Torna al gioco principale");
+        this.controlButton.setDisable(false);
     }
 
-    private void hideCards(ActionEvent event){
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void startMinigame(final List<String> players) {
+        this.controller.initGame(players);
+    }
+
+    @FXML
+    private void startGame(final ActionEvent event) {
+        final Button bt = (Button)event.getSource();
+        bt.setText("Pronto !");
+        bt.setOnAction(this::hideCards);
+        this.textLabel.setText("Quando si e' pronti, spingere il pulsante 'Pronto'");
+    }
+
+    private void hideCards(final ActionEvent event) {
         this.cardsPane.getChildren().stream().map(e -> (Button)e).forEach(b -> {
             b.setText("");
             b.setDisable(false);
         });
-        ((Button)event.getSource()).setDisable(true);
+        ((Button) event.getSource()).setDisable(true);
         this.textLabel.setText("Errori: 0");
     }
 
-    private void tryCard(ActionEvent e){
-        this.controller.selectCard(this.cardsPane.getChildren().indexOf((Button)e.getSource()));
-    }
-
-
-    @Override
-    public void showResult(Pair<String, Integer> result) {
-        this.textLabel.setText(  result.getX() + " ha guadagnato " +  String.valueOf(result.getY()) + " monete." );
-        this.controlButton.setOnAction(e -> {
-            try {
-                this.getMainView().setBoardScene();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
-    }
-
-    @Override
-    public void startMinigame(List<String> players) {
-        this.controller.initGame(players);
+    private void tryCard(final ActionEvent e) {
+        this.controller.selectCard(this.cardsPane.getChildren().indexOf((Button) e.getSource()));
     }
 
 }

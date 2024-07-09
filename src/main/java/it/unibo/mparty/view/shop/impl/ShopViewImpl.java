@@ -1,5 +1,6 @@
 package it.unibo.mparty.view.shop.impl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import it.unibo.mparty.model.item.impl.ItemName;
@@ -13,13 +14,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
- * Implements the view for the shop.
+ * Implements the {@link ShopView} interface.
  */
 public class ShopViewImpl extends AbstractSceneView implements ShopView {
     private int i = 1;
-    private int j = 1;
     private List<ItemName> itemNameList = new ArrayList<>();
     private static final double DISTANCE_FROM_BUTTON = 70.0;
+    private static final double LEFT_MARGIN = 40.0;
 
     @FXML
     private AnchorPane descriptionPane;
@@ -33,33 +34,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView {
     @FXML 
     private Label moneyLabel;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addButton(ItemName itemName, int cost) {
-        final Button but = new Button();
-        but.setText("Acquista " + itemName.toString() + ": " + cost);
-        but.setOnAction(this::selectItem);
-        buttonPane.getChildren().add(but);
-        AnchorPane.setTopAnchor(but, i * DISTANCE_FROM_BUTTON);
-        i++;
-        itemNameList.add(itemName);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void addDescription(String description) {
-        final Label lb = new Label(description);
-        descriptionPane.getChildren().add(lb);
-        AnchorPane.setTopAnchor(lb, j * DISTANCE_FROM_BUTTON);
-        AnchorPane.setLeftAnchor(lb, DISTANCE_FROM_BUTTON);
-        j++;
-    }
-
-    private void selectItem(ActionEvent e) {
+    private void selectItem(final ActionEvent e) {
         this.getMainController().buyItem(itemNameList
         .get(this.buttonPane.getChildren().indexOf((Button) (e.getSource()))), this);
     }
@@ -68,7 +43,7 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView {
      * {@inheritDoc}
      */
     @Override
-    public void updateMoney(int money) {
+    public void updateMoney(final int money) {
         moneyLabel.setText("Monete rimaste: " + money);
     }
 
@@ -81,7 +56,26 @@ public class ShopViewImpl extends AbstractSceneView implements ShopView {
     }
 
     @FXML
-    private void closeShop() {
-        this.getMainView().switchToBoard();
+    private void closeShop() throws IOException {
+        this.getMainView().setBoardScene();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addItemView(final ItemName itemName, final int cost, final String description) {
+        final Button but = new Button();
+        final Label lb = new Label(description);
+        but.setText("Acquista " + itemName.toString() + ": " + cost);
+        but.setOnAction(this::selectItem);
+        buttonPane.getChildren().add(but);
+        AnchorPane.setTopAnchor(but, i * DISTANCE_FROM_BUTTON);
+        AnchorPane.setLeftAnchor(but, LEFT_MARGIN);
+        descriptionPane.getChildren().add(lb);
+        AnchorPane.setTopAnchor(lb, i * DISTANCE_FROM_BUTTON);
+        AnchorPane.setLeftAnchor(lb, LEFT_MARGIN);
+        i++;
+        itemNameList.add(itemName);
     }
 }

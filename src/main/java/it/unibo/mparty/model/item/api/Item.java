@@ -36,7 +36,7 @@ public interface Item {
     /**
      * Get the name of the item.
      * 
-     * @return the name of the item
+     * @return the {@link ItemName} of the item
      */
     ItemName getName();
 

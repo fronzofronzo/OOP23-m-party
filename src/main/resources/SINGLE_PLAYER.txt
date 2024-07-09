@@ -1,1 +1,3 @@
 memoryCard
+perilousPath
+nanogram

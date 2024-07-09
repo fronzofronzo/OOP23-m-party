@@ -11,20 +11,20 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.shop.api.Shop;
 
 /**
- * Implementation of the shop.
+ * Implementation of the {@link Shop} interface.
  */
 public class ShopImpl implements Shop {
     private ItemFactory itemFactory = new ItemFactoryImpl();
     private final List<Item> itemList = new ArrayList<>();
 
     /**
-     * Constructs a new istance of shopImpl.
+     * Constructs a new istance of {@link ShopImpl}.
      */
     public ShopImpl() {
         itemList.add(itemFactory.createItem(ItemName.CAMPANA_BOO));
         itemList.add(itemFactory.createItem(ItemName.DADO_MALEDETTO));
         itemList.add(itemFactory.createItem(ItemName.DADO_FORTUNATO));
-        itemList.add(itemFactory.createItem(ItemName.DOPPIO_DADO));
+        itemList.add(itemFactory.createItem(ItemName.TRIPLO_DADO));
         itemList.add(itemFactory.createItem(ItemName.TUBO_DORATO));
     }
 
@@ -32,7 +32,7 @@ public class ShopImpl implements Shop {
      * {@inheritDoc}
      */
     @Override
-    public boolean buyItem(Player player, ItemName itemName) {
+    public boolean buyItem(final Player player, final ItemName itemName) {
         Item item = itemList.stream().filter(it -> it.getName().equals(itemName)).findFirst().get();
         if (canAfford(player, item) && !player.getPlayerBag().isFull()) {
             player.removeCoins(item.getCost());
@@ -42,7 +42,7 @@ public class ShopImpl implements Shop {
         return false;
     }
 
-    private boolean canAfford(Player player, Item item) {
+    private boolean canAfford(final Player player, final Item item) {
         return player.getNumCoins() >= item.getCost();
     }
 
@@ -51,7 +51,7 @@ public class ShopImpl implements Shop {
      */
     @Override
     public List<Item> getItemList() {
-        return itemList;
+        return this.itemList;
     }
 
 }

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test class for a {@link PlayerImplementation} class
+ * Test class for a {@link PlayerImplementation} class.
  */
 public class TestPlayerImplementation {
 
@@ -19,7 +19,7 @@ public class TestPlayerImplementation {
      * Configuration step: this is performed before each test
      */
     @BeforeEach
-    public void init(){
+    public void init() {
         final String username = "username";
         final String character = "Luigi";
         testPlayer = new PlayerImplementation(username,character);
@@ -29,7 +29,7 @@ public class TestPlayerImplementation {
      * Check that the Player implementation is created with the correct values
      */
     @Test
-    public void testPlayerInitialization(){
+    public void testPlayerInitialization() {
         assertEquals(0, testPlayer.getNumStars());
         assertEquals(0, testPlayer.getNumCoins());
     }
@@ -38,7 +38,7 @@ public class TestPlayerImplementation {
      * Check that the operation of star adding and removal work properly
      */
     @Test
-    public void testStarAmount(){
+    public void testStarAmount() {
         assertEquals(0, testPlayer.getNumStars());
         testPlayer.addStar();
         assertEquals(1, testPlayer.getNumStars());
@@ -50,7 +50,7 @@ public class TestPlayerImplementation {
      * Check that the operation of coins adding and removal work properly
      */
     @Test
-    public void testCoinsAmount(){
+    public void testCoinsAmount() {
         final int num_coins = 5;
         assertEquals(0, testPlayer.getNumCoins());
         testPlayer.addCoins(num_coins);

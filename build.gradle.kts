@@ -42,11 +42,16 @@ dependencies {
             implementation("org.openjfx:javafx-$module:$javaFxVersion:$platform")
         }
     }
+    implementation("org.reflections:reflections:0.10.2")
 
     val jUnitVersion = "5.10.2"
     // JUnit API and testing engine
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
+
+    val testFxVersion = "4.0.16-alpha"
+    testImplementation("org.testfx:testfx-core:$testFxVersion")
+    testImplementation("org.testfx:testfx-junit5:$testFxVersion")
 }
 
 tasks.withType<Test> {
