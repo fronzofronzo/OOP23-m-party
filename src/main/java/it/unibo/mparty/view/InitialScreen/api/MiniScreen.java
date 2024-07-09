@@ -1,11 +1,7 @@
 package it.unibo.mparty.view.InitialScreen.api;
 
-import it.unibo.mparty.model.GameModelBuilder;
-import it.unibo.mparty.model.player.impl.Character;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-
-import java.util.List;
 
 /**
  * interface that models the controller for the MiniScreen controller that opens up when you click the add player button

@@ -18,7 +18,7 @@ class GameModelBuilderImplTest {
      * Tests initialisation that is performed before each test.
      */
     @BeforeEach
-    public void init(){
+    public void init() {
         this.builder = new GameModelBuilderImpl();
     }
 
@@ -27,7 +27,7 @@ class GameModelBuilderImplTest {
      * by the Game Model builder.
      */
     @Test
-    public void testNumberOfPlayers( ){
+    public void testNumberOfPlayers() {
         final String user1 = "user1";
         final String charact1 = Character.CHAR_MARIO.getName();
         this.builder = this.builder.addPlayer(user1, charact1);
@@ -39,7 +39,7 @@ class GameModelBuilderImplTest {
         final String user3 = "user3";
         final String charact3 = Character.CHAR_PEACH.getName();
         this.builder = this.builder.addPlayer(user3, charact3);
-        final String user4 =  "user4";
+        final String user4 = "user4";
         final String charact4 = Character.CHAR_YOSHI.getName();
         this.builder = this.builder.addPlayer(user4, charact4);
         Assertions.assertTrue(this.builder.isFull());
@@ -57,7 +57,9 @@ class GameModelBuilderImplTest {
         final String user2 = "user1";
         final String charact2 = Character.CHAR_MARIO.getName();
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> {this.builder.addPlayer(user2, charact2);});
+                () -> {
+                    this.builder.addPlayer(user2, charact2);
+                });
     }
 
     /**

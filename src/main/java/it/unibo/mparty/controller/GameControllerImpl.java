@@ -30,6 +30,7 @@ public class GameControllerImpl implements GameController {
 
     /**
      * Constructor for a new {@link GameController} implementation.
+     *
      * @param view to set like {@link GameView} reference to the game.
      */
     public GameControllerImpl(final GameView view) {
@@ -48,7 +49,8 @@ public class GameControllerImpl implements GameController {
                 .toList();
         this.view.setUpBoard(this.model.getBoardDim(), this.model.getBoardConfig(), usernames);
         this.view.setBoardScene();
-        this.updatePlayersView();;
+        this.updatePlayersView();
+        ;
         this.updateCommandView();
     }
 
@@ -75,7 +77,6 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     *
      * {@inheritDoc}
      */
     @Override
@@ -86,7 +87,6 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     *
      * {@inheritDoc}
      */
     @Override
@@ -104,14 +104,13 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     *
      * {@inheritDoc}
      */
     @Override
     public void setUpShop(final ShopView shopView) {
-        Map<ItemName,Pair<Integer, String>> itemMap = new LinkedHashMap<>();
-        this.model.getItemsFromShop().stream().forEachOrdered(it -> itemMap.put(it.getName(), 
-        new Pair<Integer,String>(it.getCost(), it.getDescription())));
+        Map<ItemName, Pair<Integer, String>> itemMap = new LinkedHashMap<>();
+        this.model.getItemsFromShop().stream().forEachOrdered(it -> itemMap.put(it.getName(),
+                new Pair<Integer, String>(it.getCost(), it.getDescription())));
         itemMap.forEach((it, p) -> shopView.addItemView(it, p.getFirst(), p.getSecond()));
         this.updateCommandView();
         shopView.updateMoney(this.model.getActualPlayer().getNumCoins());
