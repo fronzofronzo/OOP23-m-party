@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.domino.impl.DominoViewImpl">
+<BorderPane minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.domino.impl.DominoViewImpl">
    <top>
       <VBox prefHeight="213.0" prefWidth="1020.0" BorderPane.alignment="CENTER">
             <Label fx:id="messageLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Messaggio">
@@ -49,6 +49,11 @@
                   <Font size="18.0" />
                </font>
             </Button>
+         <Button fx:id="tutorialButton" mnemonicParsing="false" onMouseClicked="#tutorialClicked" prefWidth="135.0" text="Tutorial">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Button>
          <BorderPane.margin>
             <Insets left="20.0" right="20.0" />
          </BorderPane.margin>
@@ -76,6 +81,9 @@
          <BorderPane.margin>
             <Insets left="188.0" />
          </BorderPane.margin>
+         <content>
+            <Label fx:id="tutorialText" alignment="CENTER" text="Tutorial" />
+         </content>
       </ScrollPane>
    </center>
 </BorderPane>

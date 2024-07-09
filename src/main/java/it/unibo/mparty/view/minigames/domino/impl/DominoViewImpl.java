@@ -24,7 +24,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -68,6 +72,12 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     @FXML
     private VBox tilesContainer;
 
+    @FXML
+    private Button tutorialButton;
+
+    @FXML
+    private Label tutorialText;
+
     private DominoController controller;
     private Integer selectedSideA;
     private Integer selectedSideB;
@@ -105,6 +115,29 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
             this.selectedSideB = null;
         } else if (this.selectedSideA == null && this.selectedSideB == null) {
             this.messageLabel.setText(DominoMessage.SELECT_TILE.toString());
+        }
+    }
+
+    @FXML
+    void tutorialClicked() {
+        if (this.tutorialText.isVisible()) {
+            this.tutorialButton.setText("Tutorial");
+            this.tutorialText.setVisible(false);
+            this.scrollPane.setVisible(true);
+        } else {
+            this.tutorialButton.setText("Chiudi\n Tutorial");
+            this.scrollPane.setVisible(false);
+            this.setTutorialTextFromFile();
+        }
+    }
+
+    private void setTutorialTextFromFile() {
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(Objects.requireNonNull(getClass().getResource("/text/dominoTutorial.txt")).toURI())));
+            this.tutorialText.setText(content);
+            this.tutorialText.setVisible(true);
+        } catch (IOException | URISyntaxException e) {
+            this.messageLabel.setText("Errore nella lettura del file: " + e.getMessage());
         }
     }
 
