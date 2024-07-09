@@ -49,6 +49,13 @@ public interface NanogramModel extends MinigameModel {
     int getBoardSize();
 
     /**
+     * Retrieves the solution board.
+     *
+     * @return the solution board.
+     */
+    SimpleBoard getSolutionBoard();
+
+    /**
      * Checks if the game is complete.
      *
      * @return true if the game is complete, otherwise false.

@@ -90,6 +90,14 @@ public class NanogramModelImpl implements NanogramModel {
      * {@inheritDoc}
      */
     @Override
+    public SimpleBoard getSolutionBoard() {
+        return solutionBoard;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean isGameComplete() {
         return IntStream.range(0, SIZE_SIMPLE_BOARD)
                 .boxed().flatMap(row -> IntStream.range(0, SIZE_SIMPLE_BOARD)
