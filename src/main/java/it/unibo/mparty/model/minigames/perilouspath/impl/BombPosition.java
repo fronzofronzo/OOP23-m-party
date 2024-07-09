@@ -9,7 +9,7 @@ import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
  */
 public class BombPosition extends AbstractPosition {
 
-    private static final int MAX_NEAR_BOMBS = 3;
+    private static final int MAX_NEAR_BOMBS = 2;
 
     /**
      * constructor which calls the constructor of AbstractPosition.
