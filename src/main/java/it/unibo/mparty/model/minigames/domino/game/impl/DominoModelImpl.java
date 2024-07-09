@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.minigames.domino.game.impl;
 
+import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.minigames.domino.board.api.BoardTile;
 import it.unibo.mparty.model.minigames.domino.game.api.DominoModel;
 import it.unibo.mparty.model.minigames.domino.player.api.PlayerTiles;
@@ -151,6 +152,16 @@ public class DominoModelImpl implements DominoModel {
                 || this.playerTiles.getPlayerTiles(this.player2).isEmpty()
                 || (this.cannotPlayerPlace(this.player1) && this.cannotPlayerPlace(this.player2)
                 && this.dominoSet.isEmpty());
+    }
+
+    @Override
+    public String getName() {
+        return "domino";
+    }
+
+    @Override
+    public MinigameType getType() {
+        return MinigameType.MULTI_PLAYER;
     }
 
     private int getDoubleTiles(final String player) {
