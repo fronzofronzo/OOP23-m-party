@@ -259,6 +259,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     }
 
     private void showTutorial(final Label label) {
+        label.setWrapText(true);
         label.setText(MinigameView.getTutorialFromFile(PATH));
     }
 }
