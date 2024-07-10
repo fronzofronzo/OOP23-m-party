@@ -22,10 +22,13 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+/**
+ * implementation of {@link MemorySweepView}.
+ */
 public class MemorySweepViewImpl extends AbstractSceneView implements MemorySweepView, Initializable {
 
     private final MemorySweepController controller = new MemorySweepControllerImpl(this);
-    private final static int SIZE = 8;
+    private static final int SIZE = 8;
     private Button button;
     private List<String> players = new ArrayList<>();
 
@@ -42,7 +45,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
      * {@inheritDoc}
      */
     @Override
-    public void handleStartButton(ActionEvent e) {
+    public void handleStartButton(final ActionEvent e) {
         this.startButton.setDisable(true);
         this.controller.setUp();
     }
@@ -51,7 +54,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
      * {@inheritDoc}
      */
     @Override
-    public void setUp(Set<Position> randoms) {
+    public void setUp(final Set<Position> randoms) {
         this.memorySweepGrid.setDisable(true);
         for (var child : this.memorySweepGrid.getChildren()) {
             var position = this.buttonPos((Button) child);
@@ -65,7 +68,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
      * {@inheritDoc}
      */
     @Override
-    public void hit(MemorySweep.HitType type, boolean turn) {
+    public void hit(final MemorySweep.HitType type, final boolean turn) {
         switch (type) {
             case RIGHT_CHOICE -> {
                 if (turn) {
@@ -95,6 +98,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
                 button.setText("X");
                 this.memorySweepGrid.setDisable(true);
             }
+            default ->  button.setText("X");
         }
 
     }
@@ -103,7 +107,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
      * {@inheritDoc}
      */
     @Override
-    public void hideRandoms(Set<Position> randoms) {
+    public void hideRandoms(final Set<Position> randoms) {
         for (var child : this.memorySweepGrid.getChildren()) {
             var position = this.buttonPos((Button) child);
             if (randoms.contains(position)) {
@@ -118,7 +122,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
         this.controller.hit(this.buttonPos(button));
     };
 
-    private Position buttonPos(Button button) {
+    private Position buttonPos(final Button button) {
         var x = GridPane.getRowIndex(button);
         var y = GridPane.getColumnIndex(button);
         return new Position(x, y);
@@ -128,7 +132,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
      * {@inheritDoc}
      */
     @Override
-    public void showResult(Pair<String, Integer> result) {
+    public void showResult(final Pair<String, Integer> result) {
         this.memorySweepGrid.setDisable(true);
         this.startButton.setDisable(false);
         this.startButton.setText("RETURN");
@@ -146,7 +150,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
      * {@inheritDoc}
      */
     @Override
-    public void startMinigame(List<String> players) {
+    public void startMinigame(final List<String> players) {
         this.controller.initGame(players);
         this.players = players;
     }
@@ -155,7 +159,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
      * {@inheritDoc}
      */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(final URL location, final ResourceBundle resources) {
         this.gridCreation();
     }
 
@@ -171,7 +175,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
         this.memorySweepGrid.setDisable(true);
     }
 
-    private void setLabelText(String text) {
+    private void setLabelText(final String text) {
         this.label.setText(text);
     }
 

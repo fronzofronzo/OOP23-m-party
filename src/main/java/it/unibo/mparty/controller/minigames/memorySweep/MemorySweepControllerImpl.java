@@ -9,15 +9,22 @@ import javafx.util.Duration;
 
 import java.util.List;
 
+/**
+ * implementation of {@link MemorySweep}.
+ */
 public class MemorySweepControllerImpl implements MemorySweepController {
 
     private final MemorySweepView view;
     private final MemorySweep model;
-    private final static int SIZE = 8;
-    private final static int SECONDS = 3000;
+    private static final int SIZE = 8;
+    private static final int SECONDS = 3000;
     private final PauseTransition pause = new PauseTransition(new Duration(SECONDS));
 
-    public MemorySweepControllerImpl(MemorySweepView view) {
+    /**
+     * constructor of this.
+     * @param view view that is linked to this
+     */
+    public MemorySweepControllerImpl(final MemorySweepView view) {
         this.view = view;
         this.model = new MemorySweepImpl(SIZE);
         this.setRandoms();
@@ -38,7 +45,7 @@ public class MemorySweepControllerImpl implements MemorySweepController {
      * {@inheritDoc}
      */
     @Override
-    public void hit(Position p) {
+    public void hit(final Position p) {
         var type = this.model.hit(p);
         if (type.equals(MemorySweep.HitType.LOSS)) {
             this.endGame();
@@ -65,7 +72,7 @@ public class MemorySweepControllerImpl implements MemorySweepController {
      * {@inheritDoc}
      */
     @Override
-    public void initGame(List<String> players) {
+    public void initGame(final List<String> players) {
         this.model.setUpPlayers(players);
     }
 

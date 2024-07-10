@@ -4,7 +4,7 @@ import it.unibo.mparty.controller.minigames.MinigameController;
 import it.unibo.mparty.utilities.Position;
 
 /**
- * implementation of {@link MemorySweepController}
+ * implementation of {@link MemorySweepController}.
  */
 public interface MemorySweepController extends MinigameController {
 

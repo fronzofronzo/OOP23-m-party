@@ -9,6 +9,9 @@ import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 
+/**
+ * implementation of {@link MemorySweep}.
+ */
 public class MemorySweepImpl implements MemorySweep {
 
     private final Set<Position> randomList;
@@ -19,8 +22,13 @@ public class MemorySweepImpl implements MemorySweep {
     private final int side;
     private boolean turn = true;
     private String winner;
+    private static final int COINS = 20;
 
-    public MemorySweepImpl(int side) {
+    /**
+     * constructor of this.
+     * @param side the side of the grid
+     */
+    public MemorySweepImpl(final int side) {
         this.random = new Random();
         this.randomList = new HashSet<>();
         this.side = side;
@@ -51,7 +59,7 @@ public class MemorySweepImpl implements MemorySweep {
      * {@inheritDoc}
      */
     @Override
-    public HitType hit(Position p) {
+    public HitType hit(final Position p) {
         return this.getTurn() ? this.playerTurn(this.p1, p) : this.playerTurn(this.p2, p);
     }
 
@@ -72,7 +80,7 @@ public class MemorySweepImpl implements MemorySweep {
     }
 
     /**
-     * method for getting a new position which is not already included in the randomList variable
+     * method for getting a new position which is not already included in the randomList variable.
      *
      * @return the new position
      */
@@ -92,29 +100,29 @@ public class MemorySweepImpl implements MemorySweep {
     }
 
     /**
-     * the actual method that manages the players turns
+     * the actual method that manages the players turns.
      *
      * @param player the set of the player
      * @param p      the position clicked by that player
      * @return whether his guess was right(in this case returns
      * whether the guess is over or not) or wrong
      */
-    private HitType playerTurn(Pair<String, Set<Position>> player, Position p) {
+    private HitType playerTurn(final Pair<String, Set<Position>> player, final Position p) {
         if (this.randomList.contains(p)) {
             player.getSecond().add(p);
             if (player.getSecond().size() == this.randomList.size()) {
                 this.changeTurn();
                 player.getSecond().clear();
-                return HitType.TURN_END;//player 1 ha passato il turno tocca al player 2
+                return HitType.TURN_END;
             }
             return HitType.RIGHT_CHOICE;
         }
         this.winner = player.equals(this.p1) ? p2.getFirst() : p1.getFirst();
-        return HitType.LOSS;//player 1 ha perso,ha vinto player 2
+        return HitType.LOSS;
     }
 
     /**
-     * changes the turn
+     * changes the turn.
      */
     private void changeTurn() {
         this.turn = !this.turn;
@@ -133,7 +141,6 @@ public class MemorySweepImpl implements MemorySweep {
      */
     @Override
     public Pair<String, Integer> getResult() {
-        int COINS = 20;
         return new Pair<>(this.winner, COINS);
     }
 
@@ -141,7 +148,7 @@ public class MemorySweepImpl implements MemorySweep {
      * {@inheritDoc}
      */
     @Override
-    public void setUpPlayers(List<String> players) {
+    public void setUpPlayers(final List<String> players) {
         this.p1 = new Pair<>(players.get(0), new HashSet<>());
         this.p2 = new Pair<>(players.get(1), new HashSet<>());
     }
@@ -153,4 +160,5 @@ public class MemorySweepImpl implements MemorySweep {
     public boolean isOver() {
         return this.winner.equals(this.p1.getFirst()) || this.winner.equals(this.p2.getFirst());
     }
+
 }
