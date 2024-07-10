@@ -34,4 +34,8 @@ public interface MinigameModel {
      * @return true if the minigame is over, false otherwise.
      */
     boolean isOver();
+
+    String getName();
+
+    MinigameType getType();
 }

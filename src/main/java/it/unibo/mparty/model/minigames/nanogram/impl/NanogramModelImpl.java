@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.minigames.nanogram.impl;
 
+import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.minigames.nanogram.api.Board;
 import it.unibo.mparty.model.minigames.nanogram.api.Live;
 import it.unibo.mparty.model.minigames.nanogram.api.NanogramModel;
@@ -133,5 +134,21 @@ public class NanogramModelImpl implements NanogramModel {
     @Override
     public boolean isOver() {
         return this.lives.isDeath() || this.isGameComplete();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getName() {
+        return "nanogram";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public MinigameType getType() {
+        return MinigameType.SINGLE_PLAYER;
     }
 }

@@ -3,13 +3,15 @@ package it.unibo.mparty.model.Player.impl;
 import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemFactoryImpl;
 import it.unibo.mparty.model.item.impl.ItemName;
-import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBag;
 import it.unibo.mparty.model.player.impl.PlayerBagImplementation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 
 /**
  * Test class for a {@link it.unibo.mparty.model.player.impl.PlayerBagImplementation}.
@@ -55,7 +57,7 @@ class PlayerBagImplementationTest {
     @Test
     public void testFull() {
         final Item item = new ItemFactoryImpl().createItem(ItemName.DADO_FORTUNATO);
-        for (int i = 0; i < capacity; i++){
+        for (int i = 0; i < capacity; i++) {
             this.bag.addItem(item);
         }
         assertTrue(this.bag.isFull());

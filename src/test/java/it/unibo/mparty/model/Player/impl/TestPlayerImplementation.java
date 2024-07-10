@@ -1,8 +1,6 @@
 package it.unibo.mparty.model.Player.impl;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.impl.PlayerImplementation;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +14,7 @@ public class TestPlayerImplementation {
     private Player testPlayer;
 
     /**
-     * Configuration step: this is performed before each test
+     * Configuration step: this is performed before each test.
      */
     @BeforeEach
     public void init() {
@@ -26,7 +24,7 @@ public class TestPlayerImplementation {
     }
 
     /**
-     * Check that the Player implementation is created with the correct values
+     * Check that the Player implementation is created with the correct values.
      */
     @Test
     public void testPlayerInitialization() {
@@ -35,7 +33,7 @@ public class TestPlayerImplementation {
     }
 
     /**
-     * Check that the operation of star adding and removal work properly
+     * Check that the operation of star adding and removal work properly.
      */
     @Test
     public void testStarAmount() {
@@ -47,15 +45,15 @@ public class TestPlayerImplementation {
     }
 
     /**
-     * Check that the operation of coins adding and removal work properly
+     * Check that the operation of coins adding and removal work properly.
      */
     @Test
     public void testCoinsAmount() {
-        final int num_coins = 5;
+        final int numCoins = 5;
         assertEquals(0, testPlayer.getNumCoins());
-        testPlayer.addCoins(num_coins);
-        assertEquals(num_coins, testPlayer.getNumCoins());
-        testPlayer.removeCoins(num_coins);
+        testPlayer.addCoins(numCoins);
+        assertEquals(numCoins, testPlayer.getNumCoins());
+        testPlayer.removeCoins(numCoins);
         assertEquals(0, testPlayer.getNumCoins());
     }
 

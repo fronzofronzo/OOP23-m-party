@@ -51,6 +51,9 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     @FXML
     private Label exceptionLabel;
 
+    @FXML
+    private Label playersLabel;
+
     @Override
     public void handleExitButton(ActionEvent event) {
         System.exit(0);
@@ -64,7 +67,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
         miniScreenController.setUp(this);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Add player");
+        stage.setTitle("Aggiungi Giocatore");
         stage.setScene(new Scene(root));
         stage.showAndWait();
         this.startGame.setDisable(!(this.builder.enoughPlayers() && !this.difficulty.isEmpty()));
@@ -103,7 +106,8 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     public void setNewPlayer(String username,String character){
         try{
             this.builder = this.builder.addPlayer(username,character);
-            this.setLabelText("player correttamente aggiunto");
+            this.setLabelText("giocatore correttamente aggiunto");
+            this.playersLabel.setText(this.playersLabel.getText() + "\n" + username + ": " + character);
         }catch(IllegalArgumentException e){
             this.setLabelText(e.getMessage());
         }

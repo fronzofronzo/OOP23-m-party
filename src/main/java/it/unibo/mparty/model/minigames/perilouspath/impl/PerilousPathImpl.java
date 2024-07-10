@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
+
+import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
 import it.unibo.mparty.utilities.Pair;
@@ -25,6 +27,7 @@ public class PerilousPathImpl implements PerilousPath {
 
     /**
      * constructor of a new instance of this.
+     *
      * @param size the size of the grid
      */
     public PerilousPathImpl(final int size) {
@@ -33,6 +36,17 @@ public class PerilousPathImpl implements PerilousPath {
         this.path = new LinkedList<>();
         this.random = new Random();
         this.size = size;
+    }
+
+    /**
+     * constructor of a new instance of this.
+     */
+    public PerilousPathImpl() {
+        this.bombs = new LinkedList<>();
+        this.balls = new LinkedList<>();
+        this.path = new LinkedList<>();
+        this.random = new Random();
+        this.size = NUM_BOMBS;
     }
 
     /**
@@ -111,6 +125,23 @@ public class PerilousPathImpl implements PerilousPath {
         return p.inHorizontal(getBalls().get(1)) || p.inVertical(getBalls().get(1));
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getName() {
+        return "perilousPath";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public MinigameType getType() {
+        return MinigameType.SINGLE_PLAYER;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -121,6 +152,7 @@ public class PerilousPathImpl implements PerilousPath {
 
     /**
      * a private method for getting always a new BombPosition in a pseudo-random manner.
+     *
      * @return a new BombPosition which is safe
      */
     private AbstractPosition setNewBombPosition() {
@@ -133,6 +165,7 @@ public class PerilousPathImpl implements PerilousPath {
 
     /**
      * a private method for getting always a new BallPosition in a pseudo-random manner.
+     *
      * @param y the already set y position in a generic(x,y) position, meaning that only the x position will be random
      * @return a new BallPosition which is safe
      */
@@ -146,6 +179,7 @@ public class PerilousPathImpl implements PerilousPath {
 
     /**
      * a private method to know if 2 positions are in the same place.
+     *
      * @param p1 the first position
      * @param p2 the second position
      * @return true if they are in the same position false otherwise

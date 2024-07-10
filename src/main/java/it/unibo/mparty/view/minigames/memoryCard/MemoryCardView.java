@@ -1,8 +1,6 @@
 package it.unibo.mparty.view.minigames.memoryCard;
 
-import it.unibo.mparty.view.SceneView;
 import it.unibo.mparty.view.minigames.MinigameView;
-import javafx.scene.control.Button;
 
 /**
  * This class models the View of the mini-game Memory Card. The view of this
