@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.Random;
 
 /**
  * This class provides an implementation for {@link MinigameHandler} interface.
@@ -19,7 +18,6 @@ public class MinigameHandlerImplementation implements MinigameHandler {
 
     private String actualMinigame = null;
     private List<Player> players;
-    private MinigameType type = null;
 
     /**
      * Constructor of a new implementation of a {@link MinigameHandler}.
@@ -35,7 +33,6 @@ public class MinigameHandlerImplementation implements MinigameHandler {
     public void startMinigame(final List<Player> players,
                               final MinigameType type) throws Exception {
         this.actualMinigame = generateMinigame(type);
-        this.type = type;
         this.players = players;
     }
 
@@ -72,7 +69,6 @@ public class MinigameHandlerImplementation implements MinigameHandler {
     public void stopMinigame() {
         this.actualMinigame = null;
         this.players = Collections.emptyList();
-        this.type = null;
     }
 
     private String generateMinigame(final MinigameType type) {
@@ -94,7 +90,6 @@ public class MinigameHandlerImplementation implements MinigameHandler {
                 throw new RuntimeException(e);
             }
         }
-        final Random random = new Random();
         return RandomFromSet.get(minigames);
     }
 }

@@ -31,7 +31,7 @@ public enum Character {
 
     private final String name;
 
-    private Character(final String name) {
+    Character(final String name) {
         this.name = name;
     }
 
