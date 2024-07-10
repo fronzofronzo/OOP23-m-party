@@ -48,6 +48,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
     public void handleStartButton(final ActionEvent e) {
         this.startButton.setDisable(true);
         this.controller.setUp();
+        this.setLabelText("RICREARE LA SEQUENZA VERDE, PRIMO TURNO DI " + this.players.get(0));
     }
 
     /**

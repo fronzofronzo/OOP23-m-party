@@ -5,12 +5,13 @@ import java.util.Set;
 import it.unibo.mparty.model.minigames.MinigameModel;
 import it.unibo.mparty.utilities.Position;
 
+/**
+ * interface that models the view of the mini-game Memory Sweep
+ */
 public interface MemorySweep extends MinigameModel {
 
     /**
-     * enum describing the types of event that can appen when a button is clicked.
-     * <p>
-     * - LOSS: the player guessed the wrong button, so he has lost
+     * enum describing the types of event that can happen when a button is clicked.
      */
     enum HitType {
         /**
@@ -18,11 +19,12 @@ public interface MemorySweep extends MinigameModel {
          */
         RIGHT_CHOICE,
         /**
-         * TURN_END: the player guessed right all the buttons of the sequence which needed to be recreated, his turn has end now it'the other player turn
+         * TURN_END: the player guessed right all the buttons of the sequence which needed to be recreated.
+         * now it's the other player turn
          */
         TURN_END,
         /**
-         * LOSS: the player guessed the wrong button, so he has lost
+         * LOSS: the player guessed the wrong button, so he has lost.
          */
         LOSS
     }
