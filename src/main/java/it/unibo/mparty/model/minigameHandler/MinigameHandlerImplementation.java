@@ -7,9 +7,11 @@ import it.unibo.mparty.utilities.RandomFromSet;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.Random;
 
 /**
  * This class provides an implementation for {@link MinigameHandler} interface.
@@ -74,14 +76,16 @@ public class MinigameHandlerImplementation implements MinigameHandler {
         this.type = null;
     }
 
-    private String generateMinigame(MinigameType type) {
+    private String generateMinigame(final MinigameType type) {
         final Set<String> minigames = new HashSet<>();
         final Reflections reflections = new Reflections("it.unibo.mparty.model.minigames");
-        Set<Class<? extends MinigameModel>> classes = reflections.getSubTypesOf(MinigameModel.class);
+        Set<Class<? extends MinigameModel>> classes =
+                reflections.getSubTypesOf(MinigameModel.class);
         for (Class<? extends MinigameModel> cl : classes) {
             try {
                 if (!cl.isInterface()) {
-                    final MinigameModel minigame = cl.getDeclaredConstructor().newInstance();
+                    final MinigameModel minigame =
+                            cl.getDeclaredConstructor().newInstance();
                     if (minigame.getType().equals(type)) {
                         minigames.add(minigame.getName());
                     }
