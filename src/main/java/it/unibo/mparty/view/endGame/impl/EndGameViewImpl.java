@@ -42,6 +42,8 @@ public class EndGameViewImpl extends AbstractSceneView implements EndGameView {
 
     @FXML
     private void initialize() {
+        tableView.setSelectionModel(null);
+
         setHeaderFont(this.playerColumn);
         setHeaderFont(this.starColumn);
         setHeaderFont(this.coinColumn);
@@ -69,7 +71,7 @@ public class EndGameViewImpl extends AbstractSceneView implements EndGameView {
             protected void updateItem(final Map.Entry<String, Pair<Integer, Integer>> item, final boolean empty) {
                 super.updateItem(item, empty);
                 if (getIndex() == 0 && item != null) {
-                    setStyle("-fx-font-weight: bold; -fx-background-color: yellow; -fx-text-fill: black;");
+                    setStyle("-fx-font-weight: bold; -fx-background-color: yellow;");
                 } else {
                     setStyle("-fx-background-color: transparent;");
                 }
