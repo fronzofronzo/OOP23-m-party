@@ -8,24 +8,27 @@ import it.unibo.mparty.view.minigames.nanogram.api.NanogramView;
 import it.unibo.mparty.view.minigames.nanogram.NanogramMessage;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -62,12 +65,6 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     @FXML
     private GridPane rowHints;
 
-    @FXML
-    private Button tutorialButton;
-
-    @FXML
-    private Label tutorialText;
-
     private NanogramController controller;
 
     private Button hitButton;
@@ -92,29 +89,17 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     }
 
     @FXML
-    private void tutorialClicked() {
-        if (this.tutorialText.isVisible()) {
-            this.tutorialButton.setText("Tutorial");
-            this.tutorialText.setVisible(false);
-        } else {
-            this.tutorialButton.setText("Chiudi\n Tutorial");
-            this.setTutorialTextFromFile();
-        }
-    }
+    private void tutorialClicked() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/minigames/nanogramTutorial.fxml"));
+        Parent root = loader.load();
 
-    private void setTutorialTextFromFile() {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
-                Objects.requireNonNull(getClass().getResourceAsStream("/text/nanogramTutorial.txt"))))) {
-            StringBuilder content = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                content.append(line).append("\n");
-            }
-            this.tutorialText.setText(String.valueOf(content));
-            this.tutorialText.setVisible(true);
-        } catch (IOException e) {
-            this.messageLabel.setText("Errore nella lettura del file: " + e.getMessage());
-        }
+        Stage stage = new Stage();
+        stage.setTitle("Nanogram Tutorial");
+        stage.getIcons().add(new Image("/images/marioParty.png"));
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(this.pane.getScene().getWindow());
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     /**
