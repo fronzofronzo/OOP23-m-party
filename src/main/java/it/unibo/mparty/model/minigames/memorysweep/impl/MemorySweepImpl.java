@@ -24,6 +24,7 @@ public class MemorySweepImpl implements MemorySweep {
     private boolean turn = true;
     private String winner;
     private static final int COINS = 20;
+    private static final int SIDE = 8;
 
     /**
      * constructor of this.
@@ -33,6 +34,13 @@ public class MemorySweepImpl implements MemorySweep {
         this.random = new Random();
         this.randomList = new HashSet<>();
         this.side = side;
+        this.counter = 1;
+    }
+
+    public MemorySweepImpl(){
+        this.random = new Random();
+        this.randomList = new HashSet<>();
+        this.side = SIDE;
         this.counter = 1;
     }
 
