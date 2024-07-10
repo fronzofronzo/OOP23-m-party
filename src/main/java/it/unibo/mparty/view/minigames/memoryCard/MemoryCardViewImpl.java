@@ -10,6 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
+
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
@@ -93,11 +96,14 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     @Override
     public void startMinigame(final List<String> players) {
         this.controller.initGame(players);
+        final InputStream input = getClass().getClassLoader().getResourceAsStream("text/memoryCardTutorial.txt");
+        String text;
         try {
-            this.textLabel.setText(new String(Files.readAllBytes(Paths.get(TUTORIAL_PATH))));
+            text = new String(input.readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        this.textLabel.setText(text);
     }
 
     @FXML
