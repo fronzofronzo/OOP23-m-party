@@ -4,7 +4,6 @@ import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardController;
 import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardControllerImpl;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
-import it.unibo.mparty.view.minigames.MinigameView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,11 +12,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * This class provides a graphic implementation for {@link MemoryCardView}.
@@ -45,7 +41,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
      */
     @Override
     public void setCardStatus(final int index, final boolean status) {
-        ((Button) this.cardsPane.getChildren().get(index)).setDisable(!status);
+        (this.cardsPane.getChildren().get(index)).setDisable(!status);
     }
 
     /**
@@ -77,7 +73,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
      */
     @Override
     public void setMistakesNumber(final int n) {
-        this.textLabel.setText("Errori: " + String.valueOf(n));
+        this.textLabel.setText("Errori: " + n);
     }
 
     /**
@@ -85,10 +81,8 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
      */
     @Override
     public void showResult(final Pair<String, Integer> result) {
-        this.textLabel.setText(result.getFirst() + " ha guadagnato " + String.valueOf(result.getSecond()) + " monete.");
-        this.controlButton.setOnAction(e -> {
-            this.controller.endGame();
-        });
+        this.textLabel.setText(result.getFirst() + " ha guadagnato " + result.getSecond() + " monete.");
+        this.controlButton.setOnAction(e -> this.controller.endGame());
         this.controlButton.setText("Torna al gioco principale");
         this.controlButton.setDisable(false);
     }

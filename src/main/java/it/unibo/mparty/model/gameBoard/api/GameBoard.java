@@ -14,10 +14,10 @@ import it.unibo.mparty.utilities.SlotType;
 public interface GameBoard {
 
     /**
-     * Get a Position in the Board Game then return its Slot Type
-     * @param position
-     * @return the {@link SlotType}
-     * @throws IllegalStateException if the input position isn't in the game board
+     * Get a Position with the Board Game then return its Slot Type
+     * @param position - position of the slot.
+     * @return the {@link SlotType}.
+     * @throws IllegalStateException if the input position isn't in the game board.
      */
     SlotType getSlotType(Position position);
 

@@ -28,29 +28,4 @@ public interface MinigameView extends SceneView {
      */
     void startMinigame(List<String> players);
 
-    /**
-     * Utility method to get tutorial for a mini-game directly from file.
-     * @param path - relative path of file.
-     * @return String containing the tutorial read by file.
-     */
-    static String getTutorialFromFile(final String path) {
-        final StringBuilder text = new StringBuilder();
-        final BufferedReader input = new BufferedReader(
-                new InputStreamReader(Objects.requireNonNull(MinigameView.class.getResourceAsStream(path))));
-        try {
-            String line;
-            while ((line = input.readLine()) != null) {
-                text.append(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                input.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return text.toString();
-    };
 }
