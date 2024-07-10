@@ -11,6 +11,7 @@ import it.unibo.mparty.model.minigames.perilouspath.impl.PathPosition;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.GameView;
+import it.unibo.mparty.view.minigames.MinigameView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -39,6 +40,8 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
      * width of the image.
      */
     private static final int FIT_WIDTH = 50;
+
+    private static final String PATH = "/text/perilousPathTutorial.txt";
     @FXML
     private GridPane myGridPane;
 
@@ -180,6 +183,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     @Override
     public void startMinigame(final List<String> players) {
         this.observer.initGame(players);
+        this.showTutorial(this.gameLabel);
     }
 
     /**
@@ -252,5 +256,9 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         imageView.setFitHeight(FIT_HEIGHT);
         imageView.setFitWidth(FIT_WIDTH);
         imageView.setPreserveRatio(false);
+    }
+
+    private void showTutorial(final Label label) {
+        label.setText(MinigameView.getTutorialFromFile(PATH));
     }
 }

@@ -99,7 +99,11 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     @Override
     public void startMinigame(final List<String> players) {
         this.controller.initGame(players);
-        this.showTutorial(textLabel);
+        try {
+            this.textLabel.setText(new String(Files.readAllBytes(Paths.get(TUTORIAL_PATH))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -122,14 +126,6 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
 
     private void tryCard(final ActionEvent e) {
         this.controller.selectCard(this.cardsPane.getChildren().indexOf((Button) e.getSource()));
-    }
-
-    private void showTutorial(final Label label) {
-        try {
-            this.textLabel.setText(new String(Files.readAllBytes(Paths.get(TUTORIAL_PATH))));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

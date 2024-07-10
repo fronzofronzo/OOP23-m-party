@@ -14,7 +14,7 @@
       <Button fx:id="startButton" mnemonicParsing="false" onAction="#handleStartButton" prefHeight="41.0" prefWidth="152.0" text="START" BorderPane.alignment="CENTER" />
    </bottom>
    <top>
-      <Label fx:id="label" alignment="TOP_RIGHT" prefHeight="22.0" prefWidth="489.0" BorderPane.alignment="CENTER">
+      <Label fx:id="label" alignment="TOP_RIGHT" prefHeight="29.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
