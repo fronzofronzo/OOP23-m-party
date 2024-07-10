@@ -6,31 +6,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.InitialScreen.impl.InitialScreenImpl">
+<StackPane fx:id="stackPane" minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.InitialScreen.impl.InitialScreenImpl">
    <children>
       <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
          <image>
             <Image url="@../images/mparty_homepage.png" />
          </image>
       </ImageView>
-      <HBox alignment="TOP_RIGHT" maxWidth="1.7976931348623157E308" spacing="900.0">
-         <children>
-            <Button mnemonicParsing="false" text="?">
-               <font>
-                  <Font name="Arial Black" size="14.0" />
-               </font>
-               <HBox.margin>
-                  <Insets right="50.0" top="20.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
-      <VBox alignment="TOP_CENTER" opacity="0.93" prefHeight="755.0" prefWidth="1014.0" spacing="10.0">
+      <VBox alignment="TOP_CENTER" minHeight="700.0" minWidth="1000.0" opacity="0.93" spacing="10.0" StackPane.alignment="TOP_CENTER">
          <children>
             <ImageView fitHeight="264.0" fitWidth="464.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -57,6 +44,9 @@
                <font>
                   <Font name="Arial Black" size="24.0" />
                </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </Button>
             <ChoiceBox fx:id="playerChoiceBox" prefHeight="50.0" prefWidth="335.0" />
             <Button fx:id="startGame" mnemonicParsing="false" onAction="#handleStartButton" prefHeight="50.0" prefWidth="335.0" text="START">
@@ -69,10 +59,11 @@
                   <Font name="Arial Black" size="24.0" />
                </font>
             </Button>
+            <Button mnemonicParsing="false" onAction="#handleTutorialButton" prefHeight="38.0" prefWidth="41.0" text="?">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Button>
          </children>
-         <StackPane.margin>
-            <Insets bottom="100.0" top="50.0" />
-         </StackPane.margin>
       </VBox>
    </children>
 </StackPane>
