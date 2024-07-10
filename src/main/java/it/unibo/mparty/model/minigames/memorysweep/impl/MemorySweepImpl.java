@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
@@ -159,6 +160,16 @@ public class MemorySweepImpl implements MemorySweep {
     @Override
     public boolean isOver() {
         return this.winner.equals(this.p1.getFirst()) || this.winner.equals(this.p2.getFirst());
+    }
+
+    @Override
+    public String getName() {
+        return "memorySweep";
+    }
+
+    @Override
+    public MinigameType getType() {
+        return MinigameType.MULTI_PLAYER;
     }
 
 }
