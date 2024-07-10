@@ -359,9 +359,7 @@ public class GameModelImpl implements GameModel {
                 case BONUS -> actualPlayer.addCoins(random.nextInt(MIN_COINS, MAX_COINS));
                 case MALUS -> actualPlayer.removeCoins(random.nextInt(MIN_COINS, MAX_COINS));
                 case SHOP -> this.activateShop = true;
-                case ACTIVE_STAR -> {
-                    this.checkStartAcquisition();
-                }
+                case ACTIVE_STAR -> this.checkStartAcquisition();
                 default -> {
                 }
             }

@@ -34,7 +34,6 @@ class PlayerBuilderImplementationTest {
     @Test
     public void testNotEnoughInformation() {
         final String username = "username";
-        final String character = Character.CHAR_MARIO.getName();
         final PlayerBuilder builder = new PlayerBuilderImplementation();
         assertThrows(IllegalStateException.class,
                 () -> {
