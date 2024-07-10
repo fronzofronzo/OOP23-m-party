@@ -188,14 +188,6 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
      * {@inheritDoc}
      */
     @Override
-    public void displayStatusMessage(final NanogramMessage message) {
-        this.messageLabel.setText(message.toString());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void disableAllCells() {
         this.boardGrid.getChildren().stream()
                 .filter(node -> node instanceof Button)
