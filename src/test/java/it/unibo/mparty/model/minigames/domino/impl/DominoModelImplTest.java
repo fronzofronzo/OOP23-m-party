@@ -52,19 +52,19 @@ class DominoModelImplTest {
     void testDistributionTiles() {
         this.model.setUpPlayers(this.players);
 
-        assertFalse(this.model.getPlayersTiles().getPlayerTiles(this.player1).isEmpty());
-        assertFalse(this.model.getPlayersTiles().getPlayerTiles(this.player2).isEmpty());
+        assertFalse(this.model.getAllPlayersTiles().getPlayerTiles(this.player1).isEmpty());
+        assertFalse(this.model.getAllPlayersTiles().getPlayerTiles(this.player2).isEmpty());
 
-        assertEquals(DISTRIBUTION_TILES, this.model.getPlayersTiles().getPlayerTiles(this.player1).size());
-        assertEquals(DISTRIBUTION_TILES, this.model.getPlayersTiles().getPlayerTiles(this.player2).size());
+        assertEquals(DISTRIBUTION_TILES, this.model.getAllPlayersTiles().getPlayerTiles(this.player1).size());
+        assertEquals(DISTRIBUTION_TILES, this.model.getAllPlayersTiles().getPlayerTiles(this.player2).size());
 
         assertEquals(DOMINO_SET_SIZE - (DISTRIBUTION_TILES * 2), this.model.getDominoSet().size());
 
-        assertFalse(this.model.getDominoSet().containsAll(this.model.getPlayersTiles().getPlayerTiles(this.player1)));
-        assertFalse(this.model.getDominoSet().containsAll(this.model.getPlayersTiles().getPlayerTiles(this.player2)));
+        assertFalse(this.model.getDominoSet().containsAll(this.model.getAllPlayersTiles().getPlayerTiles(this.player1)));
+        assertFalse(this.model.getDominoSet().containsAll(this.model.getAllPlayersTiles().getPlayerTiles(this.player2)));
 
-        assertFalse(this.model.getPlayersTiles().getPlayerTiles(this.player1)
-                .containsAll(this.model.getPlayersTiles().getPlayerTiles(this.player2)));
+        assertFalse(this.model.getAllPlayersTiles().getPlayerTiles(this.player1)
+                .containsAll(this.model.getAllPlayersTiles().getPlayerTiles(this.player2)));
     }
 
     /**
@@ -84,13 +84,13 @@ class DominoModelImplTest {
     @Test
     void testMove() {
         this.testDistributionTiles();
-        final Set<Tile> p1Tiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
+        final Set<Tile> p1Tiles = this.model.getAllPlayersTiles().getPlayerTiles(this.player1);
 
         final Tile tileToMove = p1Tiles.iterator().next();
         final boolean moveResult = this.model.checkAndAddToBoard(this.player1, tileToMove);
 
         assertTrue(moveResult);
-        assertFalse(this.model.getPlayersTiles().getPlayerTiles(this.player1).contains(tileToMove));
+        assertFalse(this.model.getAllPlayersTiles().getPlayerTiles(this.player1).contains(tileToMove));
         assertTrue(this.model.getBoardTile().getBoardTiles().contains(tileToMove));
     }
 
@@ -100,17 +100,17 @@ class DominoModelImplTest {
     @Test
     void testCanDrawTile() {
         this.model.setUpPlayers(this.players);
-        this.model.getPlayersTiles().getPlayerTiles(this.player1).clear();
+        this.model.getAllPlayersTiles().getPlayerTiles(this.player1).clear();
         assertTrue(this.model.canDrawTile(this.player1));
 
         Tile tileOnBoard = new TileImpl(SIDE1, SIDE2);
         this.model.getBoardTile().addTileToBoard(tileOnBoard);
 
         Tile matchingTile = new TileImpl(SIDE2, SIDE3);
-        this.model.getPlayersTiles().addTileToPlayer(this.player1, matchingTile);
+        this.model.getAllPlayersTiles().addTileToPlayer(this.player1, matchingTile);
         assertFalse(this.model.canDrawTile(this.player1));
 
-        this.model.getPlayersTiles().getPlayerTiles(this.player1).clear();
+        this.model.getAllPlayersTiles().getPlayerTiles(this.player1).clear();
         this.model.getDominoSet().clear();
         assertFalse(this.model.canDrawTile(this.player1));
     }
@@ -121,15 +121,15 @@ class DominoModelImplTest {
     @Test
     void testWinner() {
         this.testDistributionTiles();
-        this.model.getPlayersTiles().getPlayerTiles(this.player1).clear();
+        this.model.getAllPlayersTiles().getPlayerTiles(this.player1).clear();
         assertEquals(this.player1, this.model.getResult().getFirst());
 
-        this.model.getPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE1));
-        this.model.getPlayersTiles().getPlayerTiles(this.player2).clear();
+        this.model.getAllPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE1));
+        this.model.getAllPlayersTiles().getPlayerTiles(this.player2).clear();
         assertEquals(this.player2, this.model.getResult().getFirst());
 
-        this.model.getPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE3));
-        this.model.getPlayersTiles().getPlayerTiles(this.player2).add(new TileImpl(SIDE2, SIDE2));
+        this.model.getAllPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE3));
+        this.model.getAllPlayersTiles().getPlayerTiles(this.player2).add(new TileImpl(SIDE2, SIDE2));
         assertNull(this.model.getResult().getFirst());
     }
 
@@ -141,15 +141,15 @@ class DominoModelImplTest {
         this.model.setUpPlayers(this.players);
         assertFalse(this.model.isOver());
 
-        this.model.getPlayersTiles().getPlayerTiles(this.player1).clear();
+        this.model.getAllPlayersTiles().getPlayerTiles(this.player1).clear();
         assertTrue(this.model.isOver());
 
-        this.model.getPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE1));
-        this.model.getPlayersTiles().getPlayerTiles(this.player2).clear();
+        this.model.getAllPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE1));
+        this.model.getAllPlayersTiles().getPlayerTiles(this.player2).clear();
         assertTrue(this.model.isOver());
 
-        this.model.getPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE6));
-        this.model.getPlayersTiles().getPlayerTiles(this.player2).add(new TileImpl(SIDE2, SIDE2));
+        this.model.getAllPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE6));
+        this.model.getAllPlayersTiles().getPlayerTiles(this.player2).add(new TileImpl(SIDE2, SIDE2));
         this.model.getDominoSet().clear();
         assertFalse(this.model.isOver());
 
@@ -165,12 +165,12 @@ class DominoModelImplTest {
     void testDrawTile() {
         this.model.setUpPlayers(this.players);
 
-        final Set<Tile> initialTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
+        final Set<Tile> initialTiles = this.model.getAllPlayersTiles().getPlayerTiles(this.player1);
         final int initialSize = initialTiles.size();
 
         this.model.drawTile(this.player1);
 
-        final Set<Tile> updatedTiles = this.model.getPlayersTiles().getPlayerTiles(this.player1);
+        final Set<Tile> updatedTiles = this.model.getAllPlayersTiles().getPlayerTiles(this.player1);
         final int updatedSize = updatedTiles.size();
 
         assertEquals(initialSize + 1, updatedSize);

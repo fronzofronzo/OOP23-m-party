@@ -33,7 +33,7 @@ public interface PlayerTiles {
      * @param boardTile the board tile to check against
      * @return true if the player can place a tile, false otherwise
      */
-    boolean canPlayerPlace(String player, BoardTile boardTile);
+    boolean cannotPlayerPlace(String player, BoardTile boardTile);
 
     /**
      * Removes a tile from the player's set of tiles.
