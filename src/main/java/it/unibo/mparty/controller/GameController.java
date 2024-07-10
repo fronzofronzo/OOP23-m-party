@@ -35,7 +35,8 @@ public interface GameController {
     void rollDice();
 
     /**
-     * Handle the action of moving the player in the {@code GameBoard}.
+     * Handle the action of moving the current player.
+     * @param dir - chosen by the player in which move.
      */
     void movePlayer(Optional<Direction> dir);
 
