@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * implementation of {@link InitialScreen}
+ * implementation of {@link InitialScreen}.
  */
 public class InitialScreenImpl extends AbstractSceneView implements InitialScreen, Initializable {
 
