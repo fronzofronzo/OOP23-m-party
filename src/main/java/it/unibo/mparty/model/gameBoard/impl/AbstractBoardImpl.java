@@ -110,9 +110,7 @@ public abstract class AbstractBoardImpl implements GameBoard {
 
     @Override
     public Map<Direction, Position> getNextPositions(Position position) {
-        return this.getSlot(position).hasNext()
-                ? Collections.unmodifiableMap(this.getSlot(position).getNextConnections())
-                : Collections.emptyMap();
+        return Collections.unmodifiableMap(this.getSlot(position).getNextConnections());
     }
 
     @Override

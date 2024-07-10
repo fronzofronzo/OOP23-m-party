@@ -20,7 +20,7 @@ public class RandomListGenerator {
      * Returns the expected list based on the input values
      * @param input map that contains for each value the respective percentage
      * @return the expected list based on the input valuse
-     * @throws {@IllegalArgumentException} if the sum of the percentages is not 100
+     * @throws {@link IllegalArgumentException} if the sum of the percentages is not 100
      */
     public static <E> List<E> generate(Map<E, Integer> input) {
         if (!validProbabilities(input)) {

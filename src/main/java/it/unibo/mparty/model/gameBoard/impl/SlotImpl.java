@@ -9,6 +9,11 @@ import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 
+/**
+ * The class SlotImpl implements the interfae {@link Slot}. Each slot is identified
+ * by a {@link Position} and a {@link SlotType}, then it could have connections 
+ * to others slots.
+ */
 public class SlotImpl implements Slot {
 
     private final Position position;
@@ -16,6 +21,11 @@ public class SlotImpl implements Slot {
     private Map<Direction,Position> nextConnections;
     private Map<Direction,Position> prevConnections;
 
+    /**
+     * Create a new slot
+     * @param position of the slot.
+     * @param slotType of the slot.
+     */
     public SlotImpl(Position position, SlotType slotType){
         this.position = position;
         this.slotType = slotType;
@@ -23,60 +33,67 @@ public class SlotImpl implements Slot {
         this.prevConnections = new HashMap<>();
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public Position getPosition() {
         return this.position;
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public SlotType getSlotType() {
         return this.slotType;
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public void changeSlotType(SlotType newSlotType) {
         this.slotType = newSlotType;
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public void addNext(Direction dir, Position position) {
-        if (isValidConnection(dir, position)) {
-            this.nextConnections.put(dir, position);
-        }
+        this.checkPosition(position);
+        this.nextConnections.put(dir, position);
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public void addPrev(Direction dir, Position position) {
-        if (isValidConnection(dir, position)) {
-            this.prevConnections.put(dir, position);
-        }
+        this.checkPosition(position);
+        this.prevConnections.put(dir, position);
     }
 
-    protected boolean isValidConnection(Direction dir, Position position) {
-        return isNeighbor(position);
-    }
-
-    private boolean isNeighbor(Position position) {
-        return Math.abs(this.position.getX()-position.getX()+this.position.getY()-position.getY())==1;
-    }
-
-    @Override
-    public boolean hasNext(){
-        return !this.nextConnections.isEmpty();        
-    }
-
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public Map<Direction, Position> getNextConnections() {
         return Collections.unmodifiableMap(this.nextConnections);
     }
 
-    @Override
-    public boolean hasPrev(){
-        return !this.prevConnections.isEmpty();        
-    }
-
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public Map<Direction, Position> getPrevConnections() {
         return Collections.unmodifiableMap(this.prevConnections);
+    }
+    
+    private void checkPosition(Position position) {
+        if (this.position.equals(position)) {
+            throw new IllegalStateException();
+        }
     }
 }
