@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * implmentation of {@link MiniScreen}.
+ */
 public class MiniScreenImpl implements MiniScreen {
 
     private final List<String> characterList = new ArrayList<>();
@@ -37,7 +40,7 @@ public class MiniScreenImpl implements MiniScreen {
      * {@inheritDoc}
      */
     @Override
-    public void handleOkButton(ActionEvent e) {
+    public void handleOkButton(final ActionEvent e) {
         if (this.isShort(this.textField.getText()) && this.isChoiceSelected(this.choiceBox.getValue())) {
             this.controller.setNewPlayer(this.textField.getText(), this.choiceBox.getValue());
         } else {
@@ -52,7 +55,7 @@ public class MiniScreenImpl implements MiniScreen {
      * {@inheritDoc}
      */
     @Override
-    public void handleBackButton(ActionEvent e) {
+    public void handleBackButton(final ActionEvent e) {
         Stage stage = (Stage) this.backButton.getScene().getWindow();
         stage.close();
     }

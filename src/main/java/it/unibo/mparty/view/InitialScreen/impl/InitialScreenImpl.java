@@ -63,7 +63,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
      * {@inheritDoc}
      */
     @Override
-    public void handleExitButton(ActionEvent event) {
+    public void handleExitButton(final ActionEvent event) {
         System.exit(0);
     }
 
@@ -71,7 +71,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
      * {@inheritDoc}
      */
     @Override
-    public void handleAddPlayerButton(ActionEvent event) throws IOException {
+    public void handleAddPlayerButton(final ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/MiniScreen.fxml"));
         Parent root = loader.load();
         MiniScreen miniScreenController = loader.getController();
@@ -90,7 +90,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
      * {@inheritDoc}
      */
     @Override
-    public void handleStartButton(ActionEvent event) throws IOException {
+    public void handleStartButton(final ActionEvent event) throws IOException {
         this.builder = this.builder.difficulty(this.difficulty);
         GameController controller = this.getMainController();
         controller.startGame(this.builder.build());
@@ -138,7 +138,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
      * {@inheritDoc}
      */
     @Override
-    public void setLabelText(String text) {
+    public void setLabelText(final String text) {
         this.exceptionLabel.setText(text);
     }
 
