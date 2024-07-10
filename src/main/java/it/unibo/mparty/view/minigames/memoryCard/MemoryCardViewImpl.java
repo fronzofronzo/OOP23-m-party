@@ -122,14 +122,14 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
         this.controller.selectCard(this.cardsPane.getChildren().indexOf((Button) e.getSource()));
     }
 
-    private void showTutorial(final Label label){
+    private void showTutorial(final Label label) {
         final BufferedReader input = new BufferedReader(new InputStreamReader(Objects.requireNonNull(getClass()
                 .getResourceAsStream(TUTORIAL_PATH))));
         try {
             String line;
-            while ((line = input.readLine()) != null){
+            while ((line = input.readLine()) != null) {
                 final String labelText = label.getText();
-                label.setText(labelText+line);
+                label.setText(labelText + line);
             }
         } catch (IOException e) {
             e.printStackTrace();
