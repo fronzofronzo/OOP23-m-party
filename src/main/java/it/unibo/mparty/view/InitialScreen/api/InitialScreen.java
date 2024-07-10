@@ -47,4 +47,6 @@ public interface InitialScreen extends SceneView {
      */
     void setLabelText(String text);
 
+     void handleTutorialButton(ActionEvent event) throws IOException;
+
 }

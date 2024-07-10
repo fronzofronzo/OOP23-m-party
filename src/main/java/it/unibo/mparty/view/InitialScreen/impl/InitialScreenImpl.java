@@ -59,6 +59,8 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     @FXML
     private Label playersLabel;
 
+
+
     /**
      * {@inheritDoc}
      */
@@ -78,7 +80,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
         miniScreenController.setUp(this);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UTILITY);
+        stage.setResizable(false);
         stage.setTitle("Aggiungi Giocatore");
         stage.setScene(new Scene(root));
         stage.showAndWait();
@@ -140,6 +142,18 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     @Override
     public void setLabelText(final String text) {
         this.exceptionLabel.setText(text);
+    }
+
+    @Override
+    public void handleTutorialButton(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/TutorialScreen.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        stage.setTitle("TUTORIAL");
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
     }
 
 }
