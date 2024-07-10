@@ -1,0 +1,2 @@
+Ricreare la sequenza verde. Ad ogni turno un giocatore dovra ricreare la sequenza.
+Al turno successivo la lunghezza della sequenza aumenta

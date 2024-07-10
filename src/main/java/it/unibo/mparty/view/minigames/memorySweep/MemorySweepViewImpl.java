@@ -6,6 +6,7 @@ import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.AbstractSceneView;
+import it.unibo.mparty.view.minigames.MinigameView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -31,6 +32,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
     private static final int SIZE = 8;
     private Button button;
     private List<String> players = new ArrayList<>();
+    private static final String PATH = "/text/memorySweepTutorial.txt";
 
     @FXML
     private Button startButton;
@@ -48,7 +50,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
     public void handleStartButton(final ActionEvent e) {
         this.startButton.setDisable(true);
         this.controller.setUp();
-        this.setLabelText("RICREARE LA SEQUENZA VERDE, PRIMO TURNO DI " + this.players.get(0));
+
     }
 
     /**
@@ -174,6 +176,8 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
             }
         }
         this.memorySweepGrid.setDisable(true);
+        this.label.setWrapText(true);
+        this.setLabelText(MinigameView.getTutorialFromFile(PATH));
     }
 
     private void setLabelText(final String text) {
