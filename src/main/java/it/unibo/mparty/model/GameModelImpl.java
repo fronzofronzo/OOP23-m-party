@@ -198,20 +198,6 @@ public class GameModelImpl implements GameModel {
      * {@inheritDoc}
      */
     @Override
-    public String getWinner() {
-        final int maxStars = players.stream().map(Player::getNumStars).sorted().limit(1).reduce(0, Integer::sum);
-        List<Player> winners = players.stream().filter(p -> p.getNumStars() == maxStars).toList();
-        if (winners.size() != 1) {
-            final int maxMoney = winners.stream().map(Player::getNumCoins).sorted().limit(1).reduce(0, Integer::sum);
-            winners = winners.stream().filter(p -> p.getNumCoins() == maxMoney).toList();
-        }
-        return winners.get(0).getUsername();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Optional<String> getActiveMinigame() {
         return this.minigameHandler.isInGame()
                 ? Optional.of(this.minigameHandler.getMinigame())
@@ -268,7 +254,7 @@ public class GameModelImpl implements GameModel {
      */
     @Override
     public List<Item> getItemsFromShop() {
-        return Collections.unmodifiableList(this.shop.getItemList().stream().toList());
+        return this.shop.getItemList().stream().toList();
     }
 
     /**

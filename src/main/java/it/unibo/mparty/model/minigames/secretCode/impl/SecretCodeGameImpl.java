@@ -33,7 +33,7 @@ public class SecretCodeGameImpl implements SecretCodeGame{
 
     public SecretCodeGameImpl(List<String> players)  {
         generateSoluction();
-        players.stream()
+        players
                .forEach(p -> this.players.add(new SecretCodePlayerImpl(p, this.soluction.size())));
     }
 
@@ -51,7 +51,7 @@ public class SecretCodeGameImpl implements SecretCodeGame{
         List<SecretCodeResults> res = computeResult(this.players.get(actualPlayerIndex).getGuess());
         if (!res.isEmpty()) {
             this.players.get(actualPlayerIndex).startNewGuess();
-            res.stream().forEach(r -> this.players.get(actualPlayerIndex).addPoints(PUNTEGGIO.get(r)));
+            res.forEach(r -> this.players.get(actualPlayerIndex).addPoints(PUNTEGGIO.get(r)));
             this.nextPlayer();
         }
         return res;

@@ -57,9 +57,7 @@ class GameModelBuilderImplTest {
         final String user2 = "user1";
         final String charact2 = Character.CHAR_MARIO.getName();
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> {
-                    this.builder.addPlayer(user2, charact2);
-                });
+                () -> this.builder.addPlayer(user2, charact2));
     }
 
     /**
