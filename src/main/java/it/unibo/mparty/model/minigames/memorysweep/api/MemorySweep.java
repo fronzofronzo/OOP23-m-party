@@ -6,7 +6,7 @@ import it.unibo.mparty.model.minigames.MinigameModel;
 import it.unibo.mparty.utilities.Position;
 
 /**
- * interface that models the view of the mini-game Memory Sweep
+ * interface that models the view of the mini-game Memory Sweep.
  */
 public interface MemorySweep extends MinigameModel {
 
