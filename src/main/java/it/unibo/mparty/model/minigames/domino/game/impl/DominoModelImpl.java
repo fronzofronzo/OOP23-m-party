@@ -139,8 +139,8 @@ public class DominoModelImpl implements DominoModel {
             if (player1Score == player2Score) {
                 final int smallestTilePlayer1 = this.getSmallestTileValue(player1Tiles);
                 final int smallestTilePlayer2 = this.getSmallestTileValue(player2Tiles);
-                return smallestTilePlayer1 < smallestTilePlayer2 ?
-                        new Pair<>(this.player1, COINS) : new Pair<>(this.player2, COINS);
+                return smallestTilePlayer1 < smallestTilePlayer2
+                        ? new Pair<>(this.player1, COINS) : new Pair<>(this.player2, COINS);
             }
             return player1Score < player2Score ? new Pair<>(this.player1, COINS) : new Pair<>(this.player2, COINS);
         } else {
