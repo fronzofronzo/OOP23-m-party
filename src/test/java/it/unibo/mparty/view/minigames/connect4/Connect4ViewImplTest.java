@@ -3,9 +3,6 @@ package it.unibo.mparty.view.minigames.connect4;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.framework.junit5.ApplicationExtension;
@@ -23,7 +20,6 @@ import javafx.scene.control.Button;
 @ExtendWith(ApplicationExtension.class)
 public class Connect4ViewImplTest extends ApplicationTest {
     private Parent testRoot;
-    private static final int NUM_BUTTON = 8;
 
     /**
      * {@inheritDoc}
@@ -38,20 +34,12 @@ public class Connect4ViewImplTest extends ApplicationTest {
     }
 
     /**
-     * Test the button in the grid pane to add a circle.
+     * Test the tutorial button.
      */
     @Test
-    public void testColumnButton() {
-        List<Button> buttonList = new ArrayList<>();
-        for (int i = 0; i < NUM_BUTTON; i++) {
-            final Button button = from(this.testRoot).lookup(Integer.toString(i)).query();
-            buttonList.add(button);
-        }
-        int i = 0;
-        for (var but : buttonList) {
-            verifyThat(but, hasText(Integer.toString(i)));
-            i++;
-        }
+    public void testTutorialButton() {
+        final Button button = from(this.testRoot).lookup("#tutorialButton").query();
+        verifyThat(button, hasText("Tutorial"));
     }
 
     /**
