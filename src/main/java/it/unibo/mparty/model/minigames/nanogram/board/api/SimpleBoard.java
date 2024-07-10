@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.nanogram.api;
+package it.unibo.mparty.model.minigames.nanogram.board.api;
 
 import it.unibo.mparty.utilities.Position;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * This interface defines methods to retrieve the state of cells, generate hints for rows or columns,
  * and obtain the size of the board.
  */
-public interface SimpleBoard extends Board{
+public interface SimpleBoard extends Board {
 
     /**
      * Retrieves the state of the cell at the specified position.

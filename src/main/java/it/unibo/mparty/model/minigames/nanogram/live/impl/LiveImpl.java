@@ -1,6 +1,6 @@
-package it.unibo.mparty.model.minigames.nanogram.impl;
+package it.unibo.mparty.model.minigames.nanogram.live.impl;
 
-import it.unibo.mparty.model.minigames.nanogram.api.Live;
+import it.unibo.mparty.model.minigames.nanogram.live.api.Live;
 
 /**
  * Implementation of the {@link Live} interface for managing lives in Nanogram game.

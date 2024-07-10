@@ -1,10 +1,13 @@
-package it.unibo.mparty.model.minigames.nanogram.impl;
+package it.unibo.mparty.model.minigames.nanogram.game.impl;
 
 import it.unibo.mparty.model.minigames.MinigameType;
-import it.unibo.mparty.model.minigames.nanogram.api.Board;
-import it.unibo.mparty.model.minigames.nanogram.api.Live;
-import it.unibo.mparty.model.minigames.nanogram.api.NanogramModel;
-import it.unibo.mparty.model.minigames.nanogram.api.SimpleBoard;
+import it.unibo.mparty.model.minigames.nanogram.board.api.Board;
+import it.unibo.mparty.model.minigames.nanogram.live.api.Live;
+import it.unibo.mparty.model.minigames.nanogram.game.api.NanogramModel;
+import it.unibo.mparty.model.minigames.nanogram.board.api.SimpleBoard;
+import it.unibo.mparty.model.minigames.nanogram.board.impl.BoardImpl;
+import it.unibo.mparty.model.minigames.nanogram.board.impl.SimpleBoardImpl;
+import it.unibo.mparty.model.minigames.nanogram.live.impl.LiveImpl;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 
