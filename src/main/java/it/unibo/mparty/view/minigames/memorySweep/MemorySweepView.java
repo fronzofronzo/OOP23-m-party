@@ -22,8 +22,8 @@ public interface MemorySweepView extends MinigameView {
     /**
      * method that manages the aftermath of the clicked button.
      * based on the parameter passed in input the view will be updated accordingly
-     *
-     * @param type the parameter on which depends the view update
+     * @param type the type of click
+     * @param turn whether is the turn of the first player or the other
      */
     void hit(MemorySweep.HitType type, boolean turn);
 
