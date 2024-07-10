@@ -1,9 +1,13 @@
-questo e il tutorial per mparty non so cosa scrivere
-serve solo per provare il testo
-faccio tante righe
-pero ci sono 4 giocatori che giocano in una board
-raccogli piu stelle che puoi
-a fine gioco chi ha piu stelle vince
-durante il gioco puoi giocare ai minigiochi da solo o contro qualcuno per ottenre soldi
-soldi che puoi utilizzare per coppare le stelle
-buona partita!
+Benvenuti a Mario Party!
+
+Selezione del Personaggio: Scegli il tuo personaggio preferito tra i vari disponibili.
+Obiettivo del Gioco: Colleziona il maggior numero di stelle entro la fine del gioco.
+Tabellone di Gioco: Muoviti sul tabellone tirando il dado.
+Ogni casella puo avere effetti diversi.
+Minigiochi: Partecipa ai minigiochi finendo in un certo tipo di casella.
+Vinci per ottenere monete extra.
+Negozio: Usa le monete per acquistare items utili dal negozio.
+Stelle: Le stelle possono essere acquistate con le monete o trovate in caselle speciali.
+Strategia: Pianifica i tuoi movimenti e usa gli oggetti strategicamente per vincere.
+Vittoria: Alla fine del gioco, il giocatore con il maggior numero di stelle vince!
+Buon divertimento e buona fortuna!
