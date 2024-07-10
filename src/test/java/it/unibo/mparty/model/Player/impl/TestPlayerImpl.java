@@ -2,14 +2,14 @@ package it.unibo.mparty.model.Player.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import it.unibo.mparty.model.player.api.Player;
-import it.unibo.mparty.model.player.impl.PlayerImplementation;
+import it.unibo.mparty.model.player.impl.PlayerImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test class for a {@link PlayerImplementation} class.
+ * Test class for a {@link PlayerImpl} class.
  */
-public class TestPlayerImplementation {
+public class TestPlayerImpl {
 
     private Player testPlayer;
 
@@ -20,7 +20,7 @@ public class TestPlayerImplementation {
     public void init() {
         final String username = "username";
         final String character = "Luigi";
-        testPlayer = new PlayerImplementation(username,character);
+        testPlayer = new PlayerImpl(username,character);
     }
 
     /**

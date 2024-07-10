@@ -39,6 +39,6 @@ public class PlayerBuilderImplementation implements PlayerBuilder {
         if (this.username == null  || this.character == null) {
             throw new IllegalStateException("Missing fields: cannot create a new Player");
         }
-        return new PlayerImplementation(this.username, this.character);
+        return new PlayerImpl(this.username, this.character);
     }
 }
