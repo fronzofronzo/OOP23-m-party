@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -17,6 +16,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
+/**
+ * implementation of {@link TutorialScreen}.
+ */
 public class TutorialScreenImpl implements TutorialScreen, Initializable {
 
     @FXML
@@ -27,15 +29,20 @@ public class TutorialScreenImpl implements TutorialScreen, Initializable {
 
     private static final String TUTORIAL_PATH = "src/main/resources/Tutorial.txt";
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void handleButton(ActionEvent e) {
+    public void handleButton(final ActionEvent e) {
         Stage stage = (Stage) this.returnButton.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(final URL location, final ResourceBundle resources) {
         try {
             this.tutorialLabel.setText(new String(Files.readAllBytes(Paths.get(TUTORIAL_PATH))));
         } catch (IOException e) {
@@ -43,16 +50,4 @@ public class TutorialScreenImpl implements TutorialScreen, Initializable {
         }
     }
 
-    private String readFile() {
-        StringBuilder builder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\LENOVO\\OneDrive\\Desktop\\oop-m-party\\src\\main\\resources\\Tutorial.txt"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                builder.append(line).append("\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return builder.toString();
-    }
 }
