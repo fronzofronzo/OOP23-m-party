@@ -49,18 +49,8 @@ public class GameViewImpl extends Application implements GameView {
         this.stage = primaryStage;
         this.stage.getIcons().add(new Image("/images/marioParty.png"));
         this.setBoardView();
-        /*
-        //FAKE START
-        PlayerBuilder pb = new PlayerBuilderImplementation();
-        Player p1 = pb.username("Mario").character("Mario").buildPlayer();
-        Player p2 = pb.username("Luigi").character("Luigi").buildPlayer();
-        Player p3 = pb.username("Daisy").character("Luigi").buildPlayer();
-        Player p4 = pb.username("Peach").character("Luigi").buildPlayer();
-        this.controller.startGame(new GameModelImpl(List.of(p1,p2,p3,p4), "MEDIUM"));
-        */
-        //final Pair<Scene, SceneView> scenePair = this.loadScene("initialScreen");
-        //this.stage.setScene(scenePair.getFirst());
-        this.setMinigameScene("connect4", List.of("player2", "player1"));
+        final Pair<Scene, SceneView> scenePair = this.loadScene("initialScreen");
+        this.stage.setScene(scenePair.getFirst());
         this.stage.setMinWidth(PREF_WIDTH);
         this.stage.setMinHeight(PREF_HEIGHT);
         this.stage.setMaximized(true);
