@@ -1,0 +1,3 @@
+creare una strada tra le 2 palle da calcio partendo da quella a sinistra.
+
+La prima casella del path deve OBBLIGATORIAMENTE essere collegata alla prima palla.
