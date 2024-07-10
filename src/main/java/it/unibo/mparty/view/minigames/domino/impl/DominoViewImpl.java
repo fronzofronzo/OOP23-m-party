@@ -24,6 +24,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Set;
 
@@ -32,6 +34,7 @@ import java.util.Set;
  */
 public class DominoViewImpl extends AbstractSceneView implements DominoView {
 
+    private static final String TUTORIAL_PATH = "src/main/resources/text/dominoTutorial.txt";
     private static final int PREF_SIZE = 50;
     private static final int SPACING = 10;
 
@@ -67,6 +70,12 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
 
     @FXML
     private VBox tilesContainer;
+
+    @FXML
+    private Button tutorialButton;
+
+    @FXML
+    private Label tutorialText;
 
     private DominoController controller;
     private Integer selectedSideA;
@@ -105,6 +114,18 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
             this.selectedSideB = null;
         } else if (this.selectedSideA == null && this.selectedSideB == null) {
             this.messageLabel.setText(DominoMessage.SELECT_TILE.toString());
+        }
+    }
+
+    @FXML
+    private void tutorialClicked() throws IOException {
+        if (this.tutorialText.isVisible()) {
+            this.tutorialButton.setText("Tutorial");
+            this.tutorialText.setVisible(false);
+        } else {
+            this.tutorialButton.setText("Chiudi\nTutorial");
+            this.tutorialText.setText(new String(Files.readAllBytes(Paths.get(TUTORIAL_PATH))));
+            this.tutorialText.setVisible(true);
         }
     }
 

@@ -9,11 +9,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * implmentation of {@link MiniScreen}.
+ */
 public class MiniScreenImpl implements MiniScreen {
 
     private final List<String> characterList = new ArrayList<>();
@@ -32,11 +36,14 @@ public class MiniScreenImpl implements MiniScreen {
     @FXML
     private Button backButton;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void handleOkButton(ActionEvent e) {
-        if(this.isShort(this.textField.getText()) && this.isChoiceSelected(this.choiceBox.getValue())) {
+    public void handleOkButton(final ActionEvent e) {
+        if (this.isShort(this.textField.getText()) && this.isChoiceSelected(this.choiceBox.getValue())) {
             this.controller.setNewPlayer(this.textField.getText(), this.choiceBox.getValue());
-        }else{
+        } else {
             this.controller.setLabelText("username o character non correttamente inseriti");
         }
         Stage stage = (Stage) this.okButton.getScene().getWindow();
@@ -44,30 +51,39 @@ public class MiniScreenImpl implements MiniScreen {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void handleBackButton(ActionEvent e) {
+    public void handleBackButton(final ActionEvent e) {
         Stage stage = (Stage) this.backButton.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setUp(InitialScreen controller){
+    public void setUp(final InitialScreen controller) {
         this.controller = controller;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        for(Character character : Character.values()){
+    public void initialize(final URL location, final ResourceBundle resources) {
+        for (Character character : Character.values()) {
             this.characterList.add(character.getName());
         }
         this.choiceBox.getItems().addAll(this.characterList);
     }
 
-    private boolean isShort(String text){
+    private boolean isShort(final String text) {
         return text.length() < MAX_SIZE && !text.isEmpty();
     }
 
-    private boolean isChoiceSelected(String choice){
+    private boolean isChoiceSelected(final String choice) {
         return choice != null && !choice.isEmpty();
     }
 

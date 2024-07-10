@@ -15,7 +15,7 @@ import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.item.impl.LuckyDice;
 import it.unibo.mparty.model.item.impl.TripleDice;
 import it.unibo.mparty.model.player.api.Player;
-import it.unibo.mparty.model.player.impl.PlayerImplementation;
+import it.unibo.mparty.model.player.impl.PlayerImpl;
 import it.unibo.mparty.model.shop.api.Shop;
 import it.unibo.mparty.model.shop.impl.ShopImpl;
 
@@ -34,7 +34,7 @@ public class ShopImplTest {
     @BeforeEach
     public void init() {
         testShop = new ShopImpl();
-        testPlayer = new PlayerImplementation("testPlayer", "Mario");
+        testPlayer = new PlayerImpl("testPlayer", "Mario");
     }
 
     /**

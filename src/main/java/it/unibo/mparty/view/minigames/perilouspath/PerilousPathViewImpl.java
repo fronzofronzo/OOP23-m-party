@@ -23,6 +23,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,6 +41,8 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
      * width of the image.
      */
     private static final int FIT_WIDTH = 50;
+
+    private static final String PATH = "src/main/resources/text/perilousPathTutorial.txt";
     @FXML
     private GridPane myGridPane;
 
@@ -119,7 +123,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
                 this.gameLabel.setText("MOSSA VALIDA");
             }
             case WRONG -> this.gameLabel.setText("MOSSA NON VALIDA");
-            default -> this.gameLabel.setText("MOSSA INVALIDA");
+            default -> button.setText("");
         }
     }
 
@@ -180,6 +184,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     @Override
     public void startMinigame(final List<String> players) {
         this.observer.initGame(players);
+        this.showTutorial(this.gameLabel);
     }
 
     /**
@@ -252,5 +257,14 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         imageView.setFitHeight(FIT_HEIGHT);
         imageView.setFitWidth(FIT_WIDTH);
         imageView.setPreserveRatio(false);
+    }
+
+    private void showTutorial(final Label label) {
+        label.setWrapText(true);
+        try {
+            label.setText(new String(Files.readAllBytes(Paths.get(PATH))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

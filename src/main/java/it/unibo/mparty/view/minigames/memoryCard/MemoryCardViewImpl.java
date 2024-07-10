@@ -10,13 +10,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
 import java.util.List;
 
 /**
  * This class provides a graphic implementation for {@link MemoryCardView}.
  * This class uses the graphic library of JavaFX to implement the GUI.
  */
-public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardView{
+public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardView {
+
+    private static final int FONT_SIZE = 15;
+    private static final int PREF_BUTTON_SIZE = 100;
+    private static final String TUTORIAL_PATH = "src/main/resources/text/memoryCardTutorial.txt";
 
     private final MemoryCardController controller = new MemoryCardControllerImpl(this);
 
@@ -34,7 +41,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
      */
     @Override
     public void setCardStatus(final int index, final boolean status) {
-        ((Button) this.cardsPane.getChildren().get(index)).setDisable(!status);
+        (this.cardsPane.getChildren().get(index)).setDisable(!status);
     }
 
     /**
@@ -53,10 +60,11 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     public void addCard(final String text) {
         final Button bt = new Button(text);
         bt.setOnAction(this::tryCard);
-        bt.setPrefSize(100,100);
+        bt.setPrefSize(PREF_BUTTON_SIZE, PREF_BUTTON_SIZE);
         bt.setDisable(true);
         bt.setStyle("-fx-opacity: 1.0; ");
-        bt.setFont(new Font("Segoe UI Light", 15));
+        bt.setFont(new Font("Segoe UI Light", FONT_SIZE));
+        bt.setVisible(false);
         this.cardsPane.getChildren().add(bt);
     }
 
@@ -64,19 +72,17 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
      * {@inheritDoc}
      */
     @Override
-    public void setMistakesNumber(int n) {
-        this.textLabel.setText("Errori: " + String.valueOf(n));
+    public void setMistakesNumber(final int n) {
+        this.textLabel.setText("Errori: " + n);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void showResult(Pair<String, Integer> result) {
-        this.textLabel.setText(result.getFirst() + " ha guadagnato " +  String.valueOf(result.getSecond()) + " monete.");
-        this.controlButton.setOnAction(e -> {
-            this.controller.endGame();
-        });
+    public void showResult(final Pair<String, Integer> result) {
+        this.textLabel.setText(result.getFirst() + " ha guadagnato " + result.getSecond() + " monete.");
+        this.controlButton.setOnAction(e -> this.controller.endGame());
         this.controlButton.setText("Torna al gioco principale");
         this.controlButton.setDisable(false);
     }
@@ -87,18 +93,24 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     @Override
     public void startMinigame(final List<String> players) {
         this.controller.initGame(players);
+        try {
+            this.textLabel.setText(new String(Files.readAllBytes(Paths.get(TUTORIAL_PATH))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     private void startGame(final ActionEvent event) {
-        final Button bt = (Button)event.getSource();
+        final Button bt = (Button) event.getSource();
+        this.cardsPane.getChildren().forEach(b -> b.setVisible(true));
         bt.setText("Pronto !");
         bt.setOnAction(this::hideCards);
         this.textLabel.setText("Quando si e' pronti, spingere il pulsante 'Pronto'");
     }
 
     private void hideCards(final ActionEvent event) {
-        this.cardsPane.getChildren().stream().map(e -> (Button)e).forEach(b -> {
+        this.cardsPane.getChildren().stream().map(e -> (Button) e).forEach(b -> {
             b.setText("");
             b.setDisable(false);
         });

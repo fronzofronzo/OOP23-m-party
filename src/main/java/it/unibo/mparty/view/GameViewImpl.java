@@ -49,15 +49,6 @@ public class GameViewImpl extends Application implements GameView {
         this.stage = primaryStage;
         this.stage.getIcons().add(new Image("/images/marioParty.png"));
         this.setBoardView();
-        /*
-        //FAKE START
-        PlayerBuilder pb = new PlayerBuilderImplementation();
-        Player p1 = pb.username("Mario").character("Mario").buildPlayer();
-        Player p2 = pb.username("Luigi").character("Luigi").buildPlayer();
-        Player p3 = pb.username("Daisy").character("Luigi").buildPlayer();
-        Player p4 = pb.username("Peach").character("Luigi").buildPlayer();
-        this.controller.startGame(new GameModelImpl(List.of(p1,p2,p3,p4), "MEDIUM"));
-        */
         final Pair<Scene, SceneView> scenePair = this.loadScene("initialScreen");
         this.stage.setScene(scenePair.getFirst());
         this.stage.setMinWidth(PREF_WIDTH);
@@ -93,12 +84,10 @@ public class GameViewImpl extends Application implements GameView {
      */
     @Override
     public void setShopScene() throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + SHOP_NAME + EXTENSION));
-        final Parent root = loader.load(getClass().getResourceAsStream(PATH + SHOP_NAME + EXTENSION));
-        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        final ShopView shopView = loader.<ShopView>getController();
-        shopView.init(this, this.controller);
-        this.stage.setScene(scene);
+        final Pair<Scene, SceneView> pair = this.loadScene(SHOP_NAME);
+        final Scene shopScene = pair.getFirst();
+        final ShopView shopView = (ShopView) pair.getSecond();
+        this.stage.setScene(shopScene);
         shopView.initShopView();
         this.setStageSize();
     }
@@ -135,10 +124,12 @@ public class GameViewImpl extends Application implements GameView {
         this.boardView.updateCommands(items, message, turn);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showResults(final Map<String, Pair<Integer, Integer>> result) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + "endGame" + EXTENSION));
-        ;
         final Parent root = loader.load(getClass().getResourceAsStream(PATH + "endGame" + EXTENSION));
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
         final EndGameView endGameView = ((EndGameView) loader.<SceneView>getController());
@@ -147,26 +138,25 @@ public class GameViewImpl extends Application implements GameView {
         this.setStageSize();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void updateBoard(Map<Position, SlotType> boardUpdates) {
+    public void updateBoard(final Map<Position, SlotType> boardUpdates) {
         this.boardView.updateBoard(boardUpdates);
     }
 
     private void setBoardView() throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + "GameBoard" + EXTENSION));
-        ;
-        final Parent root = loader.load(getClass().getResourceAsStream(PATH + "GameBoard" + EXTENSION));
-        this.boardScene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        this.boardView = loader.<GameBoardView>getController();
-        this.boardView.init(this, this.controller);
+        final Pair<Scene, SceneView> pair = this.loadScene("GameBoard");
+        this.boardScene= pair.getFirst();
+        this.boardView = (GameBoardView) pair.getSecond();
     }
 
-
-    private Pair<Scene, SceneView> loadScene(String name) throws IOException {
+    private Pair<Scene, SceneView> loadScene(final String name) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + name + EXTENSION));
         final Parent root = loader.load(getClass().getResourceAsStream(PATH + name + EXTENSION));
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        final SceneView sceneView = loader.<SceneView>getController();
+        final SceneView sceneView = loader.getController();
         sceneView.init(this, this.controller);
         return new Pair<>(scene, sceneView);
     }
@@ -177,5 +167,4 @@ public class GameViewImpl extends Application implements GameView {
         this.stage.setFullScreen(true);
         this.stage.show();
     }
-
 }

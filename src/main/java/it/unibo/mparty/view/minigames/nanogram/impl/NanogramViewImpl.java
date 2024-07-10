@@ -8,17 +8,23 @@ import it.unibo.mparty.view.minigames.nanogram.api.NanogramView;
 import it.unibo.mparty.view.minigames.nanogram.NanogramMessage;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -80,6 +86,20 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
 
         this.filledButton.setOnAction(event -> this.controller.setFillState(true));
         this.crossButton.setOnAction(event -> this.controller.setFillState(false));
+    }
+
+    @FXML
+    private void tutorialClicked() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/minigames/nanogramTutorial.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        stage.setTitle("Nanogram Tutorial");
+        stage.getIcons().add(new Image("/images/marioParty.png"));
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(this.pane.getScene().getWindow());
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     /**
@@ -162,14 +182,6 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     public void updateLives(final int actualLives) {
         final String live = "Vite: ";
         this.livesLabel.setText(live + actualLives);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void displayStatusMessage(final NanogramMessage message) {
-        this.messageLabel.setText(message.toString());
     }
 
     /**

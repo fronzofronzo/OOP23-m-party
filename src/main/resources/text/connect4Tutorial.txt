@@ -1,0 +1,6 @@
+L'obiettivo e' mettere in fila  (orizzontale, verticale o diagonale) quattro proprie pedine.
+Per inserire una pedina il giocatore che e' di turno dovra' cliccare sul bottone con il numero
+relativo alla colonna in cui vorra' inserire la pedina. Se sara' possibile aggiungerla verra'
+messo un cerchio del colore corrispondente al giocatore. Al termine, in caso di parita' verra'
+assegnata la vittoria al giocatore che e' stato sfidato che vincera' un bottino inferiore 
+rispetto alla vincita normale.

@@ -42,6 +42,8 @@ public class EndGameViewImpl extends AbstractSceneView implements EndGameView {
 
     @FXML
     private void initialize() {
+        tableView.setSelectionModel(null);
+
         setHeaderFont(this.playerColumn);
         setHeaderFont(this.starColumn);
         setHeaderFont(this.coinColumn);

@@ -12,7 +12,7 @@ import it.unibo.mparty.model.item.api.ItemFactory;
 import it.unibo.mparty.model.item.impl.ItemFactoryImpl;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
-import it.unibo.mparty.model.player.impl.PlayerImplementation;
+import it.unibo.mparty.model.player.impl.PlayerImpl;
 
 /**
  * Test class for the Items.
@@ -42,7 +42,7 @@ public class TestItemImplementation {
         tripleDice = factory.createItem(ItemName.TRIPLO_DADO);
         booBell = factory.createItem(ItemName.CAMPANA_BOO);
         goldenPipe = factory.createItem(ItemName.TUBO_DORATO);
-        testPlayer = new PlayerImplementation("test", "Mario");
+        testPlayer = new PlayerImpl("test", "Mario");
     }
 
     /**
@@ -78,7 +78,7 @@ public class TestItemImplementation {
      */
     @Test
     public void testActivation() {
-        final Player testPlayer2 = new PlayerImplementation("test2", "Luigi");
+        final Player testPlayer2 = new PlayerImpl("test2", "Luigi");
         testPlayer2.addCoins(10);
         testPlayer.getPlayerBag().addItem(tripleDice);
         testPlayer.getPlayerBag().addItem(booBell);
