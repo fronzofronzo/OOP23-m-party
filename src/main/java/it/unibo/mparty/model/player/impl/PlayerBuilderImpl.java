@@ -8,7 +8,7 @@ import it.unibo.mparty.model.player.api.PlayerBuilder;
  * for a builder of player. It stores the username and the character chosen  and
  * return a new {@link Player} once the method build is called.
  */
-public class PlayerBuilderImplementation implements PlayerBuilder {
+public class PlayerBuilderImpl implements PlayerBuilder {
 
     private String username;
     private String character;

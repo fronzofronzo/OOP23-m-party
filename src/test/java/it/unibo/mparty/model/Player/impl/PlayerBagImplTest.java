@@ -4,7 +4,7 @@ import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemFactoryImpl;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.PlayerBag;
-import it.unibo.mparty.model.player.impl.PlayerBagImplementation;
+import it.unibo.mparty.model.player.impl.PlayerBagImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,9 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 /**
- * Test class for a {@link it.unibo.mparty.model.player.impl.PlayerBagImplementation}.
+ * Test class for a {@link PlayerBagImpl}.
  */
-class PlayerBagImplementationTest {
+class PlayerBagImplTest {
 
     private PlayerBag bag;
     private int capacity;
@@ -27,7 +27,7 @@ class PlayerBagImplementationTest {
     @BeforeEach
     public void init() {
         capacity =  3;
-        this.bag = new PlayerBagImplementation(capacity);
+        this.bag = new PlayerBagImpl(capacity);
     }
 
     /**

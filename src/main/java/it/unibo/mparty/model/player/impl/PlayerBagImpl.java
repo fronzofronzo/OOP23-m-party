@@ -11,7 +11,7 @@ import java.util.Optional;
  * This class implements a {@code PlayerBag}. It also offers an implementation
  * for the methods to access and modify content of the bag.
  */
-public class PlayerBagImplementation implements PlayerBag {
+public class PlayerBagImpl implements PlayerBag {
 
     private final List<Item> items;
     private final int capacity;
@@ -21,7 +21,7 @@ public class PlayerBagImplementation implements PlayerBag {
      * of items.
      * @param numberOfItems dimension of the bag.
      */
-    public PlayerBagImplementation(final int numberOfItems) {
+    public PlayerBagImpl(final int numberOfItems) {
         this.items = new ArrayList<>();
         this.capacity = numberOfItems;
     }

@@ -35,7 +35,7 @@ public class PlayerImpl implements Player{
                 .filter(c -> c.getName().equals(character))
                 .findAny()
                 .get();
-        this.playerBag = new PlayerBagImplementation(NUM_ITEMS);
+        this.playerBag = new PlayerBagImpl(NUM_ITEMS);
         this.dice = new DiceImpl();
         this.numCoins = 0;
         this.numStars = 0;

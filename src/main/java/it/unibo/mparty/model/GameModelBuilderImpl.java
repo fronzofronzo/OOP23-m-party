@@ -2,7 +2,7 @@ package it.unibo.mparty.model;
 
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBuilder;
-import it.unibo.mparty.model.player.impl.PlayerBuilderImplementation;
+import it.unibo.mparty.model.player.impl.PlayerBuilderImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class GameModelBuilderImpl implements GameModelBuilder {
      */
     @Override
     public GameModelBuilder addPlayer(final String nickname, final String character) throws IllegalArgumentException {
-        final PlayerBuilder builder = new PlayerBuilderImplementation();
+        final PlayerBuilder builder = new PlayerBuilderImpl();
         final Player pl = builder.username(nickname)
                 .character(character)
                 .buildPlayer();
