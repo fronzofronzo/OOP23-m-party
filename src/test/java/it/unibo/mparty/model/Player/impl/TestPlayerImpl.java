@@ -3,14 +3,18 @@ package it.unibo.mparty.model.Player.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.impl.PlayerImpl;
+import it.unibo.mparty.utilities.Position;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.util.Random;
 
 /**
  * Test class for a {@link PlayerImpl} class.
  */
 public class TestPlayerImpl {
 
+    private static final int RANDOM_BOUND = 100;
     private Player testPlayer;
 
     /**
@@ -57,5 +61,15 @@ public class TestPlayerImpl {
         assertEquals(0, testPlayer.getNumCoins());
     }
 
+    /**
+     * Check that position is correctly modified.
+     */
+    @Test
+    public void testPosition() {
+        final Random random = new Random();
+        final Position position = new Position(random.nextInt(RANDOM_BOUND), random.nextInt(RANDOM_BOUND));
+        this.testPlayer.setPosition(position);
+        Assertions.assertEquals(position, this.testPlayer.getPosition());
+    }
 
 }
