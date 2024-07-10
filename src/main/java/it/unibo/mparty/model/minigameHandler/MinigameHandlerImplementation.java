@@ -89,8 +89,8 @@ public class MinigameHandlerImplementation implements MinigameHandler {
                         minigames.add(minigame.getName());
                     }
                 }
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                     NoSuchMethodException e) {
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException
+                     | NoSuchMethodException e) {
                 throw new RuntimeException(e);
             }
         }

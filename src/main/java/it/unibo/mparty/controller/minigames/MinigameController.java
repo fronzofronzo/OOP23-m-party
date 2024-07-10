@@ -15,7 +15,7 @@ public interface MinigameController {
     void endGame();
 
     /**
-     * Initialise the minigame
+     * Initialise the minigame.
      * @param players that participate to the minigame.
      */
     void initGame(List<String> players);
