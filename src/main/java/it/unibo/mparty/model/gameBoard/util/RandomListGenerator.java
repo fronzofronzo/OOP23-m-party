@@ -5,11 +5,23 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * The class RandomListGenerator aims to take in input values associated with percentages
+ * and create a list of 100 elements that contains the above values in random
+ * order.
+ */
 public class RandomListGenerator {
 
     private static final int CORRECT_PERC = 100;
     private static final String ERROR_MESSAGE = "Il valore totale delle percentuali in input non è accettabile (100)";
 
+
+    /**
+     * Returns the expected list based on the input values
+     * @param input map that contains for each value the respective percentage
+     * @return the expected list based on the input valuse
+     * @throws {@IllegalArgumentException} if the sum of the percentages is not 100
+     */
     public static <E> List<E> generate(Map<E, Integer> input) {
         if (!validProbabilities(input)) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
