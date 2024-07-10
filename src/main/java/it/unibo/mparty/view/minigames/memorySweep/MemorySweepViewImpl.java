@@ -91,7 +91,6 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
                 } else {
                     this.setLabelText(this.players.get(1) + " HA FINITO IL TURNO, TOCCA A " + this.players.get(0));
                 }
-                this.controller.setRandoms();
                 this.controller.setUp();
             }
             case LOSS -> {
