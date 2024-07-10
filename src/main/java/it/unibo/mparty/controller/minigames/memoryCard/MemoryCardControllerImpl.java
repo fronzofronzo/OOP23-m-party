@@ -18,6 +18,7 @@ public class MemoryCardControllerImpl implements MemoryCardController {
     /**
      * Constructor of the Memory Card controller. It initialises the reference
      * to model and controller of the minigame.
+     *
      * @param view of the game.
      */
     public MemoryCardControllerImpl(final MemoryCardView view) {
@@ -85,10 +86,10 @@ public class MemoryCardControllerImpl implements MemoryCardController {
         }
     }
 
-    private void updateEndGameView(){
+    private void updateEndGameView() {
         final int n = this.model.getCards().size();
-        for (int i = 0; i < n; i ++) {
-            this.view.setCardStatus(i,false);
+        for (int i = 0; i < n; i++) {
+            this.view.setCardStatus(i, false);
         }
     }
 

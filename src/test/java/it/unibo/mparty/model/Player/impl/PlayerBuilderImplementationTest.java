@@ -17,7 +17,7 @@ class PlayerBuilderImplementationTest {
      * Check if the player is created correctly
      */
     @Test
-    public void testPlayerCreation(){
+    public void testPlayerCreation() {
         final String username = "username";
         final String character = Character.CHAR_MARIO.getName();
         final PlayerBuilder builder = new PlayerBuilderImplementation();
@@ -32,7 +32,7 @@ class PlayerBuilderImplementationTest {
      * Check that building a player with not enough information fails
      */
     @Test
-    public void testNotEnoughInformation(){
+    public void testNotEnoughInformation() {
         final String username = "username";
         final String character = Character.CHAR_MARIO.getName();
         final PlayerBuilder builder = new PlayerBuilderImplementation();
