@@ -1,6 +1,5 @@
 package it.unibo.mparty.view.minigames.nanogram.api;
 
-import it.unibo.mparty.view.minigames.nanogram.NanogramMessage;
 import it.unibo.mparty.view.minigames.MinigameView;
 
 import java.util.List;
