@@ -152,7 +152,6 @@ public class GameViewImpl extends Application implements GameView {
         this.boardView = (GameBoardView) pair.getSecond();
     }
 
-
     private Pair<Scene, SceneView> loadScene(final String name) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + name + EXTENSION));
         final Parent root = loader.load(getClass().getResourceAsStream(PATH + name + EXTENSION));

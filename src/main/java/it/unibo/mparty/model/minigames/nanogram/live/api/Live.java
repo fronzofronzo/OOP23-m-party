@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.nanogram.api;
+package it.unibo.mparty.model.minigames.nanogram.live.api;
 
 /**
  * Interface representing the lives system in Nanogram game.

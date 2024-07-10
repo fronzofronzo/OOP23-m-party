@@ -1,6 +1,6 @@
-package it.unibo.mparty.model.minigames.nanogram.impl;
+package it.unibo.mparty.model.minigames.nanogram.board.impl;
 
-import it.unibo.mparty.model.minigames.nanogram.api.Board;
+import it.unibo.mparty.model.minigames.nanogram.board.api.Board;
 import it.unibo.mparty.utilities.Position;
 
 import java.util.HashMap;

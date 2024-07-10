@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.nanogram.api;
+package it.unibo.mparty.model.minigames.nanogram.board.api;
 
 import it.unibo.mparty.utilities.Position;
 

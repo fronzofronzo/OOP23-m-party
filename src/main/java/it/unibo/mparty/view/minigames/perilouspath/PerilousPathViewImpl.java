@@ -11,7 +11,6 @@ import it.unibo.mparty.model.minigames.perilouspath.impl.PathPosition;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.GameView;
-import it.unibo.mparty.view.minigames.MinigameView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -24,6 +23,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,7 +42,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
      */
     private static final int FIT_WIDTH = 50;
 
-    private static final String PATH = "/text/perilousPathTutorial.txt";
+    private static final String PATH = "src/main/resources/text/perilousPathTutorial.txt";
     @FXML
     private GridPane myGridPane;
 
@@ -260,6 +261,10 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
 
     private void showTutorial(final Label label) {
         label.setWrapText(true);
-        label.setText(MinigameView.getTutorialFromFile(PATH));
+        try {
+            label.setText(new String(Files.readAllBytes(Paths.get(PATH))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

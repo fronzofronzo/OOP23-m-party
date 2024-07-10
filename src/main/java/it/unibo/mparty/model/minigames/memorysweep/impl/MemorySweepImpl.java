@@ -38,7 +38,7 @@ public class MemorySweepImpl implements MemorySweep {
     }
 
     /**
-     * constructor of this without parameters
+     * constructor of this without parameters.
      */
     public MemorySweepImpl() {
         this.random = new Random();

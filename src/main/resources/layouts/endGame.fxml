@@ -33,14 +33,13 @@
         </HBox>
     </bottom>
    <top>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="CLASSIFICA FINALE">
-               <font>
-                  <Font name="AdLib WGL4 BT" size="36.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
+       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+           <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                  text="CLASSIFICA FINALE">
+              <font>
+                  <Font name="AdLib WGL4 BT" size="36.0"/>
+              </font>
+           </Label>
+       </HBox>
    </top>
 </BorderPane>

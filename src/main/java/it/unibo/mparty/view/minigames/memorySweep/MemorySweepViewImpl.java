@@ -6,7 +6,6 @@ import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.AbstractSceneView;
-import it.unibo.mparty.view.minigames.MinigameView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,6 +17,8 @@ import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -32,7 +33,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
     private static final int SIZE = 8;
     private Button button;
     private List<String> players = new ArrayList<>();
-    private static final String PATH = "/text/memorySweepTutorial.txt";
+    private static final String PATH = "src/main/resources/text/memorySweepTutorial.txt";
 
     @FXML
     private Button startButton;
@@ -176,7 +177,11 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
         }
         this.memorySweepGrid.setDisable(true);
         this.label.setWrapText(true);
-        this.setLabelText(MinigameView.getTutorialFromFile(PATH));
+        try {
+            this.label.setText(new String(Files.readAllBytes(Paths.get(PATH))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setLabelText(final String text) {
