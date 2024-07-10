@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.minigames.nanogram.impl;
 
+import it.unibo.mparty.model.minigames.nanogram.live.impl.LiveImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
