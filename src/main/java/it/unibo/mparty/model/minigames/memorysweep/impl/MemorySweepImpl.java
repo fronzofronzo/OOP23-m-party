@@ -23,7 +23,7 @@ public class MemorySweepImpl implements MemorySweep {
     private final int side;
     private boolean turn = true;
     private String winner;
-    private static final int COINS = 20;
+    private static final int COINS = 10;
     private static final int SIDE = 8;
 
     /**

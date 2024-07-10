@@ -122,7 +122,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
                 this.gameLabel.setText("MOSSA VALIDA");
             }
             case WRONG -> this.gameLabel.setText("MOSSA NON VALIDA");
-            default -> this.gameLabel.setText("MOSSA INVALIDA");
+            default -> button.setText("");
         }
     }
 
