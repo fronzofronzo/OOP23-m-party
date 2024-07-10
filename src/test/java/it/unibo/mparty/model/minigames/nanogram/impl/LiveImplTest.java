@@ -13,8 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 class LiveImplTest {
 
     private static final int INITIAL_LIVES = 3;
-    private static final int UPDATE_LIVE = 1;
-    private static final int DEATH_LIVE = 0;
     private LiveImpl live;
 
     /**
@@ -36,25 +34,16 @@ class LiveImplTest {
     }
 
     /**
-     * Tests the {@code update} method.
-     * Ensures that the lives are updated correctly.
-     */
-    @Test
-    void update() {
-        this.live.update(UPDATE_LIVE);
-        assertEquals(UPDATE_LIVE, this.live.getLive());
-    }
-
-    /**
      * Tests the {@code isDeath} method.
      * Ensures that the method correctly identifies when lives reach zero.
      */
     @Test
     void isDeath() {
-        this.live.update(DEATH_LIVE);
-        assertTrue(this.live.isDeath());
-
-        this.live.update(INITIAL_LIVES);
+        this.live.decrease();
         assertFalse(this.live.isDeath());
+
+        this.live.decrease();
+        this.live.decrease();
+        assertTrue(this.live.isDeath());
     }
 }

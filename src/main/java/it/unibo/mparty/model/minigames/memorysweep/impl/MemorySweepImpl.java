@@ -37,7 +37,10 @@ public class MemorySweepImpl implements MemorySweep {
         this.counter = 1;
     }
 
-    public MemorySweepImpl(){
+    /**
+     * constructor of this without parameters
+     */
+    public MemorySweepImpl() {
         this.random = new Random();
         this.randomList = new HashSet<>();
         this.side = SIDE;

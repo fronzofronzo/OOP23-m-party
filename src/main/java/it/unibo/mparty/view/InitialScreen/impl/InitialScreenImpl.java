@@ -28,6 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * implementation of {@link InitialScreen}
+ */
 public class InitialScreenImpl extends AbstractSceneView implements InitialScreen, Initializable {
 
 
@@ -56,11 +59,17 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
     @FXML
     private Label playersLabel;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void handleExitButton(ActionEvent event) {
         System.exit(0);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void handleAddPlayerButton(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/MiniScreen.fxml"));
@@ -77,6 +86,9 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
         this.addPlayers.setDisable(this.builder.isFull());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void handleStartButton(ActionEvent event) throws IOException {
         this.builder = this.builder.difficulty(this.difficulty);
@@ -84,10 +96,13 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
         controller.startGame(this.builder.build());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(final URL location, final ResourceBundle resources) {
         this.startGame.setDisable(true);
-        for(BoardType difficulty: BoardType.values()){
+        for (BoardType difficulty : BoardType.values()) {
             this.difficulties.add(difficulty.toString());
         }
         this.playerChoiceBox.getItems().addAll(this.difficulties);
@@ -97,7 +112,7 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
         });
         this.builder = new GameModelBuilderImpl();
         this.stackPane.sceneProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue != null){
+            if (newValue != null) {
                 this.imageView.fitWidthProperty().bind(this.stackPane.widthProperty());
                 this.imageView.fitHeightProperty().bind(this.stackPane.heightProperty());
                 this.imageView.setPreserveRatio(false);
@@ -105,19 +120,25 @@ public class InitialScreenImpl extends AbstractSceneView implements InitialScree
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setNewPlayer(String username,String character){
-        try{
-            this.builder = this.builder.addPlayer(username,character);
+    public void setNewPlayer(final String username, final String character) {
+        try {
+            this.builder = this.builder.addPlayer(username, character);
             this.setLabelText("giocatore correttamente aggiunto");
             this.playersLabel.setText(this.playersLabel.getText() + "\n" + username + ": " + character);
-        }catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             this.setLabelText(e.getMessage());
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setLabelText(String text){
+    public void setLabelText(String text) {
         this.exceptionLabel.setText(text);
     }
 
