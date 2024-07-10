@@ -4,6 +4,7 @@ import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardController;
 import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardControllerImpl;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
+import it.unibo.mparty.view.minigames.MinigameView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -123,23 +124,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     }
 
     private void showTutorial(final Label label) {
-        final BufferedReader input = new BufferedReader(new InputStreamReader(Objects.requireNonNull(getClass()
-                .getResourceAsStream(TUTORIAL_PATH))));
-        try {
-            String line;
-            while ((line = input.readLine()) != null) {
-                final String labelText = label.getText();
-                label.setText(labelText + line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                input.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        this.textLabel.setText(MinigameView.getTutorialFromFile(TUTORIAL_PATH));
     }
 
 }
