@@ -39,14 +39,6 @@ public class LiveImpl implements Live {
      * {@inheritDoc}
      */
     @Override
-    public void update(final int live) {
-        this.lives = live;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void decrease() {
         this.lives--;
     }
