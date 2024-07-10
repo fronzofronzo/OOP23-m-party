@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
@@ -12,6 +13,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 public class TutorialScreenImpl implements TutorialScreen, Initializable {
@@ -20,7 +23,10 @@ public class TutorialScreenImpl implements TutorialScreen, Initializable {
     private Button returnButton;
 
     @FXML
-    private TextArea textArea;
+    private Label tutorialLabel;
+
+    private static final String TUTORIAL_PATH = "src/main/resources/Tutorial.txt";
+
 
     @Override
     public void handleButton(ActionEvent e) {
@@ -30,9 +36,11 @@ public class TutorialScreenImpl implements TutorialScreen, Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String text = this.readFile();
-        this.textArea.setText(text);
-        this.textArea.setEditable(false);
+        try {
+            this.tutorialLabel.setText(new String(Files.readAllBytes(Paths.get(TUTORIAL_PATH))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private String readFile() {
