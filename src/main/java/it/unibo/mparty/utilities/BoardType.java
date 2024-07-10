@@ -1,8 +1,20 @@
 package it.unibo.mparty.utilities;
 
+/**
+ * This enum identifies the board
+ */
 public enum BoardType {
-    EASY("Facile"), 
+    /**
+     * 
+     */
+    EASY("Facile"),
+    /**
+     * 
+     */
     MEDIUM("Medio"),
+    /**
+     * 
+     */
     HARD("Difficile");
 
     private final String text;
@@ -11,8 +23,12 @@ public enum BoardType {
         this.text = text;
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
-    public String toString(){
+    public String toString() {
         return this.text;
     }
 }

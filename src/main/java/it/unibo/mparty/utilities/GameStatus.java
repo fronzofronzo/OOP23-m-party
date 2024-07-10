@@ -1,7 +1,7 @@
 package it.unibo.mparty.utilities;
 
 /**
- * Enum to represent the different status during the game
+ * Enum to represent the different status during the game.
  */
 public enum GameStatus {
 
@@ -28,9 +28,10 @@ public enum GameStatus {
 
     /**
      * Method tho get the next status. This method has to called on a GameStatus object.
+     * 
      * @return - next game status.
      */
-    public GameStatus switchStatus(){
+    public GameStatus switchStatus() {
         switch (this) {
             case ROLL_DICE -> {
                 return GameStatus.MOVE_PLAYER;
@@ -47,7 +48,9 @@ public enum GameStatus {
             case END_TURN -> {
                 return GameStatus.ROLL_DICE;
             }
-        };
-        return null;
+            default -> {
+                throw new IllegalStateException();
+            }
+        }
     }
 }
