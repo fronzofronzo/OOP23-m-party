@@ -64,14 +64,13 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     @Override
     public void setUpView(final List<AbstractPosition> balls, final List<AbstractPosition> bombs) {
         for (var child : this.myGridPane.getChildren()) {
-            var ballPos = this.ballPosition(child);
-            var bombPos = this.bombPosition(child);
-            if (balls.stream().anyMatch(b -> b.getX() == ballPos.getX() && b.getY() == ballPos.getY())) {
+            var pos = this.buttonPosition(child);
+            if (balls.stream().anyMatch(b -> b.samePosition(pos))) {
                 if (child instanceof Button) {
                     this.setImage(((Button) child), new ImageView(ballImage));
                 }
             }
-            if (bombs.stream().anyMatch(b -> b.getX() == bombPos.getX() && b.getY() == bombPos.getY())) {
+            if (bombs.stream().anyMatch(b -> b.samePosition(pos))) {
                 if (child instanceof Button) {
                     this.setImage(((Button) child), new ImageView(bombImage));
                 }
@@ -86,8 +85,8 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     @Override
     public void hideBombs(final List<AbstractPosition> bombs) {
         for (var child : this.myGridPane.getChildren()) {
-            var bombPos = this.bombPosition(child);
-            if (bombs.stream().anyMatch(b -> b.getX() == bombPos.getX() && b.getY() == bombPos.getY())) {
+            var pos = this.buttonPosition(child);
+            if (bombs.stream().anyMatch(b -> b.samePosition(pos))) {
                 if (child instanceof Button) {
                     ((Button) child).setGraphic(null);
                 }
@@ -102,8 +101,8 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     @Override
     public void showBombs(final List<AbstractPosition> bombs) {
         for (var child : this.myGridPane.getChildren()) {
-            var bombPos = this.bombPosition(child);
-            if (bombs.stream().anyMatch(b -> b.getX() == bombPos.getX() && b.getY() == bombPos.getY())) {
+            var pos = this.buttonPosition(child);
+            if (bombs.stream().anyMatch(b -> b.samePosition(pos))) {
                 if (child instanceof Button) {
                     this.setImage(((Button) child), new ImageView(bombImage));
                 }
@@ -197,30 +196,6 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         var x = GridPane.getRowIndex(child) == null ? 0 : GridPane.getRowIndex(child);
         var y = GridPane.getColumnIndex(child) == null ? 0 : GridPane.getColumnIndex(child);
         return new PathPosition(x, y, SIZE);
-    }
-
-    /**
-     * method that manages the creation of a BallPosition object.
-     *
-     * @param child the child that is in that position in the grid
-     * @return the BallPosition of the child in the grid
-     */
-    private BallPosition ballPosition(final Node child) {
-        var x = GridPane.getRowIndex(child) == null ? 0 : GridPane.getRowIndex(child);
-        var y = GridPane.getColumnIndex(child) == null ? 0 : GridPane.getColumnIndex(child);
-        return new BallPosition(x, y, SIZE);
-    }
-
-    /**
-     * method that manages the creation of a BombPosition object.
-     *
-     * @param child the child that is in that position in the grid
-     * @return the BombPosition of the child in the grid
-     */
-    private BombPosition bombPosition(final Node child) {
-        var x = GridPane.getRowIndex(child) == null ? 0 : GridPane.getRowIndex(child);
-        var y = GridPane.getColumnIndex(child) == null ? 0 : GridPane.getColumnIndex(child);
-        return new BombPosition(x, y, SIZE);
     }
 
     /**

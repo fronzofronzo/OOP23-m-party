@@ -9,7 +9,7 @@ import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
  */
 public class BombPosition extends AbstractPosition {
 
-    private static final int MAX_NEAR_BOMBS = 3;
+    private static final int MAX_NEAR_BOMBS = 2;
 
     /**
      * constructor which calls the constructor of AbstractPosition.
@@ -28,20 +28,21 @@ public class BombPosition extends AbstractPosition {
      */
     @Override
     public boolean isSafe(final List<AbstractPosition> list1, final List<AbstractPosition> list2) {
-        if (list1.isEmpty() && !this.samePosition(list2)) {
+        if (list1.isEmpty() && !this.samePosition(list1, list2)) {
             return true;
         }
-        return list1.stream().filter(this::adjacent).count() <= MAX_NEAR_BOMBS && !this.samePosition(list2);
+        return list1.stream().filter(this::adjacent).count() <= MAX_NEAR_BOMBS && !this.samePosition(list1, list2);
     }
 
     /**
      * method for knowing whether this is in the same position of a button in a list.
      *
-     * @param list the list of positions to be checked
+     * @param list1 the first list of positions to be checked
+     * @param list2 the second list of positions to be checked
      * @return true whether the condition is true, false otherwise
      */
-    private boolean samePosition(final List<AbstractPosition> list) {
-        return list.stream().anyMatch(b -> (this.getX() == b.getX() && this.getY() == b.getY()));
+    private boolean samePosition(final List<AbstractPosition> list1, final List<AbstractPosition> list2) {
+        return list1.stream().anyMatch(this::samePosition) || list2.stream().anyMatch(this::samePosition);
     }
 
 }
