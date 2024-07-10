@@ -17,11 +17,15 @@ public class MemorySweepControllerImpl implements MemorySweepController {
     private final static int SECONDS = 3000;
     private final PauseTransition pause = new PauseTransition(new Duration(SECONDS));
 
-    public MemorySweepControllerImpl(MemorySweepView view){
+    public MemorySweepControllerImpl(MemorySweepView view) {
         this.view = view;
         this.model = new MemorySweepImpl(SIZE);
         this.setRandoms();
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setUp() {
         this.setRandoms();
@@ -30,34 +34,47 @@ public class MemorySweepControllerImpl implements MemorySweepController {
         this.pause.play();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void hit(Position p) {
         var type = this.model.hit(p);
-        if(type.equals(MemorySweep.HitType.LOSS)){
+        if (type.equals(MemorySweep.HitType.LOSS)) {
             this.endGame();
         }
-        this.view.hit(type,this.model.getTurn());
-        if(type.equals(MemorySweep.HitType.LOSS)){
+        this.view.hit(type, this.model.getTurn());
+        if (type.equals(MemorySweep.HitType.LOSS)) {
             this.view.setUp(this.model.getRandomList());
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void endGame() {
-        if(this.model.isOver()){
+        if (this.model.isOver()) {
             this.view.getMainController().saveMinigameResult(this.model.getResult());
             this.view.showResult(this.model.getResult());
         }
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void initGame(List<String> players) {
         this.model.setUpPlayers(players);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setRandoms(){
+    public void setRandoms() {
         this.model.setRandomList();
     }
+
 }

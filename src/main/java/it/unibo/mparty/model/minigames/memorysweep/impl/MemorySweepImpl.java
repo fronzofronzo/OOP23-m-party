@@ -4,88 +4,105 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 
-public class MemorySweepImpl implements MemorySweep{
+public class MemorySweepImpl implements MemorySweep {
 
     private final Set<Position> randomList;
     private int counter;
-    private Pair<String,Set<Position>> p1;
-    private Pair<String,Set<Position>> p2;
+    private Pair<String, Set<Position>> p1;
+    private Pair<String, Set<Position>> p2;
     private final Random random;
     private final int side;
     private boolean turn = true;
     private String winner;
 
-    public MemorySweepImpl(int side){
+    public MemorySweepImpl(int side) {
         this.random = new Random();
         this.randomList = new HashSet<>();
         this.side = side;
         this.counter = 1;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setRandomList() {
         this.setCounter();
         this.randomList.clear();
-        for(var i = 0; i < this.getCounter(); i++){
+        for (var i = 0; i < this.getCounter(); i++) {
             this.randomList.add(getNewPosition());
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<Position> getRandomList() {
         return this.randomList;
     }
 
-    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public HitType hit(Position p) {
         return this.getTurn() ? this.playerTurn(this.p1, p) : this.playerTurn(this.p2, p);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean getTurn() {
         return this.turn;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getWinner() {
         return this.winner;
     }
+
     /**
      * method for getting a new position which is not already included in the randomList variable
-     * @return the new position 
+     *
+     * @return the new position
      */
-    private Position getNewPosition(){
+    private Position getNewPosition() {
         Position p;
         do {
-            p = new Position(random.nextInt(this.side),random.nextInt(this.side));
-        }while(this.getRandomList().contains(p));
+            p = new Position(random.nextInt(this.side), random.nextInt(this.side));
+        } while (this.getRandomList().contains(p));
         return p;
     }
+
     /**
      * method for increasing the list of buttons that will be recreated
      */
-    private void setCounter(){
+    private void setCounter() {
         this.counter++;
     }
+
     /**
      * the actual method that manages the players turns
+     *
      * @param player the set of the player
-     * @param p the position clicked by that player
+     * @param p      the position clicked by that player
      * @return whether his guess was right(in this case returns
      * whether the guess is over or not) or wrong
      */
-    private HitType playerTurn(Pair<String,Set<Position>> player,Position p){
-        if(this.randomList.contains(p)){
+    private HitType playerTurn(Pair<String, Set<Position>> player, Position p) {
+        if (this.randomList.contains(p)) {
             player.getSecond().add(p);
-            if(player.getSecond().size() == this.randomList.size()){
+            if (player.getSecond().size() == this.randomList.size()) {
                 this.changeTurn();
                 player.getSecond().clear();
                 return HitType.TURN_END;//player 1 ha passato il turno tocca al player 2
@@ -99,27 +116,39 @@ public class MemorySweepImpl implements MemorySweep{
     /**
      * changes the turn
      */
-    private void changeTurn(){
+    private void changeTurn() {
         this.turn = !this.turn;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getCounter() {
         return this.counter;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Pair<String, Integer> getResult() {
         int COINS = 20;
         return new Pair<>(this.winner, COINS);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setUpPlayers(List<String> players) {
-        this.p1 = new Pair<>(players.get(0),new HashSet<>());
-        this.p2 = new Pair<>(players.get(1),new HashSet<>());
+        this.p1 = new Pair<>(players.get(0), new HashSet<>());
+        this.p2 = new Pair<>(players.get(1), new HashSet<>());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isOver() {
         return this.winner.equals(this.p1.getFirst()) || this.winner.equals(this.p2.getFirst());
