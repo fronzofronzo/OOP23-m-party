@@ -3,11 +3,7 @@ package it.unibo.mparty.view.minigames;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.SceneView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Interface representing the view for a minigame.

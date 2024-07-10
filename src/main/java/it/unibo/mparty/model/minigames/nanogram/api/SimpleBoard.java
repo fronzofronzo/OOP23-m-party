@@ -9,7 +9,7 @@ import java.util.List;
  * This interface defines methods to retrieve the state of cells, generate hints for rows or columns,
  * and obtain the size of the board.
  */
-public interface SimpleBoard {
+public interface SimpleBoard extends Board{
 
     /**
      * Retrieves the state of the cell at the specified position.
@@ -26,11 +26,4 @@ public interface SimpleBoard {
      * @return a list of lists of integers representing hints for each row or column.
      */
     List<List<Integer>> generateHints(boolean isRow);
-
-    /**
-     * Retrieves the size of the board.
-     *
-     * @return the size of the board (number of rows/columns).
-     */
-    int getSize();
 }
