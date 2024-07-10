@@ -14,7 +14,7 @@ public enum Direction {
     /**
      * downward.
      */
-    DOWN("Giù"),
+    DOWN("Giu'"),
     /**
      * rightward.
      */
@@ -22,7 +22,7 @@ public enum Direction {
     /**
      * leftward.
      */
-    LEFT("Sinista");
+    LEFT("Sinistra");
 
     private final String text;
 
