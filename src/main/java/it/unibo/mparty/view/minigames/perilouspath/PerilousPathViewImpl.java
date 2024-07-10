@@ -258,7 +258,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         imageView.setPreserveRatio(false);
     }
 
-    private void showTutorial(final Label label){
+    private void showTutorial(final Label label) {
         label.setText(MinigameView.getTutorialFromFile(PATH));
     }
 }
