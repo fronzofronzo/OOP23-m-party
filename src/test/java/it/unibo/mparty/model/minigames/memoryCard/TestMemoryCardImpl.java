@@ -37,6 +37,7 @@ public class TestMemoryCardImpl {
         model.flip(i);
         model.flip(j);
         Assertions.assertEquals(1, model.guessedCardsType().size());
+        Assertions.assertFalse(model.isOver());
     }
 
     /**
@@ -54,5 +55,6 @@ public class TestMemoryCardImpl {
         model.flip(i);
         model.flip(j);
         Assertions.assertEquals(1, model.getMistakes());
+        Assertions.assertFalse(model.isOver());
     }
 }
