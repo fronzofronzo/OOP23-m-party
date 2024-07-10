@@ -1,6 +1,7 @@
-package it.unibo.mparty.model.minigames.nanogram.api;
+package it.unibo.mparty.model.minigames.nanogram.game.api;
 
 import it.unibo.mparty.model.minigames.MinigameModel;
+import it.unibo.mparty.model.minigames.nanogram.board.api.SimpleBoard;
 
 import java.util.List;
 

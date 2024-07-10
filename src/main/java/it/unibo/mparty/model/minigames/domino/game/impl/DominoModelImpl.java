@@ -76,15 +76,15 @@ public class DominoModelImpl implements DominoModel {
      */
     @Override
     public boolean canDrawTile(final String player) {
-        return !this.playerTiles.canPlayerPlace(player, this.boardTile) && !this.dominoSet.isEmpty();
+        return this.playerTiles.cannotPlayerPlace(player, this.boardTile) && !this.dominoSet.isEmpty();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean cannotPlayerPlace(final String player) {
-        return !this.playerTiles.canPlayerPlace(player, this.boardTile) && this.dominoSet.isEmpty();
+    public boolean playerCannotMakeMove(final String player) {
+        return this.playerTiles.cannotPlayerPlace(player, this.boardTile) && this.dominoSet.isEmpty();
     }
 
     /**
@@ -109,7 +109,7 @@ public class DominoModelImpl implements DominoModel {
      * {@inheritDoc}
      */
     @Override
-    public PlayerTiles getPlayersTiles() {
+    public PlayerTiles getAllPlayersTiles() {
         return this.playerTiles;
     }
 
@@ -133,14 +133,14 @@ public class DominoModelImpl implements DominoModel {
             return new Pair<>(this.player1, COINS);
         } else if (player2Tiles.isEmpty() && !player1Tiles.isEmpty()) {
             return new Pair<>(this.player2, COINS);
-        } else if (this.cannotPlayerPlace(this.player1) && this.cannotPlayerPlace(this.player2)) {
+        } else if (this.playerCannotMakeMove(this.player1) && this.playerCannotMakeMove(this.player2)) {
             final int player1Score = this.calculateTileScore(player1Tiles);
             final int player2Score = this.calculateTileScore(player2Tiles);
             if (player1Score == player2Score) {
                 final int smallestTilePlayer1 = this.getSmallestTileValue(player1Tiles);
                 final int smallestTilePlayer2 = this.getSmallestTileValue(player2Tiles);
-                return smallestTilePlayer1 < smallestTilePlayer2 ?
-                        new Pair<>(this.player1, COINS) : new Pair<>(this.player2, COINS);
+                return smallestTilePlayer1 < smallestTilePlayer2
+                        ? new Pair<>(this.player1, COINS) : new Pair<>(this.player2, COINS);
             }
             return player1Score < player2Score ? new Pair<>(this.player1, COINS) : new Pair<>(this.player2, COINS);
         } else {
@@ -155,8 +155,8 @@ public class DominoModelImpl implements DominoModel {
     public boolean isOver() {
         return this.playerTiles.getPlayerTiles(this.player1).isEmpty()
                 || this.playerTiles.getPlayerTiles(this.player2).isEmpty()
-                || (this.cannotPlayerPlace(this.player1)
-                && this.cannotPlayerPlace(this.player2));
+                || (this.playerCannotMakeMove(this.player1)
+                && this.playerCannotMakeMove(this.player2));
     }
 
     /**

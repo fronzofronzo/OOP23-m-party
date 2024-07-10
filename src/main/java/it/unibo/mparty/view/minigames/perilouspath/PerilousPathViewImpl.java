@@ -14,7 +14,6 @@ import it.unibo.mparty.view.GameView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,15 +23,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
-import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 /**
  * implementation of {@link PerilousPathView}.
  */
-public class PerilousPathViewImpl extends AbstractSceneView implements PerilousPathView, Initializable {
+public class PerilousPathViewImpl extends AbstractSceneView implements PerilousPathView {
 
     /**
      * height of the image.
@@ -42,6 +41,8 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
      * width of the image.
      */
     private static final int FIT_WIDTH = 50;
+
+    private static final String PATH = "src/main/resources/text/perilousPathTutorial.txt";
     @FXML
     private GridPane myGridPane;
 
@@ -121,7 +122,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
                 this.gameLabel.setText("MOSSA VALIDA");
             }
             case WRONG -> this.gameLabel.setText("MOSSA NON VALIDA");
-            default -> this.gameLabel.setText("MOSSA INVALIDA");
+            default -> button.setText("");
         }
     }
 
@@ -165,7 +166,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     @Override
     public void showResult(final Pair<String, Integer> result) {
         this.gameLabel.setText("il giocatore : " + result.getFirst() + " ha vinto " + result.getSecond() + " coins");
-        this.startButton.setText("RETURNA");
+        this.startButton.setText("RETURN");
         this.startButton.setDisable(false);
         this.startButton.setOnAction(e -> {
             try {
@@ -182,6 +183,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
     @Override
     public void startMinigame(final List<String> players) {
         this.observer.initGame(players);
+        this.showTutorial(this.gameLabel);
     }
 
     /**
@@ -232,8 +234,12 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
         imageView.setPreserveRatio(false);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        this.gameLabel.setText("COLLEGARE LA PALLA A SINISTRA A QUELLA A DESTRA EVITANDO LE BOMBE");
+    private void showTutorial(final Label label) {
+        label.setWrapText(true);
+        try {
+            label.setText(new String(Files.readAllBytes(Paths.get(PATH))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

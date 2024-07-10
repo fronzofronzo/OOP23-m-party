@@ -1,6 +1,5 @@
 package it.unibo.mparty.view.minigames.nanogram.api;
 
-import it.unibo.mparty.view.minigames.nanogram.NanogramMessage;
 import it.unibo.mparty.view.minigames.MinigameView;
 
 import java.util.List;
@@ -39,13 +38,6 @@ public interface NanogramView extends MinigameView {
      * @param actualLives the number of remaining lives to display.
      */
     void updateLives(int actualLives);
-
-    /**
-     * Displays a status message to the user in the UI.
-     *
-     * @param message the status message to display, encapsulated in a {@link NanogramMessage} object.
-     */
-    void displayStatusMessage(NanogramMessage message);
 
     /**
      * Disables interaction with all cells in the Nanogram grid.

@@ -11,11 +11,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
 
-import java.io.BufferedReader;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * This class provides a graphic implementation for {@link MemoryCardView}.
@@ -25,7 +26,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
 
     private static final int FONT_SIZE = 15;
     private static final int PREF_BUTTON_SIZE = 100;
-    private static final String TUTORIAL_PATH = "/text/memoryCardTutorial.txt";
+    private static final String TUTORIAL_PATH = "src/main/resources/text/memoryCardTutorial.txt";
 
     private final MemoryCardController controller = new MemoryCardControllerImpl(this);
 
@@ -43,7 +44,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
      */
     @Override
     public void setCardStatus(final int index, final boolean status) {
-        ((Button) this.cardsPane.getChildren().get(index)).setDisable(!status);
+        (this.cardsPane.getChildren().get(index)).setDisable(!status);
     }
 
     /**
@@ -66,6 +67,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
         bt.setDisable(true);
         bt.setStyle("-fx-opacity: 1.0; ");
         bt.setFont(new Font("Segoe UI Light", FONT_SIZE));
+        bt.setVisible(false);
         this.cardsPane.getChildren().add(bt);
     }
 
@@ -74,7 +76,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
      */
     @Override
     public void setMistakesNumber(final int n) {
-        this.textLabel.setText("Errori: " + String.valueOf(n));
+        this.textLabel.setText("Errori: " + n);
     }
 
     /**
@@ -82,10 +84,8 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
      */
     @Override
     public void showResult(final Pair<String, Integer> result) {
-        this.textLabel.setText(result.getFirst() + " ha guadagnato " + String.valueOf(result.getSecond()) + " monete.");
-        this.controlButton.setOnAction(e -> {
-            this.controller.endGame();
-        });
+        this.textLabel.setText(result.getFirst() + " ha guadagnato " + result.getSecond() + " monete.");
+        this.controlButton.setOnAction(e -> this.controller.endGame());
         this.controlButton.setText("Torna al gioco principale");
         this.controlButton.setDisable(false);
     }
@@ -96,12 +96,20 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     @Override
     public void startMinigame(final List<String> players) {
         this.controller.initGame(players);
-        this.showTutorial(textLabel);
+        final InputStream input = getClass().getClassLoader().getResourceAsStream("text/memoryCardTutorial.txt");
+        String text;
+        try {
+            text = new String(input.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        this.textLabel.setText(text);
     }
 
     @FXML
     private void startGame(final ActionEvent event) {
         final Button bt = (Button) event.getSource();
+        this.cardsPane.getChildren().forEach(b -> b.setVisible(true));
         bt.setText("Pronto !");
         bt.setOnAction(this::hideCards);
         this.textLabel.setText("Quando si e' pronti, spingere il pulsante 'Pronto'");
@@ -118,26 +126,6 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
 
     private void tryCard(final ActionEvent e) {
         this.controller.selectCard(this.cardsPane.getChildren().indexOf((Button) e.getSource()));
-    }
-
-    private void showTutorial(final Label label){
-        final BufferedReader input = new BufferedReader(new InputStreamReader(Objects.requireNonNull(getClass()
-                .getResourceAsStream(TUTORIAL_PATH))));
-        try {
-            String line;
-            while ((line = input.readLine()) != null){
-                final String labelText = label.getText();
-                label.setText(labelText+line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                input.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
 }

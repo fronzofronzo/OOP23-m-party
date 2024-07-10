@@ -23,4 +23,5 @@ public interface MinigameView extends SceneView {
      * @param players that partecipate to the minigame
      */
     void startMinigame(List<String> players);
+
 }

@@ -25,7 +25,6 @@ public class TileImpl implements Tile {
         this.sideB = new SideImpl(sideB);
     }
 
-
     /**
      * {@inheritDoc}
      */

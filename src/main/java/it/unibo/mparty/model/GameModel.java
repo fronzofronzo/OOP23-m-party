@@ -70,12 +70,6 @@ public interface GameModel {
     boolean isShop();
 
     /**
-     * Get the username of the player that has won.
-     * @return the username of winner.
-     */
-    String getWinner();
-
-    /**
      * If is active, get the name of the minigame.
      * @return {@link Optional}: it's empty if there is no minigame running
      * at that moment. If there's a minigame playing, the Optional contains

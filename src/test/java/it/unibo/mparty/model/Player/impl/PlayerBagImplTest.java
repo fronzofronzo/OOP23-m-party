@@ -3,18 +3,20 @@ package it.unibo.mparty.model.Player.impl;
 import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemFactoryImpl;
 import it.unibo.mparty.model.item.impl.ItemName;
-import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBag;
-import it.unibo.mparty.model.player.impl.PlayerBagImplementation;
+import it.unibo.mparty.model.player.impl.PlayerBagImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 
 /**
- * Test class for a {@link it.unibo.mparty.model.player.impl.PlayerBagImplementation}.
+ * Test class for a {@link PlayerBagImpl}.
  */
-class PlayerBagImplementationTest {
+class PlayerBagImplTest {
 
     private PlayerBag bag;
     private int capacity;
@@ -25,7 +27,7 @@ class PlayerBagImplementationTest {
     @BeforeEach
     public void init() {
         capacity =  3;
-        this.bag = new PlayerBagImplementation(capacity);
+        this.bag = new PlayerBagImpl(capacity);
     }
 
     /**
@@ -55,7 +57,7 @@ class PlayerBagImplementationTest {
     @Test
     public void testFull() {
         final Item item = new ItemFactoryImpl().createItem(ItemName.DADO_FORTUNATO);
-        for (int i = 0; i < capacity; i++){
+        for (int i = 0; i < capacity; i++) {
             this.bag.addItem(item);
         }
         assertTrue(this.bag.isFull());

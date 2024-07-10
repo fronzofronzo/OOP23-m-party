@@ -13,11 +13,6 @@ import java.util.Set;
 public interface MemoryCardModel extends MinigameModel {
 
     /**
-     * Constant number to signal a card that is not selected.
-     */
-    int NOT_SELECTED = -1;
-
-    /**
      * Flip the card selected.
      * @param card to flip.
      * @return true if the card is the first selected of the couple, false

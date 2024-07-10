@@ -3,24 +3,24 @@ package it.unibo.mparty.model.Player.impl;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBuilder;
 import it.unibo.mparty.model.player.impl.Character;
-import it.unibo.mparty.model.player.impl.PlayerBuilderImplementation;
+import it.unibo.mparty.model.player.impl.PlayerBuilderImpl;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * Test class for a {@link PlayerBuilderImplementation} class
+ * Test class for a {@link PlayerBuilderImpl} class.
  */
-class PlayerBuilderImplementationTest {
+class PlayerBuilderImplTest {
 
     /**
-     * Check if the player is created correctly
+     * Check if the player is created correctly.
      */
     @Test
-    public void testPlayerCreation(){
+    public void testPlayerCreation() {
         final String username = "username";
         final String character = Character.CHAR_MARIO.getName();
-        final PlayerBuilder builder = new PlayerBuilderImplementation();
+        final PlayerBuilder builder = new PlayerBuilderImpl();
         final Player player = builder.username(username)
                 .character(character)
                 .buildPlayer();
@@ -29,13 +29,12 @@ class PlayerBuilderImplementationTest {
     }
 
     /**
-     * Check that building a player with not enough information fails
+     * Check that building a player with not enough information fails.
      */
     @Test
-    public void testNotEnoughInformation(){
+    public void testNotEnoughInformation() {
         final String username = "username";
-        final String character = Character.CHAR_MARIO.getName();
-        final PlayerBuilder builder = new PlayerBuilderImplementation();
+        final PlayerBuilder builder = new PlayerBuilderImpl();
         assertThrows(IllegalStateException.class,
                 () -> {
                     builder.username(username).buildPlayer();

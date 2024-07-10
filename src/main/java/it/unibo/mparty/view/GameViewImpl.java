@@ -49,7 +49,7 @@ public class GameViewImpl extends Application implements GameView {
         this.stage = primaryStage;
         this.stage.getIcons().add(new Image("/images/marioParty.png"));
         this.setBoardView();
-        final Pair<Scene, SceneView> scenePair = this.loadScene("initialScreen");
+        final Pair<Scene, SceneView> scenePair = this.loadScene("InitialScreen");
         this.stage.setScene(scenePair.getFirst());
         this.stage.setMinWidth(PREF_WIDTH);
         this.stage.setMinHeight(PREF_HEIGHT);
@@ -151,7 +151,6 @@ public class GameViewImpl extends Application implements GameView {
         this.boardScene= pair.getFirst();
         this.boardView = (GameBoardView) pair.getSecond();
     }
-
 
     private Pair<Scene, SceneView> loadScene(final String name) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + name + EXTENSION));

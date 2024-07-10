@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.nanogram.api;
+package it.unibo.mparty.model.minigames.nanogram.live.api;
 
 /**
  * Interface representing the lives system in Nanogram game.
@@ -17,13 +17,6 @@ public interface Live {
      * Resets the number of lives to the initial value.
      */
     void reset();
-
-    /**
-     * Updates the number of lives based on the given value.
-     *
-     * @param live the value to update the lives by.
-     */
-    void update(int live);
 
     /**
      * Decreases the number of lives by one.

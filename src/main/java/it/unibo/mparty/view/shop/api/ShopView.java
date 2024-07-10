@@ -4,7 +4,7 @@ import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.view.SceneView;
 
 /**
- * This interface models the view for the {@link Shop}.
+ * This interface models the view for the shop.
  */
 public interface ShopView extends SceneView {
     /**

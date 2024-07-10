@@ -119,9 +119,9 @@ class TestGameBoard{
         for (GameBoard b : boards) {
             BoardType bt = b.getBoardType();
             switch (bt) {
-                case EASY: this.dataSetToTestgetNextPositionsEasyBoard.entrySet().stream().forEach(entry -> assertEquals(entry.getValue(), b.getNextPositions(entry.getKey()))); break;
-                case MEDIUM: this.dataSetToTestgetNextPositionsMediumBoard.entrySet().stream().forEach(entry -> assertEquals(entry.getValue(), b.getNextPositions(entry.getKey()))); break;
-                case HARD: this.dataSetToTestgetNextPositionsHardBoard.entrySet().stream().forEach(entry -> assertEquals(entry.getValue(), b.getNextPositions(entry.getKey()))); break;
+                case EASY: this.dataSetToTestgetNextPositionsEasyBoard.entrySet().forEach(entry -> assertEquals(entry.getValue(), b.getNextPositions(entry.getKey()))); break;
+                case MEDIUM: this.dataSetToTestgetNextPositionsMediumBoard.entrySet().forEach(entry -> assertEquals(entry.getValue(), b.getNextPositions(entry.getKey()))); break;
+                case HARD: this.dataSetToTestgetNextPositionsHardBoard.entrySet().forEach(entry -> assertEquals(entry.getValue(), b.getNextPositions(entry.getKey()))); break;
                 default: break;
             }       
         }

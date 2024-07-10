@@ -21,7 +21,7 @@ public interface MinigameModel {
     Pair<String, Integer> getResult();
 
     /**
-     * Method to set up the players participating in the selected minigame
+     * Method to set up the players participating in the selected minigame.
      * If the mini-game is single-player, there's only one player in List.
      *
      * @param players of the mini-game.
@@ -35,7 +35,15 @@ public interface MinigameModel {
      */
     boolean isOver();
 
+    /**
+     * Method to get the name of the minigame.
+     * @return - name of mini-game.
+     */
     String getName();
 
+    /**
+     * Method to get the type of the mini-game.
+     * @return - {@link MinigameType} of the mini-game.
+     */
     MinigameType getType();
 }

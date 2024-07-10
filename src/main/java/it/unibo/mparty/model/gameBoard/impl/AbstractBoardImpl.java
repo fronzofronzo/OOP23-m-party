@@ -97,7 +97,7 @@ public abstract class AbstractBoardImpl implements GameBoard {
 
     private void generateBoard() {
         this.addSlot(RandomFromSet.get(this.starsPositions), SlotType.ACTIVE_STAR);
-        this.starsPositions.stream()
+        this.starsPositions
                 .forEach(p -> this.addSlot(p, SlotType.NOT_ACTIVE_STAR));
         this.addSlot(this.getStrartingPosition(), SlotType.PATH);
         this.createPathFromFile(this.filePath);
@@ -166,7 +166,7 @@ public abstract class AbstractBoardImpl implements GameBoard {
     public Map<Position, SlotType> getSlotsToUpdate() {
         if (this.updateStarsSlot) {
             Map<Position, SlotType> slotsToUpdate = new HashMap<>();
-            this.starsPositions.stream().forEach(p -> slotsToUpdate.put(p, this.getSlotType(p)));
+            this.starsPositions.forEach(p -> slotsToUpdate.put(p, this.getSlotType(p)));
             this.updateStarsSlot = false;
             return Collections.unmodifiableMap(slotsToUpdate);
         }

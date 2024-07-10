@@ -28,7 +28,7 @@ public interface GameModelBuilder {
     GameModelBuilder addPlayer(String nickname, String character) throws IllegalArgumentException;
 
     /**
-     * Method to set the difficulty of the game
+     * Method to set the difficulty of the game.
      * @param difficulty decided by user
      * @return the builder itself
      */
