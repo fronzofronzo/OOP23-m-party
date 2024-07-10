@@ -66,6 +66,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
         bt.setDisable(true);
         bt.setStyle("-fx-opacity: 1.0; ");
         bt.setFont(new Font("Segoe UI Light", FONT_SIZE));
+        bt.setVisible(false);
         this.cardsPane.getChildren().add(bt);
     }
 
@@ -102,6 +103,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     @FXML
     private void startGame(final ActionEvent event) {
         final Button bt = (Button) event.getSource();
+        this.cardsPane.getChildren().forEach(b -> b.setVisible(true));
         bt.setText("Pronto !");
         bt.setOnAction(this::hideCards);
         this.textLabel.setText("Quando si e' pronti, spingere il pulsante 'Pronto'");

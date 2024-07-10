@@ -38,9 +38,8 @@ public class MemoryCardControllerImpl implements MemoryCardController {
             if (this.model.isOver()) {
                 this.updateEndGameView();
                 this.view.showResult(this.model.getResult());
-            } else {
-                this.updateGameView();
             }
+            this.updateGameView();
         }
     }
 
