@@ -126,7 +126,7 @@ public class SecretCodeGameImpl implements SecretCodeGame{
         if (this.winner.isEmpty()) {
             double maxPoints = 0;
             for (int i = 0; i < this.players.size(); i++) {
-                double points = this.players.get(actualPlayerIndex).getPoints() + i == 0 ? 0.5 : 0;
+                double points = this.players.get(actualPlayerIndex).getPoints();
                 if (points > maxPoints) {
                     maxPoints = points;
                     this.winner = Optional.of(this.players.get(actualPlayerIndex).getNamePlayer());

@@ -44,7 +44,7 @@ public interface DominoModel extends MinigameModel {
      * @param player the player to check
      * @return true if the player cannot place any tiles, false otherwise
      */
-    boolean cannotPlayerPlace(String player);
+    boolean playerCannotMakeMove(String player);
 
     /**
      * Draws a tile from the set and adds it to the specified player's tiles.
@@ -65,7 +65,7 @@ public interface DominoModel extends MinigameModel {
      *
      * @return the PlayerTiles object containing players' tiles
      */
-    PlayerTiles getPlayersTiles();
+    PlayerTiles getAllPlayersTiles();
 
     /**
      * Gets the current board tile.
