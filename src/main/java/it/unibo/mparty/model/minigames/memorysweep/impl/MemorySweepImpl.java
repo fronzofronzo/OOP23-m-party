@@ -93,7 +93,7 @@ public class MemorySweepImpl implements MemorySweep {
     }
 
     /**
-     * method for increasing the list of buttons that will be recreated
+     * method for increasing the list of buttons that will be recreated.
      */
     private void setCounter() {
         this.counter++;
