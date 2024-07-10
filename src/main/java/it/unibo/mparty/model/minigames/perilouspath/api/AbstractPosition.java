@@ -72,6 +72,15 @@ public abstract class AbstractPosition {
     }
 
     /**
+     *
+     * @param p the position to be checked if is the same
+     * @return true if they are in the same position, false otherwise
+     */
+    public boolean samePosition(final AbstractPosition p) {
+        return this.getX() == p.getX() && this.getY() == p.getY();
+    }
+
+    /**
      * the politics regarding whether the position of a button inside a grid is safe or not, it depends on the implementation.
      *
      * @param list1 the first list of positions of buttons to compare to this to know if it is safe
