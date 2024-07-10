@@ -121,6 +121,9 @@ public class PerilousPathImpl implements PerilousPath {
      */
     @Override
     public boolean isOver() {
+        if (this.path.isEmpty()) {
+            return false;
+        }
         var p = this.path.get(this.path.size() - 1);
         return p.inHorizontal(getBalls().get(1)) || p.inVertical(getBalls().get(1));
     }
