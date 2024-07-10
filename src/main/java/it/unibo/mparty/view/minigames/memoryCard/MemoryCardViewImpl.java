@@ -11,7 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
-
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -26,7 +27,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
 
     private static final int FONT_SIZE = 15;
     private static final int PREF_BUTTON_SIZE = 100;
-    private static final String TUTORIAL_PATH = "/text/memoryCardTutorial.txt";
+    private static final String TUTORIAL_PATH = "src/main/resources/text/memoryCardTutorial.txt";
 
     private final MemoryCardController controller = new MemoryCardControllerImpl(this);
 
@@ -124,7 +125,11 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     }
 
     private void showTutorial(final Label label) {
-        this.textLabel.setText(MinigameView.getTutorialFromFile(TUTORIAL_PATH));
+        try {
+            this.textLabel.setText(new String(Files.readAllBytes(Paths.get(TUTORIAL_PATH))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
