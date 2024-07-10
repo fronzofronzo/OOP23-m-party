@@ -91,7 +91,7 @@ public class PerilousPathImpl implements PerilousPath {
             if (this.bombs.stream().anyMatch(b -> this.samePosition(b, p))) {
                 return Type.BOMB;
             }
-            if (this.balls.stream().anyMatch(b -> this.samePosition(b, p)) && !p.equals(this.getBalls().get(0))) {
+            if (this.balls.stream().anyMatch(b -> this.samePosition(b, p)) && !this.samePosition(p, this.getBalls().get(0))) {
                 return Type.BALL;
             }
             this.path.add(p);
