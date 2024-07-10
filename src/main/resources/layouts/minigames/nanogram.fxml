@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="pane" minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.nanogram.impl.NanogramViewImpl">
+<BorderPane fx:id="pane" minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.nanogram.impl.NanogramViewImpl">
    <left>
       <GridPane fx:id="rowHints" alignment="CENTER" prefHeight="194.0" prefWidth="126.0" BorderPane.alignment="CENTER">
         <columnConstraints>
