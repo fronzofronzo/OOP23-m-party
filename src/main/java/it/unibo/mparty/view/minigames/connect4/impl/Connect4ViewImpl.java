@@ -121,4 +121,8 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
             disableButtons(true);
         }
     }
+
+    private void updateTutorialLabel() {
+        
+    }
 }
