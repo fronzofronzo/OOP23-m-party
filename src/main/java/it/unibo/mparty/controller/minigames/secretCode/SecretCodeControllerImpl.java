@@ -43,6 +43,7 @@ public class SecretCodeControllerImpl implements SecretCodeController{
             Position pos = new Position(this.model.getGame().getCurrentGuess().size() - 1, this.model.getTurn());
             this.view.updateGuesses(this.model.getGame().getCurrentPlayer(), pos, color);
         }
+        this.updateEndaìGame();
     }
 
     @Override
@@ -54,10 +55,14 @@ public class SecretCodeControllerImpl implements SecretCodeController{
             if (!res.isEmpty()) {
                 this.view.updateResults(player, turn, res);
             }
-            if (this.model.isOver()) {
-                this.view.showSolution(this.model.getGame().getSoluction());
-                this.view.showResult(new Pair<String,Integer>(this.model.getGame().getWinner(), 10));
-            }
+        }
+        this.updateEndaìGame();
+    }
+
+    private void updateEndaìGame() {
+        if (this.model.isOver()) {
+            this.view.showSolution(this.model.getGame().getSoluction());
+            this.view.showResult(new Pair<String,Integer>(this.model.getGame().getWinner(), 10));
         }
     }
 }
