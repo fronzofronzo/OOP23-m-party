@@ -6,6 +6,10 @@ import it.unibo.mparty.controller.minigames.connect4.impl.Connect4ControllerImpl
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.minigames.connect4.api.Connect4View;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,6 +26,7 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
 
     private final Connect4Controller controller = new Connect4ControllerImpl(this);
     private static final int CIRCLE_DIMENSION = 25;
+    private static final String TUTORIAL_PATH = "src/main/resources/text/connect4Tutorial.txt";
 
     @FXML
     private Label displayLabel;
@@ -48,7 +53,7 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     public void showResult(final Pair<String, Integer> result) {
         this.updateDisplayLabel(result.getFirst() + " ha vinto " + result.getSecond() + " monete");
         this.activateExitButton(true);
-        disableButtons();
+        disableButtons(true);
     }
 
     private void disableButtons(final boolean pred) {
@@ -105,6 +110,7 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     public void startMinigame(final List<String> players) {
         this.controller.initGame(players);
         tutorialLabel.setVisible(false);
+        updateTutorialLabel();
     }
 
     @FXML
@@ -123,6 +129,10 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     }
 
     private void updateTutorialLabel() {
-        
+        try {
+            this.tutorialLabel.setText(new String(Files.readAllBytes(Paths.get(TUTORIAL_PATH))));
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
