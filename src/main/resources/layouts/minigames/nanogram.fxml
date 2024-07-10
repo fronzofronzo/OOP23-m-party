@@ -71,22 +71,13 @@
          </BorderPane.margin></GridPane>
    </center>
    <bottom>
-      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="350.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" top="5.0" />
+               </HBox.margin>
                <children>
-                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                     <children>
-                        <Label fx:id="tutorialText" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Tutorial">
-                           <font>
-                              <Font name="System Italic" size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" top="5.0" />
-                     </HBox.margin>
-                  </VBox>
                   <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="30.0">
                      <children>
                         <RadioButton fx:id="crossButton" mnemonicParsing="false" text="X">
@@ -99,15 +90,15 @@
                               <Font size="18.0" />
                            </font>
                         </RadioButton>
-                        <Button fx:id="tutorialButton" mnemonicParsing="false" onMouseClicked="#tutorialClicked" text="Tutorial">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
                      </children>
                   </HBox>
+                  <Button fx:id="tutorialButton" mnemonicParsing="false" onMouseClicked="#tutorialClicked" text="Tutorial">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
                </children>
-            </HBox>
+            </VBox>
          </children>
       </HBox>
    </bottom>
