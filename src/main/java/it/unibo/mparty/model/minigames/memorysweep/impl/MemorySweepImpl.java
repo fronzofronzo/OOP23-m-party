@@ -162,11 +162,17 @@ public class MemorySweepImpl implements MemorySweep {
         return this.winner.equals(this.p1.getFirst()) || this.winner.equals(this.p2.getFirst());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
         return "memorySweep";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public MinigameType getType() {
         return MinigameType.MULTI_PLAYER;
