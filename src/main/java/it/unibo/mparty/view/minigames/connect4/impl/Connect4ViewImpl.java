@@ -51,12 +51,8 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
         disableButtons();
     }
 
-    private void disableButtons() {
-        buttonGrid.getChildren().listIterator().forEachRemaining(it -> it.setDisable(true));
-    }
-
-    private void activateButtons() {
-        buttonGrid.getChildren().listIterator().forEachRemaining(it -> it.setDisable(false));
+    private void disableButtons(final boolean pred) {
+        buttonGrid.getChildren().listIterator().forEachRemaining(it -> it.setDisable(pred));
     }
 
     /**
@@ -117,12 +113,12 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
             tutorialButton.setText("Tutorial");
             tutorialLabel.setVisible(false);
             gameGrid.setVisible(true);
-            activateButtons();
+            disableButtons(false);
         } else {
             tutorialButton.setText("Chiudi");
             tutorialLabel.setVisible(true);
             gameGrid.setVisible(false);
-            disableButtons();
+            disableButtons(true);
         }
     }
 }
