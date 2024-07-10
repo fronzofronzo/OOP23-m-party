@@ -35,6 +35,7 @@ public class MemoryCardControllerImpl implements MemoryCardController {
             this.view.setCardType(index, this.model.getCards().get(index).getName());
         } else {
             if (this.model.isOver()) {
+                this.updateEndGameView();
                 this.view.showResult(this.model.getResult());
             } else {
                 this.updateGameView();
@@ -49,6 +50,7 @@ public class MemoryCardControllerImpl implements MemoryCardController {
     public void endGame() {
         this.view.getMainController().saveMinigameResult(this.model.getResult());
         try {
+            this.updateEndGameView();
             this.view.getMainView().setBoardScene();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -80,6 +82,13 @@ public class MemoryCardControllerImpl implements MemoryCardController {
                 this.view.setCardType(i, "");
                 this.view.setCardStatus(i, true);
             }
+        }
+    }
+
+    private void updateEndGameView(){
+        final int n = this.model.getCards().size();
+        for (int i = 0; i < n; i ++) {
+            this.view.setCardStatus(i,false);
         }
     }
 
