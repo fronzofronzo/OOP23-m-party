@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.secretCode;
+package it.unibo.mparty.model.minigames.secretcode;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -18,7 +18,7 @@ import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
 /**
  * This class test {@link SecretCodeModel}.
  */
-public class TestSecretCode {
+class TestSecretCode {
 
     private static SecretCodeModel model;
 
@@ -27,7 +27,7 @@ public class TestSecretCode {
      */
     @BeforeEach
     public void initialise() {
-        List<String> players = List.of("P1", "P2");
+        final List<String> players = List.of("P1", "P2");
         model = new SecretCodeModelImpl();
         model.setUpPlayers(players);
     }
@@ -36,7 +36,7 @@ public class TestSecretCode {
      * This class test the method addColor().
      */
     @Test
-    public void testAddColor() {
+    void testAddColor() {
         assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
         assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
         assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
@@ -48,15 +48,15 @@ public class TestSecretCode {
      * This class test that the model handles correctly the turns.
      */
     @Test
-    public void testChangeTurn() {
+    void testChangeTurn() {
         assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
         assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
         assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
         assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
-        String p1 = model.getCurrentPlayer();
-        List<SecretCodeResults> res = model.getGuessResult();
+        final String p1 = model.getCurrentPlayer();
+        final List<SecretCodeResults> res = model.getGuessResult();
         assertFalse(res.isEmpty());
-        String p2 = model.getCurrentPlayer();
+        final String p2 = model.getCurrentPlayer();
         assertNotEquals(p1, p2);
     }
 
@@ -65,15 +65,15 @@ public class TestSecretCode {
      * soluction and that the winner is the player that actually guessed it.
      */
     @Test
-    public void testEndGame() {
+    void testEndGame() {
         assertFalse(model.isOver());
-        String p1 = model.getCurrentPlayer();
-        List<SecretCodeColors> sol = model.getSoluction();
+        final String p1 = model.getCurrentPlayer();
+        final List<SecretCodeColors> sol = model.getSoluction();
         assertFalse(sol.isEmpty());
         for (SecretCodeColors c : sol) {
             assertTrue(model.addColor(c));
         }
-        List<SecretCodeResults> res = model.getGuessResult();
+        final List<SecretCodeResults> res = model.getGuessResult();
         assertFalse(res.isEmpty());
         assertTrue(model.isOver());
         assertEquals(p1, model.getWinner());
