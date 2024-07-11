@@ -1,6 +1,7 @@
 package it.unibo.mparty.view.minigames.connect4.impl;
 
 import java.util.List;
+
 import it.unibo.mparty.controller.minigames.connect4.api.Connect4Controller;
 import it.unibo.mparty.controller.minigames.connect4.impl.Connect4ControllerImpl;
 import it.unibo.mparty.utilities.Pair;
@@ -8,8 +9,8 @@ import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.minigames.connect4.api.Connect4View;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -128,11 +129,14 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
         }
     }
 
-    private void updateTutorialLabel() {
-        try {
-            this.tutorialLabel.setText(new String(Files.readAllBytes(Paths.get(TUTORIAL_PATH))));
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+    private void updateTutorialLabel(){
+        final InputStream stream = getClass().getClassLoader().getResourceAsStream(TUTORIAL_PATH);
+        if (stream != null) {
+            try {
+                this.tutorialLabel.setText(new String(stream.readAllBytes(), StandardCharsets.UTF_8));
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
