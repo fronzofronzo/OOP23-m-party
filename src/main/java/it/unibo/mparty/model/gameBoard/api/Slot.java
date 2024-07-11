@@ -45,7 +45,7 @@ public interface Slot {
      * Add the backward connection from another slot to this slot.
      * 
      * @param dir  the {@link Direction} of the previous slot.
-     * @param next the {@link Position} of the previous slot.
+     * @param prev the {@link Position} of the previous slot.
      * @throws {@link IllegalStateException} if the input position is equals to the position of this slot.
      */
     void addPrev(Direction dir, Position prev);

@@ -9,6 +9,10 @@ import it.unibo.mparty.utilities.BoardType;
  */
 public class BoardFactory {
 
+    private BoardFactory() {
+        
+    }
+
     /**
      * Return the {@link GameBoard} based on the selected {@link BoardType}.
      * 
