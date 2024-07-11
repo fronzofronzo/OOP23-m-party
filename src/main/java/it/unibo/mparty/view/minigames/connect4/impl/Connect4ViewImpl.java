@@ -28,7 +28,7 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
 
     private final Connect4Controller controller = new Connect4ControllerImpl(this);
     private static final int CIRCLE_DIMENSION = 25;
-    private static final String TUTORIAL_PATH = "src/main/resources/text/connect4Tutorial.txt";
+    private static final String TUTORIAL_PATH = "text/connect4Tutorial.txt";
 
     @FXML
     private Label displayLabel;
