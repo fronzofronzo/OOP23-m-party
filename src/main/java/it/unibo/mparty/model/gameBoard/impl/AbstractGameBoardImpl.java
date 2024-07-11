@@ -260,14 +260,13 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
                 && position.getY() >= 0 && position.getY() < this.height;
     }
 
-    private void createPath(Position from, final int steps, final Direction currentDir) {
+    private void createPath(final Position from, final int steps, final Direction currentDir) {
         this.addSlot(from, getNewSlotType());
-        Position to = this.getNeighbor(from, currentDir);
-        for (int i = 0; i < steps; i++) {
+        final Position to = this.getNeighbor(from, currentDir);
+        if (steps > 0) {
             this.addSlot(to, getNewSlotType());
             this.addConnection(from, to, currentDir);
-            from = to;
-            to = this.getNeighbor(to, currentDir);
+            this.createPath(to, steps - 1, currentDir);
         }
     }
 
