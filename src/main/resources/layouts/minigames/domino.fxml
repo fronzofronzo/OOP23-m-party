@@ -88,7 +88,7 @@
          <BorderPane.margin>
             <Insets left="20.0" right="20.0"/>
          </BorderPane.margin>
-         <Label fx:id="tutorialText" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308"
+         <Label fx:id="tutorialLabel" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308"
                 maxWidth="1.7976931348623157E308" text="Tutorial" visible="false">
             <VBox.margin>
                <Insets bottom="10.0" top="10.0"/>

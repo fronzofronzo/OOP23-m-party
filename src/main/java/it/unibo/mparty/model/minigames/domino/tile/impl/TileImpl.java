@@ -36,7 +36,7 @@ public class TileImpl implements Tile {
             this.sideA.setMatched();
             matchedTileSide.setMatched();
 
-            if (matchedTileSide == tile.getSideA()) {
+            if (Objects.equals(matchedTileSide, tile.getSideA())) {
                 tile.reverse();
             }
             return true;
@@ -47,7 +47,7 @@ public class TileImpl implements Tile {
             this.sideB.setMatched();
             matchedTileSide.setMatched();
 
-            if (matchedTileSide == tile.getSideB()) {
+            if (Objects.equals(matchedTileSide, tile.getSideB())) {
                 tile.reverse();
             }
             return true;
@@ -101,7 +101,7 @@ public class TileImpl implements Tile {
      * {@inheritDoc}
      */
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
@@ -109,12 +109,12 @@ public class TileImpl implements Tile {
             return false;
         }
         final TileImpl tile = (TileImpl) o;
-        boolean directEquality = Objects.equals(sideA, tile.sideA) && Objects.equals(sideB, tile.sideB);
-        boolean reversedEquality = Objects.equals(sideA, tile.sideB) && Objects.equals(sideB, tile.sideA);
-        boolean valueEquality = (this.sideA.getValue() == tile.sideA.getValue()
+        final boolean directEquality = Objects.equals(sideA, tile.sideA) && Objects.equals(sideB, tile.sideB);
+        final boolean reversedEquality = Objects.equals(sideA, tile.sideB) && Objects.equals(sideB, tile.sideA);
+        final boolean valueEquality = ((this.sideA.getValue() == tile.sideA.getValue()
                 && this.sideB.getValue() == tile.sideB.getValue())
                 || (this.sideA.getValue() == tile.sideB.getValue()
-                && this.sideB.getValue() == tile.sideA.getValue());
+                && this.sideB.getValue() == tile.sideA.getValue()));
         return directEquality || reversedEquality || valueEquality;
     }
 

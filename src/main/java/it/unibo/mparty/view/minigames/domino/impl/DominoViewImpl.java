@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * Implementation of the {@link DominoView} interface.
@@ -75,14 +76,14 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     private Button tutorialButton;
 
     @FXML
-    private Label tutorialText;
+    private Label tutorialLabel;
 
     private DominoController controller;
     private Integer selectedSideA;
     private Integer selectedSideB;
 
     @FXML
-    private void initialize() {
+    public void initialize() {
         this.controller = new DominoControllerImpl(this);
         this.tilesContainer = new VBox();
         this.tilesContainer.setSpacing(SPACING);
@@ -102,13 +103,13 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     }
 
     @FXML
-    private void drawButtonClicked() {
+    public void drawButtonClicked() {
         this.messageLabel.setText("");
         this.controller.drawTile();
     }
 
     @FXML
-    private void playButtonClicked() {
+    public void playButtonClicked() {
         if (this.selectedSideA != null && this.selectedSideB != null) {
             this.controller.playTile(this.selectedSideA, this.selectedSideB);
             this.selectedSideA = null;
@@ -119,26 +120,25 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     }
 
     @FXML
-    private void tutorialClicked() {
-        if (this.tutorialText.isVisible()) {
+    public void tutorialClicked() {
+        if (this.tutorialLabel.isVisible()) {
             this.tutorialButton.setText("Tutorial");
-            this.tutorialText.setVisible(false);
+            this.tutorialLabel.setVisible(false);
         } else {
             this.tutorialButton.setText("Chiudi\nTutorial");
-            this.tutorialText.setVisible(true);
+            this.tutorialLabel.setVisible(true);
         }
     }
 
     private void updateTutorialLabel() {
         final InputStream input = getClass().getClassLoader().getResourceAsStream(TUTORIAL_PATH);
         if (input != null) {
-            String text;
             try {
-                text = new String(input.readAllBytes(), StandardCharsets.UTF_8);
+                this.tutorialLabel.setText(new String(input.readAllBytes(), StandardCharsets.UTF_8));
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                final Logger log = Logger.getLogger(DominoViewImpl.class.getName());
+                log.fine(e.getMessage());
             }
-            this.tutorialText.setText(text);
         }
     }
 
@@ -242,13 +242,14 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
             }
         });
 
-        Button returnButton = new Button("Torna al \ngioco principale");
+        final Button returnButton = new Button("Torna al \ngioco principale");
         returnButton.setStyle("-fx-font-size: 13pt; -fx-text-alignment: center;");
         returnButton.setOnAction(e -> {
             try {
                 this.getMainView().setBoardScene();
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                final Logger log = Logger.getLogger(DominoViewImpl.class.getName());
+                log.fine(ex.getMessage());
             }
         });
 
