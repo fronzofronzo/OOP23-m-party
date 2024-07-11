@@ -15,7 +15,7 @@ import java.util.Objects;
 public class BoardTileImpl extends ESourceImpl<List<Pair<Integer, Integer>>> implements BoardTile {
 
     private static final int SINGLE_TILE = 1;
-    private final LinkedList<Tile> boardTiles;
+    private final List<Tile> boardTiles;
 
     /**
      * Constructs a new {@link BoardTileImpl}.
@@ -28,7 +28,7 @@ public class BoardTileImpl extends ESourceImpl<List<Pair<Integer, Integer>>> imp
      * {@inheritDoc}
      */
     @Override
-    public LinkedList<Tile> getBoardTiles() {
+    public List<Tile> getBoardTiles() {
         return this.boardTiles;
     }
 
@@ -40,7 +40,7 @@ public class BoardTileImpl extends ESourceImpl<List<Pair<Integer, Integer>>> imp
         if (this.boardTiles.isEmpty()) {
             return true;
         }
-        return this.boardTiles.getFirst().canMatch(tile) || this.boardTiles.getLast().canMatch(tile);
+        return this.boardTiles.get(0).canMatch(tile) || this.boardTiles.get(this.boardTiles.size() - 1).canMatch(tile);
     }
 
     /**
@@ -51,17 +51,16 @@ public class BoardTileImpl extends ESourceImpl<List<Pair<Integer, Integer>>> imp
         if (this.boardTiles.isEmpty()) {
             this.boardTiles.add(tile);
         } else if (this.boardTiles.size() == SINGLE_TILE) {
-            final Tile firstTile = this.boardTiles.getFirst();
-            firstTile.match(tile);
+            this.boardTiles.get(0).match(tile);
             if (tile.getSideA().isMatched()) {
-                this.boardTiles.addLast(tile);
+                this.boardTiles.add(this.boardTiles.size(), tile);
             } else if (tile.getSideB().isMatched()) {
-                this.boardTiles.addFirst(tile);
+                this.boardTiles.add(0, tile);
             }
-        } else if (this.boardTiles.getFirst().match(tile)) {
-            this.boardTiles.addFirst(tile);
-        } else if (this.boardTiles.getLast().match(tile)) {
-            this.boardTiles.addLast(tile);
+        } else if (this.boardTiles.get(0).match(tile)) {
+            this.boardTiles.add(0, tile);
+        } else if (this.boardTiles.get(this.boardTiles.size() - 1).match(tile)) {
+            this.boardTiles.add(this.boardTiles.size(), tile);
         }
         this.notifyObservers(this.boardTiles.stream()
                 .map(t -> new Pair<>(t.getSideA().getValue(), t.getSideB().getValue())).toList());
