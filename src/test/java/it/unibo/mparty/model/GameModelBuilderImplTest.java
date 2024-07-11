@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 /**
- * Test class for {@link GameModelBuilderImpl} class
+ * Test class for {@link GameModelBuilderImpl} class.
  */
-class GameModelBuilderImplTest {
+public class GameModelBuilderImplTest {
 
     private GameModelBuilder builder;
 

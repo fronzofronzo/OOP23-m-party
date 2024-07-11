@@ -1,16 +1,15 @@
 package it.unibo.mparty.model.Player.impl;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import it.unibo.mparty.model.player.api.Dice;
 import it.unibo.mparty.model.player.impl.DiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Test class for a {@link DiceImpl} class
  */
-class DiceImplTest {
+public class DiceImplTest {
 
     private Dice testDice;
 

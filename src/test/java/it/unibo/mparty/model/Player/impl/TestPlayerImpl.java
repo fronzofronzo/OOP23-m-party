@@ -24,7 +24,7 @@ public class TestPlayerImpl {
     public void init() {
         final String username = "username";
         final String character = "Luigi";
-        testPlayer = new PlayerImpl(username,character);
+        testPlayer = new PlayerImpl(username, character);
     }
 
     /**
