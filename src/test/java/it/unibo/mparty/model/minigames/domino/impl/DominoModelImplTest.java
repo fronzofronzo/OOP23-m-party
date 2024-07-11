@@ -58,10 +58,7 @@ class DominoModelImplTest {
         assertEquals(DISTRIBUTION_TILES, this.model.getAllPlayersTiles().getPlayerTiles(this.player1).size());
         assertEquals(DISTRIBUTION_TILES, this.model.getAllPlayersTiles().getPlayerTiles(this.player2).size());
 
-        assertEquals(DOMINO_SET_SIZE - (DISTRIBUTION_TILES * 2), this.model.getDominoSet().size());
-
-        assertFalse(this.model.getDominoSet().containsAll(this.model.getAllPlayersTiles().getPlayerTiles(this.player1)));
-        assertFalse(this.model.getDominoSet().containsAll(this.model.getAllPlayersTiles().getPlayerTiles(this.player2)));
+        assertEquals(DOMINO_SET_SIZE - (DISTRIBUTION_TILES * 2), this.model.getDeckSize());
 
         assertFalse(this.model.getAllPlayersTiles().getPlayerTiles(this.player1)
                 .containsAll(this.model.getAllPlayersTiles().getPlayerTiles(this.player2)));
@@ -109,10 +106,6 @@ class DominoModelImplTest {
         Tile matchingTile = new TileImpl(SIDE2, SIDE3);
         this.model.getAllPlayersTiles().addTileToPlayer(this.player1, matchingTile);
         assertFalse(this.model.canDrawTile(this.player1));
-
-        this.model.getAllPlayersTiles().getPlayerTiles(this.player1).clear();
-        this.model.getDominoSet().clear();
-        assertFalse(this.model.canDrawTile(this.player1));
     }
 
     /**
@@ -150,12 +143,7 @@ class DominoModelImplTest {
 
         this.model.getAllPlayersTiles().getPlayerTiles(this.player1).add(new TileImpl(SIDE1, SIDE6));
         this.model.getAllPlayersTiles().getPlayerTiles(this.player2).add(new TileImpl(SIDE2, SIDE2));
-        this.model.getDominoSet().clear();
         assertFalse(this.model.isOver());
-
-        this.model.checkAndAddToBoard(this.player1, new TileImpl(SIDE3, SIDE4));
-        this.model.checkAndAddToBoard(this.player2, new TileImpl(SIDE4, SIDE5));
-        assertTrue(this.model.isOver());
     }
 
     /**
@@ -174,6 +162,6 @@ class DominoModelImplTest {
         final int updatedSize = updatedTiles.size();
 
         assertEquals(initialSize + 1, updatedSize);
-        assertEquals(DOMINO_SET_SIZE - (DISTRIBUTION_TILES * 2) - 1, this.model.getDominoSet().size());
+        assertEquals(DOMINO_SET_SIZE - (DISTRIBUTION_TILES * 2) - 1, this.model.getDeckSize());
     }
 }

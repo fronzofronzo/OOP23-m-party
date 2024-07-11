@@ -45,7 +45,7 @@ public class DominoControllerImpl implements DominoController {
         this.view.setTurn(this.isPlayer1Turn);
         this.view.setPlayerName(true, this.player1);
         this.view.setPlayerName(false, this.player2);
-        this.view.updateRemainingTileSize(this.model.getDominoSet().size());
+        this.view.updateRemainingTileSize(this.model.getDeckSize());
 
         this.updatePlayersTiles();
         this.updateTurn();
@@ -77,7 +77,7 @@ public class DominoControllerImpl implements DominoController {
     @Override
     public void drawTile() {
         this.model.drawTile(this.isPlayer1Turn ? this.player1 : this.player2);
-        this.view.updateRemainingTileSize(this.model.getDominoSet().size());
+        this.view.updateRemainingTileSize(this.model.getDeckSize());
         this.updatePlayersTiles();
         this.checkDraw();
         this.updateTurn();

@@ -25,7 +25,7 @@ public class DominoModelImpl implements DominoModel {
     private static final int COINS = 10;
     private final BoardTile boardTile;
     private final PlayerTiles playerTiles;
-    private final List<Tile> dominoSet;
+    private final List<Tile> dominoDeck;
     private final Random random;
     private String player1;
     private String player2;
@@ -36,7 +36,7 @@ public class DominoModelImpl implements DominoModel {
     public DominoModelImpl() {
         this.boardTile = new BoardTileImpl();
         this.playerTiles = new PlayerTilesImpl();
-        this.dominoSet = new TileFactoryImpl().createDoubleSixSet();
+        this.dominoDeck = new TileFactoryImpl().createDoubleSixSet();
         this.random = new Random();
     }
 
@@ -77,7 +77,7 @@ public class DominoModelImpl implements DominoModel {
      */
     @Override
     public boolean canDrawTile(final String player) {
-        return this.playerTiles.cannotPlayerPlace(player, this.boardTile) && !this.dominoSet.isEmpty();
+        return this.playerTiles.cannotPlayerPlace(player, this.boardTile) && !this.dominoDeck.isEmpty();
     }
 
     /**
@@ -85,7 +85,7 @@ public class DominoModelImpl implements DominoModel {
      */
     @Override
     public boolean playerCannotMakeMove(final String player) {
-        return this.playerTiles.cannotPlayerPlace(player, this.boardTile) && this.dominoSet.isEmpty();
+        return this.playerTiles.cannotPlayerPlace(player, this.boardTile) && this.dominoDeck.isEmpty();
     }
 
     /**
@@ -93,8 +93,8 @@ public class DominoModelImpl implements DominoModel {
      */
     @Override
     public void drawTile(final String player) {
-        final Tile newTile = this.dominoSet.iterator().next();
-        this.dominoSet.remove(newTile);
+        final Tile newTile = this.dominoDeck.iterator().next();
+        this.dominoDeck.remove(newTile);
         this.playerTiles.addTileToPlayer(player, newTile);
     }
 
@@ -102,9 +102,8 @@ public class DominoModelImpl implements DominoModel {
      * {@inheritDoc}
      */
     @Override
-    public List<Tile> getDominoSet() {
-        //return Collections.unmodifiableList(this.dominoSet);
-        return this.dominoSet;
+    public int getDeckSize() {
+        return this.dominoDeck.size();
     }
 
     /**
@@ -198,7 +197,7 @@ public class DominoModelImpl implements DominoModel {
 
     private void distribution(final String player) {
         this.playerTiles.initializePlayerTiles(player,
-                this.dominoSet.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet()));
-        this.dominoSet.removeAll(this.playerTiles.getPlayerTiles(player));
+                this.dominoDeck.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet()));
+        this.dominoDeck.removeAll(this.playerTiles.getPlayerTiles(player));
     }
 }

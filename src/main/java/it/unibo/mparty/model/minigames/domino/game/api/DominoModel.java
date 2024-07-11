@@ -5,8 +5,6 @@ import it.unibo.mparty.model.minigames.domino.board.api.BoardTile;
 import it.unibo.mparty.model.minigames.domino.player.api.PlayerTiles;
 import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
 
-import java.util.List;
-
 /**
  * Interface for the Domino game model.
  */
@@ -54,11 +52,10 @@ public interface DominoModel extends MinigameModel {
     void drawTile(String player);
 
     /**
-     * Gets the set of remaining tiles.
-     *
-     * @return the list of remaining tiles
+     * Gets the size of the domino deck.
+     * @return the size of domino
      */
-    List<Tile> getDominoSet();
+    int getDeckSize();
 
     /**
      * Gets the tiles for all players.
