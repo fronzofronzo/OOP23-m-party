@@ -1,4 +1,4 @@
-package it.unibo.mparty.view.InitialScreen.api;
+package it.unibo.mparty.view.initialscreen.api;
 
 import it.unibo.mparty.view.SceneView;
 import javafx.event.ActionEvent;
