@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 
 public class NanogramTutorial {
 
-    private static final String TUTORIAL_PATH = "src/main/resources/text/nanogramTutorial.txt";
+    private static final String TUTORIAL_PATH = "text/nanogramTutorial.txt";
     private static final double MARGIN = 30;
 
     @FXML

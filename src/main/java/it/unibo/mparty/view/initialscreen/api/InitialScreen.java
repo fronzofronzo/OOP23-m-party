@@ -1,4 +1,4 @@
-package it.unibo.mparty.view.InitialScreen.api;
+package it.unibo.mparty.view.initialscreen.api;
 
 import it.unibo.mparty.view.SceneView;
 import javafx.event.ActionEvent;
@@ -47,6 +47,10 @@ public interface InitialScreen extends SceneView {
      */
     void setLabelText(String text);
 
-     void handleTutorialButton(ActionEvent event) throws IOException;
+    /**
+     * method for setting the tutorial in the label.
+     * @param event event that happens when you click the start button
+     */
+    void handleTutorialButton(ActionEvent event) throws IOException;
 
 }

@@ -94,7 +94,8 @@ public class GameModelImpl implements GameModel {
                             .get()
                             .getValue());
                 } else {
-                    if (currentDir.isEmpty() || nextPlayerPos.size() < 1 || !nextPlayerPos.containsKey(currentDir.get())) {
+                    if (currentDir.isEmpty() || nextPlayerPos.size() < 1
+                            || !nextPlayerPos.containsKey(currentDir.get())) {
                         return;
                     } else {
                         this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.get(currentDir.get()));
@@ -144,8 +145,8 @@ public class GameModelImpl implements GameModel {
                 ? Optional.of(this.board.getStarPosition())
                 : Optional.empty();
         Set<Player> targets = this.players.stream()
-                    .filter(p -> !p.equals(this.players.get(actualPlayerIndex)))
-                    .collect(Collectors.toSet());
+                .filter(p -> !p.equals(this.players.get(actualPlayerIndex)))
+                .collect(Collectors.toSet());
         final Optional<Player> target = item.isOnOthers()
                 ? Optional.of(RandomFromSet.get(targets))
                 : Optional.empty();
@@ -220,7 +221,10 @@ public class GameModelImpl implements GameModel {
                 output = output + MESSAGE_MOVING_PLAYER + getDirections();
                 break;
             case ACTIVE_SLOT:
-                output = output + MESSAGE_ACTIVE_SLOT + "\n" + this.board.getSlotType(this.players.get(actualPlayerIndex).getPosition()) + ".";
+                output = output
+                        + MESSAGE_ACTIVE_SLOT
+                        + this.board.getSlotType(this.players.get(actualPlayerIndex).getPosition())
+                        + ".";
                 break;
             case END_TURN:
                 output = output + MESSAGE_END_TURN;
@@ -230,7 +234,6 @@ public class GameModelImpl implements GameModel {
         }
         return output;
     }
-
 
     /**
      * {@inheritDoc}
@@ -303,7 +306,6 @@ public class GameModelImpl implements GameModel {
         }
     }
 
-
     private String getDirections() {
         Map<Direction, Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
         String output = "";
@@ -329,7 +331,12 @@ public class GameModelImpl implements GameModel {
                             .filter(p -> !p.equals(actualPlayer))
                             .findAny()
                             .get();
-                    this.minigameHandler.startMinigame(List.of(actualPlayer, otherPlayer), MinigameType.MULTI_PLAYER);
+                    try {
+                        this.minigameHandler.startMinigame(List.of(actualPlayer, otherPlayer),
+                                MinigameType.MULTI_PLAYER);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
                 case BONUS -> actualPlayer.addCoins(random.nextInt(MIN_COINS, MAX_COINS));
                 case MALUS -> actualPlayer.removeCoins(random.nextInt(MIN_COINS, MAX_COINS));

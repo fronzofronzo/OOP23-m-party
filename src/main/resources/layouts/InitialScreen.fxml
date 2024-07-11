@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.InitialScreen.impl.InitialScreenImpl">
+<StackPane fx:id="stackPane" minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.initialscreen.impl.InitialScreenImpl">
    <children>
       <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
          <image>

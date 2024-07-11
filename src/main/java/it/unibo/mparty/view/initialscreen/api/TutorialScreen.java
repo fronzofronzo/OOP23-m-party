@@ -1,9 +1,9 @@
-package it.unibo.mparty.view.InitialScreen.api;
+package it.unibo.mparty.view.initialscreen.api;
 
 import javafx.event.ActionEvent;
 
 /**
- * interface that models the upload on a new stage of the tutorial
+ * interface that models the upload on a new stage of the tutorial.
  */
 public interface TutorialScreen {
     /**

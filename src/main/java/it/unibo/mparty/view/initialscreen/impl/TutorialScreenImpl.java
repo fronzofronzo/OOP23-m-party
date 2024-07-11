@@ -1,6 +1,6 @@
-package it.unibo.mparty.view.InitialScreen.impl;
+package it.unibo.mparty.view.initialscreen.impl;
 
-import it.unibo.mparty.view.InitialScreen.api.TutorialScreen;
+import it.unibo.mparty.view.initialscreen.api.TutorialScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

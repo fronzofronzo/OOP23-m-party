@@ -1,8 +1,8 @@
-package it.unibo.mparty.view.InitialScreen.impl;
+package it.unibo.mparty.view.initialscreen.impl;
 
 import it.unibo.mparty.model.player.impl.Character;
-import it.unibo.mparty.view.InitialScreen.api.InitialScreen;
-import it.unibo.mparty.view.InitialScreen.api.MiniScreen;
+import it.unibo.mparty.view.initialscreen.api.InitialScreen;
+import it.unibo.mparty.view.initialscreen.api.MiniScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
