@@ -16,9 +16,8 @@ public interface MinigameHandler {
      * Method to start a new minigame.
      * @param players that participate to mini-game.
      * @param type - {@link MinigameType} of the mini-game.
-     * @throws Exception if there are problems in finding the minigame.
      */
-    void startMinigame(List<Player> players, MinigameType type) throws Exception;
+    void startMinigame(List<Player> players, MinigameType type);
 
     /**
      * Check if there's a minigame running.

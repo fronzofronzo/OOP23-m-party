@@ -23,7 +23,7 @@ public class GameModelBuilderImpl implements GameModelBuilder {
      * {@inheritDoc}
      */
     @Override
-    public GameModelBuilder addPlayer(final String nickname, final String character) throws IllegalArgumentException {
+    public GameModelBuilder addPlayer(final String nickname, final String character){
         final PlayerBuilder builder = new PlayerBuilderImpl();
         final Player pl = builder.username(nickname)
                 .character(character)
@@ -43,7 +43,7 @@ public class GameModelBuilderImpl implements GameModelBuilder {
      * {@inheritDoc}
      */
     @Override
-    public GameModelBuilder difficulty(String difficulty) {
+    public GameModelBuilder difficulty(final String difficulty) {
         this.difficulty = difficulty;
         return this;
     }

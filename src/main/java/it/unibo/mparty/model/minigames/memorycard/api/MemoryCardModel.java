@@ -1,7 +1,7 @@
-package it.unibo.mparty.model.minigames.memoryCard.api;
+package it.unibo.mparty.model.minigames.memorycard.api;
 
 import it.unibo.mparty.model.minigames.MinigameModel;
-import it.unibo.mparty.model.minigames.memoryCard.impl.CardType;
+import it.unibo.mparty.model.minigames.memorycard.impl.CardType;
 import java.util.Map;
 import java.util.Set;
 

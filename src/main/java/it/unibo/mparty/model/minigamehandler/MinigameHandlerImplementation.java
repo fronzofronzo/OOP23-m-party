@@ -10,13 +10,15 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class provides an implementation for {@link MinigameHandler} interface.
  */
 public class MinigameHandlerImplementation implements MinigameHandler {
 
-    private String actualMinigame = null;
+    private String actualMinigame;
     private List<Player> players;
 
     /**
@@ -31,7 +33,7 @@ public class MinigameHandlerImplementation implements MinigameHandler {
      */
     @Override
     public void startMinigame(final List<Player> players,
-                              final MinigameType type) throws Exception {
+                              final MinigameType type){
         this.actualMinigame = generateMinigame(type);
         this.players = players;
     }
@@ -72,11 +74,12 @@ public class MinigameHandlerImplementation implements MinigameHandler {
     }
 
     private String generateMinigame(final MinigameType type) {
+        final Logger logger = Logger.getAnonymousLogger();
         final Set<String> minigames = new HashSet<>();
         final Reflections reflections = new Reflections("it.unibo.mparty.model.minigames");
-        Set<Class<? extends MinigameModel>> classes =
+        final Set<Class<? extends MinigameModel>> classes =
                 reflections.getSubTypesOf(MinigameModel.class);
-        for (Class<? extends MinigameModel> cl : classes) {
+        for (final Class<? extends MinigameModel> cl : classes) {
             try {
                 if (!cl.isInterface()) {
                     final MinigameModel minigame =
@@ -87,7 +90,7 @@ public class MinigameHandlerImplementation implements MinigameHandler {
                 }
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException
                      | NoSuchMethodException e) {
-                throw new RuntimeException(e);
+                logger.log(Level.SEVERE, e.toString());
             }
         }
         return RandomFromSet.get(minigames);
