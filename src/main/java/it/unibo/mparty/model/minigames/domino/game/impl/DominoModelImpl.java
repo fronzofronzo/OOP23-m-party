@@ -110,16 +110,16 @@ public class DominoModelImpl implements DominoModel {
      * {@inheritDoc}
      */
     @Override
-    public PlayerTiles getAllPlayersTiles() {
-        return this.playerTiles;
+    public Set<Tile> getPlayerTiles(final String player) {
+        return this.playerTiles.getPlayerTiles(player);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public BoardTile getBoardTile() {
-        return this.boardTile;
+    public void addBoardObserver(final EObserver<? super List<Pair<Integer, Integer>>> obs) {
+        this.boardTile.addObserver(obs);
     }
 
     /**

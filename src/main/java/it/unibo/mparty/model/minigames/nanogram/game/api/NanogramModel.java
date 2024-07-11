@@ -1,7 +1,6 @@
 package it.unibo.mparty.model.minigames.nanogram.game.api;
 
 import it.unibo.mparty.model.minigames.MinigameModel;
-import it.unibo.mparty.model.minigames.nanogram.board.api.SimpleBoard;
 
 import java.util.List;
 
@@ -48,13 +47,6 @@ public interface NanogramModel extends MinigameModel {
      * @return the size of the board (number of rows/columns).
      */
     int getBoardSize();
-
-    /**
-     * Retrieves the solution board.
-     *
-     * @return the solution board.
-     */
-    SimpleBoard getSolutionBoard();
 
     /**
      * Checks if the game is complete.
