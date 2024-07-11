@@ -41,7 +41,7 @@ public abstract class AbstractPosition {
     }
 
     /**
-     * @param p the position we want to check wheter is adjacent to this
+     * @param p the position we want to check whether is adjacent to this
      * @return true if they are adjacent, false otherwise
      */
     public boolean adjacent(final AbstractPosition p) {
@@ -69,6 +69,15 @@ public abstract class AbstractPosition {
      */
     public boolean inVertical(final AbstractPosition p) {
         return this.getY() == p.getY() && this.adjacent(p);
+    }
+
+    /**
+     *
+     * @param p the position to be checked if is the same
+     * @return true if they are in the same position, false otherwise
+     */
+    public boolean samePosition(final AbstractPosition p) {
+        return this.getX() == p.getX() && this.getY() == p.getY();
     }
 
     /**
