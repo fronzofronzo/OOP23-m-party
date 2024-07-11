@@ -48,16 +48,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
             SlotType.SINGLEPLAYER, Color.LIGHTGRAY,
             SlotType.VOID, Color.BLACK);
 
-    private static final Map<SlotType, String> TEXT_TOOL_TIP = Map.of(SlotType.ACTIVE_STAR, "SLOT STELLA",
-            SlotType.BONUS, "SLOT BONUS",
-            SlotType.MALUS, "SLOT MALUS",
-            SlotType.MULTIPLAYER, "SLOT GIOCO",
-            SlotType.NOT_ACTIVE_STAR, "SENTIERO",
-            SlotType.PATH, "SENTIERO",
-            SlotType.SHOP, "NEGOZIO",
-            SlotType.SINGLEPLAYER, "GIOCO",
-            SlotType.VOID, "");
-
     private static final Map<Integer, Color> PLAYER_COLOR = Map.of(0, Color.ORANGE,
             1, Color.PURPLE,
             2, Color.BLUE,
@@ -192,7 +182,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         tmp.setBackground(background);
         if (!slotType.equals(SlotType.VOID)) {
             tmp.setStyle(SLOT_STYLE);
-            Tooltip tt = new Tooltip(TEXT_TOOL_TIP.get(slotType));
+            Tooltip tt = new Tooltip(slotType.toString());
             Tooltip.install(tmp, tt);
         }
         return tmp;
