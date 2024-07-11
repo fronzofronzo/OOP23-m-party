@@ -51,7 +51,7 @@ public class ShopImpl implements Shop {
      */
     @Override
     public List<Item> getItemList() {
-        return this.itemList;
+        return new ArrayList<>(itemList);
     }
 
 }
