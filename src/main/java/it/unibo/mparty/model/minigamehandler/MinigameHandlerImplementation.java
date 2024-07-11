@@ -35,7 +35,7 @@ public class MinigameHandlerImplementation implements MinigameHandler {
     public void startMinigame(final List<Player> players,
                               final MinigameType type) {
         this.actualMinigame = generateMinigame(type);
-        this.players = players;
+        this.players = List.copyOf(players);
     }
 
     /**

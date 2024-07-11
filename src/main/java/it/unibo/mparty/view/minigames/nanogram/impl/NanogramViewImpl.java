@@ -70,7 +70,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
 
     private Button hitButton;
 
-    private Set<Button> boardButtons;
+    private final Set<Button> boardButtons = new HashSet<>();
 
     private final EventHandler<MouseEvent> handleCellClicked = event -> {
         this.hitButton = (Button) event.getSource();
@@ -129,7 +129,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
      */
     @Override
     public void initGrid(final int size) {
-        this.boardButtons = new HashSet<>();
+        this.boardButtons.clear();
         this.boardGrid.setHgap(2);
         this.boardGrid.setVgap(2);
 
@@ -213,7 +213,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
      */
     @Override
     public void fillRemainingCellsWithCrosses() {
-        boardButtons.forEach(button -> button.setGraphic(drawCross(Color.valueOf("#38475f"))));
+        this.boardButtons.forEach(button -> button.setGraphic(drawCross(Color.valueOf("#38475f"))));
     }
 
     /**
