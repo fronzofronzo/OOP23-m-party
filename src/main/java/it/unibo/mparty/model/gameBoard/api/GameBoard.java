@@ -11,7 +11,7 @@ import it.unibo.mparty.utilities.SlotType;
 /**
  * This interface models a game board.
  */
-public interface GameBoard {
+    public interface GameBoard {
 
     /**
      * Change tha actual {@link Position} of the {@link SlotType.ACTIVE_STAR}.
@@ -23,24 +23,22 @@ public interface GameBoard {
      * {@link SlotType}.
      * 
      * @param position the position of the {@link Slot} interested.
-     * @return the {@link SlotType} of the {@link Slot} that is in the
-     *         {@link Position} requested.
-     * @throws {@link IllegalStateException} if the input {@link Position} isn't in
-     *                the game board.
+     * @return the {@link SlotType} of the {@link Slot} that is in the {@link Position} requested.
+     * @throws {@link IllegalStateException} if the input {@link Position} isn't in the game board.
      */
     SlotType getSlotType(Position position);
 
     /**
-     * Get the game board's starting position
+     * Get the game board's starting position.
      * 
-     * @return the starting position
+     * @return the starting position.
      */
     Position getStrartingPosition();
 
     /**
-     * Get the next(s) position(s) of the input position
+     * Get the next(s) position(s) of the input position.
      * 
-     * @param position a position
+     * @param position a position.
      * @return a {@link Map} that contains any {@link Direction} and
      *         the corresponding {@link Position}.
      */
