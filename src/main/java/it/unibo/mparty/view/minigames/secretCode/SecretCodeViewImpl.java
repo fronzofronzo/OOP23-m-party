@@ -175,6 +175,10 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
     }
 
     private void createData(final List<String> players) {
+        this.playersNames = new ArrayList<>();
+        this.gridPaneGuesses = new ArrayList<>();
+        this.gridPaneResults = new ArrayList<>();
+        this.solutions = new ArrayList<>();
         for (int i = 0; i < players.size(); i++) {
             this.playersNames.add(players.get(i));
         }
@@ -182,10 +186,6 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
         this.gridPaneGuesses.add(gridPaneGuessP2);
         this.gridPaneResults = List.of(gridPaneResP1, gridPaneResP2);
         this.solutions = List.of(sol1, sol2, sol3, sol4);
-        this.gridPaneGuesses = new ArrayList<>();
-        this.gridPaneResults = new ArrayList<>();
-        this.solutions = new ArrayList<>();
-        this.playersNames = new ArrayList<>();
     }
 
     private void setUpLabels() {
