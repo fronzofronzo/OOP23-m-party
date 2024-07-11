@@ -75,7 +75,8 @@ public class GameModelImpl implements GameModel {
      * {@inheritDoc}
      */
     @Override
-    public void movePlayer(Optional<Direction> dir) {
+    public void movePlayer(final Optional<Direction> dir) {
+        Optional<Direction> currentDir = dir;
         if (this.status.equals(GameStatus.MOVE_PLAYER)
                 || this.status.equals(GameStatus.MOVING_PLAYER)) {
             if (this.status.equals(GameStatus.MOVE_PLAYER)) {
@@ -93,11 +94,11 @@ public class GameModelImpl implements GameModel {
                             .get()
                             .getValue());
                 } else {
-                    if (dir.isEmpty() || nextPlayerPos.isEmpty() || !nextPlayerPos.containsKey(dir.get())) {
+                    if (currentDir.isEmpty() || nextPlayerPos.size() < 1 || !nextPlayerPos.containsKey(currentDir.get())) {
                         return;
                     } else {
-                        this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.get(dir.get()));
-                        dir = Optional.empty();
+                        this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.get(currentDir.get()));
+                        currentDir = Optional.empty();
                     }
                 }
                 this.steps++;
@@ -304,9 +305,9 @@ public class GameModelImpl implements GameModel {
 
 
     private String getDirections() {
-        final Map<Direction, Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
+        Map<Direction, Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
         String output = "";
-        for (final Map.Entry<Direction, Position> entry : pos.entrySet()) {
+        for (Map.Entry<Direction, Position> entry : pos.entrySet()) {
             if (!output.isBlank()) {
                 output = output.concat(",");
             }

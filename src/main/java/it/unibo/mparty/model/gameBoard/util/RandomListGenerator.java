@@ -10,7 +10,7 @@ import java.util.Collections;
  * and create a list of 100 elements that contains the above values in random
  * order.
  */
-public class RandomListGenerator {
+public final class RandomListGenerator {
 
     private static final int CORRECT_PERC = 100;
     private static final String ERROR_MESSAGE = "Il valore totale delle percentuali in input non è accettabile (100)";

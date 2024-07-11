@@ -30,8 +30,8 @@ public class GameModelBuilderImpl implements GameModelBuilder {
                 .buildPlayer();
         if (players.stream().anyMatch(p -> p.getUsername().equals(pl.getUsername())
                 || p.getCharacter().equals(pl.getCharacter()))) {
-            throw new IllegalArgumentException("Il player con questo " +
-                    "nome/personaggio e' gia' presente ");
+            throw new IllegalArgumentException("Il player con questo "
+                    + "nome/personaggio e' gia' presente ");
         }
         if (!this.isFull()) {
             players.add(pl);

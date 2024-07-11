@@ -1,7 +1,7 @@
 package it.unibo.mparty.utilities;
 
 /**
- * This enum identifies the board
+ * This enum identifies the board.
  */
 public enum BoardType {
     /**
