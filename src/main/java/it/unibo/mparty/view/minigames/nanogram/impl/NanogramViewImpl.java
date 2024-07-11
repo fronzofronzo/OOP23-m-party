@@ -104,7 +104,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
      */
     @FXML
     public void tutorialClicked() throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/minigames/nanogramTutorial.fxml"));
+        final FXMLLoader loader = new FXMLLoader(NanogramViewImpl.class.getResource("/layouts/minigames/nanogramTutorial.fxml"));
         final Parent root = loader.load();
 
         final Stage stage = new Stage();

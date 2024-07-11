@@ -11,6 +11,7 @@ import it.unibo.mparty.model.minigames.nanogram.live.impl.LiveImpl;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -71,7 +72,7 @@ public class NanogramModelImpl implements NanogramModel {
      */
     @Override
     public List<List<Integer>> getRowHints() {
-        return this.rowHints;
+        return Collections.unmodifiableList(this.rowHints);
     }
 
     /**
@@ -79,7 +80,7 @@ public class NanogramModelImpl implements NanogramModel {
      */
     @Override
     public List<List<Integer>> getColumnHints() {
-        return this.columnHints;
+        return Collections.unmodifiableList(this.columnHints);
     }
 
     /**

@@ -26,6 +26,7 @@ public class DominoModelImpl implements DominoModel {
     private final BoardTile boardTile;
     private final PlayerTiles playerTiles;
     private final List<Tile> dominoSet;
+    private final Random random;
     private String player1;
     private String player2;
 
@@ -36,6 +37,7 @@ public class DominoModelImpl implements DominoModel {
         this.boardTile = new BoardTileImpl();
         this.playerTiles = new PlayerTilesImpl();
         this.dominoSet = new TileFactoryImpl().createDoubleSixSet();
+        this.random = new Random();
     }
 
     /**
@@ -54,8 +56,7 @@ public class DominoModelImpl implements DominoModel {
      */
     @Override
     public boolean initializeTurn(final String player1, final String player2) {
-        final Random random = new Random();
-        return this.getDoubleTiles(player1) > this.getDoubleTiles(player2) || random.nextBoolean();
+        return this.getDoubleTiles(player1) > this.getDoubleTiles(player2) || this.random.nextBoolean();
     }
 
     /**
@@ -102,6 +103,7 @@ public class DominoModelImpl implements DominoModel {
      */
     @Override
     public List<Tile> getDominoSet() {
+        //return Collections.unmodifiableList(this.dominoSet);
         return this.dominoSet;
     }
 
