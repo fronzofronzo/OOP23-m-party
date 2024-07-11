@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * implementation of {@link MemorySweep}.
  */
-public class MemorySweepControllerImpl implements MemorySweepController {
+public final class MemorySweepControllerImpl implements MemorySweepController {
 
     private MemorySweepView view;
     private final MemorySweep model;

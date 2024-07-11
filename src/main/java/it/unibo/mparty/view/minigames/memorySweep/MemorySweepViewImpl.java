@@ -19,10 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 /**
  * implementation of {@link MemorySweepView}.
@@ -154,7 +151,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
      */
     @Override
     public void startMinigame(final List<String> players) {
-        this.controller.initGame(players);
+        this.controller.initGame(Collections.unmodifiableList(players));
         this.players = players;
     }
 
