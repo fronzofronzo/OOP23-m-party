@@ -1,4 +1,4 @@
-package it.unibo.mparty.controller.minigames.secretCode;
+package it.unibo.mparty.controller.minigames.secretcode;
 
 import java.io.IOException;
 import java.util.List;

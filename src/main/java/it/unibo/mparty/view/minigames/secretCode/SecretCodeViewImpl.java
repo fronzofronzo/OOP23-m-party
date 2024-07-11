@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import it.unibo.mparty.controller.minigames.secretCode.SecretCodeController;
-import it.unibo.mparty.controller.minigames.secretCode.SecretCodeControllerImpl;
+import it.unibo.mparty.controller.minigames.secretcode.SecretCodeController;
+import it.unibo.mparty.controller.minigames.secretcode.SecretCodeControllerImpl;
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
 import it.unibo.mparty.utilities.Pair;

@@ -1,4 +1,4 @@
-package it.unibo.mparty.controller.minigames.secretCode;
+package it.unibo.mparty.controller.minigames.secretcode;
 
 import it.unibo.mparty.controller.minigames.MinigameController;
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
