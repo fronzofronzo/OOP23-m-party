@@ -2,7 +2,7 @@
 package it.unibo.mparty.model;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
-import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
+import it.unibo.mparty.model.gameBoard.boards.BoardFactory;
 import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.minigameHandler.MinigameHandler;
@@ -65,8 +65,7 @@ public class GameModelImpl implements GameModel {
         this.players = players;
         this.minigameHandler = new MinigameHandlerImplementation();
         this.shop = new ShopImpl();
-        final SimpleBoardFactory boardFactory = new SimpleBoardFactory();
-        this.board = boardFactory.createBoard(Arrays.stream(BoardType.values())
+        this.board = BoardFactory.createBoard(Arrays.stream(BoardType.values())
                 .filter(b -> b.toString().equals(difficulty))
                 .findAny().get());
         this.players.forEach(p -> p.setPosition(this.board.getStrartingPosition()));

@@ -7,7 +7,7 @@ import it.unibo.mparty.utilities.BoardType;
  * This class is a factory that creates a {@link GameBoard} based on the
  * selected {@link BoardType}.
  */
-public class SimpleBoardFactory {
+public class BoardFactory {
 
     /**
      * Return the {@link GameBoard} based on the selected {@link BoardType}.
@@ -15,7 +15,7 @@ public class SimpleBoardFactory {
      * @param boardSelected the idicates the {@link BoardType}
      * @return the {@link GameBoard}.
      */
-    public GameBoard createBoard(BoardType boardSelected) {
+    public static GameBoard createBoard(BoardType boardSelected) {
         switch (boardSelected) {
             case EASY:
                 return new EasyGameBoard();

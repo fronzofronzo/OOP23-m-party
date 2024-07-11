@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
-import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
+import it.unibo.mparty.model.gameBoard.boards.BoardFactory;
 import it.unibo.mparty.utilities.BoardType;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Position;
@@ -61,7 +61,7 @@ class TestGameBoard{
 
     @BeforeAll
     public static void initialise(){
-        SimpleBoardFactory factory = new SimpleBoardFactory();
+        BoardFactory factory = new BoardFactory();
         for (BoardType bt : boardTypes) {
             boards.add(factory.createBoard(bt));
         }
