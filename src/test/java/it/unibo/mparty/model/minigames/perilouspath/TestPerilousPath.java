@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * testing for {@link PerilousPathImpl}.
  */
-public class TestPerilousPath {
+class TestPerilousPath {
 
     private static final int SIDE = 8;
     private static final int NUM_BALLS = 2;
@@ -27,7 +27,7 @@ public class TestPerilousPath {
      * testing for {@link PerilousPathImpl} constructor.
      */
     @Test
-    public void testPerilousPathConstructor() {
+    void testPerilousPathConstructor() {
         assertEquals(FIRST_COLUMN, this.model.getBalls().size());
         assertEquals(FIRST_COLUMN, this.model.getBombs().size());
 
@@ -37,9 +37,9 @@ public class TestPerilousPath {
      * testing for method setBombs which sets the bombs in the grid.
      */
     @Test
-    public void testSetBombs() {
+    void testSetBombs() {
         this.model.setBombs();
-        var bombs = this.model.getBombs();
+        final var bombs = this.model.getBombs();
         assertEquals(NUM_BOMBS, bombs.size());
     }
 
@@ -47,7 +47,7 @@ public class TestPerilousPath {
      * testing for method setBombs which sets the balls in the grid.
      */
     @Test
-    public void testSetBalls() {
+    void testSetBalls() {
         this.model.setBalls();
         assertEquals(NUM_BALLS, this.model.getBalls().size());
         assertEquals(FIRST_COLUMN, this.model.getBalls().get(0).getY());
@@ -58,10 +58,10 @@ public class TestPerilousPath {
      * test that simulates what happens when a generic button is clicked in the grid.
      */
     @Test
-    public void testHit() {
+    void testHit() {
         this.model.setBalls();
         this.model.setBombs();
-        var p1 = this.model.getBalls().get(1);
+        final var p1 = this.model.getBalls().get(1);
         assertEquals(PerilousPath.Type.WRONG, this.model.hit(getPosition(p1)));
     }
 
