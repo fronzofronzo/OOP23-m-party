@@ -28,5 +28,5 @@ public enum SecretCodeColors {
     /**
      * 
      */
-    ARANCIONE;
+    ARANCIONE
 }

@@ -49,8 +49,8 @@ class TestGameBoard {
             new Position(3, 6), Map.of(Direction.UP, new Position(3, 5), Direction.DOWN, new Position(3, 7)),
             new Position(26, 1), Collections.EMPTY_MAP);
 
-    private static Set<GameBoard> boards = new HashSet<>();
-    private static Set<BoardType> boardTypes = Set.of(BoardType.EASY, BoardType.MEDIUM, BoardType.HARD);
+    private static final Set<GameBoard> boards = new HashSet<>();
+    private static final Set<BoardType> boardTypes = Set.of(BoardType.EASY, BoardType.MEDIUM, BoardType.HARD);
 
     @BeforeAll
     public static void initialise() {
