@@ -189,7 +189,7 @@ public class MemorySweepImpl implements MemorySweep {
         return MinigameType.MULTI_PLAYER;
     }
 
-    private Pair<String, Set<Position>> notNull(Pair<String, Set<Position>> p) {
+    private Pair<String, Set<Position>> notNull(final Pair<String, Set<Position>> p) {
         return p == null ? new Pair<>("", new HashSet<>()) : p;
     }
 
