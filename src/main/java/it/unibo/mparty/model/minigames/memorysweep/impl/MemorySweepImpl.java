@@ -129,7 +129,7 @@ public class MemorySweepImpl implements MemorySweep {
             }
             return HitType.RIGHT_CHOICE;
         }
-        this.winner = player.equals(this.p1) ? p2.getFirst() : p1.getFirst();
+        this.winner = player.equals(notNull(this.p1)) ? notNull(this.p2).getFirst() : notNull(this.p1).getFirst();
         return HitType.LOSS;
     }
 
@@ -170,7 +170,7 @@ public class MemorySweepImpl implements MemorySweep {
      */
     @Override
     public boolean isOver() {
-        return this.winner.equals(this.p1.getFirst()) || this.winner.equals(this.p2.getFirst());
+        return this.winner.equals(notNull(this.p1).getFirst()) || this.winner.equals(notNull(this.p2).getFirst());
     }
 
     /**
@@ -187,6 +187,10 @@ public class MemorySweepImpl implements MemorySweep {
     @Override
     public MinigameType getType() {
         return MinigameType.MULTI_PLAYER;
+    }
+
+    private Pair<String, Set<Position>> notNull(Pair<String, Set<Position>> p) {
+        return p == null ? new Pair<>("", new HashSet<>()) : p;
     }
 
 }
