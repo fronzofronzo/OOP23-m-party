@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
 /**
  * implementation of {@link InitialScreen}.
  */
-public class InitialScreenImpl extends AbstractSceneView implements InitialScreen, Initializable {
+public final class InitialScreenImpl extends AbstractSceneView implements InitialScreen, Initializable {
 
 
     private GameModelBuilder builder;

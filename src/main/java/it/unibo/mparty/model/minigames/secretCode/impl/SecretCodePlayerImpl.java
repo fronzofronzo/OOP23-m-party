@@ -48,7 +48,7 @@ public class SecretCodePlayerImpl implements SecretCodePlayer {
      * {@inheritDoc}
      */
     @Override
-    public void addPoints(int points) {
+    public void addPoints(final int points) {
         this.points += points;
     }
 
