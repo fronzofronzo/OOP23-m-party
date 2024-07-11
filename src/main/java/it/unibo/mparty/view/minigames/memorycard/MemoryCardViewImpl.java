@@ -1,7 +1,7 @@
 package it.unibo.mparty.view.minigames.memorycard;
 
-import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardController;
-import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardControllerImpl;
+import it.unibo.mparty.controller.minigames.memorycard.MemoryCardController;
+import it.unibo.mparty.controller.minigames.memorycard.MemoryCardControllerImpl;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
 import javafx.event.ActionEvent;
@@ -14,6 +14,8 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class provides a graphic implementation for {@link MemoryCardView}.
@@ -95,11 +97,12 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
         this.controller.initGame(players);
         final InputStream input = getClass().getClassLoader().getResourceAsStream(TUTORIAL_PATH);
         if (input != null) {
-            String text;
+            String text = "";
             try {
                 text = new String(input.readAllBytes(), StandardCharsets.UTF_8);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                final Logger logger = Logger.getAnonymousLogger();
+                logger.log(Level.SEVERE, e.toString());
             }
             this.textLabel.setText(text);
         }

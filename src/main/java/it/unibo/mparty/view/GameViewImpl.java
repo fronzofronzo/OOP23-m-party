@@ -159,7 +159,7 @@ public class GameViewImpl extends Application implements GameView {
 
     private Pair<Scene, SceneView> loadScene(final String name) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + name + EXTENSION));
-        final Parent root = loader.load(getClass().getResourceAsStream(PATH + name + EXTENSION));
+        final Parent root = loader.load();
         final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE),
                 root.prefHeight(DEFAULT_DIMENSION_VALUE));
         final SceneView sceneView = loader.getController();
