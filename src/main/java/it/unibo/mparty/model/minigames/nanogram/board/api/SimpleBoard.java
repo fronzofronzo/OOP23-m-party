@@ -12,14 +12,6 @@ import java.util.List;
 public interface SimpleBoard extends Board {
 
     /**
-     * Retrieves the state of the cell at the specified position.
-     *
-     * @param position the position of the cell.
-     * @return true if the cell is filled, false otherwise.
-     */
-    boolean getState(Position position);
-
-    /**
      * Generates hints for each row or column based on the board's current state.
      *
      * @param isRow true if generating hints for rows, false for columns.
