@@ -1,7 +1,7 @@
 package it.unibo.mparty.model.gameBoard.boards;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
-import it.unibo.mparty.model.gameBoard.impl.AbstractBoardImpl;
+import it.unibo.mparty.model.gameBoard.impl.AbstractGameBoardImpl;
 import it.unibo.mparty.utilities.BoardType;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
@@ -13,7 +13,7 @@ import java.util.Set;
  * The class EasyGameBoard models a {@link GameBoard} that correspond to the
  * {@link BoardType.MEDIUM}.
  */
-public class MediumGameBoard extends AbstractBoardImpl {
+public class MediumGameBoard extends AbstractGameBoardImpl {
 
     private final static BoardType BOARD_TYPE = BoardType.MEDIUM;
     private static final int WIDTH = 30;

@@ -27,7 +27,7 @@ import it.unibo.mparty.model.gameBoard.api.Slot;
 /**
  * This is an abstract class that implements a {@link GameBoard}.
  */
-public abstract class AbstractBoardImpl implements GameBoard {
+public abstract class AbstractGameBoardImpl implements GameBoard {
 
     private static final int N_PARTS_INPUT_FILE = 4;
     private static final String UP = "U";
@@ -60,7 +60,7 @@ public abstract class AbstractBoardImpl implements GameBoard {
      *                        each {@link SlotType} in the board
      * @param boardType       that is the type that identifies this board.
      */
-    public AbstractBoardImpl(int width,
+    public AbstractGameBoardImpl(int width,
             int height,
             Position initialPosition,
             Set<Position> starPositions,

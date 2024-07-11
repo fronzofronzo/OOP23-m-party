@@ -1,6 +1,6 @@
 package it.unibo.mparty.model.gameBoard.boards;
 
-import it.unibo.mparty.model.gameBoard.impl.AbstractBoardImpl;
+import it.unibo.mparty.model.gameBoard.impl.AbstractGameBoardImpl;
 import it.unibo.mparty.utilities.BoardType;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
@@ -12,7 +12,7 @@ import java.util.Set;
  * The class EasyGameBoard models a {@link GameBoard} that correspond to the
  * {@link BoardType.EASY}.
  */
-public class EasyGameBoard extends AbstractBoardImpl {
+public class EasyGameBoard extends AbstractGameBoardImpl {
 
     private final static BoardType BOARD_TYPE = BoardType.EASY;
     private static final int WIDTH = 30;
