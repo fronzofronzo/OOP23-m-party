@@ -113,7 +113,7 @@ public class PerilousPathImpl implements PerilousPath {
      */
     @Override
     public void setUpPlayers(final List<String> players) {
-        this.players = players;
+        this.players = Collections.unmodifiableList(players);
     }
 
     /**

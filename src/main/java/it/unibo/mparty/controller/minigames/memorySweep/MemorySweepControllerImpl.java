@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class MemorySweepControllerImpl implements MemorySweepController {
 
-    private final MemorySweepView view;
+    private MemorySweepView view;
     private final MemorySweep model;
     private static final int SIZE = 8;
     private static final int SECONDS = 3000;
@@ -25,7 +25,7 @@ public class MemorySweepControllerImpl implements MemorySweepController {
      * @param view view that is linked to this
      */
     public MemorySweepControllerImpl(final MemorySweepView view) {
-        this.view = view;
+        this.setView(view);
         this.model = new MemorySweepImpl(SIZE);
         this.setRandoms();
     }
@@ -82,6 +82,10 @@ public class MemorySweepControllerImpl implements MemorySweepController {
     @Override
     public void setRandoms() {
         this.model.setRandomList();
+    }
+
+    private void setView(final MemorySweepView view) {
+        this.view = view;
     }
 
 }
