@@ -25,8 +25,8 @@ public abstract class AbstractSceneView implements SceneView {
      */
     @Override
     public void init(final GameView view, final GameController controller) {
-        this.mainView = view;
-        this.mainController = controller;
+        this.setView(view);
+        this.setController(controller);
     }
 
     /**
@@ -35,5 +35,13 @@ public abstract class AbstractSceneView implements SceneView {
     @Override
     public GameController getMainController() {
         return this.mainController;
+    }
+
+    private void setView(final GameView view) {
+        this.mainView = view;
+    }
+
+    private void setController(final GameController controller) {
+        this.mainController = controller;
     }
 }
