@@ -28,14 +28,6 @@ public class BoardTileImpl extends ESourceImpl<List<Pair<Integer, Integer>>> imp
      * {@inheritDoc}
      */
     @Override
-    public List<Tile> getBoardTiles() {
-        return this.boardTiles;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public boolean canMatchBoardTile(final Tile tile) {
         if (this.boardTiles.isEmpty()) {
             return true;

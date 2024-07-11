@@ -12,13 +12,6 @@ import java.util.List;
 public interface BoardTile extends ESource<List<Pair<Integer, Integer>>> {
 
     /**
-     * Returns the list of tiles currently on the board.
-     *
-     * @return the list of tiles on the board
-     */
-    List<Tile> getBoardTiles();
-
-    /**
      * Checks if a tile can be matched with any tile currently on the board.
      *
      * @param tile the tile to check
