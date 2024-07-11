@@ -61,9 +61,8 @@ class TestGameBoard{
 
     @BeforeAll
     public static void initialise(){
-        BoardFactory factory = new BoardFactory();
         for (BoardType bt : boardTypes) {
-            boards.add(factory.createBoard(bt));
+            boards.add(BoardFactory.createBoard(bt));
         }
         for (GameBoard b : boards) {
             System.out.println(b.toString());
