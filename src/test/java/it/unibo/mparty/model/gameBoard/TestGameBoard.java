@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.gameBoard;
+package it.unibo.mparty.model.gameboard;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -58,12 +58,8 @@ class TestGameBoard {
      */
     @BeforeAll
     public static void initialise() {
-        for (BoardType bt : BOARDS_TYPES) {
+        for (final BoardType bt : BOARDS_TYPES) {
             BOARDS.add(BoardFactory.createBoard(bt));
-        }
-        for (GameBoard b : BOARDS) {
-            System.out.println(b.toString());
-            System.out.println(b.getBoardType());
         }
     }
 
@@ -72,14 +68,14 @@ class TestGameBoard {
      * {@link SlotType.ACTIVE_STAR} and {@link SlotType.NOT_ACTIVE_STAR}.
      */
     @Test
-    public void testNumberStarsSlots() {
-        for (GameBoard b : BOARDS) {
-            int countActiveStar = (int) b.getBoard()
+    void testNumberStarsSlots() {
+        for (final GameBoard b : BOARDS) {
+            final int countActiveStar = (int) b.getBoard()
                     .entrySet()
                     .stream()
                     .filter(entry -> entry.getValue().getSlotType().equals(SlotType.ACTIVE_STAR))
                     .count();
-            int countNotActiveStar = (int) b.getBoard()
+            final int countNotActiveStar = (int) b.getBoard()
                     .entrySet()
                     .stream()
                     .filter(entry -> entry.getValue().getSlotType().equals(SlotType.NOT_ACTIVE_STAR))
@@ -93,9 +89,9 @@ class TestGameBoard {
      * This class tests for each {@link GameBoard} the method changeStarPosition.
      */
     @Test
-    public void testChangeStarPosition() {
-        for (GameBoard b : BOARDS) {
-            Position oldStarPosition = b.getStarPosition();
+    void testChangeStarPosition() {
+        for (final GameBoard b : BOARDS) {
+            final Position oldStarPosition = b.getStarPosition();
             assertNotNull(oldStarPosition);
             b.changeStarPosition();
             assertNotEquals(oldStarPosition, b.getStarPosition());
@@ -106,9 +102,9 @@ class TestGameBoard {
      * This class tests for each {@link GameBoard} the method getStrartingPosition.
      */
     @Test
-    public void testStartingPosition() {
-        for (GameBoard b : BOARDS) {
-            BoardType bt = b.getBoardType();
+    void testStartingPosition() {
+        for (final GameBoard b : BOARDS) {
+            final BoardType bt = b.getBoardType();
             Position expected = null;
             switch (bt) {
                 case EASY:
@@ -131,9 +127,9 @@ class TestGameBoard {
      * This class tests for each {@link GameBoard} the method getNextPositions.
      */
     @Test
-    public void testGetNextPositions() {
-        for (GameBoard b : BOARDS) {
-            BoardType bt = b.getBoardType();
+    void testGetNextPositions() {
+        for (final GameBoard b : BOARDS) {
+            final BoardType bt = b.getBoardType();
             switch (bt) {
                 case EASY:
                     DATA_SET_TO_TEST_GET_NEXT_POSITIONS_EASY_BOARD.entrySet()
