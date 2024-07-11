@@ -33,7 +33,9 @@ public class TutorialScreenImpl implements TutorialScreen, Initializable {
     @Override
     public void handleButton(final ActionEvent e) {
         Stage stage = (Stage) this.returnButton.getScene().getWindow();
-        stage.close();
+        if(stage != null) {
+            stage.close();
+        }
     }
 
     /**
