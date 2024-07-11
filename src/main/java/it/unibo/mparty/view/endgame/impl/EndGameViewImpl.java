@@ -1,11 +1,12 @@
-package it.unibo.mparty.view.endGame.impl;
+package it.unibo.mparty.view.endgame.impl;
 
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
-import it.unibo.mparty.view.endGame.api.EndGameView;
+import it.unibo.mparty.view.endgame.api.EndGameView;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -41,7 +42,7 @@ public class EndGameViewImpl extends AbstractSceneView implements EndGameView {
     private TableView<Map.Entry<String, Pair<Integer, Integer>>> tableView;
 
     @FXML
-    private void initialize() {
+    public void initialize() {
         tableView.setSelectionModel(null);
 
         setHeaderFont(this.playerColumn);
@@ -49,15 +50,14 @@ public class EndGameViewImpl extends AbstractSceneView implements EndGameView {
         setHeaderFont(this.coinColumn);
         setHeaderFont(this.rankColumn);
 
-        this.playerColumn.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getKey()));
+        this.playerColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getKey()));
         this.starColumn.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleIntegerProperty(cellData.getValue().getValue().getFirst()).asObject());
+                new SimpleIntegerProperty(cellData.getValue().getValue().getFirst()).asObject());
         this.coinColumn.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleIntegerProperty(cellData.getValue().getValue().getSecond()).asObject());
+                new SimpleIntegerProperty(cellData.getValue().getValue().getSecond()).asObject());
 
         this.rankColumn.setCellValueFactory(cellData -> {
-            ObservableList<Map.Entry<String, Pair<Integer, Integer>>> items = this.tableView.getItems();
+            final ObservableList<Map.Entry<String, Pair<Integer, Integer>>> items = this.tableView.getItems();
             return new SimpleIntegerProperty(items.indexOf(cellData.getValue()) + 1).asObject();
         });
 
@@ -80,7 +80,7 @@ public class EndGameViewImpl extends AbstractSceneView implements EndGameView {
     }
 
     @FXML
-    private void exitClicked() {
+    public void exitClicked() {
         Platform.exit();
     }
 

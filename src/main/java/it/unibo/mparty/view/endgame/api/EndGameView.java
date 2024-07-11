@@ -1,4 +1,4 @@
-package it.unibo.mparty.view.endGame.api;
+package it.unibo.mparty.view.endgame.api;
 
 import it.unibo.mparty.utilities.Pair;
 
