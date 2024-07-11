@@ -208,7 +208,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         if (!boardUpdates.isEmpty()) {
             for (Map.Entry<Position, SlotType> entry : boardUpdates.entrySet()) {
                 FlowPane tmp = this.board.get(entry.getKey());
-                tmp = setUpFlowPane(tmp, entry.getValue());
+                setUpFlowPane(tmp, entry.getValue());
             }
         }
     }
@@ -276,7 +276,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         String output = "";
         if (!items.isEmpty()) {
             for (String i : items) {
-                output = output.concat("\n- " + i.toString());
+                output = output.concat("\n- " + i);
             }
         }
         return output;
