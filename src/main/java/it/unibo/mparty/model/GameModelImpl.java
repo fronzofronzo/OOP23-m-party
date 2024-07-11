@@ -49,8 +49,8 @@ public class GameModelImpl implements GameModel {
     private boolean activateShop;
     private int turn = 1;
     private GameStatus status = GameStatus.ROLL_DICE;
-    private int actualPlayerIndex = 0;
-    private int steps = 0;
+    private int actualPlayerIndex;
+    private int steps;
     private final MinigameHandler minigameHandler;
 
     /**
@@ -87,7 +87,7 @@ public class GameModelImpl implements GameModel {
                 this.checkStartAcquisition();
                 final Position playerPos = this.players.get(actualPlayerIndex).getPosition();
                 final Map<Direction, Position> nextPlayerPos = this.board.getNextPositions(playerPos);
-                if (nextPlayerPos.size() == 1 && currentDir.isEmpty()) {
+                if (nextPlayerPos.size() == 1 && dir.isEmpty()) {
                     this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.entrySet()
                             .stream()
                             .findFirst()
@@ -325,13 +325,7 @@ public class GameModelImpl implements GameModel {
         final Random random = new Random();
         if (this.status.equals(GameStatus.ACTIVE_SLOT)) {
             switch (slot) {
-                case SINGLEPLAYER -> {
-                    try {
-                        this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.SINGLE_PLAYER);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
+                case SINGLEPLAYER -> this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.SINGLE_PLAYER);
                 case MULTIPLAYER -> {
                     final Player otherPlayer = this.players.stream()
                             .filter(p -> !p.equals(actualPlayer))

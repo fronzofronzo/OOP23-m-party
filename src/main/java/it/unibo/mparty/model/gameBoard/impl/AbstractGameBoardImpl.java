@@ -42,7 +42,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
     private final BoardType boardType;
     private final String filePath;
     private final Set<Position> starsPositions;
-    private Map<Position, Slot> board = new HashMap<>();
+    private final Map<Position, Slot> board = new HashMap<>();
     private List<SlotType> avaiableSlotTypes;
     private boolean updateStarsSlot = false;
 

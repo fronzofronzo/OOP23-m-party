@@ -23,7 +23,11 @@ public enum MinigameType {
 
     /**
      * Method to get the string describing the type.
+<<<<<<< HEAD
      * 
+=======
+     *
+>>>>>>> 92724912c635ab924d9cbe30b857f8d692b1df9f
      * @return - String containing the type.
      */
     public String getType() {

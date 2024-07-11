@@ -80,11 +80,11 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
                                                                            SecretCodeColors.VERDE, Color.GREEN, 
                                                                            SecretCodeColors.VIOLA, Color.PURPLE);
 
-    private List<GridPane> gridPaneGuesses = new ArrayList<>();
+    private final List<GridPane> gridPaneGuesses = new ArrayList<>();
     private List<GridPane> gridPaneResults = new ArrayList<>();
     private List<Circle> solutions = new ArrayList<>();
 
-    private List<String> playersNames = new ArrayList<>();
+    private final List<String> playersNames = new ArrayList<>();
 
     @FXML
     void addColor(ActionEvent e) {
