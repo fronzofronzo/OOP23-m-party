@@ -23,15 +23,13 @@ import javafx.scene.layout.GridPane;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
 /**
  * implementation of {@link PerilousPathView}.
  */
-public class PerilousPathViewImpl extends AbstractSceneView implements PerilousPathView {
+public final class PerilousPathViewImpl extends AbstractSceneView implements PerilousPathView {
 
     /**
      * height of the image.
