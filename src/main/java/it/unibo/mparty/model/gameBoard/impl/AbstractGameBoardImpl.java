@@ -2,6 +2,7 @@ package it.unibo.mparty.model.gameboard.impl;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
@@ -13,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 import it.unibo.mparty.model.gameboard.api.GameBoard;
 import it.unibo.mparty.model.gameboard.api.Slot;
@@ -70,14 +72,12 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
         this.width = width;
         this.height = height;
         this.initialPosition = initialPosition;
-        this.starsPositions = starPositions;
-        this.rules = rules;
-        this.avaiableSlotTypes = getAviableSlotType();
-        this.boardType = boardType;
+        this.starsPositions = new HashSet<>(starPositions);
         this.filePath = filePath;
+        this.rules = new HashMap<>(rules);
+        this.boardType = boardType;
         this.board = new HashMap<>();
-        this.updateStarsSlot = false;
-        this.generateBoard();
+        this.initialiteBoard();
     }
 
     /**
@@ -244,6 +244,12 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
         this.createPathFromFile(this.filePath);
     }
 
+    private void initialiteBoard() {
+        this.avaiableSlotTypes = getAviableSlotType();
+        this.updateStarsSlot = false;
+        this.generateBoard();
+    }
+
     private void addSlot(final Position position, final SlotType slotType) {
         if (!this.board.containsKey(position) && isInTheBoard(position)) {
             this.board.put(position, new SlotImpl(position, slotType));
@@ -277,7 +283,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
         if (Objects.isNull(inputStream)) {
             throw new IllegalStateException();
         }
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-16"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 final String[] parts = line.split(" ");
