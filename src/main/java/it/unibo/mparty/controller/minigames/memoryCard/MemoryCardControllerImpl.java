@@ -3,6 +3,8 @@ package it.unibo.mparty.controller.minigames.memoryCard;
 import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
 import it.unibo.mparty.model.minigames.memoryCard.impl.MemoryCardModelImpl;
 import it.unibo.mparty.view.minigames.memoryCard.MemoryCardView;
+
+import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.io.IOException;
@@ -14,7 +16,7 @@ import java.util.List;
 public class MemoryCardControllerImpl implements MemoryCardController {
 
     private final MemoryCardModel model;
-    private final MemoryCardView view;
+    private MemoryCardView view;
 
     /**
      * Constructor of the Memory Card controller. It initialises the reference
@@ -24,7 +26,7 @@ public class MemoryCardControllerImpl implements MemoryCardController {
      */
     public MemoryCardControllerImpl(final MemoryCardView view) {
         this.model = new MemoryCardModelImpl();
-        this.view = view;
+        this.setView(view);
     }
 
     /**
@@ -91,6 +93,10 @@ public class MemoryCardControllerImpl implements MemoryCardController {
         for (int i = 0; i < n; i++) {
             this.view.setCardStatus(i, false);
         }
+    }
+
+    private void setView(final MemoryCardView view) {
+        this.view  = view;
     }
 
 }

@@ -9,6 +9,7 @@ import java.util.Random;
 public class RandomFromSet {
 
     private static final String ERROR_MESSAGE = "Il set in input non deve essere vuoto";
+    private static final Random random = new Random();
 
     private RandomFromSet() {
     }
@@ -24,6 +25,6 @@ public class RandomFromSet {
         if (inputSet.isEmpty()) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
         }
-        return inputSet.stream().skip(new Random().nextInt(inputSet.size())).findFirst().get();
+        return inputSet.stream().skip(random.nextInt(inputSet.size())).findFirst().get();
     }
 }
