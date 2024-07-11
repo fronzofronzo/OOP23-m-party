@@ -1,4 +1,4 @@
-package it.unibo.mparty.controller.minigames.memoryCard;
+package it.unibo.mparty.controller.minigames.memorycard;
 
 import it.unibo.mparty.controller.minigames.MinigameController;
 
