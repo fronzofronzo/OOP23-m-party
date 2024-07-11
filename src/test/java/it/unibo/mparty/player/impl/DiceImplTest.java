@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.Player.impl;
+package it.unibo.mparty.player.impl;
 
 import it.unibo.mparty.model.player.api.Dice;
 import it.unibo.mparty.model.player.impl.DiceImpl;
@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Test class for a {@link DiceImpl} class
  */
-public class DiceImplTest {
+class DiceImplTest {
 
     private Dice testDice;
 
@@ -17,7 +17,7 @@ public class DiceImplTest {
      * Configuration step: this is performed before each step.
      */
     @BeforeEach
-    public void init() {
+    void init() {
         testDice = new DiceImpl();
     }
 
@@ -25,7 +25,7 @@ public class DiceImplTest {
      * Check if the bounds modify is correct.
      */
     @Test
-    public void testBoundsModify() {
+    void testBoundsModify() {
         final int minBound = 3;
         final int maxBound = 5;
         this.testDice.setMinNumber(minBound);
@@ -38,7 +38,7 @@ public class DiceImplTest {
      * Check if the number of attempts modify is correct.
      */
     @Test
-    public void testAttemptsModify() {
+    void testAttemptsModify() {
         final int numAttempts = 3;
         this.testDice.setNumberOfAttempts(numAttempts);
         assertEquals(numAttempts, this.testDice.getNumOfAttempts());

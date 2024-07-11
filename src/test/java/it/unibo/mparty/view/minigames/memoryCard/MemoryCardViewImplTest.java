@@ -63,7 +63,7 @@ class MemoryCardViewImplTest extends ApplicationTest {
         final Label textLabel = from(this.root).lookup("#textLabel").query();
         robot.clickOn(button);
         verifyThat(button, hasText("Pronto !"));
-        verifyThat(textLabel, hasText("Quando si e' pronti, spingere il pulsante 'Pronto' "));
+        verifyThat(textLabel, hasText("Quando si e' pronti, spingere il pulsante 'Pronto'"));
     }
 
 }
