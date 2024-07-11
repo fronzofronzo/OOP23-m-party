@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Test class for a {@link DiceImpl} class
+ * Test class for a {@link DiceImpl} class.
  */
 class DiceImplTest {
 
