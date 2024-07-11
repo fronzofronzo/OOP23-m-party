@@ -12,7 +12,7 @@ import java.util.List;
 public interface MinigameModel {
 
     /**
-     * Method to get the result of the minigame
+     * Method to get the result of the minigame.
      *
      * @return {@link Pair} of {@link String} that's the nickname of the player
      * who won ( if it's single-player, return the nickname of the only participant).

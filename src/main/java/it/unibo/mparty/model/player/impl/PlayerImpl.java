@@ -133,7 +133,7 @@ public class PlayerImpl implements Player {
      * {@inheritDoc}.
      */
     @Override
-    @SuppressFBWarnings(value="EI_EXPOSE_REP", justification = "Method getPlayerBag should return the PlayerBag to" +
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Method getPlayerBag should return the PlayerBag to" +
             "operate with it. ")
     public PlayerBag getPlayerBag() {
         return this.playerBag;
@@ -143,7 +143,7 @@ public class PlayerImpl implements Player {
      * {@inheritDoc}.
      */
     @Override
-    @SuppressFBWarnings(value="EI_EXPOSE_REP", justification = "Method getDice should return the dice of the player"
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Method getDice should return the dice of the player"
             + "to operate on it.")
     public Dice getDice() {
         return this.dice;

@@ -105,6 +105,10 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
         }
     }
 
+    /**
+     * Method to start the game.
+     * @param event that originated the method call.
+     */
     @FXML
     public void startGame(final ActionEvent event) {
         final Button bt = (Button) event.getSource();
