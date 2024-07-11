@@ -25,16 +25,7 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
     public SimpleBoardImpl(final int size, final double fillPercentage) {
         super(size);
         this.size = size;
-
-        final List<Position> position = new ArrayList<>(IntStream.range(0, size * size)
-                .mapToObj(i -> new Position(i / size, i % size))
-                .toList());
-
-        position.forEach(p -> getBoard().put(p, false));
-
-        Collections.shuffle(position);
-
-        position.stream().limit(Math.round(size * size * fillPercentage)).forEach(p -> getBoard().replace(p, true));
+        this.initializeBoard(fillPercentage);
     }
 
     /**
@@ -77,5 +68,17 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
             hintsList.add(hints);
         }
         return hintsList;
+    }
+
+    private void initializeBoard(double fillPercentage) {
+        final List<Position> position = new ArrayList<>(IntStream.range(0, size * size)
+                .mapToObj(i -> new Position(i / size, i % size))
+                .toList());
+
+        position.forEach(p -> getBoard().put(p, false));
+
+        Collections.shuffle(position);
+
+        position.stream().limit(Math.round(size * size * fillPercentage)).forEach(p -> getBoard().replace(p, true));
     }
 }
