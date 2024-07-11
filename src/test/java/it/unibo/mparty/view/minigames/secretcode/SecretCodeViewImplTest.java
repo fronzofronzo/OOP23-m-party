@@ -1,4 +1,4 @@
-package it.unibo.mparty.view.minigames.secreteCode;
+package it.unibo.mparty.view.minigames.secretcode;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.gameBoard;
+package it.unibo.mparty.model.gameboard;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
