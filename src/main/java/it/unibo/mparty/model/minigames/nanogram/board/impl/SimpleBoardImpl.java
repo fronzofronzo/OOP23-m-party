@@ -26,7 +26,7 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
         super(size);
         this.size = size;
 
-        List<Position> position = new ArrayList<>(IntStream.range(0, size * size)
+        final List<Position> position = new ArrayList<>(IntStream.range(0, size * size)
                 .mapToObj(i -> new Position(i / size, i % size))
                 .toList());
 
