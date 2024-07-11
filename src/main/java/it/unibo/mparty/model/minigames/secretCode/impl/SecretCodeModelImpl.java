@@ -77,7 +77,7 @@ public class SecretCodeModelImpl implements SecretCodeModel {
      * {@inheritDoc}
      */
     @Override
-    public boolean addColor(SecretCodeColors color) {
+    public boolean addColor(final SecretCodeColors color) {
         return this.players.get(actualPlayerIndex).addColor(color);
     }
 
@@ -135,7 +135,7 @@ public class SecretCodeModelImpl implements SecretCodeModel {
      * {@inheritDoc}
      */
     @Override
-    public void setUpPlayers(List<String> players) {
+    public void setUpPlayers(final List<String> players) {
         players
                 .forEach(p -> this.players.add(new SecretCodePlayerImpl(p, this.soluction.size())));
     }
@@ -165,7 +165,7 @@ public class SecretCodeModelImpl implements SecretCodeModel {
         } while (this.soluction.size() < DIM_SOLUCTION);
     }
 
-    private List<SecretCodeResults> computeResult(List<SecretCodeColors> guess) {
+    private List<SecretCodeResults> computeResult(final List<SecretCodeColors> guess) {
         if (guess.size() != DIM_SOLUCTION) {
             return Collections.emptyList();
         }
@@ -186,7 +186,7 @@ public class SecretCodeModelImpl implements SecretCodeModel {
         return Collections.unmodifiableList(results);
     }
 
-    private boolean hasGuessed(List<SecretCodeResults> results) {
+    private boolean hasGuessed(final List<SecretCodeResults> results) {
         return !results.contains(SecretCodeResults.CORRECT_COLOR)
                 && !results.contains(SecretCodeResults.WRONG_COLOR);
     }

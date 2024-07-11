@@ -25,7 +25,7 @@ public class SecretCodePlayerImpl implements SecretCodePlayer {
      * @param player        the name of the player.
      * @param soluctionSize the size of the soluction that the player have to guess.
      */
-    public SecretCodePlayerImpl(String player, int soluctionSize) {
+    public SecretCodePlayerImpl(final String player, final int soluctionSize) {
         this.player = player;
         this.soluctionSize = soluctionSize;
         this.myGuess = new ArrayList<>();
@@ -36,7 +36,7 @@ public class SecretCodePlayerImpl implements SecretCodePlayer {
      * {@inheritDoc}
      */
     @Override
-    public boolean addColor(SecretCodeColors color) {
+    public boolean addColor(final SecretCodeColors color) {
         if (this.myGuess.size() < this.soluctionSize) {
             this.myGuess.add(color);
             return true;

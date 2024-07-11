@@ -144,7 +144,9 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
      * {@inheritDoc}
      */
     @Override
-    public void setUpBoard(Pair<Integer, Integer> dimension, Map<Position, SlotType> map, List<String> usernames) {
+    public void setUpBoard(final Pair<Integer, Integer> dimension,
+            final Map<Position, SlotType> map,
+            final List<String> usernames) {
         this.createData();
         this.populateBoard(dimension, map);
         this.setUpPlayers(usernames);
