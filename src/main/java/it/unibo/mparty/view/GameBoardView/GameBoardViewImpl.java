@@ -127,27 +127,27 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private Label labelTurn;
 
-    private Circle player1 = new Circle(RADIUS);
-    private Circle player2 = new Circle(RADIUS);
-    private Circle player3 = new Circle(RADIUS);
-    private Circle player4 = new Circle(RADIUS);
+    private final Circle player1 = new Circle(RADIUS);
+    private final Circle player2 = new Circle(RADIUS);
+    private final Circle player3 = new Circle(RADIUS);
+    private final Circle player4 = new Circle(RADIUS);
 
-    private List<Label> labelPlayersNames = new ArrayList<>();
-    private List<Label> labelPlayersCoins = new ArrayList<>();
-    private List<Label> labelPlayersStars = new ArrayList<>();
-    private List<Label> labelPlayersItems = new ArrayList<>();
-    private List<Label> labelPlayersColor = new ArrayList<>();
-    private List<Button> buttonsItem = new ArrayList<>();
-    private List<Button> buttonsDirection = new ArrayList<>();
-    private List<Circle> pawns = new ArrayList<>();
-    private Map<Position, FlowPane> board = new HashMap<>();
+    private final List<Label> labelPlayersNames = new ArrayList<>();
+    private final List<Label> labelPlayersCoins = new ArrayList<>();
+    private final List<Label> labelPlayersStars = new ArrayList<>();
+    private final List<Label> labelPlayersItems = new ArrayList<>();
+    private final List<Label> labelPlayersColor = new ArrayList<>();
+    private final List<Button> buttonsItem = new ArrayList<>();
+    private final List<Button> buttonsDirection = new ArrayList<>();
+    private final List<Circle> pawns = new ArrayList<>();
+    private final Map<Position, FlowPane> board = new HashMap<>();
 
     @Override
     public void updatePlayer(String palyer, int coins, int stars, final List<String> items, Position position) {
         for (int i = 0; i < this.labelPlayersNames.size(); i++) {
             if (this.labelPlayersNames.get(i).getText().equals(palyer)) {
-                this.labelPlayersCoins.get(i).setText(TEXT_COINS + String.valueOf(coins));
-                this.labelPlayersStars.get(i).setText(TEXT_STARS + String.valueOf(stars));
+                this.labelPlayersCoins.get(i).setText(TEXT_COINS + coins);
+                this.labelPlayersStars.get(i).setText(TEXT_STARS + stars);
                 this.labelPlayersItems.get(i).setText(TEXT_ITEMS + this.printItems(items));
                 for (Map.Entry<Position, FlowPane> entry : this.board.entrySet()) {
                     entry.getValue().getChildren().remove(this.pawns.get(i));
@@ -238,7 +238,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
 
     @Override
     public void showResultDice(int result) {
-        this.resultDice.setText(TEXT_DICE_RESULT + String.valueOf(result));
+        this.resultDice.setText(TEXT_DICE_RESULT + result);
     }
 
     @FXML
@@ -275,7 +275,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         String output = "";
         if (!items.isEmpty()) {
             for (String i : items) {
-                output = output.concat("\n- " + i.toString());
+                output = output.concat("\n- " + i);
             }
         }
         return output;

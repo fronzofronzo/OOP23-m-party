@@ -17,15 +17,16 @@ public enum MinigameType {
 
     private final String type;
 
-    MinigameType(final String type){
+    MinigameType(final String type) {
         this.type = type;
     }
 
     /**
      * Method to get the string describing the type.
+     *
      * @return - String containing the type.
      */
-    public String getType(){
+    public String getType() {
         return this.type;
     }
 }

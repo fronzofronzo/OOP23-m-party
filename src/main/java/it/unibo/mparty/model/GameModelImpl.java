@@ -49,8 +49,8 @@ public class GameModelImpl implements GameModel {
     private boolean activateShop;
     private int turn = 1;
     private GameStatus status = GameStatus.ROLL_DICE;
-    private int actualPlayerIndex = 0;
-    private int steps = 0;
+    private int actualPlayerIndex;
+    private int steps;
     private final MinigameHandler minigameHandler;
 
     /**
@@ -93,7 +93,7 @@ public class GameModelImpl implements GameModel {
                             .get()
                             .getValue());
                 } else {
-                    if (dir.isEmpty() || nextPlayerPos.size() < 1 || !nextPlayerPos.containsKey(dir.get())) {
+                    if (dir.isEmpty() || nextPlayerPos.isEmpty() || !nextPlayerPos.containsKey(dir.get())) {
                         return;
                     } else {
                         this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.get(dir.get()));
@@ -304,9 +304,9 @@ public class GameModelImpl implements GameModel {
 
 
     private String getDirections() {
-        Map<Direction, Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
+        final Map<Direction, Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
         String output = "";
-        for (Map.Entry<Direction, Position> entry : pos.entrySet()) {
+        for (final Map.Entry<Direction, Position> entry : pos.entrySet()) {
             if (!output.isBlank()) {
                 output = output.concat(",");
             }
@@ -322,23 +322,13 @@ public class GameModelImpl implements GameModel {
         final Random random = new Random();
         if (this.status.equals(GameStatus.ACTIVE_SLOT)) {
             switch (slot) {
-                case SINGLEPLAYER -> {
-                    try {
-                        this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.SINGLE_PLAYER);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
+                case SINGLEPLAYER -> this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.SINGLE_PLAYER);
                 case MULTIPLAYER -> {
                     final Player otherPlayer = this.players.stream()
                             .filter(p -> !p.equals(actualPlayer))
                             .findAny()
                             .get();
-                    try {
-                        this.minigameHandler.startMinigame(List.of(actualPlayer, otherPlayer), MinigameType.MULTI_PLAYER);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
+                    this.minigameHandler.startMinigame(List.of(actualPlayer, otherPlayer), MinigameType.MULTI_PLAYER);
                 }
                 case BONUS -> actualPlayer.addCoins(random.nextInt(MIN_COINS, MAX_COINS));
                 case MALUS -> actualPlayer.removeCoins(random.nextInt(MIN_COINS, MAX_COINS));

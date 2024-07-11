@@ -19,8 +19,8 @@ public class SlotImpl implements Slot {
 
     private final Position position;
     private SlotType slotType;
-    private Map<Direction, Position> nextConnections;
-    private Map<Direction, Position> prevConnections;
+    private final Map<Direction, Position> nextConnections;
+    private final Map<Direction, Position> prevConnections;
 
     /**
      * Create a new slot.

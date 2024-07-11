@@ -30,8 +30,8 @@ public class SecretCodeModelImpl implements SecretCodeModel {
             SecretCodeResults.CORRECT_COLOR, PUNTI_COL_COR,
             SecretCodeResults.WRONG_COLOR, PUNTI_ERRORE);
     private static final Integer COINS_WINNER = 10;
-    private List<SecretCodePlayer> players = new ArrayList<>();;
-    private List<SecretCodeColors> soluction = new ArrayList<>();
+    private final List<SecretCodePlayer> players = new ArrayList<>();
+    private final List<SecretCodeColors> soluction = new ArrayList<>();
     private int actualPlayerIndex = 0;
     private int turn = 1;
     private Optional<String> winner = Optional.empty();

@@ -21,7 +21,7 @@ public enum Connect4Directions {
      */
     DIAGONAL_RIGHT(1, 1);
 
-    private Position pos;
+    private final Position pos;
 
     Connect4Directions(final int row, final int col) {
         pos = new Position(row, col);
