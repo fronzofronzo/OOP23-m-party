@@ -51,7 +51,7 @@ public class GameViewImpl extends Application implements GameView {
         this.setBoardView();
         final Pair<Scene, SceneView> scenePair = this.loadScene("InitialScreen");
         this.stage.setScene(scenePair.getFirst());
-        // this.setMinigameScene("memoryCard", List.of("pl1", "pl2"));
+        // this.setMinigameScene("memorycard", List.of("pl1", "pl2"));
         this.stage.setMinWidth(PREF_WIDTH);
         this.stage.setMinHeight(PREF_HEIGHT);
         this.stage.setMaximized(true);

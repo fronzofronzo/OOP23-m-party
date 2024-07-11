@@ -20,7 +20,8 @@ public class MemoryCardModelImpl implements MemoryCardModel {
     private static final double SCORE_MULTIPLIER = 1.5;
     private static final int NOT_SELECTED = -1;
     private static final int FIRST = 0;
-    private static final String NAME = "memoryCard";
+    private static final String NAME = "memorycard";
+    private static final Random RANDOM = new Random();
 
     private final Map<Integer, CardType> cards;
     private final Set<CardType> guessed;
@@ -35,16 +36,15 @@ public class MemoryCardModelImpl implements MemoryCardModel {
         this.cards = new HashMap<>();
         this.guessed = new HashSet<>();
         final int size = CardType.values().length * 2;
-        final Random random = new Random();
         for (final var type : CardType.values()) {
-            var i = random.nextInt(size);
+            var i = RANDOM.nextInt(size);
             while (cards.containsKey(i)) {
-                i = random.nextInt(size);
+                i = RANDOM.nextInt(size);
             }
             cards.put(i, type);
-            var j = random.nextInt(size);
+            var j = RANDOM.nextInt(size);
             while (cards.containsKey(j)) {
-                j = random.nextInt(size);
+                j = RANDOM.nextInt(size);
             }
             cards.put(j, type);
         }

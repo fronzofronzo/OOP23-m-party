@@ -133,6 +133,8 @@ public class PlayerImpl implements Player {
      * {@inheritDoc}.
      */
     @Override
+    @SuppressFBWarnings(value="EI_EXPOSE_REP", justification = "Method getPlayerBag should return the PlayerBag to" +
+            "operate with it. ")
     public PlayerBag getPlayerBag() {
         return this.playerBag;
     }

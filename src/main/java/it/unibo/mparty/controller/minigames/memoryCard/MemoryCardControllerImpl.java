@@ -2,9 +2,8 @@ package it.unibo.mparty.controller.minigames.memoryCard;
 
 import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
 import it.unibo.mparty.model.minigames.memoryCard.impl.MemoryCardModelImpl;
-import it.unibo.mparty.view.minigames.memoryCard.MemoryCardView;
+import it.unibo.mparty.view.minigames.memorycard.MemoryCardView;
 
-import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.io.IOException;

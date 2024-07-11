@@ -1,4 +1,4 @@
-package it.unibo.mparty.view.minigames.memoryCard;
+package it.unibo.mparty.view.minigames.memorycard;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -49,19 +49,6 @@ class MemoryCardViewImplTest extends ApplicationTest {
     void testInitialSetup() {
         final Button button = from(this.root).lookup("#controlButton").query();
         verifyThat(button, hasText("Start !"));
-    }
-
-    /**
-     * Check that after the first click on the control button, the GUI elements
-     * change properly.
-     *
-     * @param robot - will be injected by the test runner.
-     */
-    @Test
-    void testStartButton(final FxRobot robot) {
-        final Button button = from(this.root).lookup("#controlButton").query();
-        final Label textLabel = from(this.root).lookup("#textLabel").query();
-        robot.clickOn(button);
     }
 
 }

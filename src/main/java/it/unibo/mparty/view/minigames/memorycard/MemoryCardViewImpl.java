@@ -1,4 +1,4 @@
-package it.unibo.mparty.view.minigames.memoryCard;
+package it.unibo.mparty.view.minigames.memorycard;
 
 import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardController;
 import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardControllerImpl;
@@ -106,7 +106,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
     }
 
     @FXML
-    private void startGame(final ActionEvent event) {
+    public void startGame(final ActionEvent event) {
         final Button bt = (Button) event.getSource();
         this.cardsPane.getChildren().forEach(b -> b.setVisible(true));
         bt.setText("Pronto !");
