@@ -25,7 +25,7 @@ import it.unibo.mparty.model.gameBoard.util.RandomListGenerator;
 import it.unibo.mparty.model.gameBoard.api.Slot;
 
 /**
- * This is an Abstract class that implements a GameBoard
+ * This is an abstract class that implements a {@link GameBoard}.
  */
 public abstract class AbstractBoardImpl implements GameBoard {
 
@@ -48,24 +48,25 @@ public abstract class AbstractBoardImpl implements GameBoard {
 
     /**
      * This is the constructor of this abstract class
-     * @param width that is the width of the game board
-     * @param height that is the height of the game board
+     * 
+     * @param width           that is the width of the game board
+     * @param height          that is the height of the game board
      * @param initialPosition that is the spawn {@link Position} of the players
-     * in the game board
-     * @param starPositions that are the positions where the star could spawn
-     * @param filePath that is the path of the configuration file txt of
-     * the game board
-     * @param rules that contains rules about probabilities of spawn for
-     * each {@link SlotType} in the board
-     * @param boardType that is the type that identifies this board.
+     *                        in the game board
+     * @param starPositions   that are the positions where the star could spawn
+     * @param filePath        that is the path of the configuration file txt of
+     *                        the game board
+     * @param rules           that contains rules about probabilities of spawn for
+     *                        each {@link SlotType} in the board
+     * @param boardType       that is the type that identifies this board.
      */
     public AbstractBoardImpl(int width,
-                             int height,
-                             Position initialPosition,
-                             Set<Position> starPositions,
-                             String filePath,
-                             Map<SlotType, Integer> rules,
-                             BoardType boardType) {
+            int height,
+            Position initialPosition,
+            Set<Position> starPositions,
+            String filePath,
+            Map<SlotType, Integer> rules,
+            BoardType boardType) {
         this.width = width;
         this.height = height;
         this.initialPosition = initialPosition;
@@ -81,38 +82,53 @@ public abstract class AbstractBoardImpl implements GameBoard {
      * {@inheritDoc}
      */
     @Override
-    public SlotType getSlotType(Position position) throws IllegalStateException{
-        if (!isInBounds(position)) {
+    public void changeStarPosition() throws IllegalStateException {
+        Set<Position> nextStars = this.starsPositions
+                .stream()
+                .filter(p -> this.getSlotType(p).equals(SlotType.NOT_ACTIVE_STAR))
+                .collect(Collectors.toSet());
+        if (nextStars.size() != this.starsPositions.size() - 1) {
             throw new IllegalStateException();
         }
-        return this.board.containsKey(position) ? this.board.get(position).getSlotType() : SlotType.VOID;
+        Position newStarPosition = RandomFromSet.get(nextStars);
+        Position oldStarPosition = this.getStarPosition();
+        this.board.get(newStarPosition).changeSlotType(SlotType.ACTIVE_STAR);
+        this.board.get(oldStarPosition).changeSlotType(SlotType.NOT_ACTIVE_STAR);
+        this.updateStarsSlot = true;
     }
 
-    private boolean isInBounds(Position pos) {
-        return pos.getX() >= 0
-               && pos.getY() >= 0
-               && pos.getX() < this.width
-               && pos.getY() < this.height;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SlotType getSlotType(Position position) throws IllegalStateException {
+        if (!isInTheBoard(position)) {
+            throw new IllegalStateException();
+        }
+        return this.board.containsKey(position)
+                ? this.board.get(position).getSlotType()
+                : SlotType.VOID;
     }
 
-    private void generateBoard() {
-        this.addSlot(RandomFromSet.get(this.starsPositions), SlotType.ACTIVE_STAR);
-        this.starsPositions
-                .forEach(p -> this.addSlot(p, SlotType.NOT_ACTIVE_STAR));
-        this.addSlot(this.getStrartingPosition(), SlotType.PATH);
-        this.createPathFromFile(this.filePath);
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Position getStrartingPosition() {
         return this.initialPosition;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Map<Direction, Position> getNextPositions(Position position) {
         return Collections.unmodifiableMap(this.getSlot(position).getNextConnections());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Position getStarPosition() throws IllegalStateException {
         Set<Position> star = this.starsPositions
@@ -125,32 +141,25 @@ public abstract class AbstractBoardImpl implements GameBoard {
         return star.stream().findFirst().get();
     }
 
-    @Override
-    public void changeStarPosition() throws IllegalStateException {
-        Set<Position> nextStars = this.starsPositions
-                .stream()
-                .filter(p -> this.getSlotType(p).equals(SlotType.NOT_ACTIVE_STAR))
-                .collect(Collectors.toSet());
-        if (nextStars.isEmpty()) {
-            throw new IllegalStateException();
-        }
-        Position newStarPosition = RandomFromSet.get(nextStars);
-        Position oldStarPosition = this.getStarPosition();
-        this.board.get(newStarPosition).changeSlotType(SlotType.ACTIVE_STAR);
-        this.board.get(oldStarPosition).changeSlotType(SlotType.NOT_ACTIVE_STAR);
-        this.updateStarsSlot = true;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Pair<Integer, Integer> getDimension() {
         return new Pair<Integer, Integer>(this.width, this.height);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Map<Position, Slot> getBoard() {
         return Collections.unmodifiableMap(this.board);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Map<Position, SlotType> getSlotTypeBoardConfiguration() {
         Map<Position, SlotType> output = new HashMap<>();
@@ -160,6 +169,17 @@ public abstract class AbstractBoardImpl implements GameBoard {
         return Collections.unmodifiableMap(output);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public BoardType getBoardType() {
+        return this.boardType;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Map<Position, SlotType> getSlotsToUpdate() {
         if (this.updateStarsSlot) {
@@ -171,30 +191,68 @@ public abstract class AbstractBoardImpl implements GameBoard {
         return Collections.emptyMap();
     }
 
+    /**
+     * Get the slot that correspond a the position
+     * 
+     * @param position the position requested
+     * @return the {@link Slot} of the position.
+     */
+    protected Slot getSlot(Position position) {
+        return this.board.containsKey(position)
+                ? this.board.get(position)
+                : new SlotImpl(position, SlotType.VOID);
+    }
+
+    /**
+     * Compute the neighbor {@link Position} towards a {@link Direction}
+     * 
+     * @param from the starting {@link Position}
+     * @param dir  the {@link Direction}
+     * @return the computed {@link Position}
+     */
+    protected Position getNeighbor(Position from, Direction dir) {
+        return new Position(from.getX()
+                + (dir.equals(Direction.RIGHT) ? 1 : 0)
+                + (dir.equals(Direction.LEFT) ? -1 : 0),
+                from.getY()
+                        + (dir.equals(Direction.UP) ? -1 : 0)
+                        + (dir.equals(Direction.DOWN) ? 1 : 0));
+    }
+
+    /**
+     * Check if is possible to connect two positions
+     * 
+     * @param from the starting {@link Position}
+     * @param to   the destination.
+     * @return true if the connection is accepted, otherwise false.
+     */
+    protected boolean isValidConnection(Position from, Position to) {
+        return Math.abs(from.getX() - to.getX()) + Math.abs(from.getY() - to.getY()) == 1;
+    }
+
     private void addSlot(Position position, SlotType slotType) {
-        if (!this.board.containsKey(position) && isValidPosition(position)) {
+        if (!this.board.containsKey(position) && isInTheBoard(position)) {
             this.board.put(position, new SlotImpl(position, slotType));
         }
     }
 
+    private void generateBoard() {
+        this.addSlot(RandomFromSet.get(this.starsPositions), SlotType.ACTIVE_STAR);
+        this.starsPositions
+                .forEach(p -> this.addSlot(p, SlotType.NOT_ACTIVE_STAR));
+        this.addSlot(this.getStrartingPosition(), SlotType.PATH);
+        this.createPathFromFile(this.filePath);
+    }
+
     private void addConnection(Position from, Position to, Direction dir) {
-        if (this.board.containsKey(from) && this.board.containsKey(to)) {
+        if (this.board.containsKey(from) && this.board.containsKey(to) && this.isValidConnection(from, to)) {
             this.getSlot(from).addNext(dir, to);
             this.getSlot(to).addPrev(dir, from);
         }
         ;
     }
-    protected boolean isValidPosition(Position position) {
-        return isInTheBoard(position);
-    }
 
-    /**
-     * Check if the position is in board limits
-     * 
-     * @param position the position to check
-     * @return true if is in board limits, otherwise false
-     */
-    protected boolean isInTheBoard(Position position) {
+    private boolean isInTheBoard(Position position) {
         return position.getX() >= 0 && position.getX() < this.width &&
                 position.getY() >= 0 && position.getY() < this.height;
     }
@@ -225,44 +283,25 @@ public abstract class AbstractBoardImpl implements GameBoard {
                     Position pos = new Position(x, y);
                     int steps = Integer.parseInt(parts[2]);
                     String d = parts[3];
-                    Direction dir = d.equals(UP) ? Direction.UP
-                            : d.equals(DOWN) ? Direction.DOWN
-                                    : d.equals(LEFT) ? Direction.LEFT : d.equals(RIGHT) ? Direction.RIGHT : null;
-
+                    Direction dir = d.equals(UP)
+                            ? Direction.UP
+                            : d.equals(DOWN)
+                                    ? Direction.DOWN
+                                    : d.equals(LEFT)
+                                            ? Direction.LEFT
+                                            : d.equals(RIGHT)
+                                                    ? Direction.RIGHT
+                                                    : null;
                     if (Objects.nonNull(dir)) {
                         this.createPath(pos, steps, dir);
+                    } else {
+                        throw new IllegalStateException();
                     }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Get the slot that correspond a the position
-     * 
-     * @param position the position requested
-     * @return the {@link Slot} of the position
-     */
-    protected Slot getSlot(Position position) {
-        return this.board.containsKey(position) ? this.board.get(position) : new SlotImpl(position, SlotType.VOID);
-    }
-
-    /**
-     * Get the next Slot from a position towards a direction
-     * 
-     * @param from the starting position
-     * @param dir  the direction
-     * @return
-     */
-    protected Position getNeighbor(Position from, Direction dir) {
-        return new Position(from.getX()
-                + (dir.equals(Direction.RIGHT) ? 1 : 0)
-                + (dir.equals(Direction.LEFT) ? -1 : 0),
-                from.getY()
-                        + (dir.equals(Direction.UP) ? -1 : 0)
-                        + (dir.equals(Direction.DOWN) ? 1 : 0));
     }
 
     private SlotType getNewSlotType() {
@@ -273,17 +312,8 @@ public abstract class AbstractBoardImpl implements GameBoard {
         this.avaiableSlotTypes.remove(0);
         return output;
     }
-    
+
     private List<SlotType> setAviableSlotType() {
         return RandomListGenerator.generate(this.rules);
-    }
-
-    /**
-     * Get the Board Type
-     * 
-     * @return the board type of the board
-     */
-    public BoardType getBoardType() {
-        return this.boardType;
     }
 }
