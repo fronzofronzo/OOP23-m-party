@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  */
 public class GameControllerImpl implements GameController {
 
-    private final GameView view;
+    private GameView view;
     private GameModel model;
 
     /**
@@ -34,7 +34,7 @@ public class GameControllerImpl implements GameController {
      * @param view to set like {@link GameView} reference to the game.
      */
     public GameControllerImpl(final GameView view) {
-        this.view = view;
+        this.setView(view);
     }
 
     /**
@@ -176,5 +176,9 @@ public class GameControllerImpl implements GameController {
                         .toList(),
                 this.model.getMessage(),
                 this.model.getTurn());
+    }
+
+    private void setView(final GameView view) {
+        this.view = view;
     }
 }
