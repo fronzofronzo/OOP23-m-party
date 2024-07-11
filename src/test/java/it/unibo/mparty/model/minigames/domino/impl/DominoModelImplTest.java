@@ -25,8 +25,6 @@ class DominoModelImplTest {
     private static final int SIDE1 = 1;
     private static final int SIDE2 = 2;
     private static final int SIDE3 = 3;
-    private static final int SIDE4 = 4;
-    private static final int SIDE5 = 5;
     private static final int SIDE6 = 6;
 
     private DominoModel model;
