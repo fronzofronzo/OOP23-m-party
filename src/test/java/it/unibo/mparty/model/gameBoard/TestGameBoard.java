@@ -58,12 +58,8 @@ class TestGameBoard {
      */
     @BeforeAll
     public static void initialise() {
-        for (BoardType bt : BOARDS_TYPES) {
+        for (final BoardType bt : BOARDS_TYPES) {
             BOARDS.add(BoardFactory.createBoard(bt));
-        }
-        for (GameBoard b : BOARDS) {
-            System.out.println(b.toString());
-            System.out.println(b.getBoardType());
         }
     }
 
