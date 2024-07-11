@@ -133,7 +133,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
      */
     @Override
     public Position getStarPosition() throws IllegalStateException {
-        Set<Position> star = this.starsPositions
+        final Set<Position> star = this.starsPositions
                 .stream()
                 .filter(p -> this.getSlotType(p).equals(SlotType.ACTIVE_STAR))
                 .collect(Collectors.toSet());
@@ -164,8 +164,8 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
      */
     @Override
     public Map<Position, SlotType> getSlotTypeBoardConfiguration() {
-        Map<Position, SlotType> output = new HashMap<>();
-        for (Entry<Position, Slot> entry : this.board.entrySet()) {
+        final Map<Position, SlotType> output = new HashMap<>();
+        for (final Entry<Position, Slot> entry : this.board.entrySet()) {
             output.put(entry.getKey(), entry.getValue().getSlotType());
         }
         return Collections.unmodifiableMap(output);
@@ -185,7 +185,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
     @Override
     public Map<Position, SlotType> getModifiedSlots() {
         if (this.updateStarsSlot) {
-            Map<Position, SlotType> slotsToUpdate = new HashMap<>();
+            final Map<Position, SlotType> slotsToUpdate = new HashMap<>();
             this.starsPositions.forEach(p -> slotsToUpdate.put(p, this.getSlotType(p)));
             this.updateStarsSlot = false;
             return Collections.unmodifiableMap(slotsToUpdate);
@@ -273,18 +273,18 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
     }
 
     private void createPathFromFile(final String filePath) {
-        InputStream inputStream = ClassLoader.getSystemResourceAsStream(this.filePath);
+        final InputStream inputStream = ClassLoader.getSystemResourceAsStream(this.filePath);
         if (Objects.isNull(inputStream)) {
             throw new IllegalStateException();
         }
         try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = br.readLine()) != null) {
-                String[] parts = line.split(" ");
+                final String[] parts = line.split(" ");
                 if (parts.length == N_PARTS_INPUT_FILE) {
                     final int x = Integer.parseInt(parts[0]);
                     final int y = Integer.parseInt(parts[1]);
-                    Position pos = new Position(x, y);
+                    final Position pos = new Position(x, y);
                     final int steps = Integer.parseInt(parts[2]);
                     final String d = parts[3];
                     final Direction dir = this.getDirection(d);
