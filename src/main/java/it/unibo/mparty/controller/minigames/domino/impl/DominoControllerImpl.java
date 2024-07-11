@@ -16,7 +16,7 @@ import java.util.List;
 public class DominoControllerImpl implements DominoController {
 
     private final DominoModel model;
-    private final DominoView view;
+    private DominoView view;
     private String player1;
     private String player2;
     private boolean isPlayer1Turn;
@@ -28,7 +28,7 @@ public class DominoControllerImpl implements DominoController {
      */
     public DominoControllerImpl(final DominoView view) {
         this.model = new DominoModelImpl();
-        this.view = view;
+        this.setView(view);
     }
 
     /**
@@ -37,7 +37,7 @@ public class DominoControllerImpl implements DominoController {
     @Override
     public void initGame(final List<String> players) {
         this.model.setUpPlayers(players);
-        this.model.getBoardTile().addObserver(this.view);
+        this.model.addBoardObserver(this.view);
         this.player1 = players.get(0);
         this.player2 = players.get(1);
 
@@ -120,5 +120,9 @@ public class DominoControllerImpl implements DominoController {
         this.updateTurn();
         this.checkDraw();
         this.endGame();
+    }
+
+    private void setView(final DominoView view) {
+        this.view = view;
     }
 }
