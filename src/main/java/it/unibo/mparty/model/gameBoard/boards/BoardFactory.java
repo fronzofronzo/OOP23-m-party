@@ -4,7 +4,7 @@ import it.unibo.mparty.model.gameBoard.api.GameBoard;
 import it.unibo.mparty.utilities.BoardType;
 
 /**
- * This class is a factory that creates a {@link GameBoard} based on the
+ * This class is a static factory that creates a {@link GameBoard} based on the
  * selected {@link BoardType}.
  */
 public class BoardFactory {
