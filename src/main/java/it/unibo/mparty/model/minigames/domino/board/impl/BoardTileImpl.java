@@ -2,6 +2,7 @@ package it.unibo.mparty.model.minigames.domino.board.impl;
 
 import it.unibo.mparty.model.minigames.domino.board.api.BoardTile;
 import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
+import it.unibo.mparty.model.minigames.domino.tile.impl.SideType;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.impl.ESourceImpl;
 
@@ -44,9 +45,9 @@ public class BoardTileImpl extends ESourceImpl<List<Pair<Integer, Integer>>> imp
             this.boardTiles.add(tile);
         } else if (this.boardTiles.size() == SINGLE_TILE) {
             this.boardTiles.get(0).match(tile);
-            if (tile.getSideA().isMatched()) {
+            if (tile.isSideMatched(SideType.SIDE_A)) {
                 this.boardTiles.add(this.boardTiles.size(), tile);
-            } else if (tile.getSideB().isMatched()) {
+            } else if (tile.isSideMatched(SideType.SIDE_B)) {
                 this.boardTiles.add(0, tile);
             }
         } else if (this.boardTiles.get(0).match(tile)) {
@@ -55,7 +56,7 @@ public class BoardTileImpl extends ESourceImpl<List<Pair<Integer, Integer>>> imp
             this.boardTiles.add(this.boardTiles.size(), tile);
         }
         this.notifyObservers(this.boardTiles.stream()
-                .map(t -> new Pair<>(t.getSideA().getValue(), t.getSideB().getValue())).toList());
+                .map(t -> new Pair<>(t.getSideValue(SideType.SIDE_A), t.getSideValue(SideType.SIDE_B))).toList());
     }
 
     /**
