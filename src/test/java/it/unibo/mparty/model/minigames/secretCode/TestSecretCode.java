@@ -70,7 +70,7 @@ class TestSecretCode {
         final String p1 = model.getCurrentPlayer();
         final List<SecretCodeColors> sol = model.getSoluction();
         assertFalse(sol.isEmpty());
-        for (SecretCodeColors c : sol) {
+        for (final SecretCodeColors c : sol) {
             assertTrue(model.addColor(c));
         }
         final List<SecretCodeResults> res = model.getGuessResult();
