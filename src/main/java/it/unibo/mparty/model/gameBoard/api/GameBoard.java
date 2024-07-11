@@ -97,5 +97,5 @@ public interface GameBoard {
      *         value the
      *         corrispondent {@link SlotType}.
      */
-    Map<Position, SlotType> getSlotsToUpdate();
+    Map<Position, SlotType> getModifiedSlots();
 }

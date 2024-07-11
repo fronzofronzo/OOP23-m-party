@@ -285,7 +285,7 @@ public class GameModelImpl implements GameModel {
      */
     @Override
     public Map<Position, SlotType> getSlotsToUpdate() {
-        return this.board.getSlotsToUpdate();
+        return this.board.getModifiedSlots();
     }
 
     /**

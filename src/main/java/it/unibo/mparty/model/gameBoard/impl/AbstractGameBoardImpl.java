@@ -181,7 +181,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
      * {@inheritDoc}
      */
     @Override
-    public Map<Position, SlotType> getSlotsToUpdate() {
+    public Map<Position, SlotType> getModifiedSlots() {
         if (this.updateStarsSlot) {
             Map<Position, SlotType> slotsToUpdate = new HashMap<>();
             this.starsPositions.forEach(p -> slotsToUpdate.put(p, this.getSlotType(p)));
@@ -230,18 +230,21 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
         return Math.abs(from.getX() - to.getX()) + Math.abs(from.getY() - to.getY()) == 1;
     }
 
-    private void addSlot(Position position, SlotType slotType) {
-        if (!this.board.containsKey(position) && isInTheBoard(position)) {
-            this.board.put(position, new SlotImpl(position, slotType));
-        }
-    }
-
-    private void generateBoard() {
+    /**
+     * This class is called in the constructor in order to create the board based on the input data of the constructor.
+     */
+    protected void generateBoard() {
         this.addSlot(RandomFromSet.get(this.starsPositions), SlotType.ACTIVE_STAR);
         this.starsPositions
                 .forEach(p -> this.addSlot(p, SlotType.NOT_ACTIVE_STAR));
         this.addSlot(this.getStrartingPosition(), SlotType.PATH);
         this.createPathFromFile(this.filePath);
+    }
+
+    private void addSlot(Position position, SlotType slotType) {
+        if (!this.board.containsKey(position) && isInTheBoard(position)) {
+            this.board.put(position, new SlotImpl(position, slotType));
+        }
     }
 
     private void addConnection(Position from, Position to, Direction dir) {
