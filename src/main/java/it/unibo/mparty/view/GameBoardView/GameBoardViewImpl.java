@@ -182,7 +182,11 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
      * {@inheritDoc}
      */
     @Override
-    public void updatePlayer(String palyer, int coins, int stars, final List<String> items, Position position) {
+    public void updatePlayer(final String palyer,
+            final int coins,
+            final int stars,
+            final List<String> items,
+            final Position position) {
         for (int i = 0; i < this.labelPlayersNames.size(); i++) {
             if (this.labelPlayersNames.get(i).getText().equals(palyer)) {
                 this.labelPlayersCoins.get(i).setText(TEXT_COINS + String.valueOf(coins));
@@ -200,7 +204,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
      * {@inheritDoc}
      */
     @Override
-    public void updateBoard(Map<Position, SlotType> boardUpdates) {
+    public void updateBoard(final Map<Position, SlotType> boardUpdates) {
         if (!boardUpdates.isEmpty()) {
             for (Map.Entry<Position, SlotType> entry : boardUpdates.entrySet()) {
                 FlowPane tmp = this.board.get(entry.getKey());
@@ -213,9 +217,13 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
      * {@inheritDoc}
      */
     @Override
-    public void updateCommands(final List<String> items, String message, Pair<String, String> turn) {
+    public void updateCommands(final List<String> items,
+            final String message,
+            final Pair<String, String> turn) {
         for (int i = 0; i < this.buttonsItem.size(); i++) {
-            this.buttonsItem.get(i).setText(i < items.size() ? items.get(i) : TEXT_VOID_ITEM);
+            this.buttonsItem.get(i).setText(i < items.size()
+                    ? items.get(i)
+                    : TEXT_VOID_ITEM);
         }
         this.labelMessage.setText(message);
         this.labelTurn.setText(TEXT_TURN + turn.getFirst() + "/" + turn.getSecond());
@@ -225,7 +233,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
      * {@inheritDoc}
      */
     @Override
-    public void showResultDice(int result) {
+    public void showResultDice(final int result) {
         this.resultDice.setText(TEXT_DICE_RESULT + String.valueOf(result));
     }
 
@@ -235,7 +243,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @FXML
-    private void movePlayer(ActionEvent e) {
+    private void movePlayer(final ActionEvent e) {
         final Button bt = (Button) e.getSource();
         Optional<Direction> dir = Optional.empty();
         if (bt.equals(buttonDOWN)) {
@@ -256,7 +264,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @FXML
-    private void useItem(ActionEvent e) {
+    private void useItem(final ActionEvent e) {
         Button bt = (Button) e.getSource();
         String text = bt.getText();
         if (!text.equals(TEXT_VOID_ITEM)) {
@@ -274,11 +282,14 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         return output;
     }
 
-    private void populateBoard(Pair<Integer, Integer> dimension, Map<Position, SlotType> map) {
+    private void populateBoard(final Pair<Integer, Integer> dimension,
+            final Map<Position, SlotType> map) {
         for (int i = 0; i < dimension.getFirst(); i++) {
             for (int j = 0; j < dimension.getSecond(); j++) {
                 Position pos = new Position(i, j);
-                SlotType slotType = Objects.isNull(map.get(pos)) ? SlotType.VOID : map.get(pos);
+                SlotType slotType = Objects.isNull(map.get(pos))
+                        ? SlotType.VOID
+                        : map.get(pos);
                 FlowPane tmp = new FlowPane();
                 tmp = setUpFlowPane(tmp, slotType);
                 this.board.put(pos, tmp);
@@ -287,7 +298,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         }
     }
 
-    private void setUpPlayers(List<String> usernames) {
+    private void setUpPlayers(final List<String> usernames) {
         for (int i = 0; i < usernames.size(); i++) {
             this.labelPlayersNames.get(i).setText(usernames.get(i));
             this.pawns.get(i).setFill(PLAYER_COLOR.get(i));
@@ -295,7 +306,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         }
     }
 
-    private FlowPane setUpFlowPane(FlowPane tmp, SlotType slotType) {
+    private FlowPane setUpFlowPane(final FlowPane tmp, final SlotType slotType) {
         BackgroundFill backgroundfill = new BackgroundFill(SLOT_COLOR.get(slotType),
                 CornerRadii.EMPTY,
                 null);
