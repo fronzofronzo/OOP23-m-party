@@ -35,7 +35,7 @@ public class Connect4ControllerImpl implements Connect4Controller {
         try {
             this.view.getMainView().setBoardScene();
         } catch (IOException e) {
-            Logger log = Logger.getLogger(Connect4ControllerImpl.class.getName());
+            final Logger log = Logger.getLogger(Connect4ControllerImpl.class.getName());
             log.fine(e.getMessage());
         }
     }

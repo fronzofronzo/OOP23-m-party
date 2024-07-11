@@ -16,5 +16,5 @@ public enum SecretCodeResults {
     /**
      * 
      */
-    WRONG_COLOR;
+    WRONG_COLOR
 }

@@ -1,10 +1,5 @@
 package it.unibo.mparty.model.shop;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +16,8 @@ import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.impl.PlayerImpl;
 import it.unibo.mparty.model.shop.api.Shop;
 import it.unibo.mparty.model.shop.impl.ShopImpl;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This class test the {@link ShopImpl} class.
@@ -48,11 +45,11 @@ class ShopImplTest {
         final List<Item> items = testShop.getItemList();
         assertNotNull(items);
         assertEquals(EXPECTED_SIZE, items.size());
-        assertTrue(items.get(0) instanceof BooBell);
-        assertTrue(items.get(1) instanceof CursedDice);
-        assertTrue(items.get(2) instanceof LuckyDice);
-        assertTrue(items.get(3) instanceof TripleDice);
-        assertTrue(items.get(4) instanceof GoldenPipe);
+        assertInstanceOf(BooBell.class, items.get(0));
+        assertInstanceOf(CursedDice.class, items.get(1));
+        assertInstanceOf(LuckyDice.class, items.get(2));
+        assertInstanceOf(TripleDice.class, items.get(3));
+        assertInstanceOf(GoldenPipe.class, items.get(4));
     }
 
     /**

@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.item;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,10 +34,10 @@ class TestItemFactoryImpl {
      */
     @Test
     void testFactory() {
-        assertTrue(this.testFactory.createItem(ItemName.TUBO_DORATO) instanceof GoldenPipe);
-        assertTrue(this.testFactory.createItem(ItemName.DADO_MALEDETTO) instanceof CursedDice);
-        assertTrue(this.testFactory.createItem(ItemName.DADO_FORTUNATO) instanceof LuckyDice);
-        assertTrue(this.testFactory.createItem(ItemName.CAMPANA_BOO) instanceof BooBell);
-        assertTrue(this.testFactory.createItem(ItemName.TRIPLO_DADO) instanceof TripleDice);
+        assertInstanceOf(GoldenPipe.class, this.testFactory.createItem(ItemName.TUBO_DORATO));
+        assertInstanceOf(CursedDice.class, this.testFactory.createItem(ItemName.DADO_MALEDETTO));
+        assertInstanceOf(LuckyDice.class, this.testFactory.createItem(ItemName.DADO_FORTUNATO));
+        assertInstanceOf(BooBell.class, this.testFactory.createItem(ItemName.CAMPANA_BOO));
+        assertInstanceOf(TripleDice.class, this.testFactory.createItem(ItemName.TRIPLO_DADO));
     }
 }
