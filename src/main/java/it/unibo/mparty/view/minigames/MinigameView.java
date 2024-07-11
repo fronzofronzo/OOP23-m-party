@@ -12,15 +12,15 @@ import java.util.List;
 public interface MinigameView extends SceneView {
 
     /**
-     * Show the result of the minigame
+     * Show the result of the minigame.
      * @param result is a {@link Pair} of player who has won and how many
-     *               coins he has earned
+     *               coins he has earned.
      */
-    void showResult(Pair<String,Integer> result);
+    void showResult(Pair<String, Integer> result);
 
     /**
-     * Method to start the minigame
-     * @param players that partecipate to the minigame
+     * Method to start the minigame.
+     * @param players that partecipate to the minigame.
      */
     void startMinigame(List<String> players);
 
