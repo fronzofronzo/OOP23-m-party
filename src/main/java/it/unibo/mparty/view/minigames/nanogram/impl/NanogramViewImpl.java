@@ -71,14 +71,21 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
 
     private Set<Button> boardButtons;
 
+    private final EventHandler<MouseEvent> handleCellClicked = event -> {
+        this.hitButton = (Button) event.getSource();
+        this.controller.checkCell(GridPane.getRowIndex(hitButton), GridPane.getColumnIndex(hitButton));
+        this.hitButton.setDisable(true);
+        this.boardButtons.remove(hitButton);
+    };
+
     @FXML
-    private void initialize() {
+    public void initialize() {
         this.controller = new NanogramControllerImpl(this);
         this.boardGrid.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        GridPane.setMargin(boardGrid, new Insets(MARGIN));
-        pane.setCenter(this.boardGrid);
+        GridPane.setMargin(this.boardGrid, new Insets(MARGIN));
+        this.pane.setCenter(this.boardGrid);
 
-        ToggleGroup toggleGroup = new ToggleGroup();
+        final ToggleGroup toggleGroup = new ToggleGroup();
         this.filledButton.setToggleGroup(toggleGroup);
         this.crossButton.setToggleGroup(toggleGroup);
 
@@ -89,11 +96,11 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     }
 
     @FXML
-    private void tutorialClicked() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/minigames/nanogramTutorial.fxml"));
-        Parent root = loader.load();
+    public void tutorialClicked() throws IOException {
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/minigames/nanogramTutorial.fxml"));
+        final Parent root = loader.load();
 
-        Stage stage = new Stage();
+        final Stage stage = new Stage();
         stage.setTitle("Nanogram Tutorial");
         stage.getIcons().add(new Image("/images/marioParty.png"));
         stage.initModality(Modality.WINDOW_MODAL);
@@ -209,7 +216,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     public void showResult(final Pair<String, Integer> result) {
         this.messageLabel.setText(NanogramMessage.END.getFormattedMessage(result.getFirst(), result.getSecond()));
 
-        Button returnButton = new Button("Torna al gioco principale");
+        final Button returnButton = new Button("Torna al gioco principale");
         returnButton.setStyle("-fx-font-size: 18pt;");
         returnButton.setOnAction(e -> {
             try {
@@ -251,13 +258,6 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
     private void clearMessageLabel() {
         this.messageLabel.setText(" ");
     }
-
-    private final EventHandler<MouseEvent> handleCellClicked = event -> {
-        this.hitButton = (Button) event.getSource();
-        this.controller.checkCell(GridPane.getRowIndex(hitButton), GridPane.getColumnIndex(hitButton));
-        this.hitButton.setDisable(true);
-        this.boardButtons.remove(hitButton);
-    };
 
     private SVGPath drawCross(final Color color) {
         final String path = "M18.8,16l5.5-5.5c0.8-0.8,0.8-2,0-2.8l0,0C24,7.3,23.5,7,23,7"
