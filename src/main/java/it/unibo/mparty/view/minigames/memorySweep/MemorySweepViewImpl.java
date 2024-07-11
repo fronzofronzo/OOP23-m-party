@@ -16,7 +16,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
     private static final int SIZE = 8;
     private Button button;
     private List<String> players = new ArrayList<>();
-    private static final String PATH = "src/main/resources/text/memorySweepTutorial.txt";
+    private static final String PATH = "text/memorySweepTutorial.txt";
 
     @FXML
     private Button startButton;
@@ -177,10 +179,15 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
         }
         this.memorySweepGrid.setDisable(true);
         this.label.setWrapText(true);
-        try {
-            this.label.setText(new String(Files.readAllBytes(Paths.get(PATH))));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        final InputStream input = getClass().getClassLoader().getResourceAsStream(PATH);
+        if (input != null) {
+            String text;
+            try {
+                text = new String(input.readAllBytes(), StandardCharsets.UTF_8);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            this.label.setText(text);
         }
     }
 

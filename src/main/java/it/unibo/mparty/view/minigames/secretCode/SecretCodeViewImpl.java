@@ -70,15 +70,16 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
     @FXML
     private Circle sol4;
 
-    private final static Map<SecretCodeResults,Color> COLORS_RES = Map.of(SecretCodeResults.CORRECT_COLOR_AND_POSITION, Color.GREEN,
-                                                                          SecretCodeResults.CORRECT_COLOR, Color.RED,
-                                                                          SecretCodeResults.WRONG_COLOR, Color.BLACK);
-    private final static Map<SecretCodeColors,Color> COLORS_GUESS = Map.of(SecretCodeColors.ARANCIONE, Color.ORANGE, 
-                                                                           SecretCodeColors.BLU, Color.BLUE, 
-                                                                           SecretCodeColors.ROSA, Color.PINK, 
-                                                                           SecretCodeColors.ROSSO, Color.RED, 
-                                                                           SecretCodeColors.VERDE, Color.GREEN, 
-                                                                           SecretCodeColors.VIOLA, Color.PURPLE);
+    private final static Map<SecretCodeResults, Color> COLORS_RES = Map.of(SecretCodeResults.CORRECT_COLOR_AND_POSITION,
+            Color.GREEN,
+            SecretCodeResults.CORRECT_COLOR, Color.RED,
+            SecretCodeResults.WRONG_COLOR, Color.BLACK);
+    private final static Map<SecretCodeColors, Color> COLORS_GUESS = Map.of(SecretCodeColors.ARANCIONE, Color.ORANGE,
+            SecretCodeColors.BLU, Color.BLUE,
+            SecretCodeColors.ROSA, Color.PINK,
+            SecretCodeColors.ROSSO, Color.RED,
+            SecretCodeColors.VERDE, Color.GREEN,
+            SecretCodeColors.VIOLA, Color.PURPLE);
 
     private final List<GridPane> gridPaneGuesses = new ArrayList<>();
     private List<GridPane> gridPaneResults = new ArrayList<>();
@@ -86,9 +87,19 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
 
     private final List<String> playersNames = new ArrayList<>();
 
+    @Override
+    public void updateGuess(String player, Pair<Integer, Integer> pos, SecretCodeColors guess) {
+        for (int i = 0; i < this.playersNames.size(); i++) {
+            if (this.playersNames.get(i).equals(player)) {
+                StackPane stack = this.createStackPaneWithCircle(COLORS_GUESS.get(guess));
+                this.gridPaneGuesses.get(i).add(stack, pos.getFirst(), pos.getSecond() - 1);
+            }
+        }
+    }
+    
     @FXML
     void addColor(ActionEvent e) {
-        Button bt = (Button)e.getSource();
+        Button bt = (Button) e.getSource();
         if (bt.equals(this.buttonGreen)) {
             this.controller.addColor(SecretCodeColors.VERDE);
         } else if (bt.equals(buttonBlu)) {
@@ -105,7 +116,7 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
     }
 
     @FXML
-    private void guess(){
+    private void guess() {
         this.controller.guess();
     }
 
@@ -138,16 +149,6 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
         this.labelResultP2.setText(TEXT_LABEL_RESULTS + this.playersNames.get(1));
     }
 
-    @Override
-    public void updateGuesses(String player, Position pos, SecretCodeColors guess) {
-        for (int i = 0; i < this.playersNames.size(); i++) {
-            if (this.playersNames.get(i).equals(player)) {                
-                StackPane stack = this.createStackPaneWithCircle(COLORS_GUESS.get(guess));
-                this.gridPaneGuesses.get(i).add(stack, pos.getX(), pos.getY() - 1);                
-            }
-        }
-    }
-
     @FXML
     private void backToBoard() {
         this.controller.endGame();
@@ -159,8 +160,8 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
             if (this.playersNames.get(i).equals(player)) {
                 for (int j = 0; j < results.size(); j++) {
                     StackPane stack = this.createStackPaneWithCircle(COLORS_RES.get(results.get(j)));
-                    this.gridPaneResults.get(i).add(stack, j, turn -1 );
-                }               
+                    this.gridPaneResults.get(i).add(stack, j, turn - 1);
+                }
             }
         }
     }

@@ -10,6 +10,9 @@ public class RandomFromSet {
 
     private static final String ERROR_MESSAGE = "Il set in input non deve essere vuoto";
 
+    private RandomFromSet() {
+    }
+
     /**
      * Return a random value form the input set.
      * 
@@ -17,7 +20,7 @@ public class RandomFromSet {
      * @return a random value form the input set.
      * @throws {@link IllegalArgumentException} if the input set is empty.
      */
-    public static <E> E get(Set<E> inputSet) {
+    public static <E> E get(final Set<E> inputSet) {
         if (inputSet.isEmpty()) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
         }

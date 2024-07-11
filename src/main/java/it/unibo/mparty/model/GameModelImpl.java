@@ -62,7 +62,7 @@ public class GameModelImpl implements GameModel {
      */
     public GameModelImpl(final List<Player> players, final String difficulty) {
         this.activateShop = false;
-        this.players = players;
+        this.players = List.copyOf(players);
         this.minigameHandler = new MinigameHandlerImplementation();
         this.shop = new ShopImpl();
         this.board = BoardFactory.createBoard(Arrays.stream(BoardType.values())
