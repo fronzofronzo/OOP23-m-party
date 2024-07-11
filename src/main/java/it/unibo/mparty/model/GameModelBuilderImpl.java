@@ -23,15 +23,15 @@ public class GameModelBuilderImpl implements GameModelBuilder {
      * {@inheritDoc}
      */
     @Override
-    public GameModelBuilder addPlayer(final String nickname, final String character){
+    public GameModelBuilder addPlayer(final String nickname, final String character) {
         final PlayerBuilder builder = new PlayerBuilderImpl();
         final Player pl = builder.username(nickname)
                 .character(character)
                 .buildPlayer();
         if (players.stream().anyMatch(p -> p.getUsername().equals(pl.getUsername())
                 || p.getCharacter().equals(pl.getCharacter()))) {
-            throw new IllegalArgumentException("Il player con questo " +
-                    "nome/personaggio e' gia' presente ");
+            throw new IllegalArgumentException("Il player con questo "
+                    + "nome/personaggio e' gia' presente ");
         }
         if (!this.isFull()) {
             players.add(pl);

@@ -49,9 +49,8 @@ public class GameViewImpl extends Application implements GameView {
         this.stage = primaryStage;
         this.stage.getIcons().add(new Image("/images/marioParty.png"));
         this.setBoardView();
-        //final Pair<Scene, SceneView> scenePair = this.loadScene("InitialScreen");
-        //this.stage.setScene(scenePair.getFirst());
-        this.setMinigameScene("memoryCard", List.of("Giuseppe"));
+        final Pair<Scene, SceneView> scenePair = this.loadScene("InitialScreen");
+        this.stage.setScene(scenePair.getFirst());
         this.stage.setMinWidth(PREF_WIDTH);
         this.stage.setMinHeight(PREF_HEIGHT);
         this.stage.setMaximized(true);

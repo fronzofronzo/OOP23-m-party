@@ -10,23 +10,25 @@ import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 
 /**
- * The class SlotImpl implements the interfae {@link Slot}. Each slot is identified
- * by a {@link Position} and a {@link SlotType}, then it could have connections 
+ * The class SlotImpl implements the interfae {@link Slot}. Each slot is
+ * identified
+ * by a {@link Position} and a {@link SlotType}, then it could have connections
  * to others slots.
  */
 public class SlotImpl implements Slot {
 
     private final Position position;
     private SlotType slotType;
-    private Map<Direction,Position> nextConnections;
-    private Map<Direction,Position> prevConnections;
+    private Map<Direction, Position> nextConnections;
+    private Map<Direction, Position> prevConnections;
 
     /**
-     * Create a new slot
+     * Create a new slot.
+     * 
      * @param position of the slot.
      * @param slotType of the slot.
      */
-    public SlotImpl(Position position, SlotType slotType){
+    public SlotImpl(final Position position, final SlotType slotType) {
         this.position = position;
         this.slotType = slotType;
         this.nextConnections = new HashMap<>();
@@ -53,7 +55,7 @@ public class SlotImpl implements Slot {
      * {@inheritDoc}.
      */
     @Override
-    public void changeSlotType(SlotType newSlotType) {
+    public void changeSlotType(final SlotType newSlotType) {
         this.slotType = newSlotType;
     }
 
@@ -61,7 +63,7 @@ public class SlotImpl implements Slot {
      * {@inheritDoc}.
      */
     @Override
-    public void addNext(Direction dir, Position position) {
+    public void addNext(final Direction dir, final Position position) {
         this.checkPosition(position);
         this.nextConnections.put(dir, position);
     }
@@ -70,7 +72,7 @@ public class SlotImpl implements Slot {
      * {@inheritDoc}.
      */
     @Override
-    public void addPrev(Direction dir, Position position) {
+    public void addPrev(final Direction dir, final Position position) {
         this.checkPosition(position);
         this.prevConnections.put(dir, position);
     }
@@ -90,8 +92,8 @@ public class SlotImpl implements Slot {
     public Map<Direction, Position> getPrevConnections() {
         return Collections.unmodifiableMap(this.prevConnections);
     }
-    
-    private void checkPosition(Position position) {
+
+    private void checkPosition(final Position position) {
         if (this.position.equals(position)) {
             throw new IllegalStateException();
         }

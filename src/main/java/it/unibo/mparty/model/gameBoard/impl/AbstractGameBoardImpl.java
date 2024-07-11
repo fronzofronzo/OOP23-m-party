@@ -47,7 +47,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
     private boolean updateStarsSlot = false;
 
     /**
-     * This is the constructor of this abstract class
+     * This is the constructor of this abstract class.
      * 
      * @param width           that is the width of the game board
      * @param height          that is the height of the game board
@@ -60,13 +60,13 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
      *                        each {@link SlotType} in the board
      * @param boardType       that is the type that identifies this board.
      */
-    public AbstractGameBoardImpl(int width,
-            int height,
-            Position initialPosition,
-            Set<Position> starPositions,
-            String filePath,
-            Map<SlotType, Integer> rules,
-            BoardType boardType) {
+    public AbstractGameBoardImpl(final int width,
+            final int height,
+            final Position initialPosition,
+            final Set<Position> starPositions,
+            final String filePath,
+            final Map<SlotType, Integer> rules,
+            final BoardType boardType) {
         this.width = width;
         this.height = height;
         this.initialPosition = initialPosition;
@@ -101,7 +101,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
      * {@inheritDoc}
      */
     @Override
-    public SlotType getSlotType(Position position) throws IllegalStateException {
+    public SlotType getSlotType(final Position position) throws IllegalStateException {
         if (!isInTheBoard(position)) {
             throw new IllegalStateException();
         }
@@ -122,7 +122,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
      * {@inheritDoc}
      */
     @Override
-    public Map<Direction, Position> getNextPositions(Position position) {
+    public Map<Direction, Position> getNextPositions(final Position position) {
         return Collections.unmodifiableMap(this.getSlot(position).getNextConnections());
     }
 
@@ -192,25 +192,25 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
     }
 
     /**
-     * Get the slot that correspond a the position
+     * Get the slot that correspond a the position.
      * 
-     * @param position the position requested
+     * @param position the position requested.
      * @return the {@link Slot} of the position.
      */
-    protected Slot getSlot(Position position) {
+    protected Slot getSlot(final Position position) {
         return this.board.containsKey(position)
                 ? this.board.get(position)
                 : new SlotImpl(position, SlotType.VOID);
     }
 
     /**
-     * Compute the neighbor {@link Position} towards a {@link Direction}
+     * Compute the neighbor {@link Position} towards a {@link Direction}.
      * 
-     * @param from the starting {@link Position}
-     * @param dir  the {@link Direction}
-     * @return the computed {@link Position}
+     * @param from the starting {@link Position}.
+     * @param dir  the {@link Direction}.
+     * @return the computed {@link Position}.
      */
-    protected Position getNeighbor(Position from, Direction dir) {
+    protected Position getNeighbor(final Position from, final Direction dir) {
         return new Position(from.getX()
                 + (dir.equals(Direction.RIGHT) ? 1 : 0)
                 + (dir.equals(Direction.LEFT) ? -1 : 0),
@@ -220,18 +220,19 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
     }
 
     /**
-     * Check if is possible to connect two positions
+     * Check if is possible to connect two positions.
      * 
-     * @param from the starting {@link Position}
+     * @param from the starting {@link Position}.
      * @param to   the destination.
      * @return true if the connection is accepted, otherwise false.
      */
-    protected boolean isValidConnection(Position from, Position to) {
+    protected boolean isValidConnection(final Position from, final Position to) {
         return Math.abs(from.getX() - to.getX()) + Math.abs(from.getY() - to.getY()) == 1;
     }
 
     /**
-     * This class is called in the constructor in order to create the board based on the input data of the constructor.
+     * This class is called in the constructor in order to create the board based on
+     * the input data of the constructor.
      */
     protected void generateBoard() {
         this.addSlot(RandomFromSet.get(this.starsPositions), SlotType.ACTIVE_STAR);
@@ -241,37 +242,37 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
         this.createPathFromFile(this.filePath);
     }
 
-    private void addSlot(Position position, SlotType slotType) {
+    private void addSlot(final Position position, final SlotType slotType) {
         if (!this.board.containsKey(position) && isInTheBoard(position)) {
             this.board.put(position, new SlotImpl(position, slotType));
         }
     }
 
-    private void addConnection(Position from, Position to, Direction dir) {
+    private void addConnection(final Position from, final Position to, final Direction dir) {
         if (this.board.containsKey(from) && this.board.containsKey(to) && this.isValidConnection(from, to)) {
             this.getSlot(from).addNext(dir, to);
             this.getSlot(to).addPrev(dir, from);
         }
-        ;
     }
 
-    private boolean isInTheBoard(Position position) {
-        return position.getX() >= 0 && position.getX() < this.width &&
-                position.getY() >= 0 && position.getY() < this.height;
+    private boolean isInTheBoard(final Position position) {
+        return position.getX() >= 0 && position.getX() < this.width
+                && position.getY() >= 0 && position.getY() < this.height;
     }
 
-    private void createPath(Position from, int steps, Direction currentDir) {
+    private void createPath(final Position from, final int steps, final Direction currentDir) {
         this.addSlot(from, getNewSlotType());
         Position to = this.getNeighbor(from, currentDir);
+        Position currentFrom = from;
         for (int i = 0; i < steps; i++) {
             this.addSlot(to, getNewSlotType());
-            this.addConnection(from, to, currentDir);
-            from = to;
+            this.addConnection(currentFrom, to, currentDir);
+            currentFrom = to;
             to = this.getNeighbor(to, currentDir);
         }
     }
 
-    private void createPathFromFile(String filePath) {
+    private void createPathFromFile(final String filePath) {
         InputStream inputStream = ClassLoader.getSystemResourceAsStream(this.filePath);
         if (Objects.isNull(inputStream)) {
             throw new IllegalStateException();
