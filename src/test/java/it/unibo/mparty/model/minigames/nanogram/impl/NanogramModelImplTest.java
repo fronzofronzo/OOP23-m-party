@@ -19,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  */
 class NanogramModelImplTest {
 
-    private static final int MAX_LIVE = 3;
     private NanogramModel model;
 
     /**
