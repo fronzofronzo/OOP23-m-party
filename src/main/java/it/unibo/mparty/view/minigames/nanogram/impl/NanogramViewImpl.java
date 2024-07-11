@@ -223,7 +223,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
             try {
                 this.getMainView().setBoardScene();
             } catch (IOException ex) {
-                Logger log = Logger.getLogger(NanogramViewImpl.class.getName());
+                final Logger log = Logger.getLogger(NanogramViewImpl.class.getName());
                 log.fine(ex.getMessage());
             }
         });
