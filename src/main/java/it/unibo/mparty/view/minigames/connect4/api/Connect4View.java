@@ -22,7 +22,6 @@ public interface Connect4View extends MinigameView {
      */
     void updateDisplayLabel(String msg);
 
-
     /**
      * Activate the exitButton.
      * @param pred true if the button has to be activated, false to disactivate it
@@ -30,8 +29,18 @@ public interface Connect4View extends MinigameView {
     void activateExitButton(boolean pred);
 
     /**
-     * Select the column clicked
+     * Select the column clicked.
      * @param e the click on the button of the relative column
      */
     void selectColumn(ActionEvent e);
+
+    /**
+     * Set visible the tutorial label teaching you how to play the game.
+     */
+    void viewTutorial();
+
+    /**
+     * Close the minigame view and set back to the main board.
+     */
+    void closeView();
 }

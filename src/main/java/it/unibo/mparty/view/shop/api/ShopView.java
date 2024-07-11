@@ -26,4 +26,9 @@ public interface ShopView extends SceneView {
      */
     void initShopView();
 
+    /**
+     * Close the shop view and get back to the main board.
+     */
+    void closeShop();
+
 }

@@ -19,6 +19,9 @@ class Connect4Test {
     private Connect4Model testModel;
     private static final int ROWS = 6;
     private static final int COLUMN_5 = 5;
+    private static final int COLUMN_4 = 4;
+    private static final int COLUMN_3 = 3;
+    private static final int COLUMN_2 = 2;
 
     /**
      * Initialize the game before each test.
@@ -35,9 +38,9 @@ class Connect4Test {
     @Test
     void testAddDisc() {
         for (int i = 0; i < ROWS; i++) {
-            assertTrue(testModel.addDisc(2));
+            assertTrue(testModel.addDisc(COLUMN_2));
         }
-        assertFalse(testModel.addDisc(2));
+        assertFalse(testModel.addDisc(COLUMN_2));
     }
 
     /**
@@ -45,13 +48,13 @@ class Connect4Test {
      */
     @Test
     void checkHorizontalWin() {
-        testModel.addDisc(3);
-        testModel.addDisc(3);
-        testModel.addDisc(4);
-        testModel.addDisc(3);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_4);
+        testModel.addDisc(COLUMN_3);
         testModel.addDisc(COLUMN_5);
-        testModel.addDisc(3);
-        testModel.addDisc(2);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_2);
         assertTrue(testModel.isOver());
         assertEquals("testPlayer1", testModel.getTurnPlayer());
     }
@@ -61,13 +64,13 @@ class Connect4Test {
      */
     @Test
     void checkVerticalWin() {
-        testModel.addDisc(3);
-        testModel.addDisc(2);
-        testModel.addDisc(3);
-        testModel.addDisc(2);
-        testModel.addDisc(3);
-        testModel.addDisc(2);
-        testModel.addDisc(3);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_2);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_2);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_2);
+        testModel.addDisc(COLUMN_3);
         assertTrue(testModel.isOver());
     }
 
@@ -76,16 +79,16 @@ class Connect4Test {
      */
     @Test
     void checkDiagonalLeftWin() {
-        testModel.addDisc(2);
-        testModel.addDisc(3);
-        testModel.addDisc(3);
-        testModel.addDisc(4);
-        testModel.addDisc(4);
+        testModel.addDisc(COLUMN_2);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_4);
+        testModel.addDisc(COLUMN_4);
         testModel.addDisc(COLUMN_5);
-        testModel.addDisc(4);
+        testModel.addDisc(COLUMN_4);
         testModel.addDisc(COLUMN_5);
         testModel.addDisc(COLUMN_5);
-        testModel.addDisc(0);
+        testModel.addDisc(COLUMN_2);
         testModel.addDisc(COLUMN_5);
         assertTrue(testModel.isOver());
     }
@@ -96,16 +99,16 @@ class Connect4Test {
     @Test
     void testDiagonalRightWin() {
         testModel.addDisc(COLUMN_5);
-        testModel.addDisc(4);
-        testModel.addDisc(4);
-        testModel.addDisc(3);
-        testModel.addDisc(3);
-        testModel.addDisc(2);
-        testModel.addDisc(3);
-        testModel.addDisc(2);
-        testModel.addDisc(2);
-        testModel.addDisc(0);
-        testModel.addDisc(2);
+        testModel.addDisc(COLUMN_4);
+        testModel.addDisc(COLUMN_4);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_2);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_2);
+        testModel.addDisc(COLUMN_2);
+        testModel.addDisc(COLUMN_5);
+        testModel.addDisc(COLUMN_2);
         assertTrue(testModel.isOver());
     }
 }
