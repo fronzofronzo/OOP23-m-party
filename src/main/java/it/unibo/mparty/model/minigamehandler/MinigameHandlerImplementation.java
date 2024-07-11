@@ -5,6 +5,7 @@ import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.utilities.RandomFromSet;
 import org.reflections.Reflections;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.HashSet;
@@ -33,7 +34,7 @@ public class MinigameHandlerImplementation implements MinigameHandler {
      */
     @Override
     public void startMinigame(final List<Player> players,
-                              final MinigameType type){
+                              final MinigameType type) {
         this.actualMinigame = generateMinigame(type);
         this.players = players;
     }

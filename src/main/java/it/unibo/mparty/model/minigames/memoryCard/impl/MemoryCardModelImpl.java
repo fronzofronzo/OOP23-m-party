@@ -1,7 +1,7 @@
-package it.unibo.mparty.model.minigames.memorycard.impl;
+package it.unibo.mparty.model.minigames.memoryCard.impl;
 
 import it.unibo.mparty.model.minigames.MinigameType;
-import it.unibo.mparty.model.minigames.memorycard.api.MemoryCardModel;
+import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
 import it.unibo.mparty.utilities.Pair;
 
 import java.util.HashMap;
@@ -20,7 +20,7 @@ public class MemoryCardModelImpl implements MemoryCardModel {
     private static final double SCORE_MULTIPLIER = 1.5;
     private static final int NOT_SELECTED = -1;
     private static final int FIRST = 0;
-    private static final String NAME = "memorycard";
+    private static final String NAME = "memoryCard";
 
     private final Map<Integer, CardType> cards;
     private final Set<CardType> guessed;

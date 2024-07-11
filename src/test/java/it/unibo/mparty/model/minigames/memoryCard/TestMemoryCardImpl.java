@@ -1,7 +1,7 @@
-package it.unibo.mparty.model.minigames.memorycard;
+package it.unibo.mparty.model.minigames.memoryCard;
 
-import it.unibo.mparty.model.minigames.memorycard.api.MemoryCardModel;
-import it.unibo.mparty.model.minigames.memorycard.impl.MemoryCardModelImpl;
+import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
+import it.unibo.mparty.model.minigames.memoryCard.impl.MemoryCardModelImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

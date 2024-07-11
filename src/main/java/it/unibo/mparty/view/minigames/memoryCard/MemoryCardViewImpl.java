@@ -1,7 +1,7 @@
 package it.unibo.mparty.view.minigames.memoryCard;
 
-import it.unibo.mparty.controller.minigames.memorycard.MemoryCardController;
-import it.unibo.mparty.controller.minigames.memorycard.MemoryCardControllerImpl;
+import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardController;
+import it.unibo.mparty.controller.minigames.memoryCard.MemoryCardControllerImpl;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
 import javafx.event.ActionEvent;
