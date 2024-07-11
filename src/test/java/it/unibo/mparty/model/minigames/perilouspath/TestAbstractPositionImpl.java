@@ -33,10 +33,10 @@ public class TestAbstractPositionImpl {
     @Test
     public void testBallPosition() {
 
-        AbstractPosition position1 = new BallPosition(random.nextInt(1, SIDE), 0, SIDE);
+        AbstractPosition position1 = new BallPosition(random.nextInt(1, SIDE - 1), 0, SIDE);
         assertTrue(position1.isSafe(List.of(), List.of()));
         assertEquals(0, position1.getY());
-        AbstractPosition position2 = new BallPosition(random.nextInt(1, SIDE), SIDE - 1, SIDE);
+        AbstractPosition position2 = new BallPosition(random.nextInt(1, SIDE - 1), SIDE - 1, SIDE);
         assertTrue(position2.isSafe(List.of(), List.of()));
         assertEquals(SIDE - 1, position2.getY());
     }
