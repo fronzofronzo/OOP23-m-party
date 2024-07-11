@@ -27,7 +27,7 @@ public class Connect4ControllerImpl implements Connect4Controller {
     }
 
     private void setView(final Connect4View view) {
-        this.view=view;
+        this.view = view;
     }
 
     /**
