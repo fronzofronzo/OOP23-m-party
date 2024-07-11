@@ -14,7 +14,7 @@ import it.unibo.mparty.view.minigames.connect4.api.Connect4View;
  */
 public class Connect4ControllerImpl implements Connect4Controller {
 
-    private final Connect4View view;
+    private Connect4View view;
     private final Connect4Model model;
 
     /**
@@ -22,8 +22,12 @@ public class Connect4ControllerImpl implements Connect4Controller {
      * @param view the {@link Connect4View} of the minigame connect4
      */
     public Connect4ControllerImpl(final Connect4View view) {
-        this.view = view;
+        this.setView(view);
         this.model = new Connect4ModelImpl();
+    }
+
+    private void setView(final Connect4View view) {
+        this.view=view;
     }
 
     /**
