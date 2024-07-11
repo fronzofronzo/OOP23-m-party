@@ -294,7 +294,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
         }
     }
 
-    private Direction getDirection(String d) {
+    private Direction getDirection(final String d) {
         switch (d) {
             case UP: return Direction.UP;
             case DOWN: return Direction.DOWN;
