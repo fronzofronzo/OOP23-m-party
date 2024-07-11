@@ -75,8 +75,8 @@ public class GameModelImpl implements GameModel {
      * {@inheritDoc}
      */
     @Override
-    public void movePlayer(final Optional<Direction> dir) {
-        Optional<Direction> currentDir = dir;
+    public void movePlayer(Optional<Direction> dir) {
+        //Optional<Direction> currentDir = dir;
         if (this.status.equals(GameStatus.MOVE_PLAYER)
                 || this.status.equals(GameStatus.MOVING_PLAYER)) {
             if (this.status.equals(GameStatus.MOVE_PLAYER)) {
@@ -94,12 +94,12 @@ public class GameModelImpl implements GameModel {
                             .get()
                             .getValue());
                 } else {
-                    if (currentDir.isEmpty() || nextPlayerPos.size() < 1
-                            || !nextPlayerPos.containsKey(currentDir.get())) {
+                    if (dir.isEmpty() || nextPlayerPos.size() < 1
+                            || !nextPlayerPos.containsKey(dir.get())) {
                         return;
                     } else {
-                        this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.get(currentDir.get()));
-                        currentDir = Optional.empty();
+                        this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.get(dir.get()));
+                        dir = Optional.empty();
                     }
                 }
                 this.steps++;

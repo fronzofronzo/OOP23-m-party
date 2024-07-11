@@ -9,7 +9,6 @@ import it.unibo.mparty.controller.minigames.secretCode.SecretCodeControllerImpl;
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
 import it.unibo.mparty.utilities.Pair;
-import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.AbstractSceneView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -96,7 +95,7 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
             }
         }
     }
-    
+
     @FXML
     void addColor(ActionEvent e) {
         Button bt = (Button) e.getSource();
