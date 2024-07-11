@@ -11,15 +11,28 @@ import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.minigames.secretCode.SecretCodeView;
 
-public class SecretCodeControllerImpl implements SecretCodeController{
-    private SecretCodeModel model;
-    private SecretCodeView view;
+/**
+ * This class implements {@link SecretCodeController}.
+ */
+public class SecretCodeControllerImpl implements SecretCodeController {
 
+    private final SecretCodeModel model;
+    private final SecretCodeView view;
+
+    /**
+     * This is the constructor of this class that. It set the reference to the model
+     * and the view of the game.
+     * 
+     * @param view the view of the game.
+     */
     public SecretCodeControllerImpl(SecretCodeView view) {
         this.model = new SecretCodeModelImpl();
         this.view = view;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void endGame() {
         if (this.model.isOver()) {
@@ -32,11 +45,17 @@ public class SecretCodeControllerImpl implements SecretCodeController{
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void initGame(List<String> players) {
-        this.model.setUpPlayers(players); 
+        this.model.setUpPlayers(players);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addColor(SecretCodeColors color) {
         if (!this.model.isOver() && this.model.addColor(color)) {
@@ -46,6 +65,9 @@ public class SecretCodeControllerImpl implements SecretCodeController{
         this.updateEndaGame();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void guess() {
         if (!this.model.isOver()) {
@@ -62,7 +84,7 @@ public class SecretCodeControllerImpl implements SecretCodeController{
     private void updateEndaGame() {
         if (this.model.isOver()) {
             this.view.showSolution(this.model.getSoluction());
-            this.view.showResult(new Pair<String,Integer>(this.model.getWinner(), 10));
+            this.view.showResult(new Pair<String, Integer>(this.model.getWinner(), 10));
         }
     }
 }
