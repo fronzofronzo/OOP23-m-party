@@ -92,7 +92,7 @@ class BoardTileImplTest {
         this.boardTile.addTileToBoard(tile2);
         this.boardTile.addTileToBoard(tile3);
 
-        final LinkedList<Tile> tiles = this.boardTile.getBoardTiles();
+        final List<Tile> tiles = this.boardTile.getBoardTiles();
         assertEquals(3, tiles.size());
         assertTrue(tiles.contains(tile1));
         assertTrue(tiles.contains(tile2));

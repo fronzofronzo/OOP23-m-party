@@ -30,7 +30,7 @@ public class TileImpl implements Tile {
      */
     @Override
     public boolean match(final Tile tile) {
-        final Optional<Side> matchedSideA = this.canMatchSide(this.sideA, tile);
+        final Optional<Side> matchedSideA = this.matchedSide(this.sideA, tile);
         if (matchedSideA.isPresent()) {
             final Side matchedTileSide = matchedSideA.get();
             this.sideA.setMatched();
@@ -41,7 +41,7 @@ public class TileImpl implements Tile {
             }
             return true;
         }
-        final Optional<Side> matchedSideB = this.canMatchSide(this.sideB, tile);
+        final Optional<Side> matchedSideB = this.matchedSide(this.sideB, tile);
         if (matchedSideB.isPresent()) {
             final Side matchedTileSide = matchedSideB.get();
             this.sideB.setMatched();
@@ -70,7 +70,7 @@ public class TileImpl implements Tile {
      */
     @Override
     public boolean canMatch(final Tile tile) {
-        return this.canMatchSide(this.sideA, tile).isPresent() || this.canMatchSide(this.sideB, tile).isPresent();
+        return this.matchedSide(this.sideA, tile).isPresent() || this.matchedSide(this.sideB, tile).isPresent();
     }
 
     /**
@@ -101,7 +101,7 @@ public class TileImpl implements Tile {
      * {@inheritDoc}
      */
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -109,8 +109,13 @@ public class TileImpl implements Tile {
             return false;
         }
         final TileImpl tile = (TileImpl) o;
-        return (this.sideA.getValue() == tile.sideA.getValue() && this.sideB.getValue() == tile.sideB.getValue())
-                || (this.sideA.getValue() == tile.sideB.getValue() && this.sideB.getValue() == tile.sideA.getValue());
+        boolean directEquality = Objects.equals(sideA, tile.sideA) && Objects.equals(sideB, tile.sideB);
+        boolean reversedEquality = Objects.equals(sideA, tile.sideB) && Objects.equals(sideB, tile.sideA);
+        boolean valueEquality = (this.sideA.getValue() == tile.sideA.getValue()
+                && this.sideB.getValue() == tile.sideB.getValue())
+                || (this.sideA.getValue() == tile.sideB.getValue()
+                && this.sideB.getValue() == tile.sideA.getValue());
+        return directEquality || reversedEquality || valueEquality;
     }
 
     /**
@@ -134,7 +139,7 @@ public class TileImpl implements Tile {
                 + '}';
     }
 
-    private Optional<Side> canMatchSide(final Side side, final Tile tile) {
+    private Optional<Side> matchedSide(final Side side, final Tile tile) {
         if (side.isMatched()) {
             return Optional.empty();
         } else if (side.getValue() == tile.getSideA().getValue()) {
