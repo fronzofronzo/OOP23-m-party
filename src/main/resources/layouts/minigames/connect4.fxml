@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.connect4.impl.Connect4ViewImpl">
+<AnchorPane minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.connect4.impl.Connect4ViewImpl">
    <children>
       <SplitPane dividerPositions="0.9045226130653267" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="1000.0" orientation="VERTICAL">
         <items>
@@ -56,26 +55,26 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#getColumn" text="0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#selectColumn" text="0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#getColumn" text="1" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#selectColumn" text="1" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#getColumn" text="2" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                        <Button mnemonicParsing="false" onAction="#getColumn" text="3" GridPane.columnIndex="3" GridPane.halignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#selectColumn" text="2" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#selectColumn" text="3" GridPane.columnIndex="3" GridPane.halignment="CENTER">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#getColumn" text="4" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
-                        <Button mnemonicParsing="false" onAction="#getColumn" text="5" GridPane.columnIndex="5" GridPane.halignment="CENTER" />
-                        <Button mnemonicParsing="false" onAction="#getColumn" text="6" GridPane.columnIndex="6" GridPane.halignment="CENTER" />
-                        <Button mnemonicParsing="false" onAction="#getColumn" text="7" GridPane.columnIndex="7" GridPane.halignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#selectColumn" text="4" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#selectColumn" text="5" GridPane.columnIndex="5" GridPane.halignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#selectColumn" text="6" GridPane.columnIndex="6" GridPane.halignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#selectColumn" text="7" GridPane.columnIndex="7" GridPane.halignment="CENTER" />
                      </children>
                   </GridPane>
                </children>

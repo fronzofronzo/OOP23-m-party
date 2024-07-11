@@ -11,15 +11,28 @@ import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.minigames.secretCode.SecretCodeView;
 
-public class SecretCodeControllerImpl implements SecretCodeController{
-    private SecretCodeModel model;
-    private SecretCodeView view;
+/**
+ * This class implements {@link SecretCodeController}.
+ */
+public class SecretCodeControllerImpl implements SecretCodeController {
 
-    public SecretCodeControllerImpl(SecretCodeView view) {
+    private final SecretCodeModel model;
+    private final SecretCodeView view;
+
+    /**
+     * This is the constructor of this class that. It set the reference to the model
+     * and the view of the game.
+     * 
+     * @param view the view of the game.
+     */
+    public SecretCodeControllerImpl(final SecretCodeView view) {
         this.model = new SecretCodeModelImpl();
         this.view = view;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void endGame() {
         if (this.model.isOver()) {
@@ -32,26 +45,35 @@ public class SecretCodeControllerImpl implements SecretCodeController{
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void initGame(List<String> players) {
-        this.model.setUpPlayers(players); 
+    public void initGame(final List<String> players) {
+        this.model.setUpPlayers(players);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void addColor(SecretCodeColors color) {
-        if (!this.model.isOver() && this.model.getGame().addColor(color)) {
-            Position pos = new Position(this.model.getGame().getCurrentGuess().size() - 1, this.model.getTurn());
-            this.view.updateGuesses(this.model.getGame().getCurrentPlayer(), pos, color);
+    public void addColor(final SecretCodeColors color) {
+        if (!this.model.isOver() && this.model.addColor(color)) {
+            Position pos = new Position(this.model.getCurrentGuess().size() - 1, this.model.getTurn());
+            this.view.updateGuesses(this.model.getCurrentPlayer(), pos, color);
         }
         this.updateEndaGame();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void guess() {
         if (!this.model.isOver()) {
-            String player = this.model.getGame().getCurrentPlayer();
+            String player = this.model.getCurrentPlayer();
             int turn = this.model.getTurn();
-            List<SecretCodeResults> res = this.model.getGame().getGuessResult();
+            List<SecretCodeResults> res = this.model.getGuessResult();
             if (!res.isEmpty()) {
                 this.view.updateResults(player, turn, res);
             }
@@ -61,8 +83,8 @@ public class SecretCodeControllerImpl implements SecretCodeController{
 
     private void updateEndaGame() {
         if (this.model.isOver()) {
-            this.view.showSolution(this.model.getGame().getSoluction());
-            this.view.showResult(new Pair<String,Integer>(this.model.getGame().getWinner(), 10));
+            this.view.showSolution(this.model.getSoluction());
+            this.view.showResult(new Pair<String, Integer>(this.model.getWinner(), 10));
         }
     }
 }

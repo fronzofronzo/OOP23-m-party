@@ -1,10 +1,9 @@
-package it.unibo.mparty.model.Player.impl;
+package it.unibo.mparty.player.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.impl.PlayerImpl;
 import it.unibo.mparty.utilities.Position;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.Random;
@@ -12,7 +11,7 @@ import java.util.Random;
 /**
  * Test class for a {@link PlayerImpl} class.
  */
-public class TestPlayerImpl {
+class TestPlayerImpl {
 
     private static final int RANDOM_BOUND = 100;
     private Player testPlayer;
@@ -21,17 +20,17 @@ public class TestPlayerImpl {
      * Configuration step: this is performed before each test.
      */
     @BeforeEach
-    public void init() {
+    void init() {
         final String username = "username";
         final String character = "Luigi";
-        testPlayer = new PlayerImpl(username,character);
+        testPlayer = new PlayerImpl(username, character);
     }
 
     /**
      * Check that the Player implementation is created with the correct values.
      */
     @Test
-    public void testPlayerInitialization() {
+    void testPlayerInitialization() {
         assertEquals(0, testPlayer.getNumStars());
         assertEquals(0, testPlayer.getNumCoins());
     }
@@ -40,7 +39,7 @@ public class TestPlayerImpl {
      * Check that the operation of star adding and removal work properly.
      */
     @Test
-    public void testStarAmount() {
+    void testStarAmount() {
         assertEquals(0, testPlayer.getNumStars());
         testPlayer.addStar();
         assertEquals(1, testPlayer.getNumStars());
@@ -52,7 +51,7 @@ public class TestPlayerImpl {
      * Check that the operation of coins adding and removal work properly.
      */
     @Test
-    public void testCoinsAmount() {
+    void testCoinsAmount() {
         final int numCoins = 5;
         assertEquals(0, testPlayer.getNumCoins());
         testPlayer.addCoins(numCoins);
@@ -65,11 +64,11 @@ public class TestPlayerImpl {
      * Check that position is correctly modified.
      */
     @Test
-    public void testPosition() {
+    void testPosition() {
         final Random random = new Random();
         final Position position = new Position(random.nextInt(RANDOM_BOUND), random.nextInt(RANDOM_BOUND));
         this.testPlayer.setPosition(position);
-        Assertions.assertEquals(position, this.testPlayer.getPosition());
+        assertEquals(position, this.testPlayer.getPosition());
     }
 
 }

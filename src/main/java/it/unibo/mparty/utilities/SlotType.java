@@ -45,7 +45,7 @@ public enum SlotType {
 
     private final String text;
 
-    private SlotType(final String text) {
+    SlotType(final String text) {
         this.text = text;
     }
 

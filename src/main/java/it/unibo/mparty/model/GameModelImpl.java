@@ -2,11 +2,11 @@
 package it.unibo.mparty.model;
 
 import it.unibo.mparty.model.gameBoard.api.GameBoard;
-import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
+import it.unibo.mparty.model.gameBoard.boards.BoardFactory;
 import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemName;
-import it.unibo.mparty.model.minigameHandler.MinigameHandler;
-import it.unibo.mparty.model.minigameHandler.MinigameHandlerImplementation;
+import it.unibo.mparty.model.minigamehandler.MinigameHandler;
+import it.unibo.mparty.model.minigamehandler.MinigameHandlerImplementation;
 import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.shop.api.Shop;
@@ -65,8 +65,7 @@ public class GameModelImpl implements GameModel {
         this.players = players;
         this.minigameHandler = new MinigameHandlerImplementation();
         this.shop = new ShopImpl();
-        final SimpleBoardFactory boardFactory = new SimpleBoardFactory();
-        this.board = boardFactory.createBoard(Arrays.stream(BoardType.values())
+        this.board = BoardFactory.createBoard(Arrays.stream(BoardType.values())
                 .filter(b -> b.toString().equals(difficulty))
                 .findAny().get());
         this.players.forEach(p -> p.setPosition(this.board.getStrartingPosition()));
@@ -76,7 +75,8 @@ public class GameModelImpl implements GameModel {
      * {@inheritDoc}
      */
     @Override
-    public void movePlayer(Optional<Direction> dir) {
+    public void movePlayer(final Optional<Direction> dir) {
+        Optional<Direction> currentDir = dir;
         if (this.status.equals(GameStatus.MOVE_PLAYER)
                 || this.status.equals(GameStatus.MOVING_PLAYER)) {
             if (this.status.equals(GameStatus.MOVE_PLAYER)) {
@@ -87,18 +87,18 @@ public class GameModelImpl implements GameModel {
                 this.checkStartAcquisition();
                 final Position playerPos = this.players.get(actualPlayerIndex).getPosition();
                 final Map<Direction, Position> nextPlayerPos = this.board.getNextPositions(playerPos);
-                if (nextPlayerPos.size() == 1 && dir.isEmpty()) {
+                if (nextPlayerPos.size() == 1 && currentDir.isEmpty()) {
                     this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.entrySet()
                             .stream()
                             .findFirst()
                             .get()
                             .getValue());
                 } else {
-                    if (dir.isEmpty() || nextPlayerPos.size() < 1 || !nextPlayerPos.containsKey(dir.get())) {
+                    if (currentDir.isEmpty() || nextPlayerPos.size() < 1 || !nextPlayerPos.containsKey(currentDir.get())) {
                         return;
                     } else {
-                        this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.get(dir.get()));
-                        dir = Optional.empty();
+                        this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.get(currentDir.get()));
+                        currentDir = Optional.empty();
                     }
                 }
                 this.steps++;
@@ -139,17 +139,16 @@ public class GameModelImpl implements GameModel {
      */
     @Override
     public void useItem(final ItemName itemName) {
-        Item item = this.players.get(actualPlayerIndex).getPlayerBag().useItem(itemName);
-        Optional<Position> position = item.needPosition()
+        final Item item = this.players.get(actualPlayerIndex).getPlayerBag().useItem(itemName);
+        final Optional<Position> position = item.needPosition()
                 ? Optional.of(this.board.getStarPosition())
                 : Optional.empty();
-        Optional<Player> target = Optional.empty();
-        if (item.isOnOthers()) {
-            Set<Player> targets = this.players.stream()
+        Set<Player> targets = this.players.stream()
                     .filter(p -> !p.equals(this.players.get(actualPlayerIndex)))
                     .collect(Collectors.toSet());
-            target = Optional.of(RandomFromSet.get(targets));
-        }
+        final Optional<Player> target = item.isOnOthers()
+                ? Optional.of(RandomFromSet.get(targets))
+                : Optional.empty();
         item.activate(this.players.get(actualPlayerIndex), target, position);
     }
 
@@ -285,8 +284,8 @@ public class GameModelImpl implements GameModel {
      * {@inheritDoc}
      */
     @Override
-    public Map<Position, SlotType> getSlotsToUpdate() {
-        return this.board.getSlotsToUpdate();
+    public Map<Position, SlotType> getModifiedSlots() {
+        return this.board.getModifiedSlots();
     }
 
     /**

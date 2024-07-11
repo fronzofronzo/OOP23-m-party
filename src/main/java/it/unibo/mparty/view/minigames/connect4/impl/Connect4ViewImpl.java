@@ -1,6 +1,8 @@
 package it.unibo.mparty.view.minigames.connect4.impl;
 
 import java.util.List;
+import java.util.logging.Logger;
+
 import it.unibo.mparty.controller.minigames.connect4.api.Connect4Controller;
 import it.unibo.mparty.controller.minigames.connect4.impl.Connect4ControllerImpl;
 import it.unibo.mparty.utilities.Pair;
@@ -8,8 +10,8 @@ import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.minigames.connect4.api.Connect4View;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -81,16 +83,20 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
      */
     @Override
     public void addCircle(final int col, final int row, final boolean color) {
-        Circle circle = new Circle(CIRCLE_DIMENSION);
+        final Circle circle = new Circle(CIRCLE_DIMENSION);
         circle.setFill(color ? Color.RED : Color.YELLOW);
-        StackPane stack = new StackPane();
+        final StackPane stack = new StackPane();
         stack.getChildren().add(circle);
         gameGrid.add(stack, col, row);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     @FXML
-    private void getColumn(final ActionEvent e) {
-        Button but = (Button) (e.getSource());
+    public void selectColumn(final ActionEvent e) {
+        final Button but = (Button) (e.getSource());
         var index = GridPane.getColumnIndex(but);
         if (index == null) {
             index = 0;
@@ -98,8 +104,12 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
         this.controller.check(index);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     @FXML
-    private void closeView() {
+    public void closeView() {
         this.controller.endGame();
     }
 
@@ -113,8 +123,12 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
         updateTutorialLabel();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     @FXML
-    private void viewTutorial() {
+    public void viewTutorial() {
         if (tutorialLabel.isVisible()) {
             tutorialButton.setText("Tutorial");
             tutorialLabel.setVisible(false);
@@ -129,10 +143,14 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
     }
 
     private void updateTutorialLabel() {
-        try {
-            this.tutorialLabel.setText(new String(Files.readAllBytes(Paths.get(TUTORIAL_PATH))));
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        final InputStream stream = getClass().getClassLoader().getResourceAsStream(TUTORIAL_PATH);
+        if (stream != null) {
+            try {
+                this.tutorialLabel.setText(new String(stream.readAllBytes(), StandardCharsets.UTF_8));
+            } catch (IOException e) {
+                final Logger log = Logger.getLogger(Connect4ViewImpl.class.getName());
+                log.fine(e.getMessage());
+            }
         }
     }
 }

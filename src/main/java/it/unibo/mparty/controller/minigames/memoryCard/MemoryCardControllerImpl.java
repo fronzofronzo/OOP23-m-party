@@ -3,7 +3,8 @@ package it.unibo.mparty.controller.minigames.memoryCard;
 import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
 import it.unibo.mparty.model.minigames.memoryCard.impl.MemoryCardModelImpl;
 import it.unibo.mparty.view.minigames.memoryCard.MemoryCardView;
-
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import java.io.IOException;
 import java.util.List;
 
@@ -35,11 +36,11 @@ public class MemoryCardControllerImpl implements MemoryCardController {
             this.view.setCardStatus(index, false);
             this.view.setCardType(index, this.model.getCards().get(index).getName());
         } else {
+            this.updateGameView();
             if (this.model.isOver()) {
                 this.updateEndGameView();
                 this.view.showResult(this.model.getResult());
             }
-            this.updateGameView();
         }
     }
 
@@ -48,12 +49,12 @@ public class MemoryCardControllerImpl implements MemoryCardController {
      */
     @Override
     public void endGame() {
+        final Logger logger = Logger.getAnonymousLogger();
         this.view.getMainController().saveMinigameResult(this.model.getResult());
         try {
-            this.updateEndGameView();
             this.view.getMainView().setBoardScene();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.SEVERE, e.toString());
         }
     }
 
@@ -72,9 +73,9 @@ public class MemoryCardControllerImpl implements MemoryCardController {
     private void updateGameView() {
         final var guessed = this.model.guessedCardsType();
         this.view.setMistakesNumber(this.model.getMistakes());
-        for (var e : this.model.getCards().entrySet()) {
-            var type = e.getValue();
-            var i = e.getKey();
+        for (final var e : this.model.getCards().entrySet()) {
+            final var type = e.getValue();
+            final var i = e.getKey();
             if (guessed.contains(type)) {
                 this.view.setCardType(i, type.getName());
                 this.view.setCardStatus(i, false);

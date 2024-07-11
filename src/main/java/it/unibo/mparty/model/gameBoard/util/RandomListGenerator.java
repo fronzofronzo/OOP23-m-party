@@ -10,19 +10,21 @@ import java.util.Collections;
  * and create a list of 100 elements that contains the above values in random
  * order.
  */
-public class RandomListGenerator {
+public final class RandomListGenerator {
 
     private static final int CORRECT_PERC = 100;
     private static final String ERROR_MESSAGE = "Il valore totale delle percentuali in input non è accettabile (100)";
 
+    private RandomListGenerator() {
+    }
 
     /**
-     * Returns the expected list based on the input values
-     * @param input map that contains for each value the respective percentage
-     * @return the expected list based on the input valuse
-     * @throws {@IllegalArgumentException} if the sum of the percentages is not 100
+     * Returns the expected list based on the input values.
+     * @param input map that contains for each value the respective percentage.
+     * @return the expected list based on the input valuse.
+     * @throws {@link IllegalArgumentException} if the sum of the percentages is not 100.
      */
-    public static <E> List<E> generate(Map<E, Integer> input) {
+    public static <E> List<E> generate(final Map<E, Integer> input) {
         if (!validProbabilities(input)) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
         }
@@ -38,7 +40,7 @@ public class RandomListGenerator {
         return outputList;
     }
 
-    private static <E> boolean validProbabilities(Map<E, Integer> inputSet) {
+    private static <E> boolean validProbabilities(final Map<E, Integer> inputSet) {
         int totPerc = 0;
         for (Map.Entry<E, Integer> entry : inputSet.entrySet()) {
             totPerc += entry.getValue();

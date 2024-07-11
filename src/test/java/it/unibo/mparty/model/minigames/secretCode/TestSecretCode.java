@@ -28,37 +28,38 @@ public class TestSecretCode {
 
     @Test
     public void TestAddColor() {
-        assertTrue(model.getGame().addColor(SecretCodeColors.ARANCIONE));
-        assertTrue(model.getGame().addColor(SecretCodeColors.ARANCIONE));
-        assertTrue(model.getGame().addColor(SecretCodeColors.ARANCIONE));
-        assertTrue(model.getGame().addColor(SecretCodeColors.ARANCIONE));
-        assertFalse(model.getGame().addColor(SecretCodeColors.ARANCIONE));
+        assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
+        assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
+        assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
+        assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
+        assertFalse(model.addColor(SecretCodeColors.ARANCIONE));
     }
 
     @Test
     public void TestChangeTurn() {
-        assertTrue(model.getGame().addColor(SecretCodeColors.ARANCIONE));
-        assertTrue(model.getGame().addColor(SecretCodeColors.ARANCIONE));
-        assertTrue(model.getGame().addColor(SecretCodeColors.ARANCIONE));
-        assertTrue(model.getGame().addColor(SecretCodeColors.ARANCIONE));
-        String p1 = model.getGame().getCurrentPlayer();
-        List<SecretCodeResults> res = model.getGame().getGuessResult();
+        assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
+        assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
+        assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
+        assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
+        String p1 = model.getCurrentPlayer();
+        List<SecretCodeResults> res = model.getGuessResult();
         assertFalse(res.isEmpty());
-        String p2 = model.getGame().getCurrentPlayer();
+        String p2 = model.getCurrentPlayer();
         assertNotEquals(p1, p2);
     }
 
     @Test 
     public void TestEndGame() {
-        assertFalse(model.getGame().isOver());
-        String p1 = model.getGame().getCurrentPlayer();
-        List<SecretCodeColors> sol = model.getGame().getSoluction();
+        assertFalse(model.isOver());
+        String p1 = model.getCurrentPlayer();
+        List<SecretCodeColors> sol = model.getSoluction();
         assertFalse(sol.isEmpty());
         for (SecretCodeColors c : sol) {
-            assertTrue(model.getGame().addColor(c));
+            assertTrue(model.addColor(c));
         }
-        List<SecretCodeResults> res = model.getGame().getGuessResult();
-        assertTrue(model.getGame().isOver());
-        assertEquals(p1, model.getGame().getWinner());
+        List<SecretCodeResults> res = model.getGuessResult();
+        assertFalse(res.isEmpty());
+        assertTrue(model.isOver());
+        assertEquals(p1, model.getWinner());
     }   
 }

@@ -18,15 +18,14 @@ import javafx.stage.Stage;
  * This class tests the {@link ShopViewImpl} class.
  */
 @ExtendWith(ApplicationExtension.class)
-public class ShopViewImplTest extends ApplicationTest {
-    private Parent testRoot;
+class ShopViewImplTest extends ApplicationTest {
     /**
      * {@inheritDoc}
      */
     @Override
     public void start(final Stage stage) throws Exception {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/Shop.fxml"));
-        this.testRoot = loader.load();
+        final Parent testRoot = loader.load();
         final Scene scene = new Scene(testRoot);
         stage.setScene(scene);
         stage.show();
@@ -36,7 +35,7 @@ public class ShopViewImplTest extends ApplicationTest {
      * Test the presence of the exitButton.
      */
     @Test
-    public void shouldContainExitButton() {
+    void shouldContainExitButton() {
         verifyThat(".button", hasText("Esci"));
     }
 
@@ -44,7 +43,7 @@ public class ShopViewImplTest extends ApplicationTest {
      * Test the presence of the label in the view.
      */
     @Test
-    public void shouldContainLabel() {
+    void shouldContainLabel() {
         verifyThat(".label", hasText("Seleziona l'Item che desideri acquistare"));
     }
 }

@@ -14,7 +14,7 @@ import it.unibo.mparty.model.shop.api.Shop;
  * Implementation of the {@link Shop} interface.
  */
 public class ShopImpl implements Shop {
-    private ItemFactory itemFactory = new ItemFactoryImpl();
+    private final ItemFactory itemFactory = new ItemFactoryImpl();
     private final List<Item> itemList = new ArrayList<>();
 
     /**
@@ -33,7 +33,7 @@ public class ShopImpl implements Shop {
      */
     @Override
     public boolean buyItem(final Player player, final ItemName itemName) {
-        Item item = itemList.stream().filter(it -> it.getName().equals(itemName)).findFirst().get();
+        final Item item = itemList.stream().filter(it -> it.getName().equals(itemName)).findFirst().get();
         if (canAfford(player, item) && !player.getPlayerBag().isFull()) {
             player.removeCoins(item.getCost());
             player.getPlayerBag().addItem(item);

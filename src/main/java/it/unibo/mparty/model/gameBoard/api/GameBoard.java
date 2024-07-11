@@ -9,65 +9,91 @@ import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
 
 /**
- * This interface models a Game Board
+ * This interface models a game board.
  */
-public interface GameBoard {
+    public interface GameBoard {
 
     /**
-     * Get a Position with the Board Game then return its Slot Type
-     * @param position - position of the slot.
-     * @return the {@link SlotType}.
-     * @throws IllegalStateException if the input position isn't in the game board.
-     */
-    SlotType getSlotType(Position position);
-
-    /**
-     * Get the game board's starting position
-     * @return the starting position
-     */
-    Position getStrartingPosition();
-
-    /**
-     * Get the next(s) position(s) of the input position
-     * @param position a position
-     * @return a map that contains directions and positions
-     */
-    Map<Direction, Position> getNextPositions(Position position);
-
-    /**
-     * Get the actual position of the active star
-     * @return the actual position of the active star
-     */
-    Position getStarPosition();
-
-    /**
-     * Change tha actual position of the active star
+     * Change tha actual {@link Position} of the {@link SlotType.ACTIVE_STAR}.
      */
     void changeStarPosition();
 
     /**
-     * Get the board's dimension
-     * @return width x height
+     * Get a {@link Position} that is in this game board then return its
+     * {@link SlotType}.
+     * 
+     * @param position the position of the {@link Slot} interested.
+     * @return the {@link SlotType} of the {@link Slot} that is in the {@link Position} requested.
+     * @throws {@link IllegalStateException} if the input {@link Position} isn't in the game board.
+     */
+    SlotType getSlotType(Position position);
+
+    /**
+     * Get the game board's starting position.
+     * 
+     * @return the starting position.
+     */
+    Position getStrartingPosition();
+
+    /**
+     * Get the next(s) position(s) of the input position.
+     * 
+     * @param position a position.
+     * @return a {@link Map} that contains any {@link Direction} and
+     *         the corresponding {@link Position}.
+     */
+    Map<Direction, Position> getNextPositions(Position position);
+
+    /**
+     * Get the {@link Position} of the {@link SlotType.ACTIVE_STAR}.
+     * 
+     * @return the actual position of the {@link SlotType.ACTIVE_STAR}.
+     * @throws {@link IllegalStateException} if there is not an
+     *                {@link SlotType.ACTIVE_STAR} in the game board.
+     */
+    Position getStarPosition();
+
+    /**
+     * Get the game board's dimension.
+     * 
+     * @return a {@link Pair} containing width and height.
      */
     Pair<Integer, Integer> getDimension();
 
     /**
-     * Get the actual game board's map
-     * @return the map of the actual board tha has as key a position and it has as value a {@link Slot}
+     * Get the {@link Map} of the game board that contains for each {@link Position}
+     * the corrispondent {@link Slot}. This map contains only slots that are not
+     * {@link SlotType.VOID}.
+     * 
+     * @return the {@link Map} of the game board that has as key a {@link Position}
+     *         and it has
+     *         as value a {@link Slot}.
      */
-    Map<Position,Slot> getBoard();
+    Map<Position, Slot> getBoard();
 
     /**
-     * Get the actual game board's map but with only SlotTypes
-     * @return the map of the actual board tha has as key a position and it has as value a {@link Slot}
+     * Get the {@link Map} of the game board that contains for each {@link Position}
+     * the corrispondent {@link SlotType}.
+     * 
+     * @return the {@link Map} of the game board that has as key a {@link Position}
+     *         and it has
+     *         as value a {@link SlotType}.
      */
-    Map<Position,SlotType> getSlotTypeBoardConfiguration();
+    Map<Position, SlotType> getSlotTypeBoardConfiguration();
 
     /**
-     * Get the board's {@link BoardType}
-     * @return the {@link BoardType}
+     * Get the board's {@link BoardType}.
+     * 
+     * @return the {@link BoardType} of this board.
      */
     BoardType getBoardType();
 
-    Map<Position, SlotType> getSlotsToUpdate();
+    /**
+     * Get the {@link Map} that contains the positions that changed their slot type.
+     * 
+     * @return the {@link Map} that has as key a {@link Position} and it has as
+     *         value the
+     *         corrispondent {@link SlotType}.
+     */
+    Map<Position, SlotType> getModifiedSlots();
 }

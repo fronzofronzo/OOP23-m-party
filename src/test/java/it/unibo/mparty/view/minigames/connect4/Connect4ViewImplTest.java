@@ -18,7 +18,7 @@ import javafx.scene.control.Button;
  * This class tests the {@link Connect4ViewImpl} class.
  */
 @ExtendWith(ApplicationExtension.class)
-public class Connect4ViewImplTest extends ApplicationTest {
+class Connect4ViewImplTest extends ApplicationTest {
     private Parent testRoot;
 
     /**
@@ -37,7 +37,7 @@ public class Connect4ViewImplTest extends ApplicationTest {
      * Test the tutorial button.
      */
     @Test
-    public void testTutorialButton() {
+    void testTutorialButton() {
         final Button button = from(this.testRoot).lookup("#tutorialButton").query();
         verifyThat(button, hasText("Tutorial"));
     }
@@ -46,7 +46,7 @@ public class Connect4ViewImplTest extends ApplicationTest {
      * Test the presence of the exit button.
      */
     @Test
-    public void testExitButton() {
+    void testExitButton() {
         final Button button = from(this.testRoot).lookup("#exitButton").query();
         verifyThat(button, hasText("Esci"));
     }

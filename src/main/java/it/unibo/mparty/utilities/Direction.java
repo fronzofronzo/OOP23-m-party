@@ -26,7 +26,7 @@ public enum Direction {
 
     private final String text;
 
-    private Direction(final String text) {
+    Direction(final String text) {
         this.text = text;
     }
 
