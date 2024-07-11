@@ -1,5 +1,6 @@
 package it.unibo.mparty.view.minigames.secreteCode;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -21,5 +22,10 @@ class SecreteCodeViewImplTest extends ApplicationTest{
         final Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Test
+    void testInitialSetup() {
+        
     }
 }
