@@ -155,7 +155,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
     @Override
     public void startMinigame(final List<String> players) {
         this.controller.initGame(Collections.unmodifiableList(players));
-        this.players = players;
+        this.players = Collections.unmodifiableList(players);
     }
 
     /**

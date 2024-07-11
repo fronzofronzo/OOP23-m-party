@@ -35,6 +35,8 @@ public class TutorialScreenImpl implements TutorialScreen, Initializable {
         Stage stage = (Stage) this.returnButton.getScene().getWindow();
         if (stage != null) {
             stage.close();
+        } else {
+            throw new IllegalStateException();
         }
     }
 

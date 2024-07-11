@@ -49,6 +49,8 @@ public class MiniScreenImpl implements MiniScreen {
         Stage stage = (Stage) this.okButton.getScene().getWindow();
         if (stage != null) {
             stage.close();
+        } else {
+            throw new IllegalStateException();
         }
 
     }
@@ -61,6 +63,8 @@ public class MiniScreenImpl implements MiniScreen {
         Stage stage = (Stage) this.backButton.getScene().getWindow();
         if (stage != null) {
             stage.close();
+        } else {
+            throw new IllegalStateException();
         }
 
     }
