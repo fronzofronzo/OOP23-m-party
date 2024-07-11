@@ -21,6 +21,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -40,7 +42,7 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
      */
     private static final int FIT_WIDTH = 50;
 
-    private static final String PATH = "src/main/resources/text/perilousPathTutorial.txt";
+    private static final String PATH = "text/perilousPathTutorial.txt";
     @FXML
     private GridPane myGridPane;
 
@@ -234,10 +236,15 @@ public class PerilousPathViewImpl extends AbstractSceneView implements PerilousP
 
     private void showTutorial(final Label label) {
         label.setWrapText(true);
-        try {
-            label.setText(new String(Files.readAllBytes(Paths.get(PATH))));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        final InputStream input = getClass().getClassLoader().getResourceAsStream(PATH);
+        if (input != null) {
+            String text;
+            try {
+                text = new String(input.readAllBytes(), StandardCharsets.UTF_8);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            label.setText(text);
         }
     }
 }
