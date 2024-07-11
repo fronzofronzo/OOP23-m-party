@@ -20,6 +20,9 @@ public class NanogramTutorial {
     @FXML
     private BorderPane pane;
 
+    /**
+     * Initializes the view components and sets up the game.
+     */
     @FXML
     public void initialize() {
         final Label tutorialText = new Label();

@@ -41,6 +41,9 @@ public class EndGameViewImpl extends AbstractSceneView implements EndGameView {
     @FXML
     private TableView<Map.Entry<String, Pair<Integer, Integer>>> tableView;
 
+    /**
+     * Initializes the view components and sets up the game.
+     */
     @FXML
     public void initialize() {
         tableView.setSelectionModel(null);
@@ -79,6 +82,9 @@ public class EndGameViewImpl extends AbstractSceneView implements EndGameView {
         });
     }
 
+    /**
+     * Handles the event when the exit button is clicked.
+     */
     @FXML
     public void exitClicked() {
         Platform.exit();
