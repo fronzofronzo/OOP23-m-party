@@ -24,9 +24,9 @@ public class MemoryCardModelImpl implements MemoryCardModel {
 
     private final Map<Integer, CardType> cards;
     private final Set<CardType> guessed;
-    private String player = null;
+    private String player;
     private int selected = NOT_SELECTED;
-    private int mistakesNumber = 0;
+    private int mistakesNumber;
 
     /**
      * Constructor of a new instance of {@link MemoryCardModel}.
@@ -36,7 +36,7 @@ public class MemoryCardModelImpl implements MemoryCardModel {
         this.guessed = new HashSet<>();
         final int size = CardType.values().length * 2;
         final Random random = new Random();
-        for (var type : CardType.values()) {
+        for (final var type : CardType.values()) {
             var i = random.nextInt(size);
             while (cards.containsKey(i)) {
                 i = random.nextInt(size);

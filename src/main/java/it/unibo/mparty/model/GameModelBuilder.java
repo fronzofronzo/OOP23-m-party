@@ -25,7 +25,7 @@ public interface GameModelBuilder {
      * @throws IllegalArgumentException if there is already another player with
      * same nickname and/or username.
      */
-    GameModelBuilder addPlayer(String nickname, String character) throws IllegalArgumentException;
+    GameModelBuilder addPlayer(String nickname, String character);
 
     /**
      * Method to set the difficulty of the game.

@@ -35,8 +35,8 @@ public class PlayerBuilderImpl implements PlayerBuilder {
      * {@inheritDoc}
      */
     @Override
-    public Player buildPlayer() throws IllegalStateException {
-        if (this.username == null  || this.character == null) {
+    public Player buildPlayer() {
+        if (this.username == null || this.character == null) {
             throw new IllegalStateException("Missing fields: cannot create a new Player");
         }
         return new PlayerImpl(this.username, this.character);

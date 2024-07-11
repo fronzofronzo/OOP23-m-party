@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.Player.impl;
+package it.unibo.mparty.player.impl;
 
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBuilder;
@@ -17,7 +17,7 @@ class PlayerBuilderImplTest {
      * Check if the player is created correctly.
      */
     @Test
-    public void testPlayerCreation() {
+    void testPlayerCreation() {
         final String username = "username";
         final String character = Character.CHAR_MARIO.getName();
         final PlayerBuilder builder = new PlayerBuilderImpl();
@@ -32,7 +32,7 @@ class PlayerBuilderImplTest {
      * Check that building a player with not enough information fails.
      */
     @Test
-    public void testNotEnoughInformation() {
+    void testNotEnoughInformation() {
         final String username = "username";
         final PlayerBuilder builder = new PlayerBuilderImpl();
         assertThrows(IllegalStateException.class,

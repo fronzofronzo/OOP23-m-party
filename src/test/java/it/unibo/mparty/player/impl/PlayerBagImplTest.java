@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.Player.impl;
+package it.unibo.mparty.player.impl;
 
 import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemFactoryImpl;
@@ -34,7 +34,7 @@ class PlayerBagImplTest {
      * Check if an item is correctly added to the bag.
      */
     @Test
-    public void testAddItem() {
+    void testAddItem() {
         final Item item = new ItemFactoryImpl().createItem(ItemName.DADO_FORTUNATO);
         this.bag.addItem(item);
         assertTrue(this.bag.getItems().contains(item.getName()));
@@ -44,7 +44,7 @@ class PlayerBagImplTest {
      * Check if an item is correctly removed from the bag.
      */
     @Test
-    public void testRemoveItem() {
+    void testRemoveItem() {
         final Item item = new ItemFactoryImpl().createItem(ItemName.DADO_FORTUNATO);
         this.bag.addItem(item);
         assertEquals(item, this.bag.useItem(item.getName()));
@@ -55,7 +55,7 @@ class PlayerBagImplTest {
      * Check if the {@code isFull} function works properly.
      */
     @Test
-    public void testFull() {
+    void testFull() {
         final Item item = new ItemFactoryImpl().createItem(ItemName.DADO_FORTUNATO);
         for (int i = 0; i < capacity; i++) {
             this.bag.addItem(item);
