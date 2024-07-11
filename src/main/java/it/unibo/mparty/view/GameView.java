@@ -76,6 +76,7 @@ public interface GameView {
      *
      * @param items   that are the items of the actual player.
      * @param message that is the message to display.
+     * @param turn    that is a {@link Pair} that contains <CurrentTurn,TotalTurn>.
      */
     void updateCommands(List<String> items, String message, Pair<String, String> turn);
 

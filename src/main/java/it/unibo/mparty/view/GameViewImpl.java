@@ -51,7 +51,7 @@ public class GameViewImpl extends Application implements GameView {
         this.setBoardView();
         final Pair<Scene, SceneView> scenePair = this.loadScene("InitialScreen");
         this.stage.setScene(scenePair.getFirst());
-        //this.setMinigameScene("memoryCard", List.of("pl1", "pl2"));
+        // this.setMinigameScene("memoryCard", List.of("pl1", "pl2"));
         this.stage.setMinWidth(PREF_WIDTH);
         this.stage.setMinHeight(PREF_HEIGHT);
         this.stage.setMaximized(true);
@@ -97,7 +97,9 @@ public class GameViewImpl extends Application implements GameView {
      * {@inheritDoc}
      */
     @Override
-    public void setUpBoard(final Pair<Integer, Integer> dimension, final Map<Position, SlotType> board, final List<String> usernames) {
+    public void setUpBoard(final Pair<Integer, Integer> dimension,
+            final Map<Position, SlotType> board,
+            final List<String> usernames) {
         this.boardView.setUpBoard(dimension, board, usernames);
     }
 
@@ -113,7 +115,8 @@ public class GameViewImpl extends Application implements GameView {
      * {@inheritDoc}
      */
     @Override
-    public void updatePlayer(final String player, final int coins, final int stars, final List<String> items, final Position position) {
+    public void updatePlayer(final String player, final int coins, final int stars, final List<String> items,
+            final Position position) {
         this.boardView.updatePlayer(player, coins, stars, items, position);
     }
 
@@ -132,7 +135,8 @@ public class GameViewImpl extends Application implements GameView {
     public void showResults(final Map<String, Pair<Integer, Integer>> result) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + "endGame" + EXTENSION));
         final Parent root = loader.load(getClass().getResourceAsStream(PATH + "endGame" + EXTENSION));
-        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
+        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE),
+                root.prefHeight(DEFAULT_DIMENSION_VALUE));
         final EndGameView endGameView = ((EndGameView) loader.<SceneView>getController());
         endGameView.showResults(result);
         this.stage.setScene(scene);
@@ -149,14 +153,15 @@ public class GameViewImpl extends Application implements GameView {
 
     private void setBoardView() throws IOException {
         final Pair<Scene, SceneView> pair = this.loadScene("GameBoard");
-        this.boardScene= pair.getFirst();
+        this.boardScene = pair.getFirst();
         this.boardView = (GameBoardView) pair.getSecond();
     }
 
     private Pair<Scene, SceneView> loadScene(final String name) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + name + EXTENSION));
         final Parent root = loader.load(getClass().getResourceAsStream(PATH + name + EXTENSION));
-        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
+        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE),
+                root.prefHeight(DEFAULT_DIMENSION_VALUE));
         final SceneView sceneView = loader.getController();
         sceneView.init(this, this.controller);
         return new Pair<>(scene, sceneView);

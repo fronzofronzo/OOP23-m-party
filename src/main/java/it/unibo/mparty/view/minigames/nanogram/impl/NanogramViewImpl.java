@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * Implementation of the {@link NanogramView} interface representing the view for a Nanogram game.
@@ -222,7 +223,8 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
             try {
                 this.getMainView().setBoardScene();
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                final Logger log = Logger.getLogger(NanogramViewImpl.class.getName());
+                log.fine(ex.getMessage());
             }
         });
 

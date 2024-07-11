@@ -155,8 +155,8 @@ public class DominoModelImpl implements DominoModel {
     public boolean isOver() {
         return this.playerTiles.getPlayerTiles(this.player1).isEmpty()
                 || this.playerTiles.getPlayerTiles(this.player2).isEmpty()
-                || (this.playerCannotMakeMove(this.player1)
-                && this.playerCannotMakeMove(this.player2));
+                || this.playerCannotMakeMove(this.player1)
+                && this.playerCannotMakeMove(this.player2);
     }
 
     /**
