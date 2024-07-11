@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.player.impl;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.mparty.model.player.api.Dice;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBag;
@@ -140,6 +141,8 @@ public class PlayerImpl implements Player {
      * {@inheritDoc}.
      */
     @Override
+    @SuppressFBWarnings(value="EI_EXPOSE_REP", justification = "Method getDice should return the dice of the player"
+            + "to operate on it.")
     public Dice getDice() {
         return this.dice;
     }
