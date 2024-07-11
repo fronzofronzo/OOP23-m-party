@@ -26,6 +26,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+/**
+ * This class extends {@link AbstractSceneView} and implements
+ * {@link GameBoardView}.
+ */
 public class GameBoardViewImpl extends AbstractSceneView implements GameBoardView {
 
     private static final String SLOT_STYLE = "-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;";
@@ -35,9 +39,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     private static final String TEXT_VOID_ITEM = "NESSUN OGGETTO";
     private static final String TEXT_DICE_RESULT = "RISULTATO: ";
     private static final String TEXT_TURN = "TURNO: ";
-
     private static final int RADIUS = 8;
-
+    private static final int PAWN_STROKE = 2;
     private static final Map<SlotType, Color> SLOT_COLOR = Map.of(SlotType.ACTIVE_STAR, Color.GOLD,
             SlotType.BONUS, Color.LIGHTGREEN,
             SlotType.MALUS, Color.LIGHTCORAL,
@@ -47,17 +50,27 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
             SlotType.SHOP, Color.SKYBLUE,
             SlotType.SINGLEPLAYER, Color.LIGHTGRAY,
             SlotType.VOID, Color.BLACK);
-
     private static final Map<Integer, Color> PLAYER_COLOR = Map.of(0, Color.ORANGE,
             1, Color.PURPLE,
             2, Color.BLUE,
             3, Color.WHITE);
-
     private static final Map<Color, String> COLOR_TO_TEXT = Map.of(Color.ORANGE, "Arancione",
             Color.PURPLE, "Viola",
             Color.BLUE, "Blu",
             Color.WHITE, "Bianco");
-
+    private Circle player1;
+    private Circle player2;
+    private Circle player3;
+    private Circle player4;
+    private List<Label> labelPlayersNames;
+    private List<Label> labelPlayersCoins;
+    private List<Label> labelPlayersStars;
+    private List<Label> labelPlayersItems;
+    private List<Label> labelPlayersColor;
+    private List<Button> buttonsItem;
+    private List<Button> buttonsDirection;
+    private List<Circle> pawns;
+    private Map<Position, FlowPane> board;
     @FXML
     private GridPane gridPaneBoard;
     @FXML
@@ -127,21 +140,47 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private Label labelTurn;
 
-    private Circle player1 = new Circle(RADIUS);
-    private Circle player2 = new Circle(RADIUS);
-    private Circle player3 = new Circle(RADIUS);
-    private Circle player4 = new Circle(RADIUS);
 
-    private List<Label> labelPlayersNames = new ArrayList<>();
-    private List<Label> labelPlayersCoins = new ArrayList<>();
-    private List<Label> labelPlayersStars = new ArrayList<>();
-    private List<Label> labelPlayersItems = new ArrayList<>();
-    private List<Label> labelPlayersColor = new ArrayList<>();
-    private List<Button> buttonsItem = new ArrayList<>();
-    private List<Button> buttonsDirection = new ArrayList<>();
-    private List<Circle> pawns = new ArrayList<>();
-    private Map<Position, FlowPane> board = new HashMap<>();
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setUpBoard(Pair<Integer, Integer> dimension, Map<Position, SlotType> map, List<String> usernames) {
+        this.createData();
+        this.populateBoard(dimension, map);
+        this.setUpPlayers(usernames);
+    }
 
+    private void createData() {
+        
+        this.player1 = new Circle(RADIUS);
+        this.player2 = new Circle(RADIUS);
+        this.player3 = new Circle(RADIUS);
+        this.player4 = new Circle(RADIUS);
+        this.labelPlayersNames = new ArrayList<>();
+        this.labelPlayersCoins = new ArrayList<>();
+        this.labelPlayersStars = new ArrayList<>();
+        this.labelPlayersItems = new ArrayList<>();
+        this.labelPlayersColor = new ArrayList<>();
+        this.buttonsItem = new ArrayList<>();
+        this.buttonsDirection = new ArrayList<>();
+        this.pawns = new ArrayList<>();
+        this.board = new HashMap<>();
+        this.labelPlayersNames.addAll(List.of(this.nameP1, this.nameP2, this.nameP3, this.nameP4));
+        this.labelPlayersCoins.addAll(List.of(this.coinsP1, this.coinsP2, this.coinsP3, this.coinsP4));
+        this.labelPlayersStars.addAll(List.of(this.starsP1, this.starsP2, this.starsP3, this.starsP4));
+        this.labelPlayersItems.addAll(List.of(this.itemP1, this.itemP2, this.itemP3, this.itemP4));
+        this.labelPlayersColor.addAll(List.of(this.colorP1, this.colorP2, this.colorP3, this.colorP4));
+        this.buttonsItem.addAll(List.of(this.useItem1, this.useItem2, this.useItem3));
+        this.buttonsDirection.addAll(List.of(this.buttonUP, this.buttonDOWN, this.buttonLEFT, this.buttonRIGHT));
+        this.pawns.addAll(List.of(this.player1, this.player2, this.player3, this.player4));
+        this.pawns.forEach(c -> c.setStroke(Color.BLACK));
+        this.pawns.forEach(c -> c.setStrokeWidth(PAWN_STROKE));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updatePlayer(String palyer, int coins, int stars, final List<String> items, Position position) {
         for (int i = 0; i < this.labelPlayersNames.size(); i++) {
@@ -157,13 +196,9 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         }
     }
 
-    @Override
-    public void setUpBoard(Pair<Integer, Integer> dimension, Map<Position, SlotType> map, List<String> usernames) {
-        this.populateGridPane(dimension, map);
-        this.createData();
-        this.setUpPlayers(usernames);
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateBoard(Map<Position, SlotType> boardUpdates) {
         if (!boardUpdates.isEmpty()) {
@@ -174,54 +209,9 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         }
     }
 
-    private FlowPane setUpFlowPane(FlowPane tmp, SlotType slotType) {
-        BackgroundFill backgroundfill = new BackgroundFill(SLOT_COLOR.get(slotType),
-                CornerRadii.EMPTY,
-                null);
-        Background background = new Background(backgroundfill);
-        tmp.setBackground(background);
-        if (!slotType.equals(SlotType.VOID)) {
-            tmp.setStyle(SLOT_STYLE);
-            Tooltip tt = new Tooltip(slotType.toString());
-            Tooltip.install(tmp, tt);
-        }
-        return tmp;
-    }
-
-    private void setUpPlayers(List<String> usernames) {
-        for (int i = 0; i < usernames.size(); i++) {
-            this.labelPlayersNames.get(i).setText(usernames.get(i));
-            this.pawns.get(i).setFill(PLAYER_COLOR.get(i));
-            this.labelPlayersColor.get(i).setText("(" + COLOR_TO_TEXT.get(PLAYER_COLOR.get(i)) + ")");
-        }
-    }
-
-    private void createData() {
-        this.labelPlayersNames.addAll(List.of(this.nameP1, this.nameP2, this.nameP3, this.nameP4));
-        this.labelPlayersCoins.addAll(List.of(this.coinsP1, this.coinsP2, this.coinsP3, this.coinsP4));
-        this.labelPlayersStars.addAll(List.of(this.starsP1, this.starsP2, this.starsP3, this.starsP4));
-        this.labelPlayersItems.addAll(List.of(this.itemP1, this.itemP2, this.itemP3, this.itemP4));
-        this.labelPlayersColor.addAll(List.of(this.colorP1, this.colorP2, this.colorP3, this.colorP4));
-        this.buttonsItem.addAll(List.of(this.useItem1, this.useItem2, this.useItem3));
-        this.buttonsDirection.addAll(List.of(this.buttonUP, this.buttonDOWN, this.buttonLEFT, this.buttonRIGHT));
-        this.pawns.addAll(List.of(this.player1, this.player2, this.player3, this.player4));
-        this.pawns.forEach(c -> c.setStroke(Color.BLACK));
-        this.pawns.forEach(c -> c.setStrokeWidth(2));
-    }
-
-    private void populateGridPane(Pair<Integer, Integer> dimension, Map<Position, SlotType> map) {
-        for (int i = 0; i < dimension.getFirst(); i++) {
-            for (int j = 0; j < dimension.getSecond(); j++) {
-                Position pos = new Position(i, j);
-                SlotType slotType = Objects.isNull(map.get(pos)) ? SlotType.VOID : map.get(pos);
-                FlowPane tmp = new FlowPane();
-                tmp = setUpFlowPane(tmp, slotType);
-                this.board.put(pos, tmp);
-                this.gridPaneBoard.add(tmp, i, j);
-            }
-        }
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateCommands(final List<String> items, String message, Pair<String, String> turn) {
         for (int i = 0; i < this.buttonsItem.size(); i++) {
@@ -231,14 +221,17 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.labelTurn.setText(TEXT_TURN + turn.getFirst() + "/" + turn.getSecond());
     }
 
-    @FXML
-    private void rollDice() {
-        this.getMainController().rollDice();
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showResultDice(int result) {
         this.resultDice.setText(TEXT_DICE_RESULT + String.valueOf(result));
+    }
+
+    @FXML
+    private void rollDice() {
+        this.getMainController().rollDice();
     }
 
     @FXML
@@ -279,5 +272,40 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
             }
         }
         return output;
+    }
+
+    private void populateBoard(Pair<Integer, Integer> dimension, Map<Position, SlotType> map) {
+        for (int i = 0; i < dimension.getFirst(); i++) {
+            for (int j = 0; j < dimension.getSecond(); j++) {
+                Position pos = new Position(i, j);
+                SlotType slotType = Objects.isNull(map.get(pos)) ? SlotType.VOID : map.get(pos);
+                FlowPane tmp = new FlowPane();
+                tmp = setUpFlowPane(tmp, slotType);
+                this.board.put(pos, tmp);
+                this.gridPaneBoard.add(tmp, i, j);
+            }
+        }
+    }
+
+    private void setUpPlayers(List<String> usernames) {
+        for (int i = 0; i < usernames.size(); i++) {
+            this.labelPlayersNames.get(i).setText(usernames.get(i));
+            this.pawns.get(i).setFill(PLAYER_COLOR.get(i));
+            this.labelPlayersColor.get(i).setText("(" + COLOR_TO_TEXT.get(PLAYER_COLOR.get(i)) + ")");
+        }
+    }
+
+    private FlowPane setUpFlowPane(FlowPane tmp, SlotType slotType) {
+        BackgroundFill backgroundfill = new BackgroundFill(SLOT_COLOR.get(slotType),
+                CornerRadii.EMPTY,
+                null);
+        Background background = new Background(backgroundfill);
+        tmp.setBackground(background);
+        if (!slotType.equals(SlotType.VOID)) {
+            tmp.setStyle(SLOT_STYLE);
+            Tooltip tt = new Tooltip(slotType.toString());
+            Tooltip.install(tmp, tt);
+        }
+        return tmp;
     }
 }
