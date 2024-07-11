@@ -42,9 +42,9 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
     private final BoardType boardType;
     private final String filePath;
     private final Set<Position> starsPositions;
-    private final Map<Position, Slot> board = new HashMap<>();
+    private final Map<Position, Slot> board;
     private List<SlotType> avaiableSlotTypes;
-    private boolean updateStarsSlot = false;
+    private boolean updateStarsSlot;
 
     /**
      * This is the constructor of this abstract class.
@@ -72,9 +72,11 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
         this.initialPosition = initialPosition;
         this.starsPositions = starPositions;
         this.rules = rules;
-        this.avaiableSlotTypes = setAviableSlotType();
+        this.avaiableSlotTypes = getAviableSlotType();
         this.boardType = boardType;
         this.filePath = filePath;
+        this.board = new HashMap<>();
+        this.updateStarsSlot = false;
         this.generateBoard();
     }
 
@@ -83,15 +85,15 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
      */
     @Override
     public void changeStarPosition() throws IllegalStateException {
-        Set<Position> nextStars = this.starsPositions
+        final Set<Position> nextStars = this.starsPositions
                 .stream()
                 .filter(p -> this.getSlotType(p).equals(SlotType.NOT_ACTIVE_STAR))
                 .collect(Collectors.toSet());
         if (nextStars.size() != this.starsPositions.size() - 1) {
             throw new IllegalStateException();
         }
-        Position newStarPosition = RandomFromSet.get(nextStars);
-        Position oldStarPosition = this.getStarPosition();
+        final Position newStarPosition = RandomFromSet.get(nextStars);
+        final Position oldStarPosition = this.getStarPosition();
         this.board.get(newStarPosition).changeSlotType(SlotType.ACTIVE_STAR);
         this.board.get(oldStarPosition).changeSlotType(SlotType.NOT_ACTIVE_STAR);
         this.updateStarsSlot = true;
@@ -280,12 +282,12 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(" ");
                 if (parts.length == N_PARTS_INPUT_FILE) {
-                    int x = Integer.parseInt(parts[0]);
-                    int y = Integer.parseInt(parts[1]);
+                    final int x = Integer.parseInt(parts[0]);
+                    final int y = Integer.parseInt(parts[1]);
                     Position pos = new Position(x, y);
-                    int steps = Integer.parseInt(parts[2]);
-                    String d = parts[3];
-                    Direction dir = this.getDirection(d);
+                    final int steps = Integer.parseInt(parts[2]);
+                    final String d = parts[3];
+                    final Direction dir = this.getDirection(d);
                     this.createPath(pos, steps, dir);
                 }
             }
@@ -306,14 +308,14 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
 
     private SlotType getNewSlotType() {
         if (this.avaiableSlotTypes.isEmpty()) {
-            this.avaiableSlotTypes = setAviableSlotType();
+            this.avaiableSlotTypes = getAviableSlotType();
         }
-        SlotType output = this.avaiableSlotTypes.get(0);
+        final SlotType output = this.avaiableSlotTypes.get(0);
         this.avaiableSlotTypes.remove(0);
         return output;
     }
 
-    private List<SlotType> setAviableSlotType() {
+    private List<SlotType> getAviableSlotType() {
         return RandomListGenerator.generate(this.rules);
     }
 }
