@@ -9,9 +9,9 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
 /**
@@ -25,7 +25,7 @@ public class TutorialScreenImpl implements TutorialScreen, Initializable {
     @FXML
     private Label tutorialLabel;
 
-    private static final String TUTORIAL_PATH = "src/main/resources/Tutorial.txt";
+    private static final String TUTORIAL_PATH = "Tutorial.txt";
 
     /**
      * {@inheritDoc}
@@ -41,10 +41,15 @@ public class TutorialScreenImpl implements TutorialScreen, Initializable {
      */
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
-        try {
-            this.tutorialLabel.setText(new String(Files.readAllBytes(Paths.get(TUTORIAL_PATH))));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        final InputStream input = getClass().getClassLoader().getResourceAsStream(TUTORIAL_PATH);
+        if (input != null) {
+            String text;
+            try {
+                text = new String(input.readAllBytes(), StandardCharsets.UTF_8);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            this.tutorialLabel.setText(text);
         }
     }
 
