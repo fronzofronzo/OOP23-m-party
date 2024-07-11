@@ -282,7 +282,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
         if (Objects.isNull(inputStream)) {
             throw new IllegalStateException();
         }
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-16"))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 final String[] parts = line.split(" ");
