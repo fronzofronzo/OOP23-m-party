@@ -68,11 +68,9 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
 
     private NanogramController controller;
 
-    @FXML
     private Button hitButton;
 
-    @FXML
-    private Set<Button> boardButtons = new HashSet<>();
+    private final Set<Button> boardButtons = new HashSet<>();
 
     private final EventHandler<MouseEvent> handleCellClicked = event -> {
         this.hitButton = (Button) event.getSource();
