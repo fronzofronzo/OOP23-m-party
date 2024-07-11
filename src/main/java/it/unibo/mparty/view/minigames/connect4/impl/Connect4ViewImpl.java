@@ -104,8 +104,12 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
         this.controller.check(index);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     @FXML
-    private void closeView() {
+    public void closeView() {
         this.controller.endGame();
     }
 
@@ -119,8 +123,12 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
         updateTutorialLabel();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     @FXML
-    private void viewTutorial() {
+    public void viewTutorial() {
         if (tutorialLabel.isVisible()) {
             tutorialButton.setText("Tutorial");
             tutorialLabel.setVisible(false);
@@ -140,7 +148,7 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
             try {
                 this.tutorialLabel.setText(new String(stream.readAllBytes(), StandardCharsets.UTF_8));
             } catch (IOException e) {
-                Logger log = Logger.getLogger(Connect4ViewImpl.class.getName());
+                final Logger log = Logger.getLogger(Connect4ViewImpl.class.getName());
                 log.fine(e.getMessage());
             }
         }
