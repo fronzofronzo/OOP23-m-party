@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigameHandler;
+package it.unibo.mparty.model.minigamehandler;
 
 import it.unibo.mparty.model.minigames.MinigameModel;
 import it.unibo.mparty.model.minigames.MinigameType;

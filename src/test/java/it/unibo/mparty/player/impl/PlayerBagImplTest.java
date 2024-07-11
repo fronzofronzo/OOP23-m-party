@@ -25,7 +25,7 @@ class PlayerBagImplTest {
      * Configuration step: this is performed before each test.
      */
     @BeforeEach
-    void init() {
+    public void init() {
         capacity =  3;
         this.bag = new PlayerBagImpl(capacity);
     }
@@ -55,7 +55,7 @@ class PlayerBagImplTest {
      * Check if the {@code isFull} function works properly.
      */
     @Test
-    public void testFull() {
+    void testFull() {
         final Item item = new ItemFactoryImpl().createItem(ItemName.DADO_FORTUNATO);
         for (int i = 0; i < capacity; i++) {
             this.bag.addItem(item);

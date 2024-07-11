@@ -41,7 +41,7 @@ public class PlayerBagImpl implements PlayerBag {
      */
     @Override
     public Item useItem(final ItemName name) {
-        Optional<Item> output = this.items.stream().filter(i -> i.getName().equals(name)).findAny();
+        final Optional<Item> output = this.items.stream().filter(i -> i.getName().equals(name)).findAny();
         if (output.isEmpty()) {
             throw new IllegalStateException("Player should have the item");
         }
@@ -63,6 +63,6 @@ public class PlayerBagImpl implements PlayerBag {
      */
     @Override
     public List<ItemName> getItems() {
-        return (items.stream().map(Item::getName).toList());
+        return items.stream().map(Item::getName).toList();
     }
 }
