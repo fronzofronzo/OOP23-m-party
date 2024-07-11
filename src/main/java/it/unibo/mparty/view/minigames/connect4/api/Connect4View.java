@@ -30,7 +30,7 @@ public interface Connect4View extends MinigameView {
     void activateExitButton(boolean pred);
 
     /**
-     * Select the column clicked
+     * Select the column clicked.
      * @param e the click on the button of the relative column
      */
     void selectColumn(ActionEvent e);
