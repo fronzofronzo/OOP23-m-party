@@ -17,7 +17,7 @@ public interface BoardTile extends ESource<List<Pair<Integer, Integer>>> {
      *
      * @return the list of tiles on the board
      */
-    LinkedList<Tile> getBoardTiles();
+    List<Tile> getBoardTiles();
 
     /**
      * Checks if a tile can be matched with any tile currently on the board.
