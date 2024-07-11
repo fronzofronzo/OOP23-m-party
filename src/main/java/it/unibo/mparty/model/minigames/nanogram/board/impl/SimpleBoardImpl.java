@@ -70,7 +70,7 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
         return hintsList;
     }
 
-    private void initializeBoard(double fillPercentage){
+    private void initializeBoard(double fillPercentage) {
         final List<Position> position = new ArrayList<>(IntStream.range(0, size * size)
                 .mapToObj(i -> new Position(i / size, i % size))
                 .toList());
