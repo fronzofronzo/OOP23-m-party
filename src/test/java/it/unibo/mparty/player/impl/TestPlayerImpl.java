@@ -14,6 +14,7 @@ import java.util.Random;
 class TestPlayerImpl {
 
     private static final int RANDOM_BOUND = 100;
+    private static final Random RANDOM = new Random();
     private Player testPlayer;
 
     /**
@@ -65,8 +66,7 @@ class TestPlayerImpl {
      */
     @Test
     void testPosition() {
-        final Random random = new Random();
-        final Position position = new Position(random.nextInt(RANDOM_BOUND), random.nextInt(RANDOM_BOUND));
+        final Position position = new Position(RANDOM.nextInt(RANDOM_BOUND), RANDOM.nextInt(RANDOM_BOUND));
         this.testPlayer.setPosition(position);
         assertEquals(position, this.testPlayer.getPosition());
     }

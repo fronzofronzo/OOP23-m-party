@@ -17,7 +17,7 @@ public abstract class AbstractSceneView implements SceneView {
      * {@inheritDoc}
      */
     @Override
-    @SuppressFBWarnings(value = "EI_EXPOSED_REP" , justification = "An abstract scene view should be able "
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "An abstract scene view should be able "
             + "to provide the reference to main view ")
     public GameView getMainView() {
         return this.mainView;
@@ -36,7 +36,7 @@ public abstract class AbstractSceneView implements SceneView {
      * {@inheritDoc}
      */
     @Override
-    @SuppressFBWarnings(value = "EI_EXPOSED_REP" , justification = "An abstract scene view should be able "
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "An abstract scene view should be able "
             + "to provide the reference to main controller ")
     public GameController getMainController() {
         return this.mainController;
