@@ -75,8 +75,8 @@ public class GameModelImpl implements GameModel {
      * {@inheritDoc}
      */
     @Override
-    public void movePlayer(Optional<Direction> dir) {
-        //Optional<Direction> currentDir = dir;
+    public void movePlayer(final Optional<Direction> dir) {
+        // Optional<Direction> currentDir = dir;
         if (this.status.equals(GameStatus.MOVE_PLAYER)
                 || this.status.equals(GameStatus.MOVING_PLAYER)) {
             if (this.status.equals(GameStatus.MOVE_PLAYER)) {
@@ -99,7 +99,10 @@ public class GameModelImpl implements GameModel {
                         return;
                     } else {
                         this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.get(dir.get()));
-                        dir = Optional.empty();
+                        // dir = Optional.empty();
+                        this.steps++;
+                        this.movePlayer(Optional.empty());
+                        return;
                     }
                 }
                 this.steps++;
@@ -179,7 +182,7 @@ public class GameModelImpl implements GameModel {
      */
     @Override
     public boolean isOver() {
-        return this.turn < TURNS_NUMBER;
+        return this.turn > TURNS_NUMBER;
     }
 
     /**
@@ -325,7 +328,8 @@ public class GameModelImpl implements GameModel {
         final Random random = new Random();
         if (this.status.equals(GameStatus.ACTIVE_SLOT)) {
             switch (slot) {
-                case SINGLEPLAYER -> this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.SINGLE_PLAYER);
+                case SINGLEPLAYER ->
+                    this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.SINGLE_PLAYER);
                 case MULTIPLAYER -> {
                     final Player otherPlayer = this.players.stream()
                             .filter(p -> !p.equals(actualPlayer))
