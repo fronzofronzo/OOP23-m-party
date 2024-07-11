@@ -34,7 +34,7 @@ import java.util.Set;
  */
 public class DominoViewImpl extends AbstractSceneView implements DominoView {
 
-    private static final String TUTORIAL_PATH = "src/main/resources/text/dominoTutorial.txt";
+    private static final String TUTORIAL_PATH = "text/dominoTutorial.txt";
     private static final int PREF_SIZE = 50;
     private static final int SPACING = 10;
 
