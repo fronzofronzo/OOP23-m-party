@@ -12,6 +12,9 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.logging.Logger;
 
+/**
+ * Class representing the tutorial for the Nanogram game.
+ */
 public class NanogramTutorial {
 
     private static final String TUTORIAL_PATH = "text/nanogramTutorial.txt";
