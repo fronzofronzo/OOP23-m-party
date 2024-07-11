@@ -4,7 +4,6 @@ import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.api.ESource;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
