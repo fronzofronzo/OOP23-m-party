@@ -63,7 +63,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
         bt.setPrefSize(PREF_BUTTON_SIZE, PREF_BUTTON_SIZE);
         bt.setDisable(true);
         bt.setStyle("-fx-opacity: 1.0; ");
-        bt.setFont(new Font("Segoe UI Light", FONT_SIZE));
+        bt.setFont(new Font("Cascadia Code PL Regular", FONT_SIZE));
         bt.setVisible(false);
         this.cardsPane.getChildren().add(bt);
     }
