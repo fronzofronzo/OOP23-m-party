@@ -220,7 +220,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
      */
     @Override
     public void updateRemainingTileSize(final int size) {
-        this.deckSize.setText(DominoMessage.REMAINING_TILE + String.valueOf(size));
+        this.deckSize.setText("Tessere \nrestanti: " + size);
     }
 
     /**
