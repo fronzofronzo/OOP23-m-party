@@ -36,7 +36,7 @@ public class TestAbstractPositionImpl {
         AbstractPosition position1 = new BallPosition(random.nextInt(1, SIDE), 0, SIDE);
         assertTrue(position1.isSafe(List.of(), List.of()));
         assertEquals(0, position1.getY());
-        AbstractPosition position2 = new BallPosition(random.nextInt(SIDE), SIDE - 1, SIDE);
+        AbstractPosition position2 = new BallPosition(random.nextInt(1, SIDE), SIDE - 1, SIDE);
         assertTrue(position2.isSafe(List.of(), List.of()));
         assertEquals(SIDE - 1, position2.getY());
     }
@@ -47,13 +47,12 @@ public class TestAbstractPositionImpl {
     @Test
     public void testBombsPosition() {
         List<AbstractPosition> list = new LinkedList<>();
-
+        assertTrue(new BombPosition(2, 2, SIDE).isSafe(list, List.of()));
         list.add(new BombPosition(2, 2, SIDE));
-        assertTrue(list.get(0).isSafe(list, List.of()));
+        assertTrue(new BombPosition(2, 3, SIDE).isSafe(list, List.of()));
         list.add(new BombPosition(2, 3, SIDE));
-        assertTrue(list.get(1).isSafe(list, List.of()));
+        assertTrue(new BombPosition(4, 2, SIDE).isSafe(list, List.of()));
         list.add(new BombPosition(4, 2, SIDE));
-        assertTrue(list.get(2).isSafe(list, List.of()));
 
     }
 

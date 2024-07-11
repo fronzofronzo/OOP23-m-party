@@ -140,7 +140,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     private Label labelTurn;
 
-
     /**
      * {@inheritDoc}
      */
@@ -152,7 +151,6 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     private void createData() {
-        
         this.player1 = new Circle(RADIUS);
         this.player2 = new Circle(RADIUS);
         this.player3 = new Circle(RADIUS);
