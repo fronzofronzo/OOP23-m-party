@@ -223,7 +223,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @Override
-    public void updateCommands(final List<String> items, String message, Pair<String,String> turn) {
+    public void updateCommands(final List<String> items, String message, Pair<String, String> turn) {
         for (int i = 0; i < this.buttonsItem.size(); i++) {
             this.buttonsItem.get(i).setText(i < items.size() ? items.get(i) : TEXT_VOID_ITEM);
         }

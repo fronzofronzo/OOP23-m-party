@@ -25,7 +25,7 @@ public class SecretCodeControllerImpl implements SecretCodeController {
      * 
      * @param view the view of the game.
      */
-    public SecretCodeControllerImpl(SecretCodeView view) {
+    public SecretCodeControllerImpl(final SecretCodeView view) {
         this.model = new SecretCodeModelImpl();
         this.view = view;
     }
@@ -49,7 +49,7 @@ public class SecretCodeControllerImpl implements SecretCodeController {
      * {@inheritDoc}
      */
     @Override
-    public void initGame(List<String> players) {
+    public void initGame(final List<String> players) {
         this.model.setUpPlayers(players);
     }
 
@@ -57,7 +57,7 @@ public class SecretCodeControllerImpl implements SecretCodeController {
      * {@inheritDoc}
      */
     @Override
-    public void addColor(SecretCodeColors color) {
+    public void addColor(final SecretCodeColors color) {
         if (!this.model.isOver() && this.model.addColor(color)) {
             Position pos = new Position(this.model.getCurrentGuess().size() - 1, this.model.getTurn());
             this.view.updateGuesses(this.model.getCurrentPlayer(), pos, color);

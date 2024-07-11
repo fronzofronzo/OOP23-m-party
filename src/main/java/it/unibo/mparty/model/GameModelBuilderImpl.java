@@ -23,7 +23,7 @@ public class GameModelBuilderImpl implements GameModelBuilder {
      * {@inheritDoc}
      */
     @Override
-    public GameModelBuilder addPlayer(final String nickname, final String character){
+    public GameModelBuilder addPlayer(final String nickname, final String character) {
         final PlayerBuilder builder = new PlayerBuilderImpl();
         final Player pl = builder.username(nickname)
                 .character(character)

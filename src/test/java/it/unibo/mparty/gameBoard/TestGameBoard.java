@@ -22,7 +22,7 @@ import it.unibo.mparty.utilities.SlotType;
 import java.util.Set;
 import java.util.HashSet;
 
-class TestGameBoard{
+class TestGameBoard {
 
     private static final int ACTIVE_STAR_SLOTS_EXPECTED = 1;
     private static final int NOT_ACTIVE_STAR_SLOTS_EXPECTED = 2;
@@ -33,58 +33,51 @@ class TestGameBoard{
     private static final int INITIAL_X_HARD_BOARD = 28;
     private static final int INITIAL_Y_HARD_BOARD = 14;
 
-    
     @SuppressWarnings("unchecked")
-    private final Map<Position,Map<Direction, Position>> dataSetToTestgetNextPositionsEasyBoard = 
-    Map.of(
-        new Position(19, 10), Map.of(Direction.UP, new Position(19, 9)),
-        new Position(19, 13), Map.of(Direction.UP, new Position(19, 12),Direction.LEFT, new Position(18, 13)),
-        new Position(15,3), Collections.EMPTY_MAP
-        );
+    private final Map<Position, Map<Direction, Position>> dataSetToTestgetNextPositionsEasyBoard = Map.of(
+            new Position(19, 10), Map.of(Direction.UP, new Position(19, 9)),
+            new Position(19, 13), Map.of(Direction.UP, new Position(19, 12), Direction.LEFT, new Position(18, 13)),
+            new Position(15, 3), Collections.EMPTY_MAP);
     @SuppressWarnings("unchecked")
-    private final Map<Position,Map<Direction, Position>> dataSetToTestgetNextPositionsMediumBoard = 
-        Map.of(
+    private final Map<Position, Map<Direction, Position>> dataSetToTestgetNextPositionsMediumBoard = Map.of(
             new Position(5, 11), Map.of(Direction.UP, new Position(5, 10)),
-            new Position(25, 7), Map.of(Direction.UP, new Position(25, 6),Direction.RIGHT, new Position(26, 7)),
-            new Position(15,2), Collections.EMPTY_MAP
-            );
+            new Position(25, 7), Map.of(Direction.UP, new Position(25, 6), Direction.RIGHT, new Position(26, 7)),
+            new Position(15, 2), Collections.EMPTY_MAP);
     @SuppressWarnings("unchecked")
-    private final Map<Position,Map<Direction, Position>> dataSetToTestgetNextPositionsHardBoard = 
-        Map.of(
+    private final Map<Position, Map<Direction, Position>> dataSetToTestgetNextPositionsHardBoard = Map.of(
             new Position(1, 13), Map.of(Direction.UP, new Position(1, 12)),
-            new Position(3, 6), Map.of(Direction.UP, new Position(3, 5),Direction.DOWN, new Position(3, 7)),
-            new Position(26,1), Collections.EMPTY_MAP
-            );
-    
+            new Position(3, 6), Map.of(Direction.UP, new Position(3, 5), Direction.DOWN, new Position(3, 7)),
+            new Position(26, 1), Collections.EMPTY_MAP);
+
     private static Set<GameBoard> boards = new HashSet<>();
     private static Set<BoardType> boardTypes = Set.of(BoardType.EASY, BoardType.MEDIUM, BoardType.HARD);
 
     @BeforeAll
-    public static void initialise(){
+    public static void initialise() {
         for (BoardType bt : boardTypes) {
             boards.add(BoardFactory.createBoard(bt));
         }
         for (GameBoard b : boards) {
             System.out.println(b.toString());
-            System.out.println(b.getBoardType());  
+            System.out.println(b.getBoardType());
         }
     }
 
-    @Test 
-    public void testNumberStarsSlots(){
+    @Test
+    public void testNumberStarsSlots() {
         for (GameBoard b : boards) {
-            int count_active_star = (int)b.getBoard()
-                                          .entrySet()
-                                          .stream()
-                                          .filter(entry -> entry.getValue().getSlotType().equals(SlotType.ACTIVE_STAR))
-                                          .count();
-            int count_not_active_star = (int)b.getBoard()
-                                              .entrySet()
-                                              .stream()
-                                              .filter(entry -> entry.getValue().getSlotType().equals(SlotType.NOT_ACTIVE_STAR))
-                                              .count();
-        assertEquals(ACTIVE_STAR_SLOTS_EXPECTED, count_active_star);
-        assertEquals(NOT_ACTIVE_STAR_SLOTS_EXPECTED, count_not_active_star);
+            int countActiveStar = (int) b.getBoard()
+                    .entrySet()
+                    .stream()
+                    .filter(entry -> entry.getValue().getSlotType().equals(SlotType.ACTIVE_STAR))
+                    .count();
+            int countNotActiveStar = (int) b.getBoard()
+                    .entrySet()
+                    .stream()
+                    .filter(entry -> entry.getValue().getSlotType().equals(SlotType.NOT_ACTIVE_STAR))
+                    .count();
+            assertEquals(ACTIVE_STAR_SLOTS_EXPECTED, countActiveStar);
+            assertEquals(NOT_ACTIVE_STAR_SLOTS_EXPECTED, countNotActiveStar);
         }
     }
 
@@ -94,22 +87,29 @@ class TestGameBoard{
             Position oldStarPosition = b.getStarPosition();
             assertNotNull(oldStarPosition);
             b.changeStarPosition();
-            assertNotEquals(oldStarPosition, b.getStarPosition());   
+            assertNotEquals(oldStarPosition, b.getStarPosition());
         }
     }
 
-    @Test 
-    public void testStartingPosition(){
+    @Test
+    public void testStartingPosition() {
         for (GameBoard b : boards) {
             BoardType bt = b.getBoardType();
             Position expected = null;
             switch (bt) {
-                case EASY: expected = new Position(INITIAL_X_EASY_BOARD, INITIAL_Y_EASY_BOARD); break;
-                case MEDIUM: expected = new Position(INITIAL_X_MEDIUM_BOARD, INITIAL_Y_MEDIUM_BOARD); break;
-                case HARD: expected = new Position(INITIAL_X_HARD_BOARD, INITIAL_Y_HARD_BOARD); break;
-                default: break;
+                case EASY:
+                    expected = new Position(INITIAL_X_EASY_BOARD, INITIAL_Y_EASY_BOARD);
+                    break;
+                case MEDIUM:
+                    expected = new Position(INITIAL_X_MEDIUM_BOARD, INITIAL_Y_MEDIUM_BOARD);
+                    break;
+                case HARD:
+                    expected = new Position(INITIAL_X_HARD_BOARD, INITIAL_Y_HARD_BOARD);
+                    break;
+                default:
+                    break;
             }
-            assertEquals(expected, b.getStrartingPosition());            
+            assertEquals(expected, b.getStrartingPosition());
         }
     }
 
@@ -118,12 +118,22 @@ class TestGameBoard{
         for (GameBoard b : boards) {
             BoardType bt = b.getBoardType();
             switch (bt) {
-                case EASY: this.dataSetToTestgetNextPositionsEasyBoard.entrySet().forEach(entry -> assertEquals(entry.getValue(), b.getNextPositions(entry.getKey()))); break;
-                case MEDIUM: this.dataSetToTestgetNextPositionsMediumBoard.entrySet().forEach(entry -> assertEquals(entry.getValue(), b.getNextPositions(entry.getKey()))); break;
-                case HARD: this.dataSetToTestgetNextPositionsHardBoard.entrySet().forEach(entry -> assertEquals(entry.getValue(), b.getNextPositions(entry.getKey()))); break;
-                default: break;
-            }       
+                case EASY:
+                    this.dataSetToTestgetNextPositionsEasyBoard.entrySet()
+                            .forEach(entry -> assertEquals(entry.getValue(), b.getNextPositions(entry.getKey())));
+                    break;
+                case MEDIUM:
+                    this.dataSetToTestgetNextPositionsMediumBoard.entrySet()
+                            .forEach(entry -> assertEquals(entry.getValue(), b.getNextPositions(entry.getKey())));
+                    break;
+                case HARD:
+                    this.dataSetToTestgetNextPositionsHardBoard.entrySet()
+                            .forEach(entry -> assertEquals(entry.getValue(), b.getNextPositions(entry.getKey())));
+                    break;
+                default:
+                    break;
+            }
         }
-        
+
     }
 }

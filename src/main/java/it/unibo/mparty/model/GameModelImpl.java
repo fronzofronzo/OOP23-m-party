@@ -283,7 +283,7 @@ public class GameModelImpl implements GameModel {
      * {@inheritDoc}
      */
     @Override
-    public Map<Position, SlotType> getSlotsToUpdate() {
+    public Map<Position, SlotType> getModifiedSlots() {
         return this.board.getModifiedSlots();
     }
 
