@@ -24,8 +24,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Set;
 
@@ -98,6 +98,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         this.tilesContainer.getChildren().add(boardHBox);
 
         this.playerCantDraw();
+        this.updateTutorialLabel();
     }
 
     @FXML
@@ -118,14 +119,26 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     }
 
     @FXML
-    private void tutorialClicked() throws IOException {
+    private void tutorialClicked() {
         if (this.tutorialText.isVisible()) {
             this.tutorialButton.setText("Tutorial");
             this.tutorialText.setVisible(false);
         } else {
             this.tutorialButton.setText("Chiudi\nTutorial");
-            this.tutorialText.setText(new String(Files.readAllBytes(Paths.get(TUTORIAL_PATH))));
             this.tutorialText.setVisible(true);
+        }
+    }
+
+    private void updateTutorialLabel() {
+        final InputStream input = getClass().getClassLoader().getResourceAsStream(TUTORIAL_PATH);
+        if (input != null) {
+            String text;
+            try {
+                text = new String(input.readAllBytes(), StandardCharsets.UTF_8);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            this.tutorialText.setText(text);
         }
     }
 

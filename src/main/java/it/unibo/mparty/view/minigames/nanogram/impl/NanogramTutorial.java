@@ -8,8 +8,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 public class NanogramTutorial {
 
@@ -20,7 +20,7 @@ public class NanogramTutorial {
     private BorderPane pane;
 
     @FXML
-    private void initialize() throws IOException {
+    private void initialize() {
         Label tutorialText = new Label();
         tutorialText.setStyle("-fx-font-size: 12pt; -fx-font-style: italic;");
         tutorialText.setTextAlignment(TextAlignment.CENTER);
@@ -28,6 +28,15 @@ public class NanogramTutorial {
         BorderPane.setMargin(tutorialText, new Insets(MARGIN));
         this.pane.setCenter(tutorialText);
 
-        tutorialText.setText(new String(Files.readAllBytes(Paths.get(TUTORIAL_PATH))));
+        final InputStream input = getClass().getClassLoader().getResourceAsStream(TUTORIAL_PATH);
+        if (input != null) {
+            String text;
+            try {
+                text = new String(input.readAllBytes(), StandardCharsets.UTF_8);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            tutorialText.setText(text);
+        }
     }
 }
