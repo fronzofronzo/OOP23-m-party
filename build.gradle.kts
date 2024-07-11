@@ -12,7 +12,7 @@ plugins {
      * The runnable jar will be found in build/libs/projectname-all.jar
      */
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("org.danilopianini.gradle-java-qa") version "1.46.0"
+    id("org.danilopianini.gradle-java-qa") version "1.28.0"
 }
 
 repositories {
@@ -33,7 +33,7 @@ dependencies {
     // Suppressions for SpotBugs
     compileOnly("com.github.spotbugs:spotbugs-annotations:4.8.4")
 
-    // Example library: Guava. Add what you need (and remove Guava if you don't use it)
+    // Example library: Guava. Add what you need (and remove Guuava if you don't use it)
     // implementation("com.google.guava:guava:28.1-jre")
     // JavaFX: comment out if you do not need them
     val javaFxVersion = 15
