@@ -13,7 +13,7 @@ import java.util.List;
 public class PerilousPathControllerImpl implements  PerilousPathController {
 
     private final PerilousPath model;
-    private final PerilousPathView view;
+    private PerilousPathView view;
     private static final int SIZE = 8;
     private static final int SECONDS = 3000;
     private final PauseTransition pause = new PauseTransition(new Duration(SECONDS));
@@ -25,7 +25,7 @@ public class PerilousPathControllerImpl implements  PerilousPathController {
     public PerilousPathControllerImpl(final PerilousPathView view) {
 
         this.model = new PerilousPathImpl(SIZE);
-        this.view = view;
+        this.setView(view);
         this.model.setBalls();
         this.model.setBombs();
     }
@@ -70,6 +70,10 @@ public class PerilousPathControllerImpl implements  PerilousPathController {
     @Override
     public void initGame(final List<String> players) {
         this.model.setUpPlayers(players);
+    }
+
+    private void setView(final PerilousPathView view) {
+        this.view = view;
     }
 
 }
