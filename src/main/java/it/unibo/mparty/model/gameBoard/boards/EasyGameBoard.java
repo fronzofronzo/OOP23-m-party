@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public class EasyGameBoard extends AbstractGameBoardImpl {
 
-    private final static BoardType BOARD_TYPE = BoardType.EASY;
+    private static final BoardType BOARD_TYPE = BoardType.EASY;
     private static final int WIDTH = 30;
     private static final int HEIGHT = 20;
     private static final int INITIAL_X_EASY_BOARD = 7;

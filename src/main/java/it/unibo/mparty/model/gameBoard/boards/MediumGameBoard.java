@@ -15,7 +15,7 @@ import java.util.Set;
  */
 public class MediumGameBoard extends AbstractGameBoardImpl {
 
-    private final static BoardType BOARD_TYPE = BoardType.MEDIUM;
+    private static final BoardType BOARD_TYPE = BoardType.MEDIUM;
     private static final int WIDTH = 30;
     private static final int HEIGHT = 20;
     private static final int INITIAL_X_MEDIUM_BOARD = 4;

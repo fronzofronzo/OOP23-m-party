@@ -111,10 +111,10 @@ public class TileImpl implements Tile {
         final TileImpl tile = (TileImpl) o;
         final boolean directEquality = Objects.equals(sideA, tile.sideA) && Objects.equals(sideB, tile.sideB);
         final boolean reversedEquality = Objects.equals(sideA, tile.sideB) && Objects.equals(sideB, tile.sideA);
-        final boolean valueEquality = ((this.sideA.getValue() == tile.sideA.getValue()
-                && this.sideB.getValue() == tile.sideB.getValue())
+        final boolean valueEquality = (((this.sideA.getValue() == tile.sideA.getValue())
+                && (this.sideB.getValue() == tile.sideB.getValue()))
                 || (this.sideA.getValue() == tile.sideB.getValue()
-                && this.sideB.getValue() == tile.sideA.getValue()));
+                && (this.sideB.getValue() == tile.sideA.getValue())));
         return directEquality || reversedEquality || valueEquality;
     }
 
