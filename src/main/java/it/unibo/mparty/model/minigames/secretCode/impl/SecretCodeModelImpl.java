@@ -15,6 +15,9 @@ import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.RandomFromSet;
 
+/**
+ * Thi class implements {@link SecretCodeModel}.
+ */
 public class SecretCodeModelImpl implements SecretCodeModel {
 
     private static final int DIM_SOLUCTION = 4;
