@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.memoryCard.impl;
+package it.unibo.mparty.model.minigames.memorycard.impl;
 
 /**
  * This enum contains all the types of card of the Memory card mini-game.

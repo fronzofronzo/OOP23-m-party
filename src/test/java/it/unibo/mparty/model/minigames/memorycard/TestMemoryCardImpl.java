@@ -1,7 +1,7 @@
-package it.unibo.mparty.model.minigames.memoryCard;
+package it.unibo.mparty.model.minigames.memorycard;
 
-import it.unibo.mparty.model.minigames.memoryCard.api.MemoryCardModel;
-import it.unibo.mparty.model.minigames.memoryCard.impl.MemoryCardModelImpl;
+import it.unibo.mparty.model.minigames.memorycard.api.MemoryCardModel;
+import it.unibo.mparty.model.minigames.memorycard.impl.MemoryCardModelImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -27,9 +27,9 @@ public class TestMemoryCardImpl {
      * Check if flipping correct behavior of model flipping two cards of same type.
      */
     @Test
-    public void testFlipSameType() {
+    void testFlipSameType() {
         final int i = 0;
-        var type = model.getCards().get(i);
+        final var type = model.getCards().get(i);
         final int j = model.getCards().entrySet().stream()
                 .filter(e -> e.getValue() == type && e.getKey() != i)
                 .map(e -> e.getKey())
@@ -44,9 +44,9 @@ public class TestMemoryCardImpl {
      * Check if flipping correct behavior of model flipping two cards of different type.
      */
     @Test
-    public void testFlipDifferentType() {
+    void testFlipDifferentType() {
         final int i = 0;
-        var type = model.getCards().get(i);
+        final var type = model.getCards().get(i);
         final int j = model.getCards().entrySet().stream()
                 .filter(e -> e.getValue() != type && e.getKey() != i)
                 .map(Map.Entry::getKey)
