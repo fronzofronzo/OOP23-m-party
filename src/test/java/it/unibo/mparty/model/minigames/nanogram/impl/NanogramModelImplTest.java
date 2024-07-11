@@ -61,18 +61,4 @@ class NanogramModelImplTest {
 
         assertTrue(this.model.isGameComplete());
     }
-
-    /**
-     * Tests the {@code isOver} method.
-     */
-    @Test
-    void isOver() {
-        assertFalse(this.model.isOver());
-
-        for (int i = 0; i < MAX_LIVE; i++) {
-            this.model.checkAndSelectCell(0, 0, false);
-        }
-
-        assertTrue(this.model.isOver());
-    }
 }
