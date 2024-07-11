@@ -23,7 +23,6 @@ class Connect4Test {
     private static final int COLUMN_3 = 3;
     private static final int COLUMN_2 = 2;
 
-
     /**
      * Initialize the game before each test.
      */
