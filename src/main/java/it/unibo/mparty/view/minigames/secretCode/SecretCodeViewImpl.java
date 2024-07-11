@@ -20,10 +20,23 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+/**
+ * This class implements {@link SecretCodeView} and extends
+ * {@link AbstractSceneView}.
+ */
 public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeView {
 
     private final SecretCodeController controller = new SecretCodeControllerImpl(this);
-
+    private static final Map<SecretCodeResults, Color> COLORS_RES = Map.of(SecretCodeResults.CORRECT_COLOR_AND_POSITION,
+            Color.GREEN,
+            SecretCodeResults.CORRECT_COLOR, Color.RED,
+            SecretCodeResults.WRONG_COLOR, Color.BLACK);
+    private static final Map<SecretCodeColors, Color> COLORS_GUESS = Map.of(SecretCodeColors.ARANCIONE, Color.ORANGE,
+            SecretCodeColors.BLU, Color.BLUE,
+            SecretCodeColors.ROSA, Color.PINK,
+            SecretCodeColors.ROSSO, Color.RED,
+            SecretCodeColors.VERDE, Color.GREEN,
+            SecretCodeColors.VIOLA, Color.PURPLE);
     private static final String TEXT_LABEL_GUESS = "Tentativi di ";
     private static final String TEXT_LABEL_RESULTS = "Risultati di ";
     private static final int RADIUS = 10;
@@ -68,17 +81,6 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
     private Circle sol3;
     @FXML
     private Circle sol4;
-
-    private final static Map<SecretCodeResults, Color> COLORS_RES = Map.of(SecretCodeResults.CORRECT_COLOR_AND_POSITION,
-            Color.GREEN,
-            SecretCodeResults.CORRECT_COLOR, Color.RED,
-            SecretCodeResults.WRONG_COLOR, Color.BLACK);
-    private final static Map<SecretCodeColors, Color> COLORS_GUESS = Map.of(SecretCodeColors.ARANCIONE, Color.ORANGE,
-            SecretCodeColors.BLU, Color.BLUE,
-            SecretCodeColors.ROSA, Color.PINK,
-            SecretCodeColors.ROSSO, Color.RED,
-            SecretCodeColors.VERDE, Color.GREEN,
-            SecretCodeColors.VIOLA, Color.PURPLE);
 
     private final List<GridPane> gridPaneGuesses = new ArrayList<>();
     private List<GridPane> gridPaneResults = new ArrayList<>();
@@ -174,7 +176,7 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
     }
 
     @Override
-    public void showSolution(List<SecretCodeColors> solution) {
+    public void showSolution(final List<SecretCodeColors> solution) {
         for (int i = 0; i < solution.size(); i++) {
             this.solutions.get(i).setFill(COLORS_GUESS.get(solution.get(i)));
         }
