@@ -36,6 +36,9 @@ public class SecretCodeModelImpl implements SecretCodeModel {
     private int turn = 1;
     private Optional<String> winner = Optional.empty();
 
+    /**
+     * This is the constructor of this classe, that generate the soluction for this game.
+     */
     public SecretCodeModelImpl() {
         this.generateSoluction();
     }

@@ -22,7 +22,8 @@ public interface GameModel {
     /**
      * Method to move the player in the selected direction.
      * 
-     * @param dir - {@link Direction}, if it is necessary, where the player wants to move.
+     * @param dir - {@link Direction}, if it is necessary, where the player wants to
+     *            move.
      */
     void movePlayer(Optional<Direction> dir);
 
@@ -134,10 +135,18 @@ public interface GameModel {
     List<String> getPlayersInGame();
 
     /**
+     * Get the latest modified slots.
      * 
-     * @return
+     * @return a {@link Map} of {@Position} and the corrispondet {@link SlotType},
+     *         but the map contains only positions that changed slotype from the
+     *         last call of this method.
      */
     Map<Position, SlotType> getModifiedSlots();
 
+    /**
+     * Return the actual turn of the game.
+     * 
+     * @return the current turn.
+     */
     Pair<String, String> getTurn();
 }

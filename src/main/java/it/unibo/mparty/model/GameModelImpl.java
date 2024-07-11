@@ -75,7 +75,8 @@ public class GameModelImpl implements GameModel {
      * {@inheritDoc}
      */
     @Override
-    public void movePlayer(Optional<Direction> dir) {
+    public void movePlayer(final Optional<Direction> dir) {
+        Optional<Direction> currentDir = dir;
         if (this.status.equals(GameStatus.MOVE_PLAYER)
                 || this.status.equals(GameStatus.MOVING_PLAYER)) {
             if (this.status.equals(GameStatus.MOVE_PLAYER)) {
@@ -86,18 +87,18 @@ public class GameModelImpl implements GameModel {
                 this.checkStartAcquisition();
                 final Position playerPos = this.players.get(actualPlayerIndex).getPosition();
                 final Map<Direction, Position> nextPlayerPos = this.board.getNextPositions(playerPos);
-                if (nextPlayerPos.size() == 1 && dir.isEmpty()) {
+                if (nextPlayerPos.size() == 1 && currentDir.isEmpty()) {
                     this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.entrySet()
                             .stream()
                             .findFirst()
                             .get()
                             .getValue());
                 } else {
-                    if (dir.isEmpty() || nextPlayerPos.size() < 1 || !nextPlayerPos.containsKey(dir.get())) {
+                    if (currentDir.isEmpty() || nextPlayerPos.size() < 1 || !nextPlayerPos.containsKey(currentDir.get())) {
                         return;
                     } else {
-                        this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.get(dir.get()));
-                        dir = Optional.empty();
+                        this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.get(currentDir.get()));
+                        currentDir = Optional.empty();
                     }
                 }
                 this.steps++;
