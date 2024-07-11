@@ -82,6 +82,9 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
     private Integer selectedSideA;
     private Integer selectedSideB;
 
+    /**
+     * Initializes the view components and sets up the game.
+     */
     @FXML
     public void initialize() {
         this.controller = new DominoControllerImpl(this);
@@ -102,12 +105,18 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         this.updateTutorialLabel();
     }
 
+    /**
+     * Handles the event when the draw button is clicked.
+     */
     @FXML
     public void drawButtonClicked() {
         this.messageLabel.setText("");
         this.controller.drawTile();
     }
 
+    /**
+     * Handles the event when the play button is clicked.
+     */
     @FXML
     public void playButtonClicked() {
         if (this.selectedSideA != null && this.selectedSideB != null) {
@@ -119,6 +128,9 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         }
     }
 
+    /**
+     * Handles the event when the tutorial button is clicked.
+     */
     @FXML
     public void tutorialClicked() {
         if (this.tutorialLabel.isVisible()) {
@@ -127,18 +139,6 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
         } else {
             this.tutorialButton.setText("Chiudi\nTutorial");
             this.tutorialLabel.setVisible(true);
-        }
-    }
-
-    private void updateTutorialLabel() {
-        final InputStream input = getClass().getClassLoader().getResourceAsStream(TUTORIAL_PATH);
-        if (input != null) {
-            try {
-                this.tutorialLabel.setText(new String(input.readAllBytes(), StandardCharsets.UTF_8));
-            } catch (IOException e) {
-                final Logger log = Logger.getLogger(DominoViewImpl.class.getName());
-                log.fine(e.getMessage());
-            }
         }
     }
 
@@ -277,6 +277,18 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
             rowBox.getChildren().add(tileBox);
         }
         this.tilesContainer.getChildren().add(rowBox);
+    }
+
+    private void updateTutorialLabel() {
+        final InputStream input = getClass().getClassLoader().getResourceAsStream(TUTORIAL_PATH);
+        if (input != null) {
+            try {
+                this.tutorialLabel.setText(new String(input.readAllBytes(), StandardCharsets.UTF_8));
+            } catch (IOException e) {
+                final Logger log = Logger.getLogger(DominoViewImpl.class.getName());
+                log.fine(e.getMessage());
+            }
+        }
     }
 
     private void highlightPlayerTurn(final Label currentPlayerLabel, final Label otherPlayerLabel) {
