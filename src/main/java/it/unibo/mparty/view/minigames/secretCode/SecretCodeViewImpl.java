@@ -26,7 +26,6 @@ import javafx.scene.shape.Circle;
  */
 public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeView {
 
-    private final SecretCodeController controller = new SecretCodeControllerImpl(this);
     private static final Map<SecretCodeResults, Color> COLORS_RES = Map.of(SecretCodeResults.CORRECT_COLOR_AND_POSITION,
             Color.GREEN,
             SecretCodeResults.CORRECT_COLOR, Color.RED,
@@ -40,6 +39,11 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
     private static final String TEXT_LABEL_GUESS = "Tentativi di ";
     private static final String TEXT_LABEL_RESULTS = "Risultati di ";
     private static final int RADIUS = 10;
+    private List<GridPane> gridPaneGuesses;
+    private List<GridPane> gridPaneResults;
+    private List<Circle> solutions;
+    private List<String> playersNames;
+    private final SecretCodeController controller = new SecretCodeControllerImpl(this);
 
     @FXML
     private GridPane gridPaneGuessP1;
@@ -82,14 +86,13 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
     @FXML
     private Circle sol4;
 
-    private final List<GridPane> gridPaneGuesses = new ArrayList<>();
-    private List<GridPane> gridPaneResults = new ArrayList<>();
-    private List<Circle> solutions = new ArrayList<>();
-
-    private final List<String> playersNames = new ArrayList<>();
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void updateGuess(String player, Pair<Integer, Integer> pos, SecretCodeColors guess) {
+    public void updateGuess(final String player,
+            final Pair<Integer, Integer> pos,
+            final SecretCodeColors guess) {
         for (int i = 0; i < this.playersNames.size(); i++) {
             if (this.playersNames.get(i).equals(player)) {
                 StackPane stack = this.createStackPaneWithCircle(COLORS_GUESS.get(guess));
@@ -98,8 +101,53 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateResults(final String player,
+            final int turn,
+            final List<SecretCodeResults> results) {
+        for (int i = 0; i < this.playersNames.size(); i++) {
+            if (this.playersNames.get(i).equals(player)) {
+                for (int j = 0; j < results.size(); j++) {
+                    StackPane stack = this.createStackPaneWithCircle(COLORS_RES.get(results.get(j)));
+                    this.gridPaneResults.get(i).add(stack, j, turn - 1);
+                }
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showSolution(final List<SecretCodeColors> solution) {
+        for (int i = 0; i < solution.size(); i++) {
+            this.solutions.get(i).setFill(COLORS_GUESS.get(solution.get(i)));
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void startMinigame(final List<String> players) {
+        this.controller.initGame(players);
+        this.createData(players);
+        this.setUpLabels();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void showResult(final Pair<String, Integer> result) {
+        this.labelResult.setText(result.getFirst() + " HA VINTO " + result.getSecond() + " MONETE");
+    }
+
     @FXML
-    void addColor(ActionEvent e) {
+    private void addColor(final ActionEvent e) {
         Button bt = (Button) e.getSource();
         if (bt.equals(this.buttonGreen)) {
             this.controller.addColor(SecretCodeColors.VERDE);
@@ -121,19 +169,12 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
         this.controller.guess();
     }
 
-    @Override
-    public void showResult(Pair<String, Integer> result) {
-        this.labelResult.setText(result.getFirst() + " HA VINTO " + result.getSecond() + " MONETE");
+    @FXML
+    private void backToBoard() {
+        this.controller.endGame();
     }
 
-    @Override
-    public void startMinigame(List<String> players) {
-        this.controller.initGame(players);
-        this.createData(players);
-        this.setUpLabels();
-    }
-
-    private void createData(List<String> players) {
+    private void createData(final List<String> players) {
         for (int i = 0; i < players.size(); i++) {
             this.playersNames.add(players.get(i));
         }
@@ -141,6 +182,10 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
         this.gridPaneGuesses.add(gridPaneGuessP2);
         this.gridPaneResults = List.of(gridPaneResP1, gridPaneResP2);
         this.solutions = List.of(sol1, sol2, sol3, sol4);
+        this.gridPaneGuesses = new ArrayList<>();
+        this.gridPaneResults = new ArrayList<>();
+        this.solutions = new ArrayList<>();
+        this.playersNames = new ArrayList<>();
     }
 
     private void setUpLabels() {
@@ -150,36 +195,11 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
         this.labelResultP2.setText(TEXT_LABEL_RESULTS + this.playersNames.get(1));
     }
 
-    @FXML
-    private void backToBoard() {
-        this.controller.endGame();
-    }
-
-    @Override
-    public void updateResults(String player, int turn, List<SecretCodeResults> results) {
-        for (int i = 0; i < this.playersNames.size(); i++) {
-            if (this.playersNames.get(i).equals(player)) {
-                for (int j = 0; j < results.size(); j++) {
-                    StackPane stack = this.createStackPaneWithCircle(COLORS_RES.get(results.get(j)));
-                    this.gridPaneResults.get(i).add(stack, j, turn - 1);
-                }
-            }
-        }
-    }
-
-    private StackPane createStackPaneWithCircle(Color colore) {
+    private StackPane createStackPaneWithCircle(final Color colore) {
         Circle c = new Circle(RADIUS, colore);
         StackPane stackPane = new StackPane();
         stackPane.setAlignment(Pos.CENTER);
         stackPane.getChildren().add(c);
         return stackPane;
     }
-
-    @Override
-    public void showSolution(final List<SecretCodeColors> solution) {
-        for (int i = 0; i < solution.size(); i++) {
-            this.solutions.get(i).setFill(COLORS_GUESS.get(solution.get(i)));
-        }
-    }
-
 }
