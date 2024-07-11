@@ -11,8 +11,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 @ExtendWith(ApplicationExtension.class)
-class SecreteCodeViewImplTest extends ApplicationTest{
-    
+class SecreteCodeViewImplTest extends ApplicationTest {
+
     private Parent root;
 
     @Override
@@ -26,6 +26,5 @@ class SecreteCodeViewImplTest extends ApplicationTest{
 
     @Test
     void testInitialSetup() {
-        
     }
 }

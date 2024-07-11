@@ -68,14 +68,14 @@ class TestGameBoard {
      * {@link SlotType.ACTIVE_STAR} and {@link SlotType.NOT_ACTIVE_STAR}.
      */
     @Test
-    public void testNumberStarsSlots() {
-        for (GameBoard b : BOARDS) {
-            int countActiveStar = (int) b.getBoard()
+    void testNumberStarsSlots() {
+        for (final GameBoard b : BOARDS) {
+            final int countActiveStar = (int) b.getBoard()
                     .entrySet()
                     .stream()
                     .filter(entry -> entry.getValue().getSlotType().equals(SlotType.ACTIVE_STAR))
                     .count();
-            int countNotActiveStar = (int) b.getBoard()
+            final int countNotActiveStar = (int) b.getBoard()
                     .entrySet()
                     .stream()
                     .filter(entry -> entry.getValue().getSlotType().equals(SlotType.NOT_ACTIVE_STAR))
@@ -89,9 +89,9 @@ class TestGameBoard {
      * This class tests for each {@link GameBoard} the method changeStarPosition.
      */
     @Test
-    public void testChangeStarPosition() {
-        for (GameBoard b : BOARDS) {
-            Position oldStarPosition = b.getStarPosition();
+    void testChangeStarPosition() {
+        for (final GameBoard b : BOARDS) {
+            final Position oldStarPosition = b.getStarPosition();
             assertNotNull(oldStarPosition);
             b.changeStarPosition();
             assertNotEquals(oldStarPosition, b.getStarPosition());
