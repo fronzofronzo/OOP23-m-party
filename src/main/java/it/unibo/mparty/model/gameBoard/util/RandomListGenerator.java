@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.gameBoard.util;
+package it.unibo.mparty.model.gameboard.util;
 
 import java.util.List;
 import java.util.Map;

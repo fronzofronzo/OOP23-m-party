@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.gameBoard.api;
+package it.unibo.mparty.model.gameboard.api;
 
 import java.util.Map;
 

@@ -10,8 +10,8 @@ import java.util.Collections;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import it.unibo.mparty.model.gameBoard.api.GameBoard;
-import it.unibo.mparty.model.gameBoard.boards.BoardFactory;
+import it.unibo.mparty.model.gameboard.api.GameBoard;
+import it.unibo.mparty.model.gameboard.boards.BoardFactory;
 import it.unibo.mparty.utilities.BoardType;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Position;

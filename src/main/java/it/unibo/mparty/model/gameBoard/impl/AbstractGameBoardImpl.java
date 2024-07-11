@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.gameBoard.impl;
+package it.unibo.mparty.model.gameboard.impl;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,15 +14,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import it.unibo.mparty.model.gameBoard.api.GameBoard;
+import it.unibo.mparty.model.gameboard.api.GameBoard;
+import it.unibo.mparty.model.gameboard.api.Slot;
+import it.unibo.mparty.model.gameboard.util.RandomListGenerator;
 import it.unibo.mparty.utilities.BoardType;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.RandomFromSet;
 import it.unibo.mparty.utilities.SlotType;
-import it.unibo.mparty.model.gameBoard.util.RandomListGenerator;
-import it.unibo.mparty.model.gameBoard.api.Slot;
 
 /**
  * This is an abstract class that implements a {@link GameBoard}.

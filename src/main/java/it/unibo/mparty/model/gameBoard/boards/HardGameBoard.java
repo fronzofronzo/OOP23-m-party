@@ -1,7 +1,7 @@
-package it.unibo.mparty.model.gameBoard.boards;
+package it.unibo.mparty.model.gameboard.boards;
 
-import it.unibo.mparty.model.gameBoard.api.GameBoard;
-import it.unibo.mparty.model.gameBoard.impl.AbstractGameBoardImpl;
+import it.unibo.mparty.model.gameboard.api.GameBoard;
+import it.unibo.mparty.model.gameboard.impl.AbstractGameBoardImpl;
 import it.unibo.mparty.utilities.BoardType;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;

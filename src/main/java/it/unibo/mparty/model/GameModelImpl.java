@@ -1,8 +1,8 @@
 
 package it.unibo.mparty.model;
 
-import it.unibo.mparty.model.gameBoard.api.GameBoard;
-import it.unibo.mparty.model.gameBoard.boards.BoardFactory;
+import it.unibo.mparty.model.gameboard.api.GameBoard;
+import it.unibo.mparty.model.gameboard.boards.BoardFactory;
 import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.minigamehandler.MinigameHandler;

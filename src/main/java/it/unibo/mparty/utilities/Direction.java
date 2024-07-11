@@ -1,6 +1,6 @@
 package it.unibo.mparty.utilities;
 
-import it.unibo.mparty.model.gameBoard.api.GameBoard;
+import it.unibo.mparty.model.gameboard.api.GameBoard;
 
 /**
  * This enum is used by the {@link GameBoard} to indicate

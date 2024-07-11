@@ -1,10 +1,10 @@
-package it.unibo.mparty.model.gameBoard.impl;
+package it.unibo.mparty.model.gameboard.impl;
 
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Collections;
 
-import it.unibo.mparty.model.gameBoard.api.Slot;
+import it.unibo.mparty.model.gameboard.api.Slot;
 import it.unibo.mparty.utilities.Direction;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
