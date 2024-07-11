@@ -102,9 +102,9 @@ class TestGameBoard {
      * This class tests for each {@link GameBoard} the method getStrartingPosition.
      */
     @Test
-    public void testStartingPosition() {
-        for (GameBoard b : BOARDS) {
-            BoardType bt = b.getBoardType();
+    void testStartingPosition() {
+        for (final GameBoard b : BOARDS) {
+            final BoardType bt = b.getBoardType();
             Position expected = null;
             switch (bt) {
                 case EASY:
@@ -127,9 +127,9 @@ class TestGameBoard {
      * This class tests for each {@link GameBoard} the method getNextPositions.
      */
     @Test
-    public void testGetNextPositions() {
-        for (GameBoard b : BOARDS) {
-            BoardType bt = b.getBoardType();
+    void testGetNextPositions() {
+        for (final GameBoard b : BOARDS) {
+            final BoardType bt = b.getBoardType();
             switch (bt) {
                 case EASY:
                     DATA_SET_TO_TEST_GET_NEXT_POSITIONS_EASY_BOARD.entrySet()
