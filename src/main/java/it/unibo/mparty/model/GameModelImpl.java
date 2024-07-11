@@ -179,7 +179,7 @@ public class GameModelImpl implements GameModel {
      */
     @Override
     public boolean isOver() {
-        return this.turn == TURNS_NUMBER;
+        return this.turn < TURNS_NUMBER;
     }
 
     /**
