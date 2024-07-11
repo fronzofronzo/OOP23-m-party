@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * The class RandomFromSet return a random value from a set.
  */
-public class RandomFromSet {
+public final class RandomFromSet {
 
     private static final String ERROR_MESSAGE = "Il set in input non deve essere vuoto";
     private static final Random RANDOM = new Random();
