@@ -285,24 +285,22 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
                     Position pos = new Position(x, y);
                     int steps = Integer.parseInt(parts[2]);
                     String d = parts[3];
-                    Direction dir = d.equals(UP)
-                            ? Direction.UP
-                            : d.equals(DOWN)
-                                    ? Direction.DOWN
-                                    : d.equals(LEFT)
-                                            ? Direction.LEFT
-                                            : d.equals(RIGHT)
-                                                    ? Direction.RIGHT
-                                                    : null;
-                    if (Objects.nonNull(dir)) {
-                        this.createPath(pos, steps, dir);
-                    } else {
-                        throw new IllegalStateException();
-                    }
+                    Direction dir = this.getDirection(d);
+                    this.createPath(pos, steps, dir);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private Direction getDirection(String d) {
+        switch (d) {
+            case UP: return Direction.UP;
+            case DOWN: return Direction.DOWN;
+            case LEFT: return Direction.LEFT;
+            case RIGHT: return Direction.RIGHT;
+            default: throw new IllegalStateException();
         }
     }
 
