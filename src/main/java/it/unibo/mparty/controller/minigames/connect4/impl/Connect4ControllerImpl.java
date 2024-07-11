@@ -2,6 +2,7 @@ package it.unibo.mparty.controller.minigames.connect4.impl;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 import it.unibo.mparty.controller.minigames.connect4.api.Connect4Controller;
 import it.unibo.mparty.model.minigames.connect4.api.Connect4Model;
@@ -13,7 +14,7 @@ import it.unibo.mparty.view.minigames.connect4.api.Connect4View;
  */
 public class Connect4ControllerImpl implements Connect4Controller {
 
-    private Connect4View view;
+    private final Connect4View view;
     private final Connect4Model model;
 
     /**
@@ -34,7 +35,8 @@ public class Connect4ControllerImpl implements Connect4Controller {
         try {
             this.view.getMainView().setBoardScene();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            Logger log = Logger.getLogger(Connect4ControllerImpl.class.getName());
+            log.fine(e.getMessage());
         }
     }
 
@@ -53,7 +55,7 @@ public class Connect4ControllerImpl implements Connect4Controller {
      */
     @Override
     public void check(final int column) {
-        int row = this.model.getAvailableRow(column);
+        final int row = this.model.getAvailableRow(column);
         if (this.model.addDisc(column)) {
             this.view.addCircle(column, row, this.model.getTurnPlayer().equals(this.model.getPlayer1()));
             if (this.model.isOver()) {

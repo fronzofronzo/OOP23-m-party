@@ -15,7 +15,7 @@ import it.unibo.mparty.model.minigames.connect4.impl.Connect4ModelImpl;
 /**
  * This class tests the {@link Connect4ModelImpl} class.
  */
-public class Connect4Test {
+class Connect4Test {
     private Connect4Model testModel;
     private static final int ROWS = 6;
     private static final int COLUMN_5 = 5;
@@ -33,7 +33,7 @@ public class Connect4Test {
      * Test adding a disc in the minigame.
      */
     @Test
-    public void testAddDisc() {
+    void testAddDisc() {
         for (int i = 0; i < ROWS; i++) {
             assertTrue(testModel.addDisc(2));
         }
@@ -44,7 +44,7 @@ public class Connect4Test {
      * Test the horizontal win.
      */
     @Test
-    public void checkHorizontalWin() {
+    void checkHorizontalWin() {
         testModel.addDisc(3);
         testModel.addDisc(3);
         testModel.addDisc(4);
@@ -60,7 +60,7 @@ public class Connect4Test {
      * Test the vertical win.
      */
     @Test
-    public void checkVerticalWin() {
+    void checkVerticalWin() {
         testModel.addDisc(3);
         testModel.addDisc(2);
         testModel.addDisc(3);
@@ -75,7 +75,7 @@ public class Connect4Test {
      * Test the diagonal left win.
      */
     @Test
-    public void checkDiagonalLeftWin() {
+    void checkDiagonalLeftWin() {
         testModel.addDisc(2);
         testModel.addDisc(3);
         testModel.addDisc(3);
@@ -94,7 +94,7 @@ public class Connect4Test {
      * Test the diagonal right win.
      */
     @Test
-    public void testDiagonalRightWin() {
+    void testDiagonalRightWin() {
         testModel.addDisc(COLUMN_5);
         testModel.addDisc(4);
         testModel.addDisc(4);

@@ -1,6 +1,7 @@
 package it.unibo.mparty.view.minigames.connect4.impl;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import it.unibo.mparty.controller.minigames.connect4.api.Connect4Controller;
 import it.unibo.mparty.controller.minigames.connect4.impl.Connect4ControllerImpl;
@@ -82,16 +83,20 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
      */
     @Override
     public void addCircle(final int col, final int row, final boolean color) {
-        Circle circle = new Circle(CIRCLE_DIMENSION);
+        final Circle circle = new Circle(CIRCLE_DIMENSION);
         circle.setFill(color ? Color.RED : Color.YELLOW);
-        StackPane stack = new StackPane();
+        final StackPane stack = new StackPane();
         stack.getChildren().add(circle);
         gameGrid.add(stack, col, row);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     @FXML
-    private void getColumn(final ActionEvent e) {
-        Button but = (Button) (e.getSource());
+    public void selectColumn(final ActionEvent e) {
+        final Button but = (Button) (e.getSource());
         var index = GridPane.getColumnIndex(but);
         if (index == null) {
             index = 0;
@@ -129,13 +134,14 @@ public class Connect4ViewImpl extends AbstractSceneView implements Connect4View 
         }
     }
 
-    private void updateTutorialLabel(){
+    private void updateTutorialLabel() {
         final InputStream stream = getClass().getClassLoader().getResourceAsStream(TUTORIAL_PATH);
         if (stream != null) {
             try {
                 this.tutorialLabel.setText(new String(stream.readAllBytes(), StandardCharsets.UTF_8));
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                Logger log = Logger.getLogger(Connect4ViewImpl.class.getName());
+                log.fine(e.getMessage());
             }
         }
     }

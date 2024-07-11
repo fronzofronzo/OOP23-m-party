@@ -5,9 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.BooBell;
 import it.unibo.mparty.model.item.impl.CursedDice;
 import it.unibo.mparty.model.item.impl.GoldenPipe;
@@ -22,7 +25,7 @@ import it.unibo.mparty.model.shop.impl.ShopImpl;
 /**
  * This class test the {@link ShopImpl} class.
  */
-public class ShopImplTest {
+class ShopImplTest {
     private Shop testShop;
     private Player testPlayer;
     private static final int EXPECTED_SIZE = 5;
@@ -41,8 +44,8 @@ public class ShopImplTest {
      * Test the getItemList method of {@link ShopImpl} class.
      */
     @Test
-    public void testGetItemList() {
-        var items = testShop.getItemList();
+    void testGetItemList() {
+        final List<Item> items = testShop.getItemList();
         assertNotNull(items);
         assertEquals(EXPECTED_SIZE, items.size());
         assertTrue(items.get(0) instanceof BooBell);
@@ -56,7 +59,7 @@ public class ShopImplTest {
      * Test the method buyItem of the {@link ShopImpl} class.
      */
     @Test
-    public void testAcquisition() {
+    void testAcquisition() {
         testPlayer.addCoins(TEST_COINS);
         assertTrue(testShop.buyItem(testPlayer, ItemName.TRIPLO_DADO));
         assertEquals(ItemName.TRIPLO_DADO, testPlayer.getPlayerBag().getItems().get(0));

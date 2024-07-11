@@ -28,9 +28,9 @@ public class Connect4ModelImpl implements Connect4Model {
     private String player2;
     private String turnPlayer;
     private Position lastSelected;
-    private int coinsWon = 0;
-    private Map<Position, String> selectedMap;
-    private List<Position> checkList;
+    private int coinsWon;
+    private final Map<Position, String> selectedMap;
+    private final List<Position> checkList;
 
     /**
      * Construct a new istance of {@link Connect4ModelImpl}.
@@ -94,7 +94,7 @@ public class Connect4ModelImpl implements Connect4Model {
      */
     @Override
     public boolean addDisc(final int column) {
-        int row = getAvailableRow(column);
+        final int row = getAvailableRow(column);
         if (row == -1) {
             return false;
         }
@@ -116,7 +116,7 @@ public class Connect4ModelImpl implements Connect4Model {
     }
 
     private void manageTurn() {
-        if (getTurnPlayer() == player1) {
+        if (getTurnPlayer().equals(player1)) {
             turnPlayer = player2;
         } else {
             turnPlayer = player1;
@@ -136,7 +136,8 @@ public class Connect4ModelImpl implements Connect4Model {
     }
 
     private int countMatches(final int i, final int j, final Connect4Directions direction, final int offset) {
-        Position check = new Position(i + offset * direction.getPosition().getX(), j + offset * direction.getPosition().getY());
+        final Position check = new Position(i + offset * direction.getPosition().getX(),
+                                            j + offset * direction.getPosition().getY());
         if (selectedMap.containsKey(check) && selectedMap.get(check).equals(getTurnPlayer()) && isAvailable(check)) {
             checkList.add(check);
         } else {

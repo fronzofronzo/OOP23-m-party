@@ -1,6 +1,7 @@
 package it.unibo.mparty.view.minigames.connect4.api;
 
 import it.unibo.mparty.view.minigames.MinigameView;
+import javafx.event.ActionEvent;
 
 /**
  * This interface models the view for a connect4 minigame extending {@link MinigameView} interface.
@@ -27,4 +28,10 @@ public interface Connect4View extends MinigameView {
      * @param pred true if the button has to be activated, false to disactivate it
      */
     void activateExitButton(boolean pred);
+
+    /**
+     * Select the column clicked
+     * @param e the click on the button of the relative column
+     */
+    void selectColumn(ActionEvent e);
 }

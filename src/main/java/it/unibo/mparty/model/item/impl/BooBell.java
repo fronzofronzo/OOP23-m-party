@@ -24,7 +24,7 @@ public class BooBell extends AbstractItem {
      */
     @Override
     public void activate(final Player player, final Optional<Player> target, final Optional<Position> position) {
-        int coins = target.get().getNumCoins() / 3;
+        final int coins = target.get().getNumCoins() / 3;
         target.get().removeCoins(coins);
         player.addCoins(coins);
     }

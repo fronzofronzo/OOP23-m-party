@@ -17,7 +17,7 @@ import it.unibo.mparty.model.item.impl.GoldenPipe;
 /**
  * This class test the {@link ItemFactoryImpl} class.
  */
-public class TestItemFactoryImpl {
+class TestItemFactoryImpl {
     private ItemFactory testFactory;
 
     /**
@@ -32,7 +32,7 @@ public class TestItemFactoryImpl {
      * Test the correct functioning of the createItem of the factory.
      */
     @Test
-    public void testFactory() {
+    void testFactory() {
         assertTrue(this.testFactory.createItem(ItemName.TUBO_DORATO) instanceof GoldenPipe);
         assertTrue(this.testFactory.createItem(ItemName.DADO_MALEDETTO) instanceof CursedDice);
         assertTrue(this.testFactory.createItem(ItemName.DADO_FORTUNATO) instanceof LuckyDice);

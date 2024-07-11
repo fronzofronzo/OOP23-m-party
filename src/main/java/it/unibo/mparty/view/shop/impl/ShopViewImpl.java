@@ -18,7 +18,7 @@ import javafx.scene.control.Label;
  */
 public class ShopViewImpl extends AbstractSceneView implements ShopView {
     private int i = 1;
-    private List<ItemName> itemNameList = new ArrayList<>();
+    private final List<ItemName> itemNameList = new ArrayList<>();
     private static final double DISTANCE_FROM_BUTTON = 70.0;
     private static final double LEFT_MARGIN = 40.0;
 

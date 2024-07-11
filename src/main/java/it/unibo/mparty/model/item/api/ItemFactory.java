@@ -11,7 +11,6 @@ public interface ItemFactory {
      * 
      * @param name the {@link ItemName} of the item to be created
      * @return the {@link Item} created
-     * @throws IllegalArgumentException in case you try to create an item which is not implemented
      */
-    Item createItem(ItemName name) throws IllegalArgumentException;
+    Item createItem(ItemName name);
 }
