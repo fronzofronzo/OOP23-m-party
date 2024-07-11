@@ -46,11 +46,8 @@ public class MiniScreenImpl implements MiniScreen {
         } else {
             this.controller.setLabelText("username o character non correttamente inseriti");
         }
-        Stage stage = (Stage) this.okButton.getScene().getWindow();
-        if (stage != null) {
+        if (this.okButton.getScene().getWindow() instanceof Stage stage) {
             stage.close();
-        } else {
-            throw new IllegalStateException();
         }
 
     }
@@ -60,11 +57,8 @@ public class MiniScreenImpl implements MiniScreen {
      */
     @Override
     public void handleBackButton(final ActionEvent e) {
-        Stage stage = (Stage) this.backButton.getScene().getWindow();
-        if (stage != null) {
+        if (this.backButton.getScene().getWindow() instanceof Stage stage) {
             stage.close();
-        } else {
-            throw new IllegalStateException();
         }
 
     }
