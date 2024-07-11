@@ -79,6 +79,9 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         this.boardButtons.remove(hitButton);
     };
 
+    /**
+     * Initializes the view components and sets up the game.
+     */
     @FXML
     public void initialize() {
         this.controller = new NanogramControllerImpl(this);
@@ -96,6 +99,9 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
         this.crossButton.setOnAction(event -> this.controller.setFillState(false));
     }
 
+    /**
+     * Handles the event when the tutorial button is clicked.
+     */
     @FXML
     public void tutorialClicked() throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/minigames/nanogramTutorial.fxml"));
