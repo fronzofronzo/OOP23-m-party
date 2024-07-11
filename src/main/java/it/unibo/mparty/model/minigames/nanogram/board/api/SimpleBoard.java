@@ -1,7 +1,5 @@
 package it.unibo.mparty.model.minigames.nanogram.board.api;
 
-import it.unibo.mparty.utilities.Position;
-
 import java.util.List;
 
 /**
