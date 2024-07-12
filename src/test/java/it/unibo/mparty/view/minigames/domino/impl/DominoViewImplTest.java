@@ -25,7 +25,7 @@ class DominoViewImplTest extends ApplicationTest {
     private Parent root;
 
     @BeforeAll
-    static public void setup() {
+     public static void setup() {
         System.setProperty("testfx.robot", "glass");
         System.setProperty("testfx.headless", "true");
         System.setProperty("java.awt.headless", "true");
