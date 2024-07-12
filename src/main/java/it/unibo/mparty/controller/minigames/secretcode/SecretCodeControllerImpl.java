@@ -49,6 +49,7 @@ public class SecretCodeControllerImpl implements SecretCodeController {
 
     /**
      * {@inheritDoc}
+     
      */
     @Override
     public void initGame(final List<String> players) {
