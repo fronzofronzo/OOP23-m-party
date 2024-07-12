@@ -1,9 +1,9 @@
-package it.unibo.mparty.controller.minigames.memorySweep;
+package it.unibo.mparty.controller.minigames.memorysweep;
 
 import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
 import it.unibo.mparty.model.minigames.memorysweep.impl.MemorySweepImpl;
 import it.unibo.mparty.utilities.Position;
-import it.unibo.mparty.view.minigames.memorySweep.MemorySweepView;
+import it.unibo.mparty.view.minigames.memorysweep.MemorySweepView;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 

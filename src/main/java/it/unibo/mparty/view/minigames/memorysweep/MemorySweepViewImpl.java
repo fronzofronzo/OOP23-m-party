@@ -1,7 +1,7 @@
-package it.unibo.mparty.view.minigames.memorySweep;
+package it.unibo.mparty.view.minigames.memorysweep;
 
-import it.unibo.mparty.controller.minigames.memorySweep.MemorySweepController;
-import it.unibo.mparty.controller.minigames.memorySweep.MemorySweepControllerImpl;
+import it.unibo.mparty.controller.minigames.memorysweep.MemorySweepController;
+import it.unibo.mparty.controller.minigames.memorysweep.MemorySweepControllerImpl;
 import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
@@ -44,6 +44,11 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
     @FXML
     private GridPane memorySweepGrid;
 
+    private final EventHandler<MouseEvent> click = event -> {
+        this.button = (Button) event.getSource();
+        this.controller.hit(this.buttonPos(button));
+    };
+
     /**
      * {@inheritDoc}
      */
@@ -60,8 +65,8 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
     @Override
     public void setUp(final Set<Position> randoms) {
         this.memorySweepGrid.setDisable(true);
-        for (var child : this.memorySweepGrid.getChildren()) {
-            var position = this.buttonPos((Button) child);
+        for (final var child : this.memorySweepGrid.getChildren()) {
+            final var position = this.buttonPos((Button) child);
             if (randoms.contains(position)) {
                 child.setStyle("-fx-background-color: #35e608;");
             }
@@ -84,7 +89,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
                 }
             }
             case TURN_END -> {
-                for (var child : this.memorySweepGrid.getChildren()) {
+                for (final var child : this.memorySweepGrid.getChildren()) {
                     child.setStyle(" ");
                 }
                 if (!turn) {
@@ -95,7 +100,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
                 this.controller.setUp();
             }
             case LOSS -> {
-                for (var child : this.memorySweepGrid.getChildren()) {
+                for (final var child : this.memorySweepGrid.getChildren()) {
                     child.setStyle(" ");
                 }
                 button.setText("X");
@@ -111,8 +116,8 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
      */
     @Override
     public void hideRandoms(final Set<Position> randoms) {
-        for (var child : this.memorySweepGrid.getChildren()) {
-            var position = this.buttonPos((Button) child);
+        for (final var child : this.memorySweepGrid.getChildren()) {
+            final var position = this.buttonPos((Button) child);
             if (randoms.contains(position)) {
                 child.setStyle(" ");
             }
@@ -120,14 +125,10 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
         this.memorySweepGrid.setDisable(false);
     }
 
-    private final EventHandler<MouseEvent> click = event -> {
-        this.button = (Button) event.getSource();
-        this.controller.hit(this.buttonPos(button));
-    };
 
     private Position buttonPos(final Button button) {
-        var x = GridPane.getRowIndex(button);
-        var y = GridPane.getColumnIndex(button);
+        final var x = GridPane.getRowIndex(button);
+        final var y = GridPane.getColumnIndex(button);
         return new Position(x, y);
     }
 

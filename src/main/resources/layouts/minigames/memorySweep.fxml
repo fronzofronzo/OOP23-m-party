@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="200.0" minWidth="400.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.memorySweep.MemorySweepViewImpl">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="200.0" minWidth="400.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.memorysweep.MemorySweepViewImpl">
    <bottom>
       <Button fx:id="startButton" mnemonicParsing="false" onAction="#handleStartButton" prefHeight="41.0" prefWidth="152.0" text="START" BorderPane.alignment="CENTER" />
    </bottom>
