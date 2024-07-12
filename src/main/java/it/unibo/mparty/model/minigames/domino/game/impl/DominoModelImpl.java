@@ -7,8 +7,10 @@ import it.unibo.mparty.model.minigames.domino.player.api.PlayerTiles;
 import it.unibo.mparty.model.minigames.domino.board.impl.BoardTileImpl;
 import it.unibo.mparty.model.minigames.domino.player.impl.PlayerTilesImpl;
 import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
+import it.unibo.mparty.model.minigames.domino.tile.impl.SideType;
 import it.unibo.mparty.model.minigames.domino.tile.impl.TileFactoryImpl;
 import it.unibo.mparty.utilities.Pair;
+import it.unibo.mparty.utilities.api.EObserver;
 
 import java.util.List;
 import java.util.Random;
@@ -177,12 +179,14 @@ public class DominoModelImpl implements DominoModel {
     }
 
     private int calculateTileScore(final Set<Tile> tiles) {
-        return tiles.stream().mapToInt(tile -> tile.getSideA().getValue() + tile.getSideB().getValue()).sum();
+        return tiles.stream().mapToInt(tile ->
+                tile.getSideValue(SideType.SIDE_A) + tile.getSideValue(SideType.SIDE_B)).sum();
     }
 
     private int getSmallestTileValue(final Set<Tile> tiles) {
         return tiles.stream()
-                .flatMapToInt(tile -> IntStream.of(tile.getSideA().getValue(), tile.getSideB().getValue()))
+                .flatMapToInt(tile ->
+                        IntStream.of(tile.getSideValue(SideType.SIDE_A), tile.getSideValue(SideType.SIDE_B)))
                 .min()
                 .orElse(Integer.MAX_VALUE);
     }
@@ -190,7 +194,7 @@ public class DominoModelImpl implements DominoModel {
     private int getDoubleTiles(final String player) {
         return this.playerTiles.getPlayerTiles(player).stream()
                 .filter(Tile::isDoubleSide)
-                .flatMapToInt(tile -> IntStream.of(tile.getSideA().getValue(), tile.getSideB().getValue()))
+                .flatMapToInt(tile -> IntStream.of(tile.getSideValue(SideType.SIDE_A), tile.getSideValue(SideType.SIDE_B)))
                 .max()
                 .orElse(Integer.MIN_VALUE);
     }
