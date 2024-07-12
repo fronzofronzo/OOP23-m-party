@@ -186,8 +186,7 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
         for (final String p : players) {
             this.playersNames.add(p);
         }
-        this.gridPaneGuesses.add(gridPaneGuessP1);
-        this.gridPaneGuesses.add(gridPaneGuessP2);
+        this.gridPaneGuesses = List.of(gridPaneGuessP1, gridPaneGuessP2);
         this.gridPaneResults = List.of(gridPaneResP1, gridPaneResP2);
         this.solutions = List.of(sol1, sol2, sol3, sol4);
     }
