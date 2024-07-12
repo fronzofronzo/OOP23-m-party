@@ -6,10 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.util.WaitForAsyncUtils;
 
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.hasText;
@@ -21,6 +23,17 @@ import static org.testfx.util.NodeQueryUtils.hasText;
 class DominoViewImplTest extends ApplicationTest {
 
     private Parent root;
+
+    @BeforeAll
+    static public void setup() {
+        System.setProperty("testfx.robot", "glass");
+        System.setProperty("testfx.headless", "true");
+        System.setProperty("java.awt.headless", "true");
+        System.setProperty("prism.order", "sw");
+        System.setProperty("prism.text", "t2k");
+        WaitForAsyncUtils.checkAllExceptions = false;
+        WaitForAsyncUtils.autoCheckException = false;
+    }
 
     /**
      * {@inheritDoc}
