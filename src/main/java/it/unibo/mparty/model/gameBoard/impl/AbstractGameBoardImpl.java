@@ -85,7 +85,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
      * {@inheritDoc}
      */
     @Override
-    public void changeStarPosition() throws IllegalStateException {
+    public void changeStarPosition() {
         final Set<Position> nextStars = this.starsPositions
                 .stream()
                 .filter(p -> this.getSlotType(p).equals(SlotType.NOT_ACTIVE_STAR))
@@ -104,7 +104,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
      * {@inheritDoc}
      */
     @Override
-    public SlotType getSlotType(final Position position) throws IllegalStateException {
+    public SlotType getSlotType(final Position position) {
         if (!isInTheBoard(position)) {
             throw new IllegalStateException();
         }
@@ -117,7 +117,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
      * {@inheritDoc}
      */
     @Override
-    public Position getStrartingPosition() {
+    public final Position getStrartingPosition() {
         return this.initialPosition;
     }
 
@@ -133,7 +133,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
      * {@inheritDoc}
      */
     @Override
-    public Position getStarPosition() throws IllegalStateException {
+    public Position getStarPosition() {
         final Set<Position> star = this.starsPositions
                 .stream()
                 .filter(p -> this.getSlotType(p).equals(SlotType.ACTIVE_STAR))
@@ -275,8 +275,8 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
             throw new IllegalStateException();
         }
         try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
+            String line = br.readLine();
+            while (line != null) {
                 final String[] parts = line.split(" ");
                 if (parts.length == N_PARTS_INPUT_FILE) {
                     final int x = Integer.parseInt(parts[0]);
@@ -287,6 +287,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
                     final Direction dir = this.getDirection(d);
                     this.createPath(pos, steps, dir);
                 }
+                line = br.readLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -295,11 +296,16 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
 
     private Direction getDirection(final String d) {
         switch (d) {
-            case UP: return Direction.UP;
-            case DOWN: return Direction.DOWN;
-            case LEFT: return Direction.LEFT;
-            case RIGHT: return Direction.RIGHT;
-            default: throw new IllegalStateException();
+            case UP:
+                return Direction.UP;
+            case DOWN:
+                return Direction.DOWN;
+            case LEFT:
+                return Direction.LEFT;
+            case RIGHT:
+                return Direction.RIGHT;
+            default:
+                throw new IllegalStateException();
         }
     }
 

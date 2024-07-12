@@ -28,10 +28,10 @@ public final class RandomListGenerator {
         if (!validProbabilities(input)) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
         }
-        List<E> outputList = new ArrayList<>();
-        for (Map.Entry<E, Integer> entry : input.entrySet()) {
-            E element = entry.getKey();
-            int perc = entry.getValue();
+        final List<E> outputList = new ArrayList<>();
+        for (final Map.Entry<E, Integer> entry : input.entrySet()) {
+            final E element = entry.getKey();
+            final int perc = entry.getValue();
             for (int i = 0; i < perc; i++) {
                 outputList.add(element);
             }
@@ -42,7 +42,7 @@ public final class RandomListGenerator {
 
     private static <E> boolean validProbabilities(final Map<E, Integer> inputSet) {
         int totPerc = 0;
-        for (Map.Entry<E, Integer> entry : inputSet.entrySet()) {
+        for (final Map.Entry<E, Integer> entry : inputSet.entrySet()) {
             totPerc += entry.getValue();
         }
         return totPerc == CORRECT_PERC;
