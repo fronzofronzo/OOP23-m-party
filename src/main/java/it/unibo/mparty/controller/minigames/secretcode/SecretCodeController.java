@@ -1,7 +1,7 @@
 package it.unibo.mparty.controller.minigames.secretcode;
 
 import it.unibo.mparty.controller.minigames.MinigameController;
-import it.unibo.mparty.model.minigames.ciao.util.SecretCodeColors;
+import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeColors;
 
 /**
  * Interface that models the controller of the minigame Secrete Code. It

@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import it.unibo.mparty.model.minigames.ciao.api.SecretCodeModel;
-import it.unibo.mparty.model.minigames.ciao.impl.SecretCodeModelImpl;
-import it.unibo.mparty.model.minigames.ciao.util.SecretCodeColors;
-import it.unibo.mparty.model.minigames.ciao.util.SecretCodeResults;
+import it.unibo.mparty.model.minigames.secretcode.api.SecretCodeModel;
+import it.unibo.mparty.model.minigames.secretcode.impl.SecretCodeModelImpl;
+import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeColors;
+import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeResults;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.minigames.secretcode.SecretCodeView;
 
