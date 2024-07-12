@@ -71,7 +71,7 @@ public class MiniScreenImpl implements MiniScreen {
      * {@inheritDoc}
      */
     @Override
-    public void setUp(final InitialScreen controller) {
+    public void setUpView(final InitialScreen controller) {
         this.controller = controller;
     }
 

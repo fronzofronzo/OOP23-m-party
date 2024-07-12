@@ -76,7 +76,7 @@ public final class InitialScreenImpl extends AbstractSceneView implements Initia
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/MiniScreen.fxml"));
         final Parent root = loader.load();
         final MiniScreen miniScreenController = loader.getController();
-        miniScreenController.setUp(this);
+        miniScreenController.setUpView(this);
         final Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);

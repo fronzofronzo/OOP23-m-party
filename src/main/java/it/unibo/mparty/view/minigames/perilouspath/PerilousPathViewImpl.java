@@ -55,7 +55,7 @@ public final class PerilousPathViewImpl extends AbstractSceneView implements Per
     private Button button;
     private static final int SIZE = 8;
     private final Image bombImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/BombImage.png")));
-    private final Image ballImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/pallaCalcio.jpg")));
+    private final Image ballImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/pallaCalcio.png")));
     private final PerilousPathController observer = new PerilousPathControllerImpl(this);
 
     private final EventHandler<MouseEvent> buttonClicked = e -> {
