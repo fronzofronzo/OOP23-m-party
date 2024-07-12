@@ -1,4 +1,4 @@
-package it.unibo.mparty.view.minigames.secretCode;
+package it.unibo.mparty.view.minigames.secretcode;
 
 import java.util.ArrayList;
 import java.util.List;
