@@ -30,20 +30,4 @@ public interface Board {
      * @return true if the cell is filled, false if it is empty or the position is not found.
      */
     boolean getState(Position position);
-
-    /**
-     * Puts a cell state in the board map.
-     *
-     * @param position the position of the cell
-     * @param state the state of the cell
-     */
-    void putCellState(Position position, boolean state);
-
-    /**
-     * Retrieves the state of a cell in the board map.
-     *
-     * @param position the position of the cell
-     * @return the state of the cell
-     */
-    boolean getCellState(Position position);
 }
