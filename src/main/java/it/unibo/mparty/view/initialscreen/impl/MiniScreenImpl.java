@@ -1,5 +1,6 @@
 package it.unibo.mparty.view.initialscreen.impl;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.mparty.model.player.impl.Character;
 import it.unibo.mparty.view.initialscreen.api.InitialScreen;
 import it.unibo.mparty.view.initialscreen.api.MiniScreen;
@@ -70,7 +71,9 @@ public class MiniScreenImpl implements MiniScreen {
     /**
      * {@inheritDoc}
      */
+
     @Override
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "method setUpView needs a mutable object")
     public void setUpView(final InitialScreen controller) {
         this.controller = controller;
     }
