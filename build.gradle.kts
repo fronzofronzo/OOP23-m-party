@@ -43,10 +43,12 @@ dependencies {
         }
     }
     implementation("org.reflections:reflections:0.10.2")
+    implementation("com.github.spotbugs:spotbugs-annotations:4.7.3")
 
     val jUnitVersion = "5.10.2"
     // JUnit API and testing engine
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
+    testImplementation("com.github.spotbugs:spotbugs-annotations:4.7.3")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
 
     val testFxVersion = "4.0.16-alpha"
