@@ -1,11 +1,11 @@
-package it.unibo.mparty.model.minigames.secretCode.impl;
+package it.unibo.mparty.model.minigames.secretcode.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import it.unibo.mparty.model.minigames.secretCode.api.SecretCodePlayer;
-import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
+import it.unibo.mparty.model.minigames.secretcode.api.SecretCodePlayer;
+import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeColors;
 
 /**
  * This class implementes {@link SecreteCodePlayer}.

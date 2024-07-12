@@ -3,10 +3,10 @@ package it.unibo.mparty.controller.minigames.secretcode;
 import java.io.IOException;
 import java.util.List;
 
-import it.unibo.mparty.model.minigames.secretCode.api.SecretCodeModel;
-import it.unibo.mparty.model.minigames.secretCode.impl.SecretCodeModelImpl;
-import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
-import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
+import it.unibo.mparty.model.minigames.secretcode.api.SecretCodeModel;
+import it.unibo.mparty.model.minigames.secretcode.impl.SecretCodeModelImpl;
+import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeColors;
+import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeResults;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.minigames.secretcode.SecretCodeView;
 

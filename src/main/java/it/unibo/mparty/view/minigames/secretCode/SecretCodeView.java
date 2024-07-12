@@ -2,8 +2,8 @@ package it.unibo.mparty.view.minigames.secretcode;
 
 import java.util.List;
 
-import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
-import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
+import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeColors;
+import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeResults;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.minigames.MinigameView;
 

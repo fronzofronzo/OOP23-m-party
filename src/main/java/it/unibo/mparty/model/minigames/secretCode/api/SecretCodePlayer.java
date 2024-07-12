@@ -1,8 +1,8 @@
-package it.unibo.mparty.model.minigames.secretCode.api;
+package it.unibo.mparty.model.minigames.secretcode.api;
 
 import java.util.List;
 
-import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
+import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeColors;
 
 /**
  * This interface models a player of the game Secrete Code.

@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.secretCode.util;
+package it.unibo.mparty.model.minigames.secretcode.util;
 
 /**
  * This enum SecretCodeResults indicate the result type of a guess in the game

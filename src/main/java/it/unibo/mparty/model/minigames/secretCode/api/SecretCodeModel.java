@@ -1,11 +1,11 @@
 
-package it.unibo.mparty.model.minigames.secretCode.api;
+package it.unibo.mparty.model.minigames.secretcode.api;
 
 import java.util.List;
 
 import it.unibo.mparty.model.minigames.MinigameModel;
-import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
-import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
+import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeColors;
+import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeResults;
 
 /**
  * This interface models the Model of the pattern "MVC" of the mini-game Secrete

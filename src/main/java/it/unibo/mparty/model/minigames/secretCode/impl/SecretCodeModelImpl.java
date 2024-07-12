@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.secretCode.impl;
+package it.unibo.mparty.model.minigames.secretcode.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,10 +8,10 @@ import java.util.Set;
 import java.util.Map;
 
 import it.unibo.mparty.model.minigames.MinigameType;
-import it.unibo.mparty.model.minigames.secretCode.api.SecretCodeModel;
-import it.unibo.mparty.model.minigames.secretCode.api.SecretCodePlayer;
-import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
-import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
+import it.unibo.mparty.model.minigames.secretcode.api.SecretCodeModel;
+import it.unibo.mparty.model.minigames.secretcode.api.SecretCodePlayer;
+import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeColors;
+import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeResults;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.RandomFromSet;
 
