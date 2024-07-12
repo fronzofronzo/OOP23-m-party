@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import org.awaitility.Durations;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,6 +16,8 @@ import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
 import org.testfx.util.WaitForAsyncUtils;
 
+import static org.awaitility.Awaitility.await;
+import static org.testfx.assertions.api.Assertions.assertThat;
 import static org.testfx.util.NodeQueryUtils.hasText;
 
 /**
@@ -26,7 +29,7 @@ class DominoViewImplTest extends ApplicationTest {
     private Parent root;
 
     @BeforeAll
-     public static void setup() {
+    public static void setup() {
         System.setProperty("testfx.robot", "glass");
         System.setProperty("testfx.headless", "true");
         System.setProperty("java.awt.headless", "true");
@@ -57,7 +60,10 @@ class DominoViewImplTest extends ApplicationTest {
     @Test
     void drawButtonClicked() {
         final Button button = from(this.root).lookup("#drawButton").query();
-        FxAssert.verifyThat(button, hasText("Pesca Tessera"));
+        await().pollInterval(Durations.TWO_HUNDRED_MILLISECONDS).atMost(Durations.FIVE_SECONDS).untilAsserted(() -> {
+            //FxAssert.verifyThat(button, hasText("Pesca Tessera"));
+            assertThat(button).hasText("Pesca Tessera");
+        });
     }
 
     /**
@@ -66,7 +72,10 @@ class DominoViewImplTest extends ApplicationTest {
     @Test
     void playButtonClicked() {
         final Button button = from(this.root).lookup("#playButton").query();
-        FxAssert.verifyThat(button, hasText("Gioca Tessera"));
+        await().pollInterval(Durations.TWO_HUNDRED_MILLISECONDS).atMost(Durations.FIVE_SECONDS).untilAsserted(() -> {
+            //FxAssert.verifyThat(button, hasText("Gioca Tessera"));
+            assertThat(button).hasText("Gioca Tessera");
+        });
     }
 
     /**
@@ -75,7 +84,10 @@ class DominoViewImplTest extends ApplicationTest {
     @Test
     void tutorialClicked() {
         final Button button = from(this.root).lookup("#tutorialButton").query();
-        FxAssert.verifyThat(button, hasText("Tutorial"));
+        await().pollInterval(Durations.TWO_HUNDRED_MILLISECONDS).atMost(Durations.FIVE_SECONDS).untilAsserted(() -> {
+            //FxAssert.verifyThat(button, hasText("Tutorial"));
+            assertThat(button).hasText("Tutorial");
+        });
     }
 
     /**
@@ -84,6 +96,8 @@ class DominoViewImplTest extends ApplicationTest {
     @Test
     void playerCanDraw() {
         final Button button = from(this.root).lookup("#drawButton").query();
-        FxAssert.verifyThat(button, Node::isDisabled);
+        await().pollInterval(Durations.TWO_HUNDRED_MILLISECONDS).atMost(Durations.FIVE_SECONDS).untilAsserted(() -> {
+            FxAssert.verifyThat(button, Node::isDisabled);
+        });
     }
 }
