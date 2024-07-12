@@ -50,12 +50,18 @@ public class BoardImpl implements Board {
     }
 
     /**
-     * Retrieves the board map.
-     *
-     * @return the board map
+     * {@inheritDoc}
      */
     @Override
-    public Map<Position, Boolean> getBoard() {
-        return this.board;
+    public void putCellState(final Position position, final boolean state) {
+        this.board.put(position, state);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean getCellState(final Position position) {
+        return this.board.getOrDefault(position, false);
     }
 }

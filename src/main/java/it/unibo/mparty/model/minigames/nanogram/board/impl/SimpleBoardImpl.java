@@ -33,7 +33,7 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
      */
     @Override
     public boolean getState(final Position position) {
-        return getBoard().get(position);
+        return getCellState(position);
     }
 
     /**
@@ -49,7 +49,7 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
 
             for (int j = 0; j < this.size; j++) {
                 final Position pos = isRow ? new Position(i, j) : new Position(j, i);
-                final boolean currentState = getBoard().get(pos);
+                final boolean currentState = getCellState(pos);
 
                 if (currentState) {
                     count++;
@@ -75,10 +75,10 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
                 .mapToObj(i -> new Position(i / size, i % size))
                 .toList());
 
-        position.forEach(p -> getBoard().put(p, false));
+        position.forEach(p -> putCellState(p, false));
 
         Collections.shuffle(position);
 
-        position.stream().limit(Math.round(size * size * fillPercentage)).forEach(p -> getBoard().replace(p, true));
+        position.stream().limit(Math.round(size * size * fillPercentage)).forEach(p -> putCellState(p, true));
     }
 }
