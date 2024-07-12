@@ -42,7 +42,8 @@ public class SecretCodeControllerImpl implements SecretCodeController {
             try {
                 this.view.getMainView().setBoardScene();
             } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "ERROR: ", e);
+                
+                
             }
         }
     }

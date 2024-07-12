@@ -43,7 +43,7 @@ class SimpleBoardImplTest {
 
             final long actualCount = IntStream.range(0, SIZE * SIZE)
                     .mapToObj(i -> new Position(i / SIZE, i % SIZE))
-                    .filter(pos -> simpleBoard.getState(pos))
+                    .filter(pos -> simpleBoard.getCellState(pos))
                     .count();
 
             assertEquals(expectedCount, actualCount);

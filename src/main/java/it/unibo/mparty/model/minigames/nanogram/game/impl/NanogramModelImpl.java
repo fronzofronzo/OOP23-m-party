@@ -49,7 +49,7 @@ public class NanogramModelImpl implements NanogramModel {
      */
     @Override
     public boolean checkAndSelectCell(final int x, final int y, final boolean state) {
-        if (state == this.solutionBoard.getState(new Position(x, y))) {
+        if (state == this.solutionBoard.getCellState(new Position(x, y))) {
             this.hittedBoard.setCellState(new Position(x, y), state);
             return true;
         } else {
@@ -99,8 +99,8 @@ public class NanogramModelImpl implements NanogramModel {
         return IntStream.range(0, SIZE_SIMPLE_BOARD)
                 .boxed().flatMap(row -> IntStream.range(0, SIZE_SIMPLE_BOARD)
                         .mapToObj(col -> new Position(row, col)))
-                .filter(this.solutionBoard::getState)
-                .allMatch(this.hittedBoard::getState);
+                .filter(this.solutionBoard::getCellState)
+                .allMatch(this.hittedBoard::getCellState);
     }
 
     /**

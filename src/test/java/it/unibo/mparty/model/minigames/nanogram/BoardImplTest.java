@@ -50,10 +50,10 @@ class BoardImplTest {
         this.board.setCellState(position4, false);
         this.board.setCellState(position5, true);
 
-        assertTrue(this.board.getState(position1));
-        assertFalse(this.board.getState(position2));
-        assertTrue(this.board.getState(position3));
-        assertFalse(this.board.getState(position4));
-        assertTrue(this.board.getState(position5));
+        assertTrue(this.board.getCellState(position1));
+        assertFalse(this.board.getCellState(position2));
+        assertTrue(this.board.getCellState(position3));
+        assertFalse(this.board.getCellState(position4));
+        assertTrue(this.board.getCellState(position5));
     }
 }

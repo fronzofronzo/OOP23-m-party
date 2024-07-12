@@ -230,13 +230,20 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.resultDice.setText(TEXT_DICE_RESULT + result);
     }
 
+    /**
+     * Method to roll dice.
+     */
     @FXML
-    private void rollDice() {
+    public void rollDice() {
         this.getMainController().rollDice();
     }
 
     @FXML
-    private void movePlayer(final ActionEvent e) {
+    /**
+     * Method to move the current player.
+     * @param e
+     */
+    public void movePlayer(final ActionEvent e) {
         final Button bt = (Button) e.getSource();
         Optional<Direction> dir = Optional.empty();
         if (bt.equals(buttonDOWN)) {
@@ -251,12 +258,17 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.getMainController().movePlayer(dir);
     }
 
+    /**
+     * Method to go on in the current turn.
+     * @throws IOException .
+     */
     @FXML
-    private void action() throws IOException {
+    public void action() throws IOException {
         this.getMainController().action();
     }
 
     @FXML
+    @SuppressWarnings("PMD.UnusedPrivateMethod")
     private void useItem(final ActionEvent e) {
         final Button bt = (Button) e.getSource();
         final String text = bt.getText();

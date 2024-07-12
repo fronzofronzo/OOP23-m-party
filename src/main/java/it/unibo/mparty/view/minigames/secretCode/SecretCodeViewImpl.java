@@ -147,6 +147,7 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
     }
 
     @FXML
+    @SuppressWarnings("PMD.UnusedPrivateMethod")
     private void addColor(final ActionEvent e) {
         final Button bt = (Button) e.getSource();
         if (bt.equals(this.buttonGreen)) {
@@ -165,11 +166,13 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
     }
 
     @FXML
+    @SuppressWarnings("PMD.UnusedPrivateMethod")
     private void guess() {
         this.controller.guess();
     }
 
     @FXML
+    @SuppressWarnings("PMD.UnusedPrivateMethod")
     private void backToBoard() {
         this.controller.endGame();
     }

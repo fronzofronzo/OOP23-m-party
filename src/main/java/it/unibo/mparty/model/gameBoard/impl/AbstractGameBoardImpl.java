@@ -248,7 +248,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
         this.starsPositions
                 .forEach(p -> this.addSlot(p, SlotType.NOT_ACTIVE_STAR));
         this.addSlot(this.initialPosition, SlotType.PATH);
-        this.createPathFromFile(this.filePath);
+        this.createPathFromFile();
     }
 
     private void addSlot(final Position position, final SlotType slotType) {
@@ -279,7 +279,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
         }
     }
 
-    private void createPathFromFile(final String filePath) {
+    private void createPathFromFile() {
         final InputStream inputStream = ClassLoader.getSystemResourceAsStream(this.filePath);
         if (Objects.isNull(inputStream)) {
             throw new IllegalStateException();
