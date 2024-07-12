@@ -8,20 +8,6 @@ import it.unibo.mparty.model.minigames.domino.tile.impl.SideType;
 public interface Tile {
 
     /**
-     * Returns the first side of the tile.
-     *
-     * @return the first side of the tile
-     */
-    Side getSideA();
-
-    /**
-     * Returns the second side of the tile.
-     *
-     * @return the second side of the tile
-     */
-    Side getSideB();
-
-    /**
      * Attempts to match the current tile with another tile.
      *
      * @param tile the tile to match with
