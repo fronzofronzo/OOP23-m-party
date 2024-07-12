@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.minigames.domino.impl;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
 import it.unibo.mparty.model.minigames.domino.tile.impl.TileFactoryImpl;
 import it.unibo.mparty.model.minigames.domino.tile.impl.TileImpl;
@@ -35,6 +36,8 @@ class DominoFactoryImplTest {
      * Ensures that the set contains the correct number of tiles and all expected tiles.
      */
     @Test
+    @SuppressFBWarnings(value = "UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR",
+            justification = "The field is initialized in the setUp method, which is run before each test.")
     void testCreateFullSet() {
         final List<Tile> fullSet = this.dominoFactory.createDoubleSixSet();
         final Set<Tile> expectedSet = this.generateFullSet();

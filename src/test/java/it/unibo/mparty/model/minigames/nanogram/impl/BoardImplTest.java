@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.minigames.nanogram.impl;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.mparty.model.minigames.nanogram.board.api.Board;
 import it.unibo.mparty.model.minigames.nanogram.board.impl.BoardImpl;
 import it.unibo.mparty.utilities.Position;
@@ -34,6 +35,8 @@ class BoardImplTest {
      * Ensures that the state of specific cells can be set and retrieved correctly.
      */
     @Test
+    @SuppressFBWarnings(value = "UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR",
+            justification = "The field is initialized in the setUp method, which is run before each test.")
     void setCellState() {
         final Position position1 = new Position(ZERO, ZERO);
         final Position position2 = new Position(ZERO, FIRST);

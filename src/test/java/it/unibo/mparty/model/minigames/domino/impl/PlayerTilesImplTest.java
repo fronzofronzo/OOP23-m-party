@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.minigames.domino.impl;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.mparty.model.minigames.domino.player.api.PlayerTiles;
 import it.unibo.mparty.model.minigames.domino.player.impl.PlayerTilesImpl;
 import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
@@ -47,6 +48,8 @@ class PlayerTilesImplTest {
      * Ensures that player tiles are initialized and distributed correctly.
      */
     @Test
+    @SuppressFBWarnings(value = "UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR",
+            justification = "The field is initialized in the setUp method, which is run before each test.")
     void testInitializePlayerTiles() {
         final var fullSet = this.tileFactory.createDoubleSixSet();
         final var toDistributeP1 = fullSet.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet());
@@ -69,6 +72,8 @@ class PlayerTilesImplTest {
      * Ensures that tiles are correctly removed from a player's tile set.
      */
     @Test
+    @SuppressFBWarnings(value = "UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR",
+            justification = "The field is initialized in the setUp method, which is run before each test.")
     void testRemoveTilesFromPlayer() {
         this.testInitializePlayerTiles();
 

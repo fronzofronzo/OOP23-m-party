@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.minigames.nanogram.impl;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.mparty.model.minigames.nanogram.game.api.NanogramModel;
 import it.unibo.mparty.model.minigames.nanogram.game.impl.NanogramModelImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,6 +32,8 @@ class NanogramModelImplTest {
      * Tests the {@code isGameComplete} method.
      */
     @Test
+    @SuppressFBWarnings(value = "UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR",
+            justification = "The field is initialized in the setUp method, which is run before each test.")
     void isGameComplete() {
         assertFalse(this.model.isGameComplete());
 
