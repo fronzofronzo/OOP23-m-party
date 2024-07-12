@@ -19,6 +19,7 @@ import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
 import org.testfx.framework.junit5.ApplicationExtension;
+import org.testfx.util.WaitForAsyncUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -55,6 +56,7 @@ class MemoryCardViewImplTest extends ApplicationTest {
     @Test
     void testInitialSetup() {
         final Button button = from(this.root).lookup("#controlButton").query();
+        WaitForAsyncUtils.waitForFxEvents();
         verifyThat(button, hasText("Start !"));
     }
 
@@ -68,6 +70,7 @@ class MemoryCardViewImplTest extends ApplicationTest {
         final Label label = from(this.root).lookup("#textLabel").query();
         final FlowPane pane = from(this.root).lookup("#cardsPane").query();
         robot.clickOn(button);
+        WaitForAsyncUtils.waitForFxEvents();
         verifyThat(button, hasText("Pronto !"));
         verifyThat(label, hasText("Quando si e' pronti, spingere il pulsante 'Pronto'"));
         Assertions.assertFalse(pane.getChildren().isEmpty());
