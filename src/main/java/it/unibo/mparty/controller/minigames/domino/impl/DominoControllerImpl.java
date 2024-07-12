@@ -106,8 +106,8 @@ public class DominoControllerImpl implements DominoController {
     }
 
     private void updatePlayersTiles() {
-        this.view.setPlayerTiles(true, this.model.getAllPlayersTiles().getPlayerTiles(this.player1));
-        this.view.setPlayerTiles(false, this.model.getAllPlayersTiles().getPlayerTiles(this.player2));
+        this.view.setPlayerTiles(true, this.model.getPlayerTiles(this.player1));
+        this.view.setPlayerTiles(false, this.model.getPlayerTiles(this.player2));
     }
 
     private void updateTurn() {
