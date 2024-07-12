@@ -54,7 +54,6 @@ dependencies {
     val testFxVersion = "4.0.16-alpha"
     testImplementation("org.testfx:testfx-core:$testFxVersion")
     testImplementation("org.testfx:testfx-junit5:$testFxVersion")
-    testRuntimeOnly("org.testfx:openjfx-monocle:8u76-b04")
 
     // SLF4J API
     implementation ("org.slf4j:slf4j-api:2.0.7")
