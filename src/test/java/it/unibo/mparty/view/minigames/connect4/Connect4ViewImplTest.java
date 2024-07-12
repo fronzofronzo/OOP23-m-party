@@ -28,7 +28,7 @@ import java.util.List;
  */
 @ExtendWith(ApplicationExtension.class)
 class Connect4ViewImplTest extends ApplicationTest {
-    private Parent testRoot;
+    private Parent testRoot = null;
 
     /**
      * {@inheritDoc}
