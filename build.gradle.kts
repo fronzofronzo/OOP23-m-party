@@ -44,7 +44,6 @@ dependencies {
     }
     implementation("org.reflections:reflections:0.10.2")
     implementation("com.github.spotbugs:spotbugs-annotations:4.7.3")
-    implementation("org.awaitility:awaitility:4.2.1")
 
     val jUnitVersion = "5.10.2"
     // JUnit API and testing engine
@@ -54,7 +53,6 @@ dependencies {
     val testFxVersion = "4.0.16-alpha"
     testImplementation("org.testfx:testfx-core:$testFxVersion")
     testImplementation("org.testfx:testfx-junit5:$testFxVersion")
-    testImplementation("org.testfx:openjfx-monocle:17.0.10")
 
     // SLF4J API
     implementation ("org.slf4j:slf4j-api:2.0.7")
