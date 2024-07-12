@@ -8,7 +8,7 @@ import it.unibo.mparty.model.minigames.secretCode.impl.SecretCodeModelImpl;
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
 import it.unibo.mparty.utilities.Pair;
-import it.unibo.mparty.view.minigames.secretCode.SecretCodeView;
+import it.unibo.mparty.view.minigames.secretcode.SecretCodeView;
 
 /**
  * This class implements {@link SecretCodeController}.
