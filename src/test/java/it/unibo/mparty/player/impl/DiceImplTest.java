@@ -50,8 +50,8 @@ class DiceImplTest {
      */
     @Test
     void rollingDice() {
-        final int min = this.testDice.getBounds().getFirst();
-        final int max = this.testDice.getBounds().getSecond();
+        final int min = this.testDice.getBounds().getFirst() * this.testDice.getNumOfAttempts();
+        final int max = this.testDice.getBounds().getSecond() * this.testDice.getNumOfAttempts();
         this.testDice.rollDice();
         final int diceResult = this.testDice.getResult();
         assertTrue(diceResult >= min && diceResult <= max);

@@ -3,6 +3,7 @@ package it.unibo.mparty.player.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.impl.PlayerImpl;
 import it.unibo.mparty.utilities.Position;
@@ -18,8 +19,10 @@ class TestPlayerImpl {
     private static final int RANDOM_BOUND = 100;
     private static final Random RANDOM = new Random();
     private Player testPlayer;
-    final String username = "username";
-    final String character = "Luigi";
+    @SuppressFBWarnings(justification = "username field is used to initialise the player")
+    private final String username = "username";
+    @SuppressFBWarnings(justification = "character field is used to initialise the player")
+    private final String character = "Luigi";
 
     /**
      * Configuration step: this is performed before each test.
