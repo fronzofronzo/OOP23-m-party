@@ -69,7 +69,8 @@ class GameModelBuilderImplTest {
         final String charact2 = Character.CHAR_DK.getName();
         final GameModel model = this.builder.addPlayer(USER_1, charact1)
                 .addPlayer(user2, charact2)
-                .difficulty(BoardType.EASY.toString()).build();
+                .difficulty(BoardType.EASY.toString())
+                .build();
         Assertions.assertTrue(model.getPlayers().stream()
                 .map(Player::getUsername)
                 .toList().contains(USER_1));

@@ -1,5 +1,6 @@
 package it.unibo.mparty.model.minigames.memorycard;
 
+import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.minigames.memorycard.api.MemoryCardModel;
 import it.unibo.mparty.model.minigames.memorycard.impl.MemoryCardModelImpl;
 import org.junit.jupiter.api.Assertions;
@@ -56,5 +57,14 @@ class TestMemoryCardImpl {
         model.flip(j);
         Assertions.assertEquals(1, model.getMistakes());
         Assertions.assertFalse(model.isOver());
+    }
+
+    /**
+     * Check that the attributes name and type are correct.
+     */
+    @Test
+    void testMinigameAttributes() {
+        Assertions.assertEquals("memoryCard", model.getName());
+        Assertions.assertEquals(MinigameType.SINGLE_PLAYER, model.getType());
     }
 }

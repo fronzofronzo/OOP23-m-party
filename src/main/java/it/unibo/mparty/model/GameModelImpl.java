@@ -146,17 +146,19 @@ public class GameModelImpl implements GameModel {
      */
     @Override
     public void useItem(final ItemName itemName) {
-        final Item item = this.players.get(actualPlayerIndex).getPlayerBag().useItem(itemName);
-        final Optional<Position> position = item.needPosition()
-                ? Optional.of(this.board.getStarPosition())
-                : Optional.empty();
-        final Set<Player> targets = this.players.stream()
-                .filter(p -> !p.equals(this.players.get(actualPlayerIndex)))
-                .collect(Collectors.toSet());
-        final Optional<Player> target = item.isOnOthers()
-                ? Optional.of(RandomFromSet.get(targets))
-                : Optional.empty();
-        item.activate(this.players.get(actualPlayerIndex), target, position);
+        if(this.status.equals(GameStatus.ROLL_DICE)) {
+            final Item item = this.players.get(actualPlayerIndex).getPlayerBag().useItem(itemName);
+            final Optional<Position> position = item.needPosition()
+                    ? Optional.of(this.board.getStarPosition())
+                    : Optional.empty();
+            final Set<Player> targets = this.players.stream()
+                    .filter(p -> !p.equals(this.players.get(actualPlayerIndex)))
+                    .collect(Collectors.toSet());
+            final Optional<Player> target = item.isOnOthers()
+                    ? Optional.of(RandomFromSet.get(targets))
+                    : Optional.empty();
+            item.activate(this.players.get(actualPlayerIndex), target, position);
+        }
     }
 
     /**
