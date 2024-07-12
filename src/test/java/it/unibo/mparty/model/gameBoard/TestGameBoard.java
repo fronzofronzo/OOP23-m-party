@@ -59,7 +59,9 @@ class TestGameBoard {
     @BeforeAll
     public static void initialise() {
         for (final BoardType bt : BOARDS_TYPES) {
-            BOARDS.add(BoardFactory.createBoard(bt));
+            final GameBoard gameBoard = BoardFactory.createBoard(bt);
+            gameBoard.initialiseBoard();
+            BOARDS.add(gameBoard);
         }
     }
 
