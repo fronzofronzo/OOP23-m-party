@@ -158,7 +158,7 @@ public class GameViewImpl extends Application implements GameView {
         this.boardView = (GameBoardView) pair.getSecond();
     }
 
-    @SuppressFBWarnings(value = "UI_INVOKE_RUN", justification = "GetResources is already used safely. ")
+    @SuppressFBWarnings(value = "UI_INHERITANCE_UNSAFE_GETRESOURCE", justification = "GetResources is already used safely. ")
     private Pair<Scene, SceneView> loadScene(final String name) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + name + EXTENSION));
         final Parent root = loader.load();
