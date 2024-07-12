@@ -95,7 +95,7 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
             final SecretCodeColors guess) {
         for (int i = 0; i < this.playersNames.size(); i++) {
             if (this.playersNames.get(i).equals(player)) {
-                StackPane stack = this.createStackPaneWithCircle(COLORS_GUESS.get(guess));
+                final StackPane stack = this.createStackPaneWithCircle(COLORS_GUESS.get(guess));
                 this.gridPaneGuesses.get(i).add(stack, pos.getFirst(), pos.getSecond() - 1);
             }
         }
@@ -111,7 +111,7 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
         for (int i = 0; i < this.playersNames.size(); i++) {
             if (this.playersNames.get(i).equals(player)) {
                 for (int j = 0; j < results.size(); j++) {
-                    StackPane stack = this.createStackPaneWithCircle(COLORS_RES.get(results.get(j)));
+                    final StackPane stack = this.createStackPaneWithCircle(COLORS_RES.get(results.get(j)));
                     this.gridPaneResults.get(i).add(stack, j, turn - 1);
                 }
             }
@@ -148,7 +148,7 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
 
     @FXML
     private void addColor(final ActionEvent e) {
-        Button bt = (Button) e.getSource();
+        final Button bt = (Button) e.getSource();
         if (bt.equals(this.buttonGreen)) {
             this.controller.addColor(SecretCodeColors.VERDE);
         } else if (bt.equals(buttonBlu)) {
@@ -179,8 +179,8 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
         this.gridPaneGuesses = new ArrayList<>();
         this.gridPaneResults = new ArrayList<>();
         this.solutions = new ArrayList<>();
-        for (int i = 0; i < players.size(); i++) {
-            this.playersNames.add(players.get(i));
+        for (String p : players) {
+            this.playersNames.add(p);
         }
         this.gridPaneGuesses.add(gridPaneGuessP1);
         this.gridPaneGuesses.add(gridPaneGuessP2);
@@ -196,7 +196,7 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
     }
 
     private StackPane createStackPaneWithCircle(final Color colore) {
-        Circle c = new Circle(RADIUS, colore);
+        final Circle c = new Circle(RADIUS, colore);
         StackPane stackPane = new StackPane();
         stackPane.setAlignment(Pos.CENTER);
         stackPane.getChildren().add(c);
