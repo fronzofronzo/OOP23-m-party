@@ -238,11 +238,12 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
         this.getMainController().rollDice();
     }
 
-    @FXML
     /**
      * Method to move the current player.
-     * @param e
+     * 
+     * @param e the source of the event.
      */
+    @FXML
     public void movePlayer(final ActionEvent e) {
         final Button bt = (Button) e.getSource();
         Optional<Direction> dir = Optional.empty();
@@ -260,6 +261,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
 
     /**
      * Method to go on in the current turn.
+     * 
      * @throws IOException .
      */
     @FXML

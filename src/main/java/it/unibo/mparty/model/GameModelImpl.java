@@ -37,11 +37,11 @@ public class GameModelImpl implements GameModel {
     private static final int MIN_COINS = 4;
     private static final int MAX_COINS = 10;
     private static final int STAR_COST = 20;
-    private static final String MESSAGE_ROLL_DICE = " puoi usare un oggetto o tirare solo i dadi.";
-    private static final String MESSAGE_MOVE_PLAYER = " muovi la pedina.";
+    private static final String MESSAGE_ROLL_DICE = " puoi usare un oggetto o tirare solo i dadi";
+    private static final String MESSAGE_MOVE_PLAYER = " muovi la pedina";
     private static final String MESSAGE_MOVING_PLAYER = " muovi la pedina in una delle direzioni possibili:";
     private static final String MESSAGE_ACTIVE_SLOT = " attiva l'effetto dello slot: ";
-    private static final String MESSAGE_END_TURN = " passa il turno.";
+    private static final String MESSAGE_END_TURN = " passa il turno";
 
     private final List<Player> players;
     private final GameBoard board;
@@ -217,30 +217,29 @@ public class GameModelImpl implements GameModel {
      */
     @Override
     public String getMessage() {
-        String output = this.players.get(actualPlayerIndex).getUsername();
+        final StringBuilder stringBuilder = new StringBuilder(this.players.get(actualPlayerIndex).getUsername());
         switch (this.status) {
             case ROLL_DICE:
-                output = output + MESSAGE_ROLL_DICE;
+                stringBuilder.append(MESSAGE_ROLL_DICE);
                 break;
             case MOVE_PLAYER:
-                output = output + MESSAGE_MOVE_PLAYER;
+                stringBuilder.append(MESSAGE_MOVE_PLAYER);
                 break;
             case MOVING_PLAYER:
-                output = output + MESSAGE_MOVING_PLAYER + getDirections();
+                stringBuilder.append(MESSAGE_MOVING_PLAYER);
+                stringBuilder.append(this.getDirections());
                 break;
             case ACTIVE_SLOT:
-                output = output
-                        + MESSAGE_ACTIVE_SLOT
-                        + this.board.getSlotType(this.players.get(actualPlayerIndex).getPosition())
-                        + ".";
+                stringBuilder.append(MESSAGE_ACTIVE_SLOT);
+                stringBuilder.append(this.board.getSlotType(this.players.get(actualPlayerIndex).getPosition()));
                 break;
             case END_TURN:
-                output = output + MESSAGE_END_TURN;
+                stringBuilder.append(MESSAGE_END_TURN);
                 break;
             default:
                 break;
         }
-        return output;
+        return stringBuilder.toString();
     }
 
     /**
@@ -315,7 +314,8 @@ public class GameModelImpl implements GameModel {
     }
 
     private String getDirections() {
-        final Map<Direction, Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
+        final Map<Direction, Position> pos = this.board
+                .getNextPositions(this.players.get(actualPlayerIndex).getPosition());
         String output = "";
         for (final Map.Entry<Direction, Position> entry : pos.entrySet()) {
             if (!output.isBlank()) {
