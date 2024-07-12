@@ -29,7 +29,7 @@ class MemorySweepViewImplTest extends ApplicationTest {
     @Override
     public void start(final Stage stage) throws Exception {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/minigames/memorySweep.fxml"));
-        Parent root = loader.load();
+        final Parent root = loader.load();
         final Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -57,6 +57,4 @@ class MemorySweepViewImplTest extends ApplicationTest {
 
 
     }
-
-
 }

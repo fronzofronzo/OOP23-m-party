@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.memorySweep;
+package it.unibo.mparty.model.minigames.memorysweep;
 
 
 import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
