@@ -51,10 +51,9 @@ public class SideImpl implements Side {
      */
     @Override
     public String toString() {
-        return "SideImpl{"
-                + "value=" + this.value
-                + ", isMatched=" + this.isMatched
-                + "}\n";
+        return "( " + this.value
+                + "," + this.isMatched
+                + ")";
     }
 
     /**
