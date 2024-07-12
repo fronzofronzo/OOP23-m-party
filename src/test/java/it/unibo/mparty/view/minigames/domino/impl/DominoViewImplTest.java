@@ -34,6 +34,8 @@ class DominoViewImplTest extends ApplicationTest {
         System.setProperty("java.awt.headless", "true");
         System.setProperty("prism.order", "sw");
         System.setProperty("prism.text", "t2k");
+        System.setProperty("glass.platform", "Monocle");
+        System.setProperty("monocle.platform", "Headless");
         WaitForAsyncUtils.checkAllExceptions = false;
         WaitForAsyncUtils.autoCheckException = false;
     }
