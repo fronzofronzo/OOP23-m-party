@@ -1,11 +1,13 @@
 package it.unibo.mparty.view.minigames.perilouspath;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.framework.junit5.ApplicationExtension;
@@ -23,6 +25,8 @@ import static org.testfx.matcher.control.LabeledMatchers.hasText;
  */
 @ExtendWith(ApplicationExtension.class)
 class PerilousPathViewImplTest extends ApplicationTest {
+    private static final int SECONDS = 4000;
+    private final PauseTransition pause = new PauseTransition(new Duration(SECONDS));
 
     /**
      * Method to start testing of a JavaFX implementation.
@@ -46,6 +50,10 @@ class PerilousPathViewImplTest extends ApplicationTest {
     void testStartButton() {
         final Button startButton = (Button) lookup("#startButton").query();
         verifyThat(startButton, hasText("START"));
+        clickOn("#startButton");
+        pause.setOnFinished(e -> assertTrue(startButton.isDisabled()));
+        pause.play();
+
     }
 
     /**
@@ -56,7 +64,8 @@ class PerilousPathViewImplTest extends ApplicationTest {
         final GridPane grid = (GridPane) lookup("#myGridPane").query();
         assertFalse(grid.isDisabled());
         clickOn("#startButton");
-        assertTrue(grid.isDisabled());
+        pause.setOnFinished(e -> assertFalse(grid.isDisabled()));
+        pause.play();
 
 
     }
