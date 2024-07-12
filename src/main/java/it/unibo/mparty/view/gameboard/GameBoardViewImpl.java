@@ -241,7 +241,8 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     @FXML
     /**
      * Method to move the current player.
-     * @param e
+     * 
+     * @param e the source of the evnt.
      */
     public void movePlayer(final ActionEvent e) {
         final Button bt = (Button) e.getSource();
@@ -260,6 +261,7 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
 
     /**
      * Method to go on in the current turn.
+     * 
      * @throws IOException .
      */
     @FXML
