@@ -46,6 +46,7 @@ class Connect4ViewImplTest extends ApplicationTest {
 
     /**
      * Test the tutorial button.
+     * @param robot click the button, given by TestFX
      */
     @Test
     void testTutorialButton(FxRobot robot) {
@@ -73,8 +74,8 @@ class Connect4ViewImplTest extends ApplicationTest {
         final Button button = from(this.testRoot).lookup("3").query();
         final GridPane grid = from(this.testRoot.lookup("#gameGrid")).query();
         clickOn(button);
-        final StackPane pane = (StackPane) (grid.getChildren().filtered(it -> it instanceof StackPane).getFirst());
-        final Circle circle = (Circle) (pane.getChildren().getFirst());
+        final StackPane pane = (StackPane) (grid.getChildren().filtered(it -> it instanceof StackPane).get(0));
+        final Circle circle = (Circle) (pane.getChildren().get(0));
         assertTrue(circle.getFill() == Color.RED);
     }
 }
