@@ -37,7 +37,7 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
             SecretCodeColors.VERDE, Color.GREEN,
             SecretCodeColors.VIOLA, Color.PURPLE);
     private static final String TEXT_LABEL_GUESS = "Tentativi di ";
-    private static final String TEXT_LABEL_RESULTS = "Risultati di ";
+    private static final String TEXT_LABEL_RESULTS = "Indizi di ";
     private static final int RADIUS = 10;
     private List<GridPane> gridPaneGuesses;
     private List<GridPane> gridPaneResults;
@@ -148,7 +148,7 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
 
     @FXML
     @SuppressWarnings("PMD.UnusedPrivateMethod")
-    
+
     private void addColor(final ActionEvent e) {
         final Button bt = (Button) e.getSource();
         if (bt.equals(this.buttonGreen)) {
