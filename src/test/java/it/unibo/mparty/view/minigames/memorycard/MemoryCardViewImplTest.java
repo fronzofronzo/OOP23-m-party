@@ -54,7 +54,8 @@ class MemoryCardViewImplTest extends ApplicationTest {
     }
 
     /**
-     * Check that the start button works properly.
+     * Check that the button works properly.
+     * @param robot used to test.
      */
     @Test
     void testButton(final FxRobot robot) {
