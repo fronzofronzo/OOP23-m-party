@@ -58,7 +58,7 @@ public class SecretCodeControllerImpl implements SecretCodeController {
     @Override
     public void addColor(final SecretCodeColors color) {
         if (!this.model.isOver() && this.model.addColor(color)) {
-            Pair<Integer, Integer> pos = new Pair<>(this.model.getCurrentGuess().size() - 1, this.model.getTurn());
+            final Pair<Integer, Integer> pos = new Pair<>(this.model.getCurrentGuess().size() - 1, this.model.getTurn());
             this.view.updateGuess(this.model.getCurrentPlayer(), pos, color);
         }
         this.updateEndaGame();
@@ -70,9 +70,9 @@ public class SecretCodeControllerImpl implements SecretCodeController {
     @Override
     public void guess() {
         if (!this.model.isOver()) {
-            String player = this.model.getCurrentPlayer();
-            int turn = this.model.getTurn();
-            List<SecretCodeResults> res = this.model.getGuessResult();
+            final String player = this.model.getCurrentPlayer();
+            final int turn = this.model.getTurn();
+            final List<SecretCodeResults> res = this.model.getGuessResult();
             if (!res.isEmpty()) {
                 this.view.updateResults(player, turn, res);
             }
