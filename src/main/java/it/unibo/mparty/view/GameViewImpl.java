@@ -133,11 +133,9 @@ public class GameViewImpl extends Application implements GameView {
      */
     @Override
     public void showResults(final Map<String, Pair<Integer, Integer>> result) throws IOException {
-        final FXMLLoader loader = new FXMLLoader(GameViewImpl.class.getResource(PATH + "endGame" + EXTENSION));
-        final Parent root = loader.load(getClass().getResourceAsStream(PATH + "endGame" + EXTENSION));
-        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE),
-                root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        final EndGameView endGameView = ((EndGameView) loader.<SceneView>getController());
+        final Pair<Scene, SceneView> pair = this.loadScene("endGame");
+        final Scene scene = pair.getFirst();
+        final EndGameView endGameView = (EndGameView) pair.getSecond();
         endGameView.showResults(result);
         this.stage.setScene(scene);
         this.setStageSize();
