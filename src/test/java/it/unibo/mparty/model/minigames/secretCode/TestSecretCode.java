@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.mparty.model.minigames.secretCode.api.SecretCodeModel;
 import it.unibo.mparty.model.minigames.secretCode.impl.SecretCodeModelImpl;
 import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
@@ -36,6 +37,8 @@ class TestSecretCode {
      * This class test the method addColor().
      */
     @Test
+    @SuppressFBWarnings(value = "UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR",
+            justification = "The field is initialized in the setUp method, which is run before each test.")
     void testAddColor() {
         assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
         assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
@@ -48,6 +51,8 @@ class TestSecretCode {
      * This class test that the model handles correctly the turns.
      */
     @Test
+    @SuppressFBWarnings(value = "UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR",
+            justification = "The field is initialized in the setUp method, which is run before each test.")
     void testChangeTurn() {
         assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
         assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
@@ -65,6 +70,8 @@ class TestSecretCode {
      * soluction and that the winner is the player that actually guessed it.
      */
     @Test
+    @SuppressFBWarnings(value = "UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR",
+            justification = "The field is initialized in the setUp method, which is run before each test.")
     void testEndGame() {
         assertFalse(model.isOver());
         final String p1 = model.getCurrentPlayer();
