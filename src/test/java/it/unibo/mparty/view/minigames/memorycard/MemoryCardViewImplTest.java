@@ -2,15 +2,15 @@ package it.unibo.mparty.view.minigames.memorycard;
 
 import it.unibo.mparty.view.minigames.MinigameView;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+//import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+//import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -21,7 +21,7 @@ import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
-import org.testfx.util.WaitForAsyncUtils;
+//import org.testfx.util.WaitForAsyncUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -35,6 +35,11 @@ public class MemoryCardViewImplTest extends ApplicationTest {
 
     private Parent root;
 
+    /**
+     * ndsfins.
+     * @param stage .
+     * @throws IOException .
+     */
     @Start
     public void start(final Stage stage) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/minigames/memoryCard.fxml"));
