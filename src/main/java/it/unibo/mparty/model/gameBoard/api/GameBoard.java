@@ -11,10 +11,10 @@ import it.unibo.mparty.utilities.SlotType;
 /**
  * This interface models a game board.
  */
-    public interface GameBoard {
-    
+public interface GameBoard {
+
     /**
-     * 
+     * Initialise the actual board.
      */
     void initialiseBoard();
 
@@ -28,8 +28,10 @@ import it.unibo.mparty.utilities.SlotType;
      * {@link SlotType}.
      * 
      * @param position the position of the {@link Slot} interested.
-     * @return the {@link SlotType} of the {@link Slot} that is in the {@link Position} requested.
-     * @throws {@link IllegalStateException} if the input {@link Position} isn't in the game board.
+     * @return the {@link SlotType} of the {@link Slot} that is in the
+     *         {@link Position} requested.
+     * @throws {@link IllegalStateException} if the input {@link Position} isn't in
+     *                the game board.
      */
     SlotType getSlotType(Position position);
 
