@@ -7,6 +7,7 @@ import it.unibo.mparty.model.player.impl.PlayerBuilderImpl;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Test class for a {@link PlayerBuilderImpl} class.
@@ -24,6 +25,7 @@ class PlayerBuilderImplTest {
         final Player player = builder.username(username)
                 .character(character)
                 .buildPlayer();
+        assertNotNull(player);
         assertEquals(username, player.getUsername());
         assertEquals(character, player.getCharacter().getName());
     }
@@ -37,7 +39,8 @@ class PlayerBuilderImplTest {
         final PlayerBuilder builder = new PlayerBuilderImpl();
         assertThrows(IllegalStateException.class,
                 () -> {
-                    builder.username(username).buildPlayer();
+                    builder.username(username)
+                            .buildPlayer();
                 });
     }
 }

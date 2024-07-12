@@ -41,10 +41,10 @@ class PlayerBagImplTest {
     }
 
     /**
-     * Check if an item is correctly removed from the bag.
+     * Check if, once it is used, the Item is correctly removed from the bag.
      */
     @Test
-    void testRemoveItem() {
+    void testUseItem() {
         final Item item = new ItemFactoryImpl().createItem(ItemName.DADO_FORTUNATO);
         this.bag.addItem(item);
         assertEquals(item, this.bag.useItem(item.getName()));

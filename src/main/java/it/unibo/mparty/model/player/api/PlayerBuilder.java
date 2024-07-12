@@ -30,6 +30,7 @@ public interface PlayerBuilder {
     /**
      * Create the player instance with the specified parameters.
      * @return a new {@link Player} instance.
+     * @throws IllegalStateException if there are not enough information.
      */
     Player buildPlayer();
 }
