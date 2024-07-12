@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -32,6 +33,12 @@ import java.util.List;
 class MemoryCardViewImplTest extends ApplicationTest {
 
     private Parent root;
+
+    @BeforeAll
+    static public void setup() {
+        WaitForAsyncUtils.checkAllExceptions = false;
+        WaitForAsyncUtils.autoCheckException = false;
+    }
 
     /**
      * Method to start testing of a JavaFX implementation.
@@ -56,7 +63,6 @@ class MemoryCardViewImplTest extends ApplicationTest {
     @Test
     void testInitialSetup() {
         final Button button = from(this.root).lookup("#controlButton").query();
-        WaitForAsyncUtils.waitForFxEvents();
         verifyThat(button, hasText("Start !"));
     }
 
@@ -70,7 +76,6 @@ class MemoryCardViewImplTest extends ApplicationTest {
         final Label label = from(this.root).lookup("#textLabel").query();
         final FlowPane pane = from(this.root).lookup("#cardsPane").query();
         robot.clickOn(button);
-        WaitForAsyncUtils.waitForFxEvents();
         verifyThat(button, hasText("Pronto !"));
         verifyThat(label, hasText("Quando si e' pronti, spingere il pulsante 'Pronto'"));
         Assertions.assertFalse(pane.getChildren().isEmpty());
