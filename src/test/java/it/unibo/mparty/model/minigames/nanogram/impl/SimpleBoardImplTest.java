@@ -36,12 +36,12 @@ class SimpleBoardImplTest {
      */
     @Test
     void testSimpleBoard() {
-        Random random = new Random();
+        final Random random = new Random();
         random.doubles(NUM_TEST).forEach(p -> {
             this.simpleBoard = new SimpleBoardImpl(SIZE, p);
-            long expectedCount = Math.round(SIZE * SIZE * p);
+            final long expectedCount = Math.round(SIZE * SIZE * p);
 
-            long actualCount = IntStream.range(0, SIZE * SIZE)
+            final long actualCount = IntStream.range(0, SIZE * SIZE)
                     .mapToObj(i -> new Position(i / SIZE, i % SIZE))
                     .filter(pos -> simpleBoard.getState(pos))
                     .count();
@@ -55,8 +55,8 @@ class SimpleBoardImplTest {
      */
     @Test
     void testGenerateHints() {
-        List<List<Integer>> rowHints = simpleBoard.generateHints(true);
-        List<List<Integer>> columnHints = simpleBoard.generateHints(false);
+        final List<List<Integer>> rowHints = simpleBoard.generateHints(true);
+        final List<List<Integer>> columnHints = simpleBoard.generateHints(false);
 
         assertFalse(rowHints.isEmpty());
         assertFalse(columnHints.isEmpty());
@@ -64,10 +64,10 @@ class SimpleBoardImplTest {
         assertEquals(SIZE, rowHints.size());
         assertEquals(SIZE, columnHints.size());
 
-        for (List<Integer> hints : rowHints) {
+        for (final List<Integer> hints : rowHints) {
             assertFalse(hints.isEmpty());
         }
-        for (List<Integer> hints : columnHints) {
+        for (final List<Integer> hints : columnHints) {
             assertFalse(hints.isEmpty());
         }
     }

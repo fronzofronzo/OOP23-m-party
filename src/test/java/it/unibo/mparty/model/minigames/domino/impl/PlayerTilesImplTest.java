@@ -48,15 +48,15 @@ class PlayerTilesImplTest {
      */
     @Test
     void testInitializePlayerTiles() {
-        var fullSet = this.tileFactory.createDoubleSixSet();
-        var toDistributeP1 = fullSet.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet());
+        final var fullSet = this.tileFactory.createDoubleSixSet();
+        final var toDistributeP1 = fullSet.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet());
 
         this.playerTiles.initializePlayerTiles(this.player1, toDistributeP1);
         fullSet.removeAll(toDistributeP1);
         assertFalse(this.playerTiles.getPlayerTiles(this.player1).isEmpty());
         assertEquals(DISTRIBUTION_TILES, this.playerTiles.getPlayerTiles(this.player1).size());
 
-        var toDistributeP2 = fullSet.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet());
+        final var toDistributeP2 = fullSet.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet());
 
         this.playerTiles.initializePlayerTiles(this.player2, toDistributeP2);
         fullSet.removeAll(toDistributeP2);
@@ -72,7 +72,7 @@ class PlayerTilesImplTest {
     void testRemoveTilesFromPlayer() {
         this.testInitializePlayerTiles();
 
-        var pickTile = this.playerTiles.getPlayerTiles(player1).iterator().next();
+        final var pickTile = this.playerTiles.getPlayerTiles(player1).iterator().next();
         assertTrue(this.playerTiles.getPlayerTiles(this.player1).contains(pickTile));
         this.playerTiles.removeTilesFromPlayer(this.player1, pickTile);
         assertFalse(this.playerTiles.getPlayerTiles(this.player1).contains(pickTile));

@@ -40,9 +40,9 @@ class TileImplTest {
     @Test
     void testMatch() {
         this.tile = new TileImpl(SIDE_3, SIDE_5);
-        Tile tile1 = new TileImpl(SIDE_1, SIDE_2);
-        Tile tile2 = new TileImpl(SIDE_3, SIDE_3);
-        Tile tile3 = new TileImpl(SIDE_6, SIDE_4);
+        final Tile tile1 = new TileImpl(SIDE_1, SIDE_2);
+        final Tile tile2 = new TileImpl(SIDE_3, SIDE_3);
+        final Tile tile3 = new TileImpl(SIDE_6, SIDE_4);
 
         assertFalse(this.tile.match(tile1));
         assertTrue(this.tile.match(tile2));
@@ -87,9 +87,9 @@ class TileImplTest {
     @Test
     void testCanMatch() {
         this.tile = new TileImpl(SIDE_2, SIDE_5);
-        Tile tile1 = new TileImpl(SIDE_1, SIDE_2);
-        Tile tile2 = new TileImpl(SIDE_6, SIDE_5);
-        Tile tile3 = new TileImpl(SIDE_3, SIDE_4);
+        final Tile tile1 = new TileImpl(SIDE_1, SIDE_2);
+        final Tile tile2 = new TileImpl(SIDE_6, SIDE_5);
+        final Tile tile3 = new TileImpl(SIDE_3, SIDE_4);
 
         assertTrue(this.tile.canMatch(tile1));
         assertTrue(this.tile.canMatch(tile2));

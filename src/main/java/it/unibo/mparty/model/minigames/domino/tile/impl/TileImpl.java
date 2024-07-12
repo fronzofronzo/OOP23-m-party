@@ -42,6 +42,8 @@ public class TileImpl implements Tile {
         switch (side) {
             case SIDE_A -> this.sideA.getSecond().setMatched();
             case SIDE_B -> this.sideB.getSecond().setMatched();
+            default -> {
+            }
         }
     }
 
@@ -60,7 +62,8 @@ public class TileImpl implements Tile {
      */
     @Override
     public boolean canMatch(final Tile tile) {
-        return this.matchedSide(this.sideA.getSecond(), tile).isPresent() || this.matchedSide(this.sideB.getSecond(), tile).isPresent();
+        return this.matchedSide(this.sideA.getSecond(), tile).isPresent()
+                || this.matchedSide(this.sideB.getSecond(), tile).isPresent();
     }
 
     /**

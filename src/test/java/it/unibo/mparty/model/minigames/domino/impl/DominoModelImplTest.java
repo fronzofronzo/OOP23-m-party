@@ -63,17 +63,6 @@ class DominoModelImplTest {
     }
 
     /**
-     * Tests the initialization of player turns.
-     */
-    @Test
-    void testTurn() {
-        this.testDistributionTiles();
-
-        assertTrue(this.model.initializeTurn(this.player1, this.player2)
-                || !this.model.initializeTurn(this.player1, this.player2));
-    }
-
-    /**
      * Tests the process of making a move.
      */
     @Test
