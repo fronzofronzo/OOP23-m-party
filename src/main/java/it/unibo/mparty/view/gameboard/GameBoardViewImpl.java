@@ -231,11 +231,13 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @FXML
+    @SuppressWarnings("PMD.UnusedPrivateMethod")
     private void rollDice() {
         this.getMainController().rollDice();
     }
 
     @FXML
+    @SuppressWarnings("PMD.UnusedPrivateMethod")
     private void movePlayer(final ActionEvent e) {
         final Button bt = (Button) e.getSource();
         Optional<Direction> dir = Optional.empty();
@@ -252,11 +254,13 @@ public class GameBoardViewImpl extends AbstractSceneView implements GameBoardVie
     }
 
     @FXML
+    @SuppressWarnings("PMD.UnusedPrivateMethod")
     private void action() throws IOException {
         this.getMainController().action();
     }
 
     @FXML
+    @SuppressWarnings("PMD.UnusedPrivateMethod")
     private void useItem(final ActionEvent e) {
         final Button bt = (Button) e.getSource();
         final String text = bt.getText();
