@@ -1,14 +1,16 @@
 package it.unibo.mparty.model.minigames.memorysweep.impl;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
 
 import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+import java.util.List;
 
 /**
  * implementation of {@link MemorySweep}.
@@ -64,7 +66,7 @@ public class MemorySweepImpl implements MemorySweep {
      */
     @Override
     public Set<Position> getRandomList() {
-        return this.randomList;
+        return Collections.unmodifiableSet(this.randomList);
     }
 
     /**

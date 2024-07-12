@@ -42,12 +42,15 @@ public class MiniScreenImpl implements MiniScreen {
     @Override
     public void handleOkButton(final ActionEvent e) {
         if (this.isShort(this.textField.getText()) && this.isChoiceSelected(this.choiceBox.getValue())) {
-            this.controller.setNewPlayer(this.textField.getText(), this.choiceBox.getValue());
+            if (this.controller != null) {
+                this.controller.setNewPlayer(this.textField.getText(), this.choiceBox.getValue());
+            }
         } else {
-            this.controller.setLabelText("username o character non correttamente inseriti");
+            if (this.controller != null) {
+                this.controller.setLabelText("username o character non correttamente inseriti");
+            }
         }
-        Stage stage = (Stage) this.okButton.getScene().getWindow();
-        if (stage != null) {
+        if (this.okButton.getScene().getWindow() instanceof Stage stage) {
             stage.close();
         }
 
@@ -58,8 +61,7 @@ public class MiniScreenImpl implements MiniScreen {
      */
     @Override
     public void handleBackButton(final ActionEvent e) {
-        Stage stage = (Stage) this.backButton.getScene().getWindow();
-        if (stage != null) {
+        if (this.backButton.getScene().getWindow() instanceof Stage stage) {
             stage.close();
         }
 
