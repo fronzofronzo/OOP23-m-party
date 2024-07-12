@@ -52,7 +52,7 @@ public class GameModelImpl implements GameModel {
     private int actualPlayerIndex;
     private int steps;
     private final MinigameHandler minigameHandler;
-    final Random random;
+    private final Random random;
 
     /**
      * Constructor of the Game Model: creates a new istance of game with players.
