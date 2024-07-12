@@ -4,7 +4,7 @@ import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.view.SceneView;
 
 /**
- * This interface models the view for the {@link Shop}.
+ * This interface models the view for the shop.
  */
 public interface ShopView extends SceneView {
     /**
@@ -25,5 +25,10 @@ public interface ShopView extends SceneView {
      * Initialize the shop view.
      */
     void initShopView();
+
+    /**
+     * Close the shop view and get back to the main board.
+     */
+    void closeShop();
 
 }

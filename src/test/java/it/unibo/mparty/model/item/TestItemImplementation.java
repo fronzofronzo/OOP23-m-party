@@ -12,12 +12,12 @@ import it.unibo.mparty.model.item.api.ItemFactory;
 import it.unibo.mparty.model.item.impl.ItemFactoryImpl;
 import it.unibo.mparty.model.item.impl.ItemName;
 import it.unibo.mparty.model.player.api.Player;
-import it.unibo.mparty.model.player.impl.PlayerImplementation;
+import it.unibo.mparty.model.player.impl.PlayerImpl;
 
 /**
  * Test class for the Items.
  */
-public class TestItemImplementation {
+class TestItemImplementation {
 
     private final ItemFactory factory = new ItemFactoryImpl();
     private Player testPlayer;
@@ -42,14 +42,14 @@ public class TestItemImplementation {
         tripleDice = factory.createItem(ItemName.TRIPLO_DADO);
         booBell = factory.createItem(ItemName.CAMPANA_BOO);
         goldenPipe = factory.createItem(ItemName.TUBO_DORATO);
-        testPlayer = new PlayerImplementation("test", "Mario");
+        testPlayer = new PlayerImpl("test", "Mario");
     }
 
     /**
      * Test the getDescription method of the items.
      */
     @Test
-    public void testGetDescription() {
+    void testGetDescription() {
         assertEquals("Il dado ha solo numeri da 1 a 3. Puo' essere attivato su un giocatore a tua scelta",
         cursedDice.getDescription());
         assertEquals("Boo ruba delle monete ad un avversario.", booBell.getDescription());
@@ -59,7 +59,7 @@ public class TestItemImplementation {
      * Test the getCost method of the items.
      */
     @Test
-    public void testGetCost() {
+    void testGetCost() {
         assertEquals(EXP_GOLDENPIPE, goldenPipe.getCost());
         assertEquals(EXP_TRIPLEDICE, tripleDice.getCost());
     }
@@ -68,7 +68,7 @@ public class TestItemImplementation {
      * Test the getName method of the item.
      */
     @Test
-    public void testGetName() {
+    void testGetName() {
         assertEquals(ItemName.DADO_FORTUNATO, luckyDice.getName());
         assertEquals(ItemName.CAMPANA_BOO, booBell.getName());
     }
@@ -77,16 +77,16 @@ public class TestItemImplementation {
      * Test the activation of the items and the effect on the players.
      */
     @Test
-    public void testActivation() {
-        final Player testPlayer2 = new PlayerImplementation("test2", "Luigi");
+    void testActivation() {
+        final Player testPlayer2 = new PlayerImpl("test2", "Luigi");
         testPlayer2.addCoins(10);
         testPlayer.getPlayerBag().addItem(tripleDice);
         testPlayer.getPlayerBag().addItem(booBell);
         assertEquals(2, testPlayer.getPlayerBag().getItems().size());
-        Item item = testPlayer.getPlayerBag().useItem(testPlayer.getPlayerBag().getItems().get(0));
+        final Item item = testPlayer.getPlayerBag().useItem(testPlayer.getPlayerBag().getItems().get(0));
         item.activate(testPlayer, null, null);
         assertEquals(3, testPlayer.getDice().getNumOfAttempts());
-        Item item2 = testPlayer.getPlayerBag().useItem(testPlayer.getPlayerBag().getItems().get(0));
+        final Item item2 = testPlayer.getPlayerBag().useItem(testPlayer.getPlayerBag().getItems().get(0));
         item2.activate(testPlayer, Optional.of(testPlayer2), null);
         assertEquals(EXP_PL2_COINS, testPlayer2.getNumCoins());
         assertEquals(EXP_PL1_COINS, testPlayer.getNumCoins());

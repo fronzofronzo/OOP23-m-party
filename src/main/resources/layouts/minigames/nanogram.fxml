@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="pane" minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.nanogram.impl.NanogramViewImpl">
+<BorderPane fx:id="pane" minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.nanogram.impl.NanogramViewImpl">
    <left>
       <GridPane fx:id="rowHints" alignment="CENTER" prefHeight="194.0" prefWidth="126.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -71,44 +71,29 @@
          </BorderPane.margin></GridPane>
    </center>
    <bottom>
-      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="350.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-               <children>
-                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                     <children>
-                        <Label fx:id="tutorialText" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Tutorial">
-                           <font>
-                              <Font name="System Italic" size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" top="5.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="30.0">
-                     <children>
-                        <RadioButton fx:id="crossButton" mnemonicParsing="false" text="X">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </RadioButton>
-                        <RadioButton fx:id="filledButton" text="█">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </RadioButton>
-                        <Button fx:id="tutorialButton" mnemonicParsing="false" onMouseClicked="#tutorialClicked" text="Tutorial">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
-         </children>
-      </HBox>
+       <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+           <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0">
+               <HBox.margin>
+                   <Insets bottom="5.0" left="5.0" top="5.0" />
+               </HBox.margin>
+               <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="30.0">
+                   <RadioButton fx:id="crossButton" mnemonicParsing="false" text="X">
+                       <font>
+                           <Font size="18.0" />
+                       </font>
+                   </RadioButton>
+                   <RadioButton fx:id="filledButton" text="█">
+                       <font>
+                           <Font size="18.0" />
+                       </font>
+                   </RadioButton>
+               </HBox>
+               <Button mnemonicParsing="false" onMouseClicked="#tutorialClicked" text="Tutorial">
+                   <font>
+                       <Font size="18.0" />
+                   </font>
+               </Button>
+           </VBox>
+       </HBox>
    </bottom>
 </BorderPane>

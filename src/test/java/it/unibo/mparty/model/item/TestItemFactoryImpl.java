@@ -1,7 +1,6 @@
 package it.unibo.mparty.model.item;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +16,7 @@ import it.unibo.mparty.model.item.impl.GoldenPipe;
 /**
  * This class test the {@link ItemFactoryImpl} class.
  */
-public class TestItemFactoryImpl {
+class TestItemFactoryImpl {
     private ItemFactory testFactory;
 
     /**
@@ -32,11 +31,11 @@ public class TestItemFactoryImpl {
      * Test the correct functioning of the createItem of the factory.
      */
     @Test
-    public void testFactory() {
-        assertTrue(this.testFactory.createItem(ItemName.TUBO_DORATO) instanceof GoldenPipe);
-        assertTrue(this.testFactory.createItem(ItemName.DADO_MALEDETTO) instanceof CursedDice);
-        assertTrue(this.testFactory.createItem(ItemName.DADO_FORTUNATO) instanceof LuckyDice);
-        assertTrue(this.testFactory.createItem(ItemName.CAMPANA_BOO) instanceof BooBell);
-        assertTrue(this.testFactory.createItem(ItemName.TRIPLO_DADO) instanceof TripleDice);
+    void testFactory() {
+        assertInstanceOf(GoldenPipe.class, this.testFactory.createItem(ItemName.TUBO_DORATO));
+        assertInstanceOf(CursedDice.class, this.testFactory.createItem(ItemName.DADO_MALEDETTO));
+        assertInstanceOf(LuckyDice.class, this.testFactory.createItem(ItemName.DADO_FORTUNATO));
+        assertInstanceOf(BooBell.class, this.testFactory.createItem(ItemName.CAMPANA_BOO));
+        assertInstanceOf(TripleDice.class, this.testFactory.createItem(ItemName.TRIPLO_DADO));
     }
 }

@@ -44,8 +44,8 @@ public class PlayerTilesImpl implements PlayerTiles {
      * {@inheritDoc}
      */
     @Override
-    public boolean canPlayerPlace(final String player, final BoardTile boardTile) {
-        return this.playersTiles.get(player).stream().anyMatch(boardTile::canMatchBoardTile);
+    public boolean cannotPlayerPlace(final String player, final BoardTile boardTile) {
+        return this.playersTiles.get(player).stream().noneMatch(boardTile::canMatchBoardTile);
     }
 
     /**

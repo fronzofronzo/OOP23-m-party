@@ -8,17 +8,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 /**
- * Test class for {@link GameModelBuilderImpl} class
+ * Test class for {@link GameModelBuilderImpl} class.
  */
 class GameModelBuilderImplTest {
 
+    private static final String USER_1 = "user1";
     private GameModelBuilder builder;
 
     /**
      * Tests initialisation that is performed before each test.
      */
     @BeforeEach
-    public void init() {
+    void init() {
         this.builder = new GameModelBuilderImpl();
     }
 
@@ -27,10 +28,9 @@ class GameModelBuilderImplTest {
      * by the Game Model builder.
      */
     @Test
-    public void testNumberOfPlayers() {
-        final String user1 = "user1";
+    void testNumberOfPlayers() {
         final String charact1 = Character.CHAR_MARIO.getName();
-        this.builder = this.builder.addPlayer(user1, charact1);
+        this.builder = this.builder.addPlayer(USER_1, charact1);
         Assertions.assertFalse(this.builder.enoughPlayers());
         final String user2 = "user2";
         final String charact2 = Character.CHAR_DK.getName();
@@ -50,33 +50,30 @@ class GameModelBuilderImplTest {
      * throws {@link IllegalArgumentException}.
      */
     @Test
-    public void testInsertSamePlayer() {
-        final String user1 = "user1";
+    void testInsertSamePlayer() {
         final String charact1 = Character.CHAR_MARIO.getName();
-        this.builder = this.builder.addPlayer(user1, charact1);
+        this.builder = this.builder.addPlayer(USER_1, charact1);
         final String user2 = "user1";
         final String charact2 = Character.CHAR_MARIO.getName();
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> {
-                    this.builder.addPlayer(user2, charact2);
-                });
+                () -> this.builder.addPlayer(user2, charact2));
     }
 
     /**
      * Check if the building of a new GameModel instance is created properly.
      */
     @Test
-    public void testBuildingModel() {
-        final String user1 = "user1";
+    void testBuildingModel() {
         final String charact1 = Character.CHAR_MARIO.getName();
         final String user2 = "user2";
         final String charact2 = Character.CHAR_DK.getName();
-        final GameModel model = this.builder.addPlayer(user1, charact1)
+        final GameModel model = this.builder.addPlayer(USER_1, charact1)
                 .addPlayer(user2, charact2)
-                .difficulty(BoardType.EASY.toString()).build();
+                .difficulty(BoardType.EASY.toString())
+                .build();
         Assertions.assertTrue(model.getPlayers().stream()
                 .map(Player::getUsername)
-                .toList().contains(user1));
+                .toList().contains(USER_1));
         Assertions.assertTrue(model.getPlayers().stream()
                 .map(Player::getUsername)
                 .toList().contains(user2));

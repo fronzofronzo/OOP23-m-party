@@ -4,20 +4,12 @@ import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.api.ESource;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Represents the board in the domino game. Manages the tiles on the board and observers.
  */
 public interface BoardTile extends ESource<List<Pair<Integer, Integer>>> {
-
-    /**
-     * Returns the list of tiles currently on the board.
-     *
-     * @return the list of tiles on the board
-     */
-    LinkedList<Tile> getBoardTiles();
 
     /**
      * Checks if a tile can be matched with any tile currently on the board.

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.domino.impl.DominoViewImpl">
+<BorderPane minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.minigames.domino.impl.DominoViewImpl">
    <top>
       <VBox prefHeight="213.0" prefWidth="1020.0" BorderPane.alignment="CENTER">
             <Label fx:id="messageLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Messaggio">
@@ -85,19 +85,18 @@
    </center>
    <left>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="191.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="tutorialText" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Tutorial" visible="false">
-               <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="System Italic" size="12.0" />
-               </font>
-            </Label>
-         </children>
          <BorderPane.margin>
-            <Insets left="20.0" right="20.0" />
+            <Insets left="20.0" right="20.0"/>
          </BorderPane.margin>
+         <Label fx:id="tutorialLabel" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308"
+                maxWidth="1.7976931348623157E308" text="Tutorial" visible="false">
+            <VBox.margin>
+               <Insets bottom="10.0" top="10.0"/>
+            </VBox.margin>
+            <font>
+               <Font name="System Italic" size="12.0"/>
+            </font>
+         </Label>
       </VBox>
    </left>
 </BorderPane>

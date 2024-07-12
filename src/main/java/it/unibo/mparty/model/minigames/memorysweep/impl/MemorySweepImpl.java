@@ -1,14 +1,16 @@
 package it.unibo.mparty.model.minigames.memorysweep.impl;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
 
 import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+import java.util.List;
 
 /**
  * implementation of {@link MemorySweep}.
@@ -23,7 +25,8 @@ public class MemorySweepImpl implements MemorySweep {
     private final int side;
     private boolean turn = true;
     private String winner;
-    private static final int COINS = 20;
+    private static final int COINS = 10;
+    private static final int SIDE = 8;
 
     /**
      * constructor of this.
@@ -33,6 +36,16 @@ public class MemorySweepImpl implements MemorySweep {
         this.random = new Random();
         this.randomList = new HashSet<>();
         this.side = side;
+        this.counter = 1;
+    }
+
+    /**
+     * constructor of this without parameters.
+     */
+    public MemorySweepImpl() {
+        this.random = new Random();
+        this.randomList = new HashSet<>();
+        this.side = SIDE;
         this.counter = 1;
     }
 
@@ -53,7 +66,7 @@ public class MemorySweepImpl implements MemorySweep {
      */
     @Override
     public Set<Position> getRandomList() {
-        return this.randomList;
+        return Collections.unmodifiableSet(this.randomList);
     }
 
     /**
@@ -61,14 +74,14 @@ public class MemorySweepImpl implements MemorySweep {
      */
     @Override
     public HitType hit(final Position p) {
-        return this.getTurn() ? this.playerTurn(this.p1, p) : this.playerTurn(this.p2, p);
+        return this.turn() ? this.playerTurn(this.p1, p) : this.playerTurn(this.p2, p);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean getTurn() {
+    public boolean turn() {
         return this.turn;
     }
 
@@ -118,7 +131,7 @@ public class MemorySweepImpl implements MemorySweep {
             }
             return HitType.RIGHT_CHOICE;
         }
-        this.winner = player.equals(this.p1) ? p2.getFirst() : p1.getFirst();
+        this.winner = player.equals(notNull(this.p1)) ? notNull(this.p2).getFirst() : notNull(this.p1).getFirst();
         return HitType.LOSS;
     }
 
@@ -159,7 +172,7 @@ public class MemorySweepImpl implements MemorySweep {
      */
     @Override
     public boolean isOver() {
-        return this.winner.equals(this.p1.getFirst()) || this.winner.equals(this.p2.getFirst());
+        return this.winner.equals(notNull(this.p1).getFirst()) || this.winner.equals(notNull(this.p2).getFirst());
     }
 
     /**
@@ -176,6 +189,10 @@ public class MemorySweepImpl implements MemorySweep {
     @Override
     public MinigameType getType() {
         return MinigameType.MULTI_PLAYER;
+    }
+
+    private Pair<String, Set<Position>> notNull(final Pair<String, Set<Position>> p) {
+        return p == null ? new Pair<>("", new HashSet<>()) : p;
     }
 
 }

@@ -61,11 +61,6 @@ public interface PerilousPath extends MinigameModel {
     Type hit(AbstractPosition p);
 
     /**
-     * @return true whether the game is over or not
-     */
-    boolean isOver();
-
-    /**
      * @return the side of the grid which is a square
      */
     int getSize();

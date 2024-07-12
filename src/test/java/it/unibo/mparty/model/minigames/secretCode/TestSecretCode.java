@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.secretCode;
+package it.unibo.mparty.model.minigames.secretcode;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -10,55 +10,79 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.unibo.mparty.model.minigames.secretCode.api.SecretCodeModel;
-import it.unibo.mparty.model.minigames.secretCode.impl.SecretCodeModelImpl;
-import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeColors;
-import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.mparty.model.minigames.secretcode.api.SecretCodeModel;
+import it.unibo.mparty.model.minigames.secretcode.impl.SecretCodeModelImpl;
+import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeColors;
+import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeResults;
 
-public class TestSecretCode {
+/**
+ * This class test {@link SecretCodeModel}.
+ */
+class TestSecretCode {
 
-    private static SecretCodeModel model;
+    private SecretCodeModel model;
 
+    /**
+     * This class initialises the model befor each test method.
+     */
     @BeforeEach
     public void initialise() {
-        List<String> players = List.of("P1","P2");
-        model = new SecretCodeModelImpl(); 
+        final List<String> players = List.of("P1", "P2");
+        model = new SecretCodeModelImpl();
         model.setUpPlayers(players);
     }
 
+    /**
+     * This class test the method addColor().
+     */
     @Test
-    public void TestAddColor() {
-        assertTrue(model.getGame().addColor(SecretCodeColors.ARANCIONE));
-        assertTrue(model.getGame().addColor(SecretCodeColors.ARANCIONE));
-        assertTrue(model.getGame().addColor(SecretCodeColors.ARANCIONE));
-        assertTrue(model.getGame().addColor(SecretCodeColors.ARANCIONE));
-        assertFalse(model.getGame().addColor(SecretCodeColors.ARANCIONE));
+    @SuppressFBWarnings(value = "UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR",
+            justification = "The field is initialized in the setUp method, which is run before each test.")
+    void testAddColor() {
+        assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
+        assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
+        assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
+        assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
+        assertFalse(model.addColor(SecretCodeColors.ARANCIONE));
     }
 
+    /**
+     * This class test that the model handles correctly the turns.
+     */
     @Test
-    public void TestChangeTurn() {
-        assertTrue(model.getGame().addColor(SecretCodeColors.ARANCIONE));
-        assertTrue(model.getGame().addColor(SecretCodeColors.ARANCIONE));
-        assertTrue(model.getGame().addColor(SecretCodeColors.ARANCIONE));
-        assertTrue(model.getGame().addColor(SecretCodeColors.ARANCIONE));
-        String p1 = model.getGame().getCurrentPlayer();
-        List<SecretCodeResults> res = model.getGame().getGuessResult();
+    @SuppressFBWarnings(value = "UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR",
+            justification = "The field is initialized in the setUp method, which is run before each test.")
+    void testChangeTurn() {
+        assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
+        assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
+        assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
+        assertTrue(model.addColor(SecretCodeColors.ARANCIONE));
+        final String p1 = model.getCurrentPlayer();
+        final List<SecretCodeResults> res = model.getGuessResult();
         assertFalse(res.isEmpty());
-        String p2 = model.getGame().getCurrentPlayer();
+        final String p2 = model.getCurrentPlayer();
         assertNotEquals(p1, p2);
     }
 
-    @Test 
-    public void TestEndGame() {
-        assertFalse(model.getGame().isOver());
-        String p1 = model.getGame().getCurrentPlayer();
-        List<SecretCodeColors> sol = model.getGame().getSoluction();
+    /**
+     * This class test that the game actually ends when a player guesses the
+     * soluction and that the winner is the player that actually guessed it.
+     */
+    @Test
+    @SuppressFBWarnings(value = "UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR",
+            justification = "The field is initialized in the setUp method, which is run before each test.")
+    void testEndGame() {
+        assertFalse(model.isOver());
+        final String p1 = model.getCurrentPlayer();
+        final List<SecretCodeColors> sol = model.getSoluction();
         assertFalse(sol.isEmpty());
-        for (SecretCodeColors c : sol) {
-            assertTrue(model.getGame().addColor(c));
+        for (final SecretCodeColors c : sol) {
+            assertTrue(model.addColor(c));
         }
-        List<SecretCodeResults> res = model.getGame().getGuessResult();
-        assertTrue(model.getGame().isOver());
-        assertEquals(p1, model.getGame().getWinner());
-    }   
+        final List<SecretCodeResults> res = model.getGuessResult();
+        assertFalse(res.isEmpty());
+        assertTrue(model.isOver());
+        assertEquals(p1, model.getWinner());
+    }
 }

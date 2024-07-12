@@ -1,12 +1,19 @@
 Mini-gioco NANOGRAM:
 
-OBIETTIVO: Colorare la griglia seguendo le indicazioni numeriche.
+OBIETTIVO:
+Colorare la griglia seguendo le indicazioni numeriche.
 
-REGOLE: I numeri indicano quante celle consecutive colorare.
-Più numeri indicano più sequenze, separate da almeno una cella vuota.
-L'ordine dei numeri corrisponde all'ordine delle sequenze colorate.
+REGOLE:
+I numeri indicano quante celle consecutive colorare.
+Piu' numeri indicano piu' sequenze,
+separate da almeno una cella vuota.
+L'ordine dei numeri corrisponde
+all'ordine delle sequenze colorate.
 Colorare le celle secondo le indicazioni numeriche.
-Usa la croce per segnare le celle che sono sicuramente vuote.
+Usa la croce per segnare le celle
+che sono sicuramente vuote.
 
 FINE DELLA PARTITA:
-La partita termina quando tutte le celle sono correttamente colorate.
+La partita termina quando tutte le
+celle sono correttamente colorate
+oppure se si finiscono le vite.

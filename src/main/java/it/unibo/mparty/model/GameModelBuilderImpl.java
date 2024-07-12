@@ -2,7 +2,7 @@ package it.unibo.mparty.model;
 
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.api.PlayerBuilder;
-import it.unibo.mparty.model.player.impl.PlayerBuilderImplementation;
+import it.unibo.mparty.model.player.impl.PlayerBuilderImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.List;
  * This class provides an implementation of {@link GameModelBuilder} interface.
  * It implements all the methods of the interface.
  */
-public class GameModelBuilderImpl implements GameModelBuilder{
+public class GameModelBuilderImpl implements GameModelBuilder {
 
-    private static final int MIN_PLAYERS  = 2;
+    private static final int MIN_PLAYERS = 2;
     private static final int MAX_PLAYERS = 4;
 
     private final List<Player> players = new ArrayList<>();
@@ -23,15 +23,15 @@ public class GameModelBuilderImpl implements GameModelBuilder{
      * {@inheritDoc}
      */
     @Override
-    public GameModelBuilder addPlayer(final String nickname, final String character) throws IllegalArgumentException {
-        final PlayerBuilder builder = new PlayerBuilderImplementation();
+    public GameModelBuilder addPlayer(final String nickname, final String character) {
+        final PlayerBuilder builder = new PlayerBuilderImpl();
         final Player pl = builder.username(nickname)
-                                    .character(character)
-                                    .buildPlayer();
+                .character(character)
+                .buildPlayer();
         if (players.stream().anyMatch(p -> p.getUsername().equals(pl.getUsername())
                 || p.getCharacter().equals(pl.getCharacter()))) {
-            throw new IllegalArgumentException("Il player con questo " +
-                    "nome/personaggio e' gia' presente ");
+            throw new IllegalArgumentException("Il player con questo "
+                    + "nome/personaggio e' gia' presente ");
         }
         if (!this.isFull()) {
             players.add(pl);
@@ -43,7 +43,7 @@ public class GameModelBuilderImpl implements GameModelBuilder{
      * {@inheritDoc}
      */
     @Override
-    public GameModelBuilder difficulty(String difficulty) {
+    public GameModelBuilder difficulty(final String difficulty) {
         this.difficulty = difficulty;
         return this;
     }

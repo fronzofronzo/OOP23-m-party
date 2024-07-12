@@ -7,8 +7,10 @@ import it.unibo.mparty.model.minigames.domino.player.api.PlayerTiles;
 import it.unibo.mparty.model.minigames.domino.board.impl.BoardTileImpl;
 import it.unibo.mparty.model.minigames.domino.player.impl.PlayerTilesImpl;
 import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
+import it.unibo.mparty.model.minigames.domino.tile.impl.SideType;
 import it.unibo.mparty.model.minigames.domino.tile.impl.TileFactoryImpl;
 import it.unibo.mparty.utilities.Pair;
+import it.unibo.mparty.utilities.api.EObserver;
 
 import java.util.List;
 import java.util.Random;
@@ -25,7 +27,8 @@ public class DominoModelImpl implements DominoModel {
     private static final int COINS = 10;
     private final BoardTile boardTile;
     private final PlayerTiles playerTiles;
-    private final List<Tile> dominoSet;
+    private final List<Tile> dominoDeck;
+    private final Random random;
     private String player1;
     private String player2;
 
@@ -35,7 +38,8 @@ public class DominoModelImpl implements DominoModel {
     public DominoModelImpl() {
         this.boardTile = new BoardTileImpl();
         this.playerTiles = new PlayerTilesImpl();
-        this.dominoSet = new TileFactoryImpl().createDoubleSixSet();
+        this.dominoDeck = new TileFactoryImpl().createDoubleSixSet();
+        this.random = new Random();
     }
 
     /**
@@ -54,8 +58,7 @@ public class DominoModelImpl implements DominoModel {
      */
     @Override
     public boolean initializeTurn(final String player1, final String player2) {
-        final Random random = new Random();
-        return this.getDoubleTiles(player1) > this.getDoubleTiles(player2) || random.nextBoolean();
+        return this.getDoubleTiles(player1) > this.getDoubleTiles(player2) || this.random.nextBoolean();
     }
 
     /**
@@ -76,15 +79,15 @@ public class DominoModelImpl implements DominoModel {
      */
     @Override
     public boolean canDrawTile(final String player) {
-        return !this.playerTiles.canPlayerPlace(player, this.boardTile) && !this.dominoSet.isEmpty();
+        return this.playerTiles.cannotPlayerPlace(player, this.boardTile) && !this.dominoDeck.isEmpty();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean cannotPlayerPlace(final String player) {
-        return !this.playerTiles.canPlayerPlace(player, this.boardTile) && this.dominoSet.isEmpty();
+    public boolean playerCannotMakeMove(final String player) {
+        return this.playerTiles.cannotPlayerPlace(player, this.boardTile) && this.dominoDeck.isEmpty();
     }
 
     /**
@@ -92,8 +95,8 @@ public class DominoModelImpl implements DominoModel {
      */
     @Override
     public void drawTile(final String player) {
-        final Tile newTile = this.dominoSet.iterator().next();
-        this.dominoSet.remove(newTile);
+        final Tile newTile = this.dominoDeck.iterator().next();
+        this.dominoDeck.remove(newTile);
         this.playerTiles.addTileToPlayer(player, newTile);
     }
 
@@ -101,24 +104,24 @@ public class DominoModelImpl implements DominoModel {
      * {@inheritDoc}
      */
     @Override
-    public List<Tile> getDominoSet() {
-        return this.dominoSet;
+    public int getDeckSize() {
+        return this.dominoDeck.size();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public PlayerTiles getPlayersTiles() {
-        return this.playerTiles;
+    public Set<Tile> getPlayerTiles(final String player) {
+        return this.playerTiles.getPlayerTiles(player);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public BoardTile getBoardTile() {
-        return this.boardTile;
+    public void addBoardObserver(final EObserver<? super List<Pair<Integer, Integer>>> obs) {
+        this.boardTile.addObserver(obs);
     }
 
     /**
@@ -133,7 +136,7 @@ public class DominoModelImpl implements DominoModel {
             return new Pair<>(this.player1, COINS);
         } else if (player2Tiles.isEmpty() && !player1Tiles.isEmpty()) {
             return new Pair<>(this.player2, COINS);
-        } else if (this.cannotPlayerPlace(this.player1) && this.cannotPlayerPlace(this.player2)) {
+        } else if (this.playerCannotMakeMove(this.player1) && this.playerCannotMakeMove(this.player2)) {
             final int player1Score = this.calculateTileScore(player1Tiles);
             final int player2Score = this.calculateTileScore(player2Tiles);
             if (player1Score == player2Score) {
@@ -155,8 +158,8 @@ public class DominoModelImpl implements DominoModel {
     public boolean isOver() {
         return this.playerTiles.getPlayerTiles(this.player1).isEmpty()
                 || this.playerTiles.getPlayerTiles(this.player2).isEmpty()
-                || (this.cannotPlayerPlace(this.player1)
-                && this.cannotPlayerPlace(this.player2));
+                || this.playerCannotMakeMove(this.player1)
+                && this.playerCannotMakeMove(this.player2);
     }
 
     /**
@@ -176,12 +179,14 @@ public class DominoModelImpl implements DominoModel {
     }
 
     private int calculateTileScore(final Set<Tile> tiles) {
-        return tiles.stream().mapToInt(tile -> tile.getSideA().getValue() + tile.getSideB().getValue()).sum();
+        return tiles.stream().mapToInt(tile ->
+                tile.getSideValue(SideType.SIDE_A) + tile.getSideValue(SideType.SIDE_B)).sum();
     }
 
     private int getSmallestTileValue(final Set<Tile> tiles) {
         return tiles.stream()
-                .flatMapToInt(tile -> IntStream.of(tile.getSideA().getValue(), tile.getSideB().getValue()))
+                .flatMapToInt(tile ->
+                        IntStream.of(tile.getSideValue(SideType.SIDE_A), tile.getSideValue(SideType.SIDE_B)))
                 .min()
                 .orElse(Integer.MAX_VALUE);
     }
@@ -189,14 +194,14 @@ public class DominoModelImpl implements DominoModel {
     private int getDoubleTiles(final String player) {
         return this.playerTiles.getPlayerTiles(player).stream()
                 .filter(Tile::isDoubleSide)
-                .flatMapToInt(tile -> IntStream.of(tile.getSideA().getValue(), tile.getSideB().getValue()))
+                .flatMapToInt(tile -> IntStream.of(tile.getSideValue(SideType.SIDE_A), tile.getSideValue(SideType.SIDE_B)))
                 .max()
                 .orElse(Integer.MIN_VALUE);
     }
 
     private void distribution(final String player) {
         this.playerTiles.initializePlayerTiles(player,
-                this.dominoSet.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet()));
-        this.dominoSet.removeAll(this.playerTiles.getPlayerTiles(player));
+                this.dominoDeck.stream().limit(DISTRIBUTION_TILES).collect(Collectors.toSet()));
+        this.dominoDeck.removeAll(this.playerTiles.getPlayerTiles(player));
     }
 }

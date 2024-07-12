@@ -1,7 +1,8 @@
 package it.unibo.mparty.controller.minigames.nanogram.impl;
 
 import it.unibo.mparty.controller.minigames.nanogram.api.NanogramController;
-import it.unibo.mparty.model.minigames.nanogram.impl.NanogramModelImpl;
+import it.unibo.mparty.model.minigames.nanogram.game.impl.NanogramModelImpl;
+import it.unibo.mparty.view.minigames.nanogram.api.NanogramView;
 import it.unibo.mparty.view.minigames.nanogram.impl.NanogramViewImpl;
 
 import java.util.List;
@@ -12,8 +13,8 @@ import java.util.List;
  */
 public class NanogramControllerImpl implements NanogramController {
 
-    private final NanogramViewImpl view;
     private final NanogramModelImpl model;
+    private NanogramView view;
     private boolean fillState = true;
 
     /**
@@ -21,8 +22,8 @@ public class NanogramControllerImpl implements NanogramController {
      *
      * @param view the view component to interact with.
      */
-    public NanogramControllerImpl(final NanogramViewImpl view) {
-        this.view = view;
+    public NanogramControllerImpl(final NanogramView view) {
+        this.setView(view);
         this.model = new NanogramModelImpl();
     }
 
@@ -75,5 +76,9 @@ public class NanogramControllerImpl implements NanogramController {
             this.view.showResult(this.model.getResult());
             this.view.getMainController().saveMinigameResult(this.model.getResult());
         }
+    }
+
+    private void setView(final NanogramView view) {
+        this.view = view;
     }
 }

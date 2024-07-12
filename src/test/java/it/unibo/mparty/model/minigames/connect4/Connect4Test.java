@@ -15,10 +15,13 @@ import it.unibo.mparty.model.minigames.connect4.impl.Connect4ModelImpl;
 /**
  * This class tests the {@link Connect4ModelImpl} class.
  */
-public class Connect4Test {
+class Connect4Test {
     private Connect4Model testModel;
     private static final int ROWS = 6;
     private static final int COLUMN_5 = 5;
+    private static final int COLUMN_4 = 4;
+    private static final int COLUMN_3 = 3;
+    private static final int COLUMN_2 = 2;
 
     /**
      * Initialize the game before each test.
@@ -33,25 +36,25 @@ public class Connect4Test {
      * Test adding a disc in the minigame.
      */
     @Test
-    public void testAddDisc() {
+    void testAddDisc() {
         for (int i = 0; i < ROWS; i++) {
-            assertTrue(testModel.addDisc(2));
+            assertTrue(testModel.addDisc(COLUMN_2));
         }
-        assertFalse(testModel.addDisc(2));
+        assertFalse(testModel.addDisc(COLUMN_2));
     }
 
     /**
      * Test the horizontal win.
      */
     @Test
-    public void checkHorizontalWin() {
-        testModel.addDisc(3);
-        testModel.addDisc(3);
-        testModel.addDisc(4);
-        testModel.addDisc(3);
+    void checkHorizontalWin() {
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_4);
+        testModel.addDisc(COLUMN_3);
         testModel.addDisc(COLUMN_5);
-        testModel.addDisc(3);
-        testModel.addDisc(2);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_2);
         assertTrue(testModel.isOver());
         assertEquals("testPlayer1", testModel.getTurnPlayer());
     }
@@ -60,14 +63,14 @@ public class Connect4Test {
      * Test the vertical win.
      */
     @Test
-    public void checkVerticalWin() {
-        testModel.addDisc(3);
-        testModel.addDisc(2);
-        testModel.addDisc(3);
-        testModel.addDisc(2);
-        testModel.addDisc(3);
-        testModel.addDisc(2);
-        testModel.addDisc(3);
+    void checkVerticalWin() {
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_2);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_2);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_2);
+        testModel.addDisc(COLUMN_3);
         assertTrue(testModel.isOver());
     }
 
@@ -75,17 +78,17 @@ public class Connect4Test {
      * Test the diagonal left win.
      */
     @Test
-    public void checkDiagonalLeftWin() {
-        testModel.addDisc(2);
-        testModel.addDisc(3);
-        testModel.addDisc(3);
-        testModel.addDisc(4);
-        testModel.addDisc(4);
+    void checkDiagonalLeftWin() {
+        testModel.addDisc(COLUMN_2);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_4);
+        testModel.addDisc(COLUMN_4);
         testModel.addDisc(COLUMN_5);
-        testModel.addDisc(4);
+        testModel.addDisc(COLUMN_4);
         testModel.addDisc(COLUMN_5);
         testModel.addDisc(COLUMN_5);
-        testModel.addDisc(0);
+        testModel.addDisc(COLUMN_2);
         testModel.addDisc(COLUMN_5);
         assertTrue(testModel.isOver());
     }
@@ -94,18 +97,18 @@ public class Connect4Test {
      * Test the diagonal right win.
      */
     @Test
-    public void testDiagonalRightWin() {
+    void testDiagonalRightWin() {
         testModel.addDisc(COLUMN_5);
-        testModel.addDisc(4);
-        testModel.addDisc(4);
-        testModel.addDisc(3);
-        testModel.addDisc(3);
-        testModel.addDisc(2);
-        testModel.addDisc(3);
-        testModel.addDisc(2);
-        testModel.addDisc(2);
-        testModel.addDisc(0);
-        testModel.addDisc(2);
+        testModel.addDisc(COLUMN_4);
+        testModel.addDisc(COLUMN_4);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_2);
+        testModel.addDisc(COLUMN_3);
+        testModel.addDisc(COLUMN_2);
+        testModel.addDisc(COLUMN_2);
+        testModel.addDisc(COLUMN_5);
+        testModel.addDisc(COLUMN_2);
         assertTrue(testModel.isOver());
     }
 }

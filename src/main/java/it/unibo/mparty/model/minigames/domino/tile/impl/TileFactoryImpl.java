@@ -21,7 +21,7 @@ public class TileFactoryImpl implements TileFactory {
      */
     @Override
     public List<Tile> createDoubleSixSet() {
-        List<Tile> tiles = IntStream.rangeClosed(0, MAX_TILE_VALUE).boxed()
+        final List<Tile> tiles = IntStream.rangeClosed(0, MAX_TILE_VALUE).boxed()
                 .flatMap(i -> IntStream.rangeClosed(i, MAX_TILE_VALUE).mapToObj(j -> new TileImpl(i, j)))
                 .collect(Collectors.toList());
         Collections.shuffle(tiles);

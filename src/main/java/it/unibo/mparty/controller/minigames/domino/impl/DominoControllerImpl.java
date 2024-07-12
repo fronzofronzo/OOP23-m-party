@@ -16,7 +16,7 @@ import java.util.List;
 public class DominoControllerImpl implements DominoController {
 
     private final DominoModel model;
-    private final DominoView view;
+    private DominoView view;
     private String player1;
     private String player2;
     private boolean isPlayer1Turn;
@@ -28,7 +28,7 @@ public class DominoControllerImpl implements DominoController {
      */
     public DominoControllerImpl(final DominoView view) {
         this.model = new DominoModelImpl();
-        this.view = view;
+        this.setView(view);
     }
 
     /**
@@ -37,7 +37,7 @@ public class DominoControllerImpl implements DominoController {
     @Override
     public void initGame(final List<String> players) {
         this.model.setUpPlayers(players);
-        this.model.getBoardTile().addObserver(this.view);
+        this.model.addBoardObserver(this.view);
         this.player1 = players.get(0);
         this.player2 = players.get(1);
 
@@ -45,7 +45,7 @@ public class DominoControllerImpl implements DominoController {
         this.view.setTurn(this.isPlayer1Turn);
         this.view.setPlayerName(true, this.player1);
         this.view.setPlayerName(false, this.player2);
-        this.view.updateRemainingTileSize(this.model.getDominoSet().size());
+        this.view.updateRemainingTileSize(this.model.getDeckSize());
 
         this.updatePlayersTiles();
         this.updateTurn();
@@ -64,7 +64,7 @@ public class DominoControllerImpl implements DominoController {
             this.endTurn();
         } else {
             this.view.setMessage(DominoMessage.MOVE_NOT_VALID);
-            if (this.model.cannotPlayerPlace(currentPlayer) && !this.model.canDrawTile(currentPlayer)) {
+            if (this.model.playerCannotMakeMove(currentPlayer) && !this.model.canDrawTile(currentPlayer)) {
                 this.view.setMessage(DominoMessage.PASS_TURN);
                 this.endTurn();
             }
@@ -77,7 +77,7 @@ public class DominoControllerImpl implements DominoController {
     @Override
     public void drawTile() {
         this.model.drawTile(this.isPlayer1Turn ? this.player1 : this.player2);
-        this.view.updateRemainingTileSize(this.model.getDominoSet().size());
+        this.view.updateRemainingTileSize(this.model.getDeckSize());
         this.updatePlayersTiles();
         this.checkDraw();
         this.updateTurn();
@@ -106,8 +106,8 @@ public class DominoControllerImpl implements DominoController {
     }
 
     private void updatePlayersTiles() {
-        this.view.setPlayerTiles(true, this.model.getPlayersTiles().getPlayerTiles(this.player1));
-        this.view.setPlayerTiles(false, this.model.getPlayersTiles().getPlayerTiles(this.player2));
+        this.view.setPlayerTiles(true, this.model.getPlayerTiles(this.player1));
+        this.view.setPlayerTiles(false, this.model.getPlayerTiles(this.player2));
     }
 
     private void updateTurn() {
@@ -120,5 +120,9 @@ public class DominoControllerImpl implements DominoController {
         this.updateTurn();
         this.checkDraw();
         this.endGame();
+    }
+
+    private void setView(final DominoView view) {
+        this.view = view;
     }
 }

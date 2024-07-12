@@ -1,11 +1,12 @@
 package it.unibo.mparty.model.minigames.domino.game.api;
 
 import it.unibo.mparty.model.minigames.MinigameModel;
-import it.unibo.mparty.model.minigames.domino.board.api.BoardTile;
-import it.unibo.mparty.model.minigames.domino.player.api.PlayerTiles;
 import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
+import it.unibo.mparty.utilities.Pair;
+import it.unibo.mparty.utilities.api.EObserver;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Interface for the Domino game model.
@@ -44,7 +45,7 @@ public interface DominoModel extends MinigameModel {
      * @param player the player to check
      * @return true if the player cannot place any tiles, false otherwise
      */
-    boolean cannotPlayerPlace(String player);
+    boolean playerCannotMakeMove(String player);
 
     /**
      * Draws a tile from the set and adds it to the specified player's tiles.
@@ -54,23 +55,24 @@ public interface DominoModel extends MinigameModel {
     void drawTile(String player);
 
     /**
-     * Gets the set of remaining tiles.
+     * Gets the size of the domino deck.
      *
-     * @return the list of remaining tiles
+     * @return the size of the domino deck
      */
-    List<Tile> getDominoSet();
+    int getDeckSize();
 
     /**
-     * Gets the tiles for all players.
+     * Gets the tiles of the specified player.
      *
-     * @return the PlayerTiles object containing players' tiles
+     * @param player the player whose tiles are to be retrieved
+     * @return the set of tiles belonging to the player
      */
-    PlayerTiles getPlayersTiles();
+    Set<Tile> getPlayerTiles(String player);
 
     /**
-     * Gets the current board tile.
+     * Adds an observer to the board.
      *
-     * @return the BoardTile object representing the current state of the board
+     * @param obs the observer to add
      */
-    BoardTile getBoardTile();
+    void addBoardObserver(EObserver<? super List<Pair<Integer, Integer>>> obs);
 }

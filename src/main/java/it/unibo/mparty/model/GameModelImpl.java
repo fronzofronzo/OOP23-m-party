@@ -1,12 +1,12 @@
 
 package it.unibo.mparty.model;
 
-import it.unibo.mparty.model.gameBoard.api.GameBoard;
-import it.unibo.mparty.model.gameBoard.boards.SimpleBoardFactory;
+import it.unibo.mparty.model.gameboard.api.GameBoard;
+import it.unibo.mparty.model.gameboard.boards.BoardFactory;
 import it.unibo.mparty.model.item.api.Item;
 import it.unibo.mparty.model.item.impl.ItemName;
-import it.unibo.mparty.model.minigameHandler.MinigameHandler;
-import it.unibo.mparty.model.minigameHandler.MinigameHandlerImplementation;
+import it.unibo.mparty.model.minigamehandler.MinigameHandler;
+import it.unibo.mparty.model.minigamehandler.MinigameHandlerImplementation;
 import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.shop.api.Shop;
@@ -37,11 +37,11 @@ public class GameModelImpl implements GameModel {
     private static final int MIN_COINS = 4;
     private static final int MAX_COINS = 10;
     private static final int STAR_COST = 20;
-    private static final String MESSAGE_ROLL_DICE = " puoi usare un oggetto o tirare solo i dadi.";
-    private static final String MESSAGE_MOVE_PLAYER = " muovi la pedina.";
+    private static final String MESSAGE_ROLL_DICE = " puoi usare un oggetto o tirare solo i dadi";
+    private static final String MESSAGE_MOVE_PLAYER = " muovi la pedina";
     private static final String MESSAGE_MOVING_PLAYER = " muovi la pedina in una delle direzioni possibili:";
     private static final String MESSAGE_ACTIVE_SLOT = " attiva l'effetto dello slot: ";
-    private static final String MESSAGE_END_TURN = " passa il turno.";
+    private static final String MESSAGE_END_TURN = " passa il turno";
 
     private final List<Player> players;
     private final GameBoard board;
@@ -49,9 +49,10 @@ public class GameModelImpl implements GameModel {
     private boolean activateShop;
     private int turn = 1;
     private GameStatus status = GameStatus.ROLL_DICE;
-    private int actualPlayerIndex = 0;
-    private int steps = 0;
+    private int actualPlayerIndex;
+    private int steps;
     private final MinigameHandler minigameHandler;
+    private final Random random;
 
     /**
      * Constructor of the Game Model: creates a new istance of game with players.
@@ -62,21 +63,23 @@ public class GameModelImpl implements GameModel {
      */
     public GameModelImpl(final List<Player> players, final String difficulty) {
         this.activateShop = false;
-        this.players = players;
+        this.players = List.copyOf(players);
         this.minigameHandler = new MinigameHandlerImplementation();
         this.shop = new ShopImpl();
-        final SimpleBoardFactory boardFactory = new SimpleBoardFactory();
-        this.board = boardFactory.createBoard(Arrays.stream(BoardType.values())
+        this.board = BoardFactory.createBoard(Arrays.stream(BoardType.values())
                 .filter(b -> b.toString().equals(difficulty))
                 .findAny().get());
+        this.board.initialiseBoard();
         this.players.forEach(p -> p.setPosition(this.board.getStrartingPosition()));
+        this.random = new Random();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void movePlayer(Optional<Direction> dir) {
+    public void movePlayer(final Optional<Direction> dir) {
+        // Optional<Direction> currentDir = dir;
         if (this.status.equals(GameStatus.MOVE_PLAYER)
                 || this.status.equals(GameStatus.MOVING_PLAYER)) {
             if (this.status.equals(GameStatus.MOVE_PLAYER)) {
@@ -94,11 +97,15 @@ public class GameModelImpl implements GameModel {
                             .get()
                             .getValue());
                 } else {
-                    if (dir.isEmpty() || nextPlayerPos.size() < 1 || !nextPlayerPos.containsKey(dir.get())) {
+                    if (dir.isEmpty() || nextPlayerPos.isEmpty()
+                            || !nextPlayerPos.containsKey(dir.get())) {
                         return;
                     } else {
                         this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.get(dir.get()));
-                        dir = Optional.empty();
+                        // dir = Optional.empty();
+                        this.steps++;
+                        this.movePlayer(Optional.empty());
+                        return;
                     }
                 }
                 this.steps++;
@@ -139,18 +146,19 @@ public class GameModelImpl implements GameModel {
      */
     @Override
     public void useItem(final ItemName itemName) {
-        Item item = this.players.get(actualPlayerIndex).getPlayerBag().useItem(itemName);
-        Optional<Position> position = item.needPosition()
-                ? Optional.of(this.board.getStarPosition())
-                : Optional.empty();
-        Optional<Player> target = Optional.empty();
-        if (item.isOnOthers()) {
-            Set<Player> targets = this.players.stream()
+        if (this.status.equals(GameStatus.ROLL_DICE)) {
+            final Item item = this.players.get(actualPlayerIndex).getPlayerBag().useItem(itemName);
+            final Optional<Position> position = item.needPosition()
+                    ? Optional.of(this.board.getStarPosition())
+                    : Optional.empty();
+            final Set<Player> targets = this.players.stream()
                     .filter(p -> !p.equals(this.players.get(actualPlayerIndex)))
                     .collect(Collectors.toSet());
-            target = Optional.of(RandomFromSet.get(targets));
+            final Optional<Player> target = item.isOnOthers()
+                    ? Optional.of(RandomFromSet.get(targets))
+                    : Optional.empty();
+            item.activate(this.players.get(actualPlayerIndex), target, position);
         }
-        item.activate(this.players.get(actualPlayerIndex), target, position);
     }
 
     /**
@@ -179,7 +187,7 @@ public class GameModelImpl implements GameModel {
      */
     @Override
     public boolean isOver() {
-        return this.turn == TURNS_NUMBER;
+        return this.turn > TURNS_NUMBER;
     }
 
     /**
@@ -198,20 +206,6 @@ public class GameModelImpl implements GameModel {
      * {@inheritDoc}
      */
     @Override
-    public String getWinner() {
-        final int maxStars = players.stream().map(Player::getNumStars).sorted().limit(1).reduce(0, Integer::sum);
-        List<Player> winners = players.stream().filter(p -> p.getNumStars() == maxStars).toList();
-        if (winners.size() != 1) {
-            final int maxMoney = winners.stream().map(Player::getNumCoins).sorted().limit(1).reduce(0, Integer::sum);
-            winners = winners.stream().filter(p -> p.getNumCoins() == maxMoney).toList();
-        }
-        return winners.get(0).getUsername();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Optional<String> getActiveMinigame() {
         return this.minigameHandler.isInGame()
                 ? Optional.of(this.minigameHandler.getMinigame())
@@ -223,29 +217,30 @@ public class GameModelImpl implements GameModel {
      */
     @Override
     public String getMessage() {
-        String output = this.players.get(actualPlayerIndex).getUsername();
+        final StringBuilder stringBuilder = new StringBuilder(this.players.get(actualPlayerIndex).getUsername());
         switch (this.status) {
             case ROLL_DICE:
-                output = output + MESSAGE_ROLL_DICE;
+                stringBuilder.append(MESSAGE_ROLL_DICE);
                 break;
             case MOVE_PLAYER:
-                output = output + MESSAGE_MOVE_PLAYER;
+                stringBuilder.append(MESSAGE_MOVE_PLAYER);
                 break;
             case MOVING_PLAYER:
-                output = output + MESSAGE_MOVING_PLAYER + getDirections();
+                stringBuilder.append(MESSAGE_MOVING_PLAYER);
+                stringBuilder.append(this.getDirections());
                 break;
             case ACTIVE_SLOT:
-                output = output + MESSAGE_ACTIVE_SLOT + "\n" + this.board.getSlotType(this.players.get(actualPlayerIndex).getPosition()) + ".";
+                stringBuilder.append(MESSAGE_ACTIVE_SLOT);
+                stringBuilder.append(this.board.getSlotType(this.players.get(actualPlayerIndex).getPosition()));
                 break;
             case END_TURN:
-                output = output + MESSAGE_END_TURN;
+                stringBuilder.append(MESSAGE_END_TURN);
                 break;
             default:
                 break;
         }
-        return output;
+        return stringBuilder.toString();
     }
-
 
     /**
      * {@inheritDoc}
@@ -268,7 +263,7 @@ public class GameModelImpl implements GameModel {
      */
     @Override
     public List<Item> getItemsFromShop() {
-        return Collections.unmodifiableList(this.shop.getItemList().stream().toList());
+        return this.shop.getItemList().stream().toList();
     }
 
     /**
@@ -299,8 +294,8 @@ public class GameModelImpl implements GameModel {
      * {@inheritDoc}
      */
     @Override
-    public Map<Position, SlotType> getSlotsToUpdate() {
-        return this.board.getSlotsToUpdate();
+    public Map<Position, SlotType> getModifiedSlots() {
+        return this.board.getModifiedSlots();
     }
 
     /**
@@ -318,11 +313,11 @@ public class GameModelImpl implements GameModel {
         }
     }
 
-
     private String getDirections() {
-        Map<Direction, Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
+        final Map<Direction, Position> pos = this.board
+                .getNextPositions(this.players.get(actualPlayerIndex).getPosition());
         String output = "";
-        for (Map.Entry<Direction, Position> entry : pos.entrySet()) {
+        for (final Map.Entry<Direction, Position> entry : pos.entrySet()) {
             if (!output.isBlank()) {
                 output = output.concat(",");
             }
@@ -335,33 +330,22 @@ public class GameModelImpl implements GameModel {
     private void activateSlot() {
         final Player actualPlayer = this.players.get(actualPlayerIndex);
         final SlotType slot = this.board.getSlotType(actualPlayer.getPosition());
-        final Random random = new Random();
         if (this.status.equals(GameStatus.ACTIVE_SLOT)) {
             switch (slot) {
-                case SINGLEPLAYER -> {
-                    try {
-                        this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.SINGLE_PLAYER);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
+                case SINGLEPLAYER ->
+                    this.minigameHandler.startMinigame(List.of(actualPlayer), MinigameType.SINGLE_PLAYER);
                 case MULTIPLAYER -> {
                     final Player otherPlayer = this.players.stream()
                             .filter(p -> !p.equals(actualPlayer))
                             .findAny()
                             .get();
-                    try {
-                        this.minigameHandler.startMinigame(List.of(actualPlayer, otherPlayer), MinigameType.MULTI_PLAYER);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
+                    this.minigameHandler.startMinigame(List.of(actualPlayer, otherPlayer),
+                            MinigameType.MULTI_PLAYER);
                 }
-                case BONUS -> actualPlayer.addCoins(random.nextInt(MIN_COINS, MAX_COINS));
-                case MALUS -> actualPlayer.removeCoins(random.nextInt(MIN_COINS, MAX_COINS));
-                case SHOP -> this.activateShop = true;
-                case ACTIVE_STAR -> {
-                    this.checkStartAcquisition();
-                }
+                case BONUS -> actualPlayer.addCoins(this.random.nextInt(MIN_COINS, MAX_COINS));
+                case MALUS -> actualPlayer.removeCoins(this.random.nextInt(MIN_COINS, MAX_COINS));
+                case SHOP -> this.activeShop();
+                case ACTIVE_STAR -> this.checkStartAcquisition();
                 default -> {
                 }
             }
@@ -377,6 +361,10 @@ public class GameModelImpl implements GameModel {
             actualPlayer.removeCoins(STAR_COST);
             this.board.changeStarPosition();
         }
+    }
+
+    private void activeShop() {
+        this.activateShop = true;
     }
 
 }

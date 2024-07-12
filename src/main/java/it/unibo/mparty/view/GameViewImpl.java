@@ -1,11 +1,12 @@
 package it.unibo.mparty.view;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.mparty.controller.GameControllerImpl;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.utilities.SlotType;
-import it.unibo.mparty.view.GameBoardView.GameBoardView;
-import it.unibo.mparty.view.endGame.api.EndGameView;
+import it.unibo.mparty.view.endgame.api.EndGameView;
+import it.unibo.mparty.view.gameboard.GameBoardView;
 import it.unibo.mparty.view.minigames.MinigameView;
 import it.unibo.mparty.view.shop.api.ShopView;
 import javafx.application.Application;
@@ -45,22 +46,15 @@ public class GameViewImpl extends Application implements GameView {
      * {@inheritDoc}
      */
     @Override
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Needed to save primary stage in stage variable"
+            + " to modify it while the application is running ")
     public void start(final Stage primaryStage) throws Exception {
         this.stage = primaryStage;
         this.stage.getIcons().add(new Image("/images/marioParty.png"));
         this.setBoardView();
-        /*
-        //FAKE START
-        PlayerBuilder pb = new PlayerBuilderImplementation();
-        Player p1 = pb.username("Mario").character("Mario").buildPlayer();
-        Player p2 = pb.username("Luigi").character("Luigi").buildPlayer();
-        Player p3 = pb.username("Daisy").character("Luigi").buildPlayer();
-        Player p4 = pb.username("Peach").character("Luigi").buildPlayer();
-        this.controller.startGame(new GameModelImpl(List.of(p1,p2,p3,p4), "MEDIUM"));
-        */
-        //final Pair<Scene, SceneView> scenePair = this.loadScene("initialScreen");
-        //this.stage.setScene(scenePair.getFirst());
-        this.setMinigameScene("connect4", List.of("player2", "player1"));
+        final Pair<Scene, SceneView> scenePair = this.loadScene("InitialScreen");
+        this.stage.setScene(scenePair.getFirst());
+        // this.setMinigameScene("memorycard", List.of("pl1", "pl2"));
         this.stage.setMinWidth(PREF_WIDTH);
         this.stage.setMinHeight(PREF_HEIGHT);
         this.stage.setMaximized(true);
@@ -106,7 +100,9 @@ public class GameViewImpl extends Application implements GameView {
      * {@inheritDoc}
      */
     @Override
-    public void setUpBoard(final Pair<Integer, Integer> dimension, final Map<Position, SlotType> board, final List<String> usernames) {
+    public void setUpBoard(final Pair<Integer, Integer> dimension,
+            final Map<Position, SlotType> board,
+            final List<String> usernames) {
         this.boardView.setUpBoard(dimension, board, usernames);
     }
 
@@ -122,7 +118,8 @@ public class GameViewImpl extends Application implements GameView {
      * {@inheritDoc}
      */
     @Override
-    public void updatePlayer(final String player, final int coins, final int stars, final List<String> items, final Position position) {
+    public void updatePlayer(final String player, final int coins, final int stars, final List<String> items,
+            final Position position) {
         this.boardView.updatePlayer(player, coins, stars, items, position);
     }
 
@@ -139,10 +136,9 @@ public class GameViewImpl extends Application implements GameView {
      */
     @Override
     public void showResults(final Map<String, Pair<Integer, Integer>> result) throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + "endGame" + EXTENSION));
-        final Parent root = loader.load(getClass().getResourceAsStream(PATH + "endGame" + EXTENSION));
-        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
-        final EndGameView endGameView = ((EndGameView) loader.<SceneView>getController());
+        final Pair<Scene, SceneView> pair = this.loadScene("endGame");
+        final Scene scene = pair.getFirst();
+        final EndGameView endGameView = (EndGameView) pair.getSecond();
         endGameView.showResults(result);
         this.stage.setScene(scene);
         this.setStageSize();
@@ -158,15 +154,16 @@ public class GameViewImpl extends Application implements GameView {
 
     private void setBoardView() throws IOException {
         final Pair<Scene, SceneView> pair = this.loadScene("GameBoard");
-        this.boardScene= pair.getFirst();
+        this.boardScene = pair.getFirst();
         this.boardView = (GameBoardView) pair.getSecond();
     }
 
-
+    @SuppressFBWarnings(value = "UI_INHERITANCE_UNSAFE_GETRESOURCE", justification = "GetResources is already used safely. ")
     private Pair<Scene, SceneView> loadScene(final String name) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + name + EXTENSION));
-        final Parent root = loader.load(getClass().getResourceAsStream(PATH + name + EXTENSION));
-        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE), root.prefHeight(DEFAULT_DIMENSION_VALUE));
+        final Parent root = loader.load();
+        final Scene scene = new Scene(root, root.prefWidth(DEFAULT_DIMENSION_VALUE),
+                root.prefHeight(DEFAULT_DIMENSION_VALUE));
         final SceneView sceneView = loader.getController();
         sceneView.init(this, this.controller);
         return new Pair<>(scene, sceneView);

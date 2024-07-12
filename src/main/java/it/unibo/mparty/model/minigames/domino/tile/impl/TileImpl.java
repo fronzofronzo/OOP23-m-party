@@ -2,6 +2,7 @@ package it.unibo.mparty.model.minigames.domino.tile.impl;
 
 import it.unibo.mparty.model.minigames.domino.tile.api.Side;
 import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
+import it.unibo.mparty.utilities.Pair;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -11,8 +12,8 @@ import java.util.Optional;
  */
 public class TileImpl implements Tile {
 
-    private Side sideA;
-    private Side sideB;
+    private Pair<SideType, Side> sideA;
+    private Pair<SideType, Side> sideB;
 
     /**
      * Constructs a new {@link TileImpl} with the specified values for the sides.
@@ -21,39 +22,29 @@ public class TileImpl implements Tile {
      * @param sideB the value of side B
      */
     public TileImpl(final int sideA, final int sideB) {
-        this.sideA = new SideImpl(sideA);
-        this.sideB = new SideImpl(sideB);
+        this.sideA = new Pair<>(SideType.SIDE_A, new SideImpl(sideA));
+        this.sideB = new Pair<>(SideType.SIDE_B, new SideImpl(sideB));
     }
-
 
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean match(final Tile tile) {
-        final Optional<Side> matchedSideA = this.canMatchSide(this.sideA, tile);
-        if (matchedSideA.isPresent()) {
-            final Side matchedTileSide = matchedSideA.get();
-            this.sideA.setMatched();
-            matchedTileSide.setMatched();
+        return canMatchSide(this.sideA, tile) || canMatchSide(this.sideB, tile);
+    }
 
-            if (matchedTileSide == tile.getSideA()) {
-                tile.reverse();
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setMatched(final SideType side) {
+        switch (side) {
+            case SIDE_A -> this.sideA.getSecond().setMatched();
+            case SIDE_B -> this.sideB.getSecond().setMatched();
+            default -> {
             }
-            return true;
         }
-        final Optional<Side> matchedSideB = this.canMatchSide(this.sideB, tile);
-        if (matchedSideB.isPresent()) {
-            final Side matchedTileSide = matchedSideB.get();
-            this.sideB.setMatched();
-            matchedTileSide.setMatched();
-
-            if (matchedTileSide == tile.getSideB()) {
-                tile.reverse();
-            }
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -61,9 +52,9 @@ public class TileImpl implements Tile {
      */
     @Override
     public void reverse() {
-        final Side tempA = this.sideA;
-        this.sideA = this.sideB;
-        this.sideB = tempA;
+        final Side tempA = this.sideA.getSecond();
+        this.sideA = new Pair<>(SideType.SIDE_A, this.sideB.getSecond());
+        this.sideB = new Pair<>(SideType.SIDE_B, tempA);
     }
 
     /**
@@ -71,7 +62,8 @@ public class TileImpl implements Tile {
      */
     @Override
     public boolean canMatch(final Tile tile) {
-        return this.canMatchSide(this.sideA, tile).isPresent() || this.canMatchSide(this.sideB, tile).isPresent();
+        return this.matchedSide(this.sideA.getSecond(), tile).isPresent()
+                || this.matchedSide(this.sideB.getSecond(), tile).isPresent();
     }
 
     /**
@@ -79,23 +71,29 @@ public class TileImpl implements Tile {
      */
     @Override
     public boolean isDoubleSide() {
-        return this.sideA.getValue() == this.sideB.getValue();
+        return this.sideA.getSecond().getValue() == this.sideB.getSecond().getValue();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Side getSideA() {
-        return this.sideA;
+    public int getSideValue(final SideType side) {
+        return switch (side) {
+            case SIDE_A -> this.sideA.getSecond().getValue();
+            case SIDE_B -> this.sideB.getSecond().getValue();
+        };
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Side getSideB() {
-        return this.sideB;
+    public boolean isSideMatched(final SideType side) {
+        return switch (side) {
+            case SIDE_A -> this.sideA.getSecond().isMatched();
+            case SIDE_B -> this.sideB.getSecond().isMatched();
+        };
     }
 
     /**
@@ -110,8 +108,13 @@ public class TileImpl implements Tile {
             return false;
         }
         final TileImpl tile = (TileImpl) o;
-        return (this.sideA.getValue() == tile.sideA.getValue() && this.sideB.getValue() == tile.sideB.getValue())
-                || (this.sideA.getValue() == tile.sideB.getValue() && this.sideB.getValue() == tile.sideA.getValue());
+        final boolean directEquality = Objects.equals(sideA, tile.sideA) && Objects.equals(sideB, tile.sideB);
+        final boolean reversedEquality = Objects.equals(sideA, tile.sideB) && Objects.equals(sideB, tile.sideA);
+        final boolean valueEquality = this.sideA.getSecond().getValue() == tile.sideA.getSecond().getValue()
+                && this.sideB.getSecond().getValue() == tile.sideB.getSecond().getValue()
+                || this.sideA.getSecond().getValue() == tile.sideB.getSecond().getValue()
+                && this.sideB.getSecond().getValue() == tile.sideA.getSecond().getValue();
+        return directEquality || reversedEquality || valueEquality;
     }
 
     /**
@@ -119,8 +122,8 @@ public class TileImpl implements Tile {
      */
     @Override
     public int hashCode() {
-        final int valueA = this.sideA.getValue();
-        final int valueB = this.sideB.getValue();
+        final int valueA = this.sideA.getSecond().getValue();
+        final int valueB = this.sideB.getSecond().getValue();
         return valueA <= valueB ? Objects.hash(valueA, valueB) : Objects.hash(valueB, valueA);
     }
 
@@ -130,20 +133,32 @@ public class TileImpl implements Tile {
     @Override
     public String toString() {
         return "TileImpl{"
-                + "sideA=" + this.sideA
-                + ", sideB=" + this.sideB
+                + this.sideA
+                + ", " + this.sideB
                 + '}';
     }
 
-    private Optional<Side> canMatchSide(final Side side, final Tile tile) {
-        if (side.isMatched()) {
-            return Optional.empty();
-        } else if (side.getValue() == tile.getSideA().getValue()) {
-            return Optional.of(tile.getSideA());
-        } else if (side.getValue() == tile.getSideB().getValue()) {
-            return Optional.of(tile.getSideB());
-        } else {
-            return Optional.empty();
+    private Optional<SideType> matchedSide(final Side side, final Tile tile) {
+        if (!side.isMatched()) {
+            if (side.getValue() == tile.getSideValue(SideType.SIDE_A)) {
+                return Optional.of(SideType.SIDE_A);
+            } else if (side.getValue() == tile.getSideValue(SideType.SIDE_B)) {
+                return Optional.of(SideType.SIDE_B);
+            }
         }
+        return Optional.empty();
+    }
+
+    private boolean canMatchSide(final Pair<SideType, Side> side, final Tile tile) {
+        final Optional<SideType> matchedSide = this.matchedSide(side.getSecond(), tile);
+        if (matchedSide.isPresent()) {
+            side.getSecond().setMatched();
+            tile.setMatched(matchedSide.get());
+            if (side.getFirst() == matchedSide.get()) {
+                tile.reverse();
+            }
+            return true;
+        }
+        return false;
     }
 }

@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  */
 public class GameControllerImpl implements GameController {
 
-    private final GameView view;
+    private GameView view;
     private GameModel model;
 
     /**
@@ -34,7 +34,7 @@ public class GameControllerImpl implements GameController {
      * @param view to set like {@link GameView} reference to the game.
      */
     public GameControllerImpl(final GameView view) {
-        this.view = view;
+        this.setView(view);
     }
 
     /**
@@ -43,7 +43,7 @@ public class GameControllerImpl implements GameController {
     @Override
     public void startGame(final GameModel model) throws IOException {
         this.model = model;
-        List<String> usernames = this.model.getPlayers()
+        final List<String> usernames = this.model.getPlayers()
                 .stream()
                 .map(Player::getUsername)
                 .toList();
@@ -98,7 +98,7 @@ public class GameControllerImpl implements GameController {
         }
         this.updateCommandView();
         this.updatePlayersView();
-        this.view.updateBoard(this.model.getSlotsToUpdate());
+        this.view.updateBoard(this.model.getModifiedSlots());
         this.checkEndGame();
     }
 
@@ -107,8 +107,8 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void setUpShop(final ShopView shopView) {
-        Map<ItemName, Pair<Integer, String>> itemMap = new LinkedHashMap<>();
-        this.model.getItemsFromShop().stream().forEachOrdered(it -> itemMap.put(it.getName(),
+        final Map<ItemName, Pair<Integer, String>> itemMap = new LinkedHashMap<>();
+        this.model.getItemsFromShop().forEach(it -> itemMap.put(it.getName(),
                 new Pair<>(it.getCost(), it.getDescription())));
         itemMap.forEach((it, p) -> shopView.addItemView(it, p.getFirst(), p.getSecond()));
         this.updateCommandView();
@@ -139,8 +139,8 @@ public class GameControllerImpl implements GameController {
 
     private void checkEndGame() throws IOException {
         if (this.model.isOver()) {
-            List<Player> players = this.model.getPlayers();
-            Map<String, Pair<Integer, Integer>> result = players.stream()
+            final List<Player> players = this.model.getPlayers();
+            final Map<String, Pair<Integer, Integer>> result = players.stream()
                     .sorted(Comparator
                             .comparingInt(Player::getNumStars)
                             .thenComparingInt(Player::getNumCoins)
@@ -156,7 +156,7 @@ public class GameControllerImpl implements GameController {
     }
 
     private void updatePlayersView() {
-        List<Player> players = this.model.getPlayers();
+        final List<Player> players = this.model.getPlayers();
         players.forEach(p -> this.view.updatePlayer(p.getUsername(),
                 p.getNumCoins(),
                 p.getNumStars(),
@@ -176,5 +176,9 @@ public class GameControllerImpl implements GameController {
                         .toList(),
                 this.model.getMessage(),
                 this.model.getTurn());
+    }
+
+    private void setView(final GameView view) {
+        this.view = view;
     }
 }
