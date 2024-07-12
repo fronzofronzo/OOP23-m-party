@@ -52,7 +52,7 @@ public class BoardImpl implements Board {
     /**
      * Retrieves the board map.
      *
-     * @return the board map.
+     * @return the board map
      */
     @Override
     public Map<Position, Boolean> getBoard() {

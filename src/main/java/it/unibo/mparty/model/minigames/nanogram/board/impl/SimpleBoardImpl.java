@@ -19,7 +19,7 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
     /**
      * Constructs a SimpleBoardImpl object with the specified size and fill percentage.
      *
-     * @param size           the size of the board (size x size).
+     * @param size the size of the board (size x size).
      * @param fillPercentage the percentage of cells to be initially filled (true).
      */
     public SimpleBoardImpl(final int size, final double fillPercentage) {
