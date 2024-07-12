@@ -224,7 +224,7 @@ public class GameModelImpl implements GameModel {
                 stringBuilder.append(MESSAGE_MOVE_PLAYER);
                 break;
             case MOVING_PLAYER:
-                stringBuilder.append(MESSAGE_MOVE_PLAYER);
+                stringBuilder.append(MESSAGE_MOVING_PLAYER);
                 stringBuilder.append(this.getDirections());
                 break;
             case ACTIVE_SLOT:
