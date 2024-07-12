@@ -15,4 +15,5 @@ che sono sicuramente vuote.
 
 FINE DELLA PARTITA:
 La partita termina quando tutte le
-celle sono correttamente colorate.
+celle sono correttamente colorate
+oppure se si finiscono le vite.
