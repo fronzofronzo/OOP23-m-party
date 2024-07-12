@@ -18,7 +18,6 @@ import org.testfx.util.WaitForAsyncUtils;
 
 import static org.awaitility.Awaitility.await;
 import static org.testfx.assertions.api.Assertions.assertThat;
-import static org.testfx.util.NodeQueryUtils.hasText;
 
 /**
  * Test class for {@link DominoViewImpl} class.
@@ -41,7 +40,7 @@ class DominoViewImplTest extends ApplicationTest {
 
 
     /**
-     * Will be called with {@code @Before} semantics, i. e. before each test method.
+     * Will be called with {@code @Before} semantics, i.e. before each test method.
      *
      * @param stage - Will be injected by the test runner.
      */
