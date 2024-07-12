@@ -197,7 +197,7 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
 
     private StackPane createStackPaneWithCircle(final Color colore) {
         final Circle c = new Circle(RADIUS, colore);
-        StackPane stackPane = new StackPane();
+        final StackPane stackPane = new StackPane();
         stackPane.setAlignment(Pos.CENTER);
         stackPane.getChildren().add(c);
         return stackPane;
