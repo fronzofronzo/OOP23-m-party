@@ -35,7 +35,7 @@ class MemoryCardViewImplTest extends ApplicationTest {
     private Parent root;
 
     @BeforeAll
-    static public void setup() {
+    static void setup() {
         WaitForAsyncUtils.checkAllExceptions = false;
         WaitForAsyncUtils.autoCheckException = false;
     }
