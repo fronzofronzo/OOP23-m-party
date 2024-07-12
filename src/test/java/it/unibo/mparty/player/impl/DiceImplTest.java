@@ -5,6 +5,7 @@ import it.unibo.mparty.model.player.impl.DiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Test class for a {@link DiceImpl} class.
@@ -42,6 +43,18 @@ class DiceImplTest {
         final int numAttempts = 3;
         this.testDice.setNumberOfAttempts(numAttempts);
         assertEquals(numAttempts, this.testDice.getNumOfAttempts());
+    }
+
+    /**
+     * Check that the result of the dice is a number between bounds.
+     */
+    @Test
+    void rollingDice() {
+        final int min = this.testDice.getBounds().getFirst();
+        final int max = this.testDice.getBounds().getSecond();
+        this.testDice.rollDice();
+        final int diceResult = this.testDice.getResult();
+        assertTrue(diceResult >= min && diceResult <= max);
     }
 
 }

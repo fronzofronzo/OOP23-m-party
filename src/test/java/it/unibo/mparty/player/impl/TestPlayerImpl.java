@@ -1,6 +1,8 @@
 package it.unibo.mparty.player.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import it.unibo.mparty.model.player.api.Player;
 import it.unibo.mparty.model.player.impl.PlayerImpl;
 import it.unibo.mparty.utilities.Position;
@@ -16,14 +18,14 @@ class TestPlayerImpl {
     private static final int RANDOM_BOUND = 100;
     private static final Random RANDOM = new Random();
     private Player testPlayer;
+    final String username = "username";
+    final String character = "Luigi";
 
     /**
      * Configuration step: this is performed before each test.
      */
     @BeforeEach
     void init() {
-        final String username = "username";
-        final String character = "Luigi";
         testPlayer = new PlayerImpl(username, character);
     }
 
@@ -32,6 +34,8 @@ class TestPlayerImpl {
      */
     @Test
     void testPlayerInitialization() {
+        assertEquals(username, testPlayer.getUsername());
+        assertEquals(character, testPlayer.getCharacter().getName());
         assertEquals(0, testPlayer.getNumStars());
         assertEquals(0, testPlayer.getNumCoins());
     }
@@ -69,6 +73,15 @@ class TestPlayerImpl {
         final Position position = new Position(RANDOM.nextInt(RANDOM_BOUND), RANDOM.nextInt(RANDOM_BOUND));
         this.testPlayer.setPosition(position);
         assertEquals(position, this.testPlayer.getPosition());
+    }
+
+    /**
+     * Check that player has PlayerBag and Dice correctly initialized.
+     */
+    @Test
+    void playerDiceBag() {
+        assertNotNull(this.testPlayer.getPlayerBag());
+        assertNotNull(this.testPlayer.getDice());
     }
 
 }
