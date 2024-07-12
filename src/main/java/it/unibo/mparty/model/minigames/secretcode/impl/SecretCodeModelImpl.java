@@ -2,9 +2,11 @@ package it.unibo.mparty.model.minigames.secretcode.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.Map;
 
 import it.unibo.mparty.model.minigames.MinigameType;
@@ -186,7 +188,28 @@ public class SecretCodeModelImpl implements SecretCodeModel {
         if (hasGuessed(results)) {
             this.winner = Optional.of(this.getCurrentPlayer());
         }
-        return Collections.unmodifiableList(results);
+        return Collections.unmodifiableList(results.stream()
+                .sorted(new Comparator<SecretCodeResults>() {
+
+                    @Override
+                    public int compare(final SecretCodeResults o1, final SecretCodeResults o2) {
+                        if (o1.equals(o2)) {
+                            return 0;
+                        }
+                        if (o1.equals(SecretCodeResults.CORRECT_COLOR_AND_POSITION)) {
+                            return -1;
+                        }
+                        if (o1.equals(SecretCodeResults.WRONG_COLOR)) {
+                            return 1;
+                        }
+                        if (o2.equals(SecretCodeResults.CORRECT_COLOR_AND_POSITION)) {
+                            return 1;
+                        }
+                        return -1;
+                    }
+
+                })
+                .collect(Collectors.toList()));
     }
 
     private boolean hasGuessed(final List<SecretCodeResults> results) {
