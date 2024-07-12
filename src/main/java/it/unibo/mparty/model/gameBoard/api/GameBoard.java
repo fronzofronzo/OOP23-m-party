@@ -12,6 +12,11 @@ import it.unibo.mparty.utilities.SlotType;
  * This interface models a game board.
  */
     public interface GameBoard {
+    
+    /**
+     * 
+     */
+    void initialiseBoard();
 
     /**
      * Change tha actual {@link Position} of the {@link SlotType.ACTIVE_STAR}.

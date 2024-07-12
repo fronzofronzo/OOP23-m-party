@@ -69,6 +69,7 @@ public class GameModelImpl implements GameModel {
         this.board = BoardFactory.createBoard(Arrays.stream(BoardType.values())
                 .filter(b -> b.toString().equals(difficulty))
                 .findAny().get());
+        this.board.initialiseBoard();
         this.players.forEach(p -> p.setPosition(this.board.getStrartingPosition()));
         this.random = new Random();
     }

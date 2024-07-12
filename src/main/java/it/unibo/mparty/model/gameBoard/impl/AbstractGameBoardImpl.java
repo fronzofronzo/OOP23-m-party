@@ -78,6 +78,13 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
         this.board = new HashMap<>();
         this.avaiableSlotTypes = getAviableSlotType();
         this.updateStarsSlot = false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initialiseBoard() {
         this.generateBoard();
     }
 

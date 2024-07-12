@@ -2,6 +2,8 @@ package it.unibo.mparty.controller.minigames.secretcode;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.unibo.mparty.model.minigames.secretcode.api.SecretCodeModel;
 import it.unibo.mparty.model.minigames.secretcode.impl.SecretCodeModelImpl;
@@ -15,6 +17,7 @@ import it.unibo.mparty.view.minigames.secretcode.SecretCodeView;
  */
 public class SecretCodeControllerImpl implements SecretCodeController {
 
+    private static final Logger LOGGER = Logger.getLogger(SecretCodeControllerImpl.class.getName());
     private final SecretCodeModel model;
     private final SecretCodeView view;
 
@@ -39,7 +42,7 @@ public class SecretCodeControllerImpl implements SecretCodeController {
             try {
                 this.view.getMainView().setBoardScene();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, "ERROR: ", e);
             }
         }
     }
@@ -58,7 +61,8 @@ public class SecretCodeControllerImpl implements SecretCodeController {
     @Override
     public void addColor(final SecretCodeColors color) {
         if (!this.model.isOver() && this.model.addColor(color)) {
-            final Pair<Integer, Integer> pos = new Pair<>(this.model.getCurrentGuess().size() - 1, this.model.getTurn());
+            final Pair<Integer, Integer> pos = new Pair<>(this.model.getCurrentGuess().size() - 1,
+                    this.model.getTurn());
             this.view.updateGuess(this.model.getCurrentPlayer(), pos, color);
         }
         this.updateEndaGame();
