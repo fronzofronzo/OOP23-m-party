@@ -3,11 +3,11 @@ package it.unibo.mparty.view.minigames.domino.impl;
 import it.unibo.mparty.controller.minigames.domino.api.DominoController;
 import it.unibo.mparty.controller.minigames.domino.impl.DominoControllerImpl;
 import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
+import it.unibo.mparty.model.minigames.domino.tile.impl.SideType;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
 import it.unibo.mparty.view.minigames.domino.DominoMessage;
 import it.unibo.mparty.view.minigames.domino.api.DominoView;
-
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -162,7 +162,7 @@ public class DominoViewImpl extends AbstractSceneView implements DominoView {
             tileBox.setAlignment(Pos.CENTER);
             VBox.setVgrow(tileBox, Priority.ALWAYS);
             VBox.setMargin(tileBox, new Insets(0, PREF_SIZE, 0, PREF_SIZE));
-            this.generateTile(tileBox, tile.getSideA().getValue(), tile.getSideB().getValue());
+            this.generateTile(tileBox, tile.getSideValue(SideType.SIDE_A), tile.getSideValue(SideType.SIDE_B));
             tileBox.setStyle("-fx-border-color: #d3d3d3; -fx-border-width: 1px; -fx-border-style: solid;");
             playerTilesBox.getChildren().add(tileBox);
         }
