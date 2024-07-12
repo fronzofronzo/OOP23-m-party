@@ -31,14 +31,6 @@ public class LiveImpl implements Live {
      * {@inheritDoc}
      */
     @Override
-    public void reset() {
-        this.lives = INITIAL_LIVES;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void decrease() {
         this.lives--;
     }

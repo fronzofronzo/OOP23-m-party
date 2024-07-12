@@ -14,11 +14,6 @@ public interface Live {
     int getLive();
 
     /**
-     * Resets the number of lives to the initial value.
-     */
-    void reset();
-
-    /**
      * Decreases the number of lives by one.
      */
     void decrease();

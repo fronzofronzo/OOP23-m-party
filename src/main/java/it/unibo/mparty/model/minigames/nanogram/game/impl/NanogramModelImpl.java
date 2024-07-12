@@ -41,7 +41,6 @@ public class NanogramModelImpl implements NanogramModel {
         this.hittedBoard = new BoardImpl(SIZE_SIMPLE_BOARD);
         this.rowHints = this.solutionBoard.generateHints(true);
         this.columnHints = this.solutionBoard.generateHints(false);
-        this.lives.reset();
     }
 
     /**
