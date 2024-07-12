@@ -59,7 +59,7 @@ public interface PerilousPath extends MinigameModel {
      * @return the type of that button
      */
     Type hit(AbstractPosition p);
-    
+
     /**
      * @return the side of the grid which is a square
      */
