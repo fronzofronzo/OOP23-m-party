@@ -11,10 +11,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.mparty.model.minigames.secretcode.api.SecretCodeModel;
-import it.unibo.mparty.model.minigames.secretcode.impl.SecretCodeModelImpl;
-import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeColors;
-import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeResults;
+import it.unibo.mparty.model.minigames.ciao.api.SecretCodeModel;
+import it.unibo.mparty.model.minigames.ciao.impl.SecretCodeModelImpl;
+import it.unibo.mparty.model.minigames.ciao.util.SecretCodeColors;
+import it.unibo.mparty.model.minigames.ciao.util.SecretCodeResults;
 
 /**
  * This class test {@link SecretCodeModel}.

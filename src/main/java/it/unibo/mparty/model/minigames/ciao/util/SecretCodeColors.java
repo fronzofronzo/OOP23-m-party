@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.secretcode.util;
+package it.unibo.mparty.model.minigames.ciao.util;
 
 /**
  * The enum SecretCodeColors identifies the colors acceptlae for the game

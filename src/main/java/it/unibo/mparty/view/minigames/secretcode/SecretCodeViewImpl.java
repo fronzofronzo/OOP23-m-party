@@ -6,8 +6,8 @@ import java.util.Map;
 
 import it.unibo.mparty.controller.minigames.secretcode.SecretCodeController;
 import it.unibo.mparty.controller.minigames.secretcode.SecretCodeControllerImpl;
-import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeColors;
-import it.unibo.mparty.model.minigames.secretcode.util.SecretCodeResults;
+import it.unibo.mparty.model.minigames.ciao.util.SecretCodeColors;
+import it.unibo.mparty.model.minigames.ciao.util.SecretCodeResults;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
 import javafx.event.ActionEvent;
@@ -148,6 +148,7 @@ public class SecretCodeViewImpl extends AbstractSceneView implements SecretCodeV
 
     @FXML
     @SuppressWarnings("PMD.UnusedPrivateMethod")
+    
     private void addColor(final ActionEvent e) {
         final Button bt = (Button) e.getSource();
         if (bt.equals(this.buttonGreen)) {
