@@ -111,7 +111,7 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
 
         final Stage stage = new Stage();
         stage.setTitle("Nanogram Tutorial");
-        stage.getIcons().add(new Image("/images/marioParty.png"));
+        stage.getIcons().add(new Image("/images/idea.png"));
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(this.pane.getScene().getWindow());
         stage.setScene(new Scene(root));
