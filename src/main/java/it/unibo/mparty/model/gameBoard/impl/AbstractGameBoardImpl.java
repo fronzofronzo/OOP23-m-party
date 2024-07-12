@@ -76,7 +76,9 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
         this.rules = new HashMap<>(rules);
         this.boardType = boardType;
         this.board = new HashMap<>();
-        this.initialiteBoard();
+        this.avaiableSlotTypes = getAviableSlotType();
+        this.updateStarsSlot = false;
+        this.generateBoard();
     }
 
     /**
@@ -231,22 +233,12 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
         return Math.abs(from.getX() - to.getX()) + Math.abs(from.getY() - to.getY()) == 1;
     }
 
-    /**
-     * This class is called in the constructor in order to create the board based on
-     * the input data of the constructor.
-     */
-    protected void generateBoard() {
+    private void generateBoard() {
         this.addSlot(RandomFromSet.get(this.starsPositions), SlotType.ACTIVE_STAR);
         this.starsPositions
                 .forEach(p -> this.addSlot(p, SlotType.NOT_ACTIVE_STAR));
         this.addSlot(this.getStrartingPosition(), SlotType.PATH);
         this.createPathFromFile(this.filePath);
-    }
-
-    private void initialiteBoard() {
-        this.avaiableSlotTypes = getAviableSlotType();
-        this.updateStarsSlot = false;
-        this.generateBoard();
     }
 
     private void addSlot(final Position position, final SlotType slotType) {
