@@ -1,6 +1,7 @@
 package it.unibo.mparty.model.minigames.domino;
 
 import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
+import it.unibo.mparty.model.minigames.domino.tile.impl.SideType;
 import it.unibo.mparty.model.minigames.domino.tile.impl.TileImpl;
 import org.junit.jupiter.api.Test;
 
@@ -29,8 +30,8 @@ class TileImplTest {
     @Test
     void testTile() {
         this.tile = new TileImpl(SIDE_0, SIDE_1);
-        assertEquals(SIDE_0, this.tile.getSideA().getValue());
-        assertEquals(SIDE_1, this.tile.getSideB().getValue());
+        assertEquals(SIDE_0, this.tile.getSideValue(SideType.SIDE_A));
+        assertEquals(SIDE_1, this.tile.getSideValue(SideType.SIDE_B));
     }
 
     /**
@@ -76,8 +77,8 @@ class TileImplTest {
     void testReverse() {
         this.tile = new TileImpl(SIDE_1, SIDE_2);
         this.tile.reverse();
-        assertEquals(SIDE_2, this.tile.getSideA().getValue());
-        assertEquals(SIDE_1, this.tile.getSideB().getValue());
+        assertEquals(SIDE_2, this.tile.getSideValue(SideType.SIDE_A));
+        assertEquals(SIDE_1, this.tile.getSideValue(SideType.SIDE_B));
     }
 
     /**

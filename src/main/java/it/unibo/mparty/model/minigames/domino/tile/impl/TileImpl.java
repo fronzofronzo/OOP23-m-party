@@ -78,22 +78,6 @@ public class TileImpl implements Tile {
      * {@inheritDoc}
      */
     @Override
-    public Side getSideA() {
-        return this.sideA.getSecond();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Side getSideB() {
-        return this.sideB.getSecond();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public int getSideValue(final SideType side) {
         return switch (side) {
             case SIDE_A -> this.sideA.getSecond().getValue();
