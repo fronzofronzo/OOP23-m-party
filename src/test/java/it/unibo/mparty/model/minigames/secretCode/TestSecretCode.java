@@ -20,7 +20,7 @@ import it.unibo.mparty.model.minigames.secretCode.util.SecretCodeResults;
  */
 class TestSecretCode {
 
-    private static SecretCodeModel model;
+    private SecretCodeModel model;
 
     /**
      * This class initialises the model befor each test method.
