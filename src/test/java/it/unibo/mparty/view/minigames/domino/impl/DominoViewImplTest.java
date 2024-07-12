@@ -9,11 +9,12 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.api.FxAssert;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.framework.junit5.Start;
 import org.testfx.util.WaitForAsyncUtils;
 
-import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.hasText;
 
 /**
@@ -35,10 +36,13 @@ class DominoViewImplTest extends ApplicationTest {
         WaitForAsyncUtils.autoCheckException = false;
     }
 
+
     /**
-     * {@inheritDoc}
+     * Will be called with {@code @Before} semantics, i. e. before each test method.
+     *
+     * @param stage - Will be injected by the test runner.
      */
-    @Override
+    @Start
     public void start(final Stage stage) throws Exception {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/minigames/domino.fxml"));
         this.root = loader.load();
@@ -53,7 +57,7 @@ class DominoViewImplTest extends ApplicationTest {
     @Test
     void drawButtonClicked() {
         final Button button = from(this.root).lookup("#drawButton").query();
-        verifyThat(button, hasText("Pesca Tessera"));
+        FxAssert.verifyThat(button, hasText("Pesca Tessera"));
     }
 
     /**
@@ -62,7 +66,7 @@ class DominoViewImplTest extends ApplicationTest {
     @Test
     void playButtonClicked() {
         final Button button = from(this.root).lookup("#playButton").query();
-        verifyThat(button, hasText("Gioca Tessera"));
+        FxAssert.verifyThat(button, hasText("Gioca Tessera"));
     }
 
     /**
@@ -71,7 +75,7 @@ class DominoViewImplTest extends ApplicationTest {
     @Test
     void tutorialClicked() {
         final Button button = from(this.root).lookup("#tutorialButton").query();
-        verifyThat(button, hasText("Tutorial"));
+        FxAssert.verifyThat(button, hasText("Tutorial"));
     }
 
     /**
@@ -80,6 +84,6 @@ class DominoViewImplTest extends ApplicationTest {
     @Test
     void playerCanDraw() {
         final Button button = from(this.root).lookup("#drawButton").query();
-        verifyThat(button, Node::isDisabled);
+        FxAssert.verifyThat(button, Node::isDisabled);
     }
 }
