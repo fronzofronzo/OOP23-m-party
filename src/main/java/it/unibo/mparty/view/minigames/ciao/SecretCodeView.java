@@ -1,4 +1,4 @@
-package it.unibo.mparty.view.minigames.secretcode;
+package it.unibo.mparty.view.minigames.ciao;
 
 import java.util.List;
 
