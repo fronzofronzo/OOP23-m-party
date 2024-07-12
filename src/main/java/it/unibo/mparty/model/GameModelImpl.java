@@ -37,11 +37,11 @@ public class GameModelImpl implements GameModel {
     private static final int MIN_COINS = 4;
     private static final int MAX_COINS = 10;
     private static final int STAR_COST = 20;
-    private static final String MESSAGE_ROLL_DICE = " puoi usare un oggetto o tirare solo i dadi.";
-    private static final String MESSAGE_MOVE_PLAYER = " muovi la pedina.";
+    private static final String MESSAGE_ROLL_DICE = " puoi usare un oggetto o tirare solo i dadi";
+    private static final String MESSAGE_MOVE_PLAYER = " muovi la pedina";
     private static final String MESSAGE_MOVING_PLAYER = " muovi la pedina in una delle direzioni possibili:";
     private static final String MESSAGE_ACTIVE_SLOT = " attiva l'effetto dello slot: ";
-    private static final String MESSAGE_END_TURN = " passa il turno.";
+    private static final String MESSAGE_END_TURN = " passa il turno";
 
     private final List<Player> players;
     private final GameBoard board;
@@ -230,7 +230,6 @@ public class GameModelImpl implements GameModel {
             case ACTIVE_SLOT:
                 stringBuilder.append(MESSAGE_ACTIVE_SLOT);
                 stringBuilder.append(this.board.getSlotType(this.players.get(actualPlayerIndex).getPosition()));
-                stringBuilder.append(".");
                 break;
             case END_TURN:
                 stringBuilder.append(MESSAGE_END_TURN);
