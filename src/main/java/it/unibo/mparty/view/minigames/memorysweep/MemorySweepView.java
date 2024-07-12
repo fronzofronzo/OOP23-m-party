@@ -17,7 +17,7 @@ public interface MemorySweepView extends MinigameView {
      *
      * @param randoms the group of randomly chosen positions
      */
-    void setUp(Set<Position> randoms);
+    void setUpGame(Set<Position> randoms);
 
     /**
      * method that manages the aftermath of the clicked button.

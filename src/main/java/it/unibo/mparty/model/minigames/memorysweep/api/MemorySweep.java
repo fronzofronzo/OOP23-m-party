@@ -54,7 +54,7 @@ public interface MemorySweep extends MinigameModel {
      *
      * @return true if it is the turn of one player, false if it is the turn of the other player
      */
-    boolean getTurn();
+    boolean turn();
 
     /**
      * method for getting the winner of the game.

@@ -10,7 +10,7 @@ public interface PerilousPathController extends MinigameController {
     /**
      * methods that manages the setting up of the view and model of Perilous Path mini-game.
      */
-    void setUp() throws InterruptedException;
+    void setUpGame() throws InterruptedException;
 
     /**
      * method that manages the click of a button in the view and links it with the model.

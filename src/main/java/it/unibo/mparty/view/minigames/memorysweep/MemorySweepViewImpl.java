@@ -24,6 +24,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * implementation of {@link MemorySweepView}.
  */
@@ -55,7 +58,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
     @Override
     public void handleStartButton(final ActionEvent e) {
         this.startButton.setDisable(true);
-        this.controller.setUp();
+        this.controller.setUpGame();
 
     }
 
@@ -63,7 +66,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
      * {@inheritDoc}
      */
     @Override
-    public void setUp(final Set<Position> randoms) {
+    public void setUpGame(final Set<Position> randoms) {
         this.memorySweepGrid.setDisable(true);
         for (final var child : this.memorySweepGrid.getChildren()) {
             final var position = this.buttonPos((Button) child);
@@ -97,7 +100,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
                 } else {
                     this.setLabelText(this.players.get(1) + " HA FINITO IL TURNO, TOCCA A " + this.players.get(0));
                 }
-                this.controller.setUp();
+                this.controller.setUpGame();
             }
             case LOSS -> {
                 for (final var child : this.memorySweepGrid.getChildren()) {
@@ -144,7 +147,8 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
             try {
                 this.getMainView().setBoardScene();
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                final Logger logger = Logger.getAnonymousLogger();
+                logger.log(Level.SEVERE, ex.toString());
             }
         });
         this.setLabelText(result.getFirst() + " HA VINTO " + result.getSecond() + " COINS");
@@ -180,11 +184,12 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
         this.label.setWrapText(true);
         final InputStream input = getClass().getClassLoader().getResourceAsStream(PATH);
         if (input != null) {
-            String text;
+            String text = "";
             try {
                 text = new String(input.readAllBytes(), StandardCharsets.UTF_8);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                final Logger logger = Logger.getAnonymousLogger();
+                logger.log(Level.SEVERE, e.toString());
             }
             this.label.setText(text);
         }

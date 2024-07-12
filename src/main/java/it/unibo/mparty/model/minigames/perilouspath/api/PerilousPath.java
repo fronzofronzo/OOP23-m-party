@@ -59,12 +59,7 @@ public interface PerilousPath extends MinigameModel {
      * @return the type of that button
      */
     Type hit(AbstractPosition p);
-
-    /**
-     * @return true whether the game is over or not
-     */
-    boolean isOver();
-
+    
     /**
      * @return the side of the grid which is a square
      */

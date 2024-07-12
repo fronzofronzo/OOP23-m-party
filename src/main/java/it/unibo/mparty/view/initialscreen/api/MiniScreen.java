@@ -26,6 +26,7 @@ public interface MiniScreen extends Initializable {
      *
      * @param controller an object that the view calls when it is needed to create the Game model
      */
-    void setUp(InitialScreen controller);
+    void setUpView(InitialScreen controller);
 
 }
+

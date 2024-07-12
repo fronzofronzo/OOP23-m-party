@@ -74,14 +74,14 @@ public class MemorySweepImpl implements MemorySweep {
      */
     @Override
     public HitType hit(final Position p) {
-        return this.getTurn() ? this.playerTurn(this.p1, p) : this.playerTurn(this.p2, p);
+        return this.turn() ? this.playerTurn(this.p1, p) : this.playerTurn(this.p2, p);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean getTurn() {
+    public boolean turn() {
         return this.turn;
     }
 

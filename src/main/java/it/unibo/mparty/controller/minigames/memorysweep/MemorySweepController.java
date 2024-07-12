@@ -11,7 +11,7 @@ public interface MemorySweepController extends MinigameController {
     /**
      * manages the setting up of the view and controller.
      */
-    void setUp();
+    void setUpGame();
 
     /**
      * manages the click of a button and links it to the model.

@@ -25,6 +25,8 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * implementation of {@link PerilousPathView}.
@@ -128,7 +130,7 @@ public final class PerilousPathViewImpl extends AbstractSceneView implements Per
     @Override
     public void handleStartButton(final ActionEvent e) throws InterruptedException {
         this.gridCreation();
-        this.observer.setUp();
+        this.observer.setUpGame();
         this.startButton.setDisable(true);
     }
 
@@ -152,7 +154,8 @@ public final class PerilousPathViewImpl extends AbstractSceneView implements Per
             try {
                 this.getMainView().setBoardScene();
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                final Logger logger = Logger.getAnonymousLogger();
+                logger.log(Level.SEVERE, ex.toString());
             }
         });
     }
@@ -209,11 +212,12 @@ public final class PerilousPathViewImpl extends AbstractSceneView implements Per
         label.setWrapText(true);
         final InputStream input = getClass().getClassLoader().getResourceAsStream(PATH);
         if (input != null) {
-            String text;
+            String text = "";
             try {
                 text = new String(input.readAllBytes(), StandardCharsets.UTF_8);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                final Logger logger = Logger.getAnonymousLogger();
+                logger.log(Level.SEVERE, e.toString());
             }
             label.setText(text);
         }

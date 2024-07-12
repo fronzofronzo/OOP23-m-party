@@ -34,7 +34,7 @@ public class PerilousPathControllerImpl implements  PerilousPathController {
      *{@inheritDoc}
      */
     @Override
-    public void setUp() throws InterruptedException {
+    public void setUpGame() throws InterruptedException {
 
         this.view.setUpView(this.model.getBalls(), this.model.getBombs());
         pause.setOnFinished(e -> this.view.hideBombs(this.model.getBombs()));
