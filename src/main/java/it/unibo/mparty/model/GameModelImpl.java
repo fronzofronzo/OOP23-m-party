@@ -146,7 +146,7 @@ public class GameModelImpl implements GameModel {
      */
     @Override
     public void useItem(final ItemName itemName) {
-        if(this.status.equals(GameStatus.ROLL_DICE)) {
+        if (this.status.equals(GameStatus.ROLL_DICE)) {
             final Item item = this.players.get(actualPlayerIndex).getPlayerBag().useItem(itemName);
             final Optional<Position> position = item.needPosition()
                     ? Optional.of(this.board.getStarPosition())

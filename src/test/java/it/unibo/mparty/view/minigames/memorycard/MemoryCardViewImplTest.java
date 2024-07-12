@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationTest;
 
 import static org.testfx.api.FxAssert.verifyThat;
@@ -50,6 +51,18 @@ class MemoryCardViewImplTest extends ApplicationTest {
         final Label label = from(this.root).lookup("#textLabel").query();
         verifyThat(button, hasText("Start !"));
         verifyThat(label, hasText(""));
+    }
+
+    /**
+     * Check that the start button works properly.
+     */
+    @Test
+    void testButton(final FxRobot robot) {
+        final Button button = from(this.root).lookup("#controlButton").query();
+        final Label label = from(this.root).lookup("#textLabel").query();
+        robot.clickOn(button);
+        verifyThat(button, hasText("Pronto !"));
+        verifyThat(label, hasText("Quando si e' pronti, spingere il pulsante 'Pronto'"));
     }
 
 }
