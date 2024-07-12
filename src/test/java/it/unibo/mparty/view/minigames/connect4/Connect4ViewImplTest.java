@@ -1,6 +1,6 @@
 package it.unibo.mparty.view.minigames.connect4;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
@@ -38,7 +38,7 @@ class Connect4ViewImplTest extends ApplicationTest {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/minigames/connect4.fxml"));
         this.testRoot = loader.load();
         final MinigameView controller = loader.getController();
-        controller.startMinigame(List.of("testPlayer1","testPlayer2"));
+        controller.startMinigame(List.of("testPlayer1", "testPlayer2"));
         final Scene scene = new Scene(testRoot);
         stage.setScene(scene);
         stage.show();
@@ -49,7 +49,7 @@ class Connect4ViewImplTest extends ApplicationTest {
      * @param robot click the button, given by TestFX
      */
     @Test
-    void testTutorialButton(FxRobot robot) {
+    void testTutorialButton(final FxRobot robot) {
         final Button button = from(this.testRoot).lookup("#tutorialButton").query();
         verifyThat(button, hasText("Tutorial"));
         clickOn(button);
@@ -70,12 +70,12 @@ class Connect4ViewImplTest extends ApplicationTest {
      * @param robot click the button, given by TestFX
      */
     @Test
-    void testAddCircle(FxRobot robot) {
+    void testAddCircle(final FxRobot robot) {
         final Button button = from(this.testRoot).lookup("3").query();
         final GridPane grid = from(this.testRoot.lookup("#gameGrid")).query();
         clickOn(button);
         final StackPane pane = (StackPane) (grid.getChildren().filtered(it -> it instanceof StackPane).get(0));
         final Circle circle = (Circle) (pane.getChildren().get(0));
-        assertTrue(circle.getFill() == Color.RED);
+        assertEquals(Color.RED, circle.getFill());
     }
 }
