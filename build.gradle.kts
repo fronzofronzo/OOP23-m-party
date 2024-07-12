@@ -44,6 +44,7 @@ dependencies {
     }
     implementation("org.reflections:reflections:0.10.2")
     implementation("com.github.spotbugs:spotbugs-annotations:4.7.3")
+    implementation("org.awaitility:awaitility:4.2.1")
 
     val jUnitVersion = "5.10.2"
     // JUnit API and testing engine
