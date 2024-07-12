@@ -45,7 +45,7 @@ public class BoardImpl implements Board {
      * {@inheritDoc}
      */
     @Override
-    public boolean getState(final Position position) {
+    public boolean getCellState(final Position position) {
         return this.board.getOrDefault(position, false);
     }
 }

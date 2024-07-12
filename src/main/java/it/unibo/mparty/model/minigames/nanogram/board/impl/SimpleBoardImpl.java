@@ -41,7 +41,7 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
 
             for (int j = 0; j < this.size; j++) {
                 final Position pos = isRow ? new Position(i, j) : new Position(j, i);
-                final boolean currentState = getState(pos);
+                final boolean currentState = getCellState(pos);
 
                 if (currentState) {
                     count++;

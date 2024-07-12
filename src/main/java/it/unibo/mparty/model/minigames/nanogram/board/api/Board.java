@@ -29,5 +29,5 @@ public interface Board {
      * @param position the position of the cell.
      * @return true if the cell is filled, false if it is empty or the position is not found.
      */
-    boolean getState(Position position);
+    boolean getCellState(Position position);
 }
