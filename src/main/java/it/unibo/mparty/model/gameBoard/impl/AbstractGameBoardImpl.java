@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +32,7 @@ import it.unibo.mparty.utilities.SlotType;
  */
 public abstract class AbstractGameBoardImpl implements GameBoard {
 
+    private static final Logger LOGGER = Logger.getLogger(AbstractGameBoardImpl.class.getName());
     private static final int N_PARTS_INPUT_FILE = 4;
     private static final String UP = "U";
     private static final String DOWN = "D";
@@ -297,7 +300,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
                 line = br.readLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "ERROR: ", e);
         }
     }
 
