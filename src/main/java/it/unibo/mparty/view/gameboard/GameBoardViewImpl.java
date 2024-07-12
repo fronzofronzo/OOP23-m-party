@@ -32,7 +32,6 @@ import javafx.scene.shape.Circle;
  */
 public class GameBoardViewImpl extends AbstractSceneView implements GameBoardView {
 
-    
     private static final String SLOT_STYLE = "-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;";
     private static final String TEXT_COINS = "MONETE: ";
     private static final String TEXT_STARS = "STELLE: ";

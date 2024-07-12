@@ -32,14 +32,17 @@ public class SecretCodeModelImpl implements SecretCodeModel {
     private static final Integer COINS_WINNER = 10;
     private final List<SecretCodePlayer> players = new ArrayList<>();
     private final List<SecretCodeColors> soluction = new ArrayList<>();
-    private int actualPlayerIndex = 0;
-    private int turn = 1;
+    private int actualPlayerIndex;
+    private int turn;
     private Optional<String> winner = Optional.empty();
 
     /**
-     * This is the constructor of this classe, that generate the soluction for this game.
+     * This is the constructor of this classe, that generate the soluction for this
+     * game.
      */
     public SecretCodeModelImpl() {
+        this.actualPlayerIndex = 0;
+        this.turn = 1;
         this.generateSoluction();
     }
 
@@ -48,7 +51,7 @@ public class SecretCodeModelImpl implements SecretCodeModel {
      */
     @Override
     public List<SecretCodeResults> getGuessResult() {
-        List<SecretCodeResults> res = computeResult(this.players.get(actualPlayerIndex).getGuess());
+        final List<SecretCodeResults> res = computeResult(this.players.get(actualPlayerIndex).getGuess());
         if (!res.isEmpty()) {
             this.players.get(actualPlayerIndex).startNewGuess();
             res.forEach(r -> this.players.get(actualPlayerIndex).addPoints(PUNTEGGIO.get(r)));
@@ -105,7 +108,7 @@ public class SecretCodeModelImpl implements SecretCodeModel {
         if (this.winner.isEmpty()) {
             double maxPoints = 0;
             for (int i = 0; i < this.players.size(); i++) {
-                double points = this.players.get(actualPlayerIndex).getPoints();
+                final double points = this.players.get(actualPlayerIndex).getPoints();
                 if (points > maxPoints) {
                     maxPoints = points;
                     this.winner = Optional.of(this.players.get(actualPlayerIndex).getNamePlayer());
@@ -158,7 +161,7 @@ public class SecretCodeModelImpl implements SecretCodeModel {
 
     private void generateSoluction() {
         do {
-            SecretCodeColors tmp = RandomFromSet.get(Set.of(SecretCodeColors.values()));
+            final SecretCodeColors tmp = RandomFromSet.get(Set.of(SecretCodeColors.values()));
             if (this.soluction.isEmpty() || !this.soluction.contains(tmp)) {
                 this.soluction.add(tmp);
             }
@@ -169,7 +172,7 @@ public class SecretCodeModelImpl implements SecretCodeModel {
         if (guess.size() != DIM_SOLUCTION) {
             return Collections.emptyList();
         }
-        List<SecretCodeResults> results = new ArrayList<>();
+        final List<SecretCodeResults> results = new ArrayList<>();
         for (int i = 0; i < guess.size(); i++) {
             if (this.soluction.contains(guess.get(i))
                     && i == this.soluction.indexOf(guess.get(i))) {

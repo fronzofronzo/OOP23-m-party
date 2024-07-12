@@ -51,13 +51,6 @@ public interface SecretCodeModel extends MinigameModel {
     String getCurrentPlayer();
 
     /**
-     * Check if the game is over .
-     * 
-     * @return true if is over, otherwise false.
-     */
-    boolean isOver();
-
-    /**
      * Get the name of the winner player if the game is over.
      * 
      * @return the name of the winner player if the game is over, null otherwise.
