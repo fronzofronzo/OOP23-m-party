@@ -4,8 +4,8 @@ import it.unibo.mparty.controller.minigames.nanogram.api.NanogramController;
 import it.unibo.mparty.controller.minigames.nanogram.impl.NanogramControllerImpl;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
-import it.unibo.mparty.view.minigames.nanogram.api.NanogramView;
 import it.unibo.mparty.view.minigames.nanogram.NanogramMessage;
+import it.unibo.mparty.view.minigames.nanogram.api.NanogramView;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -101,6 +101,8 @@ public class NanogramViewImpl extends AbstractSceneView implements NanogramView 
 
     /**
      * Handles the event when the tutorial button is clicked.
+     *
+     * @throws IOException if the tutorial file cannot be loaded
      */
     @FXML
     public void tutorialClicked() throws IOException {
