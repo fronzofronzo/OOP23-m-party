@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
+import java.io.IOException;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,7 +22,7 @@ import javafx.stage.Stage;
  * This class test {@link SecreteCodeViewImpl}.
  */
 @ExtendWith(ApplicationExtension.class)
-class SecreteCodeViewImplTest extends ApplicationTest {
+class SecretCodeViewImplTest extends ApplicationTest {
 
     private static final int COLUMNS = 4;
     private static final int ROWS = 8;
@@ -31,7 +33,7 @@ class SecreteCodeViewImplTest extends ApplicationTest {
      * {@inheritDoc}
      */
     @Override
-    public void start(final Stage stage) throws Exception {
+    public void start(final Stage stage) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/minigames/secretCode.fxml"));
         this.root = loader.load();
         final Scene scene = new Scene(root);
