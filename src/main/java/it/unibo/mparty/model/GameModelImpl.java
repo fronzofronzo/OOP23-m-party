@@ -94,7 +94,7 @@ public class GameModelImpl implements GameModel {
                             .get()
                             .getValue());
                 } else {
-                    if (dir.isEmpty() || nextPlayerPos.size() < 1
+                    if (dir.isEmpty() || nextPlayerPos.isEmpty()
                             || !nextPlayerPos.containsKey(dir.get())) {
                         return;
                     } else {
@@ -147,7 +147,7 @@ public class GameModelImpl implements GameModel {
         final Optional<Position> position = item.needPosition()
                 ? Optional.of(this.board.getStarPosition())
                 : Optional.empty();
-        Set<Player> targets = this.players.stream()
+        final Set<Player> targets = this.players.stream()
                 .filter(p -> !p.equals(this.players.get(actualPlayerIndex)))
                 .collect(Collectors.toSet());
         final Optional<Player> target = item.isOnOthers()
@@ -310,9 +310,9 @@ public class GameModelImpl implements GameModel {
     }
 
     private String getDirections() {
-        Map<Direction, Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
+        final Map<Direction, Position> pos = this.board.getNextPositions(this.players.get(actualPlayerIndex).getPosition());
         String output = "";
-        for (Map.Entry<Direction, Position> entry : pos.entrySet()) {
+        for (final Map.Entry<Direction, Position> entry : pos.entrySet()) {
             if (!output.isBlank()) {
                 output = output.concat(",");
             }
@@ -335,12 +335,8 @@ public class GameModelImpl implements GameModel {
                             .filter(p -> !p.equals(actualPlayer))
                             .findAny()
                             .get();
-                    try {
-                        this.minigameHandler.startMinigame(List.of(actualPlayer, otherPlayer),
-                                MinigameType.MULTI_PLAYER);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
+                    this.minigameHandler.startMinigame(List.of(actualPlayer, otherPlayer),
+                            MinigameType.MULTI_PLAYER);
                 }
                 case BONUS -> actualPlayer.addCoins(random.nextInt(MIN_COINS, MAX_COINS));
                 case MALUS -> actualPlayer.removeCoins(random.nextInt(MIN_COINS, MAX_COINS));

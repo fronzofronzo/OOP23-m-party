@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Test class for the {@link MemoryCardModelImpl} class.
  */
-public class TestMemoryCardImpl {
+class TestMemoryCardImpl {
 
     private static MemoryCardModel model;
 
