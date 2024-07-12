@@ -95,14 +95,6 @@ public class NanogramModelImpl implements NanogramModel {
      * {@inheritDoc}
      */
     @Override
-    public SimpleBoard getSolutionBoard() {
-        return solutionBoard;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public boolean isGameComplete() {
         return IntStream.range(0, SIZE_SIMPLE_BOARD)
                 .boxed().flatMap(row -> IntStream.range(0, SIZE_SIMPLE_BOARD)
@@ -116,7 +108,7 @@ public class NanogramModelImpl implements NanogramModel {
      */
     @Override
     public Pair<String, Integer> getResult() {
-        return switch (lives.getLive()) {
+        return switch (this.lives.getLive()) {
             case 1 -> new Pair<>(this.player, COINS / COIN_CALCULATION_FACTOR);
             case 2 -> new Pair<>(this.player, COINS - COIN_CALCULATION_FACTOR);
             case 3 -> new Pair<>(this.player, COINS);
