@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.nanogram.impl;
+package it.unibo.mparty.model.minigames.nanogram;
 
 import it.unibo.mparty.model.minigames.nanogram.board.api.SimpleBoard;
 import it.unibo.mparty.model.minigames.nanogram.board.impl.SimpleBoardImpl;

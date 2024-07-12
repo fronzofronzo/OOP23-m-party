@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.domino.impl;
+package it.unibo.mparty.model.minigames.domino;
 
 import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
 import it.unibo.mparty.model.minigames.domino.tile.impl.TileImpl;

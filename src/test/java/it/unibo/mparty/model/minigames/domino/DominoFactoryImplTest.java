@@ -1,4 +1,4 @@
-package it.unibo.mparty.model.minigames.domino.impl;
+package it.unibo.mparty.model.minigames.domino;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.mparty.model.minigames.domino.tile.api.Tile;
