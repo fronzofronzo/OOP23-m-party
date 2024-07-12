@@ -117,7 +117,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
      * {@inheritDoc}
      */
     @Override
-    public final Position getStrartingPosition() {
+    public Position getStrartingPosition() {
         return this.initialPosition;
     }
 
@@ -237,7 +237,7 @@ public abstract class AbstractGameBoardImpl implements GameBoard {
         this.addSlot(RandomFromSet.get(this.starsPositions), SlotType.ACTIVE_STAR);
         this.starsPositions
                 .forEach(p -> this.addSlot(p, SlotType.NOT_ACTIVE_STAR));
-        this.addSlot(this.getStrartingPosition(), SlotType.PATH);
+        this.addSlot(this.initialPosition, SlotType.PATH);
         this.createPathFromFile(this.filePath);
     }
 
