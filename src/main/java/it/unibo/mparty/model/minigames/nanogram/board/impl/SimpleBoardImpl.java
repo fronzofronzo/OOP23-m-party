@@ -32,14 +32,6 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
      * {@inheritDoc}
      */
     @Override
-    public boolean getState(final Position position) {
-        return getCellState(position);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public List<List<Integer>> generateHints(final boolean isRow) {
         final List<List<Integer>> hintsList = new ArrayList<>();
 
@@ -75,10 +67,9 @@ public class SimpleBoardImpl extends BoardImpl implements SimpleBoard {
                 .mapToObj(i -> new Position(i / size, i % size))
                 .toList());
 
-        position.forEach(p -> putCellState(p, false));
-
+        position.forEach(p -> setCellState(p, false));
         Collections.shuffle(position);
 
-        position.stream().limit(Math.round(size * size * fillPercentage)).forEach(p -> putCellState(p, true));
+        position.stream().limit(Math.round(size * size * fillPercentage)).forEach(p -> setCellState(p, true));
     }
 }
