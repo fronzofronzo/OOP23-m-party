@@ -1,5 +1,6 @@
 package it.unibo.mparty.view;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.mparty.controller.GameControllerImpl;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
@@ -45,6 +46,8 @@ public class GameViewImpl extends Application implements GameView {
      * {@inheritDoc}
      */
     @Override
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Needed to save primary stage in stage variable"
+            + " to modify it while the application is running ")
     public void start(final Stage primaryStage) throws Exception {
         this.stage = primaryStage;
         this.stage.getIcons().add(new Image("/images/marioParty.png"));
@@ -155,6 +158,7 @@ public class GameViewImpl extends Application implements GameView {
         this.boardView = (GameBoardView) pair.getSecond();
     }
 
+    @SuppressFBWarnings(value = "UI_UNSAFE_GETRESOURCE", justification = "GetResources is already used safely. ")
     private Pair<Scene, SceneView> loadScene(final String name) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH + name + EXTENSION));
         final Parent root = loader.load();
