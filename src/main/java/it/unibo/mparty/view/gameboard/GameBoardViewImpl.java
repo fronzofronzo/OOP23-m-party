@@ -1,4 +1,4 @@
-package it.unibo.mparty.view.GameBoardView;
+package it.unibo.mparty.view.gameboard;
 
 import java.util.Map;
 import java.util.HashMap;

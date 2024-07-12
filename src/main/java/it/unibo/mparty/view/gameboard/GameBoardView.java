@@ -1,4 +1,4 @@
-package it.unibo.mparty.view.GameBoardView;
+package it.unibo.mparty.view.gameboard;
 
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
