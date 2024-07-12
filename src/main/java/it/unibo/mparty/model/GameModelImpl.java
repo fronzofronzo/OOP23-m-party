@@ -52,6 +52,7 @@ public class GameModelImpl implements GameModel {
     private int actualPlayerIndex;
     private int steps;
     private final MinigameHandler minigameHandler;
+    final Random random;
 
     /**
      * Constructor of the Game Model: creates a new istance of game with players.
@@ -69,6 +70,7 @@ public class GameModelImpl implements GameModel {
                 .filter(b -> b.toString().equals(difficulty))
                 .findAny().get());
         this.players.forEach(p -> p.setPosition(this.board.getStrartingPosition()));
+        this.random = new Random();
     }
 
     /**
@@ -325,7 +327,6 @@ public class GameModelImpl implements GameModel {
     private void activateSlot() {
         final Player actualPlayer = this.players.get(actualPlayerIndex);
         final SlotType slot = this.board.getSlotType(actualPlayer.getPosition());
-        final Random random = new Random();
         if (this.status.equals(GameStatus.ACTIVE_SLOT)) {
             switch (slot) {
                 case SINGLEPLAYER ->
@@ -338,8 +339,8 @@ public class GameModelImpl implements GameModel {
                     this.minigameHandler.startMinigame(List.of(actualPlayer, otherPlayer),
                             MinigameType.MULTI_PLAYER);
                 }
-                case BONUS -> actualPlayer.addCoins(random.nextInt(MIN_COINS, MAX_COINS));
-                case MALUS -> actualPlayer.removeCoins(random.nextInt(MIN_COINS, MAX_COINS));
+                case BONUS -> actualPlayer.addCoins(this.random.nextInt(MIN_COINS, MAX_COINS));
+                case MALUS -> actualPlayer.removeCoins(this.random.nextInt(MIN_COINS, MAX_COINS));
                 case SHOP -> this.activeShop();
                 case ACTIVE_STAR -> this.checkStartAcquisition();
                 default -> {
