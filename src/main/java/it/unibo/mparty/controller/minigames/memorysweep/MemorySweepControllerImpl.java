@@ -46,7 +46,7 @@ public final class MemorySweepControllerImpl implements MemorySweepController {
      */
     @Override
     public void hit(final Position p) {
-        var type = this.model.hit(p);
+        final var type = this.model.hit(p);
         if (type.equals(MemorySweep.HitType.LOSS)) {
             this.endGame();
         }

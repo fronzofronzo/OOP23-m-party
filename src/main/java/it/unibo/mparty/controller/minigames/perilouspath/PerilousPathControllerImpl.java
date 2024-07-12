@@ -1,4 +1,4 @@
-package it.unibo.mparty.controller.minigames.perilousPath;
+package it.unibo.mparty.controller.minigames.perilouspath;
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
 import it.unibo.mparty.model.minigames.perilouspath.impl.PerilousPathImpl;
@@ -47,7 +47,7 @@ public class PerilousPathControllerImpl implements  PerilousPathController {
     @Override
     public void hit(final AbstractPosition p) {
 
-        var type = this.model.hit(p);
+        final var type = this.model.hit(p);
         if (type.equals(PerilousPath.Type.BOMB) || type.equals(PerilousPath.Type.BALL)) {
             this.view.showBombs(this.model.getBombs());
             this.endGame();

@@ -80,7 +80,7 @@ public class MiniScreenImpl implements MiniScreen {
      */
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
-        for (Character character : Character.values()) {
+        for (final Character character : Character.values()) {
             this.characterList.add(character.getName());
         }
         this.choiceBox.getItems().addAll(this.characterList);

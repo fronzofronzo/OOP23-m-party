@@ -73,11 +73,11 @@ public final class InitialScreenImpl extends AbstractSceneView implements Initia
      */
     @Override
     public void handleAddPlayerButton(final ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/MiniScreen.fxml"));
-        Parent root = loader.load();
-        MiniScreen miniScreenController = loader.getController();
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/MiniScreen.fxml"));
+        final Parent root = loader.load();
+        final MiniScreen miniScreenController = loader.getController();
         miniScreenController.setUp(this);
-        Stage stage = new Stage();
+        final Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.setTitle("Aggiungi Giocatore");
@@ -93,7 +93,7 @@ public final class InitialScreenImpl extends AbstractSceneView implements Initia
     @Override
     public void handleStartButton(final ActionEvent event) throws IOException {
         this.builder = this.builder.difficulty(this.difficulty);
-        GameController controller = this.getMainController();
+        final GameController controller = this.getMainController();
         controller.startGame(this.builder.build());
     }
 
@@ -103,7 +103,7 @@ public final class InitialScreenImpl extends AbstractSceneView implements Initia
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
         this.startGame.setDisable(true);
-        for (BoardType difficulty : BoardType.values()) {
+        for (final BoardType difficulty : BoardType.values()) {
             this.difficulties.add(difficulty.toString());
         }
         this.playerChoiceBox.getItems().addAll(this.difficulties);
@@ -148,9 +148,9 @@ public final class InitialScreenImpl extends AbstractSceneView implements Initia
      */
     @Override
     public void handleTutorialButton(final ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/TutorialScreen.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/TutorialScreen.fxml"));
+        final Parent root = loader.load();
+        final Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.setTitle("TUTORIAL");

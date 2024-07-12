@@ -1,4 +1,4 @@
-package it.unibo.mparty.controller.minigames.perilousPath;
+package it.unibo.mparty.controller.minigames.perilouspath;
 
 import it.unibo.mparty.controller.minigames.MinigameController;
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;

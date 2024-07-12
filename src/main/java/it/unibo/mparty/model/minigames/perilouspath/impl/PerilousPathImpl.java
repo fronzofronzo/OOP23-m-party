@@ -54,7 +54,7 @@ public class PerilousPathImpl implements PerilousPath {
      */
     @Override
     public void setBombs() {
-        IntStream.iterate(0, i -> i + 1).limit(NUM_BOMBS).forEach(b -> this.bombs.add(setNewBombPosition()));
+        IntStream.iterate(0, i -> i + 1).limit(NUM_BOMBS).forEach(b -> this.bombs.add(getNewBombPosition()));
     }
 
     /**
@@ -62,8 +62,8 @@ public class PerilousPathImpl implements PerilousPath {
      */
     @Override
     public void setBalls() {
-        this.balls.add(this.setNewBallPosition(0));
-        this.balls.add(this.setNewBallPosition(this.getSize() - 1));
+        this.balls.add(this.getNewBallPosition(0));
+        this.balls.add(this.getNewBallPosition(this.getSize() - 1));
     }
 
     /**
@@ -124,7 +124,7 @@ public class PerilousPathImpl implements PerilousPath {
         if (this.path.isEmpty()) {
             return false;
         }
-        var p = this.path.get(this.path.size() - 1);
+        final var p = this.path.get(this.path.size() - 1);
         return p.inHorizontal(getBalls().get(1)) || p.inVertical(getBalls().get(1));
     }
 
@@ -158,7 +158,7 @@ public class PerilousPathImpl implements PerilousPath {
      *
      * @return a new BombPosition which is safe
      */
-    private AbstractPosition setNewBombPosition() {
+    private AbstractPosition getNewBombPosition() {
         BombPosition b;
         do {
             b = new BombPosition(random.nextInt(this.getSize() - 1), random.nextInt(this.getSize() - 1), this.getSize());
@@ -172,7 +172,7 @@ public class PerilousPathImpl implements PerilousPath {
      * @param y the already set y position in a generic(x,y) position, meaning that only the x position will be random
      * @return a new BallPosition which is safe
      */
-    private AbstractPosition setNewBallPosition(final int y) {
+    private AbstractPosition getNewBallPosition(final int y) {
         BallPosition b;
         do {
             b = new BallPosition(this.random.nextInt(this.getSize() - 1), y, this.getSize());

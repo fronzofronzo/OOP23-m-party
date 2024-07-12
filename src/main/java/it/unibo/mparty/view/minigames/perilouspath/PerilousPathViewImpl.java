@@ -1,8 +1,8 @@
 package it.unibo.mparty.view.minigames.perilouspath;
 
 import it.unibo.mparty.controller.GameController;
-import it.unibo.mparty.controller.minigames.perilousPath.PerilousPathController;
-import it.unibo.mparty.controller.minigames.perilousPath.PerilousPathControllerImpl;
+import it.unibo.mparty.controller.minigames.perilouspath.PerilousPathController;
+import it.unibo.mparty.controller.minigames.perilouspath.PerilousPathControllerImpl;
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
 import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
 import it.unibo.mparty.model.minigames.perilouspath.impl.PathPosition;
@@ -70,10 +70,10 @@ public final class PerilousPathViewImpl extends AbstractSceneView implements Per
         for (final var child : this.myGridPane.getChildren()) {
             final var pos = this.buttonPosition(child);
             if (balls.stream().anyMatch(b -> b.samePosition(pos)) && child instanceof Button) {
-                this.setImage(((Button) child), new ImageView(ballImage));
+                this.setImage((Button) child, new ImageView(ballImage));
             }
             if (bombs.stream().anyMatch(b -> b.samePosition(pos)) && child instanceof Button) {
-                this.setImage(((Button) child), new ImageView(bombImage));
+                this.setImage((Button) child, new ImageView(bombImage));
             }
         }
         this.myGridPane.setDisable(true);
@@ -101,7 +101,7 @@ public final class PerilousPathViewImpl extends AbstractSceneView implements Per
         for (final var child : this.myGridPane.getChildren()) {
             final var pos = this.buttonPosition(child);
             if (bombs.stream().anyMatch(b -> b.samePosition(pos)) && child instanceof Button) {
-                this.setImage(((Button) child), new ImageView(bombImage));
+                this.setImage((Button) child, new ImageView(bombImage));
             }
         }
         this.myGridPane.setDisable(true);
