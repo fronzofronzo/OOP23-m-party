@@ -50,10 +50,6 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
 
-    val testFxVersion = "4.0.16-alpha"
-    testImplementation("org.testfx:testfx-core:$testFxVersion")
-    testImplementation("org.testfx:testfx-junit5:$testFxVersion")
-
     // SLF4J API
     implementation ("org.slf4j:slf4j-api:2.0.7")
     // Logback Classic
