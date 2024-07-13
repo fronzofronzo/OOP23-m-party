@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.gameboard.GameBoardViewImpl">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.gameboard.GameBoardViewImpl">
    <left>
       <SplitPane fx:id="leftSplitPane" dividerPositions="0.5" minWidth="150.0" orientation="VERTICAL" prefWidth="150.0" BorderPane.alignment="CENTER">
          <items>
-            <VBox fx:id="sectionP1" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+            <VBox fx:id="sectionP1" minWidth="150.0" prefHeight="200.0" prefWidth="150.0" spacing="5.0">
                <children>
                   <Label fx:id="nameP1" wrapText="true">
                      <font>
@@ -41,7 +41,7 @@
                <padding>
                   <Insets left="10.0" top="10.0" />
                </padding></VBox>
-            <VBox fx:id="sectionP3" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+            <VBox fx:id="sectionP3" minWidth="150.0" prefHeight="200.0" prefWidth="150.0" spacing="5.0">
                <children>
                   <Label fx:id="nameP3" wrapText="true">
                      <font>
@@ -73,7 +73,7 @@
    <right>
       <SplitPane fx:id="rightSplitPane" dividerPositions="0.5" minWidth="150.0" orientation="VERTICAL" prefWidth="150.0" BorderPane.alignment="CENTER">
          <items>
-            <VBox fx:id="sectionP2" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+            <VBox fx:id="sectionP2" minWidth="150.0" prefHeight="200.0" prefWidth="150.0" spacing="5.0">
                <children>
                   <Label fx:id="nameP2" wrapText="true">
                      <font>
@@ -99,7 +99,7 @@
                <padding>
                   <Insets left="10.0" top="10.0" />
                </padding></VBox>
-            <VBox fx:id="sectionP4" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+            <VBox fx:id="sectionP4" minWidth="150.0" prefHeight="200.0" prefWidth="150.0" spacing="5.0">
                <children>
                   <Label fx:id="nameP4" wrapText="true">
                      <font>
@@ -132,7 +132,7 @@
       <Insets />
    </opaqueInsets>
    <center>
-      <GridPane fx:id="gridPaneBoard" gridLinesVisible="true" minHeight="300.0" minWidth="700.0" prefHeight="300.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+      <GridPane fx:id="gridPaneBoard" gridLinesVisible="true" BorderPane.alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
