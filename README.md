@@ -1,4 +1,4 @@
-![Mario Party](./Mario_Party_Logo_(MPSuperstars).png)
+![Mario Party](Mario_Party_Logo_(MPSuperstars).png)
 
 # Obiettivo del Progetto
 
