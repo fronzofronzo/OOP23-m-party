@@ -31,9 +31,9 @@ public interface MemoryCardView extends MinigameView {
     void addCard(String text);
 
     /**
-     * Set the mistake number made by the player.
+     * Show the mistake number made by the player.
      * @param n number of mistakes.
      */
-    void setMistakesNumber(int n);
+    void showMistakesNumber(int n);
 
 }

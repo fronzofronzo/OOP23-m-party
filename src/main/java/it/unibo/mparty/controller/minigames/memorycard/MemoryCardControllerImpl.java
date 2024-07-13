@@ -73,7 +73,7 @@ public class MemoryCardControllerImpl implements MemoryCardController {
 
     private void updateGameView() {
         final var guessed = this.model.guessedCardsType();
-        this.view.setMistakesNumber(this.model.getMistakes());
+        this.view.showMistakesNumber(this.model.getMistakes());
         for (final var e : this.model.getCards().entrySet()) {
             final var type = e.getValue();
             final var i = e.getKey();

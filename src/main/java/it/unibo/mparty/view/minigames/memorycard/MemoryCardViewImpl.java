@@ -74,7 +74,7 @@ public class MemoryCardViewImpl extends AbstractSceneView implements MemoryCardV
      * {@inheritDoc}
      */
     @Override
-    public void setMistakesNumber(final int n) {
+    public void showMistakesNumber(final int n) {
         this.textLabel.setText("Errori: " + n);
     }
 
