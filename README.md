@@ -1,3 +1,5 @@
+![Mario Party](./Mario_Party_Logo_(MPSuperstars).png)
+
 # Obiettivo del Progetto
 
 Il gruppo si pone come obiettivo quello di realizzare un gioco che prende ispirazione dalla saga "Mario Party" ([link](https://it.wikipedia.org/wiki/Mario_Party_(serie))).
