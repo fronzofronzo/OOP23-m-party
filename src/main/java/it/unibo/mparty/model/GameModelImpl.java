@@ -79,7 +79,6 @@ public class GameModelImpl implements GameModel {
      */
     @Override
     public void movePlayer(final Optional<Direction> dir) {
-        // Optional<Direction> currentDir = dir;
         if (this.status.equals(GameStatus.MOVE_PLAYER)
                 || this.status.equals(GameStatus.MOVING_PLAYER)) {
             if (this.status.equals(GameStatus.MOVE_PLAYER)) {
@@ -102,7 +101,6 @@ public class GameModelImpl implements GameModel {
                         return;
                     } else {
                         this.players.get(actualPlayerIndex).setPosition(nextPlayerPos.get(dir.get()));
-                        // dir = Optional.empty();
                         this.steps++;
                         this.movePlayer(Optional.empty());
                         return;
