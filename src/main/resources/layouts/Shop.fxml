@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.shop.impl.ShopViewImpl">
+<StackPane minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.mparty.view.shop.impl.ShopViewImpl">
    <children>
       <SplitPane id="principalPane" dividerPositions="0.10050251256281408" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="1000.0" orientation="VERTICAL">
         <items>
