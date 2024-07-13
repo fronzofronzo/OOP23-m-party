@@ -1,1 +1,4 @@
-Mini-gioco MEMORY: si hanno dei tipi di frutta e per ognuno di questi vi è una coppia di carte nel mazzo. Le cartevengono disposte sul tavolo di gioco e vengono fatte vedere al giocatore. Una volta che il giocatore è pronto, coprele carte e cerca di indovinare quante più coppie possibili. Il giocatore può commettere massimo 3 errori. Alla fine del gioco il punteggio è determinato in base al numero di coppie indovinate.
+Mini-gioco MEMORY: si hanno dei tipi di frutta e per ognuno di questi vi è una coppia di carte nel mazzo.
+Le carte vengono disposte sul tavolo di gioco e vengono fatte vedere al giocatore.
+Una volta che il giocatore è pronto, coprirle carte e cerca di indovinare quante più coppie possibili.
+Il giocatore può commettere massimo 3 errori. Alla fine del gioco il punteggio è determinato in base al numero di coppie indovinate.
