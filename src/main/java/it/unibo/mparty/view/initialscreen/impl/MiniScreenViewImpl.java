@@ -2,8 +2,8 @@ package it.unibo.mparty.view.initialscreen.impl;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.mparty.model.player.impl.Character;
-import it.unibo.mparty.view.initialscreen.api.InitialScreen;
-import it.unibo.mparty.view.initialscreen.api.MiniScreen;
+import it.unibo.mparty.view.initialscreen.api.InitialScreenView;
+import it.unibo.mparty.view.initialscreen.api.MiniScreenView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,12 +17,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * implmentation of {@link MiniScreen}.
+ * implmentation of {@link MiniScreenView}.
  */
-public class MiniScreenImpl implements MiniScreen {
+public class MiniScreenViewImpl implements MiniScreenView {
 
     private final List<String> characterList = new ArrayList<>();
-    private InitialScreen controller;
+    private InitialScreenView controller;
     private static final int MAX_SIZE = 10;
 
     @FXML
@@ -74,7 +74,7 @@ public class MiniScreenImpl implements MiniScreen {
 
     @Override
     @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "method setUpView needs a mutable object")
-    public void setUpView(final InitialScreen controller) {
+    public void setUpView(final InitialScreenView controller) {
         this.controller = controller;
     }
 

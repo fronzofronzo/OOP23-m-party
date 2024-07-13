@@ -5,7 +5,7 @@ import javafx.event.ActionEvent;
 /**
  * interface that models the upload on a new stage of the tutorial.
  */
-public interface TutorialScreen {
+public interface TutorialScreenView {
     /**
      * method that manages the okButton in Tutorial screen.
      * @param e the action event

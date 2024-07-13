@@ -6,7 +6,7 @@ import javafx.fxml.Initializable;
 /**
  * interface that models the controller for the MiniScreen controller that opens up when you click the add player button.
  */
-public interface MiniScreen extends Initializable {
+public interface MiniScreenView extends Initializable {
     /**
      * method that handles the event that happens when you click the ok button.
      *
@@ -26,7 +26,7 @@ public interface MiniScreen extends Initializable {
      *
      * @param controller an object that the view calls when it is needed to create the Game model
      */
-    void setUpView(InitialScreen controller);
+    void setUpView(InitialScreenView controller);
 
 }
 

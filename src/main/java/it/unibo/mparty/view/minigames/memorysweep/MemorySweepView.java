@@ -1,6 +1,6 @@
 package it.unibo.mparty.view.minigames.memorysweep;
 
-import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
+import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweepModel;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.minigames.MinigameView;
 import javafx.event.ActionEvent;
@@ -25,7 +25,7 @@ public interface MemorySweepView extends MinigameView {
      * @param type the type of click
      * @param turn whether is the turn of the first player or the other
      */
-    void hit(MemorySweep.HitType type, boolean turn);
+    void hit(MemorySweepModel.HitType type, boolean turn);
 
     /**
      * method for hiding the random button previously marked.

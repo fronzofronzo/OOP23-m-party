@@ -8,13 +8,13 @@ import java.util.stream.IntStream;
 
 import it.unibo.mparty.model.minigames.MinigameType;
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
-import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
+import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPathModel;
 import it.unibo.mparty.utilities.Pair;
 
 /**
- * implementation of {@link PerilousPath} that models the actual model of the mini-game.
+ * implementation of {@link PerilousPathModel} that models the actual model of the mini-game.
  */
-public class PerilousPathImpl implements PerilousPath {
+public class PerilousPathModelImpl implements PerilousPathModel {
 
     private final List<AbstractPosition> bombs;
     private final List<AbstractPosition> balls;
@@ -30,7 +30,7 @@ public class PerilousPathImpl implements PerilousPath {
      *
      * @param size the size of the grid
      */
-    public PerilousPathImpl(final int size) {
+    public PerilousPathModelImpl(final int size) {
         this.bombs = new LinkedList<>();
         this.balls = new LinkedList<>();
         this.path = new LinkedList<>();
@@ -41,7 +41,7 @@ public class PerilousPathImpl implements PerilousPath {
     /**
      * constructor of a new instance of this.
      */
-    public PerilousPathImpl() {
+    public PerilousPathModelImpl() {
         this.bombs = new LinkedList<>();
         this.balls = new LinkedList<>();
         this.path = new LinkedList<>();

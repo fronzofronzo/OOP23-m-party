@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * interface that model the starting screen view you see when you start playing the game.
  */
-public interface InitialScreen extends SceneView {
+public interface InitialScreenView extends SceneView {
 
     /**
      * method that handles the event that happens when you click the exit button.

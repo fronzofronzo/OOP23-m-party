@@ -1,7 +1,7 @@
 package it.unibo.mparty.view.minigames.perilouspath;
 
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
-import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
+import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPathModel;
 import it.unibo.mparty.view.minigames.MinigameView;
 import javafx.event.ActionEvent;
 import java.util.List;
@@ -31,7 +31,7 @@ public interface PerilousPathView extends MinigameView {
      *
      * @param type the type of click that can happen
      */
-    void hitTile(PerilousPath.Type type);
+    void hitTile(PerilousPathModel.Type type);
 
     /**
      * method that handles the click of the start button.

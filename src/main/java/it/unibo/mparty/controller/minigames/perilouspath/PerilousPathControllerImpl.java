@@ -1,7 +1,7 @@
 package it.unibo.mparty.controller.minigames.perilouspath;
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
-import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
-import it.unibo.mparty.model.minigames.perilouspath.impl.PerilousPathImpl;
+import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPathModel;
+import it.unibo.mparty.model.minigames.perilouspath.impl.PerilousPathModelImpl;
 import it.unibo.mparty.view.minigames.perilouspath.PerilousPathView;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class PerilousPathControllerImpl implements  PerilousPathController {
 
-    private final PerilousPath model;
+    private final PerilousPathModel model;
     private PerilousPathView view;
     private static final int SIZE = 8;
     private static final int SECONDS = 3000;
@@ -24,7 +24,7 @@ public class PerilousPathControllerImpl implements  PerilousPathController {
      */
     public PerilousPathControllerImpl(final PerilousPathView view) {
 
-        this.model = new PerilousPathImpl(SIZE);
+        this.model = new PerilousPathModelImpl(SIZE);
         this.setView(view);
         this.model.setBalls();
         this.model.setBombs();
@@ -48,7 +48,7 @@ public class PerilousPathControllerImpl implements  PerilousPathController {
     public void hit(final AbstractPosition p) {
 
         final var type = this.model.hit(p);
-        if (type.equals(PerilousPath.Type.BOMB) || type.equals(PerilousPath.Type.BALL)) {
+        if (type.equals(PerilousPathModel.Type.BOMB) || type.equals(PerilousPathModel.Type.BALL)) {
             this.view.showBombs(this.model.getBombs());
             this.endGame();
         }

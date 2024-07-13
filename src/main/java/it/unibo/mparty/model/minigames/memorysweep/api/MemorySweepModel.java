@@ -8,7 +8,7 @@ import it.unibo.mparty.utilities.Position;
 /**
  * interface that models the view of the mini-game Memory Sweep.
  */
-public interface MemorySweep extends MinigameModel {
+public interface MemorySweepModel extends MinigameModel {
 
     /**
      * enum describing the types of event that can happen when a button is clicked.

@@ -4,7 +4,7 @@ import it.unibo.mparty.controller.GameController;
 import it.unibo.mparty.controller.minigames.perilouspath.PerilousPathController;
 import it.unibo.mparty.controller.minigames.perilouspath.PerilousPathControllerImpl;
 import it.unibo.mparty.model.minigames.perilouspath.api.AbstractPosition;
-import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPath;
+import it.unibo.mparty.model.minigames.perilouspath.api.PerilousPathModel;
 import it.unibo.mparty.model.minigames.perilouspath.impl.PathPosition;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.view.AbstractSceneView;
@@ -113,7 +113,7 @@ public final class PerilousPathViewImpl extends AbstractSceneView implements Per
      * {@inheritDoc}
      */
     @Override
-    public void hitTile(final PerilousPath.Type type) {
+    public void hitTile(final PerilousPathModel.Type type) {
         switch (type) {
             case PATH -> {
                 button.setStyle("-fx-background-color: #f3f5f8;");

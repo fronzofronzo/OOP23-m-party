@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * interface that model the model for the Perilous Path mini-game.
  */
-public interface PerilousPath extends MinigameModel {
+public interface PerilousPathModel extends MinigameModel {
 
     /**
      * the types of buttons present a grid

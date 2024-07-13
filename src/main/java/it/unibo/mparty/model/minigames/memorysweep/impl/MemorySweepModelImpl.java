@@ -2,7 +2,7 @@ package it.unibo.mparty.model.minigames.memorysweep.impl;
 
 
 import it.unibo.mparty.model.minigames.MinigameType;
-import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
+import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweepModel;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 
@@ -13,9 +13,9 @@ import java.util.Set;
 import java.util.List;
 
 /**
- * implementation of {@link MemorySweep}.
+ * implementation of {@link MemorySweepModel}.
  */
-public class MemorySweepImpl implements MemorySweep {
+public class MemorySweepModelImpl implements MemorySweepModel {
 
     private final Set<Position> randomList;
     private int counter;
@@ -32,7 +32,7 @@ public class MemorySweepImpl implements MemorySweep {
      * constructor of this.
      * @param side the side of the grid
      */
-    public MemorySweepImpl(final int side) {
+    public MemorySweepModelImpl(final int side) {
         this.random = new Random();
         this.randomList = new HashSet<>();
         this.side = side;
@@ -42,7 +42,7 @@ public class MemorySweepImpl implements MemorySweep {
     /**
      * constructor of this without parameters.
      */
-    public MemorySweepImpl() {
+    public MemorySweepModelImpl() {
         this.random = new Random();
         this.randomList = new HashSet<>();
         this.side = SIDE;

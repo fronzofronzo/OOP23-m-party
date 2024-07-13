@@ -1,7 +1,7 @@
 package it.unibo.mparty.controller.minigames.memorysweep;
 
-import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
-import it.unibo.mparty.model.minigames.memorysweep.impl.MemorySweepImpl;
+import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweepModel;
+import it.unibo.mparty.model.minigames.memorysweep.impl.MemorySweepModelImpl;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.minigames.memorysweep.MemorySweepView;
 import javafx.animation.PauseTransition;
@@ -10,12 +10,12 @@ import javafx.util.Duration;
 import java.util.List;
 
 /**
- * implementation of {@link MemorySweep}.
+ * implementation of {@link MemorySweepModel}.
  */
 public final class MemorySweepControllerImpl implements MemorySweepController {
 
     private MemorySweepView view;
-    private final MemorySweep model;
+    private final MemorySweepModel model;
     private static final int SIZE = 8;
     private static final int SECONDS = 3000;
     private final PauseTransition pause = new PauseTransition(new Duration(SECONDS));
@@ -26,7 +26,7 @@ public final class MemorySweepControllerImpl implements MemorySweepController {
      */
     public MemorySweepControllerImpl(final MemorySweepView view) {
         this.setView(view);
-        this.model = new MemorySweepImpl(SIZE);
+        this.model = new MemorySweepModelImpl(SIZE);
         this.setRandoms();
     }
 
@@ -47,11 +47,11 @@ public final class MemorySweepControllerImpl implements MemorySweepController {
     @Override
     public void hit(final Position p) {
         final var type = this.model.hit(p);
-        if (type.equals(MemorySweep.HitType.LOSS)) {
+        if (type.equals(MemorySweepModel.HitType.LOSS)) {
             this.endGame();
         }
         this.view.hit(type, this.model.turn());
-        if (type.equals(MemorySweep.HitType.LOSS)) {
+        if (type.equals(MemorySweepModel.HitType.LOSS)) {
             this.view.setUpGame(this.model.getRandomList());
         }
     }

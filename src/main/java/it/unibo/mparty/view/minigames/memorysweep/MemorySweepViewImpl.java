@@ -2,7 +2,7 @@ package it.unibo.mparty.view.minigames.memorysweep;
 
 import it.unibo.mparty.controller.minigames.memorysweep.MemorySweepController;
 import it.unibo.mparty.controller.minigames.memorysweep.MemorySweepControllerImpl;
-import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
+import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweepModel;
 import it.unibo.mparty.utilities.Pair;
 import it.unibo.mparty.utilities.Position;
 import it.unibo.mparty.view.AbstractSceneView;
@@ -80,7 +80,7 @@ public class MemorySweepViewImpl extends AbstractSceneView implements MemorySwee
      * {@inheritDoc}
      */
     @Override
-    public void hit(final MemorySweep.HitType type, final boolean turn) {
+    public void hit(final MemorySweepModel.HitType type, final boolean turn) {
         switch (type) {
             case RIGHT_CHOICE -> {
                 if (turn) {

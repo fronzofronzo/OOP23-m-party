@@ -1,8 +1,8 @@
 package it.unibo.mparty.model.minigames.memorysweep;
 
 
-import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweep;
-import it.unibo.mparty.model.minigames.memorysweep.impl.MemorySweepImpl;
+import it.unibo.mparty.model.minigames.memorysweep.api.MemorySweepModel;
+import it.unibo.mparty.model.minigames.memorysweep.impl.MemorySweepModelImpl;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * test class for Memory Sweep model.
  */
-class TestMemorySweepImpl {
+class TestMemorySweepModelImpl {
 
     private static final int SIZE = 8;
-    private final MemorySweep model = new MemorySweepImpl(SIZE);
+    private final MemorySweepModel model = new MemorySweepModelImpl(SIZE);
 
     /**
      * test for setting up the random list of button to be recreated.
@@ -37,7 +37,7 @@ class TestMemorySweepImpl {
         this.model.setUpPlayers(List.of("Dan", "Mat"));
         final var list = this.model.getRandomList();
         final var p1 = list.iterator().next();
-        assertEquals(MemorySweep.HitType.RIGHT_CHOICE, this.model.hit(p1));
+        assertEquals(MemorySweepModel.HitType.RIGHT_CHOICE, this.model.hit(p1));
 
     }
 

@@ -5,8 +5,8 @@ import it.unibo.mparty.model.GameModelBuilder;
 import it.unibo.mparty.model.GameModelBuilderImpl;
 import it.unibo.mparty.utilities.BoardType;
 import it.unibo.mparty.view.AbstractSceneView;
-import it.unibo.mparty.view.initialscreen.api.InitialScreen;
-import it.unibo.mparty.view.initialscreen.api.MiniScreen;
+import it.unibo.mparty.view.initialscreen.api.InitialScreenView;
+import it.unibo.mparty.view.initialscreen.api.MiniScreenView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,9 +28,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * implementation of {@link InitialScreen}.
+ * implementation of {@link InitialScreenView}.
  */
-public final class InitialScreenImpl extends AbstractSceneView implements InitialScreen, Initializable {
+public final class InitialScreenViewImpl extends AbstractSceneView implements InitialScreenView, Initializable {
 
 
     private GameModelBuilder builder;
@@ -75,8 +75,8 @@ public final class InitialScreenImpl extends AbstractSceneView implements Initia
     public void handleAddPlayerButton(final ActionEvent event) throws IOException {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/MiniScreen.fxml"));
         final Parent root = loader.load();
-        final MiniScreen miniScreenController = loader.getController();
-        miniScreenController.setUpView(this);
+        final MiniScreenView miniScreenViewController = loader.getController();
+        miniScreenViewController.setUpView(this);
         final Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);

@@ -1,6 +1,6 @@
 package it.unibo.mparty.view.initialscreen.impl;
 
-import it.unibo.mparty.view.initialscreen.api.TutorialScreen;
+import it.unibo.mparty.view.initialscreen.api.TutorialScreenView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,9 +17,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * implementation of {@link TutorialScreen}.
+ * implementation of {@link TutorialScreenView}.
  */
-public class TutorialScreenImpl implements TutorialScreen, Initializable {
+public class TutorialScreenViewImpl implements TutorialScreenView, Initializable {
 
     @FXML
     private Button returnButton;
